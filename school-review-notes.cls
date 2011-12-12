@@ -1,6 +1,6 @@
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \LoadClass{school-base}
-\ProvidesClass{school-22.101}
+\ProvidesClass{school-review-notes}
 
 \usepackage[version=3]{mhchem}
 \usepackage{color}
@@ -13,9 +13,5 @@
 \usepackage{multirow}
 \usepackage{hyperref}
 
-\usepackage{school-style-math}
-\usepackage{school-style-units}
-
+\usepackage{school-style-notes}
 \usepackage{school-style-class}
-\classcode{22.101}
-\schoolname{Massachusetts Institute of Technology}

@@ -1,6 +1,6 @@
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \LoadClass{school-base}
-\ProvidesClass{school-22.101}
+\ProvidesClass{school-22.251}
 
 \usepackage[version=3]{mhchem}
 \usepackage{color}
@@ -17,5 +17,5 @@
 \usepackage{school-style-units}
 
 \usepackage{school-style-class}
-\classcode{22.101}
+\classcode{22.251}
 \schoolname{Massachusetts Institute of Technology}

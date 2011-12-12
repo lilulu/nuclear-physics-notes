@@ -1,0 +1,38 @@
+\NeedsTeXFormat{LaTeX2e}[1995/12/01]
+\ProvidesClass{school-style-notes}
+
+\def\date#1{\gdef\@date{#1}}
+
+\lhead{\@author}
+\chead{}
+\rhead{\@classcode\ Class Notes: \@date}
+\lfoot{}
+\cfoot{\thepage}
+\rfoot{}
+
+\renewcommand{\maketitle}{%
+  \begin{figure}[t]
+    \begin{flushright}
+      \@author \\
+      \@classcode \\
+      \@date \\
+    \end{flushright}
+    \begin{flushleft}
+      \textit{\@classcode\ Class Notes} \\
+    \end{flushleft}
+  \end{figure}}
+
+\newcommand{\makecontents}{%
+  \setcounter{tocdepth}{3}%
+  \tableofcontents
+  \clearpage}
+
+\newcommand{\firstlecture}{}
+\newcommand{\newlecture}{}
+\newcommand{\exam}[1]{\textbf{#1}\\}
+\newcommand{\lecture}[1]{\textbf{#1}\\}
+\newcommand{\topic}[1]{\textbf{#1}\\}
+\newcommand{\subtopic}[1]{\textit{#1}\\}
+\newcommand{\subsubtopic}[1]{\textit{#1}\\}
+\newcommand{\subsubsubtopic}[1]{\textit{#1}\\}
+\newcommand{\note}[1]{\textbf{note:} #1}

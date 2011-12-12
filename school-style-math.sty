@@ -17,6 +17,8 @@
 \newcommand{\degree}{^{\circ}}
 \newcommand{\sub}[1]{_{\mathrm{#1}}}
 \newcommand{\mtx}[1]{\tilde{#1}}
+\newcommand{\eqn}[1]{\begin{equation}#1\end{equation}}
+\newcommand{\ali}[1]{\begin{align}#1\end{align}}
 
 % Parthentecies
 \newcommand{\lp}{ \left( }
@@ -47,6 +49,15 @@
 
 \newcommand{\Frac}[2]{\displaystyle\frac{\displaystyle #1}{\displaystyle #2}}
 
+% LaTeX doesn't define this one, but I don't know why
+\newcommand\ointint{\begingroup
+\displaystyle \unitlength 1pt
+\int\mkern-7.2mu
+\begin{picture}(0,3)
+\put(0,3){\oval(10,8)}
+\end{picture}
+\mkern-7mu\int\endgroup}
+
 % Physics symbols
 \newcommand{\avg}[1]{\left< #1 \right>}
 \newcommand{\ket}[1]{\left| #1 \right>}
@@ -58,7 +69,17 @@
 \newcommand{\down}{\downarrow}
 \newcommand{\braces}[1]{\left\{ #1 \right\}}
 
-% Short names for primes and underlines
+% Fluid mechanics symbols
+\newcommand{\Reynolds}{\mathrm{Re}}
+\newcommand{\Fr}{\mathrm{Fr}}
+\newcommand{\Nu}{\mathrm{Nu}}
+\newcommand{\Pe}{\mathrm{Pe}}
+\newcommand{\St}{\mathrm{St}}
+
+% Short names for primes, overlines, and underlines
+\newcommand{\nbar}{\bar{n}}
+\newcommand{\epsilonbar}{\bar{\epsilon}}
+\newcommand{\kbar}{\bar{k}}
 \newcommand{\uline}[1]{\underline{#1}}
 \newcommand{\uuline}[1]{\underline{\underline{#1}}}
 \newcommand{\pprime}[1]{\left.{#1}^{\prime \prime}\right.}
@@ -122,16 +143,60 @@
 
 \newcommand{\Log}[1]{\log\left( #1 \right)}
 
-% Hats
+% Unit Vetors
+\newcommand{\Ahat}{\hat{A}}
+\newcommand{\ahat}{\hat{a}}
+\newcommand{\Bhat}{\hat{B}}
+\newcommand{\bhat}{\hat{b}}
+\newcommand{\Chat}{\hat{C}}
+\newcommand{\chat}{\hat{c}}
+\newcommand{\Dhat}{\hat{D}}
+\newcommand{\dhat}{\hat{d}}
+\newcommand{\Ehat}{\hat{E}}
+\newcommand{\ehat}{\hat{e}}
+\newcommand{\Fhat}{\hat{F}}
+\newcommand{\fhat}{\hat{f}}
+\newcommand{\Ghat}{\hat{G}}
+\newcommand{\ghat}{\hat{g}}
+\newcommand{\Hhat}{\hat{H}}
+\newcommand{\hhat}{\hat{h}}
+\newcommand{\Ihat}{\hat{I}}
+\newcommand{\ihat}{\hat{i}}
+\newcommand{\Jhat}{\hat{J}}
+\newcommand{\jhat}{\hat{j}}
+\newcommand{\Khat}{\hat{K}}
 \newcommand{\khat}{\hat{k}}
+\newcommand{\Lhat}{\hat{L}}
+\newcommand{\lhat}{\hat{l}}
+\newcommand{\Mhat}{\hat{M}}
+\newcommand{\mhat}{\hat{m}}
+\newcommand{\Nhat}{\hat{N}}
 \newcommand{\nhat}{\hat{n}}
+\newcommand{\Ohat}{\hat{O}}
+\newcommand{\ohat}{\hat{o}}
+\newcommand{\Phat}{\hat{P}}
 \newcommand{\phat}{\hat{p}}
+\newcommand{\Qhat}{\hat{Q}}
+\newcommand{\qhat}{\hat{q}}
+\newcommand{\Rhat}{\hat{R}}
 \newcommand{\rhat}{\hat{r}}
+\newcommand{\Shat}{\hat{S}}
+\newcommand{\shat}{\hat{s}}
+\newcommand{\That}{\hat{T}}
 \newcommand{\that}{\hat{t}}
+\newcommand{\Uhat}{\hat{U}}
+\newcommand{\uhat}{\hat{u}}
+\newcommand{\Vhat}{\hat{V}}
+\newcommand{\vhat}{\hat{v}}
+\newcommand{\What}{\hat{W}}
+\newcommand{\what}{\hat{w}}
+\newcommand{\Xhat}{\hat{X}}
 \newcommand{\xhat}{\hat{x}}
+\newcommand{\Yhat}{\hat{Y}}
 \newcommand{\yhat}{\hat{y}}
+\newcommand{\Zhat}{\hat{Z}}
 \newcommand{\zhat}{\hat{z}}
+
 \newcommand{\rhohat}{\hat{\rho}}
 \newcommand{\phihat}{\hat{\phi}}
 \newcommand{\thetahat}{\hat{\theta}}
-
