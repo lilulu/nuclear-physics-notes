@@ -1,0 +1,218 @@
+%
+% The many shortcuts for derivitives, seperated from -style-math because there
+% are just so many of these
+%
+\NeedsTeXFormat{LaTeX2e}[1995/12/01]
+\ProvidesClass{school-style-derivitives}
+
+\newcommand{\derivitive}{\fsp\mathrm{d}}
+\newcommand{\derivitiveone}[1]{\frac{\mathrm{d}}{\mathrm{d}#1}}
+\newcommand{\derivitiveonen}[2]{\frac{\mathrm{d}^{#2}}{\mathrm{d}#1^{#2}}}
+\newcommand{\derivitivetwo}[2]{\frac{\mathrm{d}#1}{\mathrm{d}#2}}
+\newcommand{\derivitivetwon}[3]{\frac{\mathrm{d}^{#3}#1}{\mathrm{d}#2^{#3}}}
+\newcommand{\partialone}[1]{\frac{\partial}{\partial #1}}
+\newcommand{\partialonen}[2]{\frac{\partial^{#2}}{\partial #1^{#2}}}
+\newcommand{\partialtwo}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\partialtwon}[3]{\frac{\partial^{#3} #1}{\partial #2 ^{#3}}}
+
+\newcommand{\dll}{\derivitive \ell}
+\newcommand{\dvecell}{\derivitive \vec{\ell}}
+
+\newcommand{\drho}{\derivitive \rho}
+\newcommand{\ddrho}{\derivitiveone{\rho}}
+\newcommand{\prhofpt}{\partialtwo{\rho_f}{t}}
+\newcommand{\prhopt}{\partialtwo{\rho}{t}}
+
+\newcommand{\dPhidt}{\derivitivetwo{\Phi}{t}}
+
+\newcommand{\dphi}{\derivitive \phi}
+\newcommand{\ddphi}{\derivitiveone{\phi}}
+\newcommand{\ddphin}[1]{\derivitiveonen{\phi}{#1}}
+\newcommand{\dphidr}{\derivitivetwo{\phi}{r}}
+\newcommand{\dphidt}{\derivitivetwo{\phi}{t}}
+\newcommand{\dphidx}{\derivitivetwo{\phi}{x}}
+\newcommand{\dphidy}{\derivitivetwo{\phi}{y}}
+\newcommand{\ppphi}{\partialone{\phi}}
+\newcommand{\pphiptheta}{\partialtwo{\phi}{\theta}}
+\newcommand{\pphipr}{\partialtwo{\phi}{r}}
+\newcommand{\pphipt}{\partialtwo{\phi}{t}}
+\newcommand{\pphiptn}[1]{\partialtwon{\phi}{t}{#1}}
+
+\newcommand{\dvarphi}{\derivitive \varphi}
+\newcommand{\dvarphidphi}{\derivitivetwo{\varphi}{\phi}}
+\newcommand{\dvarphidphin}[1]{\derivitivetwon{\varphi}{\phi}{#1}}
+\newcommand{\dvarphidtheta}{\derivitivetwo{\varphi}{\theta}}
+\newcommand{\dvarphidthetan}[1]{\derivitivetwon{\varphi}{\theta}{#1}}
+\newcommand{\dvarphidr}{\derivitivetwo{\varphi}{r}}
+\newcommand{\pvarphipr}{\partialtwo{\varphi}{r}}
+\newcommand{\pvarphipt}{\partialtwo{\varphi}{t}}
+\newcommand{\pvarphiptn}[1]{\partialtwon{\varphi}{t}{#1}}
+
+\newcommand{\domega}{\derivitive \omega}
+
+\newcommand{\dPsidxn}[1]{\derivitivetwon{\Psi}{x}{#1}}
+\newcommand{\dPsidt}{\derivitivetwo{\Psi}{t}}
+\newcommand{\dPsidx}{\derivitivetwo{\Psi}{x}}
+\newcommand{\dPsidtn}[1]{\derivitivetwon{\Psi}{t}{#1}}
+\newcommand{\pPsipt}{\partialtwo{\Psi}{t}}
+\newcommand{\pPsipx}{\partialtwo{\Psi}{x}}
+\newcommand{\pPsiptn}[1]{\partialtwon{\Psi}{t}{#1}}
+
+\newcommand{\dpsidx}{\derivitivetwo{\psi}{x}}
+\newcommand{\dpsidxn}[1]{\derivitivetwon{\psi}{x}{#1}}
+\newcommand{\dpsidt}{\derivitivetwo{\psi}{t}}
+\newcommand{\dpsidtn}[1]{\derivitivetwon{\psi}{t}{#1}}
+\newcommand{\ppsiptn}[1]{\partialtwon{\psi}{t}{#1}}
+\newcommand{\ppsipxn}[1]{\partialtwon{\psi}{x}{#1}}
+\newcommand{\ppsipyn}[1]{\partialtwon{\psi}{y}{#1}}
+\newcommand{\ppsipzn}[1]{\partialtwon{\psi}{z}{#1}}
+
+\newcommand{\pPsistarpx}{\partialtwo{\Psi^*}{x}}
+
+\newcommand{\dsigma}{\derivitive \sigma}
+
+\newcommand{\dtau}{\derivitive \tau}
+
+\newcommand{\ddthetan}[1]{\derivitiveonen{\theta}{#1}}
+
+\newcommand{\dtheta}{\derivitive \theta}
+\newcommand{\ddtheta}{\derivitiveone{\theta}}
+\newcommand{\dthetadt}{\derivitivetwo{\theta}{t}}
+\newcommand{\pptheta}{\partialone{\theta}}
+
+\newcommand{\pxipt}{\partialtwo{\xi}{t}}
+\newcommand{\pxiptn}[1]{\partialtwon{\xi}{t}{#1}}
+
+\newcommand{\dA}{\derivitive A}
+\newcommand{\pAptn}[1]{\partialtwon{A}{t}{#1}}
+
+\newcommand{\da}{\derivitive a}
+\newcommand{\dveca}{\derivitive \vec{a}}
+\newcommand{\dda}{\derivitiveone{a}}
+
+\newcommand{\pvecApt}{\partialtwo{\vec{A}}{t}}
+\newcommand{\pvecApx}{\partialtwo{\vec{A}}{x}}
+\newcommand{\pvecApy}{\partialtwo{\vec{A}}{y}}
+\newcommand{\pvecApz}{\partialtwo{\vec{A}}{z}}
+\newcommand{\pvecAptn}[1]{\partialtwon{\vec{A}}{t}{#1}}
+
+\newcommand{\dvecB}{\derivitive\vec{B}}
+\newcommand{\dvecBdt}{\derivitivetwo{\vec{B}}{t}}
+\newcommand{\dvecBdtn}[1]{\derivitivetwon{\vec{B}}{t}{#1}}
+\newcommand{\dvecBdxn}[1]{\derivitivetwon{\vec{B}}{x}{#1}}
+\newcommand{\pvecBpt}{\partialtwo{\vec{B}}{t}}
+\newcommand{\pBpt}{\partialtwo{B}{t}}
+\newcommand{\pBpyn}[1]{\partialtwon{B}{t}{#1}}
+\newcommand{\dBdt}{\derivitivetwo{B}{t}}
+\newcommand{\dBdtn}[1]{\derivitivetwon{B}{t}{#1}}
+\newcommand{\dBdyn}[1]{\derivitivetwon{B}{y}{#1}}
+
+\newcommand{\pvecDpt}{\partialtwo{\vec{D}}{t}}
+
+\newcommand{\dE}{\derivitive E}
+\newcommand{\dEdt}{\derivitivetwo{E}{t}}
+\newcommand{\pEpt}{\partialtwo{E}{t}}
+\newcommand{\pEptn}[1]{\partialtwon{E}{t}{#1}}
+\newcommand{\pEpz}{\partialtwo{E}{z}}
+\newcommand{\pEpzn}[1]{\partialtwon{E}{z}{#1}}
+
+\newcommand{\dvecEdtn}[1]{\derivitivetwon{\vec{E}}{t}{#1}}
+\newcommand{\dvecEdxn}[1]{\derivitivetwon{\vec{E}}{x}{#1}}
+\newcommand{\pvecEpt}{\partialtwo{\vec{E}}{t}}
+\newcommand{\pvecEptn}[1]{\partialtwon{\vec{E}}{t}{#1}}
+\newcommand{\pvecEpx}{\partialtwo{\vec{E}}{x}}
+\newcommand{\pvecEpy}{\partialtwo{\vec{E}}{y}}
+\newcommand{\pvecEpz}{\partialtwo{\vec{E}}{z}}
+
+\newcommand{\dF}{\derivitive F}
+\newcommand{\dFdx}{\derivitivetwo{F}{x}}
+\newcommand{\dFdxn}[1]{\derivitivetwon{F}{x}{#1}}
+
+\newcommand{\dfdx}{\derivitivetwo{f}{x}}
+\newcommand{\dfdt}{\derivitivetwo{f}{t}}
+
+\newcommand{\dhdxn}[1]{\derivitivetwon{h}{x}{#1}}
+
+\newcommand{\dGdt}{\derivitivetwo{G}{t}}
+
+\newcommand{\dgdtn}[1]{\derivitivetwon{g}{x}{#1}}
+
+\newcommand{\pvecHpt}{\partialtwo{\vec{H}}{t}}
+\newcommand{\pvecHptn}[1]{\partialtwon{\vec{H}}{t}{#1}}
+
+\newcommand{\dhdt}{\derivitivetwo{h}{t}}
+
+\newcommand{\dI}{\derivitive I}
+\newcommand{\dIdt}{\derivitivetwo{I}{t}}
+\newcommand{\pIpt}{\partialtwo{I}{t}}
+\newcommand{\pIpz}{\partialtwo{I}{z}}
+
+\newcommand{\didt}{\derivitivetwo{i}{t}}
+
+\newcommand{\dvecJ}{\derivitive \vec{J}}
+
+\newcommand{\dk}{\derivitive k}
+
+\newcommand{\dN}{\derivitive N}
+\newcommand{\dNdf}{\derivitivetwo{N}{f}}
+
+\newcommand{\dn}{\derivitive n}
+
+\newcommand{\dP}{\derivitive P}
+
+\newcommand{\dpdt}{\derivitivetwo{p}{t}}
+
+\newcommand{\dvecpdt}{\derivitivetwo{\vec{p}}{t}}
+
+\newcommand{\dq}{\derivitive q}
+\newcommand{\dqdt}{\derivitivetwo{q}{t}}
+
+\newcommand{\dr}{\derivitive r}
+\newcommand{\dvecr}{\derivitive \vec{r}}
+\newcommand{\ddr}{\derivitiveone{r}}
+\newcommand{\ddrn}[1]{\derivitiveonen{r}{#1}}
+\newcommand{\ppr}{\partialone{r}}
+
+\newcommand{\dvecS}{\derivitive \vec{S}}
+
+\newcommand{\ds}{\derivitive s}
+\newcommand{\dvecs}{\derivitive \vec{s}}
+
+\newcommand{\dt}{\derivitive t}
+\newcommand{\ddt}{\derivitiveone{t}}
+\newcommand{\ddtn}[1]{\derivitiveonen{t}{#1}}
+\newcommand{\ppt}{\partialone{t}}
+
+\newcommand{\du}{\derivitive u}
+\newcommand{\dudrn}[1]{\derivitivetwo{u}{r}{#1}}
+\newcommand{\dudt}{\derivitivetwo{u}{t}}
+
+\newcommand{\dV}{\derivitive V}
+\newcommand{\dVdr}{\derivitivetwo{V}{r}}
+\newcommand{\dVdrn}[1]{\derivitivetwon{V}{r}{#1}}
+\newcommand{\pVpz}{\partialtwo{V}{z}}
+
+\newcommand{\dv}{\derivitive v}
+\newcommand{\dvdt}{\derivitivetwo{v}{t}}
+\newcommand{\dvdtn}[1]{\derivitivetwon{v}{t}{#1}}
+\newcommand{\pptn}[1]{\partialonen{t}{#1}}
+
+\newcommand{\dx}{\derivitive x}
+\newcommand{\ddx}{\derivitiveone{x}}
+\newcommand{\ddxn}[1]{\derivitiveonen{x}{#1}}
+\newcommand{\ppx}{\partialone{x}}
+\newcommand{\ppxn}[1]{\partialonen{x}{#1}}
+
+\newcommand{\davgxdt}{\derivitivetwo{\avg{x}}{t}}
+
+\newcommand{\dy}{\derivitive y}
+\newcommand{\ddy}{\derivitiveone{y}}
+\newcommand{\ddyn}[1]{\derivitiveonen{y}{#1}}
+\newcommand{\dydt}{\derivitivetwo{y}{t}}
+\newcommand{\ppy}{\partialone{y}}
+\newcommand{\ppyn}[1]{\partialonen{y}{#1}}
+
+\newcommand{\dz}{\derivitive z}
+\newcommand{\dzdt}{\derivitivetwo{z}{t}}
+\newcommand{\ppz}{\partialone{z}}
+\newcommand{\ppzn}[1]{\partialonen{z}{#1}}

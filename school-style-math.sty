@@ -1,0 +1,77 @@
+%
+% Contains shorter names for many commonly used math related items
+%
+\NeedsTeXFormat{LaTeX2e}[1995/12/01]
+\ProvidesClass{school-style-math}
+
+\usepackage{school-style-derivitives}
+
+% These don't really have anywhere else to go
+\newcommand{\fsp}{\mbox{ }}
+\newcommand{\inv}{^{_-}\!\!}
+\newcommand{\nt}{_{_{0}}}
+\newcommand{\degree}{^{\circ}}
+\newcommand{\sub}[1]{_{\mathrm{#1}}}
+\newcommand{\mtx}[1]{\tilde{#1}}
+
+% Parthentecies
+\newcommand{\lp}{ \left( }
+\newcommand{\rp}{ \right) }
+\newcommand{\parens}[1]{ \lp #1 \rp }
+\newcommand{\bracket}[1]{ \left[ #1 \right] }
+
+% Relation Symbols
+\newcommand{\eq}{\stackrel{}{=}}
+\newcommand{\qeq}{\stackrel{?}{=}}
+\newcommand{\qneq}{\stackrel{?}{\neq}}
+\newcommand{\qleq}{\stackrel{?}{\leq}}
+
+% Shortcuts to print some things larger
+\newcommand{\Sum}{\displaystyle\sum}
+\newcommand{\Prod}{\displaystyle\prod}
+
+\newcommand{\Int}{\displaystyle\int}
+\newcommand{\oInt}{\displaystyle\oint}
+\newcommand{\OInt}{\displaystyle\oint}
+\newcommand{\Oint}{\displaystyle\oint}
+
+\newcommand{\Frac}[2]{\displaystyle\frac{\displaystyle #1}{\displaystyle #2}}
+
+% Vector calculus related terms
+\newcommand{\gradient}{\nabla}
+\newcommand{\divergence}{\nabla \cdot}
+\newcommand{\curl}{\nabla \times}
+\newcommand{\laplacian}{\nabla^2}
+\newcommand{\laplace}{\laplacian}
+\newcommand{\cross}{\times}
+
+% Functions that sometimes need () around them
+\newcommand{\Sin}[1]{\sin\left( #1 \right)}
+\newcommand{\Arcsin}[1]{\arcsin\left( #1 \right)}
+\newcommand{\Cos}[1]{\cos\left( #1 \right)}
+\newcommand{\Arccos}[1]{\arccos\left( #1 \right)}
+\newcommand{\Tan}[1]{\tan\left( #1 \right)}
+\newcommand{\Arctan}[1]{\arctan\left( #1 \right)}
+
+\newcommand{\Sinh}[1]{\sinh\left( #1 \right)}
+\newcommand{\Arcsinh}[1]{\arcsinh\left( #1 \right)}
+\newcommand{\Cosh}[1]{\cosh\left( #1 \right)}
+\newcommand{\Arccosh}[1]{\arccosh\left( #1 \right)}
+\newcommand{\Tanh}[1]{\tanh\left( #1 \right)}
+\newcommand{\Arctanh}[1]{\arctanh\left( #1 \right)}
+
+\newcommand{\Log}[1]{\log\left( #1 \right)}
+
+% Hats
+\newcommand{\khat}{\hat{k}}
+\newcommand{\nhat}{\hat{n}}
+\newcommand{\phat}{\hat{p}}
+\newcommand{\rhat}{\hat{r}}
+\newcommand{\that}{\hat{t}}
+\newcommand{\xhat}{\hat{x}}
+\newcommand{\yhat}{\hat{y}}
+\newcommand{\zhat}{\hat{z}}
+\newcommand{\rhohat}{\hat{\rho}}
+\newcommand{\phihat}{\hat{\phi}}
+\newcommand{\thetahat}{\hat{\theta}}
+
