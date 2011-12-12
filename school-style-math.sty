@@ -4,6 +4,10 @@
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesClass{school-style-math}
 
+% We use the AMS math stuff
+\usepackage{amsmath}
+
+% Derivitives are messy, so they go in a seperate file
 \usepackage{school-style-derivitives}
 
 % These don't really have anywhere else to go
@@ -26,6 +30,12 @@
 \newcommand{\qneq}{\stackrel{?}{\neq}}
 \newcommand{\qleq}{\stackrel{?}{\leq}}
 
+% Number Sets
+\newcommand{\Real}{\mathbb{R}}
+\newcommand{\Natural}{\mathbb{N}}
+\newcommand{\Integer}{\mathbb{Z}}
+\newcommand{\Rational}{\mathbb{Q}}
+
 % Shortcuts to print some things larger
 \newcommand{\Sum}{\displaystyle\sum}
 \newcommand{\Prod}{\displaystyle\prod}
@@ -36,6 +46,56 @@
 \newcommand{\Oint}{\displaystyle\oint}
 
 \newcommand{\Frac}[2]{\displaystyle\frac{\displaystyle #1}{\displaystyle #2}}
+
+% Physics symbols
+\newcommand{\avg}[1]{\left< #1 \right>}
+\newcommand{\ket}[1]{\left| #1 \right>}
+\newcommand{\bra}[1]{\left< #1 \right|}
+\newcommand{\expect}[1]{\left< #1 \right>}
+\newcommand{\braket}[2]{\langle #1 \mid #2 \rangle}
+\newcommand{\ketbra}[2]{\left| #1 \right> \left< #2 \right|}
+\newcommand{\up}{\uparrow}
+\newcommand{\down}{\downarrow}
+\newcommand{\braces}[1]{\left\{ #1 \right\}}
+
+% Short names for primes and underlines
+\newcommand{\uline}[1]{\underline{#1}}
+\newcommand{\uuline}[1]{\underline{\underline{#1}}}
+\newcommand{\pprime}[1]{\left.{#1}^{\prime \prime}\right.}
+\newcommand{\ppprime}[1]{\left.{#1}^{\prime \prime \prime}\right.}
+\newcommand{\pppprime}[1]{\left.{#1}^{\prime \prime \prime \prime}\right.}
+\newcommand{\qp}{\left.q^{\prime}\right.}
+\newcommand{\qpp}{\left.q^{\prime \prime}\right.}
+\newcommand{\qppp}{\left.q^{\prime \prime \prime}\right.}
+\newcommand{\Qp}{\left.Q^{\prime}\right.}
+\newcommand{\Qpp}{\left.Q^{\prime \prime}\right.}
+\newcommand{\Qppp}{\left.Q^{\prime \prime \prime}\right.}
+\newcommand{\vecp}{\vec{p}}
+\newcommand{\vecv}{\vec{v}}
+\newcommand{\vecV}{\vec{V}}
+\newcommand{\vecvp}{\vec{v}^{\prime}}
+\newcommand{\vecvb}{\bar{\vec{v}}}
+\newcommand{\vecw}{\vec{w}}
+\newcommand{\vp}{\left.v^{\prime}\right.}
+\newcommand{\vb}{\left.\bar{v}\right.}
+\newcommand{\Tprime}{\left.T^{\prime}\right.}
+\newcommand{\Tbar}{\bar{T}}
+\newcommand{\pbar}{\bar{p}}
+\newcommand{\DeltaPacc}{\Delta P_{\mathrm{acc}}}
+\newcommand{\DeltaPfri}{\Delta P_{\mathrm{friction}}}
+\newcommand{\DeltaPgra}{\Delta P_{\mathrm{gravity}}}
+\newcommand{\DeltaPloss}{\Delta P_{\mathrm{loss}}}
+\newcommand{\DeltaPent}{\Delta P_{\mathrm{entrance}}}
+\newcommand{\DeltaPexit}{\Delta P_{\mathrm{exit}}}
+\newcommand{\DeltaPspa}{\Delta P_{\mathrm{spacer}}}
+\newcommand{\DeltaPfit}{\Delta P_{\mathrm{fitting}}}
+\newcommand{\dPdzacc}{\left( \dPdz \right)_{\mathrm{acc}}}
+\newcommand{\dPdzfri}{\left( \dPdz \right)_{\mathrm{friction}}}
+\newcommand{\dPdzgra}{\left( \dPdz \right)_{\mathrm{gravity}}}
+\newcommand{\dPdzloss}{\left( \dPdz \right)_{\mathrm{loss}}}
+\newcommand{\Xp}{\left.X^{\prime}\right.}
+\newcommand{\xp}{\left.x^{\prime}\right.}
+\newcommand{\yp}{\left.y^{\prime}\right.}
 
 % Vector calculus related terms
 \newcommand{\gradient}{\nabla}
