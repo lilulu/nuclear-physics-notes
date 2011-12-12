@@ -8,6 +8,7 @@
 \usepackage{amsmath}
 \usepackage{amsthm}
 \usepackage{mathtools}
+\usepackage{subfig}
 \usepackage{graphicx}
 \usepackage{grffile}
 \usepackage{multirow}
