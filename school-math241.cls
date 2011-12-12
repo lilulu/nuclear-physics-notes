@@ -2,8 +2,6 @@
 \LoadClass{school-base}
 \ProvidesClass{school-math241}
 
-\usepackage{school-style-math}
-
 \usepackage{school-style-class}
 \classcode{Math 241}
 \schoolname{University of Illinois}

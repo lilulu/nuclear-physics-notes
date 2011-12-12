@@ -5,6 +5,7 @@
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \LoadClass[twoside]{article}
 \ProvidesClass{school-base}
+\usepackage{school-style-packages}
 
 % Personal information (about the author) is stored here
 \def\author#1{\gdef\@author{#1}}
