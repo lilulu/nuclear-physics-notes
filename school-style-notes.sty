@@ -11,6 +11,7 @@
 \rfoot{}
 
 \renewcommand{\maketitle}{%
+  \thispagestyle{empty}
   \begin{figure}[t]
     \begin{flushright}
       \@author \\
@@ -24,8 +25,12 @@
 
 \newcommand{\makecontents}{%
   \setcounter{tocdepth}{3}%
-  \tableofcontents
-  \clearpage}
+  \tableofcontents%
+  \clearpage%
+  \listoffigures%
+  \listoftables%
+  \clearpage
+  \pagestyle{fancy}}
 
 \newcommand{\firstlecture}{}
 \newcommand{\newlecture}{}
