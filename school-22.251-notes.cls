@@ -2,4 +2,4 @@
 \LoadClass{school-22.251}
 \ProvidesClass{school-22.251-notes}
 
-\usepackage{school-style-notes}
+\usepackage{school-style-classnotes}

@@ -2,5 +2,5 @@
 \LoadClass{school-base}
 \ProvidesClass{school-review-notes}
 
-\usepackage{school-style-notes}
+\usepackage{school-style-classnotes}
 \usepackage{school-style-class}

@@ -2,4 +2,4 @@
 \LoadClass{school-esd.801}
 \ProvidesClass{school-esd.801-notes}
 
-\usepackage{school-style-notes}
+\usepackage{school-style-classnotes}
