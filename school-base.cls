@@ -9,6 +9,7 @@
 
 % Personal information (about the author) is stored here
 \def\author#1{\gdef\@author{#1}}
+\def\authoremail#1{\gdef\@authoremail{#1}}
 \usepackage{school-base-personal}
 
 % By default, headers/footers are empty

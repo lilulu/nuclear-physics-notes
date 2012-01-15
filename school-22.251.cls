@@ -4,4 +4,6 @@
 
 \usepackage{school-style-class}
 \classcode{22.251}
+\classname{Systems Analysis of Nuclear Fuel Cycle}
+\professor{Kord Smith}
 \schoolname{Massachusetts Institute of Technology}

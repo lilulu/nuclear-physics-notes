@@ -1,0 +1,150 @@
+% Provides a framework for numbered questions on assignments
+\NeedsTeXFormat{LaTeX2e}[1995/12/01]
+\ProvidesClass{school-style-questions}
+\usepackage{calc}
+\usepackage{fmtcount}
+\usepackage{hanging}
+
+% formatting
+%\bodyindent{0in}	%auto-handles the indent
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%	Private Commands							%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%stores the current question and subquestion
+\newcounter{question}
+\newcounter{subquestion}
+
+%holds the last skipped length
+\newlength{\questionskip}
+\newlength{\subquestionskip}
+
+%resets the enviornment
+\newcommand{\resetquestions}
+{
+	\setcounter{question}{0}
+	\setcounter{subquestion}{0}
+}
+
+\newcommand{\resetsubquestions}
+{
+	\setcounter{subquestion}{0}
+}
+
+%increments the question number
+\newcommand{\incrementquestioncounter}
+{
+	\addtocounter{question}{1}
+}
+
+%increments the sub question number
+\newcommand{\incrementsubquestioncounter}
+{
+	\addtocounter{subquestion}{1}
+}
+
+%returns the value of a counter
+\newcommand{\curquestion}
+{
+	$ \! \! $ \decimal{question} $ \! \! \! \! $
+}
+
+\newcommand{\cursubquestion}
+{
+	$ \! \! $ \abalph{subquestion} $ \! \! \! \! $
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%	Public Commands								%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\question}[1]
+{
+	\resetsubquestions
+	%\incrementsubquestioncounter
+	\incrementquestioncounter
+	
+	\setlength{\questionskip}{\widthof{\curquestion) }}
+	
+	\hangpara{\questionskip}{1}%
+	\curquestion) #1
+	\\
+}
+
+\newcommand{\subquestion}[1]
+{
+	\incrementsubquestioncounter
+	
+	\setlength{\subquestionskip}{\widthof{\curquestion) \cursubquestion) }}
+	
+	\hangpara{\subquestionskip}{1}%
+	\hspace{\questionskip} $ \! \! \! \! $ \cursubquestion) #1
+	\\
+}
+
+\newcommand{\opensubquestion}[1]
+{
+	\incrementquestioncounter
+	\resetsubquestions
+	\incrementsubquestioncounter
+	
+	\setlength{\questionskip}{\widthof{\curquestion) }}
+	\setlength{\subquestionskip}{\widthof{\curquestion) \cursubquestion) }}
+	
+	\hangpara{\subquestionskip}{1}%
+	\curquestion) \cursubquestion) #1
+	\\
+}
+
+\newcommand{\multilinequestion}[2]
+{
+	\question{#1}
+	\begin{hangparas}{\questionskip}{0}
+		#2
+	\end{hangparas}
+}
+
+\newcommand{\multilinesubquestion}[2]
+{
+	\subquestion{#1}
+	\begin{hangparas}{\subquestionskip}{0}
+		#2
+	\end{hangparas}
+}
+
+\newcommand{\openmultilinesubquestion}[2]
+{
+	\opensubquestion{#1}
+	
+	\begin{hangparas}{\subquestionskip}{0}
+		#2
+	\end{hangparas}
+}
+
+\newcommand{\forcequestion}[1]
+{
+	\setcounter{question}{#1}
+	\addtocounter{question}{-1}
+}
+
+\newcommand{\forcesubquestion}[1]
+{
+	\setcounter{subquestion}{#1}
+	\addtocounter{subquestion}{-1}
+}
+
+\newcommand{\answer}[1]
+{
+	\textbf{#1}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%	Aliases									%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\q}[1]{\question{#1}}
+\newcommand{\sq}[1]{\subquestion{#1}}
+\newcommand{\osq}[1]{\opensubquestion{#1}}
+\newcommand{\mlq}[2]{\multilinequestion{#1}{#2}}
+\newcommand{\mlsq}[2]{\multilinesubquestion{#1}{#2}}
+\newcommand{\omlsq}[2]{\openmultilinesubquestion{#1}{#2}}
+\newcommand{\fq}[1]{\forcequestion{#1}}
+\newcommand{\fsq}[1]{\forcesubquestion{#1}}

@@ -4,4 +4,6 @@
 
 \usepackage{school-style-class}
 \classcode{ESD.801}
+\classname{Introduction to Technology and Policy}
+\professor{Frank Field III, Sebastian Michael Pfotenhauer}
 \schoolname{Massachusetts Institute of Technology}
