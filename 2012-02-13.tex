@@ -1,0 +1,105 @@
+\documentclass{school-22.211-notes}
+\date{February 13, 2012}
+
+\begin{document}
+\maketitle
+
+\topic{Developing An Infinite-medium Monte Carlo Neutronics}
+*does xs depend on geometry? if not, why does it matter infinite medium? 
+
+\subtopic{Isotopic Importance by Infinite Medium Reactor Materials}
+
+\begin{table}
+  \centering
+  \begin{tabular}{|c|c|c|}
+    PWR & & \\
+    BWR & & 
+  \end{tabular}
+  \caption{Volume Fraction of Reactor Materials}
+\end{table}
+Notice in PWR, H and O densities come out to be the same. 
+
+Usually given a xs, it is given in 0.025 eV because it is the peak of the Maxiwillean distribution in room temperature. 
+
+\subtopic{Absorption and Scattering}
+Absorption and scattering always line up together in terms of energy. 
+
+Sodium has a high capture xs in thermal range, and a small capture xs in fast range. But we can still build a thermal reactor with water as moderator and sodium as coolant, as long as sodium's volume is lower than that of the H. 
+
+\topic{Models for High Energy Elastic Scattering Physics}
+Compression: log slowing down. 
+
+Take an energy and adds up all the neutrons in that energy, we get flux vs. energy. 
+
+\subtopic{Flux vs. energy graph}
+The curve due to Placzek Transients; if the lower energy bound is not low enough, the flux would tail down, which means that we are not tracking enough energy. WIth enough energy, the flux should be a $\frac{1}{E}$ shape. 
+
+\subtopic{Flux vs. lethargy}
+ calculate mean energy and place them in corresponding bins; even at higher generations, there are still some neutrons not slowed down entirely yet, so the flux curve tails down. In lethargy space, $\phi(E)$ should be constant. 
+
+Binning method: When we are plotting, we are really plotting the expectation value of the numbers of neutrons; so if we ask `how many neutrons would there be at x energy level' the answer should be zero. So the bins have to be fine enough to see the details, but not too fine that the bins got no more neutrons. 
+
+
+\topic{Models for Fission Neutron Emission Spectra}
+When building a cdf for neutron emission, it is always important to sample right after and compare with the spectrum to make sure the cdf is correct. 
+
+Spectrum: shape in energy, which is independent on the number of incoming neutrons and xs for one specie; for two species, the relative xs matter. 
+
+Fission source peak: have to take into account the cross section: 
+\eqn{\phi(E) \propto \Sum_N \Sum_g N_g^n \tau_g^n = \Sum_n \Sum_g N_g^n \frac{1}{\Sigma(E_g^n)}   }
+So without taking into account xs, the sudo flux is flat and missing the fission source peak; taking into account hygrogen peak xs, the real flux peaks shows up. 
+
+\topic{Models for Equilibrium Thermal Scattering Physics}
+\subtopic{Equilibrium Monatomic Gas: Maxwellian Distribution of Target Energy}
+
+Maxiwellian: 4 eV cut-off. 
+
+
+Adding thermalization into the hydrogen flux, we get the bump. The size of the bump depends on the absorber. If we add a $1/v$ absorber with a 0.2 absorption-to-scattering ratio at 0.025 MeV, then the flux in hydrogen looks more like the flux in a typical LWR. 
+
+
+\subtopic{U238 Target in Motion Thermal Scattering Distributions}
+Fuel in LWR is around 1000K. Assume 1200K for now, then the four times cut-off for a 25 kT (2.5 eV) neutron has a cutoff of 200 kT (20 eV). 
+
+Scattering resonance: anti-resonance, due to the interacting wave between potential scattering and compound nuclear scattering. 
+
+The problem is, the scattering xs goes to 0 and goes up (scattering may even be larger than absorption) right around the peak energy, and if you cutoff right before the peak, the results are wrong. 
+
+\subtopic{Bound Elastic Scattering of H in Water Molecule vs Temperature}
+So far we've only talked about free gas; in the case of tightly bound atoms at very low wnergy, 
+\eqn{\sigma_{\mathrm{bound}} = \left( 1 + \frac{1}{A} \right) \sigma  }
+The dependency on $A$ suggests that the bound elastic scattering matters for light nuclei, and not so much for heavy nuclei. 
+
+In the case of hydrogen, the free gas model would still provide the right shape, but the probability can be off by a factor of 10. In the case of graphite, the free gas model does not provide the right shape. The lower energy you want to go, the more careful you need to be. 
+
+Know the terminologies $S, \alpha$ (momentum transfer), $\beta$ (energy transfer). 
+
+
+
+
+\lecture{Facts For Qualify Exam}
+\begin{enumerate}
+\item Flux = $\frac{n}{\cm^2 \s}.$
+
+\item Fast flux in hydrogen is around $10^{14}$ n/cm$^2$s, and on the order of $10^{12}$n/cm$^2$s for thermal flux. 
+
+\item Cross-section data: 
+\begin{enumerate}
+\item H has no resonance; it has the highest scattering xs in LWR, so we can ignore any other isotopic in the  
+\item Na has a huge resonance in 23 keV, and more resonances at higher energies because it is heavy. 
+\item Near zero energy,
+\eqn{ \sigma(E\to 0) = }
+\item Resonance at 6 to 7 eV: U238. 
+\item A small resonance at .3 eV: Pu239 (its signiture is a super low energy scattering xs). 
+\item U235's thermal elastic xs is larger than 238, have resonance around the same range. 
+  
+\end{enumerate}
+
+\item Given an unknown material type, all we care is to count the nucleus density of each material and look at it's xs. 
+
+\item Average fission neutron energy: 2 MeV; average peak fission energy: 1 MeV; see fission sepctrum. 
+
+\end{enumerate}
+
+
+\end{document}
