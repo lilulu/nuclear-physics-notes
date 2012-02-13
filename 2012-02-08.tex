@@ -14,10 +14,65 @@
   \item Elementary reactor transient analysis.
 \end{itemize}
 
-\uline{Practice}
+\topic{Exercises}
+\subtopic{Estimate the Mean Free Path of a Fission Neutron in an LWR} 
 
 
+\lecture{Neutron Slowing Down}
 Next time: elastic scattering; xi spectrum; calculate the flux for different reactor types. 
+\topic{Preview: Reuss Ch7}
+\begin{enumerate}
+\item Decouple absorption and scattering is possible because absorption is complicated at lower energies, whereas scattering is the opposite (b/c inelastic and anisotropic aspects). 
+
+\item Elastic vs inelastic: elastic scattering has no threshold, making it the most important one in neutron slowing down. 
+
+\item Laws of elastic collision: 
+  \begin{align}
+    \frac{E_{nf}}{E_{ni}} &= \frac{A^2 + 1 + 2A \cos \theta}{(A+1)^2} = \frac{1}{2} \left( 1 + \alpha + (1-\alpha) \cos \theta \right) \\
+    \cos \psi &= \frac{1 + A \cos \theta}{\sqrt{A^2 + 1 + 2A \cos \theta}} \\
+    \alpha &= \frac{(A-1)^2}{(A+1)^2} = \mbox{min ratio between final n energy and initial} 
+  \end{align}
+
+\item Lethargy, a unitless measurement of energy:
+  \eqn{ u = \ln \frac{E_{\mathrm{ref}}}{E} }
+Notice as time goes, neutrons slow down, $u$ increases, making it like a measure of the age of the neutrons. Then we can write:
+\begin{align}
+w &= u_f - u_i = -\ln \left( \frac{1}{2} ( 1 + \alpha + (1-\alpha) \cos \theta ) \right) \\
+w_{min} &= 0 \\
+w_{max} &= \epsilon = -\ln \alpha \\
+P(w) \dw &= \frac{e^{-w}}{1 - \alpha} \dw \\
+\expect{w} &= \xi = 1 - \frac{\alpha \epsilon}{1 - \alpha} 
+\end{align}
+$\xi$ is the average `progress' of the neutrons in terms of lethargy on the path of slowing down. That is, neutrons advance by $\xi$ lethargy units on average at each collision. Then to overcome the total lethargy interval $U = \ln \frac{E_0}{E_1}$, the number of collisions needed is:
+\eqn{ n = \frac{U}{\xi} }
+
+\item Moderating power is the best measure of a material's ability to slow down neutrons. It has two forms:
+\eqn{\mbox{per atom basis} = \xi \sigma_s \fsp \fsp \fsp \mbox{per volume basis} = \xi \Sigma_s   }
+A good moderating material should have: high slowing down (hence light nuclei), low capture (D, Be, C), moderating power (take into account both high slowing down and high scattering xs). 
+
+\item Laws of inelastic collision. Elastic scattering is important for moderators because they are light; inelastic scattering is important for heavy materials like the fuel because they have almost no elastic collision. Minimum energy of the neutron for an inelastic collision is:
+\eqn{ E_{\mathrm{threshold}} = \frac{A+1}{A} Q } 
+
+\item First form of the slowing down equation:
+  \begin{align}
+    \rho(u) \du 
+    &= \mbox{arrival density} = \begin{array}{l}
+      \mbox{\# neutrons arriving per time and per volume} \\
+      \mbox{in d$u$ between $u$ and $u + \du$ following a scattering to $u'$} 
+      \end{array} \\
+    &= \overbrace{\int_{-\infty}^u \Sigma_s (u') \Phi(u') \du'}^{\textcircled{1}} \overbrace{ P(u'\to u) \du }^{\textcircled{2}} \\
+    \textcircled{1} &= \mbox{\# neutrons travelling in du' and scattered per time and per volume} \\
+    \textcircled{2} &= \mbox{probability a neutron scattered at u' will be transferred in du} \\
+    \rho(u) &= \int_{-\infty}^u \Sigma_s (u'\to u) \phi(u') \du' \\
+    S(u) + \rho(u) &= \boxed{S(u) + \int_{-\infty}^u \Sigma_s (u'\to u) \phi(u') \du  = \Sigma(u) \phi(u) }
+  \end{align}
+
+
+\end{enumerate}
+
+
+
+
 
 \lecture{Facts For Qualify Exam}
 
