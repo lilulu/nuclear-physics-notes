@@ -18,15 +18,33 @@
 
 % Sets a small title
 \renewcommand{\maketitle}{%
-  \begin{figure}[t]
-    \begin{flushright}
-      \@author \\
-      \@date \\
-    \end{flushright}
-    \begin{flushleft}
-      \textit{\@classcode\ Homework \#\@assignment} \\
-    \end{flushleft}
-  \end{figure}}
+  \thispagestyle{empty}
+  \centering
+  \vspace{2in}
+  \HRule \\[0.4cm]
+         {\huge \bfseries \@classcode\ Homework \#\@assignment }\\[0.4cm]
+   \HRule \\[1.5cm]
 
+   \begin{minipage}{0.4\textwidth}
+     \begin{flushleft} \large
+       \emph{Author:}\\
+       \@author \\
+     \end{flushleft}
+   \end{minipage}
+   \begin{minipage}{0.4\textwidth}
+     \begin{flushright} \large
+       \emph{Professor:} \\
+       \@professor
+     \end{flushright}
+   \end{minipage}
+
+\vfill
+{\large  \@date} \\
+\clearpage
+}
+
+\pagestyle{fancy}
+
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
 \newcommand{\note}[1]{\textbf{#1}}
 \newcommand{\questiontext}[1]{\textbf{#1}}
