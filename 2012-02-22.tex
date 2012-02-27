@@ -8,49 +8,24 @@
 Review slides. 
 
 \topic{Temperature Effects on Cross Section (Doppler Broadening)}
-We introduce \hi{Resonance Integrals} as flux-weighted micro-scopic cross section:
+\subtopic{Resonance Integrals}
+We introduce \hi{Resonance Integrals} as flux weighted (that is, weight with 1/E spectrum in our case so far because $\phi(E) = \frac{1}{E}$) micro-scopic cross section:
 \eqn{ \mathrm{RI} = \frac{\int_{E_1}^{E_2} \sigma_{238} (E) \phi(E) \dE}{\int_{E_1}^{E_2} \phi (E) \dE }  }
-where in our case $\phi (E) = \frac{1}{E}$ for now, so we can use resonance integrals 
 
-As the \hi{Dilution Factor (U/H)} goes to zero, we get infinite dilution, which is about a factor of 10 or 20 times bigger than a real dilute in a reactor. As the dilution factor goes up, that is, approaching real case, the U238 increases, there are more dips in the flux vs. lethargy plot from U238's resonance xs. 
-
-Resonance Integrals increase with increasing temperature. \hi{Doppler Broadening} comes down to, as the width of the spectrum increases, even if the area under the curve stays the same, the probability of neutron slowing down increases. 
-
-
-\topic{Spectral Hardening, Self-Shielding}
-
-
-\topic{Reactor Type Spectral Optimizations and Sensitivities}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%% Qualify Exam Start %%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\lecture{Facts For Qualify Exam}
-\begin{enumerate}
-\item Flux = $\frac{n}{\cm^2 \s}.$
-
-\item Fast flux in hydrogen is around $10^{14}$ n/cm$^2$s, and on the order of $10^{12}$n/cm$^2$s for thermal flux. 
-
-\item Capture cross-section as in Figure~\ref{capture-xs}: 
+As the \hi{Dilution Factor (U/H)} goes to zero, we get infinite dilution, which is what we have been modeling so far. Infinite dilution factor is about 10 or 20 times bigger than a real dilute in a LWR. As the dilution factor increases and approaches a real case, the U238 increases, we would observe more dips in the flux vs. lethargy plot from U238's resonance xs as seen in Figure~\ref{dilution-factor-increase}. 
 \begin{figure}
   \centering
-  \includegraphics[width=4in]{images/capture-xs.png}
-  \\
-  \includegraphics[width=4in]{images/capture-xs-2.png}
-  \caption{Capture Cross Section} \label{capture-xs}
+  \includegraphics[width=2in]{images/dilution-factor-increase.png}
+  \caption{Resonance Dips Increase As U/H Increases} \label{dilution-factor-increase}
 \end{figure}
-\begin{enumerate}
-\item H has no resonance; it has the highest scattering xs in LWR, so we can ignore any other isotopic's neutron scattering.   
-\item Na has a huge resonance in 23 keV, and more resonances at higher energies because it is a heavy isotope.
-\item Near zero energy,
-\eqn{ \sigma(E\to 0) = }
-\item Resonance at 6 to 7 eV: U238. 
-\item U235's thermal elastic xs is larger than 238's, and they both have resonance around the same range.   
-\item A small resonance at .3 eV: Pu239 (its signiture is a super low energy scattering xs). 
-\end{enumerate}
 
-\item Given an unknown material type, all we care is to count the nucleus density of each material and look at it's xs. 
-\item Average fission neutron energy: 2 MeV; average peak fission energy: 1 MeV; see fission sepctrum. 
-\end{enumerate}
-%%%%%%%%%%%%%%%%%%%%%%%%% Qualify Exam End %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subtopic{Doppler Broadening}
+Resonance Integrals increase with increasing temperature. \hi{Doppler Broadening} means, if the width of the spectrum decreases, because the area under the curve stays the same, the depth of the resonance trap would increase and approach infinity eventually, but the probability of neutron slowing down would decrease. 
+
+In general, doppler broadening is the broadening of spectral lines due to the Doppler effect caused by a distribution of velocities of atoms or molecules. There are a couple of different kinds of Doppler broadening, including the thermal Doppler broadening due to the thermal motion of the particles; also, there are broadening depends on the frequency of the spectral line, the mass of the emitting particles, and the temperatures. 
+
+Reference 1: Reuss Section 8.4. 
+
+Reference 2: Handbook of Nuclear Engineering Chapter 4 Section 3. 
 
 \end{document}
