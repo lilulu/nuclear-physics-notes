@@ -10,19 +10,21 @@ See slides in Lec 4.
 \topic{Resonance Integrals vs. Group Cross Sections}
 We introduce \hi{Resonance Integrals} as flux weighted (that is, weight with 1/E spectrum in our case so far because $\phi(E) = \frac{1}{E}$) micro-scopic cross section. RI is used to test accuracy of resonance model. 
 \begin{align}
-\mathrm{RI} &= \\
-&=  \frac{\int_{E_1}^{E_2} \sigma_{238} (E) \phi(E) \dE}{\int_{E_1}^{E_2} \phi (E) \dE }  \\
+\mathrm{RI} &=  - \int_{u1}^{u2} \sigma(u) \du \\
+u &= \ln \left( \frac{E_0}{E} \right) = \ln(E_0) - \ln E \\
+\du &= - \frac{1}{E} \dE \\ 
+\mathrm{RI} &=  \frac{\int_{E_1}^{E_2} \sigma_{238} (E) \phi(E) \dE}{\int_{E_1}^{E_2} \phi (E) \dE }  \\
 \end{align}
 Important points:
 \begin{itemize}
-\item Resonance Integral is a classic way to evaluate new resonance data typically from 0.5 eV to 10 keV. We use RI to check our resonance data, in particularly the three big resonances at 6.67, 21, 26 eV. Numerical test of the SLBW RIs shows that the RI comes out to be within 1\% of ENDF/B-VII Reich-Moore data (Lec 6, slide 17, with 0.01 eV as spacing in histogram). 
 \item RI is defined directly from cross section data;
-\item RI depends on the normalization of the 1/E flux spectrum, but no flux calculation is required because 1/E spectrum is assumed; it is also assumed that flux equals 1 when $E = 1$.  
-\item Isolation: 
-\item Resonance integrals should be independent of temperature. This is because if the energy bound is larger enough, then as temperature increases, the spectrum would broaden, but because the area under the curve remains the same, assume the cross section is constant, then RI is essentially integrating the spectrum, which would not change upon temperature change. 
+\item RI depends on the normalization of the 1/E flux spectrum, but no flux calculation is required because 1/E spectrum is assumed; it is also implicitly assumed that flux equals 1 when $E = 1$ through normalization;
+\item For isolated resonances, RI is independent of energy bounds; 
+\item Resonance integrals should be independent of temperature. This is because if the energy bound is larger enough, then as temperature increases, the spectrum would broaden, but because the area under the curve remains the same, assume the cross section is constant, then RI is essentially integrating the spectrum, which would not change upon temperature change;
+\item RI is useful for inter-comparing libraries or cross section models. It is a classic way to evaluate new resonance data typically from 0.5 eV to 10 keV. We use RI to check our resonance data, in particularly the three big resonances at 6.67, 21, 26 eV. Numerical test of the SLBW RIs shows that the RI comes out to be within 1\% of ENDF/B-VII Reich-Moore data (Lec 6, slide 17, with 0.01 eV as spacing in histogram). 
 \end{itemize}
 
-\hi{Group cross section} is a much more useful quantity. It is defined as:
+\hi{Group cross section} is a much more useful quantity. From its definition, we see $\sigma_g$ does not depend on the flux normalization: 
 \begin{align}
 \sigma_g &= \frac{\int_{E_1}^{E_2} \sigma(E) \phi(E) \dE }{\int_{E_1}^{E_2} \phi(E) \dE} 
 \end{align}
