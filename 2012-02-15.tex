@@ -4,10 +4,9 @@
 \begin{document}
 \maketitle
 
-\lecture{Slowing Down with Resonance Absorption}
+\topic{Models for Resonance}
 At the end of last lecture, we get a smooth flux vs. lethargy curve, with two peaks (the one in the higher energy is stronger), and a smooth curve inbetween. Now we are going to look at the middle resonance region. 
 
-\topic{Setting Up A Resonance Model}
 \subtopic{Model Assumptions}
 For our resonance model, we use the Single Level Breit-Wigner(SLBW) and assume:
 \begin{itemize}
@@ -22,7 +21,7 @@ For our resonance model, we use the Single Level Breit-Wigner(SLBW) and assume:
 \subtopic{Resonance Data}
 One place to get resonance data is from LANL's website. For instance, \href{http://t2.lanl.gov/cgi-bin/endf?2,151,/inet/WWW/data/data/ENDFB-VII-neutron/U/238}{U238 Resonance Parameters}. Among the tables, GN means $\Gamma_N$ with unit eV, and GG means $\Gamma_G$ in eV. Extract the energy range from 0 to 10 keV (ignore the negative resonance energies). 
 
-\topic{Model For Resolved Resonance Absorption}
+\topic{Models For Resolved Resonance Absorption}
 \begin{align}
 \sigma_{\gamma} (E,T) &= \sqrt{\frac{E_0}{E}} \frac{2}{\Gamma} A \psi(x,\xi) \\
 \sigma_{n} (E,T) &= \frac{2}{\Gamma} \left[ A \psi(x,\xi) + B \chi(x,\xi) \right] + \sigma_{\mathrm{potential}} 
@@ -46,7 +45,7 @@ Notice there are many numerical representations of the $\psi, \chi$ functions. F
 Results: It is important to notice that \textit{all resonances contribute to all energies, even though their contributions can be infinitesimally}. 
 
 
-\subtopic{Model For Unresolved Resonance Absorption}
+\topic{Model For Unresolved Resonance Absorption}
 We assume 25 eV resonance spacing, and assume
 \begin{align}
 \Gamma_{\gamma} &= 0.023 \eV \\
