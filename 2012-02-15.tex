@@ -5,9 +5,11 @@
 \maketitle
 
 \lecture{Resonance Models}
-At the end of last lecture, we get a smooth flux vs. lethargy curve, with two peaks (the one in the higher energy is stronger), and a smooth curve inbetween. Now we are going to look at the middle resonance region. 
+In the previous section, we end up with a spectrum of a thermal peak and a fast peak, with smooth curve inbetween. In this section, we are going to focus on this middle resonance region. 
 
-\subtopic{Model Assumptions}
+\topic{Summary: Reuss Ch 2.7 Resonances (FIXME)}
+
+\topic{Model Assumptions}
 For our resonance model, we use the Single Level Breit-Wigner(SLBW) and assume:
 \begin{itemize}
   \item the only resonance isotope is U238;
@@ -18,10 +20,11 @@ For our resonance model, we use the Single Level Breit-Wigner(SLBW) and assume:
   \item generate simple `statistical model' for energies up to 10 keV, assuming an uniform spacing 25 eV\footnote{notice on a typical plot which is log-log, the spacing appears to be closer and closer as energy increases; though it is actually reasonable to assume that the spacing is uniform};
 \end{itemize}
 
-\subtopic{Resonance Data}
+Resonance Data: 
+
 One place to get resonance data is from LANL's website. For instance, \href{http://t2.lanl.gov/cgi-bin/endf?2,151,/inet/WWW/data/data/ENDFB-VII-neutron/U/238}{U238 Resonance Parameters}. Among the tables, GN means $\Gamma_N$ with unit eV, and GG means $\Gamma_G$ in eV. Extract the energy range from 0 to 10 keV (ignore the negative resonance energies). 
 
-\topic{Models For Resolved Resonance Absorption}
+\topic{Model For Resolved Resonance Absorption}
 \begin{align}
 \sigma_{\gamma} (E,T) &= \sqrt{\frac{E_0}{E}} \frac{2}{\Gamma} A \psi(x,\xi) \\
 \sigma_{n} (E,T) &= \frac{2}{\Gamma} \left[ A \psi(x,\xi) + B \chi(x,\xi) \right] + \sigma_{\mathrm{potential}} 

@@ -8,7 +8,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%% Neutron Slowing Down and Thermalization %%%%%%%%%%%%%%%
 \lecture{Neutron Slowing Down and Thermalization}
 
-\topic{Summary: Reuss Ch 7}
+\topic{Summary: Reuss Ch 7 Neutron Slowing Down}
 \begin{enumerate}
 \item Decouple absorption and scattering is possible because absorption is complicated at lower energies, whereas scattering is the opposite (b/c inelastic and anisotropic aspects). 
 
@@ -57,9 +57,7 @@ A good moderating material should have: high slowing down (hence light nuclei), 
 \end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%% Ch 9 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\topic{Summary: Reuss Ch 9 (need completion)}
-
-\topic{Summary: Reuss Ch 2.7 (need completion)}
+\topic{Summary: Reuss Ch 9 Thermalisation of Neutrons (need completion)}
 
 
 \topic{Developing An Infinite-medium Monte Carlo Neutronics}
@@ -138,8 +136,13 @@ A couple of important points:
 \item 4 eV is the typicall up-scattering cutoff energy in many models and codes. For an incident neutron energy higher than 4 eV, use asymptotic elastic down scattering. 
 \end{itemize}
 
-\topic{Pset 2: Slowing Down with Maxwellian Free Gas Thermalization}
-For pset 2, we place a $1/v$ absorber in the thermal range, because otherwise the up-scattering would push neutrons to higher energies infinitely. For the $1/v$ absorber, we set the xs at 0.025 eV to a certain number (like 7 barns), and set the xs from 10e-3 eV upto a certain energy to be $\sigma_{0.025} \sqrt{\frac{E_{0.025}}{E}}$. 7 barns is picked for absorption xs because H's scattering xs is about 11 barns, and this way the absorption-to-scattering ratio is something around 20\%. 
+\topic{HW2: Slowing Down with Maxwellian Free Gas Thermalization}
+For HW2, we place a $1/v$ absorber in the thermal range, because otherwise the up-scattering would push neutrons to higher energies infinitely. For the $1/v$ absorber, we set the xs at 0.025 eV to a certain number (like 7 barns), and set the xs from 10e-3 eV upto a certain energy to be $\sigma_{0.025} \sqrt{\frac{E_{0.025}}{E}}$. 7 barns is picked for absorption xs because H's scattering xs is about 11 barns, and this way the absorption-to-scattering ratio is something around 20\%. The result of my HW2 is shown in Figure~\ref{pset2}.
+\begin{figure}
+  \centering
+  \includegraphics[width=4in]{images/spec.uncrop.pdf}
+  \caption{Slowing Down with Maxwellian Free Gas Thermalization} \label{pset2}
+\end{figure}
 
 
 \end{document}
