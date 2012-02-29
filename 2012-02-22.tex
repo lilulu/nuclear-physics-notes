@@ -4,7 +4,7 @@
 \begin{document}
 \maketitle
 
-\lecture{Reactor Spectra}
+\topic{Reactor Spectra}
 See slides in Lec 4. 
 
 \topic{Resonance Integrals vs. Group Cross Sections}
@@ -28,7 +28,7 @@ Important points:
 \begin{align}
 \sigma_g &= \frac{\int_{E_1}^{E_2} \sigma(E) \phi(E) \dE }{\int_{E_1}^{E_2} \phi(E) \dE} 
 \end{align}
-If we make assumptions on the flux spectrum, then we can relate the group cross section to the inferred resonance integral,
+If we make assumptions on the flux spectrum, then we can relate the group cross section to the effective resonance integral,
 \begin{align}
 \phi(E) &\sim \frac{1}{E} \\
 \sigma_g &= \frac{\int_{E_1}^{E_2} \sigma(E) \frac{1}{E} \dE }{\int_{E_1}^{E_2} \frac{1}{E} \dE} \\
@@ -36,7 +36,7 @@ If we make assumptions on the flux spectrum, then we can relate the group cross 
 &= \frac{RI'}{\ln(E_2/E_1)} \\
 \Aboxed{ RI' &= \sigma_g \ln(E_2/E_1) }
 \end{align}
-where $RI'$ is not the real integral; it is the inferred resonance integral, and it approaches the real RI when $\phi(E)$ approaches $1/E$. There are a couple of important points here\footnote{Review here for exam}:
+where $RI'$ is not the real RI; it is the effective resonance integral, and it approaches the real RI when $\phi(E)$ approaches $1/E$ (per Reuss' defition, RI refers to infinite U/H ratio, whereas for finite U/H it is effective RI). There are a couple of important points here\footnote{Review here for exam}:
 \begin{itemize}
 \item Group cross section by definition depends on both cross section and flux spectrum. 
 \item Group cross section depends on the flux, but not on the normalization of flux (that is, only the shape matters, not the magnitude);
@@ -51,7 +51,7 @@ As the \hi{Dilution Factor (U/H)} goes to zero, we get infinite dilution, which 
   \includegraphics[width=2in]{images/dilution-factor-increase.png}
   \caption{Resonance Dips Increase As U/H Increases} \label{dilution-factor-increase}
 \end{figure}
-
+regenerate this graph from slide 15, lec 6. If we zoom in, we still see a 1/E flux spectrum between resonances. insert slide 16, lec 6. 
 
 \topic{Temperature Effects on Cross Section (Doppler Broadening)}
 Resonance Integrals increase with increasing temperature. \hi{Doppler Broadening} means, if the width of the spectrum decreases, because the area under the curve stays the same, the depth of the resonance trap would increase and approach infinity eventually, but the probability of neutron slowing down would decrease. 
@@ -67,7 +67,6 @@ Insert Lec 6, Slide 29.
 
 \textit{At infinite dilution factor, RI is independent of temperature because the area under the psi, chi functions are constant. This is not true at finite concentration of uranium because of self-shielding: as temperature increases, RI would increase.} The fractional change of RI increases as the dilution factor increases. That is, \textit{The higher the concentration, the higher the Doppler Broadening is}. 
 
-Pset 3 discusses how much each resonance contributes to the Doppler effect. 
 
 
 \end{document}
