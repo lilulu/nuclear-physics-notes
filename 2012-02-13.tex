@@ -12,34 +12,45 @@
 \begin{enumerate}
 \item Decouple absorption and scattering is possible because absorption is complicated at lower energies, whereas scattering is the opposite (b/c inelastic and anisotropic aspects). 
 
-\item Elastic vs inelastic: elastic scattering has no threshold, making it the most important one in neutron slowing down. 
+\item Elastic vs. inelastic: elastic scattering has no threshold, making it the most important one in neutron slowing down. Inelastic scattering has a threshold of a few MeV for light nuclei, and a few tens of keV for heavy nuclei, making it mainly observed in the fuel materials particularly \ce{^{238} U}. 
 
-\item Laws of elastic collision: 
+\item In Lab system, laws of elastic collision: 
   \begin{align}
-    \frac{E_{nf}}{E_{ni}} &= \frac{A^2 + 1 + 2A \cos \theta}{(A+1)^2} = \frac{1}{2} \left( 1 + \alpha + (1-\alpha) \cos \theta \right) \\
+    \frac{E_{nf}}{E_{ni}} &= \frac{A^2 + 1 + 2A \cos \theta}{(A+1)^2} = \frac{1}{2} \left[ 1 + \alpha + (1-\alpha) \cos \theta \right] \\
     \cos \psi &= \frac{1 + A \cos \theta}{\sqrt{A^2 + 1 + 2A \cos \theta}} \\
     \alpha &= \frac{(A-1)^2}{(A+1)^2} = \mbox{min ratio between final n energy and initial} 
   \end{align}
 
-\item Lethargy, a unitless measurement of energy:
+\item In CMCS, scattering is isotropic in solid angle $\Omega$(except very high energy), which implies that $\cos \theta$ is uniform, and $E_{nf}$ is uniform:
+
+  \begin{align}
+    P(\theta) \dtheta &= \frac{1}{2} \sin \theta \dtheta = \frac{1}{2} \derivative |\cos \theta| \\
+    P(E) \dE &= \frac{\dE}{(1-\alpha) E_i} 
+  \end{align} 
+
+\item In Lab system, scattering towards the front it favored. The mean of $\cos \psi$ is $\mu = \expect{ \cos \psi} = \frac{2}{3A}$. 
+
+\item Lethargy, a unitless measurement of energy (the idea comes from laws of elastic collision governs an energy ratio):
   \eqn{ u = \ln \frac{E_{\mathrm{ref}}}{E} }
-Notice as time goes, neutrons slow down, $u$ increases, making it like a measure of the age of the neutrons. Then we can write:
+Notice as time goes, neutrons slow down, $u$ increases, making it like a measure of the age of the neutrons. Then we know that the uniform distribution of energy becomes a decreasing exponential distribution for lethargy gain: 
 \begin{align}
-w &= u_f - u_i = -\ln \left( \frac{1}{2} ( 1 + \alpha + (1-\alpha) \cos \theta ) \right) \\
+w &= u_f - u_i = -\ln \left[ \frac{1}{2} ( 1 + \alpha + (1-\alpha) \cos \theta ) \right] \\
 w_{min} &= 0 \\
 w_{max} &= \epsilon = -\ln \alpha \\
 P(w) \dw &= \frac{e^{-w}}{1 - \alpha} \dw \\
 \expect{w} &= \xi = 1 - \frac{\alpha \epsilon}{1 - \alpha} 
 \end{align}
-$\xi$ is the average `progress' of the neutrons in terms of lethargy on the path of slowing down. That is, neutrons advance by $\xi$ lethargy units on average at each collision. Then to overcome the total lethargy interval $U = \ln \frac{E_0}{E_1}$, the number of collisions needed is:
+$\xi$ is like the efficiency of slowing down by a nucleus. That is, neutrons advance by $\xi$ lethargy units on average at each collision. Then to overcome the total lethargy interval $U = \ln \frac{E_0}{E_1}$, the number of collisions needed is:
 \eqn{ n = \frac{U}{\xi} }
 
 \item Moderating power is the best measure of a material's ability to slow down neutrons. It has two forms:
 \eqn{\mbox{per atom basis} = \xi \sigma_s \fsp \fsp \fsp \mbox{per volume basis} = \xi \Sigma_s   }
-A good moderating material should have: high slowing down (hence light nuclei), low capture (D, Be, C), moderating power (take into account both high slowing down and high scattering xs). 
+A good moderating material should have: high slowing down (hence light nuclei), low capture (D, Be, C), moderating power (take into account both high slowing down and high scattering xs). Water has the highest moderating power, but it requires an enriched fuel (around 1\%). 
 
 \item Laws of inelastic collision. Elastic scattering is important for moderators because they are light; inelastic scattering is important for heavy materials like the fuel because they have almost no elastic collision. Minimum energy of the neutron for an inelastic collision is:
 \eqn{ E_{\mathrm{threshold}} = \frac{A+1}{A} Q } 
+
+\item Slowing down equations: a simplified Boltzmann equation performing neutron counts that depends on one variable, either velocity or energy or lethargy. We pick lethargy. Then we assume an infinite, homogeneous medium with a source uniform in space and time. 
 
 \item First form of the slowing down equation:
   \begin{align}
@@ -57,7 +68,7 @@ A good moderating material should have: high slowing down (hence light nuclei), 
 \end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%% Ch 9 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\topic{Summary: Reuss Ch 9 Thermalisation of Neutrons (need completion)}
+\topic{Summary: Reuss Ch 9 Thermalisation of Neutrons (FIXME)}
 
 
 \topic{Developing An Infinite-medium Monte Carlo Neutronics}
