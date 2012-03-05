@@ -33,8 +33,8 @@ This flux shapes let us to compute approximated effective RI. Recall RI is defin
 \eqn{ \boxed{ \RI_{\eff} = \int \sigma_r(u) \frac{\sigma_d}{\sigma_r + \sigma_d} \du }  }
 Two extremes of $\RI_{\eff}$ and $\sigma_d$:
 \begin{itemize}
-\item As $\sigma_d \to \infty$, the entire media is moderator, we reach the limit of infinite dilute resonance absorption appears, and $\RI_{\eff} \to \RI$;
-\item As $\sigma_d \to 0$, analytically our assumptions do not hold true any more, but the MC is true that as $\RI_{\eff} \to 0, \phi \to 0$ as seen in Figure~\ref{dilution-factor-increase}. 
+\item As $\sigma_d \to \infty$, the entire media is moderator, we reach the limit of infinite dilute resonance absorption appears, and $\RI_{\eff} \to \RI$; at infinite dilute, we should get within 1\% of the ENDFVII xs data;
+\item As $\sigma_d \to 0$, analytically our assumptions do not hold true any more, but the MC is true that as $\RI_{\eff} \to 0, \phi \to 0$ as seen in Figure~\ref{dilution-factor-increase}. Interpretation: as we have no moderator, every atom is self-shield [FIXME]
 \end{itemize}
 Figure~\ref{dilution-factor-increase} is generated from effective RI of MC calculations at 300K with half a million neutrons, 2 barns hydrogen 1/v absorber. It illustrates that, a) the dilution ratio U/H is related with dilution xs $\sigma_d$ such that they are inversely proportional; b) as the fraction of \ce{^{238} U} increases, U/H increases, $\sigma_d$ decreases, more absorption happens during resonance, hence more flux dips on the spectrum plot and smaller effective RI values in the resonance range. That is, \textit{RI are very dependent on the density of resonant materials.}
 \begin{figure}
@@ -73,6 +73,21 @@ Narrow resonance approximations assume the opposite of the wide resonance approx
 However, the results on the slides come out to be that narrow resonance approximation is not really any better than the wide resonance approximation at higher energy, so there must be some other physics going on. 
 
 
+\topic{Narrow vs. Wide Resonance Approximations}
+Insert Lec 7, slide 15. 
+
+Wide resonance approximation agrees pretty well with MC results without U238 scattering; narrow resonance approximation agrees alright with the MC results with U238 scattering. Notice adding in scattering would change the low dilution factor results. 
+
+Compare with MC results using real U238 and U235 xs data, the real results fall between the wide and the narrow approximations for the high dilution factor; but for the low dilution factor, that is, when there are lots of resonance material (uranium), the physics gets complicated: 
+\begin{itemize}
+\item Non 1/E slowing down sources;
+\item Non constant moderator xs;
+\item Resonance scattering alters sources;
+\item We may have multiple resonance in each RI group; that is, each of our RI does not include a single resonance anymore;
+\item Resonance interference between \ce{^{235}U} and \ce{^{238}U}; eg: \ce{^{238}U}'s resonance spacing is 25 eV, whereas \ce{^{235}U}'s resonance spacing is 5 eV, that is, for each \ce{^{238}U} resonance, there are multiple \ce{^{235}U} resonances on top of it. 
+\end{itemize}
+
+
 \topic{Resonance Escape Probability}
 \begin{align}
 p &= \exp \left( - \frac{N_R \RI_{\eff}}{\xi \Sigma_m} \right)  = \exp \left( - \frac{\RI_{\eff}}{\xi \sigma_d} \right)
@@ -85,6 +100,10 @@ That is, \textit{p only depends on effective RI and dilution cross section.} For
   \includegraphics[width=4in]{images/resonance-escape-probability.png}
   \caption{Resonance Escape Probability For A Hydrogen System} \label{p-values}
 \end{table}
+
+[FIXME] Add in derivation here from Lec 7. 
+
+
 
 \topic{NJOY Modeling of Resonance Parameters}
 The normal procedure for generating multi-group xs in a code like NJOY includes:
@@ -107,47 +126,6 @@ A better procedure for generating multi-group cross sections includes:
 \item the same.
 \end{enumerate}
 
-
-\topic{Homogeneous Self-Shielding Methods}
-
-\topic{Heterogeneous Geometry Resonant Approximations}
-
-%%%%%%%%%%%%%%%%%%%%%%%%% Qualify Exam Start %%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\lecture{Facts For Qualify Exam}
-\begin{enumerate}
-\item Flux = $\frac{n}{\cm^2 \s}.$
-
-\item Fast flux in hydrogen is around $10^{14}$ n/cm$^2$s, and on the order of $10^{12}$n/cm$^2$s for thermal flux. 
-
-\item U235 fission xs at 0.1 eV is about 200 barns; Pu239 fission xs is about 500 barns. In thermal reactors, Pu absorption should be about twice that of uranium. 
-
-\item Capture cross-section as in Figure~\ref{capture-xs}: 
-\begin{figure}
-  \centering
-  \includegraphics[width=4in]{images/capture-xs.png}
-  \\
-  \includegraphics[width=4in]{images/capture-xs-2.png}
-  \caption{Capture Cross Section} \label{capture-xs}
-\end{figure}
-\begin{enumerate}
-\item H has no resonance; it has the highest scattering xs in LWR, so we can ignore any other isotopic's neutron scattering.   
-\item Na has a huge resonance in 23 keV, and more resonances at higher energies because it is a heavy isotope.
-\item Near zero energy,
-\eqn{ \sigma(E\to 0) = }
-\item Resonance at 6 to 7 eV: U238. 
-\item U235's thermal elastic xs is larger than 238's, and they both have resonance around the same range.   
-\item A small resonance at .3 eV: Pu239 (its signiture is a super low energy scattering xs). 
-\end{enumerate}
-
-\item Given an unknown material type, all we care is to count the nucleus density of each material and look at it's xs. 
-\item Average fission neutron energy: 2 MeV; average peak fission energy: 1 MeV; see fission sepctrum. 
-
-\item Core decay heat after 1 day is about 1\% rated. 
-
-
-\end{enumerate}
-%%%%%%%%%%%%%%%%%%%%%%%%% Qualify Exam End %%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
+For downstream application, do [FIXME] Lec 7, slide 31. 
 
 \end{document}
