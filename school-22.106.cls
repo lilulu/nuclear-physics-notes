@@ -7,3 +7,4 @@
 \classname{Neutron Interactions \& Applications}
 \professor{Ben Forget}
 \schoolname{Massachusetts Institute of Technology}
+\usepackage{algorithm}

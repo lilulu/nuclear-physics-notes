@@ -3,4 +3,3 @@
 \ProvidesClass{school-22.106-homework}
 
 \usepackage{school-style-homework}
-\usepackage{algorithm}
