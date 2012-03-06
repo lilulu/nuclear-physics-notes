@@ -51,9 +51,36 @@ The scattering down to resonance is independent of the resonance. In another wor
   \caption{The 1/E Spectrum Above A Resonance Suggests Group XS Independent Of Higher Energy Absorption} \label{1overE}
 \end{figure}
 
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \lecture{Analytical Derivation of Resonance Approximations}
 \topic{Summary: Reuss Ch 8 Resonance Methods (FIXME)}
+\begin{enumerate}
+\item Self-shielding (Intro): 
+  \begin{enumerate}
+  \item Resonance capture xs can be tens of thousands of barns, but self-shielding makes sure that resonant capture of neutrons remains limited. That is, even with an $\infty$ xs, the probability of falling in the trap is limited, or even small, if the trap is narrow. 
+  \item Explaination: `kangaroo leaps' tell us that the resonant capture probability is just trap width in lethargy divided by the average lethargy gain acquired by a neutron. 
+  \item \textit{Compared to slowing down by moderator, the resonance of capture by the fuel are always narrow}.
+  \item Technical term: absorption rate of neutrons remain approximately constant; that is, $\Phi \sim \frac{1}{\Sigma_a}$. 
+  \item Self-shielding occurs at resonant energies, and in regions containing resonant material. 
+  \end{enumerate}
+\item Derivation of $\Phi(u)  = \frac{C}{\Sigma_t(u)}$ (8.1.1): starting from slowing down equation,
+  \eqn{    \rho(u) + \overbrace{S(u)}^{\to 0} = \Sigma_t (u) \Phi(u) } 
+  Before resonance the flux is asymptotic without absorption:
+  \eqn{ \Phi(u) \approx \frac{q(u)}{\xi \Sigma_s (u)} = \frac{q}{\xi \Sigma_s} = C }
+  Then the arrival density in the resonance is constant as well:
+  \eqn{ \rho(u) = \Sigma_s (u) \Phi (u) = \frac{q}{\xi} = C}
+  Plug back into the slowing down equation, we get the flux in the resonance:
+  \eqn{ \Phi(u) \approx \frac{q}{\xi \Sigma_t (u)} = \frac{C}{\Sigma_t(u)} }
+\item Derivation of resonance escape probability formula (8.1.2): 
+  \eqn{P_{abs}  = \Sigma_a (u) \Phi (u) \du = \frac{\Sigma_a(u) \du}{\xi \Sigma_t (u)} }
+  \eqn{p = 1 - P_{abs} = 1 - \Sigma_a(u) \Phi(u) \du = \exp \left( - \frac{\Sigma_a \du}{\xi \Sigma_t}  \right) }
+(compare with the derivation we had in class)
+\item Fine structure/self-shielding factor $\phi$ captures the detailed resonances, whereas macroscopit flux $\Psi$ captures everything else (8.1.3).
+\item 
+
+\end{enumerate}
+
+
 
 \topic{Wide Resonance Approximations}
 The wide resonance approximation is: 
@@ -97,7 +124,7 @@ The equation here is an approximation. And for hydrogen systems, we know $\xi \t
 That is, \textit{p only depends on effective RI and dilution cross section.} For instance, in a hydrogen system with $\sigma_d = 200$, we can tabulate the p values as in Table~\ref{p-values}. The last entry tells us that \textit{about 20\% of neutrons are absorbed in U238 resonances.}
 \begin{table}
   \centering
-  \includegraphics[width=4in]{images/resonance-escape-probability.png}
+  \includegraphics[width=2.5in]{images/resonance-escape-probability.png}
   \caption{Resonance Escape Probability For A Hydrogen System} \label{p-values}
 \end{table}
 
