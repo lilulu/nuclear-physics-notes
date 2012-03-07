@@ -52,8 +52,8 @@ $\sigma_{t,f}(u) = \sigma_{r,f} + \sigma_{pot, f}$, the resonance absorption xs 
 
 
 \subtopic{Bell's Refinements of the Wigner's Collision Probability}
-Bell Factor: 
-
+Bell Factor $b$:
+\eqn{ P_{f\to f} = \frac{\sigma_{t,f} (u)}{b \sigma_e + \sigma_{t,f} (u)} }
 
 
 \subtopic{Arrays of Rods, Dancoff Factor}
@@ -63,6 +63,13 @@ LWRs typically have a C of 0.3. Know how to get C from the plot.
 
 
 C changes the coefficient in front of the escape xs $\sigma_e \to \frac{(1-C)b}{1-C + Cb} \sigma_e$. For a typical PWR pin, that is reduce $\sigma_e$ to 0.745 of it. \ce{^{235}U}'s xs is 65 barns [FIXME].
+
+\uline{Example: Find Dancoff Factor} Given water at 1 g/cc with a number density of $6.6 \times 10^{24}$ H atoms/cc, hydrogen xs of 20 barns, a PWR pin with 0.41 cm radius, a lattice pitch of 1.26cm. 
+
+Answer: we first find the mean free path: 
+\eqn{ mfp = \frac{1}{\Sigma} = \frac{1}{N \sigma} =  }
+
+
 
 \subtopic{Carlvik's Refinements of the Bell's Collision Probability}
 Carlvik's two-term approximation is what is actually used in production tools nowaday. To use it, we essentially look up the resonance integral (or group xs) twice, once with $\sigma_e$ multiplied by $\alpha_1$ and the second time with $\sigma_e$ multiplied by $\alpha_2$, each of them are simple functions of the Dancoff factor. To double check, we let Dancoff factor to go to 1, and there should be no escape from the fuel; let Dancoff factor go to 0, we should get isolated rod. 

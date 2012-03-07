@@ -4,14 +4,35 @@
 \begin{document}
 \maketitle
 
-\topic{HW4: Real Application of Resonance Model}
+\topic{k-infinity In Infinite Medium Calculations (No Leakage)}
 
+
+\topic{Solving Two-Region Monte Carlo Spectral Analysis}
+
+
+\topic{Example of Pin Cell Analysis}
+\begin{enumerate}
+\item Flux dips in moderator are mild because there is only elastic scattering. 
+\item Adding in Zr: Zr has massive elastic scattering resonances, hence creating fluctuations in fluxes. 
+\item Adding in O: the fast flux looks distorded in both fuel and moderator; the reactivity change is not large, but looking at the oxygen xs, there are werid dips in high energy xs. 
+\item Removing hydrogen absorption: the flux shape does not change much, but the reactivity change is huge (8808 pcm), because there are so much hydrogen in the system (hydrogen xs is 1/v down to 100 keV); this is why LWR fuel has to be enriched. 
+\item Remove U238 fission: reduce reactivity by 2\%. Spectrum shape does not change. 
+\end{enumerate}
+Looking at the flux in the moderator divided by the flux in the fuel, we see that:
+\begin{itemize}
+\item Above resonance energies: fuel flux is depressed because absorption is high compared with fission; 
+\item In resonance energies: larger than 1 because of fuel spectrums dips for the resonances; especially at the interval containing 6.7 eV;
+\item Below resonance energies: the ratio is around 1, till we hit the really low energy (less than 0.1 eV), that there is a 1/E tail that the fuel flux gets depressed. 
+\end{itemize}
+
+\topic{HW4: Heterogeneous Spectral Calculations}
+We are going to get all of our cross section data from pointwise ENDF cross section. 
+
+Build table: use 0.01 log(E) spacing (that's about 25,000 bins) to re-generate tables from the reading-in cross section. 
 
 
 \lecture{Exam 1 Review}
-Know how to interprete thermal scattering pdf and cdf. 
-
-Questions would be based on understanding of the physics. 
+Know how to interprete thermal scattering pdf and cdf. Questions would be based on understanding of the physics. 
 
 Part 1: Background Info (see Ch 1-3 from Reuss)
 \begin{enumerate}
