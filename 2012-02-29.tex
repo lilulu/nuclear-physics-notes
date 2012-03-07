@@ -20,7 +20,7 @@ In the above derivation we made two assumptions:
 \end{itemize}
 \begin{figure}
   \centering
-  \includegraphics[width=4in]{images/moderator-sigma-s.png}
+  \includegraphics[width=3in]{images/moderator-sigma-s.png}
   \caption{Moderator Elastic Scattering Cross Sections} \label{moderator-sigma-s}
 \end{figure}
 Eq.~\ref{flux-shape} suggests that \textit{in infinite medium the flux shape near resonance depends only on the ratio of the number density of the moderator to the resonance absorber and the moderator cross section.} But once we move into a finite medium or we take into account leakage, then the absolute number densities are needed.
@@ -39,10 +39,9 @@ Two extremes of $\RI_{\eff}$ and $\sigma_d$:
 Figure~\ref{dilution-factor-increase} is generated from effective RI of MC calculations at 300K with half a million neutrons, 2 barns hydrogen 1/v absorber. It illustrates that, a) the dilution ratio U/H is related with dilution xs $\sigma_d$ such that they are inversely proportional; b) as the fraction of \ce{^{238} U} increases, U/H increases, $\sigma_d$ decreases, more absorption happens during resonance, hence more flux dips on the spectrum plot and smaller effective RI values in the resonance range. That is, \textit{RI are very dependent on the density of resonant materials.}
 \begin{figure}
   \centering
-  \includegraphics[width=2in]{images/dilution-factor-increase.png}
+  \includegraphics[width=4in]{images/dilution-factor-increase.png}
   \caption{Spectrum Resonance Dips More As U/H Increases and Dilution Cross Section Decreases} \label{dilution-factor-increase}
 \end{figure}
-
 
 The scattering down to resonance is independent of the resonance. In another word, if the spectrum above a resonance returns to 1/E as in Figure~\ref{1overE}, the group cross sections will be independent of higher energy absorptions. 
 \begin{figure}
@@ -50,70 +49,6 @@ The scattering down to resonance is independent of the resonance. In another wor
   \includegraphics[width=3in]{images/resonance-1-over-E.png}
   \caption{The 1/E Spectrum Above A Resonance Suggests Group XS Independent Of Higher Energy Absorption} \label{1overE}
 \end{figure}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\lecture{Analytical Derivation of Resonance Approximations}
-\topic{Summary: Reuss Ch 8 Resonance Methods (FIXME)}
-\begin{enumerate}
-\item Self-shielding (Intro): 
-  \begin{enumerate}
-  \item Resonance capture xs can be tens of thousands of barns, but self-shielding makes sure that resonant capture of neutrons remains limited. That is, even with an $\infty$ xs, the probability of falling in the trap is limited, or even small, if the trap is narrow. 
-  \item Explaination: `kangaroo leaps' tell us that the resonant capture probability is just trap width in lethargy divided by the average lethargy gain acquired by a neutron. 
-  \item \textit{Compared to slowing down by moderator, the resonance of capture by the fuel are always narrow}.
-  \item Technical term: absorption rate of neutrons remain approximately constant; that is, $\Phi \sim \frac{1}{\Sigma_a}$. 
-  \item Self-shielding occurs at resonant energies, and in regions containing resonant material. 
-  \end{enumerate}
-\item Derivation of $\Phi(u)  = \frac{C}{\Sigma_t(u)}$ (8.1.1): starting from slowing down equation,
-  \eqn{    \rho(u) + \overbrace{S(u)}^{\to 0} = \Sigma_t (u) \Phi(u) } 
-  Before resonance the flux is asymptotic without absorption:
-  \eqn{ \Phi(u) \approx \frac{q(u)}{\xi \Sigma_s (u)} = \frac{q}{\xi \Sigma_s} = C }
-  Then the arrival density in the resonance is constant as well:
-  \eqn{ \rho(u) = \Sigma_s (u) \Phi (u) = \frac{q}{\xi} = C}
-  Plug back into the slowing down equation, we get the flux in the resonance:
-  \eqn{ \Phi(u) \approx \frac{q}{\xi \Sigma_t (u)} = \frac{C}{\Sigma_t(u)} }
-\item Derivation of resonance escape probability formula (8.1.2): 
-  \eqn{P_{abs}  = \Sigma_a (u) \Phi (u) \du = \frac{\Sigma_a(u) \du}{\xi \Sigma_t (u)} }
-  \eqn{p = 1 - P_{abs} = 1 - \Sigma_a(u) \Phi(u) \du = \exp \left( - \frac{\Sigma_a \du}{\xi \Sigma_t}  \right) }
-(compare with the derivation we had in class)
-\item Fine structure/self-shielding factor $\phi$ captures the detailed resonances, whereas macroscopit flux $\Psi$ captures everything else (8.1.3).
-\item 
-
-\end{enumerate}
-
-
-
-\topic{Wide Resonance Approximations}
-The wide resonance approximation is: 
-\begin{align}
-\RI_{\eff} &= \int \sigma_r(u) \frac{\sigma_d}{\sigma_r(u) + \sigma_d} \du \\
-&= \ln \left(\frac{E_2}{E_1} \right) \frac{ \int \sigma_r(E) \frac{\sigma_d}{\sigma_r(E) + \sigma_d} \frac{1}{E} \dE}{ \int \frac{\sigma_d}{\sigma_r(E) + \sigma_d} \frac{1}{E} \dE}
-\end{align}
-Notice wide resonance approximation $\RI_{\eff}$ only depends on cross sections: $\sigma_d$ is assumed to be based on material composition of the reactor, and $\sigma_r(E)$ are from libraries. There is no need for flux spectrum. 
-
-The wide resonance approximation says that we ignore scattering of U238 because its width is large compared with the approximately 1\% energy it can lose upon scattering. To improve this approximation, sometimes people use the potential scattering of 11.39 barns. 
-
-Wide resonance approximations match direct MC results near infinite dilution. 
-
-\topic{Narrow Resonance Approximations}
-Narrow resonance approximations assume the opposite of the wide resonance approximation, that the neutron is going to be out of the resonance upon one scattering. This approximation is good for higher energy. For instance, at 100 keV, scattering lose 1 keV, which is larger than the 25 eV spacing of \ce{^{238}U}. 
-
-However, the results on the slides come out to be that narrow resonance approximation is not really any better than the wide resonance approximation at higher energy, so there must be some other physics going on. 
-
-
-\topic{Narrow vs. Wide Resonance Approximations}
-Insert Lec 7, slide 15. 
-
-Wide resonance approximation agrees pretty well with MC results without U238 scattering; narrow resonance approximation agrees alright with the MC results with U238 scattering. Notice adding in scattering would change the low dilution factor results. 
-
-Compare with MC results using real U238 and U235 xs data, the real results fall between the wide and the narrow approximations for the high dilution factor; but for the low dilution factor, that is, when there are lots of resonance material (uranium), the physics gets complicated: 
-\begin{itemize}
-\item Non 1/E slowing down sources;
-\item Non constant moderator xs;
-\item Resonance scattering alters sources;
-\item We may have multiple resonance in each RI group; that is, each of our RI does not include a single resonance anymore;
-\item Resonance interference between \ce{^{235}U} and \ce{^{238}U}; eg: \ce{^{238}U}'s resonance spacing is 25 eV, whereas \ce{^{235}U}'s resonance spacing is 5 eV, that is, for each \ce{^{238}U} resonance, there are multiple \ce{^{235}U} resonances on top of it. 
-\end{itemize}
-
 
 \topic{Resonance Escape Probability}
 \begin{align}
@@ -124,35 +59,38 @@ The equation here is an approximation. And for hydrogen systems, we know $\xi \t
 That is, \textit{p only depends on effective RI and dilution cross section.} For instance, in a hydrogen system with $\sigma_d = 200$, we can tabulate the p values as in Table~\ref{p-values}. The last entry tells us that \textit{about 20\% of neutrons are absorbed in U238 resonances.}
 \begin{table}
   \centering
-  \includegraphics[width=2.5in]{images/resonance-escape-probability.png}
+  \includegraphics[width=1.5in]{images/resonance-escape-probability.png}
   \caption{Resonance Escape Probability For A Hydrogen System} \label{p-values}
 \end{table}
+T
+The full derivation of resonance escape probability is the following. Assumptions: only elastic down scatter above the resonance, $\sigma_{a,m} = 0, \sigma_{s} = $const, and only a single resonance absorber. 
 
-[FIXME] Add in derivation here from Lec 7. 
+Start from our balance equation (scattering in = resonance absorption),
+\begin{align}
+\frac{S}{\zeta(u)} \du &= \left[ N_r \sigma_{a,r} (u) + \Sigma_m \right] \phi(u) \du = N_r \left[ \sigma_{a,r} (u) + \sigma_d \right] \phi(u) \du \\
+\Rightarrow \phi(u) &= \frac{S}{\zeta(u) N_r \left[ \sigma_{a,r} (u) + \sigma_d \right] } 
+\end{align}
+Define resonance escape probability as:
+\begin{align}
+p &= \frac{S - \int N_r \sigma_a(u) \phi(u) \du}{S} \\
+&= 1 - \frac{\int N_r \sigma_a(u) \frac{S}{\zeta(u) N_r \left[ \sigma_{a,r} (u) + \sigma_d \right] } \du }{S} \\
+&= 1 - \int \frac{\sigma_{a,r} (u) }{\zeta(u) \left[ \sigma_{a,r} (u) + \sigma_d \right] } \du
+\end{align}
+If the mean logarithmic energy decrement is independent of lethargy, 
+\eqn{ p = 1 - \frac{1}{\zeta} \int \frac{\sigma_{a,r} (u)}{\sigma_{a,r} (u) + \sigma_d} \du }
+But using our definition of effective RI,
+\eqn{ \RI_{\eff}^{u1 \to u2} = \int_{u1}^{u2} \frac{\sigma_{a,r} (u) \sigma_d}{\sigma_{a,r} (u) + \sigma_d} \du }
+We can write $p$ in terms of $\RI$:
+\eqn{ \boxed{p^{1\to 2} = 1 - \frac{\RI_{\eff}^{u1 \to u2}}{\zeta \sigma_d} } }
+Since the source is incrementally reduce with each successive resonance,
+\eqn{ p^{u1 \to uN} = \left( 1 - \frac{\RI_{\eff}^{u1 \to u2}}{\zeta \sigma_d} \right) \left( 1 - \frac{\RI_{\eff}^{u2 \to u3}}{\zeta \sigma_d} \right)
+  \cdots \left( 1 - \frac{\RI_{\eff}^{uN-1 \to uN}}{\zeta \sigma_d} \right) }
+We approximate the sequence as,
+\eqn{ p^{u1 \to uN} = \exp \left( - \frac{\Sum_{u1}^{uN-1} \RI_{\eff}^u}{\zeta \sigma_d} \right) }
+or
+\eqn{ \boxed{ p \approx \exp \left( - \frac{\RI_{\eff}}{\zeta \sigma_d} \right) = \exp \left( - \frac{N_r \RI_{\eff}}{\zeta \Sigma_m} \right)  } }
+which for hydrogen system becomes, 
+\eqn{ p \approx \exp \left( - \frac{\RI_{\eff}}{\sigma_d} \right) }
 
-
-
-\topic{NJOY Modeling of Resonance Parameters}
-The normal procedure for generating multi-group xs in a code like NJOY includes:
-\begin{enumerate}
-\item use code to Doppler broaden cross sections for each resonance isotope for range of temperatures (eg, 300, 600, 900, 2000K); 
-\item use code to apply the narrow or wide resonance models for a range of dilution xs (eg, 20000, 2000, 200, 20 barns); 
-\item edit RIs or multi-group xs for your desired energy structure; 
-\item build tables of xs vs. dilution xs and temperature;
-\item for downstream computations, interpolate for the dilution cross section and temperature of each material in the simulation to obtain accurate multigroup cross sections for that specific applications. 
-\end{enumerate}
-Note that tables are general and do not have to be computed. 
-
-A better procedure for generating multi-group cross sections includes:
-\begin{enumerate}
-\item the same;
-\item use code to solve real neutron slowing down problem for a range of dilution cross sections (eg, 20000, 2000, 200, 20 barns);
-\item consider including a mix of resonance absorbers to make the spectrum as appropriate to the desired application as possible;
-\item the same;
-\item the same;
-\item the same.
-\end{enumerate}
-
-For downstream application, do [FIXME] Lec 7, slide 31. 
 
 \end{document}

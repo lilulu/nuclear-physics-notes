@@ -4,14 +4,10 @@
 \begin{document}
 \maketitle
 
-\topic{Hemogeneous Resonance Self-Shielding}
-
 \topic{Heterogeneous Geometry Resonant Approximations}
-This is probably the most important topic in generating cross section in reactor physics. 
+This is probably the most important topic in generating cross section in reactor physics. We want to take into account both the spatial and energy structure distributions of flux within each resonance when solving the neutron slowing down problem. 
 
-We want to take into account both the spatial and energy structure distributions of flux within each resonance when solving the neutron slowing down problem. 
-
-Model assumptions:
+Assumptions for heterogeneous geometry resonant approximations:
 \begin{itemize}
 \item All neutron interactions in moderator are purely scattering;
 \item Moderator scattering xs is independent of energy;
@@ -21,12 +17,25 @@ Model assumptions:
 \item Fuel scattering removes neutrons from resonance energy (that is, narrow resonance model); 
 \end{itemize}
 
-\subtopic{Reciprocity Condition}
-First we introduce the reciprocity condition. The only assumption we make is that the source is flat. It is independent of geometry. 
+\subtopic{Spatial Reciprocity Theorem}
+First we introduce the reciprocity condition. The only assumption we make for this theorem is that the source is flat. This theorem does not depend on geometry. 
 
-
-where $\tau = \frac{x_1}{\lambda_1} + \frac{x_2}{\lambda_2} = x_1 \Sigma_1 + x_2 \Sigma_2$. 
-
+Given two homogeneous region 1 and 2, the probability of going from point A in 1 to point B in 2 without colliding is:
+\eqn{ \frac{e^{-\tau}}{4 \pi R^2} }
+where $\tau = \frac{x_1}{\lambda_1} + \frac{x_2}{\lambda_2} = x_1 \Sigma_1 + x_2 \Sigma_2$. The probability of going from A to B and then colliding at B is: 
+\eqn{ \frac{e^{-\tau}}{4 \pi R^2} \Sigma_2 }
+The probability of going from A to any point in region 2 and colliding is:
+\eqn{ \int \frac{e^{-\tau}}{4 \pi R^2} \Sigma_2  \dV_2}
+The probability of a uniform spatial neutron source in region 1 going to any point in region 2 and colliding is:
+\eqn{ \int \dV_1 \int \frac{e^{-\tau}}{4 \pi R^2} \Sigma_2  \dV_2}
+The average probability per unit volume of a uniform source neutron going from region 1 to 2 and colliding is:
+\eqn{ P_{1\to 2} = \frac{\Sigma_2}{V_1} \int \dV_1 \int \frac{e^{-\tau}}{4 \pi R^2}  \dV_2}
+Likewise,
+\eqn{ P_{2\to 1} = \frac{\Sigma_1}{V_2} \int \dV_2 \int \frac{e^{-\tau}}{4 \pi R^2}  \dV_1}
+Since the two integrals are symmetric (that is, $P_{A\to B}$ and $P_{B \to A}$ are essentially the same), we can write,
+\eqn{ P_{1\to 2} \frac{V_1}{\Sigma_2} = P_{2\to 1} \frac{V_2}{\Sigma_1} }
+Hence we reach the reciprocity condition:
+\eqn{ \boxed{ P_{1\to 2} \Sigma_1 V_1 = P_{2\to 1} \Sigma_2 V_2 } }
 
 \subtopic{First Collision Reaction Rate Balance}
 
@@ -58,78 +67,6 @@ C changes the coefficient in front of the escape xs $\sigma_e \to \frac{(1-C)b}{
 \subtopic{Carlvik's Refinements of the Bell's Collision Probability}
 Carlvik's two-term approximation is what is actually used in production tools nowaday. To use it, we essentially look up the resonance integral (or group xs) twice, once with $\sigma_e$ multiplied by $\alpha_1$ and the second time with $\sigma_e$ multiplied by $\alpha_2$, each of them are simple functions of the Dancoff factor. To double check, we let Dancoff factor to go to 1, and there should be no escape from the fuel; let Dancoff factor go to 0, we should get isolated rod. 
 
-
-
-
-\topic{HW4: Real Application of Resonance Model}
-
-
-
-\lecture{Exam 1 Review}
-Know how to interprete thermal scattering pdf and cdf. 
-
-Questions would be based on understanding of the physics. 
-
-Part 1: Background Info (see Ch 1-3 from Reuss)
-\begin{enumerate}
-\item Number Density
-\item Flux
-\item Lethargy
-\item Mean free path
-\item 1/v, 1/E.
-\item Maxwellian shapes.
-\end{enumerate}
-
-
-Part 2: Monte Carlo code:
-\begin{enumerate}
-\item Asymptotic elastic scattering
-\item Maxwellian thermal elastic scattering
-\item Simple bound thermal scattering
-\item SLBW resonance models
-\item Doppler broadening
-\item Monte Carlo tallies
-\item Resonance integrals vs. group cross sections
-\item Background (dilution) cross section
-\item etc. 
-\end{enumerate}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%% Qualify Exam Start %%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\lecture{Facts For Qualify Exam}
-\begin{enumerate}
-\item Flux = $\frac{n}{\cm^2 \s}.$
-
-\item Fast flux in hydrogen is around $10^{14}$ n/cm$^2$s, and on the order of $10^{12}$n/cm$^2$s for thermal flux. 
-
-\item U235 fission xs at 0.1 eV is about 200 barns; Pu239 fission xs is about 500 barns. In thermal reactors, Pu absorption should be about twice that of uranium. 
-
-\item Capture cross-section as in Figure~\ref{capture-xs}: 
-\begin{figure}
-  \centering
-  \includegraphics[width=4in]{images/capture-xs.png}
-  \\
-  \includegraphics[width=4in]{images/capture-xs-2.png}
-  \caption{Capture Cross Section} \label{capture-xs}
-\end{figure}
-\begin{enumerate}
-\item H has no resonance; it has the highest scattering xs in LWR, so we can ignore any other isotopic's neutron scattering.   
-\item Na has a huge resonance in 23 keV, and more resonances at higher energies because it is a heavy isotope.
-\item Near zero energy,
-\eqn{ \sigma(E\to 0) = }
-\item Resonance at 6 to 7 eV: U238. 
-\item U235's thermal elastic xs is larger than 238's, and they both have resonance around the same range.   
-\item A small resonance at .3 eV: Pu239 (its signiture is a super low energy scattering xs). 
-\end{enumerate}
-
-\item Given an unknown material type, all we care is to count the nucleus density of each material and look at it's xs. 
-\item Average fission neutron energy: 2 MeV; average peak fission energy: 1 MeV; see fission sepctrum. 
-
-\item Core decay heat after 1 day is about 1\% rated. 
-
-
-\end{enumerate}
-%%%%%%%%%%%%%%%%%%%%%%%%% Qualify Exam End %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 \end{document}

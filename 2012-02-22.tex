@@ -4,53 +4,65 @@
 \begin{document}
 \maketitle
 
-\topic{Skeleton Spectra Resonance Code}
-See slides in Lec 4.
+\topic{Wide Resonance Approximations}
+The wide resonance approximation is: 
+\begin{align}
+\RI_{\eff} &= \int \sigma_r(u) \frac{\sigma_d}{\sigma_r(u) + \sigma_d} \du \\
+&= \ln \left(\frac{E_2}{E_1} \right) \frac{ \int \sigma_r(E) \frac{\sigma_d}{\sigma_r(E) + \sigma_d} \frac{1}{E} \dE}{ \int \frac{\sigma_d}{\sigma_r(E) + \sigma_d} \frac{1}{E} \dE}
+\end{align}
+Notice wide resonance approximation $\RI_{\eff}$ only depends on cross sections: $\sigma_d$ is assumed to be based on material composition of the reactor, and $\sigma_r(E)$ are from libraries. There is no need for flux spectrum. 
+
+The wide resonance approximation says that we ignore scattering of U238 because its width is large compared with the approximately 1\% energy it can lose upon scattering. To improve this approximation, sometimes people use the potential scattering of 11.39 barns. 
+
+Wide resonance approximations match direct MC results near infinite dilution. 
+
+\topic{Narrow Resonance Approximations}
+Narrow resonance approximations assume the opposite of the wide resonance approximation, that the neutron is going to be out of the resonance upon one scattering. This approximation is good for higher energy. For instance, at 100 keV, scattering lose 1 keV, which is larger than the 25 eV spacing of \ce{^{238}U}. 
+
+However, the results on the slides come out to be that narrow resonance approximation is not really any better than the wide resonance approximation at higher energy, so there must be some other physics going on. 
+
+
+\topic{Narrow vs. Wide Resonance Approximations}
+Wide resonance approximation agrees pretty well with MC results without U238 scattering; narrow resonance approximation agrees alright with the MC results with U238 scattering. Notice adding in scattering would change the low dilution factor results. See Figure~\ref{wide-vs-narrow}.
+
+Compare with MC results using real U238 and U235 xs data, the real results fall between the wide and the narrow approximations for the high dilution factor; but for the low dilution factor, that is, when there are lots of resonance material (uranium), the physics gets complicated: 
+\begin{itemize}
+\item Non 1/E slowing down sources;
+\item Non constant moderator xs;
+\item Resonance scattering alters sources;
+\item We may have multiple resonance in each RI group; that is, each of our RI does not include a single resonance anymore;
+\item Resonance interference between \ce{^{235}U} and \ce{^{238}U}; eg: \ce{^{238}U}'s resonance spacing is 25 eV, whereas \ce{^{235}U}'s resonance spacing is 5 eV, that is, for each \ce{^{238}U} resonance, there are multiple \ce{^{235}U} resonances on top of it. 
+\end{itemize}
+
 \begin{figure}
   \centering
-  \includegraphics[width=4in]{images/spectral-code-1.png}
-  \\
-  \includegraphics[width=4in]{images/spectral-code-2.png}
-  \\
-  \includegraphics[width=4in]{images/spectral-code-3.png}
-  \caption{Skeleton Spectral Code With Resonance}
+  \includegraphics[width=4in]{images/narrow-vs-wide-resonance.png}
+  \caption{Comparison Of Wide and Narrow Resonance Approximation} \label{wide-vs-narrow}
 \end{figure}
 
-\topic{(Infinite) Resonance Integrals vs. Group Cross Section}
-We introduce \hi{(Infinite) Resonance Integrals} as flux weighted (that is, weighted with 1/E spectrum $\phi(E) \sim \frac{1}{E}$) microscopic cross section: 
-\begin{align}
-\RI &=  - \int_{u1}^{u2} \sigma(u) \du \\
-u &= \ln \left( \frac{E_0}{E} \right) = \ln(E_0) - \ln E \\
-\du &= - \frac{1}{E} \dE \\ 
-\RI &=  \int \sigma (E) \frac{1}{E} \dE 
-\end{align}
-Notice, 
-\begin{itemize}
-\item RI is defined directly from cross section data; no flux calculation is required because 1/E spectrum is assumed; 
-\item RI depends on the normalization of the 1/E flux spectrum; it is also implicitly assumed that flux equals 1 when $E = 1$ through normalization;
-\item RI is independent of energy bounds for isolated resonances;
-\item RI is independent of temperature. This is because if the energy bound is larger enough, then as temperature increases, the spectrum would broaden, but because the area under the curve remains the same, assume the cross section is constant, then RI is essentially integrating the spectrum, which would not change upon temperature change;
-\item RI is useful for inter-comparing libraries or cross section models. It is a classic way to evaluate new resonance data typically from 0.5 eV to 10 keV. We use RI to check our resonance data, in particularly the three big resonances at 6.67, 21, 26 eV. Numerical test of the SLBW RIs shows that the RI comes out to be within 1\% of ENDF/B-VII Reich-Moore data (Lec 6, slide 17, with 0.01 eV as spacing in histogram). 
-\end{itemize}
 
-\hi{Group cross section} is a similar but much more useful quantity. From its definition, we see $\sigma_g$ does not depend on the flux normalization: 
-\begin{align}
-\sigma_g &= \frac{\int_{E_1}^{E_2} \sigma(E) \phi(E) \dE }{\int_{E_1}^{E_2} \phi(E) \dE} 
-\end{align}
-If we make assumptions on the flux spectrum, then we can relate $\sigma_g$ to $\RI_{\eff}$,
-\begin{align}
-\phi(E) &\sim \frac{1}{E} \\
-\sigma_g &= \frac{\int_{E_1}^{E_2} \sigma(E) \frac{1}{E} \dE }{\int_{E_1}^{E_2} \frac{1}{E} \dE} 
-= \frac{\RI_{\eff}}{\ln(E_2) - \ln(E_1)}  
-= \frac{\RI_{\eff}}{\ln(E_2/E_1)} \\
-\Aboxed{\RI_{\eff} &= \sigma_g \ln(E_2/E_1) } \label{RIeff}
-\end{align}
-Notice\footnote{Review here for exam}:
-\begin{itemize}
-\item Group cross section by definition depends on both cross section and flux spectrum. 
-\item Group cross section depends on the flux, but not on the normalization of flux (that is, only the shape matters, not the magnitude);
-\item Group cross section depend explicitly on energy bounds (widths) of the groups; 
-\item Effective RI can be computed from group cross sections and group energy bounds as in Eq.~\ref{RIeff}; As spectrum approaches 1/E, the effective RI computed from group cross sections will approach infinite RI. 
-\end{itemize}
+
+\topic{NJOY Modeling of Resonance Parameters}
+The normal procedure for generating multi-group xs in a code like NJOY includes:
+\begin{enumerate}
+\item use code to Doppler broaden cross sections for each resonance isotope for range of temperatures (eg, 300, 600, 900, 2000K); 
+\item use code to apply the narrow or wide resonance models for a range of dilution xs (eg, 20000, 2000, 200, 20 barns); 
+\item edit RIs or multi-group xs for your desired energy structure; 
+\item build tables of xs vs. dilution xs and temperature;
+\item for downstream computations, interpolate for the dilution cross section and temperature of each material in the simulation to obtain accurate multigroup cross sections for that specific applications. 
+\end{enumerate}
+Note that tables are general and do not have to be computed. 
+
+A better procedure for generating multi-group cross sections includes:
+\begin{enumerate}
+\item the same;
+\item use code to solve real neutron slowing down problem for a range of dilution cross sections (eg, 20000, 2000, 200, 20 barns);
+\item consider including a mix of resonance absorbers to make the spectrum as appropriate to the desired application as possible;
+\item the same;
+\item the same;
+\item the same.
+\end{enumerate}
+
+For downstream application, do [FIXME] Lec 7, slide 31. 
 
 \end{document}
