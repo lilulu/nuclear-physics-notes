@@ -6,7 +6,7 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \lecture{Physical Concepts Related To Resonance Models}
-\topic{Summary: Reuss Ch 8 Resonance Methods (FIXME)}
+\topic{Summary: Reuss Ch 8 Resonance Methods}
 \begin{enumerate}
 \item Self-shielding (Intro): 
   \begin{enumerate}
@@ -19,7 +19,7 @@
 \item Derivation of $\Phi(u)  = \frac{C}{\Sigma_t(u)}$ (8.1.1): starting from slowing down equation,
   \eqn{    \rho(u) + \overbrace{S(u)}^{\to 0} = \Sigma_t (u) \Phi(u) } 
   Before resonance the flux is asymptotic without absorption:
-  \eqn{ \Phi(u) \approx \frac{q(u)}{\xi \Sigma_s (u)} = \frac{q}{\xi \Sigma_s} = C }
+  \eqn{ \Phi(u) \approx \frac{q(u)}{\xi \Sigma_s (u)} = \frac{q}{\xi \Sigma_s} = \mbox{Constant} }
   Then the arrival density in the resonance is constant as well:
   \eqn{ \rho(u) = \Sigma_s (u) \Phi (u) = \frac{q}{\xi} = C}
   Plug back into the slowing down equation, we get the flux in the resonance:
@@ -29,7 +29,29 @@
   \eqn{p = 1 - P_{abs} = 1 - \Sigma_a(u) \Phi(u) \du = \exp \left( - \frac{\Sigma_a \du}{\xi \Sigma_t}  \right) }
 (compare with the derivation we had in class)
 \item Fine structure/self-shielding factor $\phi$ captures the detailed resonances, whereas macroscopit flux $\Psi$ captures everything else (8.1.3).
-\item 
+\item Fine structure in homogeneous mixture (8.2):
+  \begin{enumerate}
+    \item We define dilution xs as: $\sigma_d = \frac{N_m}{N_r} \sigma_m$ (8.2.1). 
+    \item Two models for transforming a heterogeneous situation into a homogeneous one: 
+      at very wide resonance (low energy), and at very narrow resonance (high energy). 
+  \end{enumerate}
+\item Distinguish between the different cases: truely homogeneous mixture, two-isotope heterogeneous configuration, homogenized heterogeneous configuration, and arrays of rods. 
+\item When a particle coming out of fuel is not necessarily interacting with moderator, that is in the case of tight rods, we use Dancoff factor C, which is the probability for a neutron leaving a fuel element of crossing the moderator without a collision. (8.3.4).
+\item Derivation of resonance escape probability in a heterogeneous situation (8.3.5). 
+\begin{table}
+  \begin{tabular}{|c|c|} \hline
+    Homogeneous & $\p = \exp\left[ - \frac{N_0 I_{\eff}}{(\xi \Sigma_s)_m  \right]$ \\ \hline
+    General & $\p = \exp\left[ - \frac{V_C N_0 I_{\eff}}{\Sum_i (V \xi \Sigma_s)_i  \right]$ \\  \hline
+  \end{tabular}
+  \caption{Resonance Escape Probability Formulas} \ref{p-formulas}
+\end{table}
+\item Doppler Effect (8.4):
+\begin{enumerate}
+\item Origin: we can ignore thermal agitation in treating scattering, because scattering xs is fairly constant, so a small change in velocity (hence energy) does not change xs much. Whereas in absorption, near resonance peaks, a small change in velocity (hence energy) would cause a huge difference in absorption xs, hence taking into account thermal agitation of the fuel material would make a difference. 
+\item Characteristics 1: as temperatures increase, the resonance widens, and the peak is lowered, but with a constant resonance integral (area under the curve). 
+\item Characteristics 2: although integral is constant, self-shielding says that \textit{the widening of the resonances has a much greater effect than the lowering of the peaks}. That is, Doppler effect as a whole leads to an increase in resonant capture by U238. 
+\item $\RI_{\eff}$ for capture by U238 varies approximately linearly with the square root of dilution xs; it also varies linearly with the square root of absolute temperature. 
+\end{enumerate}
 
 \end{enumerate}
 
