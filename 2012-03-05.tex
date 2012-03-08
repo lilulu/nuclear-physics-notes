@@ -37,27 +37,65 @@ Since the two integrals are symmetric (that is, $P_{A\to B}$ and $P_{B \to A}$ a
 Hence we reach the reciprocity condition:
 \eqn{ \boxed{ P_{1\to 2} \Sigma_1 V_1 = P_{2\to 1} \Sigma_2 V_2 } }
 
-\subtopic{First Collision Reaction Rate Balance}
+\subtopic{Two Region Balance Equations}
+First collision reaction rate balance, where $\sigma_{t,f}(u) = \sigma_{r,f} + \sigma_{pot, f}$ (the resonance absorption xs plus the potential scattering xs):
+\eqn{ \overbrace{N_f \sigma_{t,f} (u) \Phi(u) V_f}^{\mbox{fuel region lost neutrons}} = \overbrace{Q_f V_f P_{f\to f} + Q_m V_m P_{m\to f}}^{\mbox{fuel region gain neutrons from slowing down sources}}  }
+Because slowing down sources in both fuel and moderator are assumed to arise from the 1/E flux above the resonance energy, we can write
+\eqn{ Q_m &= N_m \sigma_{s,m} \Psi(u) &  Q_f&= N_f \sigma_{pot, f} \Psi(u) }
+Plug the slowing down sources back into the reaction rate balance equation, and recall $\Phi(u) = \Psi(u) \phi(u)$ where $\phi(u)$ is the \hi{fine structure energy shape of the flux for homogeneous mixture}, we extand the definition to define $\phi_f(u)$ as the heterogeneous energy shape of flux in fuel,
+\eqn{ N_f \sigma_{t,f} (u) \phi_f (u) V_f = N_f \sigma_{pot, f} V_f P_{f\to f} + N_m \sigma{s,m} V_m P_{m\to f} }
+Next we use reciprocity relationship,
+\eqn{ P_{m\to f} N_m \sigma_m V_m = P_{f\to m} N_f \sigma_f V_f}
+and substitute into the balance equation to get,
+\eqn{ N_f \sigma_{t,f} (u) \phi_f (u) V_f = N_f \sigma_{pot, f} V_f P_{f\to f} + N_f \sigma{t,f} V_f P_{f\to m} }
+Then we replace $P_{f\to m} = 1 - P_{f\to f}$ and get, 
+\eqn{ N_f \sigma_{t,f} (u) \phi_f (u) V_f = N_f \sigma_{pot, f} V_f P_{f\to f} + N_f \sigma{t,f} V_f (1 - P_{f\to f}) }
+Divide both sides by the number of neutrons, we get a balance equation in unit of cross section:
+\eqn{ \sigma_{t,f} (u) \phi_f (u) = \sigma_{pot, f} P_{f\to f} +  \sigma{t,f} (1 - P_{f\to f}) }
+That is, if we know $P_{f\to f}$, we can solve for the spatially averaged energy shape of the flux in the fuel. 
 
+\subtopic{Wigner's Approximation of $P_{f\to f}$, Obtaining $\phi_f(u)$}
+In this section we compute numerically the fuel-to-fuel first flight collision probability $P_{f\to f}$, hence obtaining an expression for the heterogeneous energy shape of flux in fuel $\phi_f(u)$. 
 
+Wigner approximates $P_{f\to f}$ in terms of the mean chord length $l$: 
+\eqn{ P_{f\to f} &\approx \frac{l N_f \sigma_{t,f} (u)}{1 + l N_f \sigma_{t,f} (u)} = \frac{\sigma_{t,f}(u)}{\frac{1}{l N_f} + \sigma_{t,f} (u)} }
+Recall Cauchy's Theorem for any convex body, 
+\eqn{ l = \frac{4V}{S} }
+and define \hi{effective cross section},
+\eqn{ \Sigma_e &= \frac{1}{l} & \sigma_e &= \frac{\Sigma_e}{N_f} }
+$P_{f\to f}$ simplifies to, 
+\eqn{ P_{f\to f} = \frac{\sigma_{t,f} (u)}{\sigma_{t,f} (u) + \sigma_e} }
+Hence $\phi_f(u)$ can be written as, 
+\eqn{ \boxed{ \phi_f (u) = \frac{\sigma_{pot, f} + \sigma_e}{\sigma_{t,f} (u) + \sigma_e } = \frac{\sigma_{pot, f} + \sigma_e}{\sigma_{r,f} (u) + \sigma_{pot, f} + \sigma_e} } }
 
-\subtopic{Use Reciprocity to Construct 2-Region Balance Equations}
-
-
-$\sigma_{t,f}(u) = \sigma_{r,f} + \sigma_{pot, f}$, the resonance absorption xs plus the potential scattering xs. 
 
 
 \subtopic{Heterogeneous/Homogeneous Equivalence}
-\hi{Heterogeneous/Homogeneous Equivalence} says that we can compare the heterogeneous energy shape of the flux in the fuel: 
+\hi{Heterogeneous/Homogeneous Equivalence} suggests that the effects of heterogeneity are equivalent to some dilution cross section in a homogeneous mixture:
+\begin{align}
+\mbox{Homogeneous mixture energy shape of flux } \phi(u) &= \frac{\sigma_{pot, f} + \sigma_d}{\sigma_{r,f} (u) + \sigma_{pot, f} + \sigma_d}   & \sigma_d &= \frac{N_m \sigma_m}{N_r}  \\
+\mbox{Heterogeneous energy shape of flux in the fuel } \phi_f(u) &= \frac{\sigma_{pot, f} + \sigma_e}{\sigma_{r,f} (u) + \sigma_{pot, f} + \sigma_e}   & \sigma_e &= \frac{S_f}{4 V_f N_r} 
+\end{align}
+
+\uline{Example: calculate corresponding cross sections.} Given a PWR with a 0.41 cm radius pellet, uranium number density of $4.0 \times 10^{22} \cm^{-3}$, enriched to 3\%, and fuel density is 10 g/cc. 
+
+\textbf{Answer:} 
+\begin{align}
+\sigma_d &= \frac{N_m}{N_r} \sigma_m = \frac{1}{0.2} 20 \barn = 100 \barn/\mbox{resonance atom} \\
+\sigma_e &= \frac{S_f}{4 V_f N_r} = \frac{2 \pi r h}{4 \pi r^2 h N_r} = \frac{1}{2 r N_r} = \frac{1}{(2)(0.41 \cm)(2.2 \times 10^{22} \cm^{-3})} \frac{1 \barn}{10^{-24} \cm^2} = 55 \barn/\mbox{resonance atom} \\
+\sigma_{pot, f} &= \sigma_{pot, 238} + 0.05 \sigma_{pot, 235} + 2 \sigma_{pot, O} = 11.4 + 0.05 (11.3) + 2 (4.0) = 20 \barn 
+\end{align} 
 
 
 \subtopic{Bell's Refinements of the Wigner's Collision Probability}
-Bell Factor $b$:
-\eqn{ P_{f\to f} = \frac{\sigma_{t,f} (u)}{b \sigma_e + \sigma_{t,f} (u)} }
-
+Bell Factor $b$ can be read off a plot given opacity (average chord times total cross section) and geometry (eg: homogeneous medium, infinite plate, sphere etc). It is then used to approximate $P_{f\to f}$ and hence $\phi_f(u)$:
+\eqn{ P_{f\to f} &= \frac{\sigma_{t,f} (u)}{b \sigma_e + \sigma_{t,f} (u)}  & \phi_f(u) &=\phi_f (u) = \frac{\sigma_{pot, f} + b \sigma_e}{\sigma_{t,f} (u) + b \sigma_e }  }
+Bell's refinement does nothing to the infinite opacity case, but could be a factor of 50\% or even a factor of 3 difference as opacity approaches zero. 
 
 \subtopic{Arrays of Rods, Dancoff Factor}
-Notice our model so far is an isolated pin (that is, a fuel pin surrounded by an almost infinite moderator). Now we are going to discuss arrays of rods. We define the \hi{Dancoff Factor C}:
+Notice our model so far is an isolated pin (that is, a fuel pin surrounded by an almost infinite moderator). Now we are going to discuss arrays of rods. The major difference is that not all neutrons leaving a fuel pin would have their next interaction in the moderator. 
+
+We hence define the \hi{Dancoff Factor C}:
 \eqn{ C = 1 - \frac{ \left. P_{f\to f} \right|_{\mbox{isolated rods}}}{ \left. P_{f\to f} \right|_{\mbox{arrays of rods}}}   }
 LWRs typically have a C of 0.3. Know how to get C from the plot. 
 
