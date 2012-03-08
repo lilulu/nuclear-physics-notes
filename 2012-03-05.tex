@@ -97,19 +97,24 @@ Notice our model so far is an isolated pin (that is, a fuel pin surrounded by an
 
 We hence define the \hi{Dancoff Factor C}:
 \eqn{ C = 1 - \frac{ \left. P_{f\to f} \right|_{\mbox{isolated rods}}}{ \left. P_{f\to f} \right|_{\mbox{arrays of rods}}}   }
-LWRs typically have a C of 0.3. Know how to get C from the plot. 
-
-
-C changes the coefficient in front of the escape xs $\sigma_e \to \frac{(1-C)b}{1-C + Cb} \sigma_e$. For a typical PWR pin, that is reduce $\sigma_e$ to 0.745 of it. \ce{^{235}U}'s xs is 65 barns [FIXME].
+To find the Dancoff factor for a system, we can look it up on a plot using the radius of the rods (in units of mean free path) and the lattice size/radius of rods. If the moderator is opaque, the Dancoff factor becomes zero; if transparent, the Danoff factor trends to 1.0. LWRs typically have a C of 0.3. 
+\eqn{ P_{f\to f}  = \frac{\sigma_{t,f} (u)}{\frac{(1-C)b}{(1-C) + Cb} \sigma_e + \sigma_{t,f} (u)}  } 
+C changes the coefficient in front of the escape cross section from $\sigma_e \to \frac{(1-C)b}{1-C + Cb} \sigma_e$. For a typical PWR pin, that is reduced by 0.7 to 0.8.
 
 \uline{Example: Find Dancoff Factor} Given water at 1 g/cc with a number density of $6.6 \times 10^{24}$ H atoms/cc, hydrogen xs of 20 barns, a PWR pin with 0.41 cm radius, a lattice pitch of 1.26cm. 
 
-Answer: we first find the mean free path: 
-\eqn{ mfp = \frac{1}{\Sigma} = \frac{1}{N \sigma} =  }
-
-
+\textbf{Answer:} we first find the mean free path: 
+\eqn{ mfp = \frac{1}{\Sigma} = \frac{1}{N \sigma} =  \frac{1}{0.066 \times 10^{24} \times  20 \times 10^{-24}} =  0.76 \cm }
+Then we find the parameter one, pellet radius over mfp = $\frac{0.41 \cm}{0.76 \cm}  = 0.54$, the other parameter is the lattice size over pellet radius $\frac{1.26 \cm}{0.41 \cm} = 3.07$. Using these two parameters, we can read off the plot that $C = 0.3$. For a Bell factor of about 1.1, the escape xs is reduced by,
+\eqn{ \frac{ (1-C)b}{(1-C) + Cb} = 0.774} 
 
 \subtopic{Carlvik's Refinements of the Bell's Collision Probability}
+\begin{figure}
+  \centering
+  \includegraphics[width=4in]{images/Carlvik-refinement.png}
+  \caption{Definition and Properties of Calvik's Refinement} \label{Calvik}
+\end{figure}
+
 Carlvik's two-term approximation is what is actually used in production tools nowaday. To use it, we essentially look up the resonance integral (or group xs) twice, once with $\sigma_e$ multiplied by $\alpha_1$ and the second time with $\sigma_e$ multiplied by $\alpha_2$, each of them are simple functions of the Dancoff factor. To double check, we let Dancoff factor to go to 1, and there should be no escape from the fuel; let Dancoff factor go to 0, we should get isolated rod. 
 
 

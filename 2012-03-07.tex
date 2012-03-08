@@ -5,18 +5,18 @@
 \maketitle
 
 \topic{k-infinity In Infinite Medium Calculations (No Leakage)}
-
+\eqn{ k_{\inf} =  \frac{\mbox{total fissions} \cdot \bar{\nu} }{\mbox{total absorptions}} }
 
 \topic{Solving Two-Region Monte Carlo Spectral Analysis}
+Review codes in Lec8. Review slide 22 on approximation of collision probabilities. 
 
-
-\topic{Example of Pin Cell Analysis}
+\topic{Observations From Two-Region Monte Carlo Spectral Analysis}
 \begin{enumerate}
-\item Flux dips in moderator are mild because there is only elastic scattering. 
-\item Adding in Zr: Zr has massive elastic scattering resonances, hence creating fluctuations in fluxes. 
-\item Adding in O: the fast flux looks distorded in both fuel and moderator; the reactivity change is not large, but looking at the oxygen xs, there are werid dips in high energy xs. 
-\item Removing hydrogen absorption: the flux shape does not change much, but the reactivity change is huge (8808 pcm), because there are so much hydrogen in the system (hydrogen xs is 1/v down to 100 keV); this is why LWR fuel has to be enriched. 
-\item Remove U238 fission: reduce reactivity by 2\%. Spectrum shape does not change. 
+\item With no oxygen or zirconium: flux dips in moderator are mild because there is only elastic scattering. 
+\item Adding in Zr: Zr has massive elastic scattering resonances, hence creating fluctuations in both spectrums most noticable in energies right above the resonance energies. THe reactivity change is small (positive 560 pcm).
+\item Adding in O: the fast flux looks distorded in both fuel and moderator, this is because the oxygen xs has werid dips in high energy xs. the reactivity change is not large (negative 680 pcm). 
+\item Removing hydrogen absorption: the spectrum shape does not change much, but the reactivity change is huge (8808 pcm), because there are so much hydrogen in the system (hydrogen xs is 1/v down to 100 keV); this is why LWR fuel has to be enriched. 
+\item Remove U238 fission: reduce reactivity by 2\% (negative -1910 pcm). Spectrum shape does not change. 
 \end{enumerate}
 Looking at the flux in the moderator divided by the flux in the fuel, we see that:
 \begin{itemize}
