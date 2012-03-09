@@ -42,17 +42,27 @@ P(w) \dw &= \frac{e^{-w}}{1 - \alpha} \dw \\
 \end{align}
 $\xi$ is like the efficiency of slowing down by a nucleus. That is, neutrons advance by $\xi$ lethargy units on average at each collision. Then to overcome the total lethargy interval $U = \ln \frac{E_0}{E_1}$, the number of collisions needed is:
 \eqn{ n = \frac{U}{\xi} }
+\begin{figure}
+  \centering
+  \includegraphics[width=3in]{images/slowing-down-parameter.png}
+  \caption{Slowing Down parameters}
+\end{figure}
 
 \item Moderating power is the best measure of a material's ability to slow down neutrons. It has two forms:
 \eqn{\mbox{per atom basis} = \xi \sigma_s \fsp \fsp \fsp \mbox{per volume basis} = \xi \Sigma_s   }
 A good moderating material should have: high slowing down (hence light nuclei), low capture (D, Be, C), moderating power (take into account both high slowing down and high scattering xs). Water has the highest moderating power, but it requires an enriched fuel (around 1\%). 
+\begin{figure}
+  \centering
+  \includegraphics[width=3in]{images/moderator-comparison.png}
+  \caption{Comparison of Characteristics of Moderators}
+\end{figure}
 
 \item Laws of inelastic collision. Elastic scattering is important for moderators because they are light; inelastic scattering is important for heavy materials like the fuel because they have almost no elastic collision. Minimum energy of the neutron for an inelastic collision is:
 \eqn{ E_{\mathrm{threshold}} = \frac{A+1}{A} Q } 
 
 \item Slowing down equations: a simplified Boltzmann equation performing neutron counts that depends on one variable, either velocity or energy or lethargy. We pick lethargy. Then we assume an infinite, homogeneous medium with a source uniform in space and time. 
 
-\item First form of the slowing down equation:
+\item First form of the slowing down equation (7.1.9):
   \begin{align}
     \rho(u) \du 
     &= \mbox{arrival density} = \begin{array}{l}
@@ -62,13 +72,43 @@ A good moderating material should have: high slowing down (hence light nuclei), 
     &= \overbrace{\int_{-\infty}^u \Sigma_s (u') \Phi(u') \du'}^{\textcircled{1}} \overbrace{ P(u'\to u) \du }^{\textcircled{2}} \\
     \textcircled{1} &= \mbox{\# neutrons travelling in du' and scattered per time and per volume} \\
     \textcircled{2} &= \mbox{probability a neutron scattered at u' will be transferred in du} \\
-    \rho(u) &= \int_{-\infty}^u \Sigma_s (u'\to u) \phi(u') \du' \\
-    S(u) + \rho(u) &= \boxed{S(u) + \int_{-\infty}^u \Sigma_s (u'\to u) \phi(u') \du  = \Sigma(u) \phi(u) }
+    \rho(u) &= \int_{-\infty}^u \Sigma_s (u'\to u) \Phi(u') \du' \\
+    S(u) + \rho(u) &= \boxed{S(u) + \int_{-\infty}^u \Sigma_s (u'\to u) \Phi(u') \du  = \Sigma(u) \Phi(u) }
   \end{align}
+  In the specific case of COM isotropic, monatomic elastic slowing down, the transfer probability is:
+  \eqn{P(u'\to u) = P(u\to u') = \frac{e^{-(u-u')}}{1-\alpha} }
+\item Decay of neutron spectrum by successive scattering events (7.2.2): producing spectrum by adding up successive scattering events;
+\item Slowing down without absorption (7.2.3). Asymptotic value of flux: 
+  \eqn{ \Phi_{as} (u) = \frac{S}{\xi \Sigma_s(u)} }
+  If we plot flux vs. lethargy, all isotopes would fluctuate (Placzek transient) before reaching the asymptotic flux value, except H which immediately reaches $\Phi_{as}$. 
+\item Slowing down in hydrogen (7.2.4): uses Green's function; the Dirac distribution compensates for the source in the equation; the Heaviside step function makes sure the neutrons scattered at least once scattered beyond, not below, the original lethargy. 
+\item Slowing down with resonance absorptions (which is low energy) (7.2.5): we can approximate resonance absorption of the following types
+  \begin{enumerate}
+    \item Black resonance trap: 
+      \eqn{ 1 - p = \int_0^{\gamma} \int_{u-\epsilon}^0 \du' \frac{1}{\xi} \frac{e^{-(u-u')}}{1 - \alpha} = \frac{1 - e^{-\gamma} - \alpha \gamma}{\xi (1-\alpha)}  }
+      when $\gamma$ is small, we can simplify the above to be $1 - p = \frac{\gamma}{\xi}$. 
+    \item Narrow grey resonance trap:
+      \eqn{ 1 - p  = \int_{\mathrm{trap}} \frac{\Sigma_a(u)}{\Sigma_t(u)} \frac{\du}{\xi} }
+    \item A set of narrow grey resonance traps: we express each resonance in exponential form, and find the product of them:
+      \begin{align}
+        p_i &= 1 - \int_i \frac{\Sigma_a(u)}{\xi \Sigma_t (u)} \du = \exp \left[ -\int_i \frac{\Sigma_a(u)}{\xi \Sigma_t(u)} \du \right] \\
+        p &= \prod_i p_i = \exp \left[ - \Sum_i \int_i \frac{\Sigma_a(u)}{\xi \Sigma_t(u)} \du \right]
+      \end{align}
+    \item General expression:
+      Because the integrated function is zero outside of the resonance traps, we can simply write,
+      \eqn{p =  \exp \left[ - \int_ \frac{\Sigma_a(u)}{\xi \Sigma_t(u)} \du \right] }
+      This is the general expression for resonance escape probability. 
+  \end{enumerate}
+\item Slowing down with low, slowly varying absorption (which is high energy) (7.2.6). 
+
+  \begin{enumerate}
+  \item Greuling-Goertzel approximations for slow and gradually varying absorption: 
+  \item Wigner approximation for resonance absorption: 
+  \end{enumerate}
 \end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%% Ch 9 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\topic{Summary: Reuss Ch 9 Thermalisation of Neutrons (FIXME)}
+\topic{Summary: Reuss Ch 9 Thermalisation of Neutrons}
 \begin{enumerate}
 \item For monatomic gas, there is thermal agitation and no chemical bonds, we can approximaet with Maxwell distribution. 
 \item For any thermaliser, the neutron spectrum at equilibrium and in the absence of absorption (or with low capture) would be a Maxwell spectrum. A Maxwell spectrum depends on $E, kT$. 
@@ -78,7 +118,7 @@ A good moderating material should have: high slowing down (hence light nuclei), 
 \item Thermalisation equation (9.1.5): 
   \eqn{ \int_0^{E_{\mathrm{cutoff}}} \Sigma_s (E') \Phi(E') \dE' P(E' \to E) + \overbrace{\int_{E_{\mathrm{cutoff}}}^{\infty} \Sigma_s(E') \Phi(E') \dE' P(E'\to E)}^{S_{\mbox{slow-down}}(E)} = \Sigma_t(E) \Phi(E) }
   and the slow-down equation, 
-  \eqn{ \int_{-\infty}^{u} \Sigma_s (u') \overbrace{P(u' \to u)}^{\frac{\exp(-(u-u'))}{1 - \alpha}} \Phi(u') \du' P(u' \to u) + S(u) = \Sigma_t(u) \Phi(u) }
+  \eqn{ \int_{-\infty}^{u} \Sigma_s (u') \overbrace{P(u' \to u)}^{\frac{\exp(-(u-u'))}{1 - \alpha}} \Phi(u') \du' + S(u) = \Sigma_t(u) \Phi(u) }
   The two are similar, except:
   \begin{enumerate}
   \item The slowing down equation only down scatters, whereas thermalisation equation can transfer energies in both directions. The upper boundary $E_{\mathrm{cutoff}}$ is the energy separating the thermalization domain from the slowing down domain. 
