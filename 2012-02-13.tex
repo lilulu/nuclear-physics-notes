@@ -69,18 +69,56 @@ A good moderating material should have: high slowing down (hence light nuclei), 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%% Ch 9 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \topic{Summary: Reuss Ch 9 Thermalisation of Neutrons (FIXME)}
+\begin{enumerate}
+\item For monatomic gas, there is thermal agitation and no chemical bonds, we can approximaet with Maxwell distribution. 
+\item For any thermaliser, the neutron spectrum at equilibrium and in the absence of absorption (or with low capture) would be a Maxwell spectrum. A Maxwell spectrum depends on $E, kT$. 
+\item Microreversibility principle/detailed balance: at equilibrium and with no absorption, the number of transfers by diffusion from $\dE$ to $\dE'$ as transfers in the other direction from $\dE'$ to $\dE$. 
+\item Scattering equation (9.1.4): 
+\eqn{ \Sigma_s(E', E, \mu) = \Sigma_s (E') P(E' \to E) P(\mu) = C^{te} \sqrt{\frac{E}{E'}} \exp \left[\frac{E'-E}{2kT} \right] S(\alpha, \beta)  }
+\item Thermalisation equation (9.1.5): 
+  \eqn{ \int_0^{E_{\mathrm{cutoff}}} \Sigma_s (E') \Phi(E') \dE' P(E' \to E) + \overbrace{\int_{E_{\mathrm{cutoff}}}^{\infty} \Sigma_s(E') \Phi(E') \dE' P(E'\to E)}^{S_{\mbox{slow-down}}(E)} = \Sigma_t(E) \Phi(E) }
+  and the slow-down equation, 
+  \eqn{ \int_{-\infty}^{u} \Sigma_s (u') \overbrace{P(u' \to u)}^{\frac{\exp(-(u-u'))}{1 - \alpha}} \Phi(u') \du' P(u' \to u) + S(u) = \Sigma_t(u) \Phi(u) }
+  The two are similar, except:
+  \begin{enumerate}
+  \item The slowing down equation only down scatters, whereas thermalisation equation can transfer energies in both directions. The upper boundary $E_{\mathrm{cutoff}}$ is the energy separating the thermalization domain from the slowing down domain. 
+  \item The `source' in the thermalisation equation $S_{\mbox{slow-down}}(E)$ is not a true source; it is a density of arrival at energies below the cutoff energy due to scattering events occurring in the last part of the slowing down domain and transferring the neutron beyond the cutoff energy in the thermalisation domain. 
+  \end{enumerate}
+\item Thermal Spectrum(9.2): it is approximately reasonable well by Maxwell distribution, except,
+  \begin{itemize}
+    \item $0\sim 2kT$: real thermal spectrum is smaller due to absorption of neutrons;
+    \item $2kT$ and above: Maxwell spectrum approaches zero quickly, whilst the real density falls slightly but remains significant, due to the `slowing down queue:' neutrons coming from high energies slow down and enter the thermal domain, compensating for the disappearances by absorption. 
+  \end{itemize}
+\item Comparing MOX and UOX spectrum: the two are close for the fast and epithermal domains, because they essentially have the same quantity of moderator, U238, and cladding. Whereas in the thermal domain, the number of neutrons in MOX is lower by a factor of 4 because of the high absorption by MOX fuel of thermal neutrons. 
+\item Average cross section (9.2.3): 
+  \eqn{ \bar{\sigma} = \frac{\int \sigma(E) \Phi(E) \dE}{\int \phi(E) \dE} }
+  \uline{Example: calculate the average xs for a Maxwell spectrum and a 1/v xs.} 
+  \eqn{ \bar{\sigma} = \frac{\sqrt{\pi}}{2} \sigma(v_0) = \frac{\sqrt{\pi}}{2} \sqrt{\frac{293}{T}} \sigma_{2200} }
+  where $\frac{\sqrt{\pi}}{2}$ is the average of $x = v/v_0$ on a Maxwell spectrum, and also the average of $1/x$. 
+\item Heterogeneous Configurations (9.2.4):
+  \begin{align}
+    V_f R_f \Phi_f P_{ff} + V_m (R_m \Phi_m + S_{\mathrm{sl-d}} ) P_{mf} &= V_f \Sigma_f \Phi_f \\
+    V_fR_f \Phi_f P_{fm} + V_m(R_m \Phi_m + S_{\mathrm{sl-d}}) P_{mm} &= V_m \Sigma_m \Phi_m 
+  \end{align}
+\item Approximate thermal neutron speeds(9.3.1): assume absorption xs are 1/v and scattering xs are constant, we can approximate
+  \eqn{ v = 2200 \m/\s \sqrt{\frac{T}{293.15}} } 
+\item Thermal utilisation factor (9.3.2): the fraction of thermal neutrons absorbed in the fuel,
+  \eqn{ f &= \frac{V_f \Sigma_{a,f} \Phi_f}{V_f \Sigma_{a,f} \Phi_f + V_m \Sigma_{a,m} \Phi_m + \cdots}, & \frac{1}{f} - 1 &= \underbrace{\frac{V_m}{V_f}}_{\mbox{moderation ratio}}
+    \overbrace{\frac{\Phi_m}{\Phi_f}}^{\mbox{disadvantage factor}} \frac{\Sigma_{a,m}}{\Sigma_{a,f}}   } 
+\item Reproduction factor $\eta$ (9.3.3):
+  \eqn{ \eta = \frac{\nu \Sigma_{f,f}}{\Sigma_{a,f}} }
+
+\end{enumerate}
 
 
 \topic{Developing An Infinite-medium Monte Carlo Neutronics}
-*does xs depend on geometry? if not, why does it matter infinite medium? 
-
 \subtopic{Isotopic Importance by Infinite Medium Reactor Materials}
 
 \begin{table}
   \centering
-  \begin{tabular}{|c|c|c|}
-    PWR & & \\
-    BWR & & 
+  \begin{tabular}{|c|c|c|} \hline
+    PWR & & \\ \hline
+    BWR & &  \\ \hline
   \end{tabular}
   \caption{Volume Fraction of Reactor Materials}
 \end{table}
