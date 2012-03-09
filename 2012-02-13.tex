@@ -147,24 +147,34 @@ A good moderating material should have: high slowing down (hence light nuclei), 
     \overbrace{\frac{\Phi_m}{\Phi_f}}^{\mbox{disadvantage factor}} \frac{\Sigma_{a,m}}{\Sigma_{a,f}}   } 
 \item Reproduction factor $\eta$ (9.3.3):
   \eqn{ \eta = \frac{\nu \Sigma_{f,f}}{\Sigma_{a,f}} }
-
 \end{enumerate}
 
-
+%%%%%%%%%%%%%%%%%%%%%% end of Ch 9 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \topic{Developing An Infinite-medium Monte Carlo Neutronics}
 \subtopic{Isotopic Importance by Infinite Medium Reactor Materials}
-
 \begin{table}
   \centering
-  \begin{tabular}{|c|c|c|} \hline
-    PWR & & \\ \hline
-    BWR & &  \\ \hline
+  \begin{tabular}{|c|c|c|c|} \hline
+    Reactor & Fuel & Coolant \& Moderator & Structural  \\ \hline \hline
+    PWR & 35\% & 55\% & 10\% \\ \hline
+    CANDU6 & 5\% & 85\% & 10\%  \\ \hline
+    HTGR & 5\% & 90\% & 2\% \\ \hline
+    SFR & 60\% & 30\% & 10\% \\ \hline
   \end{tabular}
-  \caption{Volume Fraction of Reactor Materials}
+  \caption{Volume Fraction/Isotopic Importance of Reactor Materials} \label{volume-fraction}
 \end{table}
-Notice in PWR, H and O densities come out to be the same. 
-
-Usually given a xs, it is given in 0.025 eV because it is the peak of the Maxiwillean distribution in room temperature. 
+For a typical LWR, we can find common isotopes' number densities by using the volume fraction in Table~\ref{volume-fraction}: 
+\begin{align}
+N^H_c &= 0.55 \times 1 \g/\cm^3 \frac{N_{AV} \mathrm{molecule}/\mol}{18 \g/\mol} 2/\mathrm{molecule}  = 3.68 \times 10^{22} \\
+N^O_c &= 0.55 \times 1 \g/\cm^3 \frac{N_{AV} \mathrm{molecule}/\mol}{18 \g/\mol} 1/\mathrm{molecule}  = 1.84 \times 10^{22} \\
+N^O_f &= 0.35 \times 10 \g/\cm^3 \frac{N_{AV} \mathrm{molecule}/\mol}{270 \g/\mol} 2/\mathrm{molecule}  = 1.56 \times 10^{22} \\
+N^{238}_f &= 0.95 \times 0.35 \times 10 \g/\cm^3 \frac{N_{AV} \mathrm{molecule}/\mol}{270 \g/\mol} 1/\mathrm{molecule}  = 1.48 \times 10^{22} \\
+N^{238}_f &= 0.05 \times 0.35 \times 10 \g/\cm^3 \frac{N_{AV} \mathrm{molecule}/\mol}{267 \g/\mol} 1/\mathrm{molecule}  = 0.079 \times 10^{22} \\
+N^{Zr} &= 0.10 \times 6.6 \g/\cm^3 \frac{N_{AV} \mathrm{molecule}/\mol}{90 \g/\mol} 1/\mathrm{molecule}  = 0.56 \times 10^{22} 
+\end{align}
+That is, in a typical LWR the relative number densities come out to be around: 
+\eqn{\boxed{H = 1, O = 1, U238 = 0.5, U235 = 0.025, Zr = 0.16   }}
+Notice hydrogen's and oxygen's number densities are approximately the same. 
 
 \subtopic{Absorption and Scattering}
 Absorption and scattering always line up together in terms of energy. 
