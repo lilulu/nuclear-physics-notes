@@ -148,8 +148,9 @@ A good moderating material should have: high slowing down (hence light nuclei), 
 \item Reproduction factor $\eta$ (9.3.3):
   \eqn{ \eta = \frac{\nu \Sigma_{f,f}}{\Sigma_{a,f}} }
 \end{enumerate}
-
 %%%%%%%%%%%%%%%%%%%%%% end of Ch 9 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
 \topic{Developing An Infinite-medium Monte Carlo Neutronics}
 \subtopic{Isotopic Importance by Infinite Medium Reactor Materials}
 \begin{table}
@@ -176,29 +177,67 @@ That is, in a typical LWR the relative number densities come out to be around:
 \eqn{\boxed{H = 1, O = 1, U238 = 0.5, U235 = 0.025, Zr = 0.16   }}
 Notice hydrogen's and oxygen's number densities are approximately the same. 
 
-\subtopic{Absorption and Scattering}
-Absorption and scattering always line up together in terms of energy. 
+\subtopic{Absorption and Scattering Cross Sections}
+See Figure~\ref{scatter-xs}, Figure~\ref{capture-xs} for common cross sections. Notice absorption and scattering tend to line up in terms of energy. 
 
-Sodium has a high capture xs in thermal range, and a small capture xs in fast range. But we can still build a thermal reactor with water as moderator and sodium as coolant, as long as sodium's volume is lower than that of the H. 
+\uline{Practice: Why can we use sodium as coolant if its capture cross section is so high?}  
 
+\textbf{Answer:} Sodium has a high capture xs in thermal range, and a small capture xs in fast range. But we can still build a thermal reactor with water as moderator and sodium as coolant, as long as sodium's volume is lower than that of the H. 
+
+
+%%%%%%%%%%%% Elastic Scattering %%%%%%%%%%%%%%%%%%%%%%
 \topic{Models for High Energy Elastic Scattering Physics}
-Compression: log slowing down. 
+Assume isotropic scattering in COM (target at rest in Lab system), then the minimum final energy is,
+\eqn{ \frac{E_{\mathrm{min}}}{E_0} = \alpha = \left( \frac{A-1}{A+1} \right)^2 } 
+We define \hi{mean log energy decrement},
+\eqn{ \zeta = 1 - \frac{\alpha \ln(\alpha)}{1 - \alpha}  } 
+whose common values are: $\zeta_{H} = 1, \zeta_D = 0.725, \zeta_C = 0.158, \zeta_U = 0.0084$. Then the number of collisions required to slow a particle from $E_2$ to $E_1$ is: 
+\eqn{ n = \frac{\ln(E_2 / E_1)}{\zeta} }
+For $E_2 = 2\times 10^6 \eV, E_1 = 0.1 \eV$, the number of collisions is: $n_H = 17, n_D = 23, n_C = 106, n_U = 2000$. 
 
-Take an energy and adds up all the neutrons in that energy, we get flux vs. energy. 
+\subtopic{Result: Flux vs. Energy}
+\begin{figure}
+  \centering
+  \includegraphics[width=3in]{images/flux-vs-energy-1.png}
+  \includegraphics[width=3in]{images/flux-vs-energy-2.png}
+  \caption{Flux vs. Energy} \label{fve}
+\end{figure}
+There are two ways to understand flux here. 
+\begin{itemize}
+\item Particle based: we let all the neutrons to scatter till death; then for each energy interval, if we add up the number of neutrons with energies in that interval; we get the flux corresponding to each interval.  
+\item Generation based: we let each neutron scatter once in each generation, save all the number of neutrons vs. energy data, and add up all the generations, this would effectively give us flux vs. energy as well[FIXME]. 
+\end{itemize}
+Figure~\ref{fve} presents the results from th generation-based flux. Notice with insufficient number of generations (left plot), the flux tails down at lower energies, meaning that some neutrons are not slowed down entirely yet. With sufficient number of generations (right plot), we get a \hi{1/E spectrum}. 
 
-\subtopic{Flux vs. energy graph}
-The curve due to Placzek Transients; if the lower energy bound is not low enough, the flux would tail down, which means that we are not tracking enough energy. WIth enough energy, the flux should be a $\frac{1}{E}$ shape. 
+\subtopic{Result: Flux vs. Lethargy}
+\begin{figure}
+  \centering
+  \includegraphics[width=3in]{images/flux-vs-lethargy-1.png}
+  \includegraphics[width=3in]{images/flux-vs-lethargy-2.png}
+  \caption{Flux vs. Lethargy} \label{fvl}
+\end{figure}
+A 1/E spectrum in energy space is a constant value in lethargy space as in Figure~\ref{fvl}. 
 
-\subtopic{Flux vs. lethargy}
- calculate mean energy and place them in corresponding bins; even at higher generations, there are still some neutrons not slowed down entirely yet, so the flux curve tails down. In lethargy space, $\phi(E)$ should be constant. 
+Caution about number of bins: When we are plotting, we are really plotting the expectation value of the numbers of neutrons; so if we ask `how many neutrons would there be at x energy level' the answer should be zero. So the bins have to be fine enough to see the details, but not too fine that the bins got no more neutrons. 
 
-Binning method: When we are plotting, we are really plotting the expectation value of the numbers of neutrons; so if we ask `how many neutrons would there be at x energy level' the answer should be zero. So the bins have to be fine enough to see the details, but not too fine that the bins got no more neutrons. 
+\topic{Models for Fission Neutron Emission Spectrum ($\chi$)}
+Model: Maxwell spectrum:
+\eqn{ \chi(E) \dE = \frac{2\pi}{(\pi T)^{3/2}} \sqrt{E} \exp\left( - \frac{E}{T} \right) \dE }
+Simulation: constructing a cdf for Maxwell distribution (when constructing any cdf, it is a good practice to sample immediately and double check with the pdf); for each neutron, generate a random number $\xi \in [0,1]$, and use $\xi = cdf(E)$ to reverse-lookup for $E$, and this is the fission emission energy of that neutron. 
 
+Characteristics of our spectrum so far: 
+\begin{itemize}
+\item A spectrum is the shape in energy;
+\item A spectrum is independent on the number of incoming neutrons; 
+\item for one specie, the spectrum is independent of its cross section; for two species, only the relative cross section matters. 
+\end{itemize}
 
-\topic{Models for Fission Neutron Emission Spectra}
-When building a cdf for neutron emission, it is always important to sample right after and compare with the spectrum to make sure the cdf is correct. 
-
-Spectrum: shape in energy, which is independent on the number of incoming neutrons and xs for one specie; for two species, the relative xs matter. 
+\begin{figure}
+  \centering
+  \includegraphics[width=3in]{images/spectrum-1.png}
+  \includegraphics[width=3in]{images/spectrum-2.png}
+  \caption{Spectrum, Adding in } \label{spe1}
+\end{figure}
 
 Fission source peak: have to take into account the cross section: 
 \eqn{\phi(E) \propto \Sum_N \Sum_g N_g^n \tau_g^n = \Sum_n \Sum_g N_g^n \frac{1}{\Sigma(E_g^n)}   }
