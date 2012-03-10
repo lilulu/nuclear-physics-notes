@@ -44,7 +44,7 @@ $\xi$ is like the efficiency of slowing down by a nucleus. That is, neutrons adv
 \eqn{ n = \frac{U}{\xi} }
 \begin{figure}
   \centering
-  \includegraphics[width=3in]{images/slowing-down-parameter.png}
+  \includegraphics[width=3in]{images/sl-d/slowing-down-parameter.png}
   \caption{Slowing Down parameters}
 \end{figure}
 
@@ -53,7 +53,7 @@ $\xi$ is like the efficiency of slowing down by a nucleus. That is, neutrons adv
 A good moderating material should have: high slowing down (hence light nuclei), low capture (D, Be, C), moderating power (take into account both high slowing down and high scattering xs). Water has the highest moderating power, but it requires an enriched fuel (around 1\%). 
 \begin{figure}
   \centering
-  \includegraphics[width=3in]{images/moderator-comparison.png}
+  \includegraphics[width=3in]{images/sl-d/moderator-comparison.png}
   \caption{Comparison of Characteristics of Moderators}
 \end{figure}
 
@@ -185,6 +185,7 @@ See Figure~\ref{scatter-xs}, Figure~\ref{capture-xs} for common cross sections. 
 \textbf{Answer:} Sodium has a high capture xs in thermal range, and a small capture xs in fast range. But we can still build a thermal reactor with water as moderator and sodium as coolant, as long as sodium's volume is lower than that of the H. 
 
 
+\clearpage
 %%%%%%%%%%%% Elastic Scattering %%%%%%%%%%%%%%%%%%%%%%
 \topic{Models for High Energy Elastic Scattering Physics}
 Assume isotropic scattering in COM (target at rest in Lab system), then the minimum final energy is,
@@ -198,8 +199,8 @@ For $E_2 = 2\times 10^6 \eV, E_1 = 0.1 \eV$, the number of collisions is: $n_H =
 \subtopic{Result: Flux vs. Energy}
 \begin{figure}
   \centering
-  \includegraphics[width=3in]{images/flux-vs-energy-1.png}
-  \includegraphics[width=3in]{images/flux-vs-energy-2.png}
+  \includegraphics[width=3in]{images/sl-d/flux-vs-energy-1.png}
+  \includegraphics[width=3in]{images/sl-d/flux-vs-energy-2.png}
   \caption{Flux vs. Energy} \label{fve}
 \end{figure}
 There are two ways to understand flux here. 
@@ -212,75 +213,114 @@ Figure~\ref{fve} presents the results from th generation-based flux. Notice with
 \subtopic{Result: Flux vs. Lethargy}
 \begin{figure}
   \centering
-  \includegraphics[width=3in]{images/flux-vs-lethargy-1.png}
-  \includegraphics[width=3in]{images/flux-vs-lethargy-2.png}
+  \includegraphics[width=3in]{images/sl-d/flux-vs-lethargy-1.png}
+  \includegraphics[width=3in]{images/sl-d/flux-vs-lethargy-2.png}
   \caption{Flux vs. Lethargy} \label{fvl}
 \end{figure}
 A 1/E spectrum in energy space is a constant value in lethargy space as in Figure~\ref{fvl}. 
 
 Caution about number of bins: When we are plotting, we are really plotting the expectation value of the numbers of neutrons; so if we ask `how many neutrons would there be at x energy level' the answer should be zero. So the bins have to be fine enough to see the details, but not too fine that the bins got no more neutrons. 
 
+\clearpage
 \topic{Models for Fission Neutron Emission Spectrum ($\chi$)}
 Model: Maxwell spectrum:
 \eqn{ \chi(E) \dE = \frac{2\pi}{(\pi T)^{3/2}} \sqrt{E} \exp\left( - \frac{E}{T} \right) \dE }
 Simulation: constructing a cdf for Maxwell distribution (when constructing any cdf, it is a good practice to sample immediately and double check with the pdf); for each neutron, generate a random number $\xi \in [0,1]$, and use $\xi = cdf(E)$ to reverse-lookup for $E$, and this is the fission emission energy of that neutron. 
 
-Characteristics of our spectrum so far: 
-\begin{itemize}
-\item A spectrum is the shape in energy;
-\item A spectrum is independent on the number of incoming neutrons; 
-\item for one specie, the spectrum is independent of its cross section; for two species, only the relative cross section matters. 
-\end{itemize}
-
+Characteristics of our spectrum so far: a spectrum is the shape in energy; the spectrum is independent on the number of incoming neutrons; for one specie, the spectrum is independent of its cross section; for two species, only the relative cross section matters. 
 \begin{figure}
   \centering
-  \includegraphics[width=3in]{images/spectrum-1.png}
-  \includegraphics[width=3in]{images/spectrum-2.png}
-  \caption{Spectrum, Adding in } \label{spe1}
+  \includegraphics[width=3in]{images/sl-d/spec-1.uncrop.pdf}
+  \includegraphics[width=3in]{images/sl-d/spec-2.uncrop.pdf}
+  \includegraphics[width=3in]{images/sl-d/spec-3.uncrop.pdf}
+  \caption{Spectrum, Added in Fission Neutron Emission Spectrum and Hydrogen Scattering XS} \label{spe1}
 \end{figure}
 
-Fission source peak: have to take into account the cross section: 
+Fission source peak: so far we reach a flat spectrum. To obtain the peak around 2 MeV (fission source peak), we have to divide the flux count by the hydrogen cross section:
 \eqn{\phi(E) \propto \Sum_N \Sum_g N_g^n \tau_g^n = \Sum_n \Sum_g N_g^n \frac{1}{\Sigma(E_g^n)}   }
-So without taking into account xs, the sudo flux is flat and missing the fission source peak; taking into account hygrogen peak xs, the real flux peaks shows up. 
+Recall the hydrogen scattering cross section decreases from 0 to 1 eV, constant between 1 eV to 10 keV, and decrease afterwards. In the fast energies, the decreased hydrogen absorption cross section and the neutron fission emission spectrum (peaks at 1.7 MeV, average at 2 MeV). 
 
+
+\clearpage
 \topic{Models for Equilibrium Thermal Scattering Physics}
-\subtopic{Equilibrium Monatomic Gas: Maxwellian Distribution of Target Energy}
+\subtopic{Elastic Scattering for Monatomic (Maxwellian) Free Gas}
+Maxwellian free gas has elastic scattering cross section dependent on A, energy, and temperature:
+\begin{align}
+  \sigma(E) f_s (E \to E') = &\frac{\sigma_{s0} \eta^2}{2E} \left[ \erf{\eta \sqrt{\frac{E'}{kT}} - \rho \sqrt{\frac{E}{kT}} } \mp \erf{\eta \sqrt{\frac{E'}{kT}} + \rho \sqrt{\frac{E}{kT}} } \right. \\
+    & \left. + e^{\frac{E - E'}{kT}} \left( \erf{ \eta \sqrt{\frac{E}{kT}} - \rho \sqrt{\frac{E'}{kT}} }  \pm \erf{\eta \sqrt{\frac{E}{kT}} + \rho \sqrt{\frac{E'}{kT}} } \right) \right] 
+\end{align}
+where the upper signs are for $E' > E$< and the lower signs for $E' < E$, and the $\eta, \rho$ terms are:
+\eqn{ \eta &= \frac{A+1}{2 \sqrt{A}} & \rho &= \frac{A-1}{2 \sqrt{A}} }
+For proton gas (A=1), we can simplify the energy transfer function to be,
+\begin{align}
+\sigma_s(E) f_s(E\to E') = \frac{\sigma_{s0}}{E} \left\{ 
+\begin{array}{cc}
+e^{\frac{E-E'}{kT}} \erf{\sqrt{\frac{E}{kT}}} & E' > E \\
+\erf{\sqrt{\frac{E'}{kT}}} & E' < E 
+\end{array}
+\right.
+\end{align}
+Two samples are plotted in Figure~\ref{ts-C-H}. Notice that a) E = 1kT to 25kT provides a good cover of range, and even at 1200K, 1kT = 0.1 eV, and 25kT = 2.5eV, so 4eV is a typical upper scattering cutoff; b) the $\frac{E'}{E}$ axis shows that there is a good probability that the neutron would gain energy from the elastic scattering(the lower the initial neutron energy, the closer it is to the target nuclei thermal agitation, the more probable is upper scattering). In fact this is the difference between this thermal energy model and the previous high-energy model.  
+\begin{figure}
+  \centering
+  \includegraphics[width=3in]{images/sl-d/ts_H.uncrop.pdf}
+  \includegraphics[width=3in]{images/sl-d/ts_C.uncrop.pdf}
+  \caption{Thermal Scattering Probability vs. Energy for Hydrogen and Graphite} \label{ts-C-H}
+\end{figure}
 
-Maxiwellian: 4 eV cut-off. 
+Adding the thermal scattering into our slowing down and thermalization in hydrogen model, we observe a peak in the thermal range as well. To make the height more realistic, we have to add in the hydrogen absorption cross section (a 1/v distribution, only affect the thermal range). The absorbing strength is picked such that the absorption-to-scattering ratio is something reasonable, like 0.2. 
+\begin{figure}
+  \centering
+  \includegraphics[width=3in]{images/sl-d/spec-4.uncrop.pdf}
+  \includegraphics[width=3in]{images/sl-d/spec-5.uncrop.pdf}
+  \caption{Spectrum, Added in Thermal Scattering and 1/v Hydrogen Absorption XS} \label{spe1}
+\end{figure}
+
+Notice that in the above thermal scattering model, we made two assumptions:
+\begin{itemize}
+\item The target is at rest;
+\item Free target. 
+\end{itemize}
+In the next two subsections, we are going to cover when do the above conditions fail. 
+
+\subtopic{Adding Target in Motion: Important for U238 Resonances at Hot Fuel Conditions}
+Thermal agitation does not matter that much for non-resonance conditions; that is, when the cross section changes reasonably slow, a small $\Delta v$, hence a small $\Delta E$ does not change the cross section much. This is not true anymore for U238 resonances, because when cross section changes very rapidly (especially true in the scattering cross section than the absorption cross section), target motion/thermal agitation would affect up scattering quite significantly. As shown in Figure~\ref{timr}, it could be a 10\% increase in LWR U238 Doppler.  
+\begin{figure}
+  \centering
+  \includegraphics[width=4in]{images/sl-d/target-in-motion-resonance.png}
+  \caption{Target Motion Is Important for U239 Resonances} \label{timr}
+\end{figure}
+We will cover resonance models later, for now we just need to know that the weird dips in scattering cross section is a result of the interacting wave between the potential scattering and the compound nuclear scattering. 
+
+Caution about cutoff energy: the resonance scattering cross section changes significantly around the resonance energies, and if our cutoff energy is placed right before the peak, the results would be wrong. 
 
 
-Adding thermalization into the hydrogen flux, we get the bump. The size of the bump depends on the absorber. If we add a $1/v$ absorber with a 0.2 absorption-to-scattering ratio at 0.025 MeV, then the flux in hydrogen looks more like the flux in a typical LWR. 
+\subtopic{Adding Chemical Bound: Bound Elastic Scattering of H in Water Molecule vs Temperature}
+So far we've only talked about free gas; in the case of tightly bound atoms at very low energy, the vibrations within a molecule due to the chemical bond come into play:
+\eqn{\sigma_{\mathrm{bound}} = \left( 1 + \frac{1}{A_{\mathrm{atom}}} \right) \sigma_{\mathrm{free}}  }
+For bound water molecule for instance, 
+\eqn{ \sigma_{\mathrm{water}}^H = (1+1)^2 \sigma_H = 4 \sigma_H }
+The dependency on $A$ suggests that \textit{the bound elastic scattering matters for light nuclei, and not so much for heavy nuclei}. In the case of hydrogen, the free gas model would still provide the right shape, but the probability can be off by a factor of 10. In the case of graphite, the free gas model does not provide the right shape. The lower energy you want to go, the more careful you need to be. 
+
+Elastic scattering for bound molecules can be characterized by,
+\eqn{ \frac{\derivative^2 \sigma}{\dOmega \dE'} (E\to E', \Omega\to \Omega')  = \frac{\sigma_b}{4 \pi kT} \sqrt{ \frac{E'}{E}} e^{-\frac{\beta}{2}} S(\alpha, \beta)   }
+where $\sigma_b$ is the bound scattering cross section for the material, $kT$ is in eV, $S(\alpha, \beta)$ is the symmetric form of the thermal scattering law,
+\eqn{ S(\alpha, \beta) = \frac{\exp{-\frac{\alpha^2 + \beta^2}{4 \alpha}} }{\sqrt{4\pi \alpha}} }
+where $\alpha, \beta$ depends on two terms:
+\begin{itemize}
+\item The momentum transfer $\kappa$,
+\eqn{ \alpha = \frac{E' + E - 2 \sqrt{E' E} \cos \theta}{A kT} = \frac{\hbar^2 \kappa^2}{2 M kT} } 
+where $A$ is the ratio of the mass of the scattering atom to the neutron mass.
+\item The energy transfer $\epsilon$,
+\eqn{ \beta = \frac{E' - E}{kT} = \frac{\epsilon}{kT} }
+\end{itemize}
 
 
-\subtopic{U238 Target in Motion Thermal Scattering Distributions}
-Fuel in LWR is around 1000K. Assume 1200K for now, then the four times cut-off for a 25 kT (2.5 eV) neutron has a cutoff of 200 kT (20 eV). 
-
-Scattering resonance: anti-resonance, due to the interacting wave between potential scattering and compound nuclear scattering. 
-
-The problem is, the scattering xs goes to 0 and goes up (scattering may even be larger than absorption) right around the peak energy, and if you cutoff right before the peak, the results are wrong. 
-
-\subtopic{Bound Elastic Scattering of H in Water Molecule vs Temperature}
-So far we've only talked about free gas; in the case of tightly bound atoms at very low wnergy, 
-\eqn{\sigma_{\mathrm{bound}} = \left( 1 + \frac{1}{A} \right) \sigma  }
-The dependency on $A$ suggests that the bound elastic scattering matters for light nuclei, and not so much for heavy nuclei. 
-
-In the case of hydrogen, the free gas model would still provide the right shape, but the probability can be off by a factor of 10. In the case of graphite, the free gas model does not provide the right shape. The lower energy you want to go, the more careful you need to be. 
-
-Know the terminologies $S, \alpha$ (momentum transfer), $\beta$ (energy transfer). 
-
+\subtopic{Recap}
 A couple of important points:
 \begin{itemize}
-\item Thermal scattering distributions: generate cdf for 1kT, 4kT, 8kT.  
-\item 4 eV is the typicall up-scattering cutoff energy in many models and codes. For an incident neutron energy higher than 4 eV, use asymptotic elastic down scattering. 
+\item Thermal scattering distributions: generate cdf for energies, like from 0.1kT to 8kT.  
+\item 4 eV is the typicall up-scattering cutoff energy. For an incident neutron energy higher than 4 eV, use asymptotic elastic down scattering. 
 \end{itemize}
-
-\topic{HW2: Slowing Down with Maxwellian Free Gas Thermalization}
-For HW2, we place a $1/v$ absorber in the thermal range, because otherwise the up-scattering would push neutrons to higher energies infinitely. For the $1/v$ absorber, we set the xs at 0.025 eV to a certain number (like 7 barns), and set the xs from 10e-3 eV upto a certain energy to be $\sigma_{0.025} \sqrt{\frac{E_{0.025}}{E}}$. 7 barns is picked for absorption xs because H's scattering xs is about 11 barns, and this way the absorption-to-scattering ratio is something around 20\%. The result of my HW2 is shown in Figure~\ref{pset2}.
-\begin{figure}
-  \centering
-  \includegraphics[width=4in]{images/spec.uncrop.pdf}
-  \caption{Slowing Down with Maxwellian Free Gas Thermalization} \label{pset2}
-\end{figure}
-
 
 \end{document}

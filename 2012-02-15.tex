@@ -5,11 +5,65 @@
 \maketitle
 
 \lecture{Resonance Models}
-In the previous section, we end up with a spectrum of a thermal peak and a fast peak, with smooth curve inbetween. In this section, we are going to focus on this middle resonance region. 
-
+In the previous section, we end up with a spectrum of a thermal peak and a fast peak, with a smooth transition in between. In this section, we are going to focus on this middle resonance region. 
 \topic{Summary: Reuss Ch 2.7 Resonances (FIXME)}
 
-\topic{Model Assumptions}
+
+\clearpage
+%%%%%%%%%%%%%%%%%%%%%% Ch 8 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\topic{Summary: Reuss Ch 8 Resonance Methods}
+\begin{enumerate}
+\item Self-shielding (Intro): 
+  \begin{enumerate}
+  \item Resonance capture xs can be tens of thousands of barns, but self-shielding makes sure that resonant capture of neutrons remains limited. That is, even with an $\infty$ xs, the probability of falling in the trap is limited, or even small, if the trap is narrow. 
+  \item Explaination: `kangaroo leaps' tell us that the resonant capture probability is just trap width in lethargy divided by the average lethargy gain acquired by a neutron. 
+  \item \textit{Compared to slowing down by moderator, the resonance of capture by the fuel are always narrow}.
+  \item Technical term: absorption rate of neutrons remain approximately constant; that is, $\Phi \sim \frac{1}{\Sigma_a}$. 
+  \item Self-shielding occurs at resonant energies, and in regions containing resonant material. 
+  \end{enumerate}
+\item Derivation of $\Phi(u)  = \frac{C}{\Sigma_t(u)}$ (8.1.1): starting from slowing down equation,
+  \eqn{    \rho(u) + \overbrace{S(u)}^{\to 0} = \Sigma_t (u) \Phi(u) } 
+  Before resonance the flux is asymptotic without absorption:
+  \eqn{ \Phi(u) \approx \frac{q(u)}{\xi \Sigma_s (u)} = \frac{q}{\xi \Sigma_s} = \mbox{Constant} }
+  Then the arrival density in the resonance is constant as well:
+  \eqn{ \rho(u) = \Sigma_s (u) \Phi (u) = \frac{q}{\xi} = C}
+  Plug back into the slowing down equation, we get the flux in the resonance:
+  \eqn{ \Phi(u) \approx \frac{q}{\xi \Sigma_t (u)} = \frac{C}{\Sigma_t(u)} }
+\item Derivation of resonance escape probability formula (8.1.2): 
+  \eqn{P_{abs}  = \Sigma_a (u) \Phi (u) \du = \frac{\Sigma_a(u) \du}{\xi \Sigma_t (u)} }
+  \eqn{p = 1 - P_{abs} = 1 - \Sigma_a(u) \Phi(u) \du = \exp \left( - \frac{\Sigma_a \du}{\xi \Sigma_t}  \right) }
+(compare with the derivation we had in class)
+\item Fine structure/self-shielding factor $\phi$ captures the detailed resonances, whereas macroscopit flux $\Psi$ captures everything else (8.1.3).
+\item Fine structure in homogeneous mixture (8.2):
+  \begin{enumerate}
+    \item We define dilution xs as: $\sigma_d = \frac{N_m}{N_r} \sigma_m$ (8.2.1). 
+    \item Two models for transforming a heterogeneous situation into a homogeneous one: 
+      at very wide resonance (low energy), and at very narrow resonance (high energy). 
+  \end{enumerate}
+\item Distinguish between the different cases: truely homogeneous mixture, two-isotope heterogeneous configuration, homogenized heterogeneous configuration, and arrays of rods. 
+\item When a particle coming out of fuel is not necessarily interacting with moderator, that is in the case of tight rods, we use Dancoff factor C, which is the probability for a neutron leaving a fuel element of crossing the moderator without a collision. (8.3.4).
+\item Derivation of resonance escape probability in a heterogeneous situation as in Table~\ref{p-formulas} (8.3.5).
+\begin{table}
+  \centering
+  \begin{tabular}{|c|c|} \hline
+    Homogeneous & $p = \exp \left[ - \frac{N_0 I_{\eff}}{(\xi \Sigma_s)_m}  \right]$ \\ \hline
+    General & $p = \exp \left[ - \frac{V_C N_0 I_{\eff}}{\Sum_i (V \xi \Sigma_s)_i}  \right]$ \\  \hline
+  \end{tabular}
+  \caption{Resonance Escape Probability Formulas} \label{p-formulas}
+\end{table}
+\item Doppler Effect (8.4):
+\begin{enumerate}
+\item Origin: we can ignore thermal agitation in treating scattering, because scattering xs is fairly constant, so a small change in velocity (hence energy) does not change xs much. Whereas in absorption, near resonance peaks, a small change in velocity (hence energy) would cause a huge difference in absorption xs, hence taking into account thermal agitation of the fuel material would make a difference. 
+\item Characteristics 1: as temperatures increase, the resonance widens, and the peak is lowered, but with a constant resonance integral (area under the curve). 
+\item Characteristics 2: although integral is constant, self-shielding says that \textit{the widening of the resonances has a much greater effect than the lowering of the peaks}. That is, Doppler effect as a whole leads to an increase in resonant capture by U238. 
+\item $\RI_{\eff}$ for capture by U238 varies approximately linearly with the square root of dilution xs; it also varies linearly with the square root of absolute temperature. 
+\end{enumerate}
+\end{enumerate}
+
+
+\clearpage
+\topic{`Poor Man's' Resonance Models}
+\subtopic{Model Assumptions}
 For our resonance model, we use the Single Level Breit-Wigner(SLBW) and assume:
 \begin{itemize}
   \item the only resonance isotope is U238;
@@ -20,11 +74,10 @@ For our resonance model, we use the Single Level Breit-Wigner(SLBW) and assume:
   \item generate simple `statistical model' for energies up to 10 keV, assuming an uniform spacing 25 eV\footnote{notice on a typical plot which is log-log, the spacing appears to be closer and closer as energy increases; though it is actually reasonable to assume that the spacing is uniform};
 \end{itemize}
 
-Resonance Data: 
+One place to get resonance data is from LANL's website. For instance, \href{http://t2.lanl.gov/cgi-bin/endf?2,151,/inet/WWW/data/data/ENDFB-VII-neutron/U/238}{U238 Resonance Parameters}. We can find parameters like, scattering length AP, and the potential scattering cross section is just $4 \pi A_p^2 = 11.293$ for U238. Other parameters: GN means $\Gamma_N$ with unit eV, and GG means $\Gamma_G$ in eV. Extract the energy range from 0 to 10 keV (ignore the negative resonance energies). 
 
-One place to get resonance data is from LANL's website. For instance, \href{http://t2.lanl.gov/cgi-bin/endf?2,151,/inet/WWW/data/data/ENDFB-VII-neutron/U/238}{U238 Resonance Parameters}. Among the tables, GN means $\Gamma_N$ with unit eV, and GG means $\Gamma_G$ in eV. Extract the energy range from 0 to 10 keV (ignore the negative resonance energies). 
 
-\topic{Model For Resolved Resonance Absorption}
+\subtopic{Model For Resolved Resonance Absorption}
 \begin{align}
 \sigma_{\gamma} (E,T) &= \sqrt{\frac{E_0}{E}} \frac{2}{\Gamma} A \psi(x,\xi) \\
 \sigma_{n} (E,T) &= \frac{2}{\Gamma} \left[ A \psi(x,\xi) + B \chi(x,\xi) \right] + \sigma_{\mathrm{potential}} 
@@ -38,25 +91,32 @@ where
 \begin{align}
 \xi &= \Gamma \sqrt{\frac{A}{4 k T E_0}} \\
 x &= \frac{2 (E-E_0)}{\Gamma} \\
-r &= \frac{h^2}{2 \pi E_0} \frac{A+1}{A} &= \frac{2603911}{E_0} \frac{A+1}{A} \\
+r &= \frac{h^2}{2 \pi E_0} \frac{A+1}{A} = \frac{2603911}{E_0} \frac{A+1}{A} \\
 q &= \sqrt{ r \sigma_{\mathrm{potential}} } \\
 \Gamma &= \Gamma_n + \Gamma_{\gamma} \\
 \sigma_{\mathrm{potential}} &=  4 \pi R^2 
 \end{align}
-Notice there are many numerical representations of the $\psi, \chi$ functions. For now, we can use ....
+Notice there are many numerical representations of the $\psi, \chi$ functions. For now, we can use,
+\begin{align}
+\Psi(x,\xi) &= \frac{\xi}{2 \sqrt{\pi}} \mathrm{Re}\left[ \exp{\left( i \frac{x+i}{2} \xi \right)^2} \mathrm{erfc}\left( -i \frac{x+i}{2} \xi \right) \right] \\
+\chi(x,\xi) &= \frac{\xi}{2 \sqrt{\pi}} \mathrm{Im}\left[ \exp{\left( i \frac{x+i}{2} \xi \right)^2} \mathrm{erfc}\left( -i \frac{x+i}{2} \xi \right) \right] 
+\end{align}
+They are plotted in Figure~\ref{psi-chi-plot}. 
+\begin{figure}
+  \centering
+  \includegraphics[width=4in]{images/r-m/psi-chi-plot.png}
+  \caption{Plots of the Psi, Chi Functions} \label{psi-chi-plot} 
+\end{figure}
 
 Results: It is important to notice that \textit{all resonances contribute to all energies, even though their contributions can be infinitesimally}. 
 
-
-\topic{Model For Unresolved Resonance Absorption}
+\subtopic{Model For Unresolved Resonance Absorption}
 We assume 25 eV resonance spacing, and assume
 \begin{align}
 \Gamma_{\gamma} &= 0.023 \eV \\
 \Gamma_{n} = 0.05 \sqrt{\frac{E}{E_{\mathrm{last}}}}  \eV
 \end{align}
-in which $E_{\mathrm{last}}$ means the last energy used in the 14 resonance region. 
-
-Notice that for the purpose of this excercise we assume this region to be unresolved, whereas in reality they are resolved. 
+in which $E_{\mathrm{last}}$ means the last resonance energy used in the 14 resonance region. Notice that for the purpose of this excercise we assume this region to be unresolved, whereas in reality they are resolved. 
 
 
 \end{document}

@@ -4,75 +4,100 @@
 \begin{document}
 \maketitle
 
-\topic{Wide Resonance Approximations}
-The wide resonance approximation is: 
+
+\clearpage
+\topic{Resonance Integrals vs. Group Cross Section}
+We introduce \hi{(Infinite) Resonance Integrals} as flux weighted (that is, weighted with 1/E spectrum $\phi(E) \sim \frac{1}{E}$) microscopic cross section: 
 \begin{align}
-\phi_{WR} (u) &= \frac{\sigma_d}{\sigma_{a,r} (u) \sigma_d } \\
-\RI_{\eff} &= \int \sigma_r(u) \frac{\sigma_d}{\sigma_{a,r}(u) + \sigma_d} \du \\
-&= \ln \left(\frac{E_2}{E_1} \right) \frac{ \int \sigma_{a,r}(E) \frac{\sigma_d}{\sigma_{a,r}(E) + \sigma_d} \frac{1}{E} \dE}{ \int \frac{\sigma_d}{\sigma_{a,r}(E) + \sigma_d} \frac{1}{E} \dE}
+\RI &=  - \int_{u1}^{u2} \sigma(u) \du \\
+u &= \ln \left( \frac{E_0}{E} \right) = \ln(E_0) - \ln E \\
+\du &= - \frac{1}{E} \dE \\ 
+\RI &=  \int \sigma (E) \frac{1}{E} \dE 
 \end{align}
-Notice wide resonance approximation $\RI_{\eff}$ only depends on cross sections: $\sigma_d$ is assumed to be based on material composition of the reactor, and $\sigma_r(E)$ are from libraries. There is no need for flux spectrum. 
-
-The wide resonance approximation says that we ignore scattering of U238 because its width is large compared with the approximately 1\% energy it can lose upon scattering. To improve this approximation, sometimes people use the potential scattering of 11.39 barns. 
-
-Wide resonance approximations match direct MC results near infinite dilution. 
-
-\topic{Narrow Resonance Approximations}
-Narrow resonance approximations assume the opposite of the wide resonance approximation, that the neutron is going to be out of the resonance upon one scattering. This approximation is good for higher energy. For instance, at 100 keV, scattering lose 1 keV, which is larger than the 25 eV spacing of \ce{^{238}U}. 
-\eqn{ \phi_{NR} (u) = \frac{\sigma_{p,r} + \sigma_d}{\sigma_{a,r} + \sigma_{p,r} + \sigma_d } }
-
-However, the results on the slides come out to be that narrow resonance approximation is not really any better than the wide resonance approximation at higher energy, so there must be some other physics going on. 
-
-
-\topic{Narrow vs. Wide Resonance Approximations}
-Wide resonance approximation agrees pretty well with MC results without U238 scattering; narrow resonance approximation agrees alright with the MC results with U238 scattering. Notice adding in scattering would change the low dilution factor results. See Figure~\ref{wide-vs-narrow}.
-
-Compare with MC results using real U238 and U235 xs data, the real results fall between the wide and the narrow approximations for the high dilution factor; but for the low dilution factor, that is, when there are lots of resonance material (uranium), the physics gets complicated: 
+Notice, 
 \begin{itemize}
-\item Non 1/E slowing down sources;
-\item Non constant moderator xs;
-\item Resonance scattering alters sources;
-\item We may have multiple resonance in each RI group; that is, each of our RI does not include a single resonance anymore;
-\item Resonance interference between \ce{^{235}U} and \ce{^{238}U}; eg: \ce{^{238}U}'s resonance spacing is 25 eV, whereas \ce{^{235}U}'s resonance spacing is 5 eV, that is, for each \ce{^{238}U} resonance, there are multiple \ce{^{235}U} resonances on top of it. 
+\item RI is defined directly from cross section data; no flux calculation is required because 1/E spectrum is assumed; 
+\item RI depends on the normalization of the 1/E flux spectrum; it is also implicitly assumed that flux equals 1 when $E = 1$ through normalization;
+\item RI is independent of energy bounds for isolated resonances;
+\item RI is independent of temperature. This is because if the energy bound is larger enough, then as temperature increases, the spectrum would broaden, but because the area under the curve remains the same, assume the cross section is constant, then RI is essentially integrating the spectrum, which would not change upon temperature change;
+\item RI is useful for inter-comparing libraries or cross section models. It is a classic way to evaluate new resonance data typically from 0.5 eV to 10 keV. We use RI to check our resonance data, in particularly the three big resonances at 6.67, 21, 26 eV. Numerical test of the SLBW RIs shows that the RI comes out to be within 1\% of ENDF/B-VII Reich-Moore data (Lec 6, slide 17, with 0.01 eV as spacing in histogram). 
 \end{itemize}
+
+\hi{Group cross section} is a similar but much more useful quantity. From its definition, we see $\sigma_g$ does not depend on the flux normalization: 
+\begin{align}
+\sigma_g &= \frac{\int_{E_1}^{E_2} \sigma(E) \phi(E) \dE }{\int_{E_1}^{E_2} \phi(E) \dE} 
+\end{align}
+If we make assumptions on the flux spectrum, then we can relate $\sigma_g$ to $\RI_{\eff}$,
+\begin{align}
+\phi(E) &\sim \frac{1}{E} \\
+\sigma_g &= \frac{\int_{E_1}^{E_2} \sigma(E) \frac{1}{E} \dE }{\int_{E_1}^{E_2} \frac{1}{E} \dE} 
+= \frac{\RI_{\eff}}{\ln(E_2) - \ln(E_1)}  
+= \frac{\RI_{\eff}}{\ln(E_2/E_1)} \\
+\Aboxed{\RI_{\eff} &= \sigma_g \ln(E_2/E_1) } \label{RIeff}
+\end{align}
+Notice\footnote{Review here for exam}:
+\begin{itemize}
+\item Group cross section by definition depends on both cross section and flux spectrum. 
+\item Group cross section depends on the flux, but not on the normalization of flux (that is, only the shape matters, not the magnitude);
+\item Group cross section depend explicitly on energy bounds (widths) of the groups; 
+\item Effective RI can be computed from group cross sections and group energy bounds as in Eq.~\ref{RIeff}; As spectrum approaches 1/E, the effective RI computed from group cross sections will approach infinite RI. 
+\end{itemize}
+
+
+\clearpage
+\topic{Temperature Effects On Cross Section (Doppler Broadening)}
+\hi{Doppler Broadening} means, as the temperature increases, the width of the spectrum decreases, though the area under the curve stays the same. There are two possibilities: 
+\begin{enumerate}
+\item Infinite RI (infinite dilution factor) is independent of temperature becase the area under the psi chi curves are constant. 
+\item Effective RI (finite concentration of \ce{^{238} U}) is dependent of temperature because of the self-shielding effect: as temperature increases, $\RI_{\eff}$ would increase. Also, as U/H increases, the fraction change of $\RI_{\eff}$ would increase as well as illustrated in Figure~\ref{Doppler}. That is, \textit{The higher the concentration of U238, the larger the Doppler temperature effects become.}
+\end{enumerate}
+
+In general, doppler broadening is the broadening of spectral lines due to the Doppler effect caused by a distribution of velocities of atoms or molecules. There are a couple of different kinds of Doppler broadening, including the thermal Doppler broadening due to the thermal motion of the particles; also, there are broadening depends on the frequency of the spectral line, the mass of the emitting particles, and the temperatures. 
+
+Reference 1: Reuss Section 8.4. 
+
+Reference 2: Handbook of Nuclear Engineering Chapter 4 Section 3. 
 
 \begin{figure}
   \centering
-  \includegraphics[width=4in]{images/narrow-vs-wide-resonance.png}
-  \caption{Comparison Of Wide and Narrow Resonance Approximation} \label{wide-vs-narrow}
+  \subfloat[U/H=0.01]{\label{UH0.01}\includegraphics[width=0.5\textwidth]{images/Doppler-RI-1.png}}
+  \subfloat[U/H=0.1]{\label{UH0.1}\includegraphics[width=0.5\textwidth]{images/Doppler-RI-2.png}}  
+  \caption{Impact of Temperature On Effective RI/Resonance Absorption, Doppler Broadening} \label{Doppler}
 \end{figure}
 
+\clearpage
+\topic{Energy Self-Shielding Effects On Spectrum}
+As we increase the U/H ratio, the RI decreases in the three big resonance regions, and we see big dips on the spectrum plot. When U/H = 1.0, the spectrum is distorted. There are so much U238 in the fuel, that there is no flux in the fuel anymore. As we increase the number of uranium atoms by a factor of 10, the number of absorption per atom is decreased by a factor of 3. That is, the total aborption still increases, but the absorption per atom decreases. Figure~\ref{self-shielding} illustrates that RI are very dependent on the density of resonant materials. 
+\begin{figure}
+  \centering
+  \includegraphics[width=4in]{images/self-shielding.png}
+  \caption{Impact of Energy Self-Shielding On RI} \label{self-shielding}
+\end{figure}
+
+Self-shielding/flux depression: 
+\begin{table}
+  \centering
+  \begin{tabular}{|l|p{6cm}|p{6cm}|} \hline
+    & Observation & Explaination \\ \hline
+    Spatial 
+    & if natural uranium was made into a lump surrounded by moderator, resonance absorption $\down \down$  
+    & U238 in the center of a pin is `shielded' from neutrons in the moderator \\ \hline
+    Energy
+    & if U/H $\up$, absorption rate per atom (for neutrons slowed down in a water \& U mix) $\down$   
+    &  \\ \hline
+  \end{tabular}
+  \end{table}
 
 
-\topic{NJOY Modeling of Resonance Parameters}
-The normal procedure for generating multi-group xs in a code like NJOY includes:
-\begin{enumerate}
-\item use code to Doppler broaden cross sections for each resonance isotope for range of temperatures (eg, 300, 600, 900, 2000K); 
-\item use code to apply the narrow or wide resonance models for a range of dilution xs (eg, 20000, 2000, 200, 20 barns); 
-\item edit RIs or multi-group xs for your desired energy structure; 
-\item build tables of xs vs. dilution xs and temperature;
-\item for downstream computations, interpolate for the dilution cross section and temperature of each material in the simulation to obtain accurate multigroup cross sections for that specific applications. 
-\end{enumerate}
-Note that tables are general and do not have to be computed. 
 
-A better procedure for generating multi-group cross sections includes:
-\begin{enumerate}
-\item the same;
-\item use code to solve real neutron slowing down problem for a range of dilution cross sections (eg, 20000, 2000, 200, 20 barns);
-\item consider including a mix of resonance absorbers to make the spectrum as appropriate to the desired application as possible;
-\item the same;
-\item the same;
-\item the same.
-\end{enumerate}
-
-For downstream applications that require cross section data, for each resonance group,
-\begin{enumerate}
-\item For each composition, evaluate the material temperature and isotopic densities. 
-\item Evaluate Dancoff from pin diameter, lattice pitch, etc. 
-\item Compute the escape cross section for each resonance absorber.
-\item Evaluate group cross section (or RI) using Dancoff, potential and escape cross sections by interpolating cross section (or RI) tables at appropriate temperatures. 
-\end{enumerate}
-The point is, for real application, it is rarely possible to just use someone else's cross section table; we almost certainly need to generate xs suitable for our application. 
+\clearpage
+\topic{Spectral Hardening Shifts Resonant Absorption Rates}
+\textit{As more absorber (uranium in this case) is added, the higher energy ranges become more important (more absorption happens in the higher energies), and the peak of the thermal spectrum shifts to the right.} Figure~\ref{spectral-hardening} also illustrates that self-shielding reduces the large resonance absorption fractions. 1/v absorption of U238 become more significant. 
+\begin{figure}
+  \centering
+  \includegraphics[width=4in]{images/spectral-hardening.png}
+  \caption{Impact of Spectral Hardening On RI} \label{spectral-hardening}
+\end{figure}
 
 
 \end{document}
