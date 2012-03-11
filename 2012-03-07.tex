@@ -5,7 +5,12 @@
 \maketitle
 
 \topic{k-infinity In Infinite Medium Calculations (No Leakage)}
-\eqn{ k_{\inf} =  \frac{\mbox{total fissions} \cdot \bar{\nu} }{\mbox{total absorptions}} }
+
+
+\eqn{ k_{\inf} =  \frac{\mbox{total fissions} \cdot \bar{\nu} }{\mbox{total absorptions}} = \frac{\int \dV \int \nu \Sigma_f \Phi \dE}{\int \dV \int \Sigma_a \Phi \dE} = \epsilon \eta f p }
+
+
+Reference: Henry p. 104. 
 
 \topic{Solving Two-Region Monte Carlo Spectral Analysis}
 Review codes in Lec8. Review slide 22 on approximation of collision probabilities. 
@@ -34,32 +39,38 @@ Build table: use 0.01 log(E) spacing (that's about 25,000 bins) to re-generate t
 \lecture{Exam 1 Review}
 Know how to interprete thermal scattering pdf and cdf. Questions would be based on understanding of the physics. 
 
-Part 1: Background Info (see Ch 1-3 from Reuss)
+\textbf{Part 1: Background Info (see Ch 1-3 from Reuss)}
 \begin{enumerate}
 \item Number Density
 \item Flux
 \item Lethargy
 \item Mean free path
-\item 1/v:
-\item 1/E spectrum: true except when resonant absorber is present. 
+\item 1/v absorption cross section: Henry (p. 202) has a derivation for why $\sigma_a(E_r) \approx \frac{1}{v_r}$, but it is using Breit-Wigner for resonance xs. 
+\item 1/E spectrum: true except when resonant absorber is present (recall we keep using 1/E for spectrum above the resonance). It is characteristic of the scalar flux in the slowing down energy range, as long as there is no up-scattering and no fission source. It arises basically from the kinematics of the scattering interaction. However it gets distorted by the energy behavior of the scattering cross sections and by neutron-absorption processes (Henry, p. 90). 
 \item Maxwellian shapes.
 \end{enumerate}
 
 
-Part 2: physical components of Monte Carlo code:
+\textbf{Part 2: physical components of Monte Carlo code}
 \begin{enumerate}
 \item Asymptotic elastic scattering
-\item Maxwellian thermal elastic scattering
+\item Maxwellian distribution: 
+\begin{itemize}
+\item thermal elastic scattering
+\item thermal flux spectrum: for an infintie source-free medium with small absorption cross section (as long as $\Sigma_a(E)$ is small compare to $\Sigma_s(E)$), the thermal spectrum is Maxwellian. The higher energy portion of the thermal region is approximately 1/E with slowing down source and absorption present (Henry, p.98). 
+\end{itemize}
 \item Simple bound thermal scattering
 \item SLBW resonance models
 \item Doppler broadening
 \item Monte Carlo tallies
-\item Resonance integrals vs. group cross sections
-\item Background (dilution) cross section
+\item Resonance integrals: represents the average absorption xs characterizing the resonance, averaged over the flux within the resonance. It is useful in generating multigroup xs. 
+\item Group cross sections $\sigma_g$: the contribution of the resonance to a flux-weighted multigroup cross section.
+  \eqn{ \sigma_g = \frac{\RI_{\eff}}{\ln(E_2/E_1)} }
+\item Background (dilution) cross section $\sigma_d$:
 \item Narrow vs. wide resonance models
-\item Resonance escape probability
+\item Resonance escape probability $p$:
 \item Homogeneous/heterogeneous equivalence
-\item Escape cross sections: Smith vs. Reuss (7.2.4). 
+\item Escape cross section $\sigma_e$: Smith vs. Reuss (7.2.4). 
 \item 2-region reciprocity relation
 \item Dancoff factors.
 \end{enumerate}
@@ -68,7 +79,15 @@ Part 2: physical components of Monte Carlo code:
 %%%%%%%%%%%%%%%%%%%%%%%%% Qualify Exam Start %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \lecture{Facts For Qualify Exam}
 \begin{enumerate}
-\item Flux = $\frac{n}{\cm^2 \s}.$
+\item Common units, see Table~\ref{units}.
+\begin{table}
+  \centering
+  \begin{tabular}{|c|c|c|c|} \hline
+   $\sigma$ & $\Sigma$ & $\phi = nv$ & $R = \phi \Sigma$  \\ \hline
+   $\cm^2$ & $1/\cm$ & $\frac{n}{\cm^2 \s}$ & $\frac{\mathrm{reactions}}{\cm^3 \s}$ \\ \hline
+  \end{tabular}
+  \caption{Units of Common Terms} \label{units}
+\end{table}
 
 \item Fast flux in hydrogen is around $10^{14}$ n/cm$^2$s, and on the order of $10^{12}$n/cm$^2$s for thermal flux. 
 
@@ -95,7 +114,7 @@ Part 2: physical components of Monte Carlo code:
 \item H has no resonance; it has the highest scattering xs in LWR, so we can ignore any other isotopic's neutron scattering.   
 \item Na has a huge resonance in 23 keV, and more resonances at higher energies because it is a heavy isotope.
 \item Near zero energy,
-\eqn{ \sigma(E\to 0) = }
+\eqn{ \sigma(E\to 0) \propto \sqrt{\frac{kT}{AE}}    }
 \item Resonance at 6 to 7 eV: U238. 
 \item U235's thermal elastic xs is larger than 238's, and they both have resonance around the same range.   
 \item A small resonance at .3 eV: Pu239 (its signiture is a super low energy scattering xs). 
