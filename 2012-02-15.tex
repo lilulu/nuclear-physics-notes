@@ -6,11 +6,35 @@
 
 \lecture{Resonance Models}
 In the previous section, we end up with a spectrum of a thermal peak and a fast peak, with a smooth transition in between. In this section, we are going to focus on this middle resonance region. 
-\topic{Summary: Reuss Ch 2.7 Resonances (FIXME)}
 
+%%%%%%%%%%%%%%%%% Begin of Ch 2.7 %%%%%%%%%%%%%%%%%%%%%%%%%%
+\topic{Summary: Reuss Ch 2.7 Why Resonances?}
+\begin{enumerate}
+\item Explaination of resonances: if the excitation energy acquired by the compound nucleus (which is neutron's binding energy plus its KE) is located close to one of the levels of the compound nucleus, the reaction would occur easily and a large cross section would be observed. 
+  \begin{itemize}
+  \item Light nuclei: simple structure, few or no resonances;
+  \item Heavier nuclei: a dense forest of peaks because of the crowded structure;
+  \item Nuclides with an odd number of neutrons (eg, \ce{^{235}U}, \ce{^{239}Pu}) have more resonances: because they have higher binding energies, and higher excitation energies.
+  \item Resolved region: for low KE hence low excitation energies, the levels are clearly separated. 
+  \item Unresolved region/statistical region: for high KE hence high excitation energies, the resonances remain but they can no longer be distinguished by measurement. 
+  \item Continuum domain: for even higher energies, the resonances overlap because of their width. 
+  \end{itemize}
+  This is why statistical domain is located around keV range for nuclides with odd number of neutrons, and around 10 keV for nucleids with even number of neutrons. 
+\item Analytical resonance cross section model: Breit-Wigner (2.7.1). It is the simpliest approximation of the R-matrix theorey. Keep in mind: a) wave-particle duality; b) s-wave dominates for thermal and epithermal neutrons; c) we introduce a statistical factor $g$ based on the momentum $J$; d) width of resonance: $\Gamma = \frac{\hbar}{\tau}$ where $\tau$ is the average lifetime of the compound nucleus (the inverse of its decay constant), and width $\Gamma$ has the dimensions of energy; the Breit-Wigner equations describe the partial cross sections for one resonance assumed to be isolated and characterized by its resonance parameters $E_0, \Gamma_j$, and the expressions must be summed for all resonances. 
+\item Statistical resonance cross section model (2.7.2): $\Gamma_n$ widths fluctuate greatly from one resonance to the other, but $\Gamma_{\gamma}$ stays about the same. This section also include expressions for the average distance between resonances, and the Wigner probability distribution. 
+\item Absorption cross section is 1/v in the thermal domain.(2.7.3) Reason: Breit-Wigner states that absorption cross section is ($i = \gamma$ for radiative capture and $f$ for fission etc):
+  \eqn{ \sigma_i = \pi \bar{\lambda}^2 g \frac{\Gamma_n \Gamma_i}{(E - E_0)^2 + \Gamma^2/4}  }
+  \begin{itemize}
+  \item $\Gamma_f, \Gamma_{\gamma}, \Gamma_{\alpha}$ etc are independent to energy E; $\Gamma_n \sim \sqrt{E}$ (for s-wave);
+  \item $\bar{\lambda}^2 \sim \frac{1}{E}$;
+  \item The denominator is approximately equal to the constant $E_0^2$ assuming that $E, \Gamma$ are small compared to $E_0$.
+  \end{itemize}
+  Thus $\sigma_f, \sigma_c \sim \frac{1}{\sqrt{E}} \sim \frac{1}{v}$. Even if several resonances make a contribution, the reasoning remains valid. This reasoning is not valid if $E_0$ is close to zero. 
+\end{enumerate}
+%%%%%%%%%%%%%%%%% End of Ch 2.7 %%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \clearpage
-%%%%%%%%%%%%%%%%%%%%%% Ch 8 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%% Begin of Ch 8 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \topic{Summary: Reuss Ch 8 Resonance Methods}
 \begin{enumerate}
 \item Self-shielding (Intro): 
@@ -52,13 +76,14 @@ In the previous section, we end up with a spectrum of a thermal peak and a fast 
   \caption{Resonance Escape Probability Formulas} \label{p-formulas}
 \end{table}
 \item Doppler Effect (8.4):
-\begin{enumerate}
-\item Origin: we can ignore thermal agitation in treating scattering, because scattering xs is fairly constant, so a small change in velocity (hence energy) does not change xs much. Whereas in absorption, near resonance peaks, a small change in velocity (hence energy) would cause a huge difference in absorption xs, hence taking into account thermal agitation of the fuel material would make a difference. 
-\item Characteristics 1: as temperatures increase, the resonance widens, and the peak is lowered, but with a constant resonance integral (area under the curve). 
-\item Characteristics 2: although integral is constant, self-shielding says that \textit{the widening of the resonances has a much greater effect than the lowering of the peaks}. That is, Doppler effect as a whole leads to an increase in resonant capture by U238. 
-\item $\RI_{\eff}$ for capture by U238 varies approximately linearly with the square root of dilution xs; it also varies linearly with the square root of absolute temperature. 
+  \begin{enumerate}
+  \item Origin: we can ignore thermal agitation in treating scattering, because scattering xs is fairly constant, so a small change in velocity (hence energy) does not change xs much. Whereas in absorption, near resonance peaks, a small change in velocity (hence energy) would cause a huge difference in absorption xs, hence taking into account thermal agitation of the fuel material would make a difference. 
+  \item Characteristics 1: as temperatures increase, the resonance widens, and the peak is lowered, but with a constant resonance integral (area under the curve). 
+  \item Characteristics 2: although integral is constant, self-shielding says that \textit{the widening of the resonances has a much greater effect than the lowering of the peaks}. That is, Doppler effect as a whole leads to an increase in resonant capture by U238. 
+  \item $\RI_{\eff}$ for capture by U238 varies approximately linearly with the square root of dilution xs; it also varies linearly with the square root of absolute temperature. 
+  \end{enumerate}
 \end{enumerate}
-\end{enumerate}
+%%%%%%%%%%%%%%%%%% End of Ch 8 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 \clearpage

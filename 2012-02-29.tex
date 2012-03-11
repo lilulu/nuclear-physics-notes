@@ -29,10 +29,10 @@ This flux shapes let us to compute approximated effective RI. Recall RI is defin
 \eqn{ \boxed{ \RI_{\eff} = \int \sigma_r(u) \frac{\sigma_d}{\sigma_r + \sigma_d} \du }  }
 Two extremes of $\RI_{\eff}$ and $\sigma_d$:
 \begin{itemize}
-\item As $\sigma_d \to \infty$, the entire media is moderator, we reach the limit of infinite dilute resonance absorption appears, and $\RI_{\eff} \to \RI$; at infinite dilute, we should get within 1\% of the ENDFVII xs data;
-\item As $\sigma_d \to 0$, analytically our assumptions do not hold true any more, but the MC is true that as $\RI_{\eff} \to 0, \phi \to 0$ as seen in Figure~\ref{dilution-factor-increase}. Interpretation: as we have no moderator, every atom is self-shield [FIXME]
+\item As $\sigma_d \to \infty$, the entire media is moderator, we reach the limit of infinite dilute, $\RI_{\eff} \to \RI$; we should get within 1\% of the ENDFVII xs data;
+\item As $\sigma_d \to 0$, analytically our assumptions do not hold true any more, but the MC is true that as $\RI_{\eff} \to 0, \phi \to 0$ as seen in Figure~\ref{dilution-factor-increase}. Interpretation: as we have no moderator, every atom is essentially self-shield because they are all resonant isotopes, hence infinite flux depression.  
 \end{itemize}
-Figure~\ref{dilution-factor-increase} is generated from effective RI of MC calculations at 300K with half a million neutrons, 2 barns hydrogen 1/v absorber. It illustrates that, a) the dilution ratio U/H is related with dilution xs $\sigma_d$ such that they are inversely proportional; b) as the fraction of \ce{^{238} U} increases, U/H increases, $\sigma_d$ decreases, more absorption happens during resonance, hence more flux dips on the spectrum plot and smaller effective RI values in the resonance range. That is, \textit{RI are very dependent on the density of resonant materials.}
+Figure~\ref{dilution-factor-increase} is generated from effective RI of MC calculations at 300K with half a million neutrons, 2 barns hydrogen 1/v absorber. It illustrates that, a) the dilution ratio U/H is related with dilution xs $\sigma_d$ such that they are inversely proportional; b) as the fraction of \ce{^{238} U} increases, U/H increases, $\sigma_d$ decreases, more absorption happens during resonance, hence more flux dips on the spectrum plot and smaller effective RI values in the resonance range. That is, \textit{effective RI decreases as the concentration of resonant material increases.}
 \begin{figure}
   \centering
   \includegraphics[width=4in]{images/dilution-factor-increase.png}
@@ -54,18 +54,17 @@ We define $p$ as the ratio of the therm neutron absorption rate over absorption 
 \begin{align}
 p &= \exp \left( - \frac{N_R \RI_{\eff}}{\xi \Sigma_m} \right)  = \exp \left( - \frac{\RI_{\eff}}{\xi \sigma_d} \right)
 \end{align}
-The equation here is an approximation. And for hydrogen systems, we know $\xi \to 1$, hence the resonance escape probability becomes:
-\eqn{ p = \exp \left( - \frac{\RI_{\eff}}{\sigma_d} \right) }
-That is, \textit{p only depends on effective RI and dilution cross section.} For instance, in a hydrogen system with $\sigma_d = 200$, we can tabulate the p values as in Table~\ref{p-values}. The last entry tells us that \textit{about 20\% of neutrons are absorbed in U238 resonances.}
+Notice: (1) this expression is only an approximation; (2) \textit{p only depends on effective RI and dilution cross section.} For instance, in a hydrogen system with $\sigma_d = 200$, we can tabulate the p values as in Table~\ref{p-values}. The last entry tells us that \textit{about 20\% of neutrons are absorbed in U238 resonances.}
 \begin{table}
   \centering
   \includegraphics[width=1.5in]{images/resonance-escape-probability.png}
   \caption{Resonance Escape Probability For A Hydrogen System} \label{p-values}
 \end{table}
-T
-The full derivation of resonance escape probability is the following. Assumptions: only elastic down scatter above the resonance, $\sigma_{a,m} = 0, \sigma_{s} = $const, and only a single resonance absorber. 
 
-Start from our balance equation (scattering in = resonance absorption),
+\textbf{Derivation of $p$ expression:}
+\begin{enumerate}
+\item Assumptions: only elastic down scatter above the resonance, $\sigma_{a,m} = 0, \sigma_{s} = $const, and only a single resonance absorber. 
+\item Start from our balance equation (scattering in = resonance absorption),
 \begin{align}
 \frac{S}{\zeta(u)} \du &= \left[ N_r \sigma_{a,r} (u) + \Sigma_m \right] \phi(u) \du = N_r \left[ \sigma_{a,r} (u) + \sigma_d \right] \phi(u) \du \\
 \Rightarrow \phi(u) &= \frac{S}{\zeta(u) N_r \left[ \sigma_{a,r} (u) + \sigma_d \right] } 
@@ -76,13 +75,13 @@ p &= \frac{S - \int N_r \sigma_a(u) \phi(u) \du}{S} \\
 &= 1 - \frac{\int N_r \sigma_a(u) \frac{S}{\zeta(u) N_r \left[ \sigma_{a,r} (u) + \sigma_d \right] } \du }{S} \\
 &= 1 - \int \frac{\sigma_{a,r} (u) }{\zeta(u) \left[ \sigma_{a,r} (u) + \sigma_d \right] } \du
 \end{align}
-If the mean logarithmic energy decrement is independent of lethargy, 
+\item Assume the mean logarithmic energy decrement is independent of lethargy, 
 \eqn{ p = 1 - \frac{1}{\zeta} \int \frac{\sigma_{a,r} (u)}{\sigma_{a,r} (u) + \sigma_d} \du }
-But using our definition of effective RI,
+\item Use our definition of effective RI,
 \eqn{ \RI_{\eff}^{u1 \to u2} = \int_{u1}^{u2} \frac{\sigma_{a,r} (u) \sigma_d}{\sigma_{a,r} (u) + \sigma_d} \du }
 We can write $p$ in terms of $\RI$:
 \eqn{ \boxed{p^{1\to 2} = 1 - \frac{\RI_{\eff}^{u1 \to u2}}{\zeta \sigma_d} } }
-Since the source is incrementally reduce with each successive resonance,
+\item Since the source is incrementally reduce with each successive resonance,
 \eqn{ p^{u1 \to uN} = \left( 1 - \frac{\RI_{\eff}^{u1 \to u2}}{\zeta \sigma_d} \right) \left( 1 - \frac{\RI_{\eff}^{u2 \to u3}}{\zeta \sigma_d} \right)
   \cdots \left( 1 - \frac{\RI_{\eff}^{uN-1 \to uN}}{\zeta \sigma_d} \right) }
 We approximate the sequence as,
@@ -91,6 +90,9 @@ or
 \eqn{ \boxed{ p \approx \exp \left( - \frac{\RI_{\eff}}{\zeta \sigma_d} \right) = \exp \left( - \frac{N_r \RI_{\eff}}{\zeta \Sigma_m} \right)  } }
 which for hydrogen system becomes, 
 \eqn{ p \approx \exp \left( - \frac{\RI_{\eff}}{\sigma_d} \right) }
+\end{enumerate}
+
+
 
 
 \end{document}

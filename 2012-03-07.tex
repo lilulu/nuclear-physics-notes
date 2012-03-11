@@ -45,34 +45,68 @@ Know how to interprete thermal scattering pdf and cdf. Questions would be based 
 \item Flux
 \item Lethargy
 \item Mean free path
-\item 1/v absorption cross section: Henry (p. 202) has a derivation for why $\sigma_a(E_r) \approx \frac{1}{v_r}$, but it is using Breit-Wigner for resonance xs. 
-\item 1/E spectrum: true except when resonant absorber is present (recall we keep using 1/E for spectrum above the resonance). It is characteristic of the scalar flux in the slowing down energy range, as long as there is no up-scattering and no fission source. It arises basically from the kinematics of the scattering interaction. However it gets distorted by the energy behavior of the scattering cross sections and by neutron-absorption processes (Henry, p. 90). 
+\item 1/v absorption cross section: 
+  \begin{itemize}
+  \item Wave-particle duality suggests that slow neutrons see a larger portion of space than fast neutrons, which means that slow neutrons often have larger cross sections, which leads to the 1/v rule for absorption (Reuss, 2.4.1). 
+  \item Reason: Breit-Wigner states that absorption cross section is ($i = \gamma$ for radiative capture and $f$ for fission etc):
+    \eqn{ \sigma_i = \pi \bar{\lambda}^2 g \frac{\Gamma_n \Gamma_i}{(E - E_0)^2 + \Gamma^2/4}  }
+    \begin{itemize}
+    \item $\Gamma_f, \Gamma_{\gamma}, \Gamma_{\alpha}$ etc are independent to energy E; $\Gamma_n \sim \sqrt{E}$ (for s-wave);
+    \item $\bar{\lambda}^2 \sim \frac{1}{E}$;
+    \item The denominator is approximately equal to the constant $E_0^2$ assuming that $E, \Gamma$ are small compared to $E_0$.
+    \end{itemize}
+    Thus $\sigma_f, \sigma_c \sim \frac{1}{\sqrt{E}} \sim \frac{1}{v}$. Even if several resonances make a contribution, the reasoning remains valid. This reasoning is not valid if $E_0$ is close to zero. 
+  \item Henry (p. 202) has a derivation for why $\sigma_a(E_r) \approx \frac{1}{v_r}$, but it is using Breit-Wigner for resonance xs. 
+  \end{itemize}
+\item 1/E spectrum: true except when resonant absorber is present (recall we keep using 1/E for spectrum above the resonance). It is characteristic of the scalar flux in the slowing down energy range, as long as there is no up-scattering and no fission source. It arises basically from the kinematics of the scattering interaction. However it gets distorted by the energy behavior of the scattering cross sections and by neutron-absorption processes (Henry, p. 90). Asymptotic elastic scattering for high energy would yield a 1/E spectrum. 
 \item Maxwellian shapes.
 \end{enumerate}
 
 
-\textbf{Part 2: physical components of Monte Carlo code}
+\textbf{Part 2: Physical components of Monte Carlo code}
 \begin{enumerate}
-\item Asymptotic elastic scattering
-\item Maxwellian distribution: 
-\begin{itemize}
-\item thermal elastic scattering
-\item thermal flux spectrum: for an infintie source-free medium with small absorption cross section (as long as $\Sigma_a(E)$ is small compare to $\Sigma_s(E)$), the thermal spectrum is Maxwellian. The higher energy portion of the thermal region is approximately 1/E with slowing down source and absorption present (Henry, p.98). 
-\end{itemize}
-\item Simple bound thermal scattering
+\item Elastic scattering:
+  \begin{itemize}
+  \item Asymptotic elastic scattering for high energy (above 4eV): assume isotropic scattering in COM. Generate 1/E spectrum; asymptotic flux value is $\Phi_{as} (u) = \frac{S}{\xi \Sigma_s (u)}$ according to Reuss (7.2.3). 
+  \item Thermal elastic scattering (below 4eV): use elastic scattering for monatomic (Maxwellian) free gas; may up-scatter;
+  \end{itemize}
+\item Simple bound thermal scattering: 
+\eqn{ \sigma_{\mbox{bound}} = \left( 1 + \frac{1}{A_{\mathrm{atom}}} \right) \sigma_{\mathrm{free}} }
 \item SLBW resonance models
 \item Doppler broadening
 \item Monte Carlo tallies
-\item Resonance integrals: represents the average absorption xs characterizing the resonance, averaged over the flux within the resonance. It is useful in generating multigroup xs. 
+\item Resonance integrals: represents the average absorption xs characterizing the resonance, averaged over the flux within the resonance. It is sort of like the averaged reaction rate, or collision density. Definition:
+\eqn{ \RIeff = - \int_{u1}^{u2} \sigma(u) \du = \int_{E_1}^{E_2} \sigma(E) \frac{1}{E} \dE }
+Relating to $\sigma_g, \sigma_d$: 
+\eqn{ \RIeff &= \sigma_g \ln{\frac{E_2}{E_1}}  & \RIeff^{u1\to u2} &= \int_{u1}^{u2} \sigma_a^R (u) \frac{\sigma_d}{\sigma_a^R(u) + \sigma_d} \du  }
 \item Group cross sections $\sigma_g$: the contribution of the resonance to a flux-weighted multigroup cross section.
   \eqn{ \sigma_g = \frac{\RI_{\eff}}{\ln(E_2/E_1)} }
 \item Background (dilution) cross section $\sigma_d$:
 \item Narrow vs. wide resonance models
-\item Resonance escape probability $p$:
-\item Homogeneous/heterogeneous equivalence
-\item Escape cross section $\sigma_e$: Smith vs. Reuss (7.2.4). 
-\item 2-region reciprocity relation
+\item Resonance escape probability $p$: only depends on effective RI and dilution xs: 
+\eqn{ \boxed{ p \approx \exp \left( - \frac{\RI_{\eff}}{\zeta \sigma_d} \right) = \exp \left( - \frac{N_r \RI_{\eff}}{\zeta \Sigma_m} \right)  } }
+\item Homogeneous/heterogeneous equivalence: 
+\begin{align*}
+\mbox{Homogeneous mixture energy shape of flux } \phi(u) &= \frac{\sigma_{pot, f} + \sigma_d}{\sigma_{r,f} (u) + \sigma_{pot, f} + \sigma_d}   & \sigma_d &= \frac{N_m \sigma_m}{N_r}  \\
+\mbox{Heterogeneous energy shape of flux in the fuel } \phi_f(u) &= \frac{\sigma_{pot, f} + \sigma_e}{\sigma_{r,f} (u) + \sigma_{pot, f} + \sigma_e}   & \sigma_e &= \frac{S_f}{4 V_f N_r} 
+\end{align*}
+\item Effective cross section $\sigma_e$: 
+\eqn{ \sigma_e = \frac{1}{l N_f} = \frac{S}{4V N_f} }
+\item 2-region reciprocity relation:
+\eqn{ P_{1\to 2} \Sigma_1 V_1 = P_{2\to 1} \Sigma_2 V_2 }
 \item Dancoff factors.
+\end{enumerate}
+
+\textbf{Part 3: Other important concepts}
+\begin{enumerate}
+\item Self-shielding:
+\item Doppler effect:
+\item Maxwellian distribution: 
+  \begin{itemize}
+  \item Fission emission spectrum: peak occurs at 1.7 MeV, average occurs at 2 MeV.
+  \item Thermal flux spectrum: for an infintie source-free medium with small absorption cross section (as long as $\Sigma_a(E)$ is small compare to $\Sigma_s(E)$), the thermal spectrum is Maxwellian. The higher energy portion of the thermal region is approximately 1/E with slowing down source and absorption present (Henry, p.98). 
+  \end{itemize}
+\item Slowing down equations. 
 \end{enumerate}
 
 
