@@ -8,9 +8,10 @@
 \topic{Wide Resonance Approximations}
 The wide resonance approximation is: 
 \begin{align}
-\phi_{WR} (u) &= \frac{\sigma_d}{\sigma_{a,r} (u) +  \sigma_d } \\
-\RI_{\eff} &= \int \sigma_r(u) \frac{\sigma_d}{\sigma_{a,r}(u) + \sigma_d} \du \\
-&= \ln \left(\frac{E_2}{E_1} \right) \frac{ \int \sigma_{a,r}(E) \frac{\sigma_d}{\sigma_{a,r}(E) + \sigma_d} \frac{1}{E} \dE}{ \int \frac{\sigma_d}{\sigma_{a,r}(E) + \sigma_d} \frac{1}{E} \dE}
+\phi_{WR} (u) &= \frac{\sigma_d}{\sigma_{a}^R (u) +  \sigma_d } \\
+\RIeff &= \int \sigma_r (u) \phi_{WR} (u) \du \\
+&= \int \sigma_r(u) \frac{\sigma_d}{\sigma_a^R(u) + \sigma_d} \du \\
+&= \Ln{\frac{E_2}{E_1}} \frac{ \int \sigma_{a}^R(E) \frac{\sigma_d}{\sigma_{a}^R(E) + \sigma_d} \frac{1}{E} \dE}{ \int \frac{\sigma_d}{\sigma_{a}^R(E) + \sigma_d} \frac{1}{E} \dE}
 \end{align}
 Notice wide resonance approximation $\RI_{\eff}$ only depends on cross sections: $\sigma_d$ is assumed to be based on material composition of the reactor, and $\sigma_r(E)$ are from libraries. There is no need for flux spectrum. 
 
@@ -20,8 +21,12 @@ Wide resonance approximations match direct MC results near infinite dilution.
 
 \topic{Narrow Resonance Approximations}
 Narrow resonance approximations assume the opposite of the wide resonance approximation, that the neutron is going to be out of the resonance upon one scattering. This approximation is good for higher energy. For instance, at 100 keV, scattering lose 1 keV, which is larger than the 25 eV spacing of \ce{^{238}U}. 
-\eqn{ \phi_{NR} (u) = \frac{\sigma_{p,r} + \sigma_d}{\sigma_{a,r} + \sigma_{p,r} + \sigma_d } }
-
+\begin{align}
+\phi_{NR} (u) &= \frac{\sigma_{pot}^R + \sigma_d}{\sigma_{a}^R + \sigma_{pot}^R + \sigma_d } \\
+\RIeff &= \int \sigma_r (u) \phi_{NR} (u) \du \\
+&= \int \sigma_r(u) \frac{\sigma_{pot}^R + \sigma_d}{\sigma_a^R(u) + \sigma_{pot}^R + \sigma_d} \du \\
+&= \Ln{\frac{E_2}{E_1}} \frac{ \int \sigma_{a}^R(E) \frac{\sigma_{pot}^R + \sigma_d}{\sigma_{a}^R(E) + \sigma_{pot}^R + \sigma_d} \frac{1}{E} \dE}{ \int \frac{\sigma_{pot}^R + \sigma_d}{\sigma_{a}^R(E) + \sigma_{pot}^R + \sigma_d} \frac{1}{E} \dE}
+\end{align}
 However, the results on the slides come out to be that narrow resonance approximation is not really any better than the wide resonance approximation at higher energy, so there must be some other physics going on. 
 
 \clearpage

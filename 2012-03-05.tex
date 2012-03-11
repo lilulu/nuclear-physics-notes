@@ -62,7 +62,7 @@ Wigner approximates $P_{f\to f}$ in terms of the mean chord length $l$:
 \eqn{ P_{f\to f} &\approx \frac{l N_f \sigma_{t,f} (u)}{1 + l N_f \sigma_{t,f} (u)} = \frac{\sigma_{t,f}(u)}{\frac{1}{l N_f} + \sigma_{t,f} (u)} }
 Recall Cauchy's Theorem for any convex body, 
 \eqn{ l = \frac{4V}{S} }
-and define \hi{effective cross section},
+and define \hi{escape cross section},
 \eqn{ \Sigma_e &= \frac{1}{l} & \sigma_e &= \frac{\Sigma_e}{N_f} }
 $P_{f\to f}$ simplifies to, 
 \eqn{ P_{f\to f} = \frac{\sigma_{t,f} (u)}{\sigma_{t,f} (u) + \sigma_e} }
@@ -78,13 +78,17 @@ Hence $\phi_f(u)$ can be written as,
 \mbox{Heterogeneous energy shape of flux in the fuel } \phi_f(u) &= \frac{\sigma_{pot, f} + \sigma_e}{\sigma_{r,f} (u) + \sigma_{pot, f} + \sigma_e}   & \sigma_e &= \frac{S_f}{4 V_f N_r} 
 \end{align}
 
-\uline{Example: calculate corresponding cross sections.} Given a PWR with a 0.41 cm radius pellet, uranium number density of $4.0 \times 10^{22} \cm^{-3}$, enriched to 3\%, and fuel density is 10 g/cc. 
+\uline{Example: calculate corresponding cross sections.} Given a PWR with a 0.41 cm radius pellet, \ce{^{238}U} number density of $4.0 \times 10^{22} \cm^{-3}$, enriched to 3\%, and fuel density is 10 g/cc. 
 
 \textbf{Answer:} 
+If the system is homogeneous uranium and hydrogen, then the dilution cross section looks like:
+\eqn{ \sigma_d &=  \frac{N_m \sigma_m}{N_r}  = \frac{1}{0.2} 20 \fsp \barn = 100 \fsp \barn/\mbox{resonance atom} }
+If the system is 2 region, and we homogeneous the fuel region, then
 \begin{align}
-\sigma_d &= \frac{N_m}{N_r} \sigma_m = \frac{1}{0.2} 20 \barn = 100 \barn/\mbox{resonance atom} \\
-\sigma_e &= \frac{S_f}{4 V_f N_r} = \frac{2 \pi r h}{4 \pi r^2 h N_r} = \frac{1}{2 r N_r} = \frac{1}{(2)(0.41 \cm)(2.2 \times 10^{22} \cm^{-3})} \frac{1 \barn}{10^{-24} \cm^2} = 55 \barn/\mbox{resonance atom} \\
-\sigma_{pot, f} &= \sigma_{pot, 238} + 0.05 \sigma_{pot, 235} + 2 \sigma_{pot, O} = 11.4 + 0.05 (11.3) + 2 (4.0) = 20 \barn 
+\sigma_e &= \frac{S_f}{4 V_f N_r} = \frac{2 \pi r h}{4 \pi r^2 h N_r} = \frac{1}{2 r N_r} = \frac{1}{(2)(0.41 \cm)(2.2 \times 10^{22} \cm^{-3})} \frac{1 \barn}{10^{-24} \cm^2} = 55 \fsp \barn/\mbox{resonance atom} \\
+\sigma_b^{hom} &=  0.05 \sigma_{pot}^{235} + 2 \sigma_{pot}^O = 0.05 (11.3) + 2 (4.0) = 9 \fsp \barn \\
+\sigma_b^{het} &= \sigma_b^{hom} + \sigma_e = 64 \fsp \barn \\ 
+\sigma_s^F &= \sigma_{pot}^R + \sigma_b^{hom} = \sigma_{pot}^{238} + 0.05 \sigma_{pot}^{235} + 2 \sigma_{pot}^O = 11.4 + 0.05 (11.3) + 2 (4.0) = 20 \fsp \barn 
 \end{align} 
 
 

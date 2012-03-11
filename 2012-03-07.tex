@@ -9,7 +9,6 @@
 
 \eqn{ k_{\inf} =  \frac{\mbox{total fissions} \cdot \bar{\nu} }{\mbox{total absorptions}} = \frac{\int \dV \int \nu \Sigma_f \Phi \dE}{\int \dV \int \Sigma_a \Phi \dE} = \epsilon \eta f p }
 
-
 Reference: Henry p. 104. 
 
 \topic{Solving Two-Region Monte Carlo Spectral Analysis}
@@ -41,9 +40,7 @@ Know how to interprete thermal scattering pdf and cdf. Questions would be based 
 
 \textbf{Part 1: Background Info (see Ch 1-3 from Reuss)}
 \begin{enumerate}
-\item Number Density
-\item Flux
-\item Lethargy
+\item Number Density, flux, lethargy.  
 \item Mean free path
 \item 1/v absorption cross section: 
   \begin{itemize}
@@ -58,7 +55,14 @@ Know how to interprete thermal scattering pdf and cdf. Questions would be based 
     Thus $\sigma_f, \sigma_c \sim \frac{1}{\sqrt{E}} \sim \frac{1}{v}$. Even if several resonances make a contribution, the reasoning remains valid. This reasoning is not valid if $E_0$ is close to zero. 
   \item Henry (p. 202) has a derivation for why $\sigma_a(E_r) \approx \frac{1}{v_r}$, but it is using Breit-Wigner for resonance xs. 
   \end{itemize}
-\item 1/E spectrum: true except when resonant absorber is present (recall we keep using 1/E for spectrum above the resonance). It is characteristic of the scalar flux in the slowing down energy range, as long as there is no up-scattering and no fission source. It arises basically from the kinematics of the scattering interaction. However it gets distorted by the energy behavior of the scattering cross sections and by neutron-absorption processes (Henry, p. 90). Asymptotic elastic scattering for high energy would yield a 1/E spectrum. 
+\item 1/E spectrum: true except when resonant absorber is present (recall we keep using 1/E for spectrum above the resonance). It is characteristic of the scalar flux in the slowing down energy range, as long as there is no up-scattering and no fission source. It arises basically from the kinematics of the scattering interaction. However it gets distorted by the energy behavior of the scattering cross sections and by neutron-absorption processes (Henry, p. 90). Asymptotic elastic scattering for high energy would yield a 1/E spectrum. Stacy (p.103) derives from slowing-down equation that, with Hydorgen as the only moderator, and very heavy nuclei with $\alpha_j = \left(\frac{A-1}{A+1} \right)^2$:
+  \begin{align}
+    \Sigma_t(E) \Phi(E) &= \int_E^{\infty} \Sigma_s^H \Phi(E')\frac{\dE'}{E} + \Sum_{j\neq H} \int_E^{E/\alpha_j} \frac{\Sigma_s^j (E') \Phi(E')}{E'(1-\alpha_j)} \dE' \\
+    &=  \int_E^{\infty} \Sigma_s^H \Phi(E')\frac{\dE'}{E} + \Sum_{j\neq H} \frac{1}{\alpha_j} \Sigma_s^j (E) \Phi(E) \\
+    \left[ \Sigma_a (E) + \Sigma_s^H \right] \Phi(E) &= \int_E^{\infty} \Sigma_s^H \frac{\Phi(E')}{E'} \dE' \\
+    \phi(E) &= \frac{(\Sigma_a (E_1) + \Sigma_s^H) E_1 \Phi (E_1) }{(\Sigma_a(E) + \Sigma_s^H) E} \exp{ - \int_E^{E_1} \frac{\Sigma_a (E') \dE'}{(\Sigma_a(E') + \Sigma_s^H) E'} }
+  \end{align} 
+  suggesting that the neutron energy distribution varies with energy as $\Phi(E) \sim \frac{1}{(\Sigma_a(E) + \Sigma_s^H) E}$. 
 \item Maxwellian shapes.
 \end{enumerate}
 
@@ -79,8 +83,10 @@ Know how to interprete thermal scattering pdf and cdf. Questions would be based 
 \eqn{ \RIeff = - \int_{u1}^{u2} \sigma(u) \du = \int_{E_1}^{E_2} \sigma(E) \frac{1}{E} \dE }
 Relating to $\sigma_g, \sigma_d$: 
 \eqn{ \RIeff &= \sigma_g \ln{\frac{E_2}{E_1}}  & \RIeff^{u1\to u2} &= \int_{u1}^{u2} \sigma_a^R (u) \frac{\sigma_d}{\sigma_a^R(u) + \sigma_d} \du  }
-\item Group cross sections $\sigma_g$: the contribution of the resonance to a flux-weighted multigroup cross section.
-  \eqn{ \sigma_g = \frac{\RI_{\eff}}{\ln(E_2/E_1)} }
+\item Group cross sections: the contribution of the resonance to a flux-weighted multigroup cross section for reaction type $\gamma$:
+  \eqn{ \sigma_{\gamma}^g = \frac{\int_{E_g}^{E_{g-1}} \sigma_{\gamma} (E) \phi(E) \dE}{\int_{E_g}^{E_{g-1}} \phi(E) \dE}  }
+  Assume $\phi \sim \frac{1}{E}$,
+  \eqn{ \sigma_g = \frac{\RI_{\eff}}{\ln(E_2/E_1)} = \frac{\Sum_{i \in g} RI_i }{\ln{\frac{E_{g-1}}{E_g} }}   }
 \item Background (dilution) cross section $\sigma_d$:
 \item Narrow vs. wide resonance models
 \item Resonance escape probability $p$: only depends on effective RI and dilution xs: 
@@ -90,7 +96,7 @@ Relating to $\sigma_g, \sigma_d$:
 \mbox{Homogeneous mixture energy shape of flux } \phi(u) &= \frac{\sigma_{pot, f} + \sigma_d}{\sigma_{r,f} (u) + \sigma_{pot, f} + \sigma_d}   & \sigma_d &= \frac{N_m \sigma_m}{N_r}  \\
 \mbox{Heterogeneous energy shape of flux in the fuel } \phi_f(u) &= \frac{\sigma_{pot, f} + \sigma_e}{\sigma_{r,f} (u) + \sigma_{pot, f} + \sigma_e}   & \sigma_e &= \frac{S_f}{4 V_f N_r} 
 \end{align*}
-\item Effective cross section $\sigma_e$: 
+\item Escape cross section $\sigma_e$: 
 \eqn{ \sigma_e = \frac{1}{l N_f} = \frac{S}{4V N_f} }
 \item 2-region reciprocity relation:
 \eqn{ P_{1\to 2} \Sigma_1 V_1 = P_{2\to 1} \Sigma_2 V_2 }
@@ -104,7 +110,11 @@ Relating to $\sigma_g, \sigma_d$:
 \item Maxwellian distribution: 
   \begin{itemize}
   \item Fission emission spectrum: peak occurs at 1.7 MeV, average occurs at 2 MeV.
-  \item Thermal flux spectrum: for an infintie source-free medium with small absorption cross section (as long as $\Sigma_a(E)$ is small compare to $\Sigma_s(E)$), the thermal spectrum is Maxwellian. The higher energy portion of the thermal region is approximately 1/E with slowing down source and absorption present (Henry, p.98). 
+  \item Thermal flux spectrum: for an infintie source-free medium with small absorption cross section (as long as $\Sigma_a(E)$ is small compare to $\Sigma_s(E)$), the thermal spectrum is Maxwellian. The higher energy portion of the thermal region is approximately 1/E with slowing down source and absorption present (Henry, p.98). Stacy (p. 109) provides a more detailed reasoning for why neutron energy distribution in the thermal range can be approximately by Maxwellian distribution: the neutron balance equation in the thermal energy range is, 
+    \eqn{ \Sigma_t(E) \phi(E) = \int_0^{E_{th}} \Sigma_s (E' \to E) \phi(E') \dE' + S(E) }
+    For the thermal range, we assume no absorption $\Sigma_a(E)$ and no slowing-down source $S(E)$, and we extend the upper limit on the integral to infinity under the assumption that the scattering to energies greater than $E_{th}$ is zero; then the neutron flux balance is,
+    \eqn{ \Sigma_s (E) \phi(E) = \int_0^{\infty} \Sigma_s (E' \to E) \phi(E') \dE' }
+   It can be shown that a Maxwellian distribution satisfies the above equation. However, absorption, leakage and a slowing-down source would distort the actual spectrum from a Maxwellian. Since most absorption xs vary as 1/v, absorption preferentially removes lower-energy neutrons, effectively shifting the spectrum to higher energies than a Maxwellian at the moderator temperature T. 
   \end{itemize}
 \item Slowing down equations. 
 \item Review of spectrum:
@@ -113,6 +123,12 @@ Relating to $\sigma_g, \sigma_d$:
       \item slight decrease in the epithermal region. Reason: resonant capture losses, esp. U238; 
       \item  a low energy hump. Reason: Maxwell distribution of the thermal agitation but a little harder because the temperature equilibrium has not been perfectly achieved. 
     \end{enumerate}
+\item More spectrum: 
+  \begin{enumerate}
+  \item $E > 0.5$ MeV: $\phi(E) = \frac{\chi(E)}{\Sigma_t(E)}$.
+  \item $1 \eV < E < 50$ keV (slowing-down domain): $\phi(E) \sim \frac{1}{\xi(E) \Sigma_t(E) E}$. 
+  \item $E < 1$ eV (thermal range): a hardened Maxwellian distribution (hardened because the temperature equilibrium has not been perfectly achieved) plus a 1/E correction at higher energies, $\phi(E) = \phi_M (E, T_n) + \frac{ \lambda \Delta (E/kT_n) }{E}$. 
+  \end{enumerate}
 \end{enumerate}
 
 
