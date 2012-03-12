@@ -9,9 +9,9 @@
 The wide resonance approximation is: 
 \begin{align}
 \phi_{WR} (u) &= \frac{\sigma_d}{\sigma_{a}^R (u) +  \sigma_d } \\
-\RIeff &= \int \sigma_r (u) \phi_{WR} (u) \du \\
-&= \int \sigma_r(u) \frac{\sigma_d}{\sigma_a^R(u) + \sigma_d} \du \\
-&= \Ln{\frac{E_2}{E_1}} \frac{ \int \sigma_{a}^R(E) \frac{\sigma_d}{\sigma_{a}^R(E) + \sigma_d} \frac{1}{E} \dE}{ \int \frac{\sigma_d}{\sigma_{a}^R(E) + \sigma_d} \frac{1}{E} \dE}
+\RIeff^{\gamma} &= \int \sigma_{\gamma}^R (u) \phi_{WR} (u) \du \\
+&= \int \sigma_{\gamma}^R (u) \frac{\sigma_d}{\sigma_a^R(u) + \sigma_d} \du \\
+&= \Ln{\frac{E_2}{E_1}} \frac{ \int \sigma_{\gamma}^R (E) \frac{\sigma_d}{\sigma_{a}^R(E) + \sigma_d} \frac{1}{E} \dE}{ \int \frac{\sigma_d}{\sigma_{a}^R(E) + \sigma_d} \frac{1}{E} \dE}
 \end{align}
 Notice wide resonance approximation $\RI_{\eff}$ only depends on cross sections: $\sigma_d$ is assumed to be based on material composition of the reactor, and $\sigma_r(E)$ are from libraries. There is no need for flux spectrum. 
 
@@ -23,14 +23,14 @@ Wide resonance approximations match direct MC results near infinite dilution.
 Narrow resonance approximations assume the opposite of the wide resonance approximation, that the neutron is going to be out of the resonance upon one scattering. This approximation is good for higher energy. For instance, at 100 keV, scattering lose 1 keV, which is larger than the 25 eV spacing of \ce{^{238}U}. 
 \begin{align}
 \phi_{NR} (u) &= \frac{\sigma_{pot}^R + \sigma_d}{\sigma_{a}^R + \sigma_{pot}^R + \sigma_d } \\
-\RIeff &= \int \sigma_r (u) \phi_{NR} (u) \du \\
-&= \int \sigma_r(u) \frac{\sigma_{pot}^R + \sigma_d}{\sigma_a^R(u) + \sigma_{pot}^R + \sigma_d} \du \\
-&= \Ln{\frac{E_2}{E_1}} \frac{ \int \sigma_{a}^R(E) \frac{\sigma_{pot}^R + \sigma_d}{\sigma_{a}^R(E) + \sigma_{pot}^R + \sigma_d} \frac{1}{E} \dE}{ \int \frac{\sigma_{pot}^R + \sigma_d}{\sigma_{a}^R(E) + \sigma_{pot}^R + \sigma_d} \frac{1}{E} \dE}
+\RIeff^{\gamma} &= \int \sigma_{\gamma}^R (u) \phi_{NR} (u) \du \\
+&= \int \sigma_{\gamma}^R (u) \frac{\sigma_{pot}^R + \sigma_d}{\sigma_a^R(u) + \sigma_{pot}^R + \sigma_d} \du \\
+&= \Ln{\frac{E_2}{E_1}} \frac{ \int \sigma_{\gamma}^R (E) \frac{\sigma_{pot}^R + \sigma_d}{\sigma_{a}^R(E) + \sigma_{pot}^R + \sigma_d} \frac{1}{E} \dE}{ \int \frac{\sigma_{pot}^R + \sigma_d}{\sigma_{a}^R(E) + \sigma_{pot}^R + \sigma_d} \frac{1}{E} \dE}
 \end{align}
 However, the results on the slides come out to be that narrow resonance approximation is not really any better than the wide resonance approximation at higher energy, so there must be some other physics going on. 
 
 \clearpage
-\topic{Narrow vs. Wide Resonance Approximations}
+\topic{Narrow vs. Wide Resonance Approximations\label{narrow-wide-compr}}
 Wide resonance approximation agrees pretty well with MC results without U238 scattering; narrow resonance approximation agrees alright with the MC results with U238 scattering. Notice adding in scattering would change the low dilution factor results. See Figure~\ref{wide-vs-narrow}.
 
 Compare with MC results using real U238 and U235 xs data, the real results fall between the wide and the narrow approximations for the high dilution factor; but for the low dilution factor, that is, when there are lots of resonance material (uranium), the physics gets complicated: 
@@ -44,34 +44,33 @@ Compare with MC results using real U238 and U235 xs data, the real results fall 
 
 \begin{figure}
   \centering
-  \includegraphics[width=4in]{images/narrow-vs-wide-resonance.png}
+  \includegraphics[width=4in]{images/r-m/narrow-vs-wide-resonance.png}
   \caption{Comparison Of Wide and Narrow Resonance Approximation} \label{wide-vs-narrow}
 \end{figure}
 
 
 \clearpage
 \topic{NJOY Modeling of Resonance Parameters}
-The normal procedure for generating multi-group xs in a code like NJOY includes:
+\textbf{Normal procedure} for generating multi-group xs in a code like NJOY includes:
 \begin{enumerate}
-\item use code to Doppler broaden cross sections for each resonance isotope for range of temperatures (eg, 300, 600, 900, 2000K); 
-\item use code to apply the narrow or wide resonance models for a range of dilution xs (eg, 20000, 2000, 200, 20 barns); 
-\item edit RIs or multi-group xs for your desired energy structure; 
-\item build tables of xs vs. dilution xs and temperature;
-\item for downstream computations, interpolate for the dilution cross section and temperature of each material in the simulation to obtain accurate multigroup cross sections for that specific applications. 
-\end{enumerate}
-Note that tables are general and do not have to be computed. 
-
-A better procedure for generating multi-group cross sections includes:
-\begin{enumerate}
-\item the same;
-\item use code to solve real neutron slowing down problem for a range of dilution cross sections (eg, 20000, 2000, 200, 20 barns);
-\item consider including a mix of resonance absorbers to make the spectrum as appropriate to the desired application as possible;
-\item the same;
-\item the same;
-\item the same.
+\item Use code to Doppler broaden cross sections for each resonance isotope for range of temperatures (eg, 300, 600, 900, 2000K); 
+\item Use code to apply the narrow or wide resonance models for a range of dilution xs (eg, 20000, 2000, 200, 20 barns); 
+\item Edit RIs or multi-group xs for your desired energy structure; 
+\item Build tables of xs vs. dilution xs and temperature;
+\item For downstream computations, interpolate for the dilution cross section and temperature of each material in the simulation to obtain accurate multigroup cross sections for that specific applications. 
 \end{enumerate}
 
-For downstream applications that require cross section data, for each resonance group,
+\textbf{A better procedure} for generating multi-group cross sections includes:
+\begin{enumerate}
+\item Same;
+\item Use code to solve real neutron slowing down problem for a range of dilution cross sections (eg, 20000, 2000, 200, 20 barns);
+\item Consider including a mix of resonance absorbers to make the spectrum as appropriate to the desired application as possible;
+\item Same;
+\item Same;
+\item Same.
+\end{enumerate}
+
+\textbf{For downstream applications} that require cross section data, for each resonance group,
 \begin{enumerate}
 \item For each composition, evaluate the material temperature and isotopic densities. 
 \item Evaluate Dancoff from pin diameter, lattice pitch, etc. 

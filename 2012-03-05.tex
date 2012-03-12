@@ -48,11 +48,11 @@ Plug the slowing down sources back into the reaction rate balance equation, and 
 Next we use reciprocity relationship,
 \eqn{ P_{m\to f} N_m \sigma_m V_m = P_{f\to m} N_f \sigma_f V_f}
 and substitute into the balance equation to get,
-\eqn{ N_f \sigma_{t,f} (u) \phi_f (u) V_f = N_f \sigma_{pot, f} V_f P_{f\to f} + N_f \sigma{t,f} V_f P_{f\to m} }
+\eqn{ N_f \sigma_{t}^F (u) \phi_f (u) V_f = N_f \sigma_{pot}^F V_f P_{f\to f} + N_f \sigma_{t}^F V_f P_{f\to m} }
 Then we replace $P_{f\to m} = 1 - P_{f\to f}$ and get, 
-\eqn{ N_f \sigma_{t,f} (u) \phi_f (u) V_f = N_f \sigma_{pot, f} V_f P_{f\to f} + N_f \sigma{t,f} V_f (1 - P_{f\to f}) }
+\eqn{ N_f \sigma_{t}^F (u) \phi_f (u) V_f = N_f \sigma_{pot}^F V_f P_{f\to f} + N_f \sigma_{t}^F V_f (1 - P_{f\to f}) }
 Divide both sides by the number of neutrons, we get a balance equation in unit of cross section:
-\eqn{ \sigma_{t,f} (u) \phi_f (u) = \sigma_{pot, f} P_{f\to f} +  \sigma{t,f} (1 - P_{f\to f}) }
+\eqn{ \sigma_{t}^F (u) \phi_f (u) = \sigma_{pot}^F P_{f\to f} +  \sigma_{t}^F (1 - P_{f\to f}) }
 That is, if we know $P_{f\to f}$, we can solve for the spatially averaged energy shape of the flux in the fuel. 
 
 \subtopic{Wigner's Approximation of $P_{f\to f}$, Obtaining $\phi_f(u)$}
@@ -116,7 +116,7 @@ Then we find the parameter one, pellet radius over mfp = $\frac{0.41 \cm}{0.76 \
 \subtopic{Carlvik's Refinements of the Bell's Collision Probability}
 \begin{figure}
   \centering
-  \includegraphics[width=4in]{images/Carlvik-refinement.png}
+  \includegraphics[width=4in]{images/r-m/Carlvik-refinement.png}
   \caption{Definition and Properties of Calvik's Refinement} \label{Calvik}
 \end{figure}
 

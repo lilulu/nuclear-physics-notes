@@ -30,20 +30,13 @@ This flux shapes let us to compute approximated effective RI. Recall RI is defin
 Two extremes of $\RI_{\eff}$ and $\sigma_d$:
 \begin{itemize}
 \item As $\sigma_d \to \infty$, the entire media is moderator, we reach the limit of infinite dilute, $\RI_{\eff} \to \RI$; we should get within 1\% of the ENDFVII xs data;
-\item As $\sigma_d \to 0$, analytically our assumptions do not hold true any more, but the MC is true that as $\RI_{\eff} \to 0, \phi \to 0$ as seen in Figure~\ref{dilution-factor-increase}. Interpretation: as we have no moderator, every atom is essentially self-shield because they are all resonant isotopes, hence infinite flux depression.  
+\item As $\sigma_d \to 0$, analytically our assumptions do not hold true any more, but the MC is true that as $\RI_{\eff} \to 0, \phi \to 0$ as seen in Figure~\ref{energy-self-shielding}. Interpretation: as we have no moderator, every atom is essentially self-shield because they are all resonant isotopes, hence infinite flux depression.  
 \end{itemize}
-Figure~\ref{dilution-factor-increase} is generated from effective RI of MC calculations at 300K with half a million neutrons, 2 barns hydrogen 1/v absorber. It illustrates that, a) the dilution ratio U/H is related with dilution xs $\sigma_d$ such that they are inversely proportional; b) as the fraction of \ce{^{238} U} increases, U/H increases, $\sigma_d$ decreases, more absorption happens during resonance, hence more flux dips on the spectrum plot and smaller effective RI values in the resonance range. That is, \textit{effective RI decreases as the concentration of resonant material increases.}
+The scattering down to resonance is independent of the resonance. In other words, if the spectrum above a resonance returns to 1/E as in Figure~\ref{1overE}, the group cross sections will be independent of higher energy absorptions. This may be related to what we talk about before, that 
 \begin{figure}
   \centering
-  \includegraphics[width=4in]{images/dilution-factor-increase.png}
-  \caption{Spectrum Resonance Dips More As U/H Increases and Dilution Cross Section Decreases} \label{dilution-factor-increase}
-\end{figure}
-
-The scattering down to resonance is independent of the resonance. In another word, if the spectrum above a resonance returns to 1/E as in Figure~\ref{1overE}, the group cross sections will be independent of higher energy absorptions. 
-\begin{figure}
-  \centering
-  \includegraphics[width=3in]{images/resonance-1-over-E.png}
-  \caption{The 1/E Spectrum Above A Resonance Suggests Group XS Independent Of Higher Energy Absorption} \label{1overE}
+  \includegraphics[width=3in]{images/r-m/resonance-1-over-E.png}
+  \caption{The 1/E Spectrum Above A Resonance Suggests Group XS Independent of Higher Energy Absorption} \label{1overE}
 \end{figure}
 
 
@@ -57,7 +50,7 @@ p &= \exp \left( - \frac{N_R \RI_{\eff}}{\xi \Sigma_m} \right)  = \exp \left( - 
 Notice: (1) this expression is only an approximation; (2) \textit{p only depends on effective RI and dilution cross section.} For instance, in a hydrogen system with $\sigma_d = 200$, we can tabulate the p values as in Table~\ref{p-values}. The last entry tells us that \textit{about 20\% of neutrons are absorbed in U238 resonances.}
 \begin{table}
   \centering
-  \includegraphics[width=1.5in]{images/resonance-escape-probability.png}
+  \includegraphics[width=1.5in]{images/r-m/resonance-escape-probability.png}
   \caption{Resonance Escape Probability For A Hydrogen System} \label{p-values}
 \end{table}
 

@@ -51,10 +51,11 @@ Notice\footnote{Review here for exam}:
 There are two possibilities: 
 \begin{enumerate}
 \item Infinite RI (infinite dilution factor, negligible absorber concentration, $\Sigma_t \sim \Sigma_s^M$) is independent of temperature becase the area under the psi chi curves are constant. The absorber concentration is too low to perturb the flux, hence no flux depression and no self-shielding.  
-\item Effective RI (finite concentration of \ce{^{238} U}) is dependent of temperature because of the self-shielding effect: 
+\item Effective RI (finite concentration of \ce{^{238} U}) is dependent of temperature and the resonant material density because of the energy self-shielding effect as in Figure~\ref{Doppler}: 
   \begin{itemize}
-  \item As temperature increases, $\RI_{\eff}$ would increase, because the broadened resonance increases the energy range over which abosrption occurs, which outweighs the lowering of the resonance peak. Reason: Energy self-shielding (the strong absorption of the resonance tends to shield the absorber nucleir from neutrons with energy $E\sim E_0$, hence the term `flux depression').  As temperature increases, the resonance is broadened by the Doppler effect, the neutron flux depression is decreased, whereas the area under the cross section curve is essentially constant. Hence the resonance absorption which is the energy-integrated reaction rate $\Sigma_a(E) \phi(E)$ increases with increasing temperature. 
-  \item Also, as U/H increases, the fraction change of $\RI_{\eff}$ would increase as well as illustrated in Figure~\ref{Doppler}. That is, \textit{The higher the concentration of U238, the larger the Doppler temperature effects become.}
+  \item If temperature increases, $\RI_{\eff}$ would increase, because the broadened resonance increases the energy range over which abosrption occurs, which outweighs the lowering of the resonance peak. Reason: Energy self-shielding (the strong absorption of the resonance tends to shield the absorber nucleir from neutrons with energy $E\sim E_0$, hence the term `flux depression').  As temperature increases, the resonance is broadened by the Doppler effect, the neutron flux depression is decreased, whereas the area under the cross section curve is essentially constant. Hence the resonance absorption which is the energy-integrated reaction rate $\Sigma_a(E) \phi(E)$ increases with increasing temperature. 
+  \item If U/H increases, there are two consequences: one is that the flux is more depressed hence the $\RIeff$ decreases; secondly the higher energies become more important as we would later see in Section~\ref{spectral-hardening-section}. 
+  \item \textit{The higher the concentration of U238, the larger the Doppler temperature effects become.}
   \end{itemize}
 \end{enumerate}
 
@@ -81,8 +82,8 @@ occur in the fuel.
 
 \begin{figure}
   \centering
-  \subfloat[U/H=0.001]{\label{UH0.01}\includegraphics[width=0.5\textwidth]{images/Doppler-RI-1.png}}
-  \subfloat[U/H=0.1]{\label{UH0.1}\includegraphics[width=0.5\textwidth]{images/Doppler-RI-2.png}}  
+  \subfloat[U/H=0.001]{\label{UH0.01}\includegraphics[width=0.5\textwidth]{images/r-m/Doppler-RI-1.png}}
+  \subfloat[U/H=0.1]{\label{UH0.1}\includegraphics[width=0.5\textwidth]{images/r-m/Doppler-RI-2.png}}  
   \caption{Impact of Temperature On Effective RI, Doppler Broadening} \label{Doppler}
 \end{figure}
 
@@ -145,20 +146,20 @@ In a sentence, \textit{the strong absorption of the resonance tends to shield th
 
 As we increase the U/H ratio, the RI decreases in the three big resonance regions, and we see big dips on the spectrum plot. There are so much U238 in the fuel, that there is no flux in the fuel anymore. 
 
-As we increase the number of uranium atoms by a factor of 10, the number of absorption per atom is decreased by a factor of 3. That is, the total aborption still increases, but the absorption per atom decreases. Figure~\ref{self-shielding} illustrates that RI are very dependent on the density of resonant materials.
+As we increase the number of uranium atoms by a factor of 10, the number of absorption per atom is decreased by a factor of 3. That is, the total aborption still increases, but the absorption per atom decreases. Figure~\ref{energy-self-shielding} illustrates that RI are very dependent on the density of resonant materials.
 \begin{figure}
   \centering
-  \includegraphics[width=4.5in]{images/self-shielding.png}
-  \caption{Impact of Energy Self-Shielding On Effective RI} \label{self-shielding}
+  \includegraphics[width=4.5in]{images/r-m/self-shielding.png}
+  \caption{Impact of Energy Self-Shielding On Effective RI} \label{energy-self-shielding}
 \end{figure}
 
 \clearpage
 %%%%%%%%%%%%%%%%%%%%% SPECTRAL HARDENING %%%%%%%%%%%%%%%%%%
-\topic{Spectral Hardening Shifts Resonant Absorption Rates}
-\textit{As more absorber (uranium in this case) is added, the higher energy ranges become more important (more absorption happens in the higher energies), and the peak of the thermal spectrum shifts to the right.} Figure~\ref{spectral-hardening} also illustrates that self-shielding reduces the large resonance absorption fractions. 1/v absorption of U238 become more significant. 
+\topic{Spectral Hardening Shifts Resonant Absorption Rates}\label{spectral-hardening-section}
+\textit{As U/H increases, the higher energy ranges become more important, and the peak of the thermal spectrum shifts to the right. Distribution of group-wise absorption shifts towards the higher energy. 1/v absorption of U238 becomes more significant. Self-shielding reduces the large resonance absorption fractions. } See Figure~\ref{spectral-hardening}. 
 \begin{figure}
   \centering
-  \includegraphics[width=4in]{images/spectral-hardening.png}
+  \includegraphics[width=4in]{images/r-m/spectral-hardening.png}
   \caption{Impact of Spectral Hardening On RI} \label{spectral-hardening}
 \end{figure}
 
