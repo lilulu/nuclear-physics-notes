@@ -5,15 +5,45 @@
 \maketitle
 
 \topic{k-infinity In Infinite Medium Calculations (No Leakage)}
+Reference: Henry p. 104, Lec10 [FIXME] 
+\eqn{ k_{\infty} =  \frac{\mbox{total fissions} \cdot \bar{\nu} }{\mbox{total absorptions}} = \frac{\int \dV \int \nu \overline{\Sigma_f} \Phi \dE}{\int \dV \int \overline{\Sigma_a} \Phi \dE} = \epsilon \eta f p }
 
-\eqn{ k_{\infty} =  \frac{\mbox{total fissions} \cdot \bar{\nu} }{\mbox{total absorptions}} = \frac{\int \dV \int \nu \Sigma_f \Phi \dE}{\int \dV \int \Sigma_a \Phi \dE} = \epsilon \eta f p }
+\subtopic{k from one-group cross section}
 
-Reference: Henry p. 104. 
+
+
+
+\subtopic{k from two-group cross section}
+\begin{enumerate}
+\item General case: 
+  \begin{align}
+    \frac{\nu \overline{\Sigma_{f1}}}{\kinf} - \overline{\Sigma_{a1}} \phi_1 - \\
+  \end{align}
+
+\item Using effective removal cross section. We define an \hi{effective removal cross section} as,
+  
+
+   Although it looks like a chicken-to-egg problem that we include $\frac{\phi_2}{\phi_1}$ in $\hat{\Sigma}_{s12}$, my understanding is that we either know flux and needs to find cross section, or the other way around, hence we do not need to worry about this term. 
+
+   If no upscattering, $\hat{\Sigma}_{s12}$ is effectively $\overline{\Sigma}_{s12}$, hence 
+\end{enumerate}
+
+\subtopic{k From Balance Equation}
+For two region problem, we can also solve $\kinf$ from the neutron balance equation. 
+
+
+
+
+
+The $\kinf$ from the three methods above should agree, because reaction rates conserves[FIXME].
+
+
 
 \topic{Solving Two-Region Monte Carlo Spectral Analysis}
 Review codes in Lec8. Review slide 22 on approximation of collision probabilities. 
 
 \topic{Observations From Two-Region PWR Pin Cell Applications}
+(FIXME) update based on Lec10. 
 \begin{enumerate}
 \item With no oxygen or zirconium: flux dips in moderator are mild because there is only elastic scattering. 
 \item Adding in Zr: Zr has massive elastic scattering resonances, hence creating fluctuations in both spectrums most noticable in energies right above the resonance energies. THe reactivity change is small (positive 560 pcm).
@@ -31,6 +61,13 @@ Looking at the flux in the moderator divided by the flux in the fuel, we see tha
 \item Below resonance energies: the ratio is around 1, till we hit the really low energy (less than 0.1 eV), that there is a 1/E tail that the fuel flux gets depressed. 
 \end{itemize}
 
+\topic{Collision and Variance Tallies}
+Starting from the infintie medium collision model, our two-region collision model is effectively an averaged model. For instance, $P_{ff}$ include cases like going from a fuel to moderator then back into fuel again, which is why we cannot use pathlength estimator. 
+
+We almost always tally reaction rate or flux. 
+[FIXME] from lec 10.
+
+
 
 \topic{HW4: Heterogeneous Spectral Calculations}
 Cross section: provided by point-wise ENDF data, except we are going to overload the U238 resonance data for the lower energies.
@@ -42,5 +79,21 @@ $k_{\infty}$: the number of absorption should equal to the total number of neutr
 Flux disadvantage factor: (flux of the fuel times fuel volume) / (flux of the moderator times moderator volume). 
 
 Generate statistics: do get an variance on the keff value, we keep a tally for each neutron (so accumulate the tally after each collision until the neutron is dead), and keep a copy of this tally and its square, and get the variance after all neutrons are done. 
+
+Check the updated specs in Lec 10. 
+
+\topic{Why We Need Deterministic Codes}
+Lec10. Monte Carlo requires too much computing power. 
+
+
+Pin-cell based, 
+
+
+Assumbly based. 
+
+
+
+
+In the next section we will discuss how to solve diffusion equation. 
 
 \end{document}
