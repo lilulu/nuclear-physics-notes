@@ -1,0 +1,75 @@
+\documentclass{school-22.211-notes}
+\date{April  2, 2012}
+
+\begin{document}
+\maketitle
+
+\lecture{Numerical Solutions for Diffusion Theory}
+\topic{Simple Numerical Methods to Solve Diffusion Equations}
+\subtopic{Derivation of Neutron Balance Equation}
+
+
+\subtopic{Derivation of Interface Flux}
+
+
+\subtopic{Derivation of Finite Difference Equations}
+
+
+\subtopic{Derivation of Boundary Condition}
+Interior of the geometry, the boundary conditions are implied. The two outter boundaries are the 
+
+
+If $D \to 0$, we get zero flux boundary condition; if $D \to \infty$, we get zero current boundary condition. 
+
+\topic{Matrix Representation of 1D Slab Diffusion Equations}
+\subtopic{Construct Matrix}
+If we use $L$ for the $n-1$ term, $U$ for the $n+1$ term, $D$ for the $n$ term, $T$ for the transport term, we can express the finite difference equation in matrix form as: 
+\begin{align}
+xx
+\end{align}
+
+Block matrix: there is no coupling of group 1 left flux to the group 2 right flux. 
+
+\subtopic{Method 1: Sequential Source/Fixed-Source Problem}
+\begin{align}
+[A] [\phi] &= [M] [\phi] + [S] \\
+[A - M ] [\phi] &= [S] \\
+[\phi] &= [A - M]^{-1} [S]
+\end{align}
+In this method, we guess $\keff$, and given a source we can solve for the flux. We never solve real questions this way, because 
+
+If we have a super-critical problem, then the only way to get criticality with an additional source is through negative flux. 
+
+A reactor is like an amplifier; the closer it is to criticality the more amplification it is; when critical, the amplification is infinity. 
+
+
+\subtopic{Method 2: Direct Matlab Eigenvalue Solver}
+
+Notice that the eigenvectors are arbitrarily normalized; hence it is fine if the flux is negative. 
+
+
+
+\subtopic{Method 3: Power Iterations}
+
+
+
+The rate our fission source converges depends on material, geometry etc. \hi{The dominance ratio} is defined as $\frac{\lambda_1}{\lambda_2}$; and it is 0.97 for this example. If we know the dominance ratio of the problem, we can estimate the number of iterations needed to converge. 
+
+
+\subtopic{Method 3+: Power Iterations with Gauss-Jacobi Numerical Inversion of Flux Matrix}
+In a steady-state problem, it does not matter whether we fully converge our flux iteration. 
+
+\topic{HW5: Numerical Solution of Solving Two-Group Diffusion Problems}
+It is not just iterative convergence that we care; spatial convergence is required as well. 
+
+\topic{Summary}
+Remember for real 3D problem,
+\begin{itemize}
+\item Matrix inversion if of order $N^3$, so in real applications no matrix inversion;
+\item Finding all eigenvalues if at least order $N^2$;
+\item Iterative inversion must be order $N$ to be practical for large problems;
+\item Multi-level iteration is a practical necessity. 
+\end{itemize}
+
+
+\end{document}
