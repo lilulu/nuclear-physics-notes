@@ -48,7 +48,6 @@ Rearranging terms by fluxes, we get,
 \eqn{ - \hat{D}_1^{n-1,n} \phi_1^{n-1} - \hat{D}_1^{n,n+1} \phi_1^{n+1} + [ \Sigma_{r1}^n \Delta^n + \hat{D}_1^{n-1, n} + \hat{D}_1^{n,n+1} ] \phi_1^n = \nu \Sigma_{f1}^n \phi_1^n \Delta^n + \nu \Sigma_{f2}^n \phi_2^n \Delta^n + S_1^n \Delta^n} 
 \eqn{ - \hat{D}_2^{n-1,n} \phi_2^{n-1} - \hat{D}_2^{n,n+1} \phi_2^{n+1} + [\Sigma_{a2}^n \Delta^n + \hat{D}_2^{n-1.n} + \hat{D}_2^{n,n+1} ] \phi_2^n = \Sigma_{s12}^n \phi_1^n \Delta^n + S_2^n \Delta^n }
 
-
 \subtopic{Derivation of Boundary Condition}
 Interior of the geometry, the boundary conditions are implied. The exterior boundaries have to be specified. There are two types of boundary conditions:
 \begin{enumerate}
@@ -65,7 +64,7 @@ which implies,
 In Eqn.~\ref{JgN}, if $D \to 0$, we get zero flux boundary condition; if $D \to \infty$, we get zero current boundary condition. 
 \end{enumerate}
 
-
+\clearpage
 \topic{Matrix Representation of 1D Slab Diffusion Equations}
 \subtopic{Construct Matrix}
 If we use $L$ for the $\phi^{n-1}$ term, $U$ for the $\phi^{n+1}$ term, $D$ for the $\phi^n$ term, $T$ for the transport term, we can express the finite difference equation in matrix form as: 
@@ -120,7 +119,6 @@ We can solve for $\keff$ directly from:
 Notice that the eigenvectors are arbitrarily normalized; hence it is fine if the flux is negative. 
 
 
-
 \subtopic{Method 3: Power Iterations}
 \begin{align}
 [A] [\phi]^{n+1} &= [M] [\phi]^n \\
@@ -137,9 +135,36 @@ The rate our fission source converges depends on material, geometry etc. \hi{The
 See Lec. 12 slide 21. In a steady-state problem, it does not matter whether we fully converge our flux iteration. 
 
 
-\topic{HW5: Numerical Solution of Solving Two-Group Diffusion Problems}
-It is not just iterative convergence that we care; spatial convergence is required as well. 
+\clearpage
+\topic{Matrix Representation of Higher Dimensions Diffusion Equations}
+Insert image from p.14 Lec13. 
 
+\begin{enumerate}
+\item 1D matrix can be solved without iterations, but not for higher dimenisions. We have to use iterative methods for higher dimensions. 
+\item The matrix representation looks the same as in 1D, except with one additional pair of off-diagonal term for each additional dimension. 
+\item The size of the matrix goes up. For instance, if we have 10 meshes per dimension, then 1D matrix is 10x10, 2D matrix is 100x100, 3D matrix is 1000x1000.
+\end{enumerate}
+
+
+\clearpage
+\topic{Dominance Ratio}
+The relationship between dominance ratio and convergence ratio: convergence rate = 1 - dominance ratio in most numerical methods. 
+\begin{enumerate}
+\item Symmetric mode. If initial guess is symmetric, solution is symmetric, and the method used is symmetric, then only the symmetric mode shows up in the dominance ratio, and the asymmetric mode is hidden. In our case  [FIXME]
+
+\item Core size: 
+
+\item Decoupling of radial zone. For instance, if we insert control rod, or have asymmetric core loadings, or have xenon distributions,  the radial zones decoupled, dominance ratio decreases. 
+
+\item Decoupling of axial zones form partially inserted control rods, axial fuel enrichment zoning, axial burnable absorber loading. 
+\end{enumerate}
+Dominance ratio measures the spatial decoupling. 
+
+\topic{HW5: Numerical Solution of Solving Two-Group Diffusion Problems}
+It is not just iterative convergence that we care; spatial convergence is required as well. Core design: reflector, fuel 1, fuel 2, fuel 1, reflector, decide which fuel goes on the inside and where the boundaries are. 
+
+
+\clearpage
 \topic{Summary}
 Remember for real 3D problem,
 \begin{itemize}
