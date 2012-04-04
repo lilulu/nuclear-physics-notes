@@ -4,45 +4,21 @@
 \begin{document}
 \maketitle
 
-\topic{k-infinity In Infinite Medium Calculations (No Leakage)}
-Reference: Henry p. 104, Lec10 [FIXME] 
-\eqn{ k_{\infty} =  \frac{\mbox{total fissions} \cdot \bar{\nu} }{\mbox{total absorptions}} = \frac{\int \dV \int \nu \overline{\Sigma_f} \Phi \dE}{\int \dV \int \overline{\Sigma_a} \Phi \dE} = \epsilon \eta f p }
+\topic{HW4: Heterogeneous Spectral Calculations}
+Cross section: provided by point-wise ENDF data, except we are going to overload the U238 resonance data for the lower energies.
 
-\subtopic{k from one-group cross section}
+Build bins: use 0.01 log(E) spacing (that's about 25,000 bins) to re-generate tables from the PENDF cross section. 
 
+$k_{\infty}$: the number of absorption should equal to the total number of neutrons; in our case, we are losing a small portion of neutrons to the cutoff energy; we can cheat by pushing those neutrons back up. 
 
+Flux disadvantage factor: (flux of the fuel times fuel volume) / (flux of the moderator times moderator volume). 
 
+Generate statistics: do get an variance on the keff value, we keep a tally for each neutron (so accumulate the tally after each collision until the neutron is dead), and keep a copy of this tally and its square, and get the variance after all neutrons are done. 
 
-\subtopic{k from two-group cross section}
-\begin{enumerate}
-\item General case: 
-  \begin{align}
-    \frac{\nu \overline{\Sigma_{f1}}}{\kinf} - \overline{\Sigma_{a1}} \phi_1 - \\
-  \end{align}
-
-\item Using effective removal cross section. We define an \hi{effective removal cross section} as,
-  
-
-   Although it looks like a chicken-to-egg problem that we include $\frac{\phi_2}{\phi_1}$ in $\hat{\Sigma}_{s12}$, my understanding is that we either know flux and needs to find cross section, or the other way around, hence we do not need to worry about this term. 
-
-   If no upscattering, $\hat{\Sigma}_{s12}$ is effectively $\overline{\Sigma}_{s12}$, hence 
-\end{enumerate}
-
-\subtopic{k From Balance Equation}
-For two region problem, we can also solve $\kinf$ from the neutron balance equation. 
+Check the updated specs in Lec 10. 
 
 
-
-
-
-The $\kinf$ from the three methods above should agree, because reaction rates conserves[FIXME].
-
-
-
-\topic{Solving Two-Region Monte Carlo Spectral Analysis}
-Review codes in Lec8. Review slide 22 on approximation of collision probabilities. 
-
-\topic{Observations From Two-Region PWR Pin Cell Applications}
+\textbf{Observations From Two-Region PWR Pin Cell Applications}
 (FIXME) update based on Lec10. 
 \begin{enumerate}
 \item With no oxygen or zirconium: flux dips in moderator are mild because there is only elastic scattering. 
@@ -68,32 +44,5 @@ We almost always tally reaction rate or flux.
 [FIXME] from lec 10.
 
 
-
-\topic{HW4: Heterogeneous Spectral Calculations}
-Cross section: provided by point-wise ENDF data, except we are going to overload the U238 resonance data for the lower energies.
-
-Build bins: use 0.01 log(E) spacing (that's about 25,000 bins) to re-generate tables from the PENDF cross section. 
-
-$k_{\infty}$: the number of absorption should equal to the total number of neutrons; in our case, we are losing a small portion of neutrons to the cutoff energy; we can cheat by pushing those neutrons back up. 
-
-Flux disadvantage factor: (flux of the fuel times fuel volume) / (flux of the moderator times moderator volume). 
-
-Generate statistics: do get an variance on the keff value, we keep a tally for each neutron (so accumulate the tally after each collision until the neutron is dead), and keep a copy of this tally and its square, and get the variance after all neutrons are done. 
-
-Check the updated specs in Lec 10. 
-
-\topic{Why We Need Deterministic Codes}
-Lec10. Monte Carlo requires too much computing power. 
-
-
-Pin-cell based, 
-
-
-Assumbly based. 
-
-
-
-
-In the next section we will discuss how to solve diffusion equation. 
 
 \end{document}

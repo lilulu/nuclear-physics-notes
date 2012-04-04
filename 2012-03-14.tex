@@ -4,6 +4,55 @@
 \begin{document}
 \maketitle
 
+\lecture{Intro to Diffusion Theory}
+\topic{Why We Need Deterministic Codes}
+Lec10. Monte Carlo requires too much computing power. 
+
+
+Pin-cell based, 
+
+
+Assumbly based. 
+
+
+
+
+In the next section we will discuss how to solve diffusion equation. 
+
+
+\topic{k-infinity In Infinite Medium Calculations (No Leakage)}
+Reference: Henry p. 104, Lec10 [FIXME] 
+\eqn{ k_{\infty} =  \frac{\mbox{total fissions} \cdot \bar{\nu} }{\mbox{total absorptions}} = \frac{\int \dV \int \nu \overline{\Sigma_f} \Phi \dE}{\int \dV \int \overline{\Sigma_a} \Phi \dE} = \epsilon \eta f p }
+
+\subtopic{k from one-group cross section}
+
+
+
+
+\subtopic{k from two-group cross section}
+\begin{enumerate}
+\item General case: 
+  \begin{align}
+    \frac{\nu \overline{\Sigma_{f1}}}{\kinf} - \overline{\Sigma_{a1}} \phi_1 - \\
+  \end{align}
+
+\item Using effective removal cross section. We define an \hi{effective removal cross section} as,
+  
+
+   Although it looks like a chicken-to-egg problem that we include $\frac{\phi_2}{\phi_1}$ in $\hat{\Sigma}_{s12}$, my understanding is that we either know flux and needs to find cross section, or the other way around, hence we do not need to worry about this term. 
+
+   If no upscattering, $\hat{\Sigma}_{s12}$ is effectively $\overline{\Sigma}_{s12}$, hence 
+\end{enumerate}
+
+\subtopic{k From Balance Equation}
+For two region problem, we can also solve $\kinf$ from the neutron balance equation. 
+
+
+
+
+
+The $\kinf$ from the three methods above should agree, because reaction rates conserves[FIXME].
+
 
 
 
