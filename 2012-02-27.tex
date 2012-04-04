@@ -5,8 +5,9 @@
 \maketitle
 
 \clearpage
-\topic{Wide Resonance Approximations}
-The wide resonance approximation is: 
+\topic{Resonance Models}
+\begin{enumerate}
+\item The wide resonance approximation is: 
 \begin{align}
 \phi_{WR} (u) &= \frac{\sigma_d}{\sigma_{a}^R (u) +  \sigma_d } \\
 \RIeff^{\gamma} &= \int \sigma_{\gamma}^R (u) \phi_{WR} (u) \du \\
@@ -19,8 +20,7 @@ The wide resonance approximation says that we ignore scattering of U238 because 
 
 Wide resonance approximations match direct MC results near infinite dilution. 
 
-\topic{Narrow Resonance Approximations}
-Narrow resonance approximations assume the opposite of the wide resonance approximation, that the neutron is going to be out of the resonance upon one scattering. This approximation is good for higher energy. For instance, at 100 keV, scattering lose 1 keV, which is larger than the 25 eV spacing of \ce{^{238}U}. 
+\item Narrow Resonance Approximations. Narrow resonance approximations assume the opposite of the wide resonance approximation, that the neutron is going to be out of the resonance upon one scattering. This approximation is good for higher energy. For instance, at 100 keV, scattering lose 1 keV, which is larger than the 25 eV spacing of \ce{^{238}U}. 
 \begin{align}
 \phi_{NR} (u) &= \frac{\sigma_{pot}^R + \sigma_d}{\sigma_{a}^R + \sigma_{pot}^R + \sigma_d } \\
 \RIeff^{\gamma} &= \int \sigma_{\gamma}^R (u) \phi_{NR} (u) \du \\
@@ -29,8 +29,7 @@ Narrow resonance approximations assume the opposite of the wide resonance approx
 \end{align}
 However, the results on the slides come out to be that narrow resonance approximation is not really any better than the wide resonance approximation at higher energy, so there must be some other physics going on. 
 
-\clearpage
-\topic{Narrow vs. Wide Resonance Approximations\label{narrow-wide-compr}}
+\item Narrow vs. Wide Resonance Approximations\label{narrow-wide-compr}. 
 Wide resonance approximation agrees pretty well with MC results without U238 scattering; narrow resonance approximation agrees alright with the MC results with U238 scattering. Notice adding in scattering would change the low dilution factor results. See Figure~\ref{wide-vs-narrow}.
 
 Compare with MC results using real U238 and U235 xs data, the real results fall between the wide and the narrow approximations for the high dilution factor; but for the low dilution factor, that is, when there are lots of resonance material (uranium), the physics gets complicated: 
@@ -41,17 +40,13 @@ Compare with MC results using real U238 and U235 xs data, the real results fall 
 \item We may have multiple resonance in each RI group; that is, each of our RI does not include a single resonance anymore;
 \item Resonance interference between \ce{^{235}U} and \ce{^{238}U}; eg: \ce{^{238}U}'s resonance spacing is 25 eV, whereas \ce{^{235}U}'s resonance spacing is 5 eV, that is, for each \ce{^{238}U} resonance, there are multiple \ce{^{235}U} resonances on top of it. 
 \end{itemize}
-
 \begin{figure}
   \centering
   \includegraphics[width=4in]{images/r-m/narrow-vs-wide-resonance.png}
   \caption{Comparison Of Wide and Narrow Resonance Approximation} \label{wide-vs-narrow}
 \end{figure}
 
-
-\clearpage
-\topic{NJOY Modeling of Resonance Parameters}
-\textbf{Normal procedure} for generating multi-group xs in a code like NJOY includes:
+\item NJOY Modeling of Resonance Parameters. \textbf{Normal procedure} for generating multi-group xs in a code like NJOY includes:
 \begin{enumerate}
 \item Use code to Doppler broaden cross sections for each resonance isotope for range of temperatures (eg, 300, 600, 900, 2000K); 
 \item Use code to apply the narrow or wide resonance models for a range of dilution xs (eg, 20000, 2000, 200, 20 barns); 
@@ -78,5 +73,8 @@ Compare with MC results using real U238 and U235 xs data, the real results fall 
 \item Evaluate group cross section (or RI) using Dancoff, potential and escape cross sections by interpolating cross section (or RI) tables at appropriate temperatures. 
 \end{enumerate}
 The point is, for real application, it is rarely possible to just use someone else's cross section table; we almost certainly need to generate xs suitable for our application. 
+
+\end{enumerate}
+
 
 \end{document}

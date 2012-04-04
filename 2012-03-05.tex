@@ -8,7 +8,8 @@
 \topic{Heterogeneous Geometry Resonant Approximations}
 This is probably the most important topic in generating cross section in reactor physics. We want to take into account both the spatial and energy structure distributions of flux within each resonance when solving the neutron slowing down problem. 
 
-Assumptions for heterogeneous geometry resonant approximations:
+\begin{enumerate}
+\item Assumptions for heterogeneous geometry resonant approximations:
 \begin{itemize}
 \item All neutron interactions in moderator are purely scattering;
 \item Moderator scattering xs is independent of energy;
@@ -18,8 +19,7 @@ Assumptions for heterogeneous geometry resonant approximations:
 \item Fuel scattering removes neutrons from resonance energy (that is, narrow resonance model); 
 \end{itemize}
 
-\subtopic{Spatial Reciprocity Theorem}
-First we introduce the reciprocity condition. The only assumption we make for this theorem is that the source is flat. This theorem does not depend on geometry. 
+\item Spatial Reciprocity Theorem. First we introduce the reciprocity condition. The only assumption we make for this theorem is that the source is flat. This theorem does not depend on geometry. 
 
 Given two homogeneous region 1 and 2, the probability of going from point A in 1 to point B in 2 without colliding is:
 \eqn{ \frac{e^{-\tau}}{4 \pi R^2} }
@@ -38,7 +38,7 @@ Since the two integrals are symmetric (that is, $P_{A\to B}$ and $P_{B \to A}$ a
 Hence we reach the reciprocity condition:
 \eqn{ \boxed{ P_{1\to 2} \Sigma_1 V_1 = P_{2\to 1} \Sigma_2 V_2 } }
 
-\subtopic{Two Region Balance Equations}
+\item Two Region Balance Equations. 
 First collision reaction rate balance, where $\sigma_{t,f}(u) = \sigma_{r,f} + \sigma_{pot, f}$ (the resonance absorption xs plus the potential scattering xs):
 \eqn{ \overbrace{N_f \sigma_{t,f} (u) \Phi(u) V_f}^{\mbox{fuel region lost neutrons}} = \overbrace{Q_f V_f P_{f\to f} + Q_m V_m P_{m\to f}}^{\mbox{fuel region gain neutrons from slowing down sources}}  }
 Because slowing down sources in both fuel and moderator are assumed to arise from the 1/E flux above the resonance energy, we can write
@@ -55,7 +55,7 @@ Divide both sides by the number of neutrons, we get a balance equation in unit o
 \eqn{ \sigma_{t}^F (u) \phi_f (u) = \sigma_{pot}^F P_{f\to f} +  \sigma_{t}^F (1 - P_{f\to f}) }
 That is, if we know $P_{f\to f}$, we can solve for the spatially averaged energy shape of the flux in the fuel. 
 
-\subtopic{Wigner's Approximation of $P_{f\to f}$, Obtaining $\phi_f(u)$}
+\item Wigner's Approximation of $P_{f\to f}$, Obtaining $\phi_f(u)$.
 In this section we compute numerically the fuel-to-fuel first flight collision probability $P_{f\to f}$, hence obtaining an expression for the heterogeneous energy shape of flux in fuel $\phi_f(u)$. 
 
 Wigner approximates $P_{f\to f}$ in terms of the mean chord length $l$: 
@@ -71,8 +71,7 @@ Hence $\phi_f(u)$ can be written as,
 
 
 
-\subtopic{Heterogeneous/Homogeneous Equivalence}
-\hi{Heterogeneous/Homogeneous Equivalence} suggests that the effects of heterogeneity are equivalent to some dilution cross section in a homogeneous mixture:
+\item \hi{Heterogeneous/Homogeneous Equivalence} suggests that the effects of heterogeneity are equivalent to some dilution cross section in a homogeneous mixture:
 \begin{align}
 \mbox{Homogeneous mixture energy shape of flux } \phi(u) &= \frac{\sigma_{pot, f} + \sigma_d}{\sigma_{r,f} (u) + \sigma_{pot, f} + \sigma_d}   & \sigma_d &= \frac{N_m \sigma_m}{N_r}  \\
 \mbox{Heterogeneous energy shape of flux in the fuel } \phi_f(u) &= \frac{\sigma_{pot, f} + \sigma_e}{\sigma_{r,f} (u) + \sigma_{pot, f} + \sigma_e}   & \sigma_e &= \frac{S_f}{4 V_f N_r} 
@@ -92,12 +91,11 @@ If the system is 2 region, and we homogeneous the fuel region, then
 \end{align} 
 
 
-\subtopic{Bell's Refinements of the Wigner's Collision Probability}
-Bell Factor $b$ can be read off a plot given opacity (average chord times total cross section) and geometry (eg: homogeneous medium, infinite plate, sphere etc). It is then used to approximate $P_{f\to f}$ and hence $\phi_f(u)$:
+\item Bell's Refinements of the Wigner's Collision Probability. Bell Factor $b$ can be read off a plot given opacity (average chord times total cross section) and geometry (eg: homogeneous medium, infinite plate, sphere etc). It is then used to approximate $P_{f\to f}$ and hence $\phi_f(u)$:
 \eqn{ P_{f\to f} &= \frac{\sigma_{t,f} (u)}{b \sigma_e + \sigma_{t,f} (u)}  & \phi_f(u) &=\phi_f (u) = \frac{\sigma_{pot, f} + b \sigma_e}{\sigma_{t,f} (u) + b \sigma_e }  }
 Bell's refinement does nothing to the infinite opacity case, but could be a factor of 50\% or even a factor of 3 difference as opacity approaches zero. 
 
-\subtopic{Arrays of Rods, Dancoff Factor}
+\item Arrays of Rods, Dancoff Factor.
 Notice our model so far is an isolated pin (that is, a fuel pin surrounded by an almost infinite moderator). Now we are going to discuss arrays of rods. The major difference is that not all neutrons leaving a fuel pin would have their next interaction in the moderator. 
 
 We hence define the \hi{Dancoff Factor C}:
@@ -113,7 +111,7 @@ C changes the coefficient in front of the escape cross section from $\sigma_e \t
 Then we find the parameter one, pellet radius over mfp = $\frac{0.41 \cm}{0.76 \cm}  = 0.54$, the other parameter is the lattice size over pellet radius $\frac{1.26 \cm}{0.41 \cm} = 3.07$. Using these two parameters, we can read off the plot that $C = 0.3$. For a Bell factor of about 1.1, the escape xs is reduced by,
 \eqn{ \frac{ (1-C)b}{(1-C) + Cb} = 0.774} 
 
-\subtopic{Carlvik's Refinements of the Bell's Collision Probability}
+\item Carlvik's Refinements of the Bell's Collision Probability.
 \begin{figure}
   \centering
   \includegraphics[width=4in]{images/r-m/Carlvik-refinement.png}

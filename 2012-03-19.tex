@@ -4,7 +4,7 @@
 \begin{document}
 \maketitle
 
-\lecture{Diffusion Theory}
+\lecture{Multi-Group Diffusion: Derivations}
 This class would not require derivation of the transport theory. 
 \topic{Derivation Of Diffusion Theory From Transport Theory}
 \begin{enumerate}
@@ -40,6 +40,73 @@ Notice this assumption is not very good in a typical PWR -- because hydrogen sca
 \end{enumerate}
 
 
+\clearpage
+\topic{Multi-Group Diffusion Theory}
+
+The diffusion coefficient approximation table is very important: $\frac{1}{3\Sigma_t}$ is off by a factor of 3! 
+
+
+
+The group diffusion coefficient $D_g$ should be a tensor; but in application, we assume that $D_g$ is the same for all directions. A more accurate approach is to let $D_g$ be the same in the x-y plane, but different in axial direction. 
+
+
+
+
+\clearpage
+\topic{Applications of Diffusion Theory}
+\begin{enumerate}
+\item 3D Noval Approach: solve unique lattice in detail; treat each assembly as homogenized; solve 3D homogenized-asssembly few-group diffusion problem. 
+\item 3D Pin Approach: solve unique pins or lattice in detail; treat each pin as homogenized; solve 3D homogenized pin few-group diffusion problem. 
+\item [FIXME]
+\end{enumerate}
+
+\topic{Continuity Conditions}
+
+
+\topic{Partial Currents}
+
+
+\hi{Albedo boundary condition} is the measurement of how much flux is reflected back: 
+\eqn{ \alpha = \frac{J^-}{J^+} }
+
+
+\topic{Boundary Conditions For Diffusion Theory}
+In diffusion theory, the incoming partial flux is zero:
+\eqn{ J^- = \frac{1}{4} \phi - \frac{1}{2} J_n = 0 }
+There are two formulisms to get the boundary condition: 
+\begin{enumerate}
+\item 
+\eqn{ \frac{J}{\phi} = \frac{1}{2} }
+\item The more conventional boundary condition is: 
+\begin{align}
+  J^- &= \frac{1}{4} \phi + \frac{D}{2} \gradient \phi_n \\
+  \frac{\gradient \phi}{\phi} &= - \frac{1}{2D} = - \frac{3\Sigma_{tr}}{2} = - \frac{1}{d_{\mathrm{extrap}}}, \mbox{ where } d_{\mathrm{extrap}} = \frac{2}{3} \Sigma_{tr}  = \frac{2}{3 \lambda_{\mathrm{tr}}} 
+\end{align}
+where $D$ is the property of the material inside, and $\lambda_{tr}$ is transport mean free path. Notice that the exact coefficient in $d_{\mathrm{extrap}}$ may be different. 
+\end{enumerate}
+
+
+\topic{Eigenvalue Problem}
+We start from a one-group diffusion equation,
+\eqn{ - \divergence D(\vecr) \gradient \phi(\vecr) + \Sigma(\vecr) \phi(\vecr) = \frac{1}{\keff} \nu \Sigma_f(\vecr) \phi(\vecr) }
+Assume cross sections do not depend on spatial distribution, 
+
+Rearranging, 
+
+Define \hi{material buckling} 
+\eqn{ B^2_m = }
+Then we get our \hi{Helmholtz equation}:
+
+
+For a criticality problem, we can solve find the $B^2$ such that the system is critical. Hence giving geometry, only certain materials would make the system critical; given material, only certain geometries would make the system critical. That is, given a reactor, it would be critical if and only if the material and the geometry satisfy,
+\eqn{ B_g^2 = B_m^2} 
+and there can only be a solution when $\kinf > 1$ (exception: if there is external source, $\kinf$ can be less than 1 and the system is still critical). 
+
+
+$DB^2_g$ is the leakage per unit volume per unit flux. Notice $\keff$ does not depend on volume or flux. 
+
+
+\hi{migration area} $M^2 = \frac{D}{\Sigma_a}$ is a measurement of the amount of travelling before absorption. 
 
 
 \end{document}
