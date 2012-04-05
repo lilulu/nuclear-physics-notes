@@ -124,7 +124,7 @@ Notice that the eigenvectors are arbitrarily normalized; hence it is fine if the
 [A] [\phi]^{n+1} &= [M] [\phi]^n \\
 \keff &= \frac{[M][\phi]^{n+1} }{[M] [\phi]^n} 
 \end{align}
-The rate our fission source converges depends on material, geometry etc. \hi{The dominance ratio} is defined as $\frac{\lambda_1}{\lambda_2}$; and it is 0.97 for this example. If we know the dominance ratio of the problem, we can estimate the number of iterations needed to converge. 
+The rate our fission source converges depends on material, geometry etc. See next section for \hi{dominance ratio}. 
 \begin{figure}
   \centering
   \includegraphics[width=4in]{images/dfs/power-iteration-convergence.png}
@@ -148,6 +148,12 @@ Insert image from p.14 Lec13.
 
 \clearpage
 \topic{Dominance Ratio}
+Given an eigenvalue problem, if we specify the solved eigenvalues to be:
+\eqn{ |\lambda_1| > |\lambda_2| > \cdots }
+then $|\lambda_1|$ is the spectral radius of the iteration matrix, and $\frac{\lambda_1}{\lambda_2}$ is the dominance ratio\footnote{See Lewis' Computational Methods of Neutron Transport Appendixe C for more details}. If $|\lambda_1| \ge 1$, the ietration scheme is unstable and it would not converge.  
+
+If we know the dominance ratio of the problem, we can estimate the number of iterations needed to converge. 
+
 The relationship between dominance ratio and convergence ratio: convergence rate = 1 - dominance ratio in most numerical methods. 
 \begin{enumerate}
 \item Symmetric mode. If initial guess is symmetric, solution is symmetric, and the method used is symmetric, then only the symmetric mode shows up in the dominance ratio, and the asymmetric mode is hidden. In our case  [FIXME]
@@ -160,6 +166,8 @@ The relationship between dominance ratio and convergence ratio: convergence rate
 \end{enumerate}
 Dominance ratio measures the spatial decoupling. 
 
+
+\clearpage
 \topic{HW5: Numerical Solution of Solving Two-Group Diffusion Problems}
 It is not just iterative convergence that we care; spatial convergence is required as well. Core design: reflector, fuel 1, fuel 2, fuel 1, reflector, decide which fuel goes on the inside and where the boundaries are. 
 
