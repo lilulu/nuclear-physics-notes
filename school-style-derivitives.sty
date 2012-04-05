@@ -5,6 +5,7 @@
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesClass{school-style-derivitives}
 
+% Base definition, the rest of this file calls them. 
 \newcommand{\derivitive}{\fsp\mathrm{d}}
 \newcommand{\derivitiveone}[1]{\frac{\mathrm{d}}{\mathrm{d}#1}}
 \newcommand{\derivitiveonen}[2]{\frac{\mathrm{d}^{#2}}{\mathrm{d}#1^{#2}}}
@@ -14,20 +15,20 @@
 \newcommand{\partialonen}[2]{\frac{\partial^{#2}}{\partial #1^{#2}}}
 \newcommand{\partialtwo}[2]{\frac{\partial #1}{\partial #2}}
 \newcommand{\partialtwon}[3]{\frac{\partial^{#3} #1}{\partial #2 ^{#3}}}
+\newcommand{\derivative}{\derivitive} % correct spelling
 
-\newcommand{\derivative}{\derivitive}
-
+% Weird derivitives that only I use
 \newcommand{\dll}{\derivitive \ell}
 \newcommand{\dvecell}{\derivitive \vec{\ell}}
 \newcommand{\dGndt}{\derivitivetwo{G_n}{t}}
 \newcommand{\pp}{\partialone{}}
-
 \newcommand{\dvarphi}{\derivitive \varphi}
 \newcommand{\dvarphidtheta}{\derivitivetwo{\varphi}{\theta}}
 \newcommand{\dvarphidthetan}[1]{\derivitivetwon{\varphi}{\theta}{#1}}
 \newcommand{\dvarphidphi}{\derivitivetwo{\varphi}{\phi}}
 \newcommand{\dvarphidphin}[1]{\derivitivetwon{\varphi}{\phi}{#1}}
 
+% English letters first, followed by Greek lettes
 \newcommand{\dA}{\derivitive A}
 \newcommand{\dAdr}{\derivitivetwo{A}{r}}
 \newcommand{\dAdrn}[1]{\derivitivetwon{A}{r}{#1}}
@@ -862,7 +863,6 @@
 \newcommand{\dphidtheta}{\derivitivetwo{\phi}{\theta}}
 \newcommand{\dphidthetan}[1]{\derivitivetwon{\phi}{\theta}{#1}}
 
-
 \newcommand{\pphi}{\partial \phi}
 \newcommand{\pvecphi}{\partial \vec{\phi}}
 \newcommand{\pphiptheta}{\partialtwo{\varphi}{\theta}}
@@ -870,8 +870,11 @@
 \newcommand{\pphipr}{\partialtwo{\phi}{r}} 
 \newcommand{\pphipt}{\partialtwo{\phi}{t}} 
 
+\newcommand{\pphipx}{\partialtwo{\phi}{x}} 
 \newcommand{\pphipxn}[1]{\partialtwon{\phi}{x}{#1}} 
+\newcommand{\pphipy}{\partialtwo{\phi}{y}} 
 \newcommand{\pphipyn}[1]{\partialtwon{\phi}{y}{#1}} 
+\newcommand{\pphipz}{\partialtwo{\phi}{z}} 
 \newcommand{\pphipzn}[1]{\partialtwon{\phi}{z}{#1}} 
 \newcommand{\ppphi}{\partialone{\phi}}
 \newcommand{\ppphin}[1]{\partialtwon{}{\phi}{#1}} 
