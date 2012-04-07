@@ -136,13 +136,13 @@ See Lec. 12 slide 21. In a steady-state problem, it does not matter whether we f
 \clearpage
 \topic{Matrix Representation of Higher Dimensions Diffusion Equations}
 \begin{enumerate}
-\item 1D matrix can be solved without iterations, but not for higher dimenisions. We have to use iterative methods for higher dimensions. 
-\item The matrix representation looks the same as in 1D, except with one additional pair of off-diagonal term for each additional dimension as in Figure~\ref{matrix-shape}
-\item The size of the matrix goes up. For instance, if we have 10 meshes per dimension, then 1D matrix is 10x10, 2D matrix is 100x100, 3D matrix is 1000x1000.
+\item 1D matrix can be solved without iterations; this is not the case for higher dimenisions: we have to use iterative methods for higher dimensions. 
+\item The matrix representation for higher dimensions looks the same as in 1D, except with one additional pair of off-diagonal term for each additional dimension as in Figure~\ref{matrix-shape}
+\item The size of the matrix increases as the dimensions increases. For instance, if we have 10 meshes per dimension, then 1D matrix is 10x10, 2D matrix is 100x100, 3D matrix is 1000x1000.
 \end{enumerate}
 \begin{figure}
   \centering
-  \includegraphics[width=4in]{images/dfs/matrix_multidimension.png}
+  \includegraphics[width=5in]{images/dfs/matrix_multidimension.png}
   \caption{Destruction and Production Matrix Representation} \label{matrix-shape}
 \end{figure}
 
@@ -152,16 +152,14 @@ Given an eigenvalue problem, if we specify the solved eigenvalues to be:
 \eqn{ |\lambda_1| > |\lambda_2| \ge |\lambda_3| \ge \cdots }
 where $|\lambda_1|$ is the spectral radius of the iteration matrix, and 
 \eqn{ \dr = \frac{\lambda_2}{\lambda_1} = \mbox{dominance ratio} }
-If $|\lambda_1| \ge 1$, the ietration scheme is unstable and it would not converge\footnote{See Lewis' Computational Methods of Neutron Transport Appendixe C for more details}. 
-
-The relationship between dominance ratio and convergence ratio: convergence of the power method is slow when $d$ is close to unity; in fact in most numerical methods, convergence rate = 1 - dominance ratio. Knowing the dominance ratio, we can estimate the number of iterations needed for convergence. 
+If $|\lambda_1| \ge 1$, the ietration scheme is unstable and it would not converge\footnote{See Lewis' Computational Methods of Neutron Transport Appendixe C for more details}. Convergence of the power method is slow when $d$ is close to unity; in fact in most numerical methods, convergence rate = 1 - dominance ratio. Knowing the dominance ratio, we can estimate the number of iterations needed for convergence. 
 
 Dominance ratio measures the spatial decoupling. It depends on: 
 \begin{enumerate}
 \item Symmetric mode. If the initial guess is symmetric, the solution is symmetric, and the method used is symmetric, then only the symmetric mode shows up in the dominance ratio, and the asymmetric mode is hidden. As shown in Figure~\ref{dominance-symmetric}, the symmetric guess may not display the highest dr convergence (0.99), instead it display a symmetric mode as seen in the eigenvector. Whereas a random guess would excited all modes and show all the dr convergence (though the lower modes die too fast to be observed; we can only see the last two dominance ratio, 0.97 and 0.99), and the dominant mode has an asymmetric shape.  
 \begin{figure}
   \centering
-  \includegraphics[width=4in]{images/dfs/dominance_ratio.png}
+  \includegraphics[width=6in]{images/dfs/dominance_ratio.png}
   \caption{Dominance Ratio With An Symmetric Guess (left) or Random Guess (right)}
   \label{dominance-symmetric}
 \end{figure}
@@ -169,7 +167,7 @@ Dominance ratio measures the spatial decoupling. It depends on:
 \item Core size: As seen in Figure~\ref{dominance-size}, as core size increases, dominance ratio increases, and it takes longer to converge. 
 \begin{figure}
   \centering
-  \includegraphics[width=4in]{images/dfs/dominance_size.png}
+  \includegraphics[width=7in]{images/dfs/dominance_ratio_size.png}
   \caption{Dominance Ratio With Different Core Sizes}
   \label{dominance-size}
 \end{figure}
