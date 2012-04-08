@@ -4,26 +4,56 @@
 \begin{document}
 \maketitle
 
-\lecture{One-Group Diffusion: Analytical Solutions}
-\topic{Simple Geometry Laplacians}
-Starting from the Helmholtz equation, we only consider the 1D case (that is, only the $r$ dimension).
+\lecture{Multi-Group Diffusion: Derivations}
+This class would not require derivation of the transport theory. 
+\topic{Multi-Group Diffusion Theory}
+
+The diffusion coefficient approximation table is very important: $\frac{1}{3\Sigma_t}$ is off by a factor of 3! 
+
+
+
+The group diffusion coefficient $D_g$ should be a tensor; but in application, we assume that $D_g$ is the same for all directions. A more accurate approach is to let $D_g$ be the same in the x-y plane, but different in axial direction. 
+
+
+\clearpage
+\topic{Partial Currents}
 \begin{enumerate}
-\item Slab $\in  \left[- \frac{L}{2}, \frac{L}{2} \right]$:
-  \eqn{ \dphidxn2 + B_g^2 \phi (x) = 0 }
-  Solution is in the form of $\phi(x) = A \cos (Bx) + C \sin(Bx)$. BCs: $\phi(\pm L/2) = 0$. Two equations two unknowns, 
-  \eqn{ \left[ \begin{array}{cc} \cos(BL/2) & \sin(BL/2) \\ \cos(BL/2) & -\sin(BL/2) \end{array} \right] \left[ \begin{array}{cc} A \\ C \end{array} \right] = 0 }
-  Set the determinant to be zero, we get $-2 \cos (BL/2) \sin (BL/2) = 0$. There are two possibilities: 
-  
-\item Sphere $\in [0, R]$:
-  \eqn{ \dphidrn2 + \frac{2}{r} \dphidr B_g^2 \phi(r) = 0 }
-\item Infinite cylinder $\in [0, R]$
-\item Finite cylinder $r \in [0, R], z \in \left[ -\frac{H}{2}, \frac{H}{2} \right]$. 
-\item Parallelepiped $\in \left[ -\frac{L_i}{2}, \frac{L_i}{2} \right]$: 
+\item Scalar flux, 
+  \eqn{\phi(\vecr, E) = \int_{4\pi} \psi(\vecr, E, \vecOmega) \dOmega }
+\item Net current,
+  \eqn{\vecJ(\vecr, E) = \int_{4\pi} \vecOmega \psi(\vecr, E, \vecOmega) \dOmega  }
+\item Partial Currents in diffusion theory:
+  \begin{align}
+    J^+(\vecr, E) &= \int_{\vecn \cdot \vecOmega > 0} \vecn \cdot \vecOmega \psi(\vecr, E, \vecOmega) = \frac{1}{4\pi} \int_{\vecn \cdot \vecOmega > 0} \vecn \cdot \vecOmega [\phi(\vecr, E) + 3 \vecOmega \cdot \vecJ(\vecr, E) ] \\
+    &= \frac{1}{4} \phi(\vecr, E) + \frac{1}{2} J_n (\vecr, E) \\
+    J^-(\vecr, E) &= \int_{\vecn \cdot \vecOmega < 0} |\vecn \cdot \vecOmega| \psi(\vecr, E, \vecOmega)  \\
+    &= \frac{1}{4} \phi(\vecr, E) - \frac{1}{2} J_n (\vecr, E) 
+  \end{align}
 \end{enumerate}
-The lowest node is the only one remains after the source is gone. 
 
 
+\clearpage
+\topic{Eigenvalue Problem}
+We start from a one-group diffusion equation,
+\eqn{ - \divergence D(\vecr) \gradient \phi(\vecr) + \Sigma(\vecr) \phi(\vecr) = \frac{1}{\keff} \nu \Sigma_f(\vecr) \phi(\vecr) }
+Assume cross sections do not depend on spatial distribution, 
 
+Rearranging, 
+
+Define \hi{material buckling} 
+\eqn{ B^2_m = }
+Then we get our \hi{Helmholtz equation}:
+
+
+For a criticality problem, we can solve find the $B^2$ such that the system is critical. Hence giving geometry, only certain materials would make the system critical; given material, only certain geometries would make the system critical. That is, given a reactor, it would be critical if and only if the material and the geometry satisfy,
+\eqn{ B_g^2 = B_m^2} 
+and there can only be a solution when $\kinf > 1$ (exception: if there is external source, $\kinf$ can be less than 1 and the system is still critical). 
+
+
+$DB^2_g$ is the leakage per unit volume per unit flux. Notice $\keff$ does not depend on volume or flux. 
+
+
+\hi{migration area} $M^2 = \frac{D}{\Sigma_a}$ is a measurement of the amount of travelling before absorption. 
 
 
 \end{document}

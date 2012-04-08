@@ -4,20 +4,6 @@
 \begin{document}
 \maketitle
 
-\topic{HW4: Heterogeneous Spectral Calculations}
-Cross section: provided by point-wise ENDF data, except we are going to overload the U238 resonance data for the lower energies.
-
-Build bins: use 0.01 log(E) spacing (that's about 25,000 bins) to re-generate tables from the PENDF cross section. 
-
-$k_{\infty}$: the number of absorption should equal to the total number of neutrons; in our case, we are losing a small portion of neutrons to the cutoff energy; we can cheat by pushing those neutrons back up. 
-
-Flux disadvantage factor: (flux of the fuel times fuel volume) / (flux of the moderator times moderator volume). 
-
-Generate statistics: do get an variance on the keff value, we keep a tally for each neutron (so accumulate the tally after each collision until the neutron is dead), and keep a copy of this tally and its square, and get the variance after all neutrons are done. 
-
-Check the updated specs in Lec 10. 
-
-
 \textbf{Observations From Two-Region PWR Pin Cell Applications}
 (FIXME) update based on Lec10. 
 \begin{enumerate}
@@ -27,7 +13,7 @@ Check the updated specs in Lec 10.
 \item Removing hydrogen absorption: the spectrum shape does not change much, but the reactivity change is huge (8808 pcm), because there are so much hydrogen in the system (hydrogen xs is 1/v down to 100 keV); this is why LWR fuel has to be enriched. 
 \item Remove U238 fission: reduce reactivity by 2\% (negative -1910 pcm). Spectrum shape does not change. 
 \item Doppler reactivity example (FIXME): see Lec 9. It is important to generate the Dopplar coefficient when preparing cross section data. 
-\item Boron reactivity (FIXME): Boron's capture cross section is almost entirely $(n,\alpha)$ cross section which produces He. 
+\item Boron reactivity: Boron's capture cross section is almost entirely $(n,\alpha)$ cross section which produces He. Boron worth: $-16$ pcm/ppm. 
 \end{enumerate}
 
 Looking at the flux in the moderator divided by the flux in the fuel, we see that:
@@ -37,11 +23,43 @@ Looking at the flux in the moderator divided by the flux in the fuel, we see tha
 \item Below resonance energies: the ratio is around 1, till we hit the really low energy (less than 0.1 eV), that there is a 1/E tail that the fuel flux gets depressed. 
 \end{itemize}
 
+
+
+\clearpage
 \topic{Collision and Variance Tallies}
 Starting from the infintie medium collision model, our two-region collision model is effectively an averaged model. For instance, $P_{ff}$ include cases like going from a fuel to moderator then back into fuel again, which is why we cannot use pathlength estimator. 
 
-We almost always tally reaction rate or flux. 
-[FIXME] from lec 10.
+We almost always tally reaction rate or flux. Then at the end of the tallying, 
+$\kinf$ and effective cross sections can be calculated from:
+\eqn{ \kinf = \frac{\bar{\nu} \Sum \Sigma_f \phi}{\Sum \Sigma_a \phi} }
+\eqn{ \bar{\Sigma}_{xg} = \frac{\Sum \Sigma_{xg} \phi_g}{\Sum \phi_g}}
+
+
+
+\topic{HW4: Monte Carlo Pin Cell}
+$k_{\infty}$: the number of absorption should equal to the total number of neutrons; in our case, we are losing a small portion of neutrons to the cutoff energy; we can cheat by pushing those neutrons back up. 
+
+Flux disadvantage factor: (flux of the fuel times fuel volume) / (flux of the moderator times moderator volume). 
+
+Our Monte Carlo tools predict LWR parameters reasonable accurately,
+\begin{enumerate}
+\item $\kinf$ has a bias of about -700pcm relative to CASMO-5;
+\item Reactivity (differential) effects are very accurate:
+  \begin{itemize}
+  \item Enrichment worth is within a couple of percent;
+  \item Doppler worth is within a couple of percent;
+  \item Boron worth is within about 5 percent;
+  \end{itemize}
+\item We should be able to use this tool to generate accurate differential reactivity effects and cross section data for simple thermal reactor lattices;
+\item Remaining errors are likely due to,
+  \begin{itemize}
+    \item Missing thermal bound scattering models;
+    \item Missing inelastic scattering;
+    \item Missing unresolved resonance models;
+    \item Simplified 2-region treatment, isotropic scattering;
+    \item $P_{ff}$ from rational approximation, simple Dancoff factor. 
+  \end{itemize}
+\end{enumerate}
 
 
 
