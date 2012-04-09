@@ -11,7 +11,7 @@ We start with the one-group diffusion equation,
 Assume homogeneous material, that is, spatial constant cross section,
 \eqn{ -D \laplacian \phi(\vecr) + \Sigma_a \phi(\vecr) = \frac{1}{\keff} \nu \Sigma_f \phi(\vecr) }
 Rearranging and defining a buckling term, 
-\eqn{ \laplacian \phi(\vecr) + \underline{\frac{ \frac{\nu \Sigma_f}{\keff} - \Sigma_a}{D} }_{B^2} \phi(\vecr) = 0 }
+\eqn{ \laplacian \phi(\vecr) + \underbrace{\frac{ \frac{\nu \Sigma_f}{\keff} - \Sigma_a}{D} }_{B^2} \phi(\vecr) = 0 }
 We obtain a classic Helmholtz Equation,
 \eqn{ \boxed{\laplacian \phi(\vecr) + B_m^2 \phi(\vecr) = 0 } }
 Helmholtz Equation implies that,
@@ -22,14 +22,16 @@ Notice,
 \item The $B_m^2$ we defined depends entirely on material properties, hence it is called `material buckling.' For a reactor to be critical with $\keff = 1$, the material buckling is uniquely determined by the cross sections, 
 \eqn{ B_m^2 = \frac{\nu \Sigma_f - \Sigma_a}{D} = \frac{\frac{\nu \Sigma_f}{\Sigma_a} - 1}{\frac{D}{\Sigma_a}} = \frac{\kinf - 1}{M^2} }
 \item Solutions exist only for certain values of the buckling such that the flux is everywhere positive and vanishing on outer (or extrapolated) surfaces; we define these unique values as `geometrical buckling' $B_g^2$. The allowable values of geometrical buckling that satisfy the boundary conditions are uniquely determined reactor geometry.
-\item For any reactor geometry, the reactor will be critical if and only if the materials satisfy:
+\item For a criticality problem, we can solve find the $B^2$ such that the system is critical. Hence giving geometry, only certain materials would make the system critical; given material, only certain geometries would make the system critical. That is, given a reactor, it would be critical if and only if the material and the geometry satisfy,
   \eqn{ B_g^2 = B_m^2} 
-Clearly there can be a solution when $\kinf > 1$. 
+\item Clearly there can be a solution when $\kinf > 1$ (exception: if there is external source, $\kinf$ can be less than 1 and the system is still critical). 
+\item $DB^2_g$ is the leakage per unit volume per unit flux. Notice $\keff$ does not depend on volume or flux. 
+\item \hi{migration area} $M^2 = \frac{D}{\Sigma_a}$ is a measurement of the amount of travelling before absorption. 
 \end{enumerate}
 
-\clearpage
-\topic{Simple Geometry Laplacians}
-In this section we are going to cover a couple of one group homogeneous geometry Laplacians. 
+
+
+Talbe~\ref{simple-geometry-laplacian} lists a couple of one group homogeneous geometry Laplacians. 
 \begin{table}
   \centering
   \begin{tabular}{|c|c|} \hline
@@ -39,6 +41,7 @@ In this section we are going to cover a couple of one group homogeneous geometry
     Finite Cylinder & $\dphidrn2 + \frac{1}{r} \dphidr + \dphidzn2 + B^2 \phi(r,z) = 0$ \\ \hline
     Cartesian & $\dphidxn2 + \dphidyn2 + \dphidzn2 + B^2 \phi(x,y,z) = 0$ \\ \hline
   \end{tabular}
+\caption{Simple Geometry Laplacians} \label{simple-geometry-laplacian}
 \end{table}
 
 
@@ -71,6 +74,7 @@ and the criticality condition implies that,
      Finite cylinder $r \in [0, R], z \in \left[ -\frac{H}{2}, \frac{H}{2} \right]$ & $\phi(r,z) = A J_0\left( \frac{2.405 r}{R} \right) \cos \left( \frac{\pi z}{H} \right)$ & $B^2 = \left( \frac{2.405}{R} \right)^2 + \left( \frac{\pi}{H} \right)^2$ \\ \hline
      Parallelepiped $\in \left[ -\frac{L_i}{2}, \frac{L_i}{2} \right]$ & $\phi(x) = A \cos \left( \frac{\pi x}{L_x} \right) \cos \left( \frac{\pi y}{L_y} \right) \cos \left( \frac{\pi x}{L_z} \right)$ & $B^2 = \left( \frac{\pi}{L_x} \right)^2 + \left( \frac{\pi}{L_y} \right)^2 + \left( \frac{\pi}{L_z} \right)^2$ \\ \hline
   \end{tabular}
+  \caption{One Group Fundamental Mode Eigenvalues and Eigenvectors} \label{eigen-values}
 \end{table}
 
 Observations:

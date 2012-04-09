@@ -5,14 +5,75 @@
 \maketitle
 
 \lecture{Multi-Group Diffusion: Derivations}
-This class would not require derivation of the transport theory. 
-\topic{Multi-Group Diffusion Theory}
+\topic{Derivation of Multi-Group Diffusion Theory}
+\begin{enumerate}
+\item Start from the steady-state continuous energy diffusion equation, we divide the energy range into $G$ groups as shown in Figure~\ref{energy-groups}. 
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=6in]{images/dfs/energy-group.png}
+  \caption{Energy Groups in Multi-Gruop Diffusion Theory} \label{energy-groups}
+\end{figure}
 
-The diffusion coefficient approximation table is very important: $\frac{1}{3\Sigma_t}$ is off by a factor of 3! 
+\item Define group flux, group cross sections. We define the yet unknown group fluxes by the integrals of the flux over individual groups,
+\eqn{ \phi_g(\vecr) = \int_{E_g}^{E_{g-1}} \phi(\vecr, E) \dE }
+The group cross sections are,
+\eqn{ \sigma_{xg}^i (\vecr) = \frac{1}{\phi_g (\vecr)} \int_{E_g}^{E_{g-1}} \sigma_x^i (\vecr, E) \phi(\vecr, E) \dE = \frac{\int_{E_g}^{E_{g-1}} \sigma_x^i (\vecr, E) \phi(\vecr, E) \dE}{\int_{E_g}^{E_{g-1}} \phi(\vecr, E) \dE} }
+Group constants are typically determined using neutron spectra obtained by solving local problems with approximate boundary conditions, like our MC code. Group wise cross sections cannot match the details of Monte Carlo spectrum calculation, so it is imperative that \textit{detailed resonance effects are contained in the multi-group cross sections} when produced from some detailed spectral calculations. 
 
+\item Integrate steady-state diffusion equation over each of the $g$ energy groups: 
+\begin{align}
+& - \overbrace{\int_{E_g}^{E_{g-1}} \dE \divergence D(\vecr, E) \gradient \phi(\vecr, E)}^{\mbox{leakage/diffusion term }\textcircled{1}} + 
+\overbrace{\int_{E_g}^{E_{g-1}} \dE \Sigma_t(\vecr, E) \phi(\vecr, E)}^{\mbox{total interaction term }\textcircled{2}} = \overbrace{\int_{E_g}^{E_{g-1}} \dE S(\vecr, E)}^{\mbox{source term } \textcircled{3}}  \\
+& + \overbrace{\int_{E_g}^{E_{g-1}} \dE \chi(E) \int_{E'} \dE' \nu \Sigma_f (\vecr, E') \phi(\vecr, E')}^{\mbox{fission source term }\textcircled{4}} 
+ + \overbrace{\int_{E_g}^{E_{g-1}} \dE \int_{E'} \dE' \Sigma_s(\vecr, E'\to E) \phi(\vecr, E')}^{\mbox{scattering source term }\textcircled{5}} 
+\end{align}
 
+\item Simplify terms: 
+  \begin{enumerate}
+  \item Leakage/Diffusion term: 
+    \begin{align}
+      \textcircled{1} &= \divergence D_g(\vecr) \int_{E_g}^{E_{g-1}} \dE \gradient \phi(\vecr, E) = \divergence D_g (\vecr) \gradient \phi_g(\vecr) 
+    \end{align}
+    The group diffusion coefficient $D_g$ should be a tensor (a 3x3 symmetric matrix, called the Eddington tensor); but in application, we assume that $D_g$ is the same for all directions. That is, the tensor is approximated by a diagonal matrix: 
+    \eqn{ D_g^u (\vecr) = \frac{\int_{E_g}^{E_{g-1}} \dE D(\vecr, E) \ppu \phi(\vecr, E) }{\ppu \phi_g}, u = x,y,z} 
+    A more accurate approach is to let $D_g$ be the same in the x-y plane, but different in axial direction. 
+  \item Total interaction term: 
+    \begin{align}
+      \textcircled{2} &= \Sigma_{tg}(\vecr) \int_{E_g}^{E_{g-1}} \dE \phi(\vecr, E) = \Sigma_{tg} (\vecr) \phi_g(\vecr) 
+    \end{align}
+    where the macroscopic cross section is a sum over all isotropes $i$:
+    \begin{align}
+      \Sigma_{tg}(\vecr) &= \Sum_{i} N_i(\vecr) \sigma_{tg}^i (\vecr) \\
+      \sigma_{tg}^i (\vecr) &= \frac{1}{\phi_g(\vecr)} \int_{E_g}^{E_{g-1}} \sigma_t^i (E) \phi(\vecr, E) \dE \\
+      &= \frac{\int_{E_g}^{E_{g-1}} \sigma_t^i (E) \phi(\vecr, E) \dE }{\int_{E_g}^{E_{g-1}} \phi(\vecr, E) \dE}
+    \end{align}
+  \item Source term: 
+    \eqn{ \textcircled{3} = S_g(\vecr) }
+  \item Fission source term: 
+    \begin{align}
+      \textcircled{4} &= \chi_g \Sum_{g'=1}^G \nu \Sigma_{fg} (\vecr) \phi_g(\vecr) \\
+      \chi_g &= \int_{E_g}^{E_{g-1}} \dE \chi(E) \\
+      \nu \sigma_{fg}^i (\vecr) &= \frac{1}{\phi_g(\vecr)} \int_{E_g}^{E_{g-1}} \nu(E) \sigma_f^i (E) \phi(\vecr, E) \dE 
+    \end{align}
+  \item Scattering source term: 
+  \begin{align}
+    \textcircled{5} &= \int_{E_g}^{E_{g-1}} \dE \Sum_{g'=1}^G \int_{E_g'}^{E_{g'-1}} \dE' \Sigma_s(\vecr, E'\to E) \phi(\vecr, E') \\
+    &= \Sum_{g'=1}^G \int_{E_g}^{E_{g-1}} \dE \int_{E_g'}^{E_{g'-1}} \dE' \Sigma_s(\vecr, E'\to E) \phi(\vecr, E') \\
+    &= \Sum_{g'=1}^G \Sigma_{sg'g} (\vecr) \phi_{g'} (\vecr) 
+  \end{align}
+  where
+  \eqn{\sigma_{sg'g}^i (\vecr) = \frac{1}{\phi_{g'} (\vecr) } \int_{E_g}^{E_{g-1}} \dE \int_{E_{g'}}^{E_{g'-1}} \dE' \sigma_s^i (E'\to E) \phi(\vecr, E') }
 
-The group diffusion coefficient $D_g$ should be a tensor; but in application, we assume that $D_g$ is the same for all directions. A more accurate approach is to let $D_g$ be the same in the x-y plane, but different in axial direction. 
+  \end{enumerate}
+
+\item The Multi-Gruop Diffusion Equation is, 
+\eqn{ -\divergence D_g(\vecr) \gradient \phi_g (\vecr) + \Sigma_{tg} (\vecr) \phi_g(\vecr) = \chi_g\Sum_{g'=1}^G \nu \Sigma_{fg'} \phi_{g'}(\vecr) + \Sum_{g'=1}^G \Sigma_{sg'g} (\vecr) \phi_{g'} (\vecr) + S_g(\vecr) }
+Cancelling the within group scattering cross section from both sides and defining the group-wise \hi{net removal cross section}, 
+\eqn{ \Sigma_{rg} = \Sigma_{tg} - \Sigma_{sgg} = \Sigma_{ag} + \Sum_{g'=1, g'\neq g} \Sigma_{sgg'} }
+
+\item We obtain the final multi-group form of the neutron diffusion equation, 
+\eqn{ \boxed{- \divergence D_g(\vecr) \gradient \phi_g(\vecr) + \Sigma_{rg} (\vecr) \phi_g(\vecr) = \chi_g \Sum_{g'=1}^G \nu \Sigma_{fg'} (\vecr) \phi_{g'} (\vecr) + \Sum_{g'=1,g'\neq g}^G \Sigma_{sg'g} (\vecr) \phi_{g'} (\vecr) + S_g(\vecr) } }
+\end{enumerate}
 
 
 \clearpage
@@ -30,30 +91,5 @@ The group diffusion coefficient $D_g$ should be a tensor; but in application, we
     &= \frac{1}{4} \phi(\vecr, E) - \frac{1}{2} J_n (\vecr, E) 
   \end{align}
 \end{enumerate}
-
-
-\clearpage
-\topic{Eigenvalue Problem}
-We start from a one-group diffusion equation,
-\eqn{ - \divergence D(\vecr) \gradient \phi(\vecr) + \Sigma(\vecr) \phi(\vecr) = \frac{1}{\keff} \nu \Sigma_f(\vecr) \phi(\vecr) }
-Assume cross sections do not depend on spatial distribution, 
-
-Rearranging, 
-
-Define \hi{material buckling} 
-\eqn{ B^2_m = }
-Then we get our \hi{Helmholtz equation}:
-
-
-For a criticality problem, we can solve find the $B^2$ such that the system is critical. Hence giving geometry, only certain materials would make the system critical; given material, only certain geometries would make the system critical. That is, given a reactor, it would be critical if and only if the material and the geometry satisfy,
-\eqn{ B_g^2 = B_m^2} 
-and there can only be a solution when $\kinf > 1$ (exception: if there is external source, $\kinf$ can be less than 1 and the system is still critical). 
-
-
-$DB^2_g$ is the leakage per unit volume per unit flux. Notice $\keff$ does not depend on volume or flux. 
-
-
-\hi{migration area} $M^2 = \frac{D}{\Sigma_a}$ is a measurement of the amount of travelling before absorption. 
-
 
 \end{document}

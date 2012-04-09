@@ -85,9 +85,29 @@
   \end{align}
   Then we can solve for $\frac{\Phi_1}{\Phi_2}$ from the second equation in terms of cross section, plug in the first equation, and get $k_{\infty}$ from there. Notice that we only know the relative magnitude of $\Phi$ and $\Phi_2$. 
 
-\item Two-group, know $D_1 = 1.5, D_2 = 0.5$. Know Two-group diffusion model on p.26 in Lec11 [FIXME].  
+\item Know Two-group diffusion model: group 1 is the fast group larger than 0.625 eV, and group 2 is the thermal group. 
+\begin{enumerate}
+\item $D_1 = 1.5, D_2 = 0.5$.
+\item Total fission source: $\chi_1 = 1.0, \chi_2 = 0.0$ implies that the fission source in thermal group is zero,
+  \eqn{ S_f(\vecr) = \chi_g \Sum_g \nu \Sigma_{fg} (\vecr) \phi_g(\vecr) }
+\item Scattering source: define effective down-scatter, so up-scattering is zero $\Sigma_{s21} (\vecr) = 0$. 
+\item Final Two-Group Diffusion Equations: 
+  \eqn{\boxed{ -\divergence D_1 \gradient \phi_1 + [\Sigma_{a1} + \Sigma_{s12} ] \phi_1 = \nu \Sigma_{f1} \phi_1 + \nu \Sigma_{f2} \phi_2 + S_1} }
+  \eqn{\boxed{ -\divergence D_2 \gradient \phi_2 + \Sigma_{a2} \phi_2 = \Sigma_{s12} \phi_1 + S_2} }
+\end{enumerate}
 
-\item Know how the solution forms on p. 18 Lec 11. 
+\item Know the one-group fundamental mode eigenvalues and eigenvectors as in Table~\ref{eigen-values}. 
+\begin{table}[ht]
+  \centering
+  \begin{tabular}{|l|l|l|} \hline
+     Slab $\in  \left[- \frac{L}{2}, \frac{L}{2} \right]$ & $\phi(x) = A \cos \left( \frac{\pi x}{L} \right)$ & $B^2 = \left( \frac{\pi}{L} \right)^2$ \\ \hline
+     Sphere $\in [0, R]$ & $\phi(r)= A\frac{\sin \left( \frac{\pi r}{R} \right)}{r} $ & $B^2 = \left( \frac{\pi}{R} \right)^2$ \\ \hline
+     Infinite cylinder $\in [0, R]$ & $\phi(r) = A J_0 \left( \frac{2.405 r}{R} \right)$ & $B^2 = \left( \frac{2.405}{R} \right)^2$ \\ \hline
+     Finite cylinder $r \in [0, R], z \in \left[ -\frac{H}{2}, \frac{H}{2} \right]$ & $\phi(r,z) = A J_0\left( \frac{2.405 r}{R} \right) \cos \left( \frac{\pi z}{H} \right)$ & $B^2 = \left( \frac{2.405}{R} \right)^2 + \left( \frac{\pi}{H} \right)^2$ \\ \hline
+     Parallelepiped $\in \left[ -\frac{L_i}{2}, \frac{L_i}{2} \right]$ & $\phi(x) = A \cos \left( \frac{\pi x}{L_x} \right) \cos \left( \frac{\pi y}{L_y} \right) \cos \left( \frac{\pi x}{L_z} \right)$ & $B^2 = \left( \frac{\pi}{L_x} \right)^2 + \left( \frac{\pi}{L_y} \right)^2 + \left( \frac{\pi}{L_z} \right)^2$ \\ \hline
+  \end{tabular}
+\end{table}
+
 \end{enumerate}
 
 
