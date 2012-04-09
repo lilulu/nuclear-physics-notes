@@ -1,0 +1,83 @@
+\documentclass{school-22.211-notes}
+\date{April  9, 2012}
+
+\begin{document}
+\maketitle
+
+\lecture{Fission Product Poisoning}
+\topic{Fission Product Chain}
+\begin{enumerate}
+
+
+\item Fast reactors are much less sensitive to fission products, because thermal spectrum does not matter. 
+\item The distribution of fission products depends on: 
+\item Fission product capture cross section for the six isotopes with the largest thermal cross section. Xe and Sm are the highest ones and textbooks typically discuss them; but in application, all isotopes are taken into account. 
+\end{enumerate}
+
+Insert image.
+
+Example: Xenon-135 Chain: 
+
+From reactor point of view, because Te's life-time is 19s, so we can assume that I is producted instantenously. Most of the chains are similar and are dominated by beta decays until they are stable. 
+
+Meda-stable state: an isotope may not directly decay into a stable state; it may branch into a meda-stable state. For our purpose, we are going to take the simplified approach.
+
+
+\topic{Nuclide Balance Equations}
+\subtopic{Meaning of Nuclide Balance Equation}
+
+
+
+
+\subtopic{Solution of Nuclide Depletion Equations, Differential Form}
+
+
+\subtopic{Solution of Nuclide Depletion Equations, Matrix Form}
+
+
+\topic{Applications}
+\begin{enumerate}
+\item \ce{^{135}I}/\ce{^{135}Xe}. 
+\item Pm-149/Sm-149 Chain.
+\item After startup and shutdown: Iodine increases and decreases with power; Xenon would generate a peak everytime there is a shutdown. There is a 2.5\% depress due to Xe; the higher the flux, the higher the peak is; the time of the peak is 9 hours, 
+\item Xenon worth following a rapid startup after a scram: the absorption of Xenon 
+\item Equilibrium Xenon Worth: if $\phi \to infty$, then $X_{eq}$ is independent of the flux; the flux is changing instantenously, hence the destruction rates of Xe, but the Idine decay rate has not increased to this level yet. 
+\item Xenon for high flux reactor: you do not want to scram for a high flux reactor, because the Xenon reactivity build-up is so large; alternatively, you can start before Xenon builds up, which is pretty rare. 
+\item Promethium/Samarium after starup and shutdowns: Promethium increases and decreases relative to power; Samarium comes from Promethium, but it is stable unlike Xenon. Hence once Pm burns out, Sm would not change neither. Sm peaks 200 hours after shutdown, and never decays away. 
+\item Samarium worth following a refueling outage: Over-write Xenon by pulling the control rods out for a couple of days; then insert the control rods for Samarium. 
+\item FIXME
+\end{enumerate}
+
+
+\topic{Large Core Sensitivity}
+The top and the bottom of the core are doing different things: 
+
+Chasing Xenon, meaning placing the control rods where there are high concentration of Xenon, is wrong because we are nine hours out of sync then. 
+
+
+\topic{Production Codes' Fission Product Modeling}
+\begin{enumerate}
+\item Point Fuel Models: ORIGEN;
+\item Lattice Physics: 
+  \begin{enumerate}
+    \item Traditional models: 30 FPs, 2 lumped FPs (these fission products do not saturate; they increase as burnups).
+    \item Latest codes: 250 FPs. 
+  \end{enumerate}
+\item Core Models: 
+  \begin{enumerate}
+    \item Traditionally: explicit I/Xe, Pm/Sm, all other FPs are resiual macros (depend on burnups);
+    \item Latest codes: 
+  \end{enumerate}
+\end{enumerate}
+
+Benchmark: Nd is a burnup marker term: each fission produces a fixed amount of Nd (Pu and U produces slightly different amount of Nd). Use Nd number density, from the yield, you can back out the burnups. 
+
+Gd156 and Gd157 are important for startups when using old rods (15 years old). Once operating, we don't really care about Gd that much. 
+
+
+
+
+
+
+
+\end{document}
