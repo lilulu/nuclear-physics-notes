@@ -1,0 +1,116 @@
+\documentclass{school-22.211-notes}
+\date{April 11, 2012}
+
+\begin{document}
+\maketitle
+
+\lecture{Fuel Depletion}
+For fuel assembly depletion, the reactivity of fuel changes dramatically with burnup. 
+
+\topic{Actinide Chain Construction}
+Normally we would model around 400 actinides; for this class, we only discuss 22 of them, which occupies the high-end of actinides (with large N, large Z). 
+
+What happens doing actinide chain construction? 
+\begin{enumerate}
+\item Fission product absorptions reduce reactivitiy of the fuel significantly, often 10-20\%;
+\item \ce{^{235}U} depletion significantly ...
+
+\item Fission cross section: isotopes have threshold energies, producing step-shape near higher energies (around 10 MeV)\footnote{Both even and odd isotopes have threshold energies, but odd isotopes have higher resonance fission cross section, hence even isotopes' threshold energy behavior is more pronoud.}. Remember Pu is very fissile material. Am242 is a funny one -- although it's an even isotope, its fission cross section is large. 
+
+\item Simple actinide nuclide transmutation model. In Figure, the red arrors designate the actinide chains we model (chains end at isotopes that decay quickly compared with the phenomena we are trying to model); blue arrors designate beta decay. 
+\end{enumerate}
+
+
+
+\clearpage
+\topic{Chain Solutions}
+Recall our nuclide balance equation. For this model, we do not have the `direct production by fission' term anymore. \textcolor{red}{aren't Pu produced from fission?} No fission yield term. 
+
+Insert equations. 
+
+
+Compare fission product matrix form vs. actinides matrix form: 
+\begin{itemize}
+\item Actinides matrix form has no fission yield term;
+\item Fission product matrix is decoupled; actinide matrix is not; 
+\end{itemize}
+In actinides matrix, blue circles are decay coupling term; a n2n reaction with isotope 2 produces isotopes 1. 
+
+
+There are 4 blocks for the 4 species; the decay terms sit outside of the blocks; they couple the blocks. The capture terms are one line off the diagonal term (NP238 decays so quickly that its capture cross section is zero and is not shown throug the spy function in matlab); We don't have above the diagonal term because we ignore the $n2n$ reaction and the $n \alpha$ reaction. The reason we ignore them is that having a sub-diagonal matrix we can invert analytically; whereas having a full matrix is a lot harder to invert. Another simplification we made is to ignore all meta-stable states and only have the ground states, hence ignoring branching. 
+
+
+\clearpage
+\topic{Understanding Results}
+\begin{enumerate}
+\item U238 barely changes; there are a lot of it, and it probably decreases by 1\%; often time the nuclear concentration is plotted with respect to initial heavy metal inventory, that is, U238 concentration. 
+\item U234, U235 does not have production, hence it decreases. 
+\item U236 is produced as we burnup U235; U236 has almost no destruction rates;
+\item U237 is produced as we burnup 
+\item U239 is a constant because its capture from U238 is constant, and U239 decays so quickly (23 mins) that it's at equilibrium the whole time. 
+\item (remember) Np has a half-life of 2 and 2.5 days; Np's cancels out Am etc, and they have the same half-life, so people use to ignore them. 
+\item Production with Pu; 
+\item Am244: takes a certain burnup to come up. Even though Am is a small concentration, we still care about them. 
+\end{enumerate}
+
+About 40-50\% of power would be produced from Pu instead of U by the time we shut down the reactor. 
+
+
+
+
+
+\clearpage
+\topic{Burnup Units}
+\begin{enumerate}
+\item FIFA = fission per initial fissile atoms;
+\item FIMA = fission per initial (heavy) metal atoms;
+\item Atom percent (A\%) = FIMA * 100;
+\item Burnup: GWd/T = MWd/kg = thermal power per weight of heavy metal. 
+  \begin{itemize}
+    \item Advantages: we know the reactor power and 
+    \item Disadvantages: `energy released' is not a very clean term; we don't really care about neutrino energy, gamma energy released from capture of neutrons; energy deposited in fuel assembly B from fissions in assembly A. In LWR, it is a good approximation to assume that energy is depositied where the fission is; in MITR it is a bad approximation, fission product energy (deposite locally), gamma heat energy (not necessarily deposited locally), etc. 
+  \end{itemize}
+\item EFPHs = Effective Full Power Hours; EFPD = Effective Full Power Days. 
+\end{enumerate}
+
+\clearpage
+\topic{Numerous Subtle Effects}
+\begin{enumerate}
+\item Where do reaction rates come from? 
+  \begin{itemize}
+  \item ORIGEN uses point depletion, 
+  \item Fuel pin radial shape: the outter region almost have 2 times the flux compared with the inner ones. 
+  \end{itemize}
+\item Benchmark: 
+  \begin{itemize}
+  \item data set is the single most important things in determine the accuracy of your codes.
+  \item U235 has a pretty large error, but we don't care because there is so little of it;
+  \item Accuracy tends to decrease the further up the decay chains. 
+  \item Measurements also have an intrinsic uncertainty; do not rely on single measurement campaigns; systematic errors in measurements are common. 
+  \item In performing `actinide burner' analysis, when we place the actinide at the end of one analysis into another one, the error builds up. 
+  \end{itemize}
+ \item We didn't really cover the Thorium/U233 Chain. 
+   \begin{itemize}
+   \item The chain for Th is very complicated; there are n2n reactions at all different levels; there are multiple ways to get U232; 
+   \item some of these isotopes have very rapid alpha decays; 
+   \item Pa233 has 27 day half-life; 
+   \item U232 has 70 year half-life; U232's daughter product Ta208 has 2.6 MeV gamma (which is the hardest gamma known). 
+   \end{itemize}
+\item Burnable Poisons History Effect: hardern the spectrum, because it pushes some water away, BP history effect: you place BP in it at the beginning of the reactor, we take it out later hence to achieve flat power through time. The BP effect is about 250 pcm. 
+\item Fuel Temperature Depletion History Effects: 
+Initially, the instantenous temperature effect is almost independent of depletion; as the burnup increases, something happens. The moral of the story is, we not only need to know the burnup but also the temperature. 
+
+\item Gadolinium burnable absorber: 
+  \begin{itemize}
+  \item Gadolinium has a huge thermal absorption cross section. It's almost as high as Zn, but we cannot use Zinon because it would ecay; 
+  \item What we do with Gadolinium is to replace part of the fuel with Gad and reactivity would be flatter with respect to time. 
+  \item Hold-down is the difference between the reactivity at the beginning of life-cycle. 
+  \item Gad resdual: there is a little bit loss of reactivity due to Gad. Gad depletes from outside to inside. 
+  \end{itemize}
+\end{enumerate} 
+
+What we cover today will not be covered. 
+
+
+
+\end{document}
