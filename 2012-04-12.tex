@@ -1,0 +1,100 @@
+\documentclass{school-22.211-notes}
+\date{April 12, 2012}
+
+\begin{document}
+\maketitle
+
+\lecture{Exam 2 Review}
+\topic{General Background}
+\begin{enumerate}
+\item Material $\kinf$ from group cross sections: 
+  \begin{itemize}
+  \item One-group: no flux dependency; cross sections that treat pin-cells as homogenized preserve exactly our MC fuel reactivity for infinite repeating lattices. 
+  \eqn{ \kinf = \frac{\nu \bar{\Sigma}_f }{\bar{\Sigma}_a} }
+  \item Two-group: Solve from two-group balance equation, still only depend on integrated cross section (we approximate the flux ratio with cross sections). 
+    \eqn{ \kinf = \frac{\nu \bar{\Sigma}_{f1} + \nu \bar{\Sigma}_{f2} \frac{\hat{\Sigma}_{s12} }{\bar{\Sigma}_{a2}}}{\bar{\Sigma}_{a1} + \hat{\Sigma}_{s12} }   }
+  \item Balance equation, \textcolor{red}{what is it?} 
+  \end{itemize}
+\item $\keff$: take into account leakage,
+  \eqn{ \keff = \frac{\nu \Sigma_f}{DB^2 + \Sigma_a} } 
+\item Materials/geometrical buckling
+\item Infinite medium critical buckling
+\item Eigenvalues/eigenfunctions
+\item Fission yields
+\item Transient fission product equations
+\item I/Xe reactivity effects
+\item Pm/Sm reactivity effects
+\item Divergence theorem
+\item Laplacian 
+\end{enumerate}
+
+
+
+\clearpage
+\topic{Diffusion Theory} 
+\begin{enumerate}
+\item Transport cross section and diffusion coefficients: from the net current equation, assume the scattering is isotropic in the COM system, and use transport correction $P_0$ approximation, 
+  \eqn{ D = \frac{1}{3 \Sigma_{tr} } }
+  \eqn{ \Sigma_{tr} = \Sigma_t - \Sigma_{s1} = \Sigma_t - \frac{2}{3A} \Sigma_s }
+
+\item Partial currents and albedos
+\begin{enumerate}
+\item Zero flux boundary condition:
+  \eqn{ \phi (0) = 0 }
+
+\item Zero incoming flux boundary condition (more accurate than zero flux, because there could still be flux leaking out the geometry):
+\eqn{ \left. \psi(\vecr, E, \vecOmega) \right|_{\vecn \cdot \vecOmega < 0} = 0}
+Integrating over all angles in half space, that is incoming partial current is zero, 
+\eqn{ J^- (\vecr_i, E) = 0}
+There are two formulism to solve this:
+  \begin{itemize}
+  \item Kord's formulism: 
+    \eqn{ J^- (\vecr, E) &= \frac{1}{4} \phi(\vecr, E) - \frac{1}{2} J_n (\vecr, E)  = 0, & \Aboxed{ \frac{J}{\phi} &= \frac{1}{2} } }
+  \item The more conventional approach is to approximate with extropolation boundary condition: 
+    \begin{align}
+      J^- &= \frac{1}{4} \phi + \frac{D}{2} \gradient \phi_n \\
+      \Aboxed{ \frac{\gradient \phi}{\phi} &= - \frac{1}{2D} = - \frac{3\Sigma_{tr}}{2} = - \frac{1}{d_{\mathrm{extrap}}}} 
+\mbox{   where } d_{\mathrm{extrap}} = \frac{2}{3 \Sigma_{tr}}  = \frac{2}{3} \lambda_{\mathrm{tr}}
+    \end{align}
+    where $D$ is the property of the material inside, and $\lambda_{tr}$ is transport mean free path. Notice that the exact coefficient in $d_{\mathrm{extrap}}$ may be different. 
+  \end{itemize}
+
+\item \hi{Albedo boundary condition} is the measurement of how much flux is reflected back: 
+\eqn{ \alpha = \frac{J^- (\vecr_i, E)}{J^+ (\vecr_i, E)} }
+\end{enumerate}
+
+\item Effective down-scattering cross section: 
+  \eqn{ \hat{\Sigma}_{s12} = \bar{\Sigma}_{s12} - \bar{\Sigma}_{s21} \frac{\phi_2}{\phi_1} }
+  So that up-scattering is zero: 
+  \eqn{ \Sigma_{21}  = 0 }
+
+\item Removal cross section
+  \eqn{ \Sigma_{rg} = \Sigma_{tg} - \Sigma_{sgg} = \Sigma_{ag} + \Sum_{g'=1, g'\neq g}^G \Sigma_{sgg'}  }
+
+\item Two-group diffusion equations,
+  \begin{align}
+    \left[ \begin{array}{cc} 
+        \frac{\nu \bar{\Sigma}_{f1}}{\kinf} -  \bar{\Sigma}_{a1}  - \hat{\Sigma}_{s12} & \frac{\nu \bar{\Sigma}_{f2}}{\kinf}   \\
+        \hat{\Sigma}_{s12} &  - \bar{\Sigma}_{a2}  
+      \end{array} \right] 
+    \left[ \begin{array}{c} \phi_1 \\ \phi_2 \end{array} \right] = 0
+  \end{align}
+
+\item Multi-group diffusion equations
+\item Interface and boundary conditions
+\item Finite-difference diffusion equation
+\item Fission source iterations
+\item Gauss-Jacobi flux inner iterations
+\item Dominance ratio estimation
+\end{enumerate}
+
+\clearpage
+\topic{Practise Problems}
+\begin{enumerate}
+\item Homogeneous (single-region) diffusion problems.
+\item Multi-region diffusion problems
+
+\end{enumerate}
+
+
+\end{document}

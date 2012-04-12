@@ -60,8 +60,10 @@ Observations:
   \end{align}
   We set determinant to be zero and solve for $\kinf$. 
 
-\item We define an \hi{effective removal cross section} as,
+\item We define \hi{effective down-scattering cross section}, 
   \eqn{ \hat{\Sigma}_{s12} = \bar{\Sigma}_{s12} - \bar{\Sigma}_{s21} \frac{\phi_2}{\phi_1} }
+  we define \hi{effective removal cross section} as,
+  \eqn{ \Sigma_{rg} = \Sigma_{tg} - \Sigma_{sgg} = \Sigma_{ag} + \Sum_{g'=1, g'\neq g}^G \Sigma_{sgg'}  }
   Then the matrix form becomes, 
   \begin{align}
     \left[ \begin{array}{cc} 
@@ -202,30 +204,30 @@ The problem with this method is that flux collapse under-predict transport.
 
 \clearpage
 \topic{Boundary Conditions}
-In diffusion theory, the incoming partial flux is zero:
-\eqn{ J^- = \frac{1}{4} \phi - \frac{1}{2} J_n = 0 }
-
 \begin{enumerate}
-\item \hi{Albedo boundary condition} is the measurement of how much flux is reflected back: 
-\eqn{ \alpha = \frac{J^- (\vecr_i, E)}{J^+ (\vecr_i, E)} }
+\item Zero flux boundary condition:
+  \eqn{ \phi (0) = 0 }
 
-\item Outer surface boundary condition: 
+\item Zero incoming flux boundary condition (more accurate than zero flux, because there could still be flux leaking out the geometry):
 \eqn{ \left. \psi(\vecr, E, \vecOmega) \right|_{\vecn \cdot \vecOmega < 0} = 0}
-Integrating over all angles in half space,
+Integrating over all angles in half space, that is incoming partial current is zero, 
 \eqn{ J^- (\vecr_i, E) = 0}
-
-\item The incoming partial current is zero. There are two formalism: 
+There are two formulism to solve this:
   \begin{itemize}
-  \item 
-    \eqn{ J^- (\vecr, E) = \frac{1}{4} \phi(\vecr, E) - \frac{1}{2} J_n (\vecr, E)  = 0 }
-    \eqn{ \frac{J}{\phi} = \frac{1}{2} }
-  \item The more conventional boundary condition is: 
+  \item Kord's formulism: 
+    \eqn{ J^- (\vecr, E) &= \frac{1}{4} \phi(\vecr, E) - \frac{1}{2} J_n (\vecr, E)  = 0, & \Aboxed{ \frac{J}{\phi} &= \frac{1}{2} } }
+  \item The more conventional approach is to approximate with extropolation boundary condition: 
     \begin{align}
       J^- &= \frac{1}{4} \phi + \frac{D}{2} \gradient \phi_n \\
-      \frac{\gradient \phi}{\phi} &= - \frac{1}{2D} = - \frac{3\Sigma_{tr}}{2} = - \frac{1}{d_{\mathrm{extrap}}}, \mbox{ where } d_{\mathrm{extrap}} = \frac{2}{3} \Sigma_{tr}  = \frac{2}{3 \lambda_{\mathrm{tr}}} 
+      \Aboxed{ \frac{\gradient \phi}{\phi} &= - \frac{1}{2D} = - \frac{3\Sigma_{tr}}{2} = - \frac{1}{d_{\mathrm{extrap}}}} 
+\mbox{   where } d_{\mathrm{extrap}} = \frac{2}{3 \Sigma_{tr}}  = \frac{2}{3} \lambda_{\mathrm{tr}}
     \end{align}
     where $D$ is the property of the material inside, and $\lambda_{tr}$ is transport mean free path. Notice that the exact coefficient in $d_{\mathrm{extrap}}$ may be different. 
   \end{itemize}
+
+\item \hi{Albedo boundary condition} is the measurement of how much flux is reflected back: 
+\eqn{ \alpha = \frac{J^- (\vecr_i, E)}{J^+ (\vecr_i, E)} }
+
 \end{enumerate}
 
 \clearpage
