@@ -232,27 +232,24 @@ There are two formulism to solve this:
 
 \clearpage
 \topic{Interface Conditions/Continuity Conditions}
-\begin{figure}
-  \centering
-  \includegraphics[width=4in]{images/dfs/boundary-interface.png}
-  \caption{Boundary Conditions and Interface Conditions} \label{boundary-interface}
-\end{figure}
-
-
-There are three continuity conditions:
+There are two continuity conditions:
 \begin{enumerate}
 \item Continuity of angular flux: 
   \eqn{ \psi(\vecr_i^-, E, \vecOmega) = \psi(\vecr_i^+, E, \vecOmega) }
-\item Continuity of scalar flux, from integrating angular flux over all angles $\dOmega$, 
+  In diffusion theory, the above is written as Continuity of scalar flux, from integrating angular flux over all angles $\dOmega$, 
   \eqn{ \phi(\vecr_i^-, E) = \phi(\vecr_i^+, E) }
 \item Continuity of normal component of current from multiplying by omega and integrating over angle, 
   \begin{align}
     \int_{4\pi} \vecn \cdot \vecOmega \psi(\vecr_i^-, E, \vecOmega) \dOmega &= \int_{4\pi} \vecn \cdot \vecOmega \psi(\vecr_i^+, E, \vecOmega) \dOmega \\
     J(\vecr_i^-, E) &= J(\vecr_i^+, E) \\
-    \vecn \cdot n(\vecr_i^-, E) \gradient \phi(\vecr_i^-, E) &= \vecn \cdot D(\vecr_i^+, E) \gradient \phi(\vecr_i^+, E) \\
+    \vecn \cdot D(\vecr_i^-, E) \gradient \phi(\vecr_i^-, E) &= \vecn \cdot D(\vecr_i^+, E) \gradient \phi(\vecr_i^+, E) \\
     \frac{\gradient \phi(\vecr_i^-, E)}{\gradient \phi(\vecr_i^+, E)} &= \frac{D(\vecr_i^-, E)}{D(\vecr_i^+, E)} 
   \end{align}
 \end{enumerate}
-
+\begin{figure}
+  \centering
+  \includegraphics[width=4in]{images/dfs/boundary-interface.png}
+  \caption{Boundary Conditions and Interface Conditions} \label{boundary-interface}
+\end{figure}
 
 \end{document}

@@ -4,7 +4,7 @@
 \begin{document}
 \maketitle
 
-\lecture{Multi-Group Diffusion: Derivations}
+\lecture{Multi-Group Diffusion: Derivations} \label{multi-group-diffusion}
 \topic{Derivation of Multi-Group Diffusion Theory}
 \begin{enumerate}
 \item Start from the steady-state continuous energy diffusion equation, we divide the energy range into $G$ groups as shown in Figure~\ref{energy-groups}. 
@@ -44,8 +44,7 @@ Group constants are typically determined using neutron spectra obtained by solvi
     where the macroscopic cross section is a sum over all isotropes $i$:
     \begin{align}
       \Sigma_{tg}(\vecr) &= \Sum_{i} N_i(\vecr) \sigma_{tg}^i (\vecr) \\
-      \sigma_{tg}^i (\vecr) &= \frac{1}{\phi_g(\vecr)} \int_{E_g}^{E_{g-1}} \sigma_t^i (E) \phi(\vecr, E) \dE \\
-      &= \frac{\int_{E_g}^{E_{g-1}} \sigma_t^i (E) \phi(\vecr, E) \dE }{\int_{E_g}^{E_{g-1}} \phi(\vecr, E) \dE}
+      \sigma_{tg}^i (\vecr) &= \frac{\int_{E_g}^{E_{g-1}} \sigma_t^i (E) \phi(\vecr, E) \dE }{\int_{E_g}^{E_{g-1}} \phi(\vecr, E) \dE}
     \end{align}
   \item Source term: 
     \eqn{ \textcircled{3} = S_g(\vecr) }
@@ -66,14 +65,22 @@ Group constants are typically determined using neutron spectra obtained by solvi
 
   \end{enumerate}
 
-\item The Multi-Gruop Diffusion Equation is, 
+\item The Multi-Group Diffusion Equation is, 
 \eqn{ -\divergence D_g(\vecr) \gradient \phi_g (\vecr) + \Sigma_{tg} (\vecr) \phi_g(\vecr) = \chi_g\Sum_{g'=1}^G \nu \Sigma_{fg'} \phi_{g'}(\vecr) + \Sum_{g'=1}^G \Sigma_{sg'g} (\vecr) \phi_{g'} (\vecr) + S_g(\vecr) }
 Cancelling the within group scattering cross section from both sides and defining the group-wise \hi{net removal cross section}, 
 \eqn{ \Sigma_{rg} = \Sigma_{tg} - \Sigma_{sgg} = \Sigma_{ag} + \Sum_{g'=1, g'\neq g} \Sigma_{sgg'} }
-
-\item We obtain the final multi-group form of the neutron diffusion equation, 
+We obtain the final multi-group form of the neutron diffusion equation, 
 \eqn{ \boxed{- \divergence D_g(\vecr) \gradient \phi_g(\vecr) + \Sigma_{rg} (\vecr) \phi_g(\vecr) = \chi_g \Sum_{g'=1}^G \nu \Sigma_{fg'} (\vecr) \phi_{g'} (\vecr) + \Sum_{g'=1,g'\neq g}^G \Sigma_{sg'g} (\vecr) \phi_{g'} (\vecr) + S_g(\vecr) } }
 \end{enumerate}
+A note about the leakage term: when the term is on the LHS, it should always have a negative sign. 
+\begin{itemize}
+\item Typically RHS $>0$ (we have either fission, scattering, or source), then the curve is concave down. We can either think about it in terms of second derivative, which is negative; or we can think the slope is decreasing, which means that $\laplacian \phi < 0$. The heat transfer analogy is that when there are sources everywhere in the slab, there would be heat transfer away at every point. 
+ 
+\item In the extreme case RHS $<0$ , and the system is losing neutrons due to absorption or scattering out, then the flux would be concave up, meaning $\laplacian \phi > 0$. The heat transfer analygo is that when there are sinks everywhere in the slab, there would be heat transfer inwards at every point. 
+
+\item When RHS $=0$, the flux would be a straight line, $\gradient \phi = $ constant, $\laplacian \phi = 0$, there is no leakage/diffusion at every point, that is, there is no net neutrons leaving any point, the neutron diffusion breakes even at every point. The heat transfer analogy is that there is no heat leaving or entering any point. 
+\end{itemize}
+
 
 
 \clearpage

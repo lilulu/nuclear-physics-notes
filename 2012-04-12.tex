@@ -7,6 +7,7 @@
 \lecture{Exam 2 Review}
 \topic{General Background}
 \begin{enumerate}
+
 \item Material $\kinf$ from group cross sections: 
   \begin{itemize}
   \item One-group: no flux dependency; cross sections that treat pin-cells as homogenized preserve exactly our MC fuel reactivity for infinite repeating lattices. 
@@ -15,10 +16,21 @@
     \eqn{ \kinf = \frac{\nu \bar{\Sigma}_{f1} + \nu \bar{\Sigma}_{f2} \frac{\hat{\Sigma}_{s12} }{\bar{\Sigma}_{a2}}}{\bar{\Sigma}_{a1} + \hat{\Sigma}_{s12} }   }
   \item Balance equation, \textcolor{red}{what is it?} 
   \end{itemize}
+
 \item $\keff$: take into account leakage,
   \eqn{ \keff = \frac{\nu \Sigma_f}{DB^2 + \Sigma_a} } 
-\item Materials/geometrical buckling
-\item Infinite medium critical buckling
+  Notice $\keff$ does not depend on volume or flux. 
+
+\item Materials bucklings,
+\eqn{ B_m^2 = \frac{\frac{\nu \Sigma_f}{\keff} - \Sigma_a}{D} }
+
+\item Geometrical buckling: the allowable values that satisfy the boundary conditions are uniquely determined reactor geometry. 
+
+
+\item Infinite medium critical buckling:
+  \eqn{ B_m^2 = \frac{\nu \Sigma_f - \Sigma_a}{D} = \frac{\frac{\nu \Sigma_f}{\Sigma_a} - 1 }{\frac{D}{\Sigma_a}} = \frac{\kinf - 1}{M^2} }
+  where migration area $M^2$ is a measurement of the distance travelled before absorption. 
+
 \item Eigenvalues/eigenfunctions
 \item Fission yields
 \item Transient fission product equations
@@ -26,42 +38,27 @@
 \item Pm/Sm reactivity effects
 \item Divergence theorem
 \item Laplacian 
+\begin{table}[ht]
+  \centering
+  \begin{tabular}{|l|l|} \hline
+    Slab & $\dphidxn2 + B^2 \phi(x) = 0$ \\ \hline
+    Sphere & $\dphidrn2 + \frac{2}{r} \dphidr + B^2 \phi(r) = 0$ \\ \hline
+    Infinite Cylinder & $\dphidrn2 + \frac{1}{r} \dphidr + B^2 \phi(r) = 0$ \\ \hline
+    Finite Cylinder & $\dphidrn2 + \frac{1}{r} \dphidr + \dphidzn2 + B^2 \phi(r,z) = 0$ \\ \hline
+    Cartesian & $\dphidxn2 + \dphidyn2 + \dphidzn2 + B^2 \phi(x,y,z) = 0$ \\ \hline
+  \end{tabular}
+\end{table}
+
 \end{enumerate}
 
 
 
 \clearpage
-\topic{Diffusion Theory} 
+\topic{Analytical Diffusion Theory} 
 \begin{enumerate}
 \item Transport cross section and diffusion coefficients: from the net current equation, assume the scattering is isotropic in the COM system, and use transport correction $P_0$ approximation, 
   \eqn{ D = \frac{1}{3 \Sigma_{tr} } }
   \eqn{ \Sigma_{tr} = \Sigma_t - \Sigma_{s1} = \Sigma_t - \frac{2}{3A} \Sigma_s }
-
-\item Partial currents and albedos
-\begin{enumerate}
-\item Zero flux boundary condition:
-  \eqn{ \phi (0) = 0 }
-
-\item Zero incoming flux boundary condition (more accurate than zero flux, because there could still be flux leaking out the geometry):
-\eqn{ \left. \psi(\vecr, E, \vecOmega) \right|_{\vecn \cdot \vecOmega < 0} = 0}
-Integrating over all angles in half space, that is incoming partial current is zero, 
-\eqn{ J^- (\vecr_i, E) = 0}
-There are two formulism to solve this:
-  \begin{itemize}
-  \item Kord's formulism: 
-    \eqn{ J^- (\vecr, E) &= \frac{1}{4} \phi(\vecr, E) - \frac{1}{2} J_n (\vecr, E)  = 0, & \Aboxed{ \frac{J}{\phi} &= \frac{1}{2} } }
-  \item The more conventional approach is to approximate with extropolation boundary condition: 
-    \begin{align}
-      J^- &= \frac{1}{4} \phi + \frac{D}{2} \gradient \phi_n \\
-      \Aboxed{ \frac{\gradient \phi}{\phi} &= - \frac{1}{2D} = - \frac{3\Sigma_{tr}}{2} = - \frac{1}{d_{\mathrm{extrap}}}} 
-\mbox{   where } d_{\mathrm{extrap}} = \frac{2}{3 \Sigma_{tr}}  = \frac{2}{3} \lambda_{\mathrm{tr}}
-    \end{align}
-    where $D$ is the property of the material inside, and $\lambda_{tr}$ is transport mean free path. Notice that the exact coefficient in $d_{\mathrm{extrap}}$ may be different. 
-  \end{itemize}
-
-\item \hi{Albedo boundary condition} is the measurement of how much flux is reflected back: 
-\eqn{ \alpha = \frac{J^- (\vecr_i, E)}{J^+ (\vecr_i, E)} }
-\end{enumerate}
 
 \item Effective down-scattering cross section: 
   \eqn{ \hat{\Sigma}_{s12} = \bar{\Sigma}_{s12} - \bar{\Sigma}_{s21} \frac{\phi_2}{\phi_1} }
@@ -80,20 +77,124 @@ There are two formulism to solve this:
     \left[ \begin{array}{c} \phi_1 \\ \phi_2 \end{array} \right] = 0
   \end{align}
 
-\item Multi-group diffusion equations
-\item Interface and boundary conditions
-\item Finite-difference diffusion equation
-\item Fission source iterations
-\item Gauss-Jacobi flux inner iterations
-\item Dominance ratio estimation
+\item Multi-group diffusion equations: See Section~\ref{multi-group-diffusion}. 
+\begin{align}
+& - \overbrace{\int_{E_g}^{E_{g-1}} \dE \divergence D(\vecr, E) \gradient \phi(\vecr, E)}^{\mbox{leakage/diffusion term }\textcircled{1}} + 
+\overbrace{\int_{E_g}^{E_{g-1}} \dE \Sigma_t(\vecr, E) \phi(\vecr, E)}^{\mbox{total interaction term }\textcircled{2}} = \overbrace{\int_{E_g}^{E_{g-1}} \dE S(\vecr, E)}^{\mbox{source term } \textcircled{3}}  \\
+& + \overbrace{\int_{E_g}^{E_{g-1}} \dE \chi(E) \int_{E'} \dE' \nu \Sigma_f (\vecr, E') \phi(\vecr, E')}^{\mbox{fission source term }\textcircled{4}} 
+ + \overbrace{\int_{E_g}^{E_{g-1}} \dE \int_{E'} \dE' \Sigma_s(\vecr, E'\to E) \phi(\vecr, E')}^{\mbox{scattering source term }\textcircled{5}} 
+\end{align}
+\eqn{ -\divergence D_g(\vecr) \gradient \phi_g (\vecr) + \Sigma_{tg} (\vecr) \phi_g(\vecr) = \chi_g\Sum_{g'=1}^G \nu \Sigma_{fg'} \phi_{g'}(\vecr) + \Sum_{g'=1}^G \Sigma_{sg'g} (\vecr) \phi_{g'} (\vecr) + S_g(\vecr) }
+Cancelling the within group scattering cross section from both sides and defining the group-wise removal cross section, we get the final form,
+\eqn{ \boxed{- \divergence D_g(\vecr) \gradient \phi_g(\vecr) + \Sigma_{rg} (\vecr) \phi_g(\vecr) = \chi_g \Sum_{g'=1}^G \nu \Sigma_{fg'} (\vecr) \phi_{g'} (\vecr) + \Sum_{g'=1,g'\neq g}^G \Sigma_{sg'g} (\vecr) \phi_{g'} (\vecr) + S_g(\vecr) } }
+
+\item Partial currents and albedos:
+  \begin{align}
+    J^+(\vecr, E) &= \int_{\vecn \cdot \vecOmega > 0} \vecn \cdot \vecOmega \psi(\vecr, E, \vecOmega) = \frac{1}{4\pi} \int_{\vecn \cdot \vecOmega > 0} \vecn \cdot \vecOmega [\phi(\vecr, E) + 3 \vecOmega \cdot \vecJ(\vecr, E) ] \\
+    &= \frac{1}{4} \phi(\vecr, E) + \frac{1}{2} J_n (\vecr, E) \\
+    J^-(\vecr, E) &= \int_{\vecn \cdot \vecOmega < 0} |\vecn \cdot \vecOmega| \psi(\vecr, E, \vecOmega)  \\
+    &= \frac{1}{4} \phi(\vecr, E) - \frac{1}{2} J_n (\vecr, E) 
+  \end{align}
+  Albedo boundary condition is the measurement of how much flux is reflected back: 
+  \eqn{ \alpha = \frac{J^- (\vecr_i, E)}{J^+ (\vecr_i, E)} }
+  
+\item Boundary conditions:
+  \begin{enumerate}
+  \item Zero flux boundary condition:
+    \eqn{ \phi (0) = 0 }
+
+  \item Zero incoming flux bc, integrating over all angles in half space, it is equivalent to zero incoming partial current:
+    \eqn{ \left. \psi(\vecr, E, \vecOmega) \right|_{\vecn \cdot \vecOmega < 0} &= 0, & J^- (\vecr_i, E) &= 0}
+    There are two formulism to solve this:
+    \begin{itemize}
+    \item Kord's formulism: 
+      \eqn{ J^- (\vecr, E) &= \frac{1}{4} \phi(\vecr, E) - \frac{1}{2} J_n (\vecr, E)  = 0, & \Aboxed{ \frac{J}{\phi} &= \frac{1}{2} } }
+    \item The more conventional approach is to approximate with extropolation boundary condition: 
+      \begin{align}
+        J^- &= \frac{1}{4} \phi + \frac{D}{2} \gradient \phi_n \\
+        \Aboxed{ \frac{\gradient \phi}{\phi} &= - \frac{1}{2D} = - \frac{3\Sigma_{tr}}{2} = - \frac{1}{d_{\mathrm{extrap}}}} 
+        \mbox{   where } d_{\mathrm{extrap}} = \frac{2}{3 \Sigma_{tr}}  = \frac{2}{3} \lambda_{\mathrm{tr}}
+      \end{align}
+      where $D$ is the property of the material inside, and $\lambda_{tr}$ is transport mean free path. The coefficient before $\lambda_{tr}$ can be 0.711 in other formulism. 
+    \end{itemize}
+  \end{enumerate}
+
+\item Interface conditions: 
+  \begin{enumerate}
+    \item Continuity of scalar flux: 
+      \eqn{ \phi(\vecr_i^-, E) = \phi(\vecr_i^+, E) }
+    \item Continuity of normal current:
+      \eqn{ \vecn \cdot D(\vecr_i^-, E) \gradient \phi(\vecr_i^-, E) = \vecn \cdot D(\vecr_i^+, E) \gradient \phi(\vecr_i^+, E) }
+  \end{enumerate}
+\end{enumerate}
+
+\clearpage
+\topic{Other Diffusion-Related Equations}
+\begin{enumerate}
+\item Balance equation derived from transport equations,
+  \eqn{ \divergence \vecJ (\vecr, E) + \Sigma_t (\vecr, E) \phi(\vecr, E) = \Sum_i \int_{E'} \dE' \Sigma_s^i (\vecr, E'\to E) \phi(\vecr, E') + S_0 (\vecr, E) }
+This expression is exact, because we haven't approximate $\vecJ$ yet. 
+
+\item Using $P_1$ angular flux expansion,
+  \eqn{ \psi (\vecr, E, \Omegahat) = \frac{1}{4\pi} \left[ \phi(\vecr, E) + 3 \Omegahat \cdot \vecJ(\vecr, E) \right] }
+  We can get the net current equation,
+  \eqn{ \frac{1}{3} \gradient \phi(\vecr, E) + \Sigma_t (\vecr, E) \vecJ(\vecr, E) = \Sum_i \int_{E'} \dE' \Sigma_{s1}^i (\vecr, E'\to E) \vecJ(\vecr, E') + \vec{S}_1(\vecr, E) }
+
+\item From net current equation, assume no source and isotropic scattering in lab system, we can approximate the transport equation as, 
+  \eqn{ \Sigma_{tr}^i (E) = \Sigma_t^i (E) - \frac{2}{3A^i} \Sigma_s^i (E) }
+  Then we can solve for diffusion coefficient $D = \frac{1}{3 \Sigma_{tr}}$. 
+
+\item One-group diffusion equation,
+  \eqn{ -\divergence D(\vecr) \gradient \phi(\vecr) + \Sigma_a(\vecr) \phi(\vecr) = \frac{1}{\keff} \nu \Sigma_f(\vecr) \phi(\vecr) }
+
+\item Helmoltz Equation: from one-group diffusion equation, we assume spatial constant cross section and use buckling term, 
+  \eqn{ \laplacian \phi(\vecr) + B^2 \phi(\vecr) = 0 }
+  This equation is important in showing that $\phi(\vecr)$ has a constant curvature. 
 \end{enumerate}
 
 \clearpage
 \topic{Practise Problems}
 \begin{enumerate}
-\item Homogeneous (single-region) diffusion problems.
-\item Multi-region diffusion problems
+\item Homogeneous (single-region) criticality problems:
+  \begin{enumerate}
+  \item 1D slab $\in  \left[- \frac{L_0}{2}, \frac{L_0}{2} \right]$, no source, critical. 
+    \eqn{ \dphidxn2 + B^2 \phi (x) &= 0, &\phi(x) &= A \cos (Bx) + C \sin(Bx) }
+    BCs: $\phi(\pm L/2) = 0$, where $\frac{L}{2} = \frac{L_0}{2} + 0.711 \lambda_{tr}$. Two equations two unknowns, 
+    \eqn{ \left[ \begin{array}{cc} \cos(BL/2) & \sin(BL/2) \\ \cos(BL/2) & -\sin(BL/2) \end{array} \right] \left[ \begin{array}{cc} A \\ C \end{array} \right] = 0 }
+    Set the determinant to be zero, we get $-2 \cos (BL/2) \sin (BL/2) = 0$. There are two possibilities: 
+    \eqn{ B_n&= \frac{n\pi}{L}  & \phi(x) &= \left\{ 
+      \begin{array}{cc} 
+        A_n \cos (B_n x) & n=1,3,5, \cdots \\
+        A_n \sin (B_n x) & n=2,4,6, \cdots 
+      \end{array} \right. }
+    But in order for $\phi(x) \ge 0$ everywhere, only $n=1$ is possible; that is, 
+    \eqn{ \phi(x) = A \cos \frac{\pi x}{L} }
+    and the criticality condition implies that, 
+    \eqn{ \frac{\nu \Sigma_f - \Sigma_a}{D}  = \left( \frac{\pi}{L} \right)^2 }
 
+  \item Find the height-to-diameter that would minimize the leakage from a fixed-volume cylinder. To minimize leakage, we need to maximize $B_m^2$ hence $B_g^2$. For a finite cylinder, we know
+    \eqn{B_g^2 = \left( \frac{2.405}{R} \right)^2 + \left( \frac{\pi}{H} \right)^2 }
+    and we solve $\frac{\derivative B_g^2}{\dr} = 0$. The optimal H/D ratio comes out to be 0.9236. 
+    
+  \end{enumerate}
+  Summary: only the lowest node remains after the source is gone. For any positive value of material buckling, there is a unique critical size for each geometry. 
+  
+\item Homogeneous (single-region) source problems:
+  \begin{enumerate}
+  \item See Section~\ref{one-group-source-problem-subcritical}
+  \item 
+  \end{enumerate}
+  
+\item Multi-region diffusion problems
+\end{enumerate}
+
+\clearpage
+\topic{Numerical Diffusion Theory}
+\begin{enumerate}
+\item Finite-difference diffusion equation
+\item Fission source iterations
+\item Gauss-Jacobi flux inner iterations
+\item Dominance ratio estimation
 \end{enumerate}
 
 

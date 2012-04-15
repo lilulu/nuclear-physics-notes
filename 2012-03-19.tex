@@ -7,7 +7,7 @@
 \lecture{One-Group Diffusion: Analytical Solutions}
 \topic{Helmholtz Equation}
 We start with the one-group diffusion equation,
-\eqn{ -\divergence D(\vecr) \gradient \phi(\vecr) + \Sigma_a(\vecr) \phi(\vecr) = \frac{1}{\keff} \mu \Sigma_f(\vecr) \phi(\vecr) }
+\eqn{ -\divergence D(\vecr) \gradient \phi(\vecr) + \Sigma_a(\vecr) \phi(\vecr) = \frac{1}{\keff} \nu \Sigma_f(\vecr) \phi(\vecr) }
 Assume homogeneous material, that is, spatial constant cross section,
 \eqn{ -D \laplacian \phi(\vecr) + \Sigma_a \phi(\vecr) = \frac{1}{\keff} \nu \Sigma_f \phi(\vecr) }
 Rearranging and defining a buckling term, 
@@ -18,15 +18,26 @@ Helmholtz Equation implies that,
 \eqn{ B_m^2 = - \frac{\laplacian \phi(\vecr)}{\phi(\vecr)} }
 Notice,
 \begin{enumerate}
-\item Since $B_m^2$ is a constant, that is to say $\frac{\laplacian \phi(vecr)}{\phi(\vecr)}$ is a constant, that is to say $\phi(\vecr)$ has a constant curvature. 
-\item The $B_m^2$ we defined depends entirely on material properties, hence it is called `material buckling.' For a reactor to be critical with $\keff = 1$, the material buckling is uniquely determined by the cross sections, 
-\eqn{ B_m^2 = \frac{\nu \Sigma_f - \Sigma_a}{D} = \frac{\frac{\nu \Sigma_f}{\Sigma_a} - 1}{\frac{D}{\Sigma_a}} = \frac{\kinf - 1}{M^2} }
+\item Since $B_m^2$ is a constant, that is to say $\frac{\laplacian \phi(\vecr)}{\phi(\vecr)}$ is a constant, that is to say $\phi(\vecr)$ has a constant curvature. 
+\item Material buckling: 
+  \eqn{ B_m^2 = \frac{\frac{\nu \Sigma_f}{\keff} - \Sigma_a}{D} }
+  which matches geometry buckling, 
+  \eqn{ \keff = \frac{\nu \Sigma_f}{DB_g^2 + \Sigma_a} }
+  where $DB^2_g$ is the leakage per unit volume per unit flux. Notice $\keff$ does not depend on volume or flux. 
+
+\item Critical buckling: when a system is critical, the material buckling is uniquely determined by cross sections, 
+  \eqn{ B_m^2 = \frac{\nu \Sigma_f - \Sigma_a}{D} = \frac{\frac{\nu \Sigma_f}{\Sigma_a} - 1}{\frac{D}{\Sigma_a}} = \frac{\kinf - 1}{M^2} }
+  \hi{Migration area} $M^2 = \frac{D}{\Sigma_a}$ is a measurement of the amount of travelling before absorption. 
+
+
 \item Solutions exist only for certain values of the buckling such that the flux is everywhere positive and vanishing on outer (or extrapolated) surfaces; we define these unique values as `geometrical buckling' $B_g^2$. The allowable values of geometrical buckling that satisfy the boundary conditions are uniquely determined reactor geometry.
+
 \item For a criticality problem, we can solve find the $B^2$ such that the system is critical. Hence giving geometry, only certain materials would make the system critical; given material, only certain geometries would make the system critical. That is, given a reactor, it would be critical if and only if the material and the geometry satisfy,
   \eqn{ B_g^2 = B_m^2} 
-\item Clearly there can be a solution when $\kinf > 1$ (exception: if there is external source, $\kinf$ can be less than 1 and the system is still critical). 
-\item $DB^2_g$ is the leakage per unit volume per unit flux. Notice $\keff$ does not depend on volume or flux. 
-\item \hi{migration area} $M^2 = \frac{D}{\Sigma_a}$ is a measurement of the amount of travelling before absorption. 
+
+\item Solution only exists when $\kinf > 1$ (exception: if there is external source, $\kinf$ can be less than 1 and the system is still critical). 
+
+
 \end{enumerate}
 
 
@@ -34,7 +45,7 @@ Notice,
 Talbe~\ref{simple-geometry-laplacian} lists a couple of one group homogeneous geometry Laplacians. 
 \begin{table}
   \centering
-  \begin{tabular}{|c|c|} \hline
+  \begin{tabular}{|l|l|} \hline
     Slab & $\dphidxn2 + B^2 \phi(x) = 0$ \\ \hline
     Sphere & $\dphidrn2 + \frac{2}{r} \dphidr + B^2 \phi(r) = 0$ \\ \hline
     Infinite Cylinder & $\dphidrn2 + \frac{1}{r} \dphidr + B^2 \phi(r) = 0$ \\ \hline
@@ -48,10 +59,10 @@ Talbe~\ref{simple-geometry-laplacian} lists a couple of one group homogeneous ge
 
 
 \clearpage
-\topic{One Group Fundamental Mode Eigenvalues and Eigenvectors}
- Slab $\in  \left[- \frac{L}{2}, \frac{L}{2} \right]$:
+\topic{One Group Criticality Problem}
+ Slab $\in  \left[- \frac{L_0}{2}, \frac{L_0}{2} \right]$:
   \eqn{ \dphidxn2 + B^2 \phi (x) &= 0, &\phi(x) &= A \cos (Bx) + C \sin(Bx) }
-BCs: $\phi(\pm L/2) = 0$. Two equations two unknowns, 
+BCs: $\phi(\pm L/2) = 0$, $\frac{L}{2} = \frac{L_0}{2} + 0.711 \lambda_{tr}$. Two equations two unknowns, 
   \eqn{ \left[ \begin{array}{cc} \cos(BL/2) & \sin(BL/2) \\ \cos(BL/2) & -\sin(BL/2) \end{array} \right] \left[ \begin{array}{cc} A \\ C \end{array} \right] = 0 }
   Set the determinant to be zero, we get $-2 \cos (BL/2) \sin (BL/2) = 0$. There are two possibilities: 
 \eqn{ B_n&= \frac{n\pi}{L}  & \phi(x) &= \left\{ 
@@ -86,17 +97,17 @@ Observations:
 
 
 \clearpage
-\topic{One Group Problem With Sources In A Subcritical Multiplying Medium}
-Consider a subcritical multiplying medium, slab geometry from $-L/2$ to $L/2$, and with a source. The Helmholtz equation is,
+\topic{One Group Source Problem} \label{one-group-source-problem-subcritical}
+Consider a subcritical multiplying medium, slab geometry from $-L/2$ to $L/2$, and with a source. 
 \begin{align}
   - D \dphidxn2 + \Sigma_a \phi(x) &= \nu \Sigma_f \phi(x) + S(x) \\
   \dphidxn2 + B_m^2 \phi(x) &= -\frac{S(x)}{D} 
 \end{align}
-Because $B^2 = \frac{\nu \Sigma_f - \Sigma_a}{D} < 0 $ for a subcritical condition, we can re-write $B^2 = - |B|^2$, so our Helmholtz equation becomes,
-\eqn{ \dphidxn2 - |B|^2 \phi(x) = S(x) }
-The general solution is,
+Because $B^2 = \frac{\nu \Sigma_f - \Sigma_a}{D} < 0 $ for a subcritical condition, we can re-write $B^2 = - |B|^2$,
+\eqn{ \dphidxn2 - |B|^2 \phi(x) = \tilde{S}(x) }
+The general/homogeneous solution is,
 \eqn{ \phi_H (x) = A e^{|B|x} + Ce^{-|B|x} = A \cosh (|B|x) + C \sinh (|B| x) }
-The particular solution depends on source $S(x)$. Apply BCs $\phi \left( \pm \frac{L}{2} \right) = 0$, we get the boundary conditions in the matrix form,
+The particular solution depends on source $\tilde{S}(x)$. Apply BCs $\phi \left( \pm \frac{L}{2} \right) = 0$, we get the boundary conditions in the matrix form,
 \eqn{ \left[ \begin{array}{cc} 
 \cosh(|B|L/2) & \sinh(|B|L/2) \\
 \sinh(|B|L/2) & \cosh(|B|L/2) 
@@ -111,9 +122,5 @@ Interpretations:
 \item There always exists a physically realizable solution (no critical buckling!);
 \item In the limit of $S\to 0$, the only physical solution is the trivial solution (\textcolor{red}{shouldn't the only solution be the general solution?}). 
 \end{enumerate}
-
-
-
-
 
 \end{document}
