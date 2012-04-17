@@ -17,41 +17,137 @@
   \item Balance equation, \textcolor{red}{what is it?} 
   \end{itemize}
 
-\item $\keff$: take into account leakage,
+\item $\keff$: take into account leakage, notice $\keff$ does not depend on volume or flux, 
   \eqn{ \keff = \frac{\nu \Sigma_f}{DB^2 + \Sigma_a} } 
-  Notice $\keff$ does not depend on volume or flux. 
 
 \item Materials bucklings,
 \eqn{ B_m^2 = \frac{\frac{\nu \Sigma_f}{\keff} - \Sigma_a}{D} }
 
-\item Geometrical buckling: the allowable values that satisfy the boundary conditions are uniquely determined reactor geometry. 
-
+\item Geometrical buckling: the allowable values that satisfy the boundary conditions are uniquely determined reactor geometry. See Table~\ref{diffusion-table}. 
+\begin{table}
+  \small
+  \makebox[\textwidth][c]{
+  \begin{tabular}{|l|l|l|l|} \hline
+    Geometry & Diffusion Equation & Flux & Geometrical Buckling \\ \hline
+    Slab $\in  \left[- \frac{L}{2}, \frac{L}{2} \right]$ &$\dphidxn2 + B^2 \phi = 0$ & $\phi = A \cos \left( \frac{\pi x}{L} \right)$ & $B^2 = \left( \frac{\pi}{L} \right)^2$ \\ 
+    Sphere $\in [0, R]$  & $\dphidrn2 + \frac{2}{r} \dphidr + B^2 \phi = 0$& $\phi= \frac{A}{r} \sin \left( \frac{\pi r}{R} \right)$ & $B^2 = \left( \frac{\pi}{R} \right)^2$ \\
+    Cylinder ($z: \infty$) & $\dphidrn2 + \frac{1}{r} \dphidr + B^2 \phi = 0$ & $\phi = A J_0 \left( \frac{2.405 r}{R} \right)$ & $B^2 = \left( \frac{2.405}{R} \right)^2$ \\ 
+    Cylinder (z: $\pm H/2$) & $\dphidrn2 + \frac{1}{r} \dphidr + \dphidzn2 + B^2 \phi = 0$ & $\phi = A J_0\left( \frac{2.405 r}{R} \right) \cos \left( \frac{\pi z}{H} \right)$ & $B^2 = \left( \frac{2.405}{R} \right)^2 + \left( \frac{\pi}{H} \right)^2$ \\ 
+    Parallelepiped ($\pm \frac{L_i}{2}$) & $\dphidxn2 + \dphidyn2 + \dphidzn2 + B^2 \phi = 0$ & $\phi = A \cos \left( \frac{\pi x}{L_x} \right) \cos \left( \frac{\pi y}{L_y} \right) \cos \left( \frac{\pi x}{L_z} \right)$ & $B^2 = \left( \frac{\pi}{L_x} \right)^2 + \left( \frac{\pi}{L_y} \right)^2 + \left( \frac{\pi}{L_z} \right)^2$ \\ \hline
+  \end{tabular}
+}
+  \caption{Finite Geometries With Zero Flux BC} \label{diffusion-table}
+\end{table}
 
 \item Infinite medium critical buckling:
   \eqn{ B_m^2 = \frac{\nu \Sigma_f - \Sigma_a}{D} = \frac{\frac{\nu \Sigma_f}{\Sigma_a} - 1 }{\frac{D}{\Sigma_a}} = \frac{\kinf - 1}{M^2} }
   where migration area $M^2$ is a measurement of the distance travelled before absorption. 
 
-\item Eigenvalues/eigenfunctions
-\item Fission yields
-\item Transient fission product equations
-\item I/Xe reactivity effects
-\item Pm/Sm reactivity effects
-\item Divergence theorem
-\item Laplacian 
-\begin{table}[ht]
+\item Divergence theorem: $\int_V (\divergence \vec{\phi} ) \dV = \int_S (\vec{\phi} \cdot \vecn) \dS$. We apply the divergence theorem in deriving the diffusion theorem from transport theorem. 
+
+\item Laplacian: see Table~\ref{diffusion-table}.
+
+\item Eigenvalues/eigenfunctions: 1D multi-group diffusion equations can be written as a matrix system, and $\keff$ is the eigenvalue of the system, and the flux is the eigenfunction: 
+  \eqn{ [A] [\phi] &= \frac{1}{\keff} [M] [\phi], & [A]^{-1} [M] [\phi] &= \keff [\phi] }
+  If using power iteration, we solve for $[A][\phi]^{n+1} = [M] [\phi]^n$, and $\keff$ can be solved from,
+  \eqn{ \keff = \frac{[M] [\phi]^{n+1} }{[M] [\phi]^n} }
+
+
+\item Fission yields. General properties of fission products: most are highly unstable and rapidly decay; certain fission products are important to thermal spectrum ($\up$ thermal absorption xs, top three are: \ce{^{135} Xe}, \ce{^{103} Rh}, \ce{^{143} Nd}), but have little contribution to the fast spectrum. 
+\begin{figure}[ht]
   \centering
-  \begin{tabular}{|l|l|} \hline
-    Slab & $\dphidxn2 + B^2 \phi(x) = 0$ \\ \hline
-    Sphere & $\dphidrn2 + \frac{2}{r} \dphidr + B^2 \phi(r) = 0$ \\ \hline
-    Infinite Cylinder & $\dphidrn2 + \frac{1}{r} \dphidr + B^2 \phi(r) = 0$ \\ \hline
-    Finite Cylinder & $\dphidrn2 + \frac{1}{r} \dphidr + \dphidzn2 + B^2 \phi(r,z) = 0$ \\ \hline
-    Cartesian & $\dphidxn2 + \dphidyn2 + \dphidzn2 + B^2 \phi(x,y,z) = 0$ \\ \hline
+  \includegraphics[width=5in]{images/dfs/fission-product-yield.png}
+\end{figure}
+
+\item Transient fission product equations: 
+ \eqn{ \frac{\derivative N_i}{\dt} = \overbrace{\gamma_i \Sigma_f \phi}^{\mbox{fission production}} - \overbrace{\lambda_i N_i}^{\mbox{decay loss}} - \overbrace{\sigma_i N_i \phi}^{\mbox{loss by neutron capture}} }
+\eqn{ + \overbrace{ \lambda_j N_j}^{\mbox{production of i by decay of j}} + \overbrace{\sigma_k N_k \phi}^{\mbox{production of i by neutron capture of k}} }
+ Solving the above equation, we find that: 
+ \begin{itemize}
+   \item Equilibrium I-135 concentration is proportional to flux: $I_{eq} = \frac{\gamma_I \Sigma_f \phi}{\gamma_I}$;
+   \item Equilibrium Xe-135 concentration depends on flux at low flux, and it is independent at high flux level: $X_{eq} = \frac{(\gamma_I + \gamma_X) \Sigma_f \phi}{\gamma_X + \sigma_X \phi}$;
+   \item Equilibrium Pm-149 concentration is proportional to flux: $P_{eq} = \frac{\gamma \Sigma_f \phi}{\gamma}$;
+   \item Equilibrium Sm-149 concentration is independent of flux: $S_{eq} = \frac{\gamma \Sigma_f}{\sigma}$. 
+ \end{itemize}
+
+\item I/Xe reactivity effects: Xe-135 has a thermal absorption cross section of $2.6\times 10^6$ barns. 
+\begin{itemize}
+\item Major source: Iodine decay; 
+\item Major sink: burnup. 
+\end{itemize}
+Xenon peaking happens because after shutdown, the major sink is removed, but the major source remains, hence Xenon peaks until the Iodine depletes. Reactors must be designed with enough fuel to offset the effect of Xenon. At the end of core life, there may not be enough reactivity to override peak Xenon; such reactors are called `xenon-precluded.' If a scram occurs, a restart may not be possible for 30-40 hours. See Stacy's Example 6.2 (p.214) for an example of xenon reactivity worth and illustrating diagrams. 
+
+
+\begin{table}
+  \centering
+  \begin{tabular}{|p{0.6\textwidth}|p{0.4\textwidth}|}\hline
+    \begin{minipage}[b]{0.6\textwidth}
+      \includegraphics[width=3.5in]{images/dfs/I-Xe-1.png} 
+    \end{minipage}
+    & 
+    \begin{minipage}[b]{0.4\textwidth}
+      After startup: both I and Xe increases, and saturates after 30 hours. After shutdown: I decays quickly, whereas Xe peaks 9 hours after shutdown, and decays away in 60 hours. The peak happens because I coninues to decay into Xe, while Xe can no longer decrease through capture. 
+There is a 2.5\% depress due to Xe; the higher the flux, the higher the peak is.
+    \end{minipage}   \\ \hline
+%
+    \begin{minipage}[b]{0.6\textwidth}
+      \includegraphics[width=3.5in]{images/dfs/I-Xe-2.png} 
+    \end{minipage}
+    & 
+    \begin{minipage}[b]{0.4\textwidth}    
+      A rapid startup after a scram: the concentration decreases immediately after the startup, because Xe absorption increases suddnely due to flux and the over-weight the amount from I decay. Xe would reach its equilibrium value again after about 40 hours. 
+    \end{minipage}  \\ \hline
+%
+    \begin{minipage}[b]{0.6\textwidth}
+      \includegraphics[width=3.5in]{images/dfs/I-Xe-3.png}
+    \end{minipage}
+ &  
+    \begin{minipage}[b]{0.4\textwidth}    
+      Equilibrium Xenon Worth: if $\phi \to \infty$, then $X_{eq}$ is independent of the flux as in the $X_{eq}$ expression; additionally, the Xenon concentration drops right after everytime power increases for the same reason as the previous case (flux increases, the destruction rate of Xe increases instantenously, but the Iodine decay rate has not increased yet). 
+    \end{minipage} \\ \hline
+%
+    \begin{minipage}[b]{0.6\textwidth}
+    \includegraphics[width=3.5in]{images/dfs/I-Xe-4.png}
+    \end{minipage}
+ &  
+    \begin{minipage}[b]{0.4\textwidth}
+      Xenon for high flux reactor: xenon peak gives rise to a control constraint. If the reactivity reserves (control rods or poisons that can be removed) are insufficient, the reactor cannot be restarted during this period of increased xenon poisoning. We have to wait till Xe drops to re-start. Alternatively, you can start before Xenon builds up, which is pretty rare. 
+      \end{minipage} \\ \hline
   \end{tabular}
 \end{table}
 
+\item  Pm/Sm reactivity effects: Samarium is another fission poisoner. It has one source: decay of Promethium; it has one sink: burnup. 
+
+\begin{table}
+  \centering
+  \begin{tabular}{|p{0.6\textwidth}|p{0.4\textwidth}|}\hline
+    \begin{minipage}[b]{0.6\textwidth}
+      \includegraphics[width=3.5in]{images/dfs/Pm-Sm-1.png} 
+    \end{minipage}
+    & 
+    \begin{minipage}[b]{0.4\textwidth}
+      Promethium behaves normally: it builds up and reaches equilibrium when in operation, and it decays away after shutdown. 
+Sm behaves similar to Xe in the sense that both peaks after reactor shutdown (Sm peaks 200 hours after shutdown, Xe peaks 9 hours after shutdown). But Sm is stable unlike Xe, and once Pm burns out, Sm would stay constant and never decay away. Sm reactivity peaks by 200-300 pcm after shutdown. 
+    \end{minipage}   \\ \hline
+%
+    \begin{minipage}[b]{0.6\textwidth}
+      \includegraphics[width=3.5in]{images/dfs/Pm-Sm-2.png} 
+    \end{minipage}
+    & 
+    \begin{minipage}[b]{0.4\textwidth}    
+     Sm worth following a refueling outage: Over-write Xenon by pulling the control rods out for a couple of days; then insert the control rods for Sm. Sm returns to equilibrium about 100 hours after restart.
+    \end{minipage}  \\ \hline
+%
+    \begin{minipage}[b]{0.6\textwidth}
+      \includegraphics[width=3.5in]{images/dfs/Pm-Sm-3.png}
+    \end{minipage}
+    &  
+    \begin{minipage}[b]{0.4\textwidth}    
+      Sm for high flux reactor (20x PWR power density): Sm peaks a lot, which is bad because we may never be able to overrid Sm reactivity without refueling. Hence we should always have a controlled shutdown that burns out Xe/Sm before they build up. 
+    \end{minipage} \\ \hline
+  \end{tabular}
+\end{table}
 \end{enumerate}
-
-
 
 \clearpage
 \topic{Analytical Diffusion Theory} 
@@ -191,10 +287,34 @@ This expression is exact, because we haven't approximate $\vecJ$ yet.
 \clearpage
 \topic{Numerical Diffusion Theory}
 \begin{enumerate}
-\item Finite-difference diffusion equation
-\item Fission source iterations
-\item Gauss-Jacobi flux inner iterations
-\item Dominance ratio estimation
+\item Finite-difference diffusion equation: 
+\begin{align*}
+ - \hat{D}_1^{n-1,n} \phi_1^{n-1} - \hat{D}_1^{n,n+1} \phi_1^{n+1} + [ \Sigma_{r1}^n \Delta^n + \hat{D}_1^{n-1, n} + \hat{D}_1^{n,n+1} ] \phi_1^n 
+&= \nu \Sigma_{f1}^n \phi_1^n \Delta^n + \nu \Sigma_{f2}^n \phi_2^n \Delta^n + S_1^n \Delta^n \\
+- \hat{D}_2^{n-1,n} \phi_2^{n-1} - \hat{D}_2^{n,n+1} \phi_2^{n+1} + [\Sigma_{a2}^n \Delta^n + \hat{D}_2^{n-1.n} + \hat{D}_2^{n,n+1} ] \phi_2^n 
+&= \Sigma_{s12}^n \phi_1^n \Delta^n + S_2^n \Delta^n 
+\end{align*}
+
+\item Fission source iterations: the equation we are trying to solve is,
+\eqn{ [A] [\phi]^{n+1} &= [M] [\phi]^n }
+An initial guess of the flux $\phi_i^{(0)}$ at each point and of the eigenvalue $\lambda^{(0)}$ is made and an initial fission source at each point is constructed $S_i^{(0)} = M \phi_i^{(0)}$. The Gaussian elimination is performed to determine $\phi_i^{(1)} = A^{-1} S_i^{(0)}$. Then we update the source term as well based on the flux. A new estimate of the eigenvalue is made from: 
+\eqn{ \keff = \frac{S_i^{(1)}}{S_i^{(0)}} }
+The process is continued until the eigenvalues obtained on two successive iterates differ by less than a threshold level. The rate our fission source converges depends on material, geometry etc.
+
+\item Gauss-Jacobi flux inner iterations: 
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=4in]{images/dfs/power-iteration-Gauss-Jacobi.png}
+\end{figure}
+
+\item Dominance ratio estimation: 
+Given an eigenvalue problem, if we specify the solved eigenvalues to be:
+\eqn{ |\lambda_1| > |\lambda_2| \ge |\lambda_3| \ge \cdots }
+then $|\lambda_1|$ is the spectral radius of the iteration matrix, and every mode has a dominance ratio,
+\eqn{ \dr_n = \frac{\lambda_n}{\lambda_1} }
+and power iteration kills of the lowest dominance ratio modes. The last remaining mode is the fundamental mode $dr = \frac{\lambda_2}{\lambda_1}$. If $|\lambda_1| \ge 1$, the ietration scheme is unstable and it would not converge. Convergence of the power method is slow when $d$ is close to unity; in fact in most numerical methods, convergence rate = 1 - dominance ratio.
+
+Dominance ratio measures the spatial decoupling, and it depends on: symmetric mode, core size, decoupling of the radial zones, and of the axial zones. 
 \end{enumerate}
 
 

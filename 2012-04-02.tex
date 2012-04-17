@@ -5,6 +5,8 @@
 \maketitle
 
 \lecture{Two-Group Diffusion: Numerical Solutions}
+Reference: Stacy's Section 3.10. 
+
 \topic{Simple Numerical Methods to Solve Diffusion Equations}
 \subtopic{Derivation of Neutron Balance Equation}
 Recall the two-group neutron balance equations:
@@ -22,7 +24,7 @@ Recall the two-group neutron balance equations:
 Then we construct a finite spatial mesh in which cross sections are constant; integrate the neutron diffusion equations over each mesh cell $\Delta^n$,
 \eqn{-\int \ddx D_1^n \ddx \phi_1^n \dx + \Sigma_{r1}^n  \phi_1^n \Delta^n = \nu \Sigma_{f1}^n \phi_1^n \Delta^n + \nu \Sigma_{f2}^n \phi_2^n \Delta^n + S_1 \Delta^n} 
 \eqn{-\int \ddx D_2^n \ddx \phi_2^n  \dx + \Sigma_{a2}^n \phi_2^n \Delta^n = \Sigma_{s12}^n \phi_1^n \Delta^n + S_2 \Delta^n}
-We evaluate the integral term\footnote{Lectuer says use the divergence theorem $\int \divergence \vec{F} \dV = \int_S \vec{F} \cdot \vec{n} \dS$, I think this is just manipulating integral and $\int \ddx A \dx \to A$}, 
+We evaluate the integral term\footnote{Lectuer says use the divergence theorem $\int \divergence \vec{F} \dV = \int_S \vec{F} \cdot \vec{n} \dS$, I think this is just manipulating integral and $\int_{x_1}^{x_2} \ddx A \dx \to \left. A \right|_{x_2} - \left. A \right|_{x_1}$}, 
 \eqn{\int \ddx D_1^n \ddx \phi_1^n \dx  = \left. D_1^n \ddx \phi_1^n \right|_{n^+} - \left. D_1^n \ddx \phi_1^n \right|_{n^-} }
 Then we have,
 \eqn{\left. D_1^n \ddx \phi_1^n \right|_{n^-} - \left. D_1^n \ddx \phi_1^n \right|_{n^+} + \Sigma_{r1}^n  \phi_1^n \Delta^n = \nu \Sigma_{f1}^n \phi_1^n \Delta^n + \nu \Sigma_{f2}^n \phi_2^n \Delta^n + S_1 \Delta^n} 
@@ -92,7 +94,7 @@ Whose compressed form is,
 The two matrix are plotted in Figure~\ref{matrix-form}. Notice there are missing points in A; explaination: Block matrix: there is no coupling of group 1 left flux to the group 2 right flux. 
 \begin{figure}
   \centering
-  \includegraphics[width=4in]{images/dfs/matrix-form.png}
+  \includegraphics[width=6in]{images/dfs/matrix-form.png}
   \caption{Destruction and Production Matrix} \label{matrix-form}
 \end{figure}
 
@@ -103,9 +105,9 @@ The two matrix are plotted in Figure~\ref{matrix-form}. Notice there are missing
 [A - M ] [\phi] &= [S] \\
 [\phi] &= [A - M]^{-1} [S]
 \end{align}
-In this method, we guess $\keff$, and given a source we can solve for the flux. We never solve real questions this way, because the flux approaches the right shape as we increase the $\keff$ to approach the correct $\keff$, but once we pass the correct $\keff$, the flux can be entirely inverted to become negative (now that I think about it, this is fine because the flux solved can be arbitrarily scaled). 
+In this method, we guess $\keff$, and given a source we can solve for the flux. We can either use Matlab to solve the $Ax = b$ system, or we use Gaussian elimination/forward elimination backward substitution by hand. The basic idea is to subtract $a_{i,i-1}/a_{i-1,i-1}$ times the $(i-1)$th equation from the $i$th equation to eliminate the $a_{i,i-1}$ element in the $i$th equation. The modified $i$th equation is then divided by $a_{i,i}$. This process is repeated successively for $i=1$ through $i = I-1$. 
 
-If we have a super-critical problem, then the only way to get criticality with an additional source is through negative flux. A reactor is like an amplifier; the closer it is to criticality the more amplification it is; when critical, the amplification is infinity. 
+We never solve real questions this way, because the flux approaches the right shape as we increase the $\keff$ to approach the correct $\keff$, but once we pass the correct $\keff$, the flux can be entirely inverted to become negative (now that I think about it, this is fine because the flux solved can be arbitrarily scaled). If we have a super-critical problem, then the only way to get criticality with an additional source is through negative flux. A reactor is like an amplifier; the closer it is to criticality the more amplification it is; when critical, the amplification is infinity. 
 
 
 \subtopic{Method 2: Direct Matlab Eigenvalue Solver}
@@ -118,11 +120,11 @@ Notice that the eigenvectors are arbitrarily normalized; hence it is fine if the
 
 
 \subtopic{Method 3: Power Iterations}
-\begin{align}
-[A] [\phi]^{n+1} &= [M] [\phi]^n \\
-\keff &= \frac{[M][\phi]^{n+1} }{[M] [\phi]^n} 
-\end{align}
-The rate our fission source converges depends on material, geometry etc. See next section for \hi{dominance ratio}. 
+The equation we are trying to solve is,
+\eqn{ [A] [\phi]^{n+1} &= [M] [\phi]^n }
+An initial guess of the flux $\phi_i^{(0)}$ at each point and of the eigenvalue $\lambda^{(0)}$ is made and an initial fission source at each point is constructed $S_i^{(0)} = M \phi_i^{(0)}$. The Gaussian elimination is performed to determine $\phi_i^{(1)} = A^{-1} S_i^{(0)}$. Then we update the source term as well based on the flux. A new estimate of the eigenvalue is made from: 
+\eqn{ \keff = \frac{S_i^{(1)}}{S_i^{(0)}} }
+The process is continued until the eigenvalues obtained on two successive iterates differ by less than a threshold level. The rate our fission source converges depends on material, geometry etc. See next section for \hi{dominance ratio}. 
 \begin{figure}
   \centering
   \includegraphics[width=4in]{images/dfs/power-iteration-convergence.png}
@@ -130,8 +132,12 @@ The rate our fission source converges depends on material, geometry etc. See nex
 \end{figure}
 
 \subtopic{Method 3+: Power Iterations with Gauss-Jacobi Numerical Inversion of Flux Matrix}
-See Lec. 12 slide 21. In a steady-state problem, it does not matter whether we fully converge our flux iteration. 
-
+In a steady-state problem, it does not matter whether we fully converge our flux iteration. 
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=4in]{images/dfs/power-iteration-Gauss-Jacobi.png}
+  \caption{Power Iteration With Gauss-Jacobi Numerical Inversion of Matrix}
+\end{figure}
 
 \clearpage
 \topic{Matrix Representation of Higher Dimensions Diffusion Equations}
@@ -150,9 +156,9 @@ See Lec. 12 slide 21. In a steady-state problem, it does not matter whether we f
 \topic{Dominance Ratio}
 Given an eigenvalue problem, if we specify the solved eigenvalues to be:
 \eqn{ |\lambda_1| > |\lambda_2| \ge |\lambda_3| \ge \cdots }
-where $|\lambda_1|$ is the spectral radius of the iteration matrix, and 
-\eqn{ \dr = \frac{\lambda_2}{\lambda_1} = \mbox{dominance ratio} }
-If $|\lambda_1| \ge 1$, the ietration scheme is unstable and it would not converge\footnote{See Lewis' Computational Methods of Neutron Transport Appendixe C for more details}. Convergence of the power method is slow when $d$ is close to unity; in fact in most numerical methods, convergence rate = 1 - dominance ratio. Knowing the dominance ratio, we can estimate the number of iterations needed for convergence. 
+then $|\lambda_1|$ is the spectral radius of the iteration matrix, and every mode has a dominance ratio,
+\eqn{ \dr_n = \frac{\lambda_n}{\lambda_1} }
+and power iteration kills of the lowest dominance ratio modes. The last remaining mode is the fundamental mode $dr = \frac{\lambda_2}{\lambda_1}$. If $|\lambda_1| \ge 1$, the ietration scheme is unstable and it would not converge\footnote{See Lewis' Computational Methods of Neutron Transport Appendixe C for more details}. Convergence of the power method is slow when $d$ is close to unity; in fact in most numerical methods, convergence rate = 1 - dominance ratio. Knowing the dominance ratio, we can estimate the number of iterations needed for convergence. 
 
 Dominance ratio measures the spatial decoupling. It depends on: 
 \begin{enumerate}
