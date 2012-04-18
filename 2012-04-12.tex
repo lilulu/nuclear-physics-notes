@@ -8,16 +8,12 @@
 \topic{General Background}
 \begin{enumerate}
 
-\item Material $\kinf$ from group cross sections: 
-  \begin{itemize}
-  \item One-group: no flux dependency; cross sections that treat pin-cells as homogenized preserve exactly our MC fuel reactivity for infinite repeating lattices. 
-  \eqn{ \kinf = \frac{\nu \bar{\Sigma}_f }{\bar{\Sigma}_a} }
-  \item Two-group: Solve from two-group balance equation, still only depend on integrated cross section (we approximate the flux ratio with cross sections). 
-    \eqn{ \kinf = \frac{\nu \bar{\Sigma}_{f1} + \nu \bar{\Sigma}_{f2} \frac{\hat{\Sigma}_{s12} }{\bar{\Sigma}_{a2}}}{\bar{\Sigma}_{a1} + \hat{\Sigma}_{s12} }   }
-  \end{itemize}
+\item Material $\kinf$: depend on integrated cross section only (cross sections that treat pin-cells as homogenized preserve exactly the MC fuel reactivity for infinite repeating lattices): 
+  \eqn{ \kinf &= \frac{\nu \bar{\Sigma}_f }{\bar{\Sigma}_a},  
+    &\kinf &= \frac{\nu \bar{\Sigma}_{f1} + \nu \bar{\Sigma}_{f2} \frac{\hat{\Sigma}_{s12} }{\bar{\Sigma}_{a2}}}{\bar{\Sigma}_{a1} + \hat{\Sigma}_{s12} }   }
 
-\item $\keff$: take into account leakage, notice $\keff$ does not depend on volume or flux, 
-  \eqn{ \keff = \frac{\nu \Sigma_f}{DB^2 + \Sigma_a} } 
+\item $\keff$: take into account leakage, notice $\keff$ does not depend on volume or flux. The one group and two group expressions are, 
+  \eqn{ \keff &= \frac{\nu \Sigma_f}{DB^2 + \Sigma_a}, &\kinf &= \frac{\nu \bar{\Sigma}_{f1} + \nu \bar{\Sigma}_{f2} \frac{\hat{\Sigma}_{s12} }{D_2 B^2 + \bar{\Sigma}_{a2}}}{D_1 B^2 + \bar{\Sigma}_{a1} + \hat{\Sigma}_{s12} }  } 
 
 \item Materials bucklings,
 \eqn{ B_m^2 = \frac{\frac{\nu \Sigma_f}{\keff} - \Sigma_a}{D} }
@@ -200,14 +196,13 @@ Sm behaves similar to Xe in the sense that both peaks after reactor shutdown (Sm
 Cancel the within group scattering cross section and define the group-wise removal cross section, we get the final form,
 \eqn{ \boxed{- \divergence D_g(\vecr) \gradient \phi_g(\vecr) + \Sigma_{rg} (\vecr) \phi_g(\vecr) = \chi_g \Sum_{g'=1}^G \nu \Sigma_{fg'} (\vecr) \phi_{g'} (\vecr) + \Sum_{g'=1,g'\neq g}^G \Sigma_{sg'g} (\vecr) \phi_{g'} (\vecr) + S_g(\vecr) } }
 
-\item Partial currents and albedos: use $\psi = \frac{1}{4\pi} [\phi + 3 \Omegahat \cdot \vecJ]$, 
+\item Partial currents and albedos: use $\psi = \frac{1}{4\pi} [\phi + 3 \vecOmega \cdot \vecJ]$, 
   \begin{align}
-    J^+ &= \frac{1}{4} \phi + \frac{1}{2} J_n \\
-    J^- &= \frac{1}{4} \phi - \frac{1}{2} J_n \\
-    J_n &= -\frac{1}{\Sigma_{tr}} \pphipz  
+    J^+ &= \frac{1}{4} \phi + \frac{1}{2} J_n = \frac{1}{4} \phi - \frac{D}{2} \gradient \phi, & J^- &= \frac{1}{4} \phi - \frac{1}{2} J_n = \frac{1}{4} \phi + \frac{D}{2} \gradient \phi \\
+    \phi &= 2[J^+ + J^-], & J_n &= J^+ - J^- =  -\frac{1}{3 \Sigma_{tr}} \gradient \phi  = - D \gradient \phi
   \end{align}
-  Albedo boundary condition is the measurement of how much flux is reflected back: 
-  \eqn{ \alpha = \frac{J^-}{J^+} }
+  Albedo coefficient, the coefficient of reflection, is the measurement of how much flux is reflected back: 
+  \eqn{ \alpha = \frac{J^-}{J^+} = \frac{\mbox{neutrons reflected back to the core}}{\mbox{neutrons leaving the core}} }
   
 \item Boundary conditions:
   \begin{enumerate}
@@ -339,6 +334,17 @@ This expression is exact, because we haven't approximate $\vecJ$ yet.
 \clearpage  
 \item \textbf{Homogeneous (single-region) source problems:}
   \begin{enumerate}
+  \item Consider a non-multiplying medium, slab geometry from $0$ to $l$, no source in the slab: 
+    \eqn{ D \dphidxn2 - \Sigma_a \phi = 0 }
+    The general solution is in the form of, 
+    \eqn{ \phi(x) = A e^{x/L} + C e^{-x/L} = A' \sinh((l-x)/L) + C' \cosh((l-x)/L) }
+    BC1: $\phi(l) = 0 \Rightarrow C' = 0$. Then we are left with, 
+    \eqn{ \phi(x) = A' \sinh((l-x)/L) }
+    We can find the albedo coefficient: 
+    \eqn{ \alpha &= \frac{1 - \gamma}{1 + \gamma}, & \gamma &= \frac{2D}{L} \coth(l/L) }
+    The parameter $\gamma$ is minus twice the current/flux ratio at the interface. The albedo improves as the thickness of the reflector increases. Eventually an asymptote is reached from a thickness of 2 or 3 $L$, 
+    \eqn{ \alpha &= \frac{1 - 2D/L}{1 + 2D/L} }
+
   \item Consider a subcritical multiplying medium, slab geometry from $-L/2$ to $L/2$, and with a source\footnote{See Section~\ref{one-group-source-problem-subcritical}.}. 
     \begin{align}
       - D \dphidxn2 + \Sigma_a \phi(x) &= \nu \Sigma_f \phi(x) + S(x) \\
@@ -347,22 +353,25 @@ This expression is exact, because we haven't approximate $\vecJ$ yet.
     Given $\Sigma_a > \nu \Sigma_f$, $B^2 = \frac{\nu \Sigma_f - \Sigma_a}{D} < 0 $, we re-write $B^2 = - |B|^2$,
     \eqn{ \dphidxn2 - |B|^2 \phi(x) = \tilde{S}(x) }
     The general/homogeneous solution is,
-    \eqn{ \phi_H (x) = A e^{|B|x} + Ce^{-|B|x} = A \cosh (|B|x) + C \sinh (|B| x) }
+    \eqn{ \phi_H (x) = A e^{|B|x} + C e^{-|B|x} = A' \cosh (|B|x) + C' \sinh (|B| x) }
     The particular solution depends on source $\tilde{S}(x)$. Apply BCs $\phi \left( \pm \frac{L}{2} \right) = 0$, we get the boundary conditions in the matrix form,
     \eqn{ \left[ \begin{array}{cc} 
           \cosh(|B|L/2) & \sinh(|B|L/2) \\
           \sinh(|B|L/2) & \cosh(|B|L/2) 
         \end{array} \right] 
       \left[ \begin{array}{c}
-          A \\ C \end{array} \right] 
+          A' \\ C' \end{array} \right] 
       = - \left[ \begin{array}{c} 
           \phi_p(L/2) \\ \phi_p(-L/2) \end{array} \right] }
-    Coefficients A and C are uniquely determined for a given source distribution: 
+    The coefficients are uniquely determined for a given source distribution: 
     \begin{itemize}
     \item There always exists a physically realizable solution (no critical buckling!);
     \item In the limit of $S\to 0$, the only physical solution is the trivial solution. 
     \end{itemize}
 
+
+
+    \clearpage
   \item Conside an infinite non-multiplying medium with a point source. 
     \eqn{ \dphidrn2 + \frac{2}{r} \dphidr - \ols\phi = -\frac{S_0}{D} \delta(\vecr) }
     We look for the homogeneous solution, and set $w = r \phi$, 
@@ -375,6 +384,14 @@ This expression is exact, because we haven't approximate $\vecJ$ yet.
       &\lim_{r\to 0} 4 \pi r^2 J(r) &= 4 \pi DB = S_0 \\
       B &= \frac{S_0}{4 \pi D}, & \phi(r) &= \frac{S_0}{4\pi D} \frac{e^{-r/L}}{r} 
     \end{align}
+
+  \item Consider an infinite non-multiplying medium with a line source along the z-axis. Use cylindrical coordinates, only $\rho$ is involved:
+    \eqn{ D\left[ \frac{\dphi^2}{\derivative^2 \rho} + \frac{1}{\rho} \frac{\dphi}{\drho} \right] - \ols \phi = - \frac{S}{D} }
+    The solution is in terms of Bessel functions, 
+    \eqn{ \phi(\rho) = A K_0(\rho/L) + B I_0(\rho/L) }
+    BC1: $\lim_{\rho \to \infty} \phi = 0, \Rightarrow B = 0$, BC2: $\lim_{\rho \to 0} 2 \pi J = S$, that is, 
+    \eqn{ \phi(\rho) = \frac{S}{2\pi D} K_0(\rho/L) }
+
 
   \item Consider an infinite non-multiplying medium with a plane source at $x=0$. Since the geometry is symmetric, we can solve for $x>0$ first. 
     \eqn{ \phi(x) = Ae^{x/L} + B e^{-x/L}} 
@@ -468,6 +485,8 @@ This expression is exact, because we haven't approximate $\vecJ$ yet.
 \end{enumerate} % end of multi-region diffusion problem
 \end{enumerate} % end of practise problems
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \clearpage
 \topic{Numerical Diffusion Theory}
 \begin{enumerate}
@@ -532,6 +551,32 @@ and power iteration kills of the lowest dominance ratio modes. The last remainin
 Dominance ratio measures the spatial decoupling, and it depends on: symmetric mode, core size (size $\up$, $\dr \up$, takes longer), decoupling of the radial zones, and of the axial zones. 
 
 \item Order of operations (not included in official list): Matrix inversion is of $N^3$, finding all eigenvalues is at least $N^2$, iterative inversion must be order $N$ to be practical, multi-level iteration is a necessity. 
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\clearpage
+\topic{Math Reviews}
+\begin{enumerate}
+\item Trigonometry:
+ \begin{align}
+  \sin(x) &= \mathrm{Im}(e^{ix}) = \frac{e^{ix} - e^{-ix}}{2i} & \cos(x) &= \mathrm{Re}(e^{ix})\frac{e^{ix} + e^{-ix}}{2} \\
+  \sin(ix) &= -i \sinh(x) & \cos(ix) &= \cos (x) \\
+  e^{\pm ix} &= \cos(x) \pm i\sin(x) 
+\end{align}
+
+
+\item Hyperbolic functions:
+\begin{align}
+  \sinh(x) &= \frac{e^x - e^{-x}}{2} & \cosh(x) &= \frac{e^x + e^{-x}}{2} \\
+  \sinh(x) &= -i \sin(ix) & \cosh(x) &= \cos (ix)  \\
+  e^{\pm x} &= \cosh(x) \pm \sinh(x)
+\end{align}
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=4in]{images/dfs/sinh-cosh.png}
+\end{figure}
 
 \end{enumerate}
 
