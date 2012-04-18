@@ -29,26 +29,24 @@ The general definition of $\kinf$ is\footnote{Reference: Henry p. 104, Lec10},
 \eqn{ \kinf =  \frac{\mbox{total fissions} \cdot \bar{\nu} }{\mbox{total absorptions}} = \frac{\int \dV \int \nu \overline{\Sigma_f} \Phi \dE}{\int \dV \int \overline{\Sigma_a} \Phi \dE} = \epsilon \eta f p }
 
 \begin{enumerate}
-\item k From One-Group Cross Section. We start by writing down the One-Group Balance Equation, 
+\item $k$ from One-Group Cross Section. We start by writing down the One-Group Balance Equation, 
 \eqn{ \frac{\nu \bar{\Sigma}_f}{\kinf} \phi - \bar{\Sigma}_a \phi = 0}
 Rearranging, we get 
 \eqn{ \kinf = \frac{\nu \bar{\Sigma}_f \phi}{\bar{\Sigma}_a \phi} = \frac{\nu \bar{\Sigma}_f }{\bar{\Sigma}_a} }
 Observations:
-\begin{enumerate}
+\begin{itemize}
 \item $\kinf$ is simply the ratio of total neutron production to destruction rate;
 \item $\kinf$ does not depend on flux magnitude, normalization, etc;
 \item $\kinf$ depends only on integrated cross sections;
 \item Cross sections for down stream codes which treat pin-cells as homogenized will preserve exactly our MC fuel reactivity for infinite repeating lattices. 
 \item Notice $\kinf$ assumes no leakage; $\keff$ would add an leakage term,
   \eqn{ \keff = \frac{\nu \Sigma_f}{DB^2 + \Sigma_a} }
-\end{enumerate}
+\end{itemize}
 
 
-\item k from Two-Group Cross Section. Again we start with the neutron balance equations (assume all neutrons born in fast group):
+\item $k$ from Two-Group Cross Section. Again we start with the neutron balance equations (assume all neutrons born in fast group):
 \eqn{\frac{\nu \bar{\Sigma}_{f1}}{\kinf} \phi_1 - \bar{\Sigma}_{a1} \phi_1 - \bar{\Sigma}_{s12} \phi_1 + \frac{\nu \bar{\Sigma}_{f2}}{\kinf} \phi_2 + \bar{\Sigma}_{s21} \phi_2 = 0} 
 \eqn{\bar{\Sigma}_{s12} \phi_1 - \bar{\Sigma}_{s21} \phi_2 - \bar{\Sigma}_{a2} \phi_2 = 0 }
- 
-
 \begin{enumerate}
 \item General case: we express the above expression in matrix form, 
   \begin{align}
@@ -76,19 +74,18 @@ Observations:
   \eqn{ \frac{\phi_2}{\phi_1} = \frac{\hat{\Sigma}_{s12} }{\bar{\Sigma}_{a2}} }
   Plug into the first row, we get, 
   \eqn{ \frac{\nu \bar{\Sigma}_{f1}}{\kinf} -  \bar{\Sigma}_{a1}  - \hat{\Sigma}_{s12} + \frac{\nu \bar{\Sigma}_{f2}}{\kinf}  \frac{\hat{\Sigma}_{s12} }{\bar{\Sigma}_{a2}} = 0 }
-  That is, 
   \eqn{ \boxed{\kinf = \frac{\nu \bar{\Sigma}_{f1} + \nu \bar{\Sigma}_{f2} \frac{\hat{\Sigma}_{s12} }{\bar{\Sigma}_{a2}}}{\bar{\Sigma}_{a1} + \hat{\Sigma}_{s12} }   } }
   
   Notice that,
-  \begin{enumerate}
+  \begin{itemize}
   \item Know how to derive the above expression;
   \item Two-Group $\kinf$ depends only on the intergrated cross sections;
   \item Although it looks like a chicken-to-egg problem that we include $\frac{\phi_2}{\phi_1}$ in $\hat{\Sigma}_{s12}$, my understanding is that we either know flux and needs to find cross section, or the other way around, hence we do not need to worry about this term. 
   \item If no upscattering, $\hat{\Sigma}_{s12}$ is effectively $\overline{\Sigma}_{s12}$.
-  \end{enumerate} 
+  \end{itemize} 
 \end{enumerate}
 
-\item k From Balance Equation. For two region problem, we can also solve $\kinf$ from the neutron balance equation. We can reduce down scattering cross section from balance equation (instead of from group-to-froup tallies), 
+\item $k$ from Balance Equation. For two region problem, we can also solve $\kinf$ from the neutron balance equation. We can reduce down scattering cross section from balance equation (instead of from group-to-froup tallies), 
     \eqn{ \hat{\Sigma}_{s12} = \frac{\frac{\nu \bar{\Sigma}_{f1}}{\kinf} - \bar{\Sigma}_{a1} }{1 - \frac{\nu \bar{\Sigma}_{f2} }{\kinf \bar{\Sigma}_{a2}}}}
 \end{enumerate}
 
@@ -105,7 +102,7 @@ Observations:
 \begin{align}
  &\overbrace{\int_{4\pi} \dOmega \vecOmega \cdot \gradient \psi(\vecr, E, \vecOmega)}^{\textcircled{1}} 
 + \Sigma_t (\vecr, E) \overbrace{\int_{4\pi} \dOmega \psi(\vecr, E, \vecOmega)}^{\textcircled{2}} \\
-&= \Sum_i \Sum_{l=0}^L \Sum_{k=-l}^l \overbrace{\left[\int_{4\pi} \dOmega Y_{lk} (\vecOmega) \right]}^{\textcircled{3}} \int \dE' \int \dOmega' \Sigma_s(\vecr, E'\to E, \vecOmega' \to \vecOmega) \psi(\vecr, E', \vecOmega') + \overbrace{\int_{4\pi} \dOmega S(\vecr, E, \vecOmega)}^{\textcircled{4}} 
+&= \Sum_i \Sum_{l=0}^L \Sum_{k=-l}^l \overbrace{\left[\int_{4\pi} \dOmega Y_{lk} (\vecOmega) \right]}^{\textcircled{3}} \int \dE' \Sigma_s(\vecr, E'\to E) \psi_{lk}(\vecr, E') + \overbrace{\int_{4\pi} \dOmega S(\vecr, E, \vecOmega)}^{\textcircled{4}} 
 \end{align}
 The scattering kernel is nasty, because a) $\Sigma_s$ depends on energy, hence we have to integrate over all energy; b) $\Sigma_s$ depends on angle, hence we have to integrate over all angle; c) $\Sigma_s$ depends on isotope, hence we have to integrate over all isotopes. 
 
@@ -113,13 +110,12 @@ The scattering kernel is nasty, because a) $\Sigma_s$ depends on energy, hence w
 \begin{align}
 \textcircled{1} &= \int_{4\pi} \dOmega (\divergence \vecOmega \psi) = \divergence \left[\int_{4\pi} \dOmega \vecOmega \psi \right] = \divergence \vec{J} (\vecr, E) \\
 \textcircled{2} &= \phi(\vecr, E) \\
-\textcircled{3} &= \sqrt{4\pi} \int_{4\pi} \dOmega \bar{Y}_{00}(\vecOmega) Y_{lk} (\vecOmega) = \sqrt{4\pi} \delta_{l0}\delta_{k0} \\
-\sqrt{4 \pi } \psi_{00} &= \phi \\
+\textcircled{3} &= \sqrt{4\pi} \int_{4\pi} \dOmega \bar{Y}_{00}(\vecOmega) Y_{lk} (\vecOmega) = \sqrt{4\pi} \delta_{l0}\delta_{k0}, \fsp \fsp \sqrt{4 \pi } \psi_{00} = \phi \\
 \textcircled{4} &= S_0 (\vecr, E) 
 \end{align}
 
 \item We obtain the balance equation:
-\eqn{ \boxed{ \divergence \vecJ (\vecr, E) + \Sigma_t (\vecr, E) \phi(\vecr, E) = \Sum_i \int_{E'} \dE' \Sigma_s^i (\vecr, E'\to E) \phi(\vecr, E') + S_0 (\vecr, E) }}
+\eqn{ \boxed{ \divergence \vecJ (\vecr, E) + \Sigma_t (\vecr, E) \phi(\vecr, E) = \Sum_i \int_{E'} \dE' \Sigma_{s}^i (\vecr, E'\to E) \phi(\vecr, E') + S_0 (\vecr, E) }}
 This balance equation is basically equalling the source and the sink. Notice this equation is exact so far. But since we do not know what $\vec{J}$ is, we need to approximate it somehow. 
 \end{enumerate}
 
@@ -130,7 +126,8 @@ This balance equation is basically equalling the source and the sink. Notice thi
 \begin{align}
 & \overbrace{\int_{4\pi} \dOmega \vecOmega \vecOmega \cdot \gradient \psi(\vecr, E, \vecOmega)}^{\textcircled{5}} 
 + \Sigma_t (\vecr, E) \overbrace{\int_{4\pi} \dOmega \vecOmega \psi(\vecr, E, \vecOmega)}^{\textcircled{6}} \\
-&= \Sum_i \Sum_{l=0}^L \Sum_{k=-l}^l \overbrace{\left[\int_{4\pi} \dOmega \vecOmega Y_{lk} (\vecOmega) \right]}^{\textcircled{7}} \int \dE' \int \dOmega' \Sigma_s(\vecr, E'\to E, \vecOmega' \to \vecOmega) \psi(\vecr, E', \vecOmega') + \overbrace{\int_{4\pi} \dOmega \vecOmega S(\vecr, E, \vecOmega)}^{\textcircled{8}} 
+&= \Sum_i \Sum_{l=0}^L \Sum_{k=-l}^l \overbrace{\left[\int_{4\pi} \dOmega \vecOmega Y_{lk} (\vecOmega) \right]}^{\textcircled{7}} \int \dE' \Sigma_{s1}^i (\vecr, E'\to E) \psi_{lk}(\vecr, E') 
++ \overbrace{\int_{4\pi} \dOmega \vecOmega S(\vecr, E, \vecOmega)}^{\textcircled{8}} 
 \end{align}
 
 \item Substitute the $P_1$ angular flux expansion, 

@@ -14,7 +14,6 @@
   \eqn{ \kinf = \frac{\nu \bar{\Sigma}_f }{\bar{\Sigma}_a} }
   \item Two-group: Solve from two-group balance equation, still only depend on integrated cross section (we approximate the flux ratio with cross sections). 
     \eqn{ \kinf = \frac{\nu \bar{\Sigma}_{f1} + \nu \bar{\Sigma}_{f2} \frac{\hat{\Sigma}_{s12} }{\bar{\Sigma}_{a2}}}{\bar{\Sigma}_{a1} + \hat{\Sigma}_{s12} }   }
-  \item Balance equation, \textcolor{red}{what is it?} 
   \end{itemize}
 
 \item $\keff$: take into account leakage, notice $\keff$ does not depend on volume or flux, 
@@ -22,28 +21,16 @@
 
 \item Materials bucklings,
 \eqn{ B_m^2 = \frac{\frac{\nu \Sigma_f}{\keff} - \Sigma_a}{D} }
+If $\keff = 1$, the material buckling is uniquely determined by the cross sections. See infinite medium critical buckling for more details. 
 
 \item Geometrical buckling: the allowable values that satisfy the boundary conditions are uniquely determined reactor geometry. See Table~\ref{diffusion-table}. 
-\begin{table}
-  \small
-  \makebox[\textwidth][c]{
-  \begin{tabular}{|l|l|l|l|} \hline
-    Geometry & Diffusion Equation & Flux & Geometrical Buckling \\ \hline
-    Slab $\in  \left[- \frac{L}{2}, \frac{L}{2} \right]$ &$\dphidxn2 + B^2 \phi = 0$ & $\phi = A \cos \left( \frac{\pi x}{L} \right)$ & $B^2 = \left( \frac{\pi}{L} \right)^2$ \\ 
-    Sphere $\in [0, R]$  & $\dphidrn2 + \frac{2}{r} \dphidr + B^2 \phi = 0$& $\phi= \frac{A}{r} \sin \left( \frac{\pi r}{R} \right)$ & $B^2 = \left( \frac{\pi}{R} \right)^2$ \\
-    Cylinder ($z: \infty$) & $\dphidrn2 + \frac{1}{r} \dphidr + B^2 \phi = 0$ & $\phi = A J_0 \left( \frac{2.405 r}{R} \right)$ & $B^2 = \left( \frac{2.405}{R} \right)^2$ \\ 
-    Cylinder (z: $\pm H/2$) & $\dphidrn2 + \frac{1}{r} \dphidr + \dphidzn2 + B^2 \phi = 0$ & $\phi = A J_0\left( \frac{2.405 r}{R} \right) \cos \left( \frac{\pi z}{H} \right)$ & $B^2 = \left( \frac{2.405}{R} \right)^2 + \left( \frac{\pi}{H} \right)^2$ \\ 
-    Parallelepiped ($\pm \frac{L_i}{2}$) & $\dphidxn2 + \dphidyn2 + \dphidzn2 + B^2 \phi = 0$ & $\phi = A \cos \left( \frac{\pi x}{L_x} \right) \cos \left( \frac{\pi y}{L_y} \right) \cos \left( \frac{\pi x}{L_z} \right)$ & $B^2 = \left( \frac{\pi}{L_x} \right)^2 + \left( \frac{\pi}{L_y} \right)^2 + \left( \frac{\pi}{L_z} \right)^2$ \\ \hline
-  \end{tabular}
-}
-  \caption{Finite Geometries With Zero Flux BC} \label{diffusion-table}
-\end{table}
 
-\item Infinite medium critical buckling:
+\item Infinite medium critical buckling: where migration area $M^2$ is a measurement of the distance travelled before absorption. 
   \eqn{ B_m^2 = \frac{\nu \Sigma_f - \Sigma_a}{D} = \frac{\frac{\nu \Sigma_f}{\Sigma_a} - 1 }{\frac{D}{\Sigma_a}} = \frac{\kinf - 1}{M^2} }
-  where migration area $M^2$ is a measurement of the distance travelled before absorption. 
 
-\item Divergence theorem: $\int_V (\divergence \vec{\phi} ) \dV = \int_S (\vec{\phi} \cdot \vecn) \dS$. We apply the divergence theorem in deriving the diffusion theorem from transport theorem. 
+\item Divergence theorem: $\int_V (\divergence \vec{\phi} ) \dV = \int_S (\vec{\phi} \cdot \vecn) \dS$. In deriving the diffusion theorem from transport theorem, we use the divergence theorem to turn the surface integral into the volume integral,
+  \eqn{ \int \vecJ \cdot \vec{n} \dS = \int \divergence \vecJ \dV }
+  From there we use the Fick's law, $\vecJ = - D \gradient \phi$ to get the leakage term $-D \laplacian \phi$. 
 
 \item Laplacian: see Table~\ref{diffusion-table}.
 
@@ -60,8 +47,7 @@
 \end{figure}
 
 \item Transient fission product equations: 
- \eqn{ \frac{\derivative N_i}{\dt} = \overbrace{\gamma_i \Sigma_f \phi}^{\mbox{fission production}} - \overbrace{\lambda_i N_i}^{\mbox{decay loss}} - \overbrace{\sigma_i N_i \phi}^{\mbox{loss by neutron capture}} }
-\eqn{ + \overbrace{ \lambda_j N_j}^{\mbox{production of i by decay of j}} + \overbrace{\sigma_k N_k \phi}^{\mbox{production of i by neutron capture of k}} }
+ \eqn{ \frac{\derivative N_i}{\dt} = \overbrace{\gamma_i \Sigma_f \phi}^{\mbox{fission gain}} - \overbrace{\lambda_i N_i}^{\mbox{decay}} - \overbrace{\sigma_i N_i \phi}^{\mbox{n capture}}  + \overbrace{ \lambda_j N_j}^{\mbox{decay of j}} + \overbrace{\sigma_k N_k \phi}^{\mbox{n capture of k}} }
  Solving the above equation, we find that: 
  \begin{itemize}
    \item Equilibrium I-135 concentration is proportional to flux: $I_{eq} = \frac{\gamma_I \Sigma_f \phi}{\gamma_I}$;
@@ -70,10 +56,10 @@
    \item Equilibrium Sm-149 concentration is independent of flux: $S_{eq} = \frac{\gamma \Sigma_f}{\sigma}$. 
  \end{itemize}
 
-\item I/Xe reactivity effects: Xe-135 has a thermal absorption cross section of $2.6\times 10^6$ barns. 
+\item I/Xe, Pm/Sm reactivity effects: Xe and Sm both are fission poisoners\footnote{Xe-135 has a thermal absorption cross section of $2.6\times 10^6$ barns.}. 
 \begin{itemize}
-\item Major source: Iodine decay; 
-\item Major sink: burnup. 
+\item Major source of Xe: Iodine decay; Source of Sm: Pm decay;
+\item Major sink of Xe: burnup; Sink of Sm: burnup. 
 \end{itemize}
 Xenon peaking happens because after shutdown, the major sink is removed, but the major source remains, hence Xenon peaks until the Iodine depletes. Reactors must be designed with enough fuel to offset the effect of Xenon. At the end of core life, there may not be enough reactivity to override peak Xenon; such reactors are called `xenon-precluded.' If a scram occurs, a restart may not be possible for 30-40 hours. See Stacy's Example 6.2 (p.214) for an example of xenon reactivity worth and illustrating diagrams. 
 
@@ -116,62 +102,93 @@ There is a 2.5\% depress due to Xe; the higher the flux, the higher the peak is.
   \end{tabular}
 \end{table}
 
-\item  Pm/Sm reactivity effects: Samarium is another fission poisoner. It has one source: decay of Promethium; it has one sink: burnup. 
-
 \begin{table}
   \centering
-  \begin{tabular}{|p{0.6\textwidth}|p{0.4\textwidth}|}\hline
-    \begin{minipage}[b]{0.6\textwidth}
-      \includegraphics[width=3.5in]{images/dfs/Pm-Sm-1.png} 
+  \begin{tabular}{|p{0.5\textwidth}|p{0.5\textwidth}|}\hline
+    \begin{minipage}[b]{0.5\textwidth}
+      \includegraphics[width=3in]{images/dfs/Pm-Sm-1.png} 
     \end{minipage}
     & 
-    \begin{minipage}[b]{0.4\textwidth}
-      Promethium behaves normally: it builds up and reaches equilibrium when in operation, and it decays away after shutdown. 
+    \begin{minipage}[b]{0.5\textwidth}
+      Pm behaves normally: it builds up and reaches equilibrium when in operation, and it decays away after shutdown. 
 Sm behaves similar to Xe in the sense that both peaks after reactor shutdown (Sm peaks 200 hours after shutdown, Xe peaks 9 hours after shutdown). But Sm is stable unlike Xe, and once Pm burns out, Sm would stay constant and never decay away. Sm reactivity peaks by 200-300 pcm after shutdown. 
     \end{minipage}   \\ \hline
 %
-    \begin{minipage}[b]{0.6\textwidth}
-      \includegraphics[width=3.5in]{images/dfs/Pm-Sm-2.png} 
+    \begin{minipage}[b]{0.5\textwidth}
+      \includegraphics[width=3in]{images/dfs/Pm-Sm-2.png} 
     \end{minipage}
     & 
-    \begin{minipage}[b]{0.4\textwidth}    
+    \begin{minipage}[b]{0.5\textwidth}    
      Sm worth following a refueling outage: Over-write Xenon by pulling the control rods out for a couple of days; then insert the control rods for Sm. Sm returns to equilibrium about 100 hours after restart.
     \end{minipage}  \\ \hline
 %
-    \begin{minipage}[b]{0.6\textwidth}
-      \includegraphics[width=3.5in]{images/dfs/Pm-Sm-3.png}
+    \begin{minipage}[b]{0.5\textwidth}
+      \includegraphics[width=3in]{images/dfs/Pm-Sm-3.png}
     \end{minipage}
     &  
-    \begin{minipage}[b]{0.4\textwidth}    
+    \begin{minipage}[b]{0.5\textwidth}    
       Sm for high flux reactor (20x PWR power density): Sm peaks a lot, which is bad because we may never be able to overrid Sm reactivity without refueling. Hence we should always have a controlled shutdown that burns out Xe/Sm before they build up. 
     \end{minipage} \\ \hline
   \end{tabular}
 \end{table}
 \end{enumerate}
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \clearpage
-\topic{Analytical Diffusion Theory} 
+\topic{Analytical Diffusion Concepts} 
 \begin{enumerate}
 \item Transport cross section and diffusion coefficients: from the net current equation, assume the scattering is isotropic in the COM system, and use transport correction $P_0$ approximation, 
-  \eqn{ D = \frac{1}{3 \Sigma_{tr} } }
-  \eqn{ \Sigma_{tr} = \Sigma_t - \Sigma_{s1} = \Sigma_t - \frac{2}{3A} \Sigma_s }
+  \eqn{ D &= \frac{1}{3 \Sigma_{tr} }, & \Sigma_{tr} &= \Sigma_t - \Sigma_{s1} = \Sigma_t - \frac{2}{3A} \Sigma_s }
 
 \item Effective down-scattering cross section: 
   \eqn{ \hat{\Sigma}_{s12} = \bar{\Sigma}_{s12} - \bar{\Sigma}_{s21} \frac{\phi_2}{\phi_1} }
-  So that up-scattering is zero: 
-  \eqn{ \Sigma_{21}  = 0 }
+  Typically we can assume the up-scattering is zero: $\Sigma_{s21}  = 0$.
 
 \item Removal cross section
   \eqn{ \Sigma_{rg} = \Sigma_{tg} - \Sigma_{sgg} = \Sigma_{ag} + \Sum_{g'=1, g'\neq g}^G \Sigma_{sgg'}  }
 
 \item Two-group diffusion equations,
-  \begin{align}
-    \left[ \begin{array}{cc} 
-        \frac{\nu \bar{\Sigma}_{f1}}{\kinf} -  \bar{\Sigma}_{a1}  - \hat{\Sigma}_{s12} & \frac{\nu \bar{\Sigma}_{f2}}{\kinf}   \\
-        \hat{\Sigma}_{s12} &  - \bar{\Sigma}_{a2}  
-      \end{array} \right] 
-    \left[ \begin{array}{c} \phi_1 \\ \phi_2 \end{array} \right] = 0
-  \end{align}
+  \begin{enumerate}
+    \item General expression: 
+      \begin{align}
+        \left\{ \begin{array}{c}
+          - D_1 \laplacian \phi_1 + (\Sigma_{a1} + \Sigma_{s12}) \phi_1 = \nu \Sigma_{f1} \phi_1 + \nu \Sigma_{f2} \phi_2 + S_1  \\
+          - D_2 \laplacian \phi_2 + \Sigma_{a2} \phi_2 = \Sigma_{s12} \phi_1 + S_2
+        \end{array} \right. 
+      \end{align}
+
+      \item Infinite medium: $\laplacian \phi \to 0$ for no leakage,
+       \begin{align}
+         \left\{ \begin{array}{c}
+         (\Sigma_{a1} + \Sigma_{s12} ) \phi_1 = \frac{1}{\kinf} ( \nu \Sigma_{f1} \phi_1 + \nu \Sigma_{f2} \phi_2 )   \\
+      \Sigma_{a2} \phi_2 = \Sigma_{s12} \phi_1
+      \end{array} \right. 
+         \end{align}
+      \begin{align}
+        \left[ \begin{array}{cc} 
+            \frac{\nu \bar{\Sigma}_{f1}}{\kinf} -  \bar{\Sigma}_{a1}  - \hat{\Sigma}_{s12} & \frac{\nu \bar{\Sigma}_{f2}}{\kinf}   \\
+            \hat{\Sigma}_{s12} &  - \bar{\Sigma}_{a2}  
+          \end{array} \right] 
+        \left[ \begin{array}{c} \phi_1 \\ \phi_2 \end{array} \right] = 0
+      \end{align}
+
+    \item Finite medium: has leakage term $DB^2$, 
+       \begin{align}
+         \left\{ \begin{array}{c}
+           (D_1 B^2 + \Sigma_{a1} + \Sigma_{s12} ) \phi_1 = \frac{1}{\keff} ( \nu \Sigma_{f1} \phi_1 + \nu \Sigma_{f2} \phi_2 )  \\
+           (D_2 B^2 +  \Sigma_{a2}) \phi_2 = \Sigma_{s12} \phi_1 
+         \end{array} \right. 
+       \end{align}
+      \begin{align}
+        \left[ \begin{array}{cc} 
+            \frac{\nu \bar{\Sigma}_{f1}}{\keff} - D_1 B^2 -  \bar{\Sigma}_{a1}  - \hat{\Sigma}_{s12} & \frac{\nu \bar{\Sigma}_{f2}}{\keff}   \\
+            \hat{\Sigma}_{s12} &  - D_2B^2 - \bar{\Sigma}_{a2}  
+          \end{array} \right] 
+        \left[ \begin{array}{c} \phi_1 \\ \phi_2 \end{array} \right] = 0
+      \end{align}
+
+\end{enumerate}
 
 \item Multi-group diffusion equations: See Section~\ref{multi-group-diffusion}. 
 \begin{align}
@@ -180,26 +197,22 @@ Sm behaves similar to Xe in the sense that both peaks after reactor shutdown (Sm
 & + \overbrace{\int_{E_g}^{E_{g-1}} \dE \chi(E) \int_{E'} \dE' \nu \Sigma_f (\vecr, E') \phi(\vecr, E')}^{\mbox{fission source term }\textcircled{4}} 
  + \overbrace{\int_{E_g}^{E_{g-1}} \dE \int_{E'} \dE' \Sigma_s(\vecr, E'\to E) \phi(\vecr, E')}^{\mbox{scattering source term }\textcircled{5}} 
 \end{align}
-\eqn{ -\divergence D_g(\vecr) \gradient \phi_g (\vecr) + \Sigma_{tg} (\vecr) \phi_g(\vecr) = \chi_g\Sum_{g'=1}^G \nu \Sigma_{fg'} \phi_{g'}(\vecr) + \Sum_{g'=1}^G \Sigma_{sg'g} (\vecr) \phi_{g'} (\vecr) + S_g(\vecr) }
-Cancelling the within group scattering cross section from both sides and defining the group-wise removal cross section, we get the final form,
+Cancel the within group scattering cross section and define the group-wise removal cross section, we get the final form,
 \eqn{ \boxed{- \divergence D_g(\vecr) \gradient \phi_g(\vecr) + \Sigma_{rg} (\vecr) \phi_g(\vecr) = \chi_g \Sum_{g'=1}^G \nu \Sigma_{fg'} (\vecr) \phi_{g'} (\vecr) + \Sum_{g'=1,g'\neq g}^G \Sigma_{sg'g} (\vecr) \phi_{g'} (\vecr) + S_g(\vecr) } }
 
-\item Partial currents and albedos:
+\item Partial currents and albedos: use $\psi = \frac{1}{4\pi} [\phi + 3 \Omegahat \cdot \vecJ]$, 
   \begin{align}
-    J^+(\vecr, E) &= \int_{\vecn \cdot \vecOmega > 0} \vecn \cdot \vecOmega \psi(\vecr, E, \vecOmega) = \frac{1}{4\pi} \int_{\vecn \cdot \vecOmega > 0} \vecn \cdot \vecOmega [\phi(\vecr, E) + 3 \vecOmega \cdot \vecJ(\vecr, E) ] \\
-    &= \frac{1}{4} \phi(\vecr, E) + \frac{1}{2} J_n (\vecr, E) \\
-    J^-(\vecr, E) &= \int_{\vecn \cdot \vecOmega < 0} |\vecn \cdot \vecOmega| \psi(\vecr, E, \vecOmega)  \\
-    &= \frac{1}{4} \phi(\vecr, E) - \frac{1}{2} J_n (\vecr, E) 
+    J^+ &= \frac{1}{4} \phi + \frac{1}{2} J_n \\
+    J^- &= \frac{1}{4} \phi - \frac{1}{2} J_n \\
+    J_n &= -\frac{1}{\Sigma_{tr}} \pphipz  
   \end{align}
   Albedo boundary condition is the measurement of how much flux is reflected back: 
-  \eqn{ \alpha = \frac{J^- (\vecr_i, E)}{J^+ (\vecr_i, E)} }
+  \eqn{ \alpha = \frac{J^-}{J^+} }
   
 \item Boundary conditions:
   \begin{enumerate}
-  \item Zero flux boundary condition:
-    \eqn{ \phi (0) = 0 }
-
-  \item Zero incoming flux bc, integrating over all angles in half space, it is equivalent to zero incoming partial current:
+  \item Zero flux boundary condition: $\phi(X) = 0$. 
+  \item `Zero Incoming Flux' bc; if integrating over all angles in half space, it gives us `Zero Incoming Partial Current':
     \eqn{ \left. \psi(\vecr, E, \vecOmega) \right|_{\vecn \cdot \vecOmega < 0} &= 0, & J^- (\vecr_i, E) &= 0}
     There are two formulism to solve this:
     \begin{itemize}
@@ -224,6 +237,8 @@ Cancelling the within group scattering cross section from both sides and definin
   \end{enumerate}
 \end{enumerate}
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \clearpage
 \topic{Other Diffusion-Related Equations}
 \begin{enumerate}
@@ -240,6 +255,9 @@ This expression is exact, because we haven't approximate $\vecJ$ yet.
   \eqn{ \Sigma_{tr}^i (E) = \Sigma_t^i (E) - \frac{2}{3A^i} \Sigma_s^i (E) }
   Then we can solve for diffusion coefficient $D = \frac{1}{3 \Sigma_{tr}}$. 
 
+\item Steady-state continuous energy diffusion equation:
+  \eqn{ - \divergence D(\vecr, E) \gradient \phi(\vecr, E) + \Sigma_t (\vecr, E) \phi(\vecr, E) = \chi(E) \int_{E'} \dE' \nu \Sigma_f (\vecr, E') \phi(\vecr, E') + \int_{E'} \dE' \Sigma_s (\vecr, E'\to E) \phi(\vecr, E') + S(\vecr, E) }
+
 \item One-group diffusion equation,
   \eqn{ -\divergence D(\vecr) \gradient \phi(\vecr) + \Sigma_a(\vecr) \phi(\vecr) = \frac{1}{\keff} \nu \Sigma_f(\vecr) \phi(\vecr) }
 
@@ -248,10 +266,13 @@ This expression is exact, because we haven't approximate $\vecJ$ yet.
   This equation is important in showing that $\phi(\vecr)$ has a constant curvature. 
 \end{enumerate}
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \clearpage
-\topic{Practise Problems}
+\topic{Sample Diffusion Problems}
 \begin{enumerate}
-\item Homogeneous (single-region) criticality problems:
+\item \textbf{Homogeneous (single-region) criticality problems:}
+ only the lowest node remains after the source is gone. For any positive value of material buckling, there is a unique critical size for each geometry. 
   \begin{enumerate}
   \item 1D slab $\in  \left[- \frac{L_0}{2}, \frac{L_0}{2} \right]$, no source, critical. 
     \eqn{ \dphidxn2 + B^2 \phi (x) &= 0, &\phi(x) &= A \cos (Bx) + C \sin(Bx) }
@@ -268,32 +289,226 @@ This expression is exact, because we haven't approximate $\vecJ$ yet.
     and the criticality condition implies that, 
     \eqn{ \frac{\nu \Sigma_f - \Sigma_a}{D}  = \left( \frac{\pi}{L} \right)^2 }
 
+  \item Consider a finite cube with the dimensions $-a/2 \le x \le a/2, -b/2 \le y \le b/2, -c/2 \le z \le c/2$. The Helmholtz equation is,
+    \eqn{ \pphipxn2 + \pphipyn2 + \pphipzn2 + B^2 \phi = 0}
+    Assume separation of variables,
+    \eqn{ \phi(x,y,z) = X(x) Y(y) Z(z) }
+    \eqn{ \dXdxn2 + B_x^2 X &= 0, &\dYdyn2 + B_y^2 Y &= 0, &\dZdzn2 + B_z^2 Z &=0}
+    The solution is, 
+    \eqn{ \phi &= A \cos \left( \frac{\pi x}{L_x} \right)\cos \left( \frac{\pi y}{L_y} \right)\cos \left( \frac{\pi z}{L_z} \right) ,  &B^2 &= \left(\frac{\pi}{a}\right)^2 + \left(\frac{\pi}{b}\right)^2 + \left(\frac{\pi}{c}\right)^2 }
+
+
+  \item Consider a finite cylinder from $-H/2$ to $H/2$ with radius $R$. We assume azmimuthal symmetry of Helmholtz Equation, 
+    \eqn{\frac{1}{r} \ddr \left( r \pphipr\right) + \pphipzn2 + B^2 \phi = 0 }
+    Assume separation of variables,
+    \eqn{ \phi(r,z) = R(r) Z(z) }
+    We plut the sepration of variables into the Helmholtz Equation, break $B^2 = B_r^2 + B_z^2$, and we get two equations one for each direction, 
+    \eqn{ \frac{1}{R} \left( \dRdrn2 + \frac{1}{r} \dRdr \right) + B_r^2 = 0 }
+    \eqn{ \dZdzn2 + B_z^2 Z = 0 }
+    In $r$ direction, we can consider an infinite cylinder, 
+    \eqn{ R(r) &= A_1 J_0 (B_r r), & B_r&= \frac{2.405}{R} }
+    In $z$ direction, we can consider an infinite slab,
+    \eqn{ Z(z) &= A_2 \cos(B_z z), & B_z &= \frac{\pi}{H} } 
+    We combine the two directions,
+    \eqn{ \phi(r,z) &= A J_0 \left( \frac{2.405}{R} r\right) \cos \left( \frac{\pi z}{H} \right), &B^2 &= B_r^2 + B_z^2 = \left( \frac{2.405}{R} \right)^2 + \left( \frac{\pi}{H} \right)^2 }
+    Problems with less than one direction that is non-homogeneous can be solved this way with separation of variables.
+
+  \item Summary for a couple of geometries
+    \begin{table}[ht]
+      \small
+      \makebox[\textwidth][c]{
+        \begin{tabular}{|l|l|l|l|} \hline
+          Geometry & Diffusion Equation & Flux & Geometrical Buckling \\ \hline
+          Slab $\in  \left[- \frac{L}{2}, \frac{L}{2} \right]$ &$\dphidxn2 + B^2 \phi = 0$ & $\phi = A \cos \left( \frac{\pi x}{L} \right)$ & $B^2 = \left( \frac{\pi}{L} \right)^2$ \\ 
+          Sphere $\in [0, R]$  & $\dphidrn2 + \frac{2}{r} \dphidr + B^2 \phi = 0$& $\phi= \frac{A}{r} \sin \left( \frac{\pi r}{R} \right)$ & $B^2 = \left( \frac{\pi}{R} \right)^2$ \\
+          Cylinder ($z: \infty$) & $\dphidrn2 + \frac{1}{r} \dphidr + B^2 \phi = 0$ & $\phi = A J_0 \left( \frac{2.405 r}{R} \right)$ & $B^2 = \left( \frac{2.405}{R} \right)^2$ \\ 
+          Cylinder (z: $\pm H/2$) & $\dphidrn2 + \frac{1}{r} \dphidr + \dphidzn2 + B^2 \phi = 0$ & $\phi = A J_0\left( \frac{2.405 r}{R} \right) \cos \left( \frac{\pi z}{H} \right)$ & $B^2 = \left( \frac{2.405}{R} \right)^2 + \left( \frac{\pi}{H} \right)^2$ \\ 
+          Parallelepiped ($\pm \frac{L_i}{2}$) & $\dphidxn2 + \dphidyn2 + \dphidzn2 + B^2 \phi = 0$ & $\phi = A \cos \left( \frac{\pi x}{L_x} \right) \cos \left( \frac{\pi y}{L_y} \right) \cos \left( \frac{\pi x}{L_z} \right)$ & $B^2 = \left( \frac{\pi}{L_x} \right)^2 + \left( \frac{\pi}{L_y} \right)^2 + \left( \frac{\pi}{L_z} \right)^2$ \\ \hline
+        \end{tabular}
+      }
+      \caption{Finite Geometries With Zero Flux BC} \label{diffusion-table}
+    \end{table}
+
   \item Find the height-to-diameter that would minimize the leakage from a fixed-volume cylinder. To minimize leakage, we need to maximize $B_m^2$ hence $B_g^2$. For a finite cylinder, we know
     \eqn{B_g^2 = \left( \frac{2.405}{R} \right)^2 + \left( \frac{\pi}{H} \right)^2 }
     and we solve $\frac{\derivative B_g^2}{\dr} = 0$. The optimal H/D ratio comes out to be 0.9236. 
     
   \end{enumerate}
-  Summary: only the lowest node remains after the source is gone. For any positive value of material buckling, there is a unique critical size for each geometry. 
-  
-\item Homogeneous (single-region) source problems:
+
+
+\clearpage  
+\item \textbf{Homogeneous (single-region) source problems:}
   \begin{enumerate}
-  \item See Section~\ref{one-group-source-problem-subcritical}
-  \item 
+  \item Consider a subcritical multiplying medium, slab geometry from $-L/2$ to $L/2$, and with a source\footnote{See Section~\ref{one-group-source-problem-subcritical}.}. 
+    \begin{align}
+      - D \dphidxn2 + \Sigma_a \phi(x) &= \nu \Sigma_f \phi(x) + S(x) \\
+      \dphidxn2 + B_m^2 \phi(x) &= -\frac{S(x)}{D} 
+    \end{align}
+    Given $\Sigma_a > \nu \Sigma_f$, $B^2 = \frac{\nu \Sigma_f - \Sigma_a}{D} < 0 $, we re-write $B^2 = - |B|^2$,
+    \eqn{ \dphidxn2 - |B|^2 \phi(x) = \tilde{S}(x) }
+    The general/homogeneous solution is,
+    \eqn{ \phi_H (x) = A e^{|B|x} + Ce^{-|B|x} = A \cosh (|B|x) + C \sinh (|B| x) }
+    The particular solution depends on source $\tilde{S}(x)$. Apply BCs $\phi \left( \pm \frac{L}{2} \right) = 0$, we get the boundary conditions in the matrix form,
+    \eqn{ \left[ \begin{array}{cc} 
+          \cosh(|B|L/2) & \sinh(|B|L/2) \\
+          \sinh(|B|L/2) & \cosh(|B|L/2) 
+        \end{array} \right] 
+      \left[ \begin{array}{c}
+          A \\ C \end{array} \right] 
+      = - \left[ \begin{array}{c} 
+          \phi_p(L/2) \\ \phi_p(-L/2) \end{array} \right] }
+    Coefficients A and C are uniquely determined for a given source distribution: 
+    \begin{itemize}
+    \item There always exists a physically realizable solution (no critical buckling!);
+    \item In the limit of $S\to 0$, the only physical solution is the trivial solution. 
+    \end{itemize}
+
+  \item Conside an infinite non-multiplying medium with a point source. 
+    \eqn{ \dphidrn2 + \frac{2}{r} \dphidr - \ols\phi = -\frac{S_0}{D} \delta(\vecr) }
+    We look for the homogeneous solution, and set $w = r \phi$, 
+    \eqn{ \dphidrn2 + \frac{2}{r} \dphidr - \ols\phi &= 0, &\dwdrn2 - \ols w &= 0}
+    The solution is, 
+    \eqn{ w &= Ae^{r/L} + B e^{-r/L}, & \phi(r) = A\frac{e^{r/L}}{r} + B \frac{e^{-r/L}}{r} }
+    BC1: $\lim_{r\to \infty} \phi = 0, \Rightarrow A=0$. BC2: $\lim_{r\to 0} 4 \pi r^2 J(r) = S_0$ (specific solution), that is, 
+    \begin{align}
+      J &= -D \dphidr = DBe^{-r/L} \left( \frac{1}{r^2} + \frac{1}{rL} \right), 
+      &\lim_{r\to 0} 4 \pi r^2 J(r) &= 4 \pi DB = S_0 \\
+      B &= \frac{S_0}{4 \pi D}, & \phi(r) &= \frac{S_0}{4\pi D} \frac{e^{-r/L}}{r} 
+    \end{align}
+
+  \item Consider an infinite non-multiplying medium with a plane source at $x=0$. Since the geometry is symmetric, we can solve for $x>0$ first. 
+    \eqn{ \phi(x) = Ae^{x/L} + B e^{-x/L}} 
+    BC1: $\lim_{x \to \infty} \phi(x) = 0, \Rightarrow \phi(x) = B e^{-x/L}$; BC2: $\lim_{x\to 0} J(r)  = \frac{S_0}{2}$, 
+    \eqn{ J = -D \dphidx = B D e^{-x/L} }
+    \eqn{ \phi(x) = \frac{S_0 L}{2D} e^{-x/L}}
+    For the total geometry, we can simply place an absolute sign on $x$:
+    \eqn{ \phi(x) = \frac{S_0 L}{2D} e^{-|x|/L}}
+    If the source is placed at $x=b$, the solution becomes,
+    \eqn{ \phi(x) = \frac{S_0 L}{2D} e^{-|x-b|/L} } 
+
+  \item Consider a finite multiplying medium with $\kinf > 1$, it is a slab extending from $-H/2$ to $H/2$, it is subcritical with leakage, BC are from the current at center and the zero flux at the H/2 boundary. 
+    \eqn{ \dphidxn2 + B_m^2 \phi &= 0,  & B_m^2 &= \frac{\nu \Sigma_f - \Sigma_a}{D} = \frac{\kinf - 1}{L^2} > 0}
+    \eqn{ \phi(x) = A \cos(B_mx) + B\sin(B_mx) }
+    BC1: $\phi(H/2) = 0$; BC2: $J(0) = \frac{S_0}{2}$. We can solve for the coefficients, and place absolute sign to represent the whole geometry: 
+    \eqn{ \phi(x) = \frac{S_0}{2DB_m \cos\left( \frac{B_m H}{2} \right)} \sin\left[ B_m \left(\frac{H}{2} - |x|\right) \right] }
+    \begin{figure}
+      \centering
+      \includegraphics[width=5in]{images/dfs/approach-critical.png}
+    \end{figure}
+
+    \item Consider a finite multiplying medium with $\kinf < 1$, a slab geometry from $0$ to $H$, and a plane source at $0$, 
+      \eqn{ B_m^2 = \frac{\nu \Sigma_f - \Sigma_a}{D} &= \frac{k_{\infty} - 1}{L^2} < 0, & B_m^2 &\to -|B_m|^2}
+      The homogeneous solution is, 
+      \eqn{\dphidxn2 - |B_m|^2 \phi &= 0, &\phi(x) &= A\cosh(|B_m|x) + B \sinh(|B_m|x) }
+      BCs: $\phi(0) = \phi_0, \phi(H) = 0$, we can solve for the coefficients, 
+      \eqn{ \phi(x) = \phi_0 \left[ \cosh(|B_m|x) - \frac{\cosh(|B_m|x)}{\sinh(|B_m|x)} \sinh(|B_m|x) \right] }
   \end{enumerate}
-  
+
+\clearpage  
 \item Multi-region diffusion problems
-\end{enumerate}
+\begin{enumerate}
+\item Consider a critical reflected slab reactor in the following image. 
+  \begin{figure}[ht]
+    \centering
+    \includegraphics[width=2in]{images/dfs/reflected-slab.png}
+  \end{figure}
+  \eqn{-D^c \laplace \phi^c + \Sigma_a^c \phi^c &= \frac{1}{\keff} \nu \Sigma_f^c \phi^c,  &-D^r \laplace \phi^r + \Sigma_a^r \phi^r &= 0 }
+  \eqn{ B^2 &= \frac{\frac{\kinf}{\keff} - 1}{L_c^2}, & \kappa^2 &= \frac{1}{L_r^2} = \frac{\Sigma_a^r}{D^r} = -B_{m,r}^2 }
+  \eqn{ \laplace \phi^c + B^2 \phi^c &= 0, &\laplace \phi^r - \kappa^2 \phi^r &= 0}
+  The solutions are in the forms of,
+  \eqn{ \phi^c(x) &= C_1 \cos(Bx) + C_2 \sin(Bx), &\phi^r(x) &= C_3 \cosh(\kappa x) + C_4 \sinh (\kappa x) }
+  BC1: reflective boudnary condition at $x=0$, BC2: zero flux at reflector surface, 
+  \eqn{ J^c(0) &= 0 \Rightarrow C_2 = 0, & \phi(H'/2) &= 0 \Rightarrow C_3 = 0} 
+  We have: 
+  \eqn{ \phi^c (x) &= C_1 \cos (Bx), & \phi^r (x) &= C_4' \sinh[\kappa(H'/2 - x)] }
+  Apply two interface conditions: 
+  \eqn{ \phi^c (H/2) &= \phi^r (H/2), & J^c(H/2) &= J^r (H/2) }
+  which can be written in the matrix form, 
+  \begin{align}
+    \left[ \begin{array}{cc}
+        \cos (BH/2) & -\sinh(\kappa \tau) \\
+        D^c B \sin(BH/2) & -D^r \kappa \cosh(\kappa \tau) 
+      \end{array} \right] 
+    \left[ \begin{array}{c} 
+        C_1 \\ C_4' \end{array} \right] = 0
+  \end{align}
+  We define the reflector thickness $\tau = \frac{H' - H}{2}$, then the coefficients can be solved,
+  \eqn{ C_1 &= \phi^c (0), & C_4' &= C_1 \frac{\cos (BH/2)}{\sinh(\kappa \tau) } }
+  which gives us the criticality condition,
+  \eqn{ D^c B \tan \left(\frac{B H}{2} \right) = D^r \kappa \coth (\kappa \tau) }
+  Interpretation:
+  \begin{enumerate}
+  \item Since $B$ is defined with $\keff$, 
+    \eqn{ B^2 = \frac{\frac{\kinf}{\keff} - 1}{L^2} }
+    we need to satisty an expression between $\keff$ and $H$. We can either,
+    \begin{enumerate}
+    \item Given $H$, search for the $\keff$ that satisfies the equivalence;
+    \item Given $\keff$, search for the $H$ that satisfies the equivalence,
+      \eqn{H = \frac{2}{B_m} \tan^{-1} \left[ \frac{D^r \kappa}{D^c B_m} \coth (\kappa \tau) \right] }
+      That is, as $H \down, \tau \up$. For large $\tau$, like $\kappa \tau > 3, \coth (\kappa \tau) \to 1$, the smallest $H$ to reach criticality is,
+      \eqn{H = \frac{2}{B_m} \tan^{-1} \left[ \frac{D^r \kappa}{D^c B_m} \right] }
+    \end{enumerate}
+  \item Critical dimension is reduced by the presence of the reflector: 
+    \eqn{   s = \frac{\tilde{H}}{2} - \frac{H}{2}   = \frac{1}{B_m} \left\{ \frac{\pi}{2} - \tan^{-1} \left[ \frac{D^r \kappa}{D^c B_m} \coth(\kappa \tau) \right] \right\} }
+    \eqn{   \tan\left[ \frac{\pi}{2} - \tan^{-1} x \right] &= \cot [\tan^{-1} x ] = \frac{1}{\tan[\tan^{-1} x]} = \frac{1}{x}, & \frac{\pi}{2} - \tan^{-1} x &= \tan^{-1} \left( \frac{1}{x} \right) }
+    \eqn{  \Aboxed{ s &= \frac{1}{B_m} \tan^{-1} \left[ \frac{D^c B_m}{D^r \kappa} \tanh(\kappa \tau) \right] } }
+  \item For larger cores, $B_m \to 0$ and $\tan^{-1} x \approx x $, that is, 
+    \eqn{ s = \frac{D^c}{D^r \kappa} \tanh(\kappa \tau) = \frac{D^c}{D^r} L^r \tanh\left( \frac{\tau}{L^r} \right)  }
+    That is, 
+    \begin{align}
+      \left\{ \begin{array}{ccc} 
+        \tau \ll L^r & s \approx \frac{D^c}{D^r} \tau &  (\tanh x \approx x \mbox{ for }x\ll 1) \\
+        \tau \gg L^r & s \approx \frac{D^c}{D^r} L^r &  (\tanh x \approx 1 \mbox{ for }x > 3) 
+      \end{array} \right. 
+    \end{align}
+  \end{enumerate} % end of two-region slab problem
+
+
+
+\end{enumerate} % end of multi-region diffusion problem
+\end{enumerate} % end of practise problems
 
 \clearpage
 \topic{Numerical Diffusion Theory}
 \begin{enumerate}
 \item Finite-difference diffusion equation: 
-\begin{align*}
- - \hat{D}_1^{n-1,n} \phi_1^{n-1} - \hat{D}_1^{n,n+1} \phi_1^{n+1} + [ \Sigma_{r1}^n \Delta^n + \hat{D}_1^{n-1, n} + \hat{D}_1^{n,n+1} ] \phi_1^n 
-&= \nu \Sigma_{f1}^n \phi_1^n \Delta^n + \nu \Sigma_{f2}^n \phi_2^n \Delta^n + S_1^n \Delta^n \\
-- \hat{D}_2^{n-1,n} \phi_2^{n-1} - \hat{D}_2^{n,n+1} \phi_2^{n+1} + [\Sigma_{a2}^n \Delta^n + \hat{D}_2^{n-1.n} + \hat{D}_2^{n,n+1} ] \phi_2^n 
-&= \Sigma_{s12}^n \phi_1^n \Delta^n + S_2^n \Delta^n 
-\end{align*}
+  \begin{enumerate}
+  \item Interface flux: 
+    \eqn{J_n^+ &= - \hat{D}^{n,n+1} (\phi^{n+1} - \phi^n)  & J_n^- &= - \hat{D}^{n-1, n} (\phi^n - \phi^{n-1} ), & \hat{D}^{n,n+1} &= \frac{2 D^n D^{n+1}}{\Delta (D^n + D^{n+1})}   }
+
+  \item Finite-difference equation: 
+    \begin{align*}
+      - \hat{D}_1^{n-1,n} \phi_1^{n-1} - \hat{D}_1^{n,n+1} \phi_1^{n+1} + [ \Sigma_{r1}^n \Delta^n + \hat{D}_1^{n-1, n} + \hat{D}_1^{n,n+1} ] \phi_1^n 
+      &= \nu \Sigma_{f1}^n \phi_1^n \Delta^n + \nu \Sigma_{f2}^n \phi_2^n \Delta^n + S_1^n \Delta^n \\
+      - \hat{D}_2^{n-1,n} \phi_2^{n-1} - \hat{D}_2^{n,n+1} \phi_2^{n+1} + [\Sigma_{a2}^n \Delta^n + \hat{D}_2^{n-1.n} + \hat{D}_2^{n,n+1} ] \phi_2^n 
+      &= \Sigma_{s12}^n \phi_1^n \Delta^n + S_2^n \Delta^n 
+    \end{align*}
+
+  \item BC: 
+    \begin{align}
+      \mbox{Zero Flux BC:} & J_g^N = -D_g^N \frac{ -\phi_g^N - \phi_g^N}{\Delta^N}  = \frac{2 D_g^N}{\Delta^N} \phi_g^N \\
+      \mbox{Zero Incoming Flux BC:} & J_g^N = \frac{2D_g^N}{\Delta^N} \left[ \frac{1}{1 + \frac{4 D_g^N}{\Delta^N}} \right] \phi_g^N 
+    \end{align}
+
+    \item Matrix form: 
+      \begin{align}
+        \left[ \begin{array}{cc} 
+            [L_1 + D_1 + U_1] & [0] \\
+            -[T_2] & [L_2 + D_2 + U_2] \\
+          \end{array} \right] 
+        \left[ \begin{array}{c}
+            \phi_1 \\ \phi_2 \\ \end{array} \right] 
+        = \left[ {\begin{array}{cc} \left[M_1\right] & \left[M_2\right] \\ \left[0\right] & \left[0\right] \end{array}} \right] 
+        \left[ \begin{array}{c}
+            \phi_1 \\ \phi_2 \\ \end{array} \right] 
+        + 
+        \left[ \begin{array}{c} 
+            S_1 \\ S_2 \\ \end{array} \right] 
+      \end{align}
+      Whose compressed form is, 
+      \eqn{ [A] [\phi] = [M] [\phi] + [S] }
+\end{enumerate}
+
 
 \item Fission source iterations: the equation we are trying to solve is,
 \eqn{ [A] [\phi]^{n+1} &= [M] [\phi]^n }
@@ -304,7 +519,7 @@ The process is continued until the eigenvalues obtained on two successive iterat
 \item Gauss-Jacobi flux inner iterations: 
 \begin{figure}[ht]
   \centering
-  \includegraphics[width=4in]{images/dfs/power-iteration-Gauss-Jacobi.png}
+  \includegraphics[width=5in]{images/dfs/power-iteration-Gauss-Jacobi.png}
 \end{figure}
 
 \item Dominance ratio estimation: 
@@ -314,7 +529,10 @@ then $|\lambda_1|$ is the spectral radius of the iteration matrix, and every mod
 \eqn{ \dr_n = \frac{\lambda_n}{\lambda_1} }
 and power iteration kills of the lowest dominance ratio modes. The last remaining mode is the fundamental mode $dr = \frac{\lambda_2}{\lambda_1}$. If $|\lambda_1| \ge 1$, the ietration scheme is unstable and it would not converge. Convergence of the power method is slow when $d$ is close to unity; in fact in most numerical methods, convergence rate = 1 - dominance ratio.
 
-Dominance ratio measures the spatial decoupling, and it depends on: symmetric mode, core size, decoupling of the radial zones, and of the axial zones. 
+Dominance ratio measures the spatial decoupling, and it depends on: symmetric mode, core size (size $\up$, $\dr \up$, takes longer), decoupling of the radial zones, and of the axial zones. 
+
+\item Order of operations (not included in official list): Matrix inversion is of $N^3$, finding all eigenvalues is at least $N^2$, iterative inversion must be order $N$ to be practical, multi-level iteration is a necessity. 
+
 \end{enumerate}
 
 

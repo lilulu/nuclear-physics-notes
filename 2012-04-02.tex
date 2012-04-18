@@ -1,204 +1,109 @@
 \documentclass{school-22.211-notes}
-\date{April  2, 2012}
+\date{April 2, 2012}
 
 \begin{document}
 \maketitle
 
-\lecture{Two-Group Diffusion: Numerical Solutions}
-Reference: Stacy's Section 3.10. 
-
-\topic{Simple Numerical Methods to Solve Diffusion Equations}
-\subtopic{Derivation of Neutron Balance Equation}
-Recall the two-group neutron balance equations:
-\begin{itemize}
-\item Total fission source is: 
-  \eqn{S_f(r) = \mu \Sigma_{f1} (r) \phi_1 (r) + \mu \Sigma_{f2} (r) \phi_2(r) }
-  $\xi_1 = 1, \xi_2 = 0$ which implies that fission source in the thermal group is zero.
-\item Scattering source: we define effective down-scattering, so up-scattering is zero $\Sigma_{21}(r) = 0$. 
-\item Two-group diffusion equations: 
-\eqn{-\gradient D_1 \divergence \phi_1 + [\Sigma_{a1} + \Sigma_{s12}] \phi_1 = \nu \Sigma_{f1} \phi_1 + \nu \Sigma_{f2} \phi_2 + S_1} 
-\eqn{-\gradient D_2 \divergence \phi_2 + \Sigma_{a2} \phi_2 = \Sigma_{s12} \phi_1 + S_2}
-\end{itemize}
-
-\subtopic{Derivation of Interface Flux}
-Then we construct a finite spatial mesh in which cross sections are constant; integrate the neutron diffusion equations over each mesh cell $\Delta^n$,
-\eqn{-\int \ddx D_1^n \ddx \phi_1^n \dx + \Sigma_{r1}^n  \phi_1^n \Delta^n = \nu \Sigma_{f1}^n \phi_1^n \Delta^n + \nu \Sigma_{f2}^n \phi_2^n \Delta^n + S_1 \Delta^n} 
-\eqn{-\int \ddx D_2^n \ddx \phi_2^n  \dx + \Sigma_{a2}^n \phi_2^n \Delta^n = \Sigma_{s12}^n \phi_1^n \Delta^n + S_2 \Delta^n}
-We evaluate the integral term\footnote{Lectuer says use the divergence theorem $\int \divergence \vec{F} \dV = \int_S \vec{F} \cdot \vec{n} \dS$, I think this is just manipulating integral and $\int_{x_1}^{x_2} \ddx A \dx \to \left. A \right|_{x_2} - \left. A \right|_{x_1}$}, 
-\eqn{\int \ddx D_1^n \ddx \phi_1^n \dx  = \left. D_1^n \ddx \phi_1^n \right|_{n^+} - \left. D_1^n \ddx \phi_1^n \right|_{n^-} }
-Then we have,
-\eqn{\left. D_1^n \ddx \phi_1^n \right|_{n^-} - \left. D_1^n \ddx \phi_1^n \right|_{n^+} + \Sigma_{r1}^n  \phi_1^n \Delta^n = \nu \Sigma_{f1}^n \phi_1^n \Delta^n + \nu \Sigma_{f2}^n \phi_2^n \Delta^n + S_1 \Delta^n} 
-\eqn{\left. D_2^n \ddx \phi_2^n \right|_{n^-} - \left. D_2^n \ddx \phi_2^n \right|_{n^+} + \Sigma_{a2}^n \phi_2^n \Delta^n = \Sigma_{s12}^n \phi_1^n \Delta^n + S_2 \Delta^n}
-We notice that the $-D \ddx \phi$ terms are just flux terms (in fact, they are the interface fluxes):
-\eqn{J_n^+ = - \left. D_g^n \ddx \phi_g^n \right|_{n+} = -D_g^n \frac{\phi_g^S - \phi_g^n}{\Delta/2} }
-\eqn{J_n^- = - \left. D_g^{n+1} \ddx \phi_g^{n+1} \right|_{n-} = - D_g^{n+1} \frac{\phi_g^{n+1} - \phi_g^s}{\Delta/2} }
-By continuity of the net current, we can set the above two equations to equal to each other, 
-\eqn{  -D_g^n \frac{\phi_g^S - \phi_g^n}{\Delta/2} =  - D_g^{n+1} \frac{\phi_g^{n+1} - \phi_g^s}{\Delta/2} }
-From where we can solve for the interface flux, 
-\eqn{ \phi_g^s = \frac{D_g^{n+1} \phi_g^{n+1} + D_g^n \phi_g^n}{D_g^n + D_g^{n+1}}} 
-Then we can get th net current in terms of mesh fluxes: 
-\eqn{ J_n^+ = - \frac{2D_g^n}{\Delta} \left[ \frac{ D^{n+1} \phi^{n+1} + D^n \phi^n}{D^n + D^{n+1}} - \phi^n \right] = - \overbrace{\frac{2 D^n D^{n+1} }{\Delta (D^n + D^{n+1})}}^{\to \hat{D}^{n,n+1}} (\phi^{n+1} - \phi^{n}) }
-That is, 
-\eqn{J_n^+ &= - \hat{D}^{n,n+1} (\phi^{n+1} - \phi^n)  & J_n^- &= - \hat{D}^{n-1, n} (\phi^n - \phi^{n-1} ) \label{net-current}}
-
-
-\subtopic{Derivation of Finite Difference Equations}
-Plug Eq.~\ref{net-current} back into diffusion equations, we get, 
-\eqn{ \hat{D}_1^{n-1,n} (\phi_1^n - \phi_1^{n-1})  - \hat{D}_1^{n,n+1} (\phi_1^{n+1} - \phi_1^n) + \Sigma_{r1}^n \phi_1^n \Delta^n &= \mu \Sigma_{f1}^n \phi_1^n \Delta^n + \mu \Sigma_{f2}^n \phi_2^n \Delta^n + S_1 \Delta^n} 
-\eqn{ \hat{D}_2^{n-1,n} (\phi_2^n - \phi_2^{n-1})  - \hat{D}_2^{n,n+1} (\phi_2^{n+1} - \phi_2^n) + \Sigma_{a2}^n \phi_2^n \Delta^n &= \Sigma_{s12}^n \phi_1^n \Delta^n + S_2 \Delta^n} 
-Rearranging terms by fluxes, we get, 
-\eqn{ - \hat{D}_1^{n-1,n} \phi_1^{n-1} - \hat{D}_1^{n,n+1} \phi_1^{n+1} + [ \Sigma_{r1}^n \Delta^n + \hat{D}_1^{n-1, n} + \hat{D}_1^{n,n+1} ] \phi_1^n = \nu \Sigma_{f1}^n \phi_1^n \Delta^n + \nu \Sigma_{f2}^n \phi_2^n \Delta^n + S_1^n \Delta^n} 
-\eqn{ - \hat{D}_2^{n-1,n} \phi_2^{n-1} - \hat{D}_2^{n,n+1} \phi_2^{n+1} + [\Sigma_{a2}^n \Delta^n + \hat{D}_2^{n-1.n} + \hat{D}_2^{n,n+1} ] \phi_2^n = \Sigma_{s12}^n \phi_1^n \Delta^n + S_2^n \Delta^n }
-
-\subtopic{Derivation of Boundary Condition}
-Interior of the geometry, the boundary conditions are implied. The exterior boundaries have to be specified. There are two types of boundary conditions:
+\lecture{Multi-Group Diffusion: Derivations} \label{multi-group-diffusion}
+\topic{Derivation of Multi-Group Diffusion Theory}
 \begin{enumerate}
-\item Zero Flux BC: 
-\eqn{ J_g^N = -D_g^N \frac{ -\phi_g^N - \phi_g^N}{\Delta^N}  = \frac{2 D_g^N}{\Delta^N} \phi_g^N }
-\item Zero Incoming Current BC:
-\eqn{ J^- = \frac{1}{4} \phi - \frac{1}{2} J_n = 0 }
-which implies,
-\begin{align}
-  J_g^N &= \frac{\phi_g^s}{2} = -D_g^N \frac{\phi_g^s - \phi_g^N}{\Delta/2} \\
-  &= - \frac{2 D_g^N}{\Delta^N} \frac{\frac{2D_g^N}{\Delta^N} - 1}{\frac{1}{2} + \frac{2D_g^N}{\Delta}} \phi_g^N \\
-  &= \boxed{ \frac{2D_g^N}{\Delta^N} \left[ \frac{1}{1 + \frac{4 D_g^N}{\Delta^N}} \right] \phi_g^N } \label{JgN}
-\end{align}
-In Eqn.~\ref{JgN}, if $D \to 0$, we get zero flux boundary condition; if $D \to \infty$, we get zero current boundary condition. 
-\end{enumerate}
-
-\clearpage
-\topic{Matrix Representation of 1D Slab Diffusion Equations}
-\subtopic{Construct Matrix}
-If we use $L$ for the $\phi^{n-1}$ term, $U$ for the $\phi^{n+1}$ term, $D$ for the $\phi^n$ term, $T$ for the transport term, we can express the finite difference equation in matrix form as: 
-\begin{align}
-[L_1 + D_1 + U_1] [\phi_1] &= [M_1] [\phi_1] + [M_2][\phi_2] + [S_1] \\
-[L_2 + D_2 + U_2] [\phi_2] &= [T_2] [\phi_1] + [S_2] 
-\end{align}
-We define a vector of group fluxes, 
-\begin{align}
-\left[ \begin{array}{cc} 
-[L_1 + D_1 + U_1] & [0] \\
--[T_2] & [L_2 + D_2 + U_2] \\
-\end{array} \right] 
-\left[ \begin{array}{c}
-\phi_1 \\ \phi_2 \\ \end{array} \right] 
-= \left[ {\begin{array}{cc} \left[M_1\right] & \left[M_2\right] \\ \left[0\right] & \left[0\right] \end{array}} \right] 
-\left[ \begin{array}{c}
-\phi_1 \\ \phi_2 \\ \end{array} \right] 
-+ 
-\left[ \begin{array}{c} 
-S_1 \\ S_2 \\ \end{array} \right] 
-\end{align}
-Whose compressed form is, 
-\eqn{ [A] [\phi] = [M] [\phi] + [S] }
-The two matrix are plotted in Figure~\ref{matrix-form}. Notice there are missing points in A; explaination: Block matrix: there is no coupling of group 1 left flux to the group 2 right flux. 
-\begin{figure}
-  \centering
-  \includegraphics[width=6in]{images/dfs/matrix-form.png}
-  \caption{Destruction and Production Matrix} \label{matrix-form}
-\end{figure}
-
-
-\subtopic{Method 1: Sequential Source/Fixed-Source Problem}
-\begin{align}
-[A] [\phi] &= [M] [\phi] + [S] \\
-[A - M ] [\phi] &= [S] \\
-[\phi] &= [A - M]^{-1} [S]
-\end{align}
-In this method, we guess $\keff$, and given a source we can solve for the flux. We can either use Matlab to solve the $Ax = b$ system, or we use Gaussian elimination/forward elimination backward substitution by hand. The basic idea is to subtract $a_{i,i-1}/a_{i-1,i-1}$ times the $(i-1)$th equation from the $i$th equation to eliminate the $a_{i,i-1}$ element in the $i$th equation. The modified $i$th equation is then divided by $a_{i,i}$. This process is repeated successively for $i=1$ through $i = I-1$. 
-
-We never solve real questions this way, because the flux approaches the right shape as we increase the $\keff$ to approach the correct $\keff$, but once we pass the correct $\keff$, the flux can be entirely inverted to become negative (now that I think about it, this is fine because the flux solved can be arbitrarily scaled). If we have a super-critical problem, then the only way to get criticality with an additional source is through negative flux. A reactor is like an amplifier; the closer it is to criticality the more amplification it is; when critical, the amplification is infinity. 
-
-
-\subtopic{Method 2: Direct Matlab Eigenvalue Solver}
-We can solve for $\keff$ directly from: 
-\begin{align}
-[A] [\phi] &= \frac{1}{\keff} [M] [\phi] \\
-[A]^{-1} [M] [\phi] &= \keff [\phi]
-\end{align}
-Notice that the eigenvectors are arbitrarily normalized; hence it is fine if the flux is negative. 
-
-
-\subtopic{Method 3: Power Iterations}
-The equation we are trying to solve is,
-\eqn{ [A] [\phi]^{n+1} &= [M] [\phi]^n }
-An initial guess of the flux $\phi_i^{(0)}$ at each point and of the eigenvalue $\lambda^{(0)}$ is made and an initial fission source at each point is constructed $S_i^{(0)} = M \phi_i^{(0)}$. The Gaussian elimination is performed to determine $\phi_i^{(1)} = A^{-1} S_i^{(0)}$. Then we update the source term as well based on the flux. A new estimate of the eigenvalue is made from: 
-\eqn{ \keff = \frac{S_i^{(1)}}{S_i^{(0)}} }
-The process is continued until the eigenvalues obtained on two successive iterates differ by less than a threshold level. The rate our fission source converges depends on material, geometry etc. See next section for \hi{dominance ratio}. 
-\begin{figure}
-  \centering
-  \includegraphics[width=4in]{images/dfs/power-iteration-convergence.png}
-  \caption{Power Iteration Convergence Rate (left) and Dominance Ratio (right)}
-\end{figure}
-
-\subtopic{Method 3+: Power Iterations with Gauss-Jacobi Numerical Inversion of Flux Matrix}
-In a steady-state problem, it does not matter whether we fully converge our flux iteration. 
+\item Start from the steady-state continuous energy diffusion equation, we divide the energy range into $G$ groups as shown in Figure~\ref{energy-groups}. 
 \begin{figure}[ht]
   \centering
-  \includegraphics[width=4in]{images/dfs/power-iteration-Gauss-Jacobi.png}
-  \caption{Power Iteration With Gauss-Jacobi Numerical Inversion of Matrix}
+  \includegraphics[width=6in]{images/dfs/energy-group.png}
+  \caption{Energy Groups in Multi-Gruop Diffusion Theory} \label{energy-groups}
 \end{figure}
 
-\clearpage
-\topic{Matrix Representation of Higher Dimensions Diffusion Equations}
-\begin{enumerate}
-\item 1D matrix can be solved without iterations; this is not the case for higher dimenisions: we have to use iterative methods for higher dimensions. 
-\item The matrix representation for higher dimensions looks the same as in 1D, except with one additional pair of off-diagonal term for each additional dimension as in Figure~\ref{matrix-shape}
-\item The size of the matrix increases as the dimensions increases. For instance, if we have 10 meshes per dimension, then 1D matrix is 10x10, 2D matrix is 100x100, 3D matrix is 1000x1000.
+\item Define group terms. We define the yet unknown group fluxes by the integrals of the flux over individual groups,
+\eqn{ \phi_g(\vecr) = \int_{E_g}^{E_{g-1}} \phi(\vecr, E) \dE }
+The group cross sections are defined such that the reaction rates in each interval are preserved,
+\eqn{ \sigma_{xg}^i (\vecr) = \frac{1}{\phi_g (\vecr)} \int_{E_g}^{E_{g-1}} \sigma_x^i (\vecr, E) \phi(\vecr, E) \dE = \frac{\int_{E_g}^{E_{g-1}} \sigma_x^i (\vecr, E) \phi(\vecr, E) \dE}{\int_{E_g}^{E_{g-1}} \phi(\vecr, E) \dE} }
+Group constants are typically determined using neutron spectra obtained by solving local problems with approximate boundary conditions, like our MC code. Group wise cross sections cannot match the details of Monte Carlo spectrum calculation, so it is imperative that \textit{detailed resonance effects are contained in the multi-group cross sections} when produced from some detailed spectral calculations. 
+
+\item Integrate steady-state diffusion equation over each of the $g$ energy groups: 
+\begin{align}
+& - \overbrace{\int_{E_g}^{E_{g-1}} \dE \divergence D(\vecr, E) \gradient \phi(\vecr, E)}^{\mbox{leakage/diffusion term }\textcircled{1}} + 
+\overbrace{\int_{E_g}^{E_{g-1}} \dE \Sigma_t(\vecr, E) \phi(\vecr, E)}^{\mbox{total interaction term }\textcircled{2}} = \overbrace{\int_{E_g}^{E_{g-1}} \dE S(\vecr, E)}^{\mbox{source term } \textcircled{3}}  \\
+& + \overbrace{\int_{E_g}^{E_{g-1}} \dE \chi(E) \int_{E'} \dE' \nu \Sigma_f (\vecr, E') \phi(\vecr, E')}^{\mbox{fission source term }\textcircled{4}} 
+ + \overbrace{\int_{E_g}^{E_{g-1}} \dE \int_{E'} \dE' \Sigma_s(\vecr, E'\to E) \phi(\vecr, E')}^{\mbox{scattering source term }\textcircled{5}} 
+\end{align}
+
+\item Simplify terms using group terms,
+  \begin{enumerate}
+  \item Leakage/Diffusion term: 
+    \begin{align}
+      \textcircled{1} &=\int_{E_g}^{E_{g-1}} \dE \divergence D(\vecr, E) \gradient \phi(\vecr, E) =  \divergence D_g(\vecr) \int_{E_g}^{E_{g-1}} \dE \gradient \phi(\vecr, E) = \divergence D_g (\vecr) \gradient \phi_g(\vecr) 
+    \end{align}
+    The group diffusion coefficient $D_g$ should be a tensor (a 3x3 symmetric matrix, called the Eddington tensor); but in application, we assume that $D_g$ is the same for all directions. That is, the tensor is approximated by a diagonal matrix: 
+    \eqn{ D_g^u (\vecr) = \frac{\int_{E_g}^{E_{g-1}} \dE D(\vecr, E) \ppu \phi(\vecr, E) }{\ppu \phi_g}, u = x,y,z} 
+    A more accurate approach is to let $D_g$ be the same in the x-y plane, but different in axial direction. 
+  \item Total interaction term: 
+    \begin{align}
+      \textcircled{2} &= \int_{E_g}^{E_{g-1}} \dE \Sigma_t(\vecr, E) \phi(\vecr, E) = \Sigma_{tg}(\vecr) \int_{E_g}^{E_{g-1}} \dE \phi(\vecr, E) = \Sigma_{tg} (\vecr) \phi_g(\vecr) 
+    \end{align}
+    where the macroscopic cross section is a sum over all isotropes $i$:
+    \begin{align}
+      \Sigma_{tg}(\vecr) &= \Sum_{i} N_i(\vecr) \sigma_{tg}^i (\vecr) \\
+      \sigma_{tg}^i (\vecr) &= \frac{\int_{E_g}^{E_{g-1}} \sigma_t^i (E) \phi(\vecr, E) \dE }{\int_{E_g}^{E_{g-1}} \phi(\vecr, E) \dE}
+    \end{align}
+  \item Source term: 
+    \eqn{ \textcircled{3} =\int_{E_g}^{E_{g-1}} \dE S(\vecr, E) =  S_g(\vecr) }
+  \item Fission source term: 
+    \eqn{ \textcircled{4} &=\int_{E_g}^{E_{g-1}} \dE \chi(E) \int_{E'} \dE' \nu \Sigma_f (\vecr, E') \phi(\vecr, E') =  \chi_g \Sum_{g'=1}^G \nu \Sigma_{fg} (\vecr) \phi_g(\vecr) }
+        where 
+        \eqn{ \chi_g &= \int_{E_g}^{E_{g-1}} \dE \chi(E), &\nu \sigma_{fg}^i (\vecr) &= \frac{1}{\phi_g(\vecr)} \int_{E_g}^{E_{g-1}} \nu(E) \sigma_f^i (E) \phi(\vecr, E) \dE }
+
+  \item Scattering source term: 
+  \begin{align}
+    \textcircled{5} &=\int_{E_g}^{E_{g-1}} \dE \int_{E'} \dE' \Sigma_s(\vecr, E'\to E) \phi(\vecr, E') = \int_{E_g}^{E_{g-1}} \dE \Sum_{g'=1}^G \int_{E_g'}^{E_{g'-1}} \dE' \Sigma_s(\vecr, E'\to E) \phi(\vecr, E') \\
+    &= \Sum_{g'=1}^G \int_{E_g}^{E_{g-1}} \dE \int_{E_g'}^{E_{g'-1}} \dE' \Sigma_s(\vecr, E'\to E) \phi(\vecr, E') \\
+    &= \Sum_{g'=1}^G \Sigma_{sg'g} (\vecr) \phi_{g'} (\vecr) 
+  \end{align}
+  where
+  \eqn{\sigma_{sg'g}^i (\vecr) = \frac{1}{\phi_{g'} (\vecr) } \int_{E_g}^{E_{g-1}} \dE \int_{E_{g'}}^{E_{g'-1}} \dE' \sigma_s^i (E'\to E) \phi(\vecr, E') }
+
+  \end{enumerate}
+
+\item The Multi-Group Diffusion Equation is, 
+\eqn{ -\divergence D_g(\vecr) \gradient \phi_g (\vecr) + \Sigma_{tg} (\vecr) \phi_g(\vecr) = \chi_g\Sum_{g'=1}^G \nu \Sigma_{fg'} \phi_{g'}(\vecr) + \Sum_{g'=1}^G \Sigma_{sg'g} (\vecr) \phi_{g'} (\vecr) + S_g(\vecr) }
+Cancelling the within group scattering cross section from both sides and defining the group-wise \hi{net removal cross section}, 
+\eqn{ \Sigma_{rg} = \Sigma_{tg} - \Sigma_{sgg} = \Sigma_{ag} + \Sum_{g'=1, g'\neq g} \Sigma_{sgg'} }
+We obtain the final multi-group form of the neutron diffusion equation, 
+\eqn{ \boxed{- \divergence D_g(\vecr) \gradient \phi_g(\vecr) + \Sigma_{rg} (\vecr) \phi_g(\vecr) = \chi_g \Sum_{g'=1}^G \nu \Sigma_{fg'} (\vecr) \phi_{g'} (\vecr) + \Sum_{g'=1,g'\neq g}^G \Sigma_{sg'g} (\vecr) \phi_{g'} (\vecr) + S_g(\vecr) } }
 \end{enumerate}
-\begin{figure}
-  \centering
-  \includegraphics[width=5in]{images/dfs/matrix_multidimension.png}
-  \caption{Destruction and Production Matrix Representation} \label{matrix-shape}
-\end{figure}
-
-\clearpage
-\topic{Dominance Ratio}
-Given an eigenvalue problem, if we specify the solved eigenvalues to be:
-\eqn{ |\lambda_1| > |\lambda_2| \ge |\lambda_3| \ge \cdots }
-then $|\lambda_1|$ is the spectral radius of the iteration matrix, and every mode has a dominance ratio,
-\eqn{ \dr_n = \frac{\lambda_n}{\lambda_1} }
-and power iteration kills of the lowest dominance ratio modes. The last remaining mode is the fundamental mode $dr = \frac{\lambda_2}{\lambda_1}$. If $|\lambda_1| \ge 1$, the ietration scheme is unstable and it would not converge\footnote{See Lewis' Computational Methods of Neutron Transport Appendixe C for more details}. Convergence of the power method is slow when $d$ is close to unity; in fact in most numerical methods, convergence rate = 1 - dominance ratio. Knowing the dominance ratio, we can estimate the number of iterations needed for convergence. 
-
-Dominance ratio measures the spatial decoupling. It depends on: 
-\begin{enumerate}
-\item Symmetric mode. If the initial guess is symmetric, the solution is symmetric, and the method used is symmetric, then only the symmetric mode shows up in the dominance ratio, and the asymmetric mode is hidden. As shown in Figure~\ref{dominance-symmetric}, the symmetric guess may not display the highest dr convergence (0.99), instead it display a symmetric mode as seen in the eigenvector. Whereas a random guess would excited all modes and show all the dr convergence (though the lower modes die too fast to be observed; we can only see the last two dominance ratio, 0.97 and 0.99), and the dominant mode has an asymmetric shape.  
-\begin{figure}
-  \centering
-  \includegraphics[width=6in]{images/dfs/dominance_ratio.png}
-  \caption{Dominance Ratio With An Symmetric Guess (left) or Random Guess (right)}
-  \label{dominance-symmetric}
-\end{figure}
-
-\item Core size: As seen in Figure~\ref{dominance-size}, as core size increases, dominance ratio increases, and it takes longer to converge. 
-\begin{figure}
-  \centering
-  \includegraphics[width=7in]{images/dfs/dominance_ratio_size.png}
-  \caption{Dominance Ratio With Different Core Sizes}
-  \label{dominance-size}
-\end{figure}
-
-\item Decoupling of radial zones from inserting control rod, having asymmetric core loadings, or having xenon distributions. The radial zones decoupled, dominance ratio decreases. 
-
-\item Decoupling of axial zones form partially inserting control rods, axial fuel enrichment zoning, and axial burnable absorber loading. 
-\end{enumerate}
-
-
-\clearpage
-\topic{HW5: Numerical Solution of Solving Two-Group Diffusion Problems}
-It is not just iterative convergence that we care; spatial convergence is required as well. Core design: reflector, fuel 1, fuel 2, fuel 1, reflector, decide which fuel goes on the inside and where the boundaries are. 
-
-
-\clearpage
-\topic{Summary}
-Remember for real 3D problem,
+Notes:
 \begin{itemize}
-\item Matrix inversion if of order $N^3$, so in real applications no matrix inversion;
-\item Finding all eigenvalues if at least order $N^2$;
-\item Iterative inversion must be order $N$ to be practical for large problems;
-\item Multi-level iteration is a practical necessity. 
-\item Dominance ratio measures spatial decoupling.
+\item A note about the \uline{summation sign}: the loss terms do not need to be summed over energy groups because once a neutron leaves group $g$ it does not matter where it goes, whereas the gain terms need to be summed over energy groups to take into account all neutrons contributing from every other energy group. 
+
+\item A note about the \uline{sign of the leakage term}: the absolute value of leakage always have a negative sign. 
+  \begin{itemize}
+  \item Typically RHS $>0$ (we have either fission, scattering, or source), then the curve is concave down. We can either think about it in terms of second derivative, which is negative; or we can think the slope is decreasing, which means that $\laplacian \phi < 0$. The heat transfer analogy is that when there are sources everywhere in the slab, there would be heat transfer away at every point. 
+    
+  \item In the extreme case RHS $<0$ , and the system is losing neutrons due to absorption or scattering out, then the flux would be concave up, meaning $\laplacian \phi > 0$. The heat transfer analygo is that when there are sinks everywhere in the slab, there would be heat transfer inwards at every point. 
+
+  \item When RHS $=0$, the flux would be a straight line, $\gradient \phi = $ constant, $\laplacian \phi = 0$, there is no leakage/diffusion at every point, that is, there is no net neutrons leaving any point, the neutron diffusion breakes even at every point. The heat transfer analogy is that there is no heat leaving or entering any point. 
+  \end{itemize}
 \end{itemize}
 
+
+
+\clearpage
+\topic{Partial Currents}
+\begin{enumerate}
+\item Scalar flux, 
+  \eqn{\phi(\vecr, E) = \int_{4\pi} \psi(\vecr, E, \vecOmega) \dOmega }
+\item Net current,
+  \eqn{\vecJ(\vecr, E) = \int_{4\pi} \vecOmega \psi(\vecr, E, \vecOmega) \dOmega  }
+\item Partial Currents in diffusion theory:
+  \begin{align}
+    J^+(\vecr, E) &= \int_{\vecn \cdot \vecOmega > 0} \vecn \cdot \vecOmega \psi(\vecr, E, \vecOmega) \dOmega \\
+    &= \frac{1}{4\pi} \int_{\vecn \cdot \vecOmega > 0} \vecn \cdot \vecOmega [\phi(\vecr, E) + 3 \vecOmega \cdot \vecJ(\vecr, E) ] \dOmega \\
+    &= \frac{1}{4\pi} \int_0^{2\pi} \dphi \int_0^1 \dmu [ \mu \phi + 3 \mu^2 J_n] \\
+    &= \frac{1}{4} \phi(\vecr, E) + \frac{1}{2} J_n (\vecr, E) \\
+    J^-(\vecr, E) &= \int_{\vecn \cdot \vecOmega < 0} |\vecn \cdot \vecOmega| \psi(\vecr, E, \vecOmega) \dOmega  \\
+    &= -\frac{1}{4\pi} \int_0^{2\pi} \dphi \int_{-1}^0 \dmu [ \mu \phi + 3 \mu^2 J_n] \\
+    &= \frac{1}{4} \phi(\vecr, E) - \frac{1}{2} J_n (\vecr, E) 
+  \end{align}
+\end{enumerate}
 
 \end{document}

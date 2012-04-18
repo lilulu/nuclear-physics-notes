@@ -4,99 +4,149 @@
 \begin{document}
 \maketitle
 
-\lecture{Multi-Group Diffusion: Derivations} \label{multi-group-diffusion}
-\topic{Derivation of Multi-Group Diffusion Theory}
-\begin{enumerate}
-\item Start from the steady-state continuous energy diffusion equation, we divide the energy range into $G$ groups as shown in Figure~\ref{energy-groups}. 
-\begin{figure}[ht]
-  \centering
-  \includegraphics[width=6in]{images/dfs/energy-group.png}
-  \caption{Energy Groups in Multi-Gruop Diffusion Theory} \label{energy-groups}
-\end{figure}
+\lecture{One-Group Diffusion: Source Problem}
+We are going to cover six classical examples to understand the mechanics, boundary conditions, and interface conditions. Know these for the exam. We always start with the Balance Equation,
+\eqn{ \laplacian \phi(\vecr) + B_m^2 \phi(\vecr) &= \laplacian \phi(\vecr) - \frac{1}{L^2} \phi(\vecr)= - \frac{S}{D} & B_m^2 = -\frac{1}{L^2} = \frac{\nu \Sigma_f - \Sigma_a}{D} 
+\label{bal-eqn}}
 
-\item Define group flux, group cross sections. We define the yet unknown group fluxes by the integrals of the flux over individual groups,
-\eqn{ \phi_g(\vecr) = \int_{E_g}^{E_{g-1}} \phi(\vecr, E) \dE }
-The group cross sections are,
-\eqn{ \sigma_{xg}^i (\vecr) = \frac{1}{\phi_g (\vecr)} \int_{E_g}^{E_{g-1}} \sigma_x^i (\vecr, E) \phi(\vecr, E) \dE = \frac{\int_{E_g}^{E_{g-1}} \sigma_x^i (\vecr, E) \phi(\vecr, E) \dE}{\int_{E_g}^{E_{g-1}} \phi(\vecr, E) \dE} }
-Group constants are typically determined using neutron spectra obtained by solving local problems with approximate boundary conditions, like our MC code. Group wise cross sections cannot match the details of Monte Carlo spectrum calculation, so it is imperative that \textit{detailed resonance effects are contained in the multi-group cross sections} when produced from some detailed spectral calculations. 
 
-\item Integrate steady-state diffusion equation over each of the $g$ energy groups: 
+\clearpage
+\topic{Arbitrary Source in Finite Multiplying Medium} \label{one-group-source-problem-subcritical}
+Consider a subcritical multiplying medium, slab geometry from $-L/2$ to $L/2$, and with a source. 
 \begin{align}
-& - \overbrace{\int_{E_g}^{E_{g-1}} \dE \divergence D(\vecr, E) \gradient \phi(\vecr, E)}^{\mbox{leakage/diffusion term }\textcircled{1}} + 
-\overbrace{\int_{E_g}^{E_{g-1}} \dE \Sigma_t(\vecr, E) \phi(\vecr, E)}^{\mbox{total interaction term }\textcircled{2}} = \overbrace{\int_{E_g}^{E_{g-1}} \dE S(\vecr, E)}^{\mbox{source term } \textcircled{3}}  \\
-& + \overbrace{\int_{E_g}^{E_{g-1}} \dE \chi(E) \int_{E'} \dE' \nu \Sigma_f (\vecr, E') \phi(\vecr, E')}^{\mbox{fission source term }\textcircled{4}} 
- + \overbrace{\int_{E_g}^{E_{g-1}} \dE \int_{E'} \dE' \Sigma_s(\vecr, E'\to E) \phi(\vecr, E')}^{\mbox{scattering source term }\textcircled{5}} 
+  - D \dphidxn2 + \Sigma_a \phi(x) &= \nu \Sigma_f \phi(x) + S(x) \\
+  \dphidxn2 + B_m^2 \phi(x) &= -\frac{S(x)}{D} 
 \end{align}
-
-\item Simplify terms: 
-  \begin{enumerate}
-  \item Leakage/Diffusion term: 
-    \begin{align}
-      \textcircled{1} &= \divergence D_g(\vecr) \int_{E_g}^{E_{g-1}} \dE \gradient \phi(\vecr, E) = \divergence D_g (\vecr) \gradient \phi_g(\vecr) 
-    \end{align}
-    The group diffusion coefficient $D_g$ should be a tensor (a 3x3 symmetric matrix, called the Eddington tensor); but in application, we assume that $D_g$ is the same for all directions. That is, the tensor is approximated by a diagonal matrix: 
-    \eqn{ D_g^u (\vecr) = \frac{\int_{E_g}^{E_{g-1}} \dE D(\vecr, E) \ppu \phi(\vecr, E) }{\ppu \phi_g}, u = x,y,z} 
-    A more accurate approach is to let $D_g$ be the same in the x-y plane, but different in axial direction. 
-  \item Total interaction term: 
-    \begin{align}
-      \textcircled{2} &= \Sigma_{tg}(\vecr) \int_{E_g}^{E_{g-1}} \dE \phi(\vecr, E) = \Sigma_{tg} (\vecr) \phi_g(\vecr) 
-    \end{align}
-    where the macroscopic cross section is a sum over all isotropes $i$:
-    \begin{align}
-      \Sigma_{tg}(\vecr) &= \Sum_{i} N_i(\vecr) \sigma_{tg}^i (\vecr) \\
-      \sigma_{tg}^i (\vecr) &= \frac{\int_{E_g}^{E_{g-1}} \sigma_t^i (E) \phi(\vecr, E) \dE }{\int_{E_g}^{E_{g-1}} \phi(\vecr, E) \dE}
-    \end{align}
-  \item Source term: 
-    \eqn{ \textcircled{3} = S_g(\vecr) }
-  \item Fission source term: 
-    \begin{align}
-      \textcircled{4} &= \chi_g \Sum_{g'=1}^G \nu \Sigma_{fg} (\vecr) \phi_g(\vecr) \\
-      \chi_g &= \int_{E_g}^{E_{g-1}} \dE \chi(E) \\
-      \nu \sigma_{fg}^i (\vecr) &= \frac{1}{\phi_g(\vecr)} \int_{E_g}^{E_{g-1}} \nu(E) \sigma_f^i (E) \phi(\vecr, E) \dE 
-    \end{align}
-  \item Scattering source term: 
-  \begin{align}
-    \textcircled{5} &= \int_{E_g}^{E_{g-1}} \dE \Sum_{g'=1}^G \int_{E_g'}^{E_{g'-1}} \dE' \Sigma_s(\vecr, E'\to E) \phi(\vecr, E') \\
-    &= \Sum_{g'=1}^G \int_{E_g}^{E_{g-1}} \dE \int_{E_g'}^{E_{g'-1}} \dE' \Sigma_s(\vecr, E'\to E) \phi(\vecr, E') \\
-    &= \Sum_{g'=1}^G \Sigma_{sg'g} (\vecr) \phi_{g'} (\vecr) 
-  \end{align}
-  where
-  \eqn{\sigma_{sg'g}^i (\vecr) = \frac{1}{\phi_{g'} (\vecr) } \int_{E_g}^{E_{g-1}} \dE \int_{E_{g'}}^{E_{g'-1}} \dE' \sigma_s^i (E'\to E) \phi(\vecr, E') }
-
-  \end{enumerate}
-
-\item The Multi-Group Diffusion Equation is, 
-\eqn{ -\divergence D_g(\vecr) \gradient \phi_g (\vecr) + \Sigma_{tg} (\vecr) \phi_g(\vecr) = \chi_g\Sum_{g'=1}^G \nu \Sigma_{fg'} \phi_{g'}(\vecr) + \Sum_{g'=1}^G \Sigma_{sg'g} (\vecr) \phi_{g'} (\vecr) + S_g(\vecr) }
-Cancelling the within group scattering cross section from both sides and defining the group-wise \hi{net removal cross section}, 
-\eqn{ \Sigma_{rg} = \Sigma_{tg} - \Sigma_{sgg} = \Sigma_{ag} + \Sum_{g'=1, g'\neq g} \Sigma_{sgg'} }
-We obtain the final multi-group form of the neutron diffusion equation, 
-\eqn{ \boxed{- \divergence D_g(\vecr) \gradient \phi_g(\vecr) + \Sigma_{rg} (\vecr) \phi_g(\vecr) = \chi_g \Sum_{g'=1}^G \nu \Sigma_{fg'} (\vecr) \phi_{g'} (\vecr) + \Sum_{g'=1,g'\neq g}^G \Sigma_{sg'g} (\vecr) \phi_{g'} (\vecr) + S_g(\vecr) } }
-\end{enumerate}
-A note about the leakage term: when the term is on the LHS, it should always have a negative sign. 
+Given $\Sigma_a > \nu \Sigma_f$, $B^2 = \frac{\nu \Sigma_f - \Sigma_a}{D} < 0 $, we re-write $B^2 = - |B|^2$,
+\eqn{ \dphidxn2 - |B|^2 \phi(x) = \tilde{S}(x) }
+The general/homogeneous solution is,
+\eqn{ \phi_H (x) = A e^{|B|x} + Ce^{-|B|x} = A \cosh (|B|x) + C \sinh (|B| x) }
+The particular solution depends on source $\tilde{S}(x)$. Apply BCs $\phi \left( \pm \frac{L}{2} \right) = 0$, we get the boundary conditions in the matrix form,
+\eqn{ \left[ \begin{array}{cc} 
+\cosh(|B|L/2) & \sinh(|B|L/2) \\
+\sinh(|B|L/2) & \cosh(|B|L/2) 
+\end{array} \right] 
+\left[ \begin{array}{c}
+A \\ C \end{array} \right] 
+= - \left[ \begin{array}{c} 
+\phi_p(L/2) \\ \phi_p(-L/2) \end{array} \right] }
+Coefficients A and C are uniquely determined for a given source distribution: 
 \begin{itemize}
-\item Typically RHS $>0$ (we have either fission, scattering, or source), then the curve is concave down. We can either think about it in terms of second derivative, which is negative; or we can think the slope is decreasing, which means that $\laplacian \phi < 0$. The heat transfer analogy is that when there are sources everywhere in the slab, there would be heat transfer away at every point. 
- 
-\item In the extreme case RHS $<0$ , and the system is losing neutrons due to absorption or scattering out, then the flux would be concave up, meaning $\laplacian \phi > 0$. The heat transfer analygo is that when there are sinks everywhere in the slab, there would be heat transfer inwards at every point. 
-
-\item When RHS $=0$, the flux would be a straight line, $\gradient \phi = $ constant, $\laplacian \phi = 0$, there is no leakage/diffusion at every point, that is, there is no net neutrons leaving any point, the neutron diffusion breakes even at every point. The heat transfer analogy is that there is no heat leaving or entering any point. 
+\item There always exists a physically realizable solution (no critical buckling!);
+\item In the limit of $S\to 0$, the only physical solution is the trivial solution. 
 \end{itemize}
+
+\clearpage
+\topic{Point Source in Infinite Non-Multiplying Medium}
+Conside an infinite non-multiplying medium with a point source. Eq.~\ref{bal-eqn} become,
+\eqn{ \dphidrn2 + \frac{2}{r} \dphidr - \ols\phi = -\frac{S_0}{D} \delta(\vecr) }
+We look for the homogeneous solution, and set $w = r \phi$, 
+\eqn{ \dphidrn2 + \frac{2}{r} \dphidr - \ols\phi &= 0, &\dwdrn2 - \ols w &= 0}
+The solution is, 
+\eqn{ w &= Ae^{r/L} + B e^{-r/L}, & \phi(r) = A\frac{e^{r/L}}{r} + B \frac{e^{-r/L}}{r} }
+BC1: $\lim_{r\to \infty} \phi = 0, \Rightarrow A=0$. BC2: $\lim_{r\to 0} 4 \pi r^2 J(r) = S_0$ (specific solution), that is, 
+\begin{align}
+J &= -D \dphidr = DBe^{-r/L} \left( \frac{1}{r^2} + \frac{1}{rL} \right), 
+&\lim_{r\to 0} 4 \pi r^2 J(r) &= 4 \pi DB = S_0 \\
+B &= \frac{S_0}{4 \pi D}, & \phi(r) &= \frac{S_0}{4\pi D} \frac{e^{-r/L}}{r} 
+\end{align}
+Interpretations:
+\begin{enumerate}
+\item Extreme condition 1: no absorption: as $\Sigma_a \to 0, L\to \infty$, 
+  \eqn{\lim_{L\to \infty} \phi(r) = \frac{S_0}{4 \pi Dr}  = \mbox{Geometrical Attenuation}}
+\item Extreme condition 2: pure absorber. We can easily solve the transport kernel: 
+  \eqn{\phi(r) = \int_{V'} \frac{S(r') e^{-\Sigma_a|r-r'|}}{4\pi|r-r'|^2}  = \frac{S_0}{4 \pi r^2} }
+\item Diffusion results in a different shape for the decrease in neutron population as in Figure~\ref{dfs-shape}.
+  \begin{figure}
+    \centering
+    \includegraphics[width=4in]{images/dfs/dfs-shape.png}
+    \caption{Flux Shape Depent On Diffusion Coefficients}\label{dfs-shape}
+  \end{figure}
+\item At $r=0$ tere is a non-physical singularity due to the mathematical artifact of point sources;
+\item Diffusion theory is not valid near singularities;
+\item We can use diffusion kernel to solve source problems in non-multiplying media by superposition.
+\end{enumerate}
+
+\clearpage
+\topic{Plane Source in Infinite Non-Multiplying Medium}
+Consider an infinite non-multiplying medium with a plane source at $x=0$. Since the geometry is symmetric, we can solve for $x>0$ first. 
+\eqn{ \phi(x) = Ae^{x/L} + B e^{-x/L}} 
+BC1: $\lim_{x \to \infty} \phi(x) = 0, \Rightarrow \phi(x) = B e^{-x/L}$; BC2: $\lim_{x\to 0} J(r)  = \frac{S_0}{2}$, 
+\eqn{ J = -D \dphidx = B D e^{-x/L} }
+\eqn{ \phi(x) = \frac{S_0 L}{2D} e^{-x/L}}
+For the total geometry, we can simply place an absolute sign on $x$:
+\eqn{ \phi(x) = \frac{S_0 L}{2D} e^{-|x|/L}}
+If the source is placed at $x=b$, the solution becomes,
+\eqn{ \phi(x) = \frac{S_0 L}{2D} e^{-|x-b|/L} }
+
+
+\clearpage
+\topic{Plane Source in Finite Multiplying Medium with $\kinf > 1$}
+Consider a finite multiplying medium with $\kinf > 1$, it is a slab extending from $-H/2$ to $H/2$, it is subcritical with leakage, BC are from the current at center and the zero flux at the H/2 boundary. 
+\eqn{ \dphidxn2 + B_m^2 \phi &= 0,  & B_m^2 &= \frac{\nu \Sigma_f - \Sigma_a}{D} = \frac{\kinf - 1}{L^2} > 0}
+\eqn{ \phi(x) = A \cos(B_mx) + B\sin(B_mx) }
+BC1: $\phi(H/2) = 0$; BC2: $J(0) = \frac{S_0}{2}$. We can solve for the coefficients, and place absolute sign to represent the whole geometry: 
+\eqn{ \phi(x) = \frac{S_0}{2DB_m \cos\left( \frac{B_m H}{2} \right)} \sin\left[ B_m \left(\frac{H}{2} - |x|\right) \right] }
+Interpretations:
+\begin{enumerate}
+\item Because $\kinf > 1$, the flux shape is concave, that is, increasing negative slopes in the positive domain.  
+\item If $H$ is increased to the critical dimension, that is, $H \to \frac{\pi}{B_m}$, then $\phi(0) \to \infty$; that is, if the reactor is critical, the flux at the source is infinite. That is, there is no steady-state solution for flux at the source site. In fact, if we place a fission detector at $x=0$ and measure source multiplication, 
+  \eqn{M_s(0) = \frac{N_d \sigma_{f,d} V_d \phi(0)}{S_0} \propto \frac{\sigma_f}{2DB} \tan\left(\frac{BH}{2} \right) }
+  Or the inverse source multiplication factor, 
+  \eqn{ \frac{1}{M_s(0)} \propto \frac{1}{\tan\left(\frac{BH}{2} \right)} \to 0 }
+\item To reach criticality, we can add fuel elements, withdraw control rods, and dilute boron. 
+\item 1/M is useful for estimating criticality as shown in Figure~\ref{approach-critical}. Also of interest is the change of the flux shape as we increase $\kinf$. 
+  \begin{figure}
+    \centering
+    \includegraphics[width=5in]{images/dfs/approach-critical.png}
+    \caption{1/M plot and Flux Shape In Approaching Criticality}\label{approach-critical}
+  \end{figure}
+\end{enumerate}
+
+\clearpage
+\topic{Plane Source in Finite Multiplying Medium with $\kinf < 1$}
+Consider a finite multiplying medium with $\kinf < 1$, a slab geometry from $0$ to $H$, and a plane source at $0$, 
+\eqn{ B_m^2 = \frac{\nu \Sigma_f - \Sigma_a}{D} &= \frac{k_{\infty} - 1}{L^2} < 0, & B_m^2 &\to -|B_m|^2}
+The homogeneous solution is, 
+\eqn{\dphidxn2 - |B_m|^2 \phi &= 0, &\phi(x) &= A\cosh(|B_m|x) + B \sinh(|B_m|x) }
+BCs: $\phi(0) = \phi_0, \phi(H) = 0$, we can solve for the coefficients, 
+\eqn{ \phi(x) = \phi_0 \left[ \cosh(|B_m|x) - \frac{\cosh(|B_m|x)}{\sinh(|B_m|x)} \sinh(|B_m|x) \right] }
+Extreme condition: if we let the size of the slab to go to infinity, 
+\eqn{\lim_{H \to \infty} \phi(x) = \phi_0 [\cosh(|B_m|x) - \sinh(|B_m|x)] = \phi_0 e^{-|B_m|x} = \frac{S_0L}{2D} e^{-|B_m|x} }
+Notice in both finite and infinite case, the fluxes have convex shapes; the finite curve is below the infinite curve though. 
 
 
 
 \clearpage
-\topic{Partial Currents}
+\topic{Summary}
 \begin{enumerate}
-\item Scalar flux, 
-  \eqn{\phi(\vecr, E) = \int_{4\pi} \psi(\vecr, E, \vecOmega) \dOmega }
-\item Net current,
-  \eqn{\vecJ(\vecr, E) = \int_{4\pi} \vecOmega \psi(\vecr, E, \vecOmega) \dOmega  }
-\item Partial Currents in diffusion theory:
-  \begin{align}
-    J^+(\vecr, E) &= \int_{\vecn \cdot \vecOmega > 0} \vecn \cdot \vecOmega \psi(\vecr, E, \vecOmega) = \frac{1}{4\pi} \int_{\vecn \cdot \vecOmega > 0} \vecn \cdot \vecOmega [\phi(\vecr, E) + 3 \vecOmega \cdot \vecJ(\vecr, E) ] \\
-    &= \frac{1}{4} \phi(\vecr, E) + \frac{1}{2} J_n (\vecr, E) \\
-    J^-(\vecr, E) &= \int_{\vecn \cdot \vecOmega < 0} |\vecn \cdot \vecOmega| \psi(\vecr, E, \vecOmega)  \\
-    &= \frac{1}{4} \phi(\vecr, E) - \frac{1}{2} J_n (\vecr, E) 
-  \end{align}
+\item \textit{Super-positioning of sources}: if we are given a random source that is the sum of a couple of common forms of sources, we can super-position the flux from each of the common sources. This method works in any non-multiplying medium, and in multiplying medium in subcritical condition\footnote{Supercritical condition, as source increaes, flux inverts}. For instance, we can super-position point sources to get a line source. 
+
+\item Diffusion theory is valid: 
+  \begin{itemize}
+    \item when there is little geometry heterogeneity;
+    \item when $\Sigma_a \ll \Sigma_s$;
+    \item when position is not too close to interface and source.
+  \end{itemize}
+  Diffusion theory is not valid near singularities. 
+
+\item $\kinf$ is important\footnote{know this for the exams}: 
+  \begin{itemize}
+  \item $\kinf = 1$: flux is straight line;
+  \item $\kinf < 1$ means $B^2 < 0$, flux is $\sinh, \cosh$ which is convex; 
+  \item $\kinf > 1$ means $B^2 > 0$, flux is $\sin, \cos$ which is concave. 
+  \end{itemize}
 \end{enumerate}
 
+  \begin{table}
+    \centering
+    \begin{tabular}{|c|c|c|c|} \hline
+      Source & Geometry & BC2 & Flux \\ \hline \hline
+      Point & Infinite Sphere &$\lim_{r\to 0} 4 \pi r^2 J(r) = S_0$ & $\frac{S_0}{4\pi D} \frac{e^{-r/L}}{r}$ \\ \hline
+      Plane & Infinite Slab & $\lim_{x\to 0} J(r)  = \frac{S_0}{2}$ & $\frac{S_0 L}{2D} e^{-|x|/L}$ \\ \hline
+    \end{tabular}
+    \caption{Subcritical System: Source and Flux} 
+  \end{table}
+  
+  
 \end{document}

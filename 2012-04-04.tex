@@ -4,213 +4,205 @@
 \begin{document}
 \maketitle
 
-\lecture{One-Group Diffusion: Analytical Solutions, Part 2}
-We are going to cover six classical examples to understand the mechanics, boundary conditions, and interface conditions. Know these for the exam. We always start with the Balance Equation,
-\eqn{ \laplacian \phi(\vecr) + B_m^2 \phi(\vecr) &= \laplacian \phi(\vecr) - \frac{1}{L^2} \phi(\vecr)= - \frac{S}{D} & B_m^2 = -\frac{1}{L^2} = \frac{\nu \Sigma_f - \Sigma_a}{D} 
-\label{bal-eqn}}
+\lecture{Two-Group Diffusion: Numerical Solutions}
+Reference: Stacy's Section 3.10. 
 
-\topic{Point Source in Infinite Non-Multiplying Medium}
-Non-multiplying medium, so we use $-\frac{1}{L^2}$ expression; point source, we set $S = S_0 \delta(\vecr)$; expand $\laplacian \phi(\vecr)$ using spherical coordinates; then Eq.~\ref{bal-eqn} become,
-\eqn{ \dphidrn2 + \frac{2}{r} \dphidr - \ols\phi = -\frac{S_0}{D} \delta(\vecr) }
-We look for the homogeneous solution: 
-\eqn{ \dphidrn2 + \frac{2}{r} \dphidr - \ols\phi = 0}
-We set $w = r \phi$, then simplify the above differential equation to be,
-\eqn{ \dwdrn2 - \ols w = 0}
-The solution is, 
-\eqn{ w &= Ae^{r/L} + B e^{-r/L}, & \phi(r) = A\frac{e^{r/L}}{r} + B \frac{e^{-r/L}}{r} }
-BC1: $\lim_{r\to \infty} \phi = 0$, that is, $A=0$. BC2: $\lim_{r\to 0} 4 \pi r^2 J(r) = S_0$ (specific solution), that is, 
-\begin{align}
-J &= -D \dphidr = DBe^{-r/L} \left( \frac{1}{r^2} + \frac{1}{rL} \right) \\
-\lim_{r\to 0} 4 \pi r^2 J(r) &= 4 \pi DB = S_0 \\
-B &= \frac{S_0}{4 \pi D} \\
-\phi(r) &= \frac{S_0}{4\pi D} \frac{e^{-r/L}}{r} 
-\end{align}
-Interpretations:
-\begin{enumerate}
-\item Extreme condition 1: no absorption: as $\Sigma_a \to 0, L\to \infty$, 
-  \eqn{\lim_{L\to \infty} \phi(r) = \frac{S_0}{4 \pi Dr}  = \mbox{Geometrical Attenuation}}
-\item Extreme condition 2: pure absorber. We can easily solve the transport kernel: 
-  \eqn{\phi(r) = \int_{V'} \frac{S(r') e^{-\Sigma_a|r-r'|}}{4\pi|r-r'|^2}  = \frac{S_0}{4 \pi r^2} }
-\item Diffusion results in a different shape for the decrease in neutron population as in Figure~\ref{dfs-shape}.
-  \begin{figure}
-    \centering
-    \includegraphics[width=4in]{images/dfs/dfs-shape.png}
-    \caption{Flux Shape Depent On Diffusion Coefficients}\label{dfs-shape}
-  \end{figure}
-\item At $r=0$ tere is a non-physical singularity due to the mathematical artifact of point sources;
-\item Diffusion theory is not valid near singularities;
-\item We can use diffusion kernel to solve source problems in non-multiplying media by superposition.
-\end{enumerate}
+\topic{Simple Numerical Methods to Solve Diffusion Equations}
+\subtopic{Derivation of Neutron Balance Equation}
+Recall the two-group neutron balance equations:
+\begin{itemize}
+\item Total fission source is: 
+  \eqn{S_f(r) = \nu \Sigma_{f1} (r) \phi_1 (r) + \nu \Sigma_{f2} (r) \phi_2(r) }
+  $\chi_1 = 1, \chi_2 = 0$ which implies that fission source in the thermal group is zero.
+\item Scattering source: we define effective down-scattering, so up-scattering is zero $\Sigma_{21}(r) = 0$. 
+\item Two-group diffusion equations: 
+  \begin{align}
+    \left\{ \begin{array}{c}
+      - D_1 \laplacian \phi_1 + (\Sigma_{a1} + \Sigma_{s12}) \phi_1 = \nu \Sigma_{f1} \phi_1 + \nu \Sigma_{f2} \phi_2 + S_1  \\
+      - D_2 \laplacian \phi_2 + \Sigma_{a2} \phi_2 = \Sigma_{s12} \phi_1 + S_2
+    \end{array} \right. 
+  \end{align}
+\end{itemize}
 
-\clearpage
-\topic{Plane Source in Infinite Non-Multiplying Medium}
-The plane source is placed at $x=0$. The balance equation and the homogeneous solution are similar as the point source case except now we are in x-direction only. In a symmetric case, we can solve for one side only; for now let's consider $x>0$: 
-\eqn{ \phi(x) = Ae^{x/L} + B e^{-x/L}} 
-BC1: $\lim_{x \to \infty} \phi(x) = 0$ suggests that $\phi(x) = B e^{-x/L}$; BC2: $\lim_{x\to 0} J(r)  = \frac{S_0}{2}$, 
-\eqn{ J = -D \dphidx = B D e^{-x/L} }
+\subtopic{Derivation of Interface Flux}
+Then we construct a finite spatial mesh in which cross sections are constant; integrate the neutron diffusion equations over each mesh cell $\Delta^n$,
+\eqn{-\int \ddx D_1^n \ddx \phi_1^n \dx + \Sigma_{r1}^n  \phi_1^n \Delta^n = \nu \Sigma_{f1}^n \phi_1^n \Delta^n + \nu \Sigma_{f2}^n \phi_2^n \Delta^n + S_1 \Delta^n} 
+\eqn{-\int \ddx D_2^n \ddx \phi_2^n  \dx + \Sigma_{a2}^n \phi_2^n \Delta^n = \Sigma_{s12}^n \phi_1^n \Delta^n + S_2 \Delta^n}
+We evaluate the integral term\footnote{Lectuer says use the divergence theorem $\int \divergence \vec{F} \dV = \int_S \vec{F} \cdot \vec{n} \dS$, I think this is just manipulating integral and $\int_{x_1}^{x_2} \ddx A \dx \to \left. A \right|_{x_2} - \left. A \right|_{x_1}$}, 
+\eqn{\int \ddx D_1^n \ddx \phi_1^n \dx  = \left. D_1^n \ddx \phi_1^n \right|_{n^+} - \left. D_1^n \ddx \phi_1^n \right|_{n^-} }
+Then we have,
+\eqn{\left. D_1^n \ddx \phi_1^n \right|_{n^-} - \left. D_1^n \ddx \phi_1^n \right|_{n^+} + \Sigma_{r1}^n  \phi_1^n \Delta^n = \nu \Sigma_{f1}^n \phi_1^n \Delta^n + \nu \Sigma_{f2}^n \phi_2^n \Delta^n + S_1 \Delta^n} 
+\eqn{\left. D_2^n \ddx \phi_2^n \right|_{n^-} - \left. D_2^n \ddx \phi_2^n \right|_{n^+} + \Sigma_{a2}^n \phi_2^n \Delta^n = \Sigma_{s12}^n \phi_1^n \Delta^n + S_2 \Delta^n}
+We notice that the $-D \ddx \phi$ terms are just current as in Figure~\ref{diagram-finite-difference}, 
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=2.5in]{images/dfs/diagram-finite-difference.png}
+  \caption{Diagram Illustrating Two Neighboring Cells in Finite Difference Scheme} \label{diagram-finite-difference}
+\end{figure}
+\eqn{J_n^+ = - \left. D_g^n \ddx \phi_g^n \right|_{n+} = -D_g^n \frac{\phi_g^S - \phi_g^n}{\Delta/2} }
+\eqn{J_{n+1}^- = - \left. D_g^{n+1} \ddx \phi_g^{n+1} \right|_{n-} = - D_g^{n+1} \frac{\phi_g^{n+1} - \phi_g^s}{\Delta/2} }
+By continuity of the net current, we can set the above two equations to equal to each other, 
+\eqn{  -D_g^n \frac{\phi_g^S - \phi_g^n}{\Delta/2} =  - D_g^{n+1} \frac{\phi_g^{n+1} - \phi_g^s}{\Delta/2} }
+From where we can solve for the interface flux, 
+\eqn{ \phi_g^s = \frac{D_g^{n+1} \phi_g^{n+1} + D_g^n \phi_g^n}{D_g^n + D_g^{n+1}}} 
+Then we can get th net current in terms of mesh fluxes: 
+\eqn{ J_n^+ = - \frac{2D_g^n}{\Delta} \left[ \frac{ D^{n+1} \phi^{n+1} + D^n \phi^n}{D^n + D^{n+1}} - \phi^n \right] = - \overbrace{\frac{2 D^n D^{n+1} }{\Delta (D^n + D^{n+1})}}^{\to \hat{D}^{n,n+1}} (\phi^{n+1} - \phi^{n}) }
 That is, 
-\eqn{ \phi(x) = \frac{S_0 L}{2D} e^{-x/L}, x>0 }
-For the total geometry, we can simply place an absolute sign on $x$:
-\eqn{ \phi(x) = \frac{S_0 L}{2D} e^{-|x|/L}}
-If the source is placed at $x=b$, the solution becomes,
-\eqn{ \phi(x) = \frac{S_0 L}{2D} e^{-|x-b|/L} }
+\eqn{ J_n^+ &= - \hat{D}^{n,n+1} (\phi^{n+1} - \phi^n)  & J_n^- &= - \hat{D}^{n-1, n} (\phi^n - \phi^{n-1} ), & \hat{D}^{n,n+1} &= \frac{2 D^n D^{n+1}}{\Delta (D^n + D^{n+1})}  \label{net-current}} 
 
 
-\clearpage
-\topic{Plane Source in Finite Multiplying Medium with $\kinf > 1$}
-For multiplying medium, we use the $B_m^2$ term instead of the $\ols$,
-\eqn{ \dphidxn2 + B_m^2 \phi &= 0,  & B_m^2 &= \frac{\mu \Sigma_f - \Sigma_a}{D} = \frac{\kinf - 1}{L^2} > 0}
-Assume system is subcritical with leakage, and boundary conditions are from current at center and zero flux at the H/2 boundary. Again this is a symmetric system, so we are going to solve the $x>0$ case. The homogeneous solution is,
-\eqn{ \phi(x) = A \cos(B_mx) + B\sin(B_mx) }
-BC1: $\phi(H/2) = 0$; BC2: $J(0) = \frac{S_0}{2}$ because of a plane source. We can solve for the coefficients,
-\eqn{ \phi(x) = \frac{S_0}{2DB_m \cos\left( \frac{B_m H}{2} \right)} \sin\left[ B_m \left(\frac{H_2} - x\right) \right] }
-Interpretations:
+\subtopic{Derivation of Finite Difference Equations}
+Plug Eq.~\ref{net-current} back into diffusion equations, we get, 
+\eqn{ \hat{D}_1^{n-1,n} (\phi_1^n - \phi_1^{n-1})  - \hat{D}_1^{n,n+1} (\phi_1^{n+1} - \phi_1^n) + \Sigma_{r1}^n \phi_1^n \Delta^n &= \mu \Sigma_{f1}^n \phi_1^n \Delta^n + \mu \Sigma_{f2}^n \phi_2^n \Delta^n + S_1 \Delta^n} 
+\eqn{ \hat{D}_2^{n-1,n} (\phi_2^n - \phi_2^{n-1})  - \hat{D}_2^{n,n+1} (\phi_2^{n+1} - \phi_2^n) + \Sigma_{a2}^n \phi_2^n \Delta^n &= \Sigma_{s12}^n \phi_1^n \Delta^n + S_2 \Delta^n} 
+Rearranging terms by fluxes, we get, 
+\eqn{ - \hat{D}_1^{n-1,n} \phi_1^{n-1} - \hat{D}_1^{n,n+1} \phi_1^{n+1} + [ \Sigma_{r1}^n \Delta^n + \hat{D}_1^{n-1, n} + \hat{D}_1^{n,n+1} ] \phi_1^n = \nu \Sigma_{f1}^n \phi_1^n \Delta^n + \nu \Sigma_{f2}^n \phi_2^n \Delta^n + S_1^n \Delta^n} 
+\eqn{ - \hat{D}_2^{n-1,n} \phi_2^{n-1} - \hat{D}_2^{n,n+1} \phi_2^{n+1} + [\Sigma_{a2}^n \Delta^n + \hat{D}_2^{n-1.n} + \hat{D}_2^{n,n+1} ] \phi_2^n = \Sigma_{s12}^n \phi_1^n \Delta^n + S_2^n \Delta^n }
+
+\subtopic{Derivation of Boundary Condition}
+Interior of the geometry, the boundary conditions are implied. The exterior boundaries have to be specified. There are two types of boundary conditions:
 \begin{enumerate}
-\item Because $\kinf > 1$, the flux shape is concave, that is, increasing negative slopes in the positive domain.  
-\item If $H$ is increased to the critical dimension, that is, $H \to \frac{\pi}{B_m}$, then $\phi(0) \to \infty$; that is, if the reactor is critical, the flux at the source is infinite. That is, there is no steady-state solution for flux at the source site. In fact, if we place a fission detector at $x=0$ and measure source multiplication, 
-  \eqn{M_s(0) = \frac{N_d \sigma_{f,d} V_d \phi(0)}{S_0} \propto \frac{\sigma_f}{2DB} \tan\left(\frac{BH}{2} \right) }
-  Or the inverse source multiplication factor, 
-  \eqn{ \frac{1}{M_s(0)} \propto \frac{1}{\tan\left(\frac{BH}{2} \right)} \to 0 }
-\item To reach criticality, we can add fuel elements, withdraw control rods, and dilute boron. 
-\item 1/M is useful for estimating criticality as shown in Figure~\ref{approach-critical}. Also of interest is the change of the flux shape as we increase $\kinf$. 
-  \begin{figure}
-    \centering
-    \includegraphics[width=5in]{images/dfs/approach-critical.png}
-    \caption{1/M plot and Flux Shape In Approaching Criticality}\label{approach-critical}
-  \end{figure}
+\item Zero Flux BC: 
+\eqn{ J_g^N = -D_g^N \frac{ -\phi_g^N - \phi_g^N}{\Delta^N}  = \frac{2 D_g^N}{\Delta^N} \phi_g^N }
+\item Zero Incoming Current BC:
+\eqn{ J^- = \frac{1}{4} \phi - \frac{1}{2} J_n = 0 }
+which implies,
+\begin{align}
+  J_g^N &= \frac{\phi_g^s}{2} = -D_g^N \frac{\phi_g^s - \phi_g^N}{\Delta/2} \\
+  &= - \frac{2 D_g^N}{\Delta^N} \frac{\frac{2D_g^N}{\Delta^N} - 1}{\frac{1}{2} + \frac{2D_g^N}{\Delta}} \phi_g^N \\
+  &= \boxed{ \frac{2D_g^N}{\Delta^N} \left[ \frac{1}{1 + \frac{4 D_g^N}{\Delta^N}} \right] \phi_g^N } \label{JgN}
+\end{align}
+In Eqn.~\ref{JgN}, if $D \to 0$, we get zero flux boundary condition; if $D \to \infty$, we get zero current boundary condition. 
 \end{enumerate}
 
 \clearpage
-\topic{Plane Source in Finite Multiplying Medium with $\kinf < 1$}
-For multiplying medium, we use the $B_m^2$ term instead of $\ols$, but for $\kinf < 1$, we know,
-\eqn{ B_m^2 = \frac{\nu \Sigma_f - \Sigma_a}{D} = \frac{k_{\infty} - 1}{L^2} < 0}
-For less confusion, we are going to use $-|B_m|^2$ term to replace the regular $B_m^2$ term to specify that the buckling term is negative in the case of $\kinf < 1$. Hence our balance equation is, 
-\eqn{ \dphidxn2 - |B_m|^2 \phi = 0 }
-The homogeneous solution is, 
-\eqn{ \phi(x)  = A\cosh(|B_m|x) + B \sinh(|B_m|x) }
-BCs: $\phi(0) = \phi_0, \phi(H) = 0$, we can solve for the coefficients, 
-\eqn{ \phi(x) = \phi_0 \left[ \cosh(|B_m|x) - \frac{\cosh(|B_m|x)}{\sinh(|B_m|x)} \sinh(|B_m|x) \right] }
-Extreme condition: if we let the size of the slab to go to infinity, 
-\eqn{\lim_{H \to \infty} \phi(x) = \phi_0 [\cosh(|B_m|x) - \sinh(|B_m|x)] = \phi_0 e^{-|B_m|x} = \frac{S_0L}{2D} e^{-|B_m|x} }
-Notice in both finite and infinite case, the fluxes have convex shapes; the finite curve is below the infinite curve though. 
-
-
-\clearpage
-\topic{Critical Finite Cube}
-Consider a finite cylinder from $-H/2$ to $H/2$ with radius $R$. We assume azmimuthal symmetry of Helmholtz Equation, 
-\eqn{\frac{1}{r} \ddr \left( r \pphipr\right) + \pphipzn2 + B^2 \phi = 0 }
-Assume separation of variables,
-\eqn{ \phi(r,z) = R(r) Z(z) }
-We plut the sepration of variables into the Helmholtz Equation, break $B^2 = B_r^2 + B_z^2$, and we get two equations one for each direction, 
-\eqn{ \frac{1}{R} \left( \dRdrn2 + \frac{1}{r} \dRdr \right) + B_r^2 = 0 }
-\eqn{ \dZdzn2 + B_z^2 Z = 0 }
-In $r$ direction, we can consider an infinite cylinder, 
-\eqn{ R(r) &= A_1 J_0 (B_r r), & B_r&= \frac{2.405}{R} }
-In $z$ direction, we can consider an infinite slab,
-\eqn{ Z(z) &= A_2 \cos(B_z z_, & B_z &= \frac{\pi}{H} } 
-We combine the two directions,
-\eqn{ \phi(r,z) &= A J_0 \left( \frac{2.405}{R} r\right) \cos \left( \frac{\pi z}{H} \right), &B^2 &= B_r^2 + B_z^2 = \left( \frac{2.405}{R} \right)^2 + \left( \frac{\pi}{H} \right)^2 }
-Problems with less than one direction that is non-homogeneous can be solved this way with separation of variables. 
-
-\clearpage
-\topic{Critical Finite Cylinder} 
-Consider a finite cube with the dimensions $-a/2 \le x \le a/2, -b/2 \le y \le b/2, -c/2 \le z \le c/2$. The Helmholtz equation is,
-\eqn{ \pphipxn2 + \pphipyn2 + \pphipzn2 + B^2 \phi = 0}
-Assume separation of variables,
-\eqn{ \phi(x,y,z) = X(x) Y(y) Z(z) }
-Do the similar math as the finite cylinder case or by intuition, 
-\eqn{ \dXdxn2 + B_x^2 X &= 0, &\dYdyn2 + B_y^2 Y &= 0, &\dZdzn2 + B_z^2 Z &=0, & B^2 &= \left(\frac{\pi}{a}\right)^2 + \left(\frac{\pi}{b}\right)^2 + \left(\frac{\pi}{c}\right)^2 }
-
+\topic{Matrix Representation of 1D Slab Diffusion Equations}
+\subtopic{Construct Matrix}
+If we use $L$ for the $\phi^{n-1}$ term, $U$ for the $\phi^{n+1}$ term, $D$ for the $\phi^n$ term, $T$ for the transport term, we can express the finite difference equation in matrix form as: 
+\begin{align}
+[L_1 + D_1 + U_1] [\phi_1] &= [M_1] [\phi_1] + [M_2][\phi_2] + [S_1] \\
+[L_2 + D_2 + U_2] [\phi_2] &= [T_2] [\phi_1] + [S_2] 
+\end{align}
+We define a vector of group fluxes, 
+\begin{align}
+\left[ \begin{array}{cc} 
+[L_1 + D_1 + U_1] & [0] \\
+-[T_2] & [L_2 + D_2 + U_2] \\
+\end{array} \right] 
+\left[ \begin{array}{c}
+\phi_1 \\ \phi_2 \\ \end{array} \right] 
+= \left[ {\begin{array}{cc} \left[M_1\right] & \left[M_2\right] \\ \left[0\right] & \left[0\right] \end{array}} \right] 
+\left[ \begin{array}{c}
+\phi_1 \\ \phi_2 \\ \end{array} \right] 
++ 
+\left[ \begin{array}{c} 
+S_1 \\ S_2 \\ \end{array} \right] 
+\end{align}
+Whose compressed form is, 
+\eqn{ [A] [\phi] = [M] [\phi] + [S] }
+The two matrix are plotted in Figure~\ref{matrix-form}. Notice there are missing points in A; explaination: Block matrix: there is no coupling of group 1 left flux to the group 2 right flux. 
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=6in]{images/dfs/matrix-form.png}
+  \caption{Destruction and Production Matrix} \label{matrix-form}
+\end{figure}
 
 \clearpage
-\topic{Critical Reflected Slab Reactor}
-Consider a critical reflected slab reactor as in Figure~\ref{reflected-slab}. 
+\subtopic{Method 1: Sequential Source/Fixed-Source Problem}
+\begin{align}
+[A] [\phi] &= [M] [\phi] + [S] \\
+[A - M ] [\phi] &= [S] \\
+[\phi] &= [A - M]^{-1} [S]
+\end{align}
+In this method, we guess $\keff$, and given a source we can solve for the flux. We can either use Matlab to solve the $Ax = b$ system, or we use Gaussian elimination/forward elimination backward substitution by hand. The basic idea is to subtract $a_{i,i-1}/a_{i-1,i-1}$ times the $(i-1)$th equation from the $i$th equation to eliminate the $a_{i,i-1}$ element in the $i$th equation. The modified $i$th equation is then divided by $a_{i,i}$. This process is repeated successively for $i=1$ through $i = I-1$. 
+
+We never solve real questions this way, because the flux approaches the right shape as we increase the $\keff$ to approach the correct $\keff$, but once we pass the correct $\keff$, the flux can be entirely inverted to become negative (now that I think about it, this is fine because the flux solved can be arbitrarily scaled). If we have a super-critical problem, then the only way to get criticality with an additional source is through negative flux. A reactor is like an amplifier; the closer it is to criticality the more amplification it is; when critical, the amplification is infinity. 
+
+
+\subtopic{Method 2: Direct Matlab Eigenvalue Solver}
+We can solve for $\keff$ directly from: 
+\begin{align}
+[A] [\phi] &= \frac{1}{\keff} [M] [\phi] \\
+[A]^{-1} [M] [\phi] &= \keff [\phi]
+\end{align}
+Notice that the eigenvectors are arbitrarily normalized; hence it is fine if the flux is negative. 
+
+
+\subtopic{Method 3: Power Iterations}
+The equation we are trying to solve is,
+\eqn{ [A] [\phi]^{n+1} &= [M] [\phi]^n }
+An initial guess of the flux $\phi_i^{(0)}$ at each point and of the eigenvalue $\lambda^{(0)}$ is made and an initial fission source at each point is constructed $S_i^{(0)} = M \phi_i^{(0)}$. The Gaussian elimination is performed to determine $\phi_i^{(1)} = A^{-1} S_i^{(0)}$. Then we update the source term as well based on the flux. A new estimate of the eigenvalue is made from: 
+\eqn{ \keff = \frac{S_i^{(1)}}{S_i^{(0)}} }
+The process is continued until the eigenvalues obtained on two successive iterates differ by less than a threshold level. The rate our fission source converges depends on material, geometry etc. See next section for \hi{dominance ratio}. 
 \begin{figure}
   \centering
-\includegraphics[width=2.5in]{images/dfs/reflected-slab.png}
-\caption{A Critical Reflected Slab Geometry} \label{reflected-slab}
+  \includegraphics[width=4in]{images/dfs/power-iteration-convergence.png}
+  \caption{Power Iteration Convergence Rate (left) and Dominance Ratio (right)}
 \end{figure}
-The Helmholtz equations for the two regions are,
-\eqn{-D^c \laplace \phi^c + \Sigma_a^c \phi^c &= \frac{1}{\keff} \nu \Sigma_f^c \phi^c,  &-D^r \laplace \phi^r + \Sigma_a^r \phi^r &= 0 }
-If we assume,
-\eqn{ B^2 &= \frac{\frac{\kinf}{\keff} - 1}{L_c^2}, & \kappa^2 &= \frac{1}{L_r^2} = \frac{\Sigma_a^r}{D^r} = -B_{m,r}^2 }
-Then we are left with,
-\eqn{ \laplace \phi^c + B^2 \phi^c &= 0, &\laplace \phi^r - \kappa^2 \phi^r &= 0}
-The solutions are in the forms of,
-\eqn{ \phi^c(x) &= C_1 \cos(Bx) + C_2 \sin(Bx), &\phi^r(x) &= C_3 \cosh(\kappa x) + C_4 \sinh (\kappa x) }
-BC1: reflective boudnary condition at $x=0$,
-\eqn{ J^c(0) = 0, \Rightarrow C_2 = 0}
-BC2: zero flux at reflector surface, 
-\eqn{ \phi(H'/2) = 0, \Rightarrow C_3 = 0} 
-and interface condition: 
-\eqn{ \phi^c (H/2) &= \phi^r (H/2), & J^c(H/2) &= J^r (H/2) }
-which can be written in the matrix form, 
-\begin{align}
-\left[ \begin{array}{cc}
-\cos (BH/2) & -\sinh(\kappa \tau) \\
-D^c B \sin(BH/2) & -D^r \kappa \cosh(\kappa \tau) 
-\end{array} \right] 
-\left[ \begin{array}{c} 
-C_1 \\ C_4 \end{array} \right] = 0
-\end{align}
-We define the reflector thickness $\tau = \frac{H' - H}{2}$, then the coefficients can be solved,
-\eqn{ C_1 &= \phi^c (0), & C_4 &= C_1 \frac{\cos (BH/2)}{\sinh(\kappa \tau) } }
-which gives us the criticality condition,
-\eqn{ D^c B_m \tan \left(\frac{B_m H}{2} \right) = D^r \kappa \coth (\kappa \tau) }
-Interpretation:
+
+\subtopic{Method 3+: Power Iterations with Gauss-Jacobi Numerical Inversion of Flux Matrix}
+In a steady-state problem, it does not matter whether we fully converge our flux iteration. 
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=6in]{images/dfs/power-iteration-Gauss-Jacobi.png}
+  \caption{Power Iteration With Gauss-Jacobi Numerical Inversion of Matrix}
+\end{figure}
+
+\clearpage
+\topic{Matrix Representation of Higher Dimensions Diffusion Equations}
 \begin{enumerate}
-\item Since $B_m$ is defined with $\keff$, that is, we need to satisty an expression between $\keff$ and $H$. We can either,
-  \begin{enumerate}
-  \item Given $H$, search for the $\keff$ that satisfies the equivalence;
-  \item Given $\keff$, search for the $H$ that satisfies the equivalence,
-    \eqn{H = \frac{2}{B_m} \tan^{-1} \left[ \frac{D^r \kappa}{D^c B_m} \coth (\kappa \tau) \right] }
-    That is, as $H \down, \tau \up$. For large $\tau$, like $\kappa \tau > 3, \coth (\kappa \tau) \to 1$, the smallest $H$ to reach criticality is,
-    \eqn{H = \frac{2}{B_m} \tan^{-1} \left[ \frac{D^r \kappa}{D^c B_m} \right] }
-  \end{enumerate}
-\item Critical dimension is reduced by the presence of the reflector: 
-\begin{align}
-  s &= \frac{\tilde{H}}{2} - \frac{H}{2}  = \frac{\pi}{2B_m} - \frac{1}{B_m} \tan^{-1} \left[ \frac{D^r \kappa}{D^c B_m} \coth (\kappa \tau) \right] 
-  = \frac{1}{B_m} \left\{ \frac{\pi}{2} - \tan^{-1} \left[ \frac{D^r \kappa}{D^c B_m} \coth(\kappa \tau) \right] \right\} \\
-  \tan\left[ \frac{\pi}{2} - \tan^{-1} x \right] &= \cot [\tan^{-1} x ] = \frac{1}{\tan[\tan^{-1} x]} = \frac{1}{x} \\
-  \frac{\pi}{2} - \tan^{-1} x &= tan^{-1} \left( \frac{1}{x} \right) \\
-  s &= \frac{1}{B_m} \tan^{-1} \left[ \frac{D^c B_m}{D^r \kappa} \tanh(\kappa \tau) \right] 
-\end{align}
-For larger cores, $B_m \to 0$ and $\tan^{-1} x \approx $, that is, 
-\eqn{ s = \frac{D^c}{D^r \kappa} \tanh(\kappa \tau) = \frac{D^c}{D^r} L^r \tanh\left( \frac{\tau}{L^r} \right) }
-That is, 
-\begin{align}
-  \left\{ \begin{array}{cc} 
-    \tau \ll L^r & s \approx \frac{D^c}{D^r} \tau, (\tanh x \approx x \mbox{ for }x\ll 1) \\
-    \tau \gg L^r & s \approx \frac{D^c}{D^r} L^r, (\tanh x \approx 1 \mbox{ for }x > 3) 
-  \end{array} \right. 
-\end{align}
+\item 1D matrix can be solved without iterations; this is not the case for higher dimenisions: we have to use iterative methods for higher dimensions. 
+\item The matrix representation for higher dimensions looks the same as in 1D, except with one additional pair of off-diagonal term for each additional dimension as in Figure~\ref{matrix-shape}
+\item The size of the matrix increases as the dimensions increases. For instance, if we have 10 meshes per dimension, then 1D matrix is 10x10, 2D matrix is 100x100, 3D matrix is 1000x1000.
+\end{enumerate}
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=5in]{images/dfs/matrix_multidimension.png}
+  \caption{Destruction and Production Matrix Representation} \label{matrix-shape}
+\end{figure}
+
+\clearpage
+\topic{Dominance Ratio}
+Given an eigenvalue problem, if we specify the solved eigenvalues to be:
+\eqn{ |\lambda_1| > |\lambda_2| \ge |\lambda_3| \ge \cdots }
+then $|\lambda_1|$ is the spectral radius of the iteration matrix, and every mode has a dominance ratio,
+\eqn{ \dr_n = \frac{\lambda_n}{\lambda_1} }
+and power iteration kills of the lowest dominance ratio modes. The last remaining mode is the fundamental mode $dr = \frac{\lambda_2}{\lambda_1}$. If $|\lambda_1| \ge 1$, the ietration scheme is unstable and it would not converge\footnote{See Lewis' Computational Methods of Neutron Transport Appendixe C for more details}. Convergence of the power method is slow when $\dr$ is close to unity; in fact in most numerical methods, convergence rate = 1 - dominance ratio. Knowing the dominance ratio, we can estimate the number of iterations needed for convergence. 
+
+Dominance ratio measures the spatial decoupling. It depends on: 
+\begin{enumerate}
+\item Symmetric mode. If the initial guess is symmetric, the solution is symmetric, and the method used is symmetric, then only the symmetric mode shows up in the dominance ratio, and the asymmetric mode is hidden. As shown in Figure~\ref{dominance-symmetric}, the symmetric guess may not display the highest $\dr$ convergence (0.99 in this case), instead it display a symmetric mode (0.975 in this case). Whereas a random guess would excited all modes and show all the $\dr$ convergence (though the lower modes die too fast to be observed; we can only see the last two dominance ratio, 0.97 and 0.99), and the dominant mode has an asymmetric shape.  
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=6in]{images/dfs/dominance_ratio.png}
+  \caption{Dominance Ratio With An Symmetric Guess (left) or Random Guess (right)}
+  \label{dominance-symmetric}
+\end{figure}
+
+\item Core size: As seen in Figure~\ref{dominance-size}, as core size increases, dominance ratio increases, and it takes longer to converge. 
+\begin{figure}
+  \centering
+  \includegraphics[width=7in]{images/dfs/dominance_ratio_size.png}
+  \caption{Dominance Ratio With Different Core Sizes}
+  \label{dominance-size}
+\end{figure}
+
+\item Decoupling of radial zones from inserting control rod, having asymmetric core loadings, or having xenon distributions. 
+
+\item Decoupling of axial zones form partially inserting control rods, axial fuel enrichment zoning, and axial burnable absorber loading. 
 \end{enumerate}
 
 
 \clearpage
 \topic{Summary}
-\begin{enumerate}
-\item \textit{Super-positioning of sources}: if we are given a random source that is the sum of a couple of common forms of sources, we can super-position the flux from each of the common sources. This method works in any non-multiplying medium, and in multiplying medium in subcritical condition\footnote{Supercritical condition, as source increaes, flux inverts}. For instance, we can super-position point sources to get a line source. 
-\item Diffusion theory is not valid near singularities. 
-\item $\kinf$ is important\footnote{know this for the exams}: 
-  \begin{enumerate}
-  \item $\kinf = 1$: flux is straight line;
-  \item $\kinf < 1$ means $B^2 < 1$, flux is $\sinh, \cosh$ which is convex; 
-  \item $\kinf > 1$ means $B^2 > 0$, flux is $\sin, \cos$ which is concave. 
-  \end{enumerate}
-\item Know how to get the critical buckling for different geometries. 
-\item Seperation of variables works as long as there is no one more than one direction that is heterogeneous. 
-\end{enumerate}
+Remember for real 3D problem,
+\begin{itemize}
+\item Matrix inversion if of order $N^3$, so in real applications no matrix inversion;
+\item Finding all eigenvalues is at least order $N^2$;
+\item Iterative inversion must be order $N$ to be practical for large problems;
+\item Multi-level iteration is a practical necessity. 
+\item Dominance ratio measures spatial decoupling-ness.
+\end{itemize}
 
-  \begin{table}
-    \centering
-    \begin{tabular}{|c|c|c|c|} \hline
-      Source & Geometry & BC2 & Flux \\ \hline \hline
-      Point & Infinite Sphere &$\lim_{r\to 0} 4 \pi r^2 J(r) = S_0$ & $\frac{S_0}{4\pi D} \frac{e^{-r/L}}{r}$ \\ \hline
-      Plane & Infinite Slab & $\lim_{x\to 0} J(r)  = \frac{S_0}{2}$ & $\frac{S_0 L}{2D} e^{-|x|/L}$ \\ \hline
-    \end{tabular}
-    \caption{Subcritical System: Source and Flux} 
-  \end{table}
-  
-  
+
 \end{document}
