@@ -1,0 +1,113 @@
+\documentclass{school-22.211-notes}
+\date{April 25, 2012}
+
+\begin{document}
+\maketitle
+
+\lecture{Point Kinetics Without Feedback}
+\topic{Physics of Delayed Neutrons}
+\textbf{Prompt neutrons}: more than 99\% of all neutrons are emitted within $10^{-10}$ seconds after the fission. Prompt neutron lifetime in a PWR is about $2 \times 10^{-5}$s. Example: A reactor was operated at 1W, a control rod was moved to produce an excess reactivity of $0.0005 \Delta k$, what would the power be 1s later? 
+\begin{align}
+P(t) &= P_0 (1.0005)^{t/(2\times 10^{-5})} = 1 W (1.0005)^{1/(2\times 10^{-5})} = 70,000 MW 
+\end{align}
+The above calculation means that this reactor would be virtually impossible to control! Fortunately, delayed netrons exist and the reactor time constant depend on more than just prompt neutron lifetime. 
+
+\textbf{Delayed neutrons}:
+\begin{enumerate}
+\item Measurement: delayed neutrons can be measured by counting neutrons emission after a pulsed irradiation of a pure U235 foil. Burst measurement represents the amount of prompt neutrons; saturated measurement represents the total amount of neutrons. 
+\item Emission: delayed neutrons are emitted through the decay of fission products, of which Br-37 is a dominant FP that emits delayed neutrons. 
+\item Delayed yields depend on fissioning species and neutron energy (keep in mind that U238 produce 4\% delayed neutron per fission, more than U235, making U238 a very important isotope when it comes to delayed neutrons). 
+  \begin{itemize}
+  \item Absolute yield: number of delayed neutrons per fission; 
+  \item Relative yield: percentage: absolute yield of this isotope divided by total absolute yield; 
+  \item Delayed neutron fraction: absolute yield divided by nu bar.  
+  \end{itemize}
+\item Modern trend: makes the 6-group to 8-group, and each group has a fixed decay constants (the one that dominants in the group, that is, largest half-life). This way, all isotopes have the same half-life for the same group; but different isotopes would still have different delayed neutron fraction. Remember the terms circled in blue.  
+\item Delayed neutrons spectrum: average prompt neutron emission energy is 2MeV; average delayed neutron emission energy is 0.4MeV. Both spectrum comes out to be Maxwellian, except the delayed one is shifted. Delayed neutron comes out in the thermal energy range, which makes them more likely to fission. Delayed neutron spectra vary only slightly for different fissioning nuclides; but the spectra depends significantly on the delayed neutron group. 
+\end{enumerate}
+
+\clearpage
+\topic{Derivation of Point Kinetics Equations}
+In steady-state transport or diffusion equation, we do not treat delayed neutrons directly. But the fission emission spectrum must be properly weighted with prompt and delayed contributions. Notice one issue is, we need fission rates to get $\chi$, and we need $\chi$ to get fission rates, so the real way to solve the balance equation is to iterate, though this is not how it is done normally.
+\begin{enumerate}
+\item We start from the diffusion equation: \hi{The steady-state diffusion equation}\footnote{Know this for the final}: 
+\begin{align}
+& - \divergence D(\vecr, E, t) \gradient \phi(\vecr, E, t) + \Sigma_t (\vecr, E, t) \phi(\vecr, E, t) = \int_0^{\infty} \Sigma_s (\vecr, E'\to E, t) \phi(\vecr, E', t) \dE' \\
+&+ \Sum_j \chi_T^j (E) \int_0^{\infty} \nu \Sigma_p^j (\vecr, E', t) \phi(\vecr, E', t) \dE' + Q(\vecr, E, t) 
+\end{align}
+
+\item \hi{The time-dependent neutron diffusion equation}: where $\beta^j = \Sum_i \beta_i^j$ is the delayed fission fraction (0.66\% for instance), 
+\begin{align}
+\ppt \left[ \frac{1}{v} \phi(\vecr, E, t) \right] &= \divergence D(\vecr, E, t) \gradient \phi(\vecr, E, t) - \Sigma_t (\vecr, E, t) \phi(\vecr, E, t) \\
+& + \int_0^{\infty} \Sigma_s (\vecr, E'\to E, t) \phi(\vecr, E', t) \dE' \\
+&+ \Sum_j \chi_p^j (E) (1-\beta^j) \int_0^{\infty} \nu \Sigma_p^j (\vecr, E', t) \phi(\vecr, E', t) \dE' \\
+&+ \Sum_i \chi_d^i (E) \lambda_i C_i (\vecr, t) + Q(\vecr, E, t)\\
+\ppt C_i (\vecr, t) &= \Sum_j \beta_i^j \int_0^{\infty} \nu \Sigma_p^j (\vecr, E', t) \phi(\vecr, E', t) \dE' - \lambda_i C_i (\vecr, t) 
+\end{align}
+
+\item Assume that flux can be separated into a space/energy term and a time-dependent term: $\phi(\vecr, E, t) = S(\vecr, E) T(t)$. Then we can manipulate the time-dependent neutron diffusion equation, 
+\begin{align}
+\ppt \left[ \frac{1}{v} S(\vecr, E) T(t) \right] &= \divergence D(\vecr, E, t) \gradient \phi(\vecr, E, t) - \Sigma_t (\vecr, E, t) \phi(\vecr, E, t) \\
+& + \int_0^{\infty} \Sigma_s (\vecr, E'\to E, t) \phi(\vecr, E', t) \dE' \\
+&+ \Sum_j \chi_p^j (E) (1-\beta^j) \int_0^{\infty} \nu \Sigma_p^j (\vecr, E', t) \phi(\vecr, E', t) \dE' \\
+&+ \Sum_i \chi_d^i (E) \lambda_i C_i (\vecr, t) + Q(\vecr, E, t)\\
+\ppt C_i (\vecr, t) &= \Sum_j \beta_i^j \int_0^{\infty} \nu \Sigma_p^j (\vecr, E', t) \phi(\vecr, E', t) \dE' - \lambda_i C_i (\vecr, t) 
+\end{align}
+
+\item top of rho: diffusion equation, if steady state, top is zero. 
+bottom of rho: fission rate (if all the neutrons show up instatenously, the bottom would be the fission rate). 
+
+Gamma = 1/v of shape divided by almost-instantenous-fission-rate. 
+
+\end{enumerate}
+
+\clearpage
+\topic{Simple Matlab Methods for Solving PKEs}
+
+\begin{enumerate}
+\item Instantaneous reactor scram ($\rho = - 8 \beta$): 
+
+Question: does the 8 group happen to have half-lives from large to small? 
+\item Two seconds rod drop ($\rho = - 8 \beta$):
+
+\item Instantaneous rod withdraw ($\rho = 0.1 \beta$): 
+The reactor wants to response immediately (hence it jumps) but it does not have enough delayed neutron to sustain that increase, hence the jump is not enough and it will increase for the rest of the way. To estimate the prompt jump, we do the prompt jump approximation (easy to do in 1 group)
+
+\item 4b: if we wait long enough, we reach secular equilibrium between power and precursor rate that the precursor rates have the same shapes as the power, altough the rates may be off by a factor. 
+
+\item 
+
+\item Power does not come back to the same level, because we are solving for an eigenvalue problem, and what the asymptotic power is depends on how to get there. In the withdrawal case, the precursor builds up and is continuing to build up during the second phase, so the power ends up higher than initially. 
+
+
+\item Super-prompt criticality: when reactivity exceeds beta, reactivity does not have to wait for the delayed neutrons anymore, changes can happen instantaneously.  
+\end{enumerate}
+
+
+
+\clearpage
+\topic{Understanding Reactor Behavior with PKEs}
+\subtopic{Negative Reactivity Excursions}
+
+
+\subtopic{Positive Reactivity Excursions}
+
+
+\subtopic{Prompt Excursions}
+
+\clearpage
+\topic{Approximate Solutions}
+\subtopic{Prompt-Jump Approximations}
+
+
+\subtopic{In-hour Equations}
+
+\begin{align}
+\Aboxed{ \rho &= \omega \Lambda + \Sum_i \frac{\beta_i \omega}{\omega + \lambda_i}}
+\end{align}
+
+
+There are four fundamental thing: diffusion equation, point-kinetics equation, derive the prompt-jump approximation, derive the in-hour equation. 
+
+
+\end{document}
