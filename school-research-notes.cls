@@ -3,3 +3,4 @@
 \ProvidesClass{school-research-notes}
 
 \usepackage{school-style-researchnotes}
+\usepackage{tikz}
