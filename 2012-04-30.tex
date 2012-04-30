@@ -1,0 +1,70 @@
+\documentclass{school-22.211-notes}
+\date{April 30, 2012}
+
+\begin{document}
+\maketitle
+
+\lecture{Point Kinetics With Feedbacks}
+\topic{Fuchs-Nordheim Model}
+The Fuchs-Nordheim Model predicts the shape and the magnitude of the transient. We do not really solve the analytical solution of this model, but instead study some characteristics from it. To start, we make three assumptions, 
+\begin{enumerate}
+\item If $\rho \gg \beta$, we can ignore the delayed neutrons:
+
+It is fair to ignore the precursors, because we can show that the power with precursor is small enough that the F-N model provides good approximation. 
+
+\item If transient is so rapid that no heat transferred form the fuel \footnote{The time constant for heat to be removed from $UO_2$ fuel is about 5 mins.}, 
+
+\item Assume a Doppler Feedback coefficient independent of temperature (recall that we calculated the doppler we calculated is about 3 pcm), 
+
+\item Because no heat conduction, we can write, 
+
+The whole time we are solving a first-order ODE. 
+
+
+Doppler temperature coefficient $\alpha$. Temperature at the peak of the transient. 
+\end{enumerate}
+Alternative Derivation: 
+
+
+p.29: F-N model provides pretty good estimation, because temperature is basically integrated power, and the reactivity insertion rate does not matter that much because we are integrating over time. 
+
+
+p.31: About 3\% of the energy deposited into the coolant (about $2.5 \times 2$ MeV $=$5 MeV worth of neutrons from 200 MeV just from neutron slowing down that is deposited into the coolant), hence the coolant temperature would change slightly as well. Net reactivity comes back to zero; 
+
+
+
+
+\topic{Application of IK with Feedback}
+\subtopic{RIA Safety Analysis: Rod Ejection at HZP}
+RIA = reactivity insertion. 
+
+If we have a 1.5\$ RIA without feedback, the power increases very rapidly with an asymptotic period. With Doppler feedback, the feedback is pronound when reactivity is above 1 dollar. 
+
+
+* a second peak is the characteristic of longer rod change. 
+
+
+\topic{PKEs with Simple Feedback}
+
+
+
+\topic{Application of PKEs with Simple Feedback}
+\subtopic{Ramp Reactivity Insertion}
+Ramping slower, peak reactivity is smaller, peak power is smaller as well, but final results are independent of rate of reactivity insertion, because system always finds stable state. 
+
+The smaller rate of reactivity change is, the smaller the overshoot is. 
+
+\hi{Selective ramp insertion}: 2 sec, power comes down quickly and recoveries, the radial heat gets high, close to an DNDF failure, makes sure to take into account the power rise. 
+
+ 
+
+\topic{Summary}
+\begin{enumerate}
+\item PKEs assume you are solving for the core average properties; PKEs assume flux spatial shape is constant;
+\item Peak temperature are proportionally larger than core average properties;
+\item If we relly want spatial dynamics, we need to do 3D spatial dynamics to get correct predictions to complicated problems. 
+\item Know how to solve first order PDE for the final exam. 
+\end{enumerate}
+
+
+\end{document}

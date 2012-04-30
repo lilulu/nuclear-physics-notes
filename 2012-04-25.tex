@@ -27,7 +27,7 @@ The above calculation means that this reactor would be virtually impossible to c
 \end{enumerate}
 
 \clearpage
-\topic{Derivation of Point Kinetics Equations}
+\topic{Derivation of Point Kinetics Equations (PKE)}
 In steady-state transport or diffusion equation, we do not treat delayed neutrons directly. But the fission emission spectrum must be properly weighted with prompt and delayed contributions. Notice one issue is, we need fission rates to get $\chi$, and we need $\chi$ to get fission rates, so the real way to solve the balance equation is to iterate, though this is not how it is done normally.
 \begin{enumerate}
 \item We start from the diffusion equation: \hi{The steady-state diffusion equation}\footnote{Know this for the final}: 
@@ -100,14 +100,76 @@ The reactor wants to response immediately (hence it jumps) but it does not have 
 \subtopic{Prompt-Jump Approximations}
 
 
-\subtopic{In-hour Equations}
-
+\subtopic{In-hour Equations: THe Simpliest Inverse Kinetics Application}
+From the PKEs, know how to derive the In-hour Equation: 
 \begin{align}
 \Aboxed{ \rho &= \omega \Lambda + \Sum_i \frac{\beta_i \omega}{\omega + \lambda_i}}
 \end{align}
+That is, knowing every other term, we can back out reactivity $\rho$ assuming there is no feedback. The steps are: 
 
+
+\clearpage
+\topic{Reactivity Units}
+\begin{table}[ht]
+  \centering
+  \begin{tabular}{|c|c|c|}
+    $\Delta k$ & actual units of PKEs & 0.01 \\
+    \% $\Delta k$ & & 1/% \\
+  \end{tabular}
+\end{table}
+
+\clearpage
+\topic{Derivation of Inverse Kinetics Equations (IK)}
+Assume we know the amplitude function $T(t)$, we can solve for the pre-cursor function $C(t)$; then plugging back in the PKEs, we can get $\rho(t)$. 
+
+
+
+\clearpage
+\topic{Experimental Applications of IK}
+\subtopic{PWR Boration/Dilution}
+
+The red curve is measured by detectors. Prompt neutron life time is so short, so that even spatial distribution flux changes a lot, we can assume that it stabalizes already at each rod drop. 
+
+Disadvantages: time concern; boration dilution increases cost with waste disposal.  
+
+Alternatives: we use General Inverse Kinetics to get around about it. 
+
+\subtopic{SCRAM/Rod Drop Analysis}
+From scram, we measure power change, infer $T(t)$, and estimate reactivity.
+
+The rough method use Prompt Jumpt Approximation,
+
+
+More accurately, we need to model all the neutron sources, including ($\alpha,n$) reactions etc. It comes out to be, 
+
+
+In reality, there are noisy signals in measured power and reactivity data; we need to smooth them out with a fitted function before we can apply IK with external neutron sources. 
+
+This technique is not used in the US that much because it is harsh your system and it requires work to bring the system back to critical. But it is one of the best ways to demonstrate to the licensing committee that a reactor is capable to scram.  
+
+\subtopic{Dynamic Rod Worth}
+We start with a critical reactor, and drive a control rod in and out and repeat with a different rod. The advantages are: no need to do boron dilution, and it takes 15 mins for each rod. This technique is widely used by Westinghouse to estimate their rod worth. 
+
+
+
+
+Alternatively, we can do sub-critical source multiplication, that is, IK with a source in the reactor. This way we don't even need to start with a critical reactor. This technique has only been used in experimental reactors but not so much in power reactors because it requires detailed knowledge about the source distribution. 
+
+\subtopic{Oscillator Sample Worth Measurements}
+
+
+\clearpage
+\topic{Summary}
+Shape function $S(\vecr, E)$, amplitude function, $T(t)$. 
+
+PKT: the top of $\rho$ is just the steady-state diffusion equation; at steady state, $\keff = 1, \rho = 0$. 
 
 There are four fundamental thing: diffusion equation, point-kinetics equation, derive the prompt-jump approximation, derive the in-hour equation. 
 
+
+Questions:  p.12, steps. 
+p.19, why don't image 1 match image 4: because step sizes are not uniform. 
+p.27, 
+p.29
 
 \end{document}
