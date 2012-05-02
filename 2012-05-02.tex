@@ -1,0 +1,132 @@
+\documentclass{school-22.211-notes}
+\date{May  2, 2012}
+
+\begin{document}
+\maketitle
+
+\lecture{Nodal Models}
+\topic{3D Core Analysis Overview}
+Reference: \href{www.oecd-nea.org/dbprog/documents/MC03Smith.pdf}{`Reactor Core Methods' by Smith, MC 2003}. 
+There are a couple levels of complexity for performing 3D core analysis,
+\begin{itemize}
+\item One reactor at one state point: couple core neutronics/fuel heat conduction/coolant hydraulics/structural mechanics for 60,000 fuel pins and 100 axial levels to evaluate thermal margins;
+\item Repeat for 50 depletion states and track 300 isotopes;
+\item Repeat for 10,000s limiting conditional simulations and 100s of transient accident simulations for safety analysis;
+\item Repeat for 1000s of startup and maneuver simulations;
+\item Repeat for millions of cycle depletion simulation for designing loading design and optimization;
+\item For operator training simulator in real time, 24/7 operation at 5-10 Hz. 
+\end{itemize}
+The challenges for 3D core calculation is,
+\begin{itemize}
+\item Predict pin power, axial shapes of pin power (see image, see spacers depress flux; even without the spacers, the axial shape is more towards the bottom compare with a cosine shape due to the temperature coefficients); 
+\item Predict core reactivity with core burnup (see image, burnable poisons deplete);
+\item Predict in-core detector response;
+\item Predict control rod worths and temperature coefficients. 
+\end{itemize}
+Approaches and their problems:
+\begin{enumerate}
+\item S$_N$ Method: computational time problem. 
+\item Homogenized pin diffusion: accuracy problem. 
+\end{enumerate}
+There is a huge push to do nodal method, because it takes a mesh size of about 1cm to get Finite Different Method to be accurate, whereas it takes 20cm for nodal methods. 
+
+\clearpage
+\topic{Derivation of Nodal Methods}
+\begin{enumerate}
+\item We start from 3D steady-state multigroup neutron diffusion equation, 
+
+Apply Fick's Law of diffusion for current out of flux, 
+
+\item Assumptions: properties are constant in homogenized nodes. Then we find the volume-averaged terms for each node; that is, we integrate over the node volume and then divide by volume,
+
+\item Transverse Integration: We need a set of equations for the surface average currents instead of solving 3D finite different equations directly. 
+  \begin{enumerate}
+  \item Define dimensionless independent variables,
+
+  \item Integrate over $y,z$ for averaging,
+
+  \item Then the normalized 3D diffusion equation becomes, 
+
+  \item We look at the leakage term, 
+
+
+  \item Collect all the terms, we get the transverse integration of 3D diffusion equation, 
+
+  \item We get the transverse integrated 1D diffusion equaition,
+
+  \item Repeat for the other two directions, we get a set of 3 directional 1D diffusion equations.
+
+  \item Interpretations: 
+
+  \end{enumerate}
+
+\item Approximation on transverse leakage: from observation, flux is insensitive to the transverse leakage shape, so we are going to perform a quandrature polynomial with 2nd order polynomials of the leakage term, and iteratively update them. 
+
+\end{enumerate}
+
+
+\clearpage
+\topic{Three Nodal Methods}
+\begin{enumerate}
+\item Nodal Expansion Method (NEM) developed by Finnemann (KWU 1975). 
+  \begin{enumerate}
+
+  \item Closure relationship (forcing the $P_1, P_2$ integration to go to zero). 
+
+  \item The choice of the weighted residual equations is flexible -- the results are not very sensitive to the weights. For instance, we can choice the same expansion coefficients for $P_i$. 
+  \end{enumerate}
+
+\item 2-Group Analytic Nodal Method (ANM) developed at MIT by Henry (1978). 
+  \begin{enumerate}
+  \item 
+
+  \item Interpretation: no need for weighted residual equations because we have exact solution to the 1D diffusion equation. The drawback is, all groups are solved simultaneously, so the generalization is very hard. But with the help of modal expansion, now we can do ANM for any number of energy groups. 
+  \end{enumerate}
+
+\item Semi-Analytic Nodal Method (SANM) developed at Studsvik (1985). 
+  \begin{enumerate}
+  \item 
+  \end{enumerate}
+
+\item Comparison of the three nodal methods. Consider a set-up that places one fuel right next to another. 
+\end{enumerate}
+
+
+\clearpage
+\topic{Iterative Solution Technique}
+In this section we show how the three nodal methods come down to be pretty much the same. The classic solution sequance involves,
+\begin{enumerate}
+\item Guess $\keff$, approximate transverse leakage as zero.
+\item Evaluate all coupling terms for 1-node equation,
+
+\item Setup global matrix equation,
+
+\item We solve the 3D balance equation by fission source and flux/leakage iteration, similar to finite difference, but leakate term has group-to-group coupling. 
+
+\item Update $\keff$ and return to 2 until converged. 
+\end{enumerate}
+
+Next the non-linear iterative solution sequence was developed,
+\begin{enumerate}
+\item 
+\item  (it's almost finite difference, but higher order in the sense that we say if flux has already converged, what would the current be). 
+
+\item Redefine equivalent coupling terms to preserve nodal solution for current. Notice the coefficients $\alpha, \beta, \gamma, \delta$ are non-linear functions of the solution. 
+
+\item Set up global matrix equation,
+
+\item Solve 3D balance equations by fission source and flux iteration (same as finite-difference, and no group-to-group spatial coupling term). 
+
+\item Update $\keff$ and return to 2 until converged. 
+\end{enumerate}
+This method is almost the same as CMFD, but with slightly different coefficients $\alpha, \beta, \gamma, \delta$. The point is, whether we do any one of the three nodal methods, we get a slightly different net current, the rest of the iteration looks the same. Mechanically, it is the same as the two-node two-group finite difference solution that we've already done. 
+
+
+
+\clearpage
+\topic{Summary of Transverse Integration Methods}
+
+
+
+
+\end{document}
