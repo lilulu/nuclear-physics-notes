@@ -553,10 +553,106 @@ Dominance ratio measures the spatial decoupling, and it depends on: symmetric mo
 \item Order of operations (not included in official list): Matrix inversion is of $N^3$, finding all eigenvalues is at least $N^2$, iterative inversion must be order $N$ to be practical, multi-level iteration is a necessity. 
 \end{enumerate}
 
+\clearpage
+\topic{Appendix A: Finite Difference 1D Transport Equation}
+In this chapter we are doing a fine-mesh finite difference (example: PDQ, CITATION). 
+
+\subtopic{Deriving Balance Equation}
+Start from neutron balance equation derive the finite-difference form of it. Note: we omit the $\chi_g$ term but it could be there. 
+
+\begin{align}
+\divergence J_g(x) + \Sigma_{t,g} \phi_g(x) &= \Sum_{k=1}^{G} \Sigma_{s,kg} \phi_k (x) + \frac{1}{k} \Sum_{k=1}^{G} \nu \Sigma_{f,kg} \phi_k(x) \\
+\frac{\dJ_g}{\dx} + \Sigma_{t,g} \phi_g(x) &= \Sum_{k=1}^{G} \Sigma_{s,kg} \phi_k (x) + \frac{1}{k} \Sum_{k=1}^{G} \nu \Sigma_{f,kg} \phi_k(x) 
+\end{align}
+We define the removal term,
+\eqn{ \frac{\dJ_g}{\dx} + \overbrace{(\Sigma_{tg} - \Sigma_{s,gg})}^{\Sigma_{rg}} \phi_g(x) -  \Sum_{k=1, k\neq g}^{G} \Sigma_{s,kg} \phi_k (x) &= \frac{1}{k} \Sum_{k=1}^{G} \nu \Sigma_{f,kg} \phi_k(x)  }
+Then we can discritize the domain into the following (insert image). 
+
+We make assumptions,
+\begin{itemize}
+\item All groups are spatially constant of a computational cell; 
+\item Average flux equals flux at the center of a cell;
+\item First order approximation on $\dphidx$ (linear that is);
+\end{itemize}
+
+Integrate over an arbitrary cell, 
+\eqn{ \int_{i-1/2}^{i+1/2} \frac{\dJ_g}{\dx} \dx + \int_{i-1/2}^{1/2} \Sigma_{rg} \phi_g(x) \dx - \int_{i-1/2}^{i+1/2} \Sum_{k=1,k\neq g}^{G} \Sigma_{s,kg} \phi_k (x) &= \frac{1}{k}\int_{i-1/2}^{i+1/2} \Sum_{k=1}^{G} \nu \Sigma_{f,kg} \phi_k(x)  }
+\begin{enumerate}
+\item The leakage term: 
+  \eqn{ \int_{i-1/2}^{i+1/2} \frac{\dJ_g}{\dx} \dx = J_g^{i+1/2} - J_g^{i-1/2} }
+\item First we find the exact expression for the volume-averaged flux in each cell: 
+  \eqn{ \overline{\phi}_g^i = \frac{\int_{i-1/2}^{i+1/2} \phi_g(x) \dx}{\Delta x_i} }
+Then we make a second-order approximation, 
+\eqn{ \overline{\phi}_g^i &= \phi_g^i = \int_{i-1/2}^{i+1/2} \phi_g(x) \dx = \phi_g^i \Delta x_i }
+\end{enumerate}
+Then we have,
+\eqn{ J_g^{i+1/2} - J_g^{i-1/2} + \Sigma_{rg}^i \phi_g^i\Delta x_i - \Sum_{k=1,k\neq g}^G \Sigma_{s,kg}^i \phi_k^i \Delta x_i = \frac{1}{k} \Sum_{k=1}^G \nu \Sigma_{f,kg}^i \phi_k^i \Delta x_i }
+\eqn{\boxed{ \frac{J_g^{i+1/2} - J_g^{i-1/2}}{\Delta x_i} + \Sigma_{rg}^i \phi_g^i - \Sum_{k=1,k\neq g}^G \Sigma_{s,kg}^i \phi_k^i  = \frac{1}{k} \Sum_{k=1}^G \nu \Sigma_{f,kg}^i \phi_k^i} }
+Notice here if we were to expand 1D into 3D, we need to add two more leakage terms making a total of six net current terms. 
+
+\clearpage
+\subtopic{Computing Interface Current}
+Insert boundary image here. Then we can write the net current at the boundary two different ways, 
+\eqn{ J_g^{i+1/2} = - D_g^i \left. \dphidx \right|_{i+1/2} \approx -D_g^i \left( \frac{\phi_g^{i+1/2} - \phi_g^i}{\Delta x_i /2} \right) }
+\eqn{ J_g^{i+1/2} = - D_g^{i+1} \left. \dphidx \right|_{i+1/2} \approx -D_g^{i+1} \left( \frac{\phi_g^{i+1} - \phi_g^{i+1/2}}{\Delta x_{i+1} /2} \right) }
+and set the above two expressions to be the same, we can hence solve for the interface current, 
+\begin{align}
+ -D_g^i \left( \frac{\phi_g^{i+1/2} - \phi_g^i}{\Delta x_i /2} \right) & =  -D_g^{i+1} \left( \frac{\phi_g^{i+1} - \phi_g^{i+1/2}}{\Delta x_{i+1} /2} \right) \\
+\phi_g^{i+1/2} &= \frac{D_g^i \Delta x_{i+1} \phi_g^i + D_g^{i+1} \Delta x_i \phi_g^{i+1}}{D_g^i \Delta x_{i+1} + D_g^{i+1} \Delta x_i} 
+\end{align}
+Plug the interface flux into either expression for the interface net current, we get, 
+\begin{align}
+ J_g^{i+1/2} &= - \frac{2D_g^i}{\Delta x_i} \left( \frac{D_g^i \Delta x_{i+1} \phi_g^i + D_g^{i+1} \Delta x_i \phi_g^{i+1}}{D_g^i \Delta x_{i+1} + D_g^{i+1} \Delta x_i}  - \phi_g^i \right) \\
+&= - \frac{2D_g^i}{\Delta x_i} \left( \frac{D_g^i \Delta x_{i+1} \phi_g^i + D_g^{i+1} \Delta x_i \phi_g^{i+1} - D_g^i \Delta x_{i+1} \phi_g^i - D_g^{i+1} \Delta x_i \phi_g^i }{D_g^i \Delta x_{i+1} + D_g^{i+1} \Delta x_i} \right) \\
+&= - \frac{2D_g^i}{\Delta x_i} \left( \frac{D_g^{i+1} \Delta x_i \phi_g^{i+1} - D_g^{i+1} \Delta x_i \phi_g^i }{D_g^i \Delta x_{i+1} + D_g^{i+1} \Delta x_i} \right) \\
+\Aboxed{ J_g^{i+1/2} &= - \frac{2D_g^i D_g^{i+1}}{D_g^i \Delta x_{i+1} + D_g^{i+1} \Delta x_i} (\phi_g^{i+1} - \phi_g^i) = - \tilde{D}_g^{i+1/2} (\phi_g^{i+1} - \phi_g^i) }
+\end{align}
+Similarly, we can construct the net current on the left hand side, 
+\eqn{ J_g^{i-1/2} &= - \frac{2D_g^{i-1} D_g^{i}}{D_g^{i-1} \Delta x_{i} + D_g^{i} \Delta x_{i-1}} (\phi_g^{i} - \phi_g^{i-1}) = - \tilde{D}_g^{i-1/2} (\phi_g^{i} - \phi_g^{i-1}) }
+
+
+\clearpage
+\subtopic{Deriving the Matrix Form}
+Substuite the interface current term into the balance equation, we get an all-flux-equation,
+\eqn{  - \frac{\tilde{D}_g^{i+1/2}}{\Delta x_i} (\phi_g^{i+1} - \phi_g^i)
++ \frac{\tilde{D}_g^{i-1/2}}{\Delta x_i} (\phi_g^i - \phi_g^{i-1}) 
+ + \Sigma_{rg}^i \phi_g^i - \Sum_{k=1,k\neq g}^G \Sigma_{s,kg}^i \phi_k^i  = \frac{1}{k} \Sum_{k=1}^G \nu \Sigma_{f,kg}^i \phi_k^i }
+Rearranging,
+\eqn{\boxed{  - \frac{\tilde{D}_g^{i+1/2}}{\Delta x_i} \phi_g^{i+1} 
++ \left( \frac{\tilde{D}_g^{i+1/2}}{\Delta x_i} + \frac{\tilde{D}_g^{i-1/2}}{\Delta x_i} + \Sigma_{rg}^i \right) \phi_g^i
+- \frac{\tilde{D}_g^{i-1/2}}{\Delta x_i} \phi_g^{i-1}
+ - \Sum_{k=1,k\neq g}^G \Sigma_{s,kg}^i \phi_k^i  = \frac{1}{k} \Sum_{k=1}^G \nu \Sigma_{f,kg}^i \phi_k^i } }
+\eqn{ [M] [\phi] &= \frac{1}{k} [F] [\phi] }
+\begin{itemize}
+\item The generalized eigenvalue problem is $F\phi = k M \phi$. If using solver, solving the generalized eigenvalue problem is faster than the eigenvalue problem. 
+\item The eigenvalue problem is $M^{-1} F \phi = k \phi$. Notice we need to re-arrange the matrix form to the eigenvalue form to get that $k$ is the eigenvalue. Also keep in mind that $[F]$ can be singular, so we try to avoid inverting $[F]$ whenever possible. 
+\end{itemize}
+Keep in mind it is always column impact rows. 
+The above expression is true all the time; with different BC, the coupling coefficients (the $\tilde{D}$ terms) would change\footnote{these coupling terms couple the interface current to the cell-averaged fluxes}. Next we will investigate the different boundary conditions. 
+\begin{enumerate}
+\item Zero Flux BC: 
+  \eqn{ J_g^{I+1/2} = - D_g^I \left. \dphidx \right|_{I+1/2} \approx -D_g^I \frac{\overbrace{\phi_g^{I+1/2}}^{\to 0} - \phi_g^I}{\Delta x_I/2} = \frac{2D_g^I}{\Delta x_I} = \tilde{D}_g^{I+1/2} \phi_g^I }
+\item Reflective Flux BC:
+  \eqn{ J_g^{I+1/2} = 0 }
+\item Vacuum BC (Zero Incoming Flux BC): 
+  \eqn{ J_g&= (J_g^+ - J_g^-) \cdot \vecn}
+  From Mashek BC from transport theory, we know,
+  \eqn{ J_g^+ &= \frac{1}{4} \phi_g + \frac{1}{2} J_g \cdot \vecn, & J_g^- &= \frac{1}{4} \phi_g - \frac{1}{2} J_g \cdot \vecn }
+  The convention is that $J_g^-$ is the incoming current for both surfaces. Then for vaccum BC, we set $J_g^- = 0$, that is, $J_g^{I+1/2} = \frac{1}{2} \phi_g^{I+1/2}$. 
+  \begin{align}
+    J_g^{I+1/2} &= - D_g^I \left( \frac{\phi_g^{I+1/2} - \phi_g^I}{\Delta x_I/2} \right) \\
+    &= - \frac{2D_g^I}{\Delta x_i} (\phi_g^{I+1/2} - \phi_g^I) \\
+    &= - \frac{2D_g^I}{\Delta x_i} (2J_g^{I+1/2} - \phi_g^I) \\
+    J_g^{I+1/2}&= \frac{2D_g^I}{\Delta x_I + 4D_g^I} \phi_g^I \\
+    &= \tilde{D}_g^{I+1/2} \phi_g^I 
+  \end{align}
+\end{enumerate}
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \clearpage
-\topic{Math Reviews}
+\topic{Appendix B: Math Reviews}
 \begin{enumerate}
 \item Trigonometry:
  \begin{align}
