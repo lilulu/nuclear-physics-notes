@@ -631,7 +631,7 @@ Keep in mind it is always column impact rows.
 The above expression is true all the time; with different BC, the coupling coefficients (the $\tilde{D}$ terms) would change\footnote{these coupling terms couple the interface current to the cell-averaged fluxes}. Next we will investigate the different boundary conditions. 
 \begin{enumerate}
 \item Zero Flux BC: 
-  \eqn{ J_g^{I+1/2} = - D_g^I \left. \dphidx \right|_{I+1/2} \approx -D_g^I \frac{\overbrace{\phi_g^{I+1/2}}^{\to 0} - \phi_g^I}{\Delta x_I/2} = \frac{2D_g^I}{\Delta x_I} = \tilde{D}_g^{I+1/2} \phi_g^I }
+  \eqn{ J_g^{I+1/2} = - D_g^I \left. \dphidx \right|_{I+1/2} \approx -D_g^I \frac{\overbrace{\phi_g^{I+1/2}}^{\to 0} - \phi_g^I}{\Delta x_I/2} = \frac{2D_g^I}{\Delta x_I} \phi_g^I = \tilde{D}_g^{I+1/2} \phi_g^I }
 \item Reflective Flux BC:
   \eqn{ J_g^{I+1/2} = 0 }
 \item Vacuum BC (Zero Incoming Flux BC): 
@@ -648,6 +648,16 @@ The above expression is true all the time; with different BC, the coupling coeff
   \end{align}
 \end{enumerate}
 
+\begin{algorithm}
+  \begin{algorithmic}
+    \FOR {every cell}
+    \STATE irow = $i$ + $nx(g-1)$;
+    $i$ = mod(irown, $nx$) + 1;
+    $g$ = mod(irow, $nx \cdot ny$)/$nx$ + 1;
+    \ENDFOR
+  \end{algorithmic}
+  \caption{Index Scheme}
+\end{algorithm}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
