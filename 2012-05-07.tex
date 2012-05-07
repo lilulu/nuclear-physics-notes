@@ -1,0 +1,67 @@
+\documentclass{school-22.211-notes}
+\date{May  7, 2012}
+
+\begin{document}
+\maketitle
+
+\lecture{Homogenization/Reconstruction Methods}
+The first half of this lecture is going to follow one of the paper. 
+
+\topic{Nodal Methods: Burnup Dependence}
+We can calculate three variations/gradients: 
+\begin{itemize}
+\item Burnup gradients.
+\item Fuel temperature gradients.
+\item Non-uniform density distribution.
+\end{itemize}
+For instance, if we know the fuel temperature gradient, from any library we know the cross section change with respect to temperature, then we can compue the cross section distribution. 
+
+\subtopic{Update Flux}
+After we add in the spatial dependent cross section, our flux distribution is different, but mechanically there is nothing tricky -- we are just adding more terms to the expressions linking $a_1$ with $a_3$, and the one linking $a_2$ with $a_4$. 
+
+
+\subtopic{Depletion Benchmark}
+There are quite large eror without spatial dependent cross section. With spatial dependency, the error drops significantly. 
+
+
+\clearpage
+\topic{Homogenization of Fuel Assemblies}
+Homogenization theory: given a reference solution, we build a heterogeneous reactor using terms without hats, and a homogeneous model using terms of hats. We cannot preserve every term, but we can decide to preserve some. For instance, we preserve the scalar flux, absorption rate and the leakage term, 
+\eqn{ \int \hat{\phi}_g \dr = \int \phi_{Ag} \dr }  
+\eqn{ \int_{V_i} \hat{\Sigma}_{ag} \hat{\phi}_g \dr &= \int_{V_i} \Sigma_{ag} \phi_g \dr  & \hat{\Sigma}_{ag}^i &= \frac{\int_{V_i} \Sigma_{ag} \phi_g \dr}{\int_{V_i} \hat{\phi}_g \dr} }
+\eqn{ \int_{S_i^k} \divergence \hat{J}_g \dS &= \int_{S_i^k} \divergence J_g \dS & \hat{J}_g &= - \hat{D}_g \gradient \hat{\phi}_g, \mbox{ where } \hat{D}_g^i = \frac{-\int_{S_i^k} J_g \dS}{\int_{S_i^k} \gradient \hat{\phi}_g \dS}}
+
+To get the homogenized model to work, we would need to preserve reaction rates, which require us to  preserve the net current on the surface on every node. After homogenization, the scalar fluxes are not continuous on the interface anymore. Koebke introduced the \hi{Heterogeneity Factor} in 1978, which says,
+\eqn{ \hat{\phi}_i f_i^+ &= \hat{\phi}_{i+1}^- f_{i+1}^- }
+where
+\eqn{ f_i^+ &= \frac{\phi_i^+}{\hat{\phi}_i^+}, &f_{i+1}^-&= \frac{\phi_{i+1}^-}{\hat{\phi}_{i+1}^-}}
+
+\subtopic{Assembly Discontinuity Factor (ADF)}
+Originally, the homogenization method would require a reference solution and hence a reference discontinuity factor (RDF); later it is realized that assembly discontinuity factor (ADF) is very close to the mean RDF, hence we can use assembly calculations to approximate RDFs. When there is zero current BC, the RDF is just the surface flux over the average flux. 
+
+ADFs dramaticaly reduce errors in both PWRs and BWRs. 
+
+An interesting point here is that the AXS-ADF solution is accurate with and only with both of them in place; it is better off than either RXS-ADF or AXS-RDF. In fact, ADF and AXS erros are often opposite in sign. 
+
+\clearpage
+\topic{Reflector Modeling}
+DFs are often used to model PWR baffle/reflector nodes (about 1.5 in thick stainless steel outside the core). Classically, people model the reflector using the albedo condition $\alpha = \frac{J_-^{\mathrm{out}}}{J_-^{\mathrm{in}}}$. Though albedos fails at re-entrance surfaces; that is, albedos have inside/outside corner dependence. We turn to DFs because they are less spatially sensitive than albedos (as shown in Table 12, DF is more or less the same at different nodes). 
+
+Results: using 1 DF is really accurate; albedos are very inaccurate around the edge, and propogate inside of the reactor. 
+
+Assembly/Reflector DFs also work in hexagonal geometry. 
+
+Be careful, when you go to different types, for instnace, a graphite reactor, DFs may not work because graphite or gas or fast reactor the mean free path is long. DFs work well mostly for thermal LWRs. 
+
+Other applications of homogenization theory: 
+\begin{itemize}
+\item Fine mesh data generation for 3D/1D axial models. Basically we homogenize axial fuel asembly, and depens on how we define the node, the DFs come out to be different. 
+\item Nonlinear acceleration of fine-mesh transport methods. 
+\item Nonlinear acceleration of Monte Carlo. 
+\end{itemize}
+
+
+\clearpage
+\topic{Pin Power Reconstruction}
+
+\end{document}
