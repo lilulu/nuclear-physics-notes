@@ -556,7 +556,11 @@ Dominance ratio measures the spatial decoupling, and it depends on: symmetric mo
 \clearpage
 \topic{Appendix A: Finite Difference 1D Transport Equation}
 In this chapter we are doing a fine-mesh finite difference (example: PDQ, CITATION). 
-
+\begin{figure}[ht]
+  \centering
+  \includegraphics[height=2.5in]{images/dfs/finite-difference.png}
+  \caption{Finite Difference Grids}
+\end{figure}
 \subtopic{Deriving Balance Equation}
 Start from neutron balance equation derive the finite-difference form of it. Note: we omit the $\chi_g$ term but it could be there. 
 
@@ -592,6 +596,11 @@ Notice here if we were to expand 1D into 3D, we need to add two more leakage ter
 
 \clearpage
 \subtopic{Computing Interface Current}
+\begin{figure}[ht]
+  \centering
+  \includegraphics[height=2in]{images/dfs/current-sign.png}
+  \caption{Current Convention}
+\end{figure}
 Insert boundary image here. Then we can write the net current at the boundary two different ways, 
 \eqn{ J_g^{i+1/2} = - D_g^i \left. \dphidx \right|_{i+1/2} \approx -D_g^i \left( \frac{\phi_g^{i+1/2} - \phi_g^i}{\Delta x_i /2} \right) }
 \eqn{ J_g^{i+1/2} = - D_g^{i+1} \left. \dphidx \right|_{i+1/2} \approx -D_g^{i+1} \left( \frac{\phi_g^{i+1} - \phi_g^{i+1/2}}{\Delta x_{i+1} /2} \right) }
