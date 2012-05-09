@@ -1,0 +1,70 @@
+\documentclass{school-22.211-notes}
+\date{May  9, 2012}
+
+\begin{document}
+\maketitle
+
+\lecture{Reconstruction/De-homogenization Methods}
+\topic{Superposition Assumptions}
+Assembly-wise cross sections, pin-wise cross sections with spacial dependency. 
+
+
+
+
+\topic{Non-Separable Flux Expansion}
+\begin{enumerate}
+\item Using 5th order polynomial, there are 25 unknown coefficients in the fast group (5 for each of the two directions). 
+\item There appears to be 50 unknowns in the thermal groups; but it is really 25, because the other 25 for the specific colution can be solved from the fast group.
+\item Surface constrains preserve flux shape. 
+\textcolor{red}{each node has 4 surface constraints?} 
+\end{enumerate}
+
+
+\topic{Reconstruction Steps}
+
+
+
+\topic{Applications}
+To measure power of a core, we pull out individual pins and measure the gamma deposited in it to get the power profile of it. The uncertainty comes out to be about 1.5\%, which is considered to be high precision. 
+
+
+\topic{Fixing Cross-sections On The Fly/`Adhop' Method}
+SA: single assembly. 
+
+This method is somewhat an empiracle one; hence it is not very robust. Nowadays, nodal methods just go to higher order of energy groups. 
+
+\clearpage
+\topic{Nodal Method Summary}
+Basically a production-grade nodal code must have, 
+\begin{itemize}
+\item Accurate lattice data;
+\item Coupling to 
+\end{itemize}
+
+
+\lecture{Adjoint Fluxes}
+\topic{Review}
+
+We can get a much accurate prediction of reactivity without knowning $\delta \psi$. 
+
+
+
+There is no reactivity associated with a space and a time (it has a reactivity contribution). Reactivity is always integrated over the entier system because of the denominator. 
+
+
+
+Because of the linearility of the first-order perturbation theory, we can super-impose: 
+\begin{itemize}
+\item reactivity contributions from perturbations in different spatial regions;
+\item reactivity effects from perturbations in xxx. 
+\end{itemize}
+
+
+\hi{The adjoint flux is defined as the asymptotic increase in total neutron population of a critical reactor for a neutron introduced a position r, direction omega, and energy E.} The adjoint is only defined for what reaction that we are interested in: in a critical reactor, that is neutron population; in a subcritical system, like the one in detector, then it is whatever purpose, like detector response, that we are interested in. 
+
+
+
+
+
+
+\end{document}
