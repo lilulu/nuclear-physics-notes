@@ -3,14 +3,14 @@
 % doesn't need much of a header.
 %
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
-\ProvidesClass{school-style-homework}
+\ProvidesClass{school-style-project}
 
 \def\assignment#1{\gdef\@assignment{#1}}
 \def\classcode#1{\gdef\@classcode{#1}}
 
 % Sets a simple header/footer
 \lhead{\@author}
-\chead{\@classcode\ Homework \#\@assignment}
+\chead{\@classcode\ Project \#\@assignment}
 \rhead{\@date}
 \lfoot{}
 \cfoot{\thepage}
