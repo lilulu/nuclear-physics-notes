@@ -5,7 +5,26 @@
 \maketitle
 
 \lecture{Reconstruction/De-homogenization Methods}
+In this lecture we consider given a homogenized solution, how to we re-construct the heterogeneous solution. Three references: Scott Palmtag's MIT PhD thesis `Advanced Nodal Methods for MOX Fuel Analysis' for good detailed math, Ken Rempse' NSE paper `SIMULATE-3 Pin Power Reconstruction: Methology and Benchmarking,' Qunlei Jiang's NCS MS thesis for detailed plots of complex terms `Intra-nodal Study for the Mixed LEU-MOX Cores.' 
+
 \topic{Superposition Assumptions}
+Basically we assume that the detailed flux distribution can be approximated by superposition of homogeneous nodal fluxes and lattice fluxes. That is, 
+\eqn{ \phi_g^{het} (x,y) &= \phi_g^{hom}(x,y) \phi_g^{SA} (x,y) }
+Keep in mind that, as the example in Fig.~\ref{dehom-supercomposing}, the heterogeneous flux should be continuous acorss the material boundary now, 
+\eqn{\left. \phi_g^{SA, UO2} (x)  \phi_g^{hom, UO2} (x) \right|_{x=0} = \left. \phi_g^{SA, MOX} (x)  \phi_g^{hom, MOX} (x) \right|_{x=0}
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=4in]{images/methd/dehom-supercomposing.png}
+  \caption{Supercomposing Thermal Flux in a 1D UO2/MOX problem} \label{dehom-supercomposing}
+\end{figure}
+In a similar fashion, we can superposition the pin power as well, in which case would need to know the pin-wise fission cross section form functions as well as the group-wise flux form functions. This would be a lot of data considering that form function, like cross sections and discontinuity factors have to be built into giant libraries vs. burnup, temperature, density etc). 
+
+Consequently, most often powers are reconstructed 
+
+
+
+
+
 Assembly-wise cross sections, pin-wise cross sections with spacial dependency. 
 
 
@@ -20,7 +39,14 @@ Assembly-wise cross sections, pin-wise cross sections with spacial dependency.
 \end{enumerate}
 
 
-\topic{Reconstruction Steps}
+\topic{Corner Point Constraints}
+
+
+\topic{Homogeneous Cross Section Shape}
+
+
+\topic{Form Function Representations}
+
 
 
 
