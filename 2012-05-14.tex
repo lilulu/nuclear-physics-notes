@@ -1,0 +1,104 @@
+\documentclass{school-22.211-notes}
+\date{May 14, 2012}
+
+\begin{document}
+\maketitle
+
+\lecture{PWR Core Loading Pattern Optimization}
+Reference: Turinsky's `Core Isotopic Depletion and Fuel Management' in \textit{Handbook of Nuclear Engineering}, Springer (2010). 
+\topic{Objectives}
+\begin{itemize}
+\item Limit on power peaking. 
+\item Increased margins to thermal limits (CHF, T$_{\mathrm{fuel}}$. 
+\item Maximize economics. 
+\end{itemize}
+The fundamental tradeoff is between economics (maximize energy) and minimize safety risks (minimize peaking):
+\begin{itemize}
+\item Maximize energy: maximize EOC reactivity, maximize cycle length, maximize fuel burnup. 
+\item Minimize peaking: minimize maximum enthalpy rise hot-channel factor F$_{\Delta H}$, minimize heat flux hot-channel factor. 
+\end{itemize}
+
+
+\topic{Loading Pattern Problem}
+\begin{enumerate}
+\item Out-in: most burned on the inside. good economics, bad peaking factor. 
+\item In-out: most burned on the outside. good peaking factor, bad economics.
+\item Ring of fire: from outside to inside less fresh, except a ring of burned one near the out-side most. 
+\end{enumerate}
+A LP problem is, 
+\begin{itemize}
+\item is a nonlinear, mixed-integer problem (so no derivatives).
+\item is inherently a multi-objective problem. 
+\item is highly constrained. 
+\item has disjoint feasible regions.
+\item has an extremely large decision space. 
+\end{itemize}
+Stochastic optimization schemes are only real options, 
+\begin{enumerate}
+\item Simulated annealing.
+\item Genetic algorithms.
+\item Swarm intelligence (ant colony, particle swarm, etc). 
+\end{enumerate}
+Casting the Objectives: A common way for using multiple objectives is the \hi{augmented (weighted) objective}. Example for $k, p$: 
+\eqn{ f(k,p) = (1.5 - p) - 100 H (1.15 - k) }
+This is an easy way to to include constrains as penalties. A better approach would the Pareto optimal which is not covered in this lecture (Ask stephano for questions). 
+
+\clearpage
+\topic{Simulated Annealing}
+The physical process of annealing means bringing metals to a high temperature and let it cool slowly; if it cools slowly enough eventually it would get to its minimum energy. 
+\begin{algorithm}
+  \begin{algorithmic}
+    \STATE Intialize $x, C_0, L_0$.  $k=0$. 
+    \WHILE{not converged} 
+    \STATE do 
+    \ENDWHILE
+  \end{algorithmic}
+  \caption{Basic Simulated Annealing Algorithm}
+\end{algorithm}
+The key feature is 
+
+
+\clearpage
+\topic{Genetic Algorithm}
+\begin{algorithm}
+  \begin{algorithmic}
+    \STATE Create and evaluate an initial population of $N$ chromosomes.
+    \WHILE{not converged} 
+    \STATE Select $n$ chromosomes to reproduce (crossover); 
+    \STATE Crossover and/or Mutate chromosomes;
+    \STATE Replace $n$ least fit chromosomes with $n$ offsprings;
+    \STATE Evaluate the population.
+    \ENDWHILE
+  \end{algorithmic}
+  \caption{Basic Genetic Algorithm}
+\end{algorithm}
+
+\begin{enumerate}
+\item  Selection criteria: survival of the fittest. 
+  \begin{enumerate}
+  \item Proportinal selection, Russian-Roulette. 
+  \item 
+  \end{enumerate}
+
+\item Crossover: breeding patterns. This type of problem is called ordering problems: we have finite number of something that need to be conserved in the crossover. A typically way to do it is the Heuristic Tie-Breaking crossover: 
+
+\item Mutation: add a bit of local refinement to the global scopes of GA. 
+
+\item Replacement: 
+  \begin{enumerate}
+    \item Delete all (generational): replace all $N$ parents with $N$ offspring.    \item Steady state: replace some subset of $n$ parents with or without avoiding duplication.
+  \end{enumerate}
+\end{enumerate}
+
+
+
+\clearpage
+\topic{Summary}
+Comparison between SA and GA:
+\begin{itemize}
+\item SA is simpler to understand. SA is harder to parallelize (becase at each temperature you are making up a $L$ that depends on the previous steps). 
+\item GA is natural for true `multiobjective' optimization. GA is trivial to parallelize. 
+\item Both are heuristic and need some tuning. Both can be improved with hill-climbing heuristics (eg, greedy exhaustive single binary swaps). 
+\end{itemize}
+Once you put the most burned cores on the outside-most ring, how the inside pattern does not affect the cycle length anymore because the power on the outside is so small. But the peaking power is very sensitivie on the inner pattern. 
+\end{document}
