@@ -69,7 +69,7 @@ Reference: Sutton and Aviles' `Diffusion Theory Methods for Spatial Kinetics Cal
     \item It is more efficient to work with diffusion equation for average flux rather than solving the diffusion equation for the point-wise fluxes in 3D. 
   \end{itemize}
 
-\item Transverse Integration: we need a set of equations for the surface average currents instead of solving 3D finite different equations directly. To do so, we pick a direction of interest (eg., x direction), and perform integration within node over 2D plane normal to that direction (eg., the grey surface in Figure~\ref{nodal-current}), then devide by planar area. The LHS of Eq.~\ref{nodal-balance} becomes, 
+\item Transverse Integration: we need a set of equations for the surface average currents instead of solving 3D finite different equations directly. To do so, we pick a direction of interest (eg., x direction), and perform integration within node over 2D plane normal to that direction (eg., the grey surface in Figure~\ref{nodal-current}), then devide by the planar area. The LHS of Eq.~\ref{nodal-balance} becomes, 
   \eqn{\Sum_{u=x,y,z} \frac{\bar{J}_{gur} - \bar{J}_{gul}}{h_u} + \Sigma_{rg} \bar{\psi}_g = \frac{1}{h_y h_z} \int_0^{h_z} \int_0^{h_y} (\divergence \vecJ_g(\vecr, E) + \Sigma_{rg} \psi_g (\vecr, E) ) \dy \dz }
 \begin{figure}[ht]
   \centering
@@ -113,9 +113,11 @@ Reference: Sutton and Aviles' `Diffusion Theory Methods for Spatial Kinetics Cal
     \eqn{ - \Sigma_{Dg}^x \frac{\derivative^2}{\dxi_x^2} \bar{\psi}_{gx} (\xi_x) + \Sigma_{rg} \bar{\psi}_{gx} (\xi_x) = \frac{1}{\keff} \chi_g \Sum_{g'=1}^G \nu \Sigma_{fg'} \bar{\psi}_{g'x} (\xi_x) + \Sum_{g'=1}^G \Sigma_{sg'g} \bar{\psi}_{g'x} (\xi_x) - L_{gy} (\xi_x) - L_{gz} (\xi_x)  } 
 
   \item Repeat for the other two directions, we get a set of 3 directional 1D diffusion equations.
-    \eqn{ \boxed{ - \Sigma_{Dg}^x \frac{\derivative^2}{\dxi_x^2} \bar{\psi}_{gx} (\xi_x) + \Sigma_{rg} \bar{\psi}_{gx} (\xi_x) = \frac{1}{\keff} \chi_g \Sum_{g'=1}^G \nu \Sigma_{fg'} \bar{\psi}_{g'x} (\xi_x) + \Sum_{g'=1}^G \Sigma_{sg'g} \bar{\psi}_{g'x} (\xi_x) - L_{gy} (\xi_x) - L_{gz} (\xi_x) } \label{nodal1} } 
-    \eqn{ \boxed{ - \Sigma_{Dg}^y \frac{\derivative^2}{\dxi_y^2} \bar{\psi}_{gy} (\xi_y) + \Sigma_{rg} \bar{\psi}_{gy} (\xi_y) = \frac{1}{\keff} \chi_g \Sum_{g'=1}^G \nu \Sigma_{fg'} \bar{\psi}_{g'y} (\xi_y) + \Sum_{g'=1}^G \Sigma_{sg'g} \bar{\psi}_{g'y} (\xi_y) - L_{gz} (\xi_y) - L_{gx} (\xi_y) } }
-    \eqn{ \boxed{ - \Sigma_{Dg}^z \frac{\derivative^2}{\dxi_z^2} \bar{\psi}_{gz} (\xi_z) + \Sigma_{rg} \bar{\psi}_{gz} (\xi_z) = \frac{1}{\keff} \chi_g \Sum_{g'=1}^G \nu \Sigma_{fg'} \bar{\psi}_{g'z} (\xi_z) + \Sum_{g'=1}^G \Sigma_{sg'g} \bar{\psi}_{g'z} (\xi_z) - L_{gx} (\xi_z) - L_{gy} (\xi_z) } }
+    \begin{align}
+      \boxed{ - \Sigma_{Dg}^x \frac{\derivative^2}{\dxi_x^2} \bar{\psi}_{gx} (\xi_x) + \Sigma_{rg} \bar{\psi}_{gx} (\xi_x) = \frac{1}{\keff} \chi_g \Sum_{g'=1}^G \nu \Sigma_{fg'} \bar{\psi}_{g'x} (\xi_x) + \Sum_{g'=1}^G \Sigma_{sg'g} \bar{\psi}_{g'x} (\xi_x) - L_{gy} (\xi_x) - L_{gz} (\xi_x) } \notag \\
+   \boxed{ - \Sigma_{Dg}^y \frac{\derivative^2}{\dxi_y^2} \bar{\psi}_{gy} (\xi_y) + \Sigma_{rg} \bar{\psi}_{gy} (\xi_y) = \frac{1}{\keff} \chi_g \Sum_{g'=1}^G \nu \Sigma_{fg'} \bar{\psi}_{g'y} (\xi_y) + \Sum_{g'=1}^G \Sigma_{sg'g} \bar{\psi}_{g'y} (\xi_y) - L_{gz} (\xi_y) - L_{gx} (\xi_y) }  \notag \\
+     \boxed{ - \Sigma_{Dg}^z \frac{\derivative^2}{\dxi_z^2} \bar{\psi}_{gz} (\xi_z) + \Sigma_{rg} \bar{\psi}_{gz} (\xi_z) = \frac{1}{\keff} \chi_g \Sum_{g'=1}^G \nu \Sigma_{fg'} \bar{\psi}_{g'z} (\xi_z) + \Sum_{g'=1}^G \Sigma_{sg'g} \bar{\psi}_{g'z} (\xi_z) - L_{gx} (\xi_z) - L_{gy} (\xi_z) } \notag
+    \end{align}
 
   \item Interpretations: we turn a 3D partial differential equation into three 1D ordinary differential equation that are coupled through average transverse leakage term. It is exact if the transverse leakage shape is known. 
   \end{enumerate}
@@ -126,6 +128,7 @@ Reference: Sutton and Aviles' `Diffusion Theory Methods for Spatial Kinetics Cal
 \end{enumerate}
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%
 \clearpage
 \topic{Three Nodal Methods}
 \begin{enumerate}
@@ -133,6 +136,14 @@ Reference: Sutton and Aviles' `Diffusion Theory Methods for Spatial Kinetics Cal
   \begin{enumerate}
   \item We approximate 1D flux by 4th order polynomial, 
     \eqn{ \bar{\psi}(\xi) = \Sum_{i=0}^4 a_i P_i (\xi) }
+    where the basis functions are, 
+    \begin{align}
+      P_0(\xi) &= 1 \\
+      P_1(\xi) &= 2 \xi - 1\\
+      P_2(\xi) &= 6 \xi (1-\xi) - 1 \\
+      P_3(\xi) &= 6 \xi (1-\xi)(2\xi-1) \\
+      P_4(\xi) &= 6 \xi (1-\xi)(5\xi^2 -5\xi +1)
+    \end{align}
     Notice these basis functions are not orthogonal, and integration from 0 to 1 would result in zero. Keep in mind that our transverse leakage is 2nd order (because the result is not very sensitive to the expansion of the transverse leakage). 
 
   \item BCs: In a two nodes case, we have 16 unknowns from: 4 flux moments $\times$ 2 nodes $\times$ 2 energy groups. But we only have 8 knowns, 
@@ -187,26 +198,27 @@ Reference: Sutton and Aviles' `Diffusion Theory Methods for Spatial Kinetics Cal
       \left[ \begin{array}{c} 0 \\ 0 \end{array} \right] }
     For nontrivial solution, we set the determinant to zero, and re-write the expression in terms of $B^2$: 
     \eqn{ (B^2)^2 + \overbrace{\left( \frac{\Sigma_{r1}}{D_1} + \frac{\Sigma_{r2}}{D_2} - \frac{\frac{\nu \Sigma_{f1}}{\keff}}{D_1} \right)}^{2b} B^2 + \overbrace{ \left( 1 - \frac{\kinf}{\keff} \right) \frac{\Sigma_{r1}}{D_1} \frac{\Sigma_{r2}}{D_2} }^{c} = 0 }
-    The roots of characteristic equations are the \textbf{eigen-buckling}; more specifically, one of them is the \hi{fundamental mode}, and the other is the \hi{harmonic mode}, 
+    The roots of characteristic equations are the \textbf{eigen-buckling}; more specifically, one of them is the \hi{fundamental mode}, and the other is the \hi{harmonic mode}\footnote{recall quadratic roots for $ax^2 + bx + c = 0$ are $x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$}, 
     \begin{align}
       &\mbox{Fundamental Mode} &B_1^2&= b\left(-1 + \sqrt{1 - \frac{c}{b^2}} \right) = \left\{ \begin{array}{cc} > 0 & \kinf > \keff \\ < 0 & \kinf < \keff \end{array} \right. \\
       &\mbox{Harmonic Mode} &B_2^2&=b\left(-1 - \sqrt{1 - \frac{c}{b^2}} \right) <0
     \end{align}
-    The homogeneous solution for the two energy groups are: 
+    The homogeneous solution for group $g$ is: 
      \begin{align}
       &\mbox{Fundamental Mode} &\psi_{g1}^H(x)&= \left\{ \begin{array}{cc} a_{g1} \sin(B_1 x) + a_{g2} \cos(B_1x) & \kinf > \keff \\ a_{g1} \sinh(B_1 x) + a_{g2} \cosh(B_1 x) & \kinf < \keff \end{array} \right. \\
       &\mbox{Second-Harmonic Mode} &\psi_{g2}^H&=a_{g3} \sinh(B_2 x) + a_{g4} \cosh(B_2 x) 
     \end{align}   
      The combined homogeneous solution shows that group 1 and group 2 equations are linearly dependent, 
-     \eqn{ \left[ \begin{array}{c} \psi_1^H(x) \\ \psi_2^H (x) \end{array} \right] = \left[ \begin{array}{cc} r_1 & r_2 \\ 1 & 1 \end{array} \right] \left[ \begin{array}{c} a_{21} \sin(B_1 x) + a_{22} \cos (B_1 x) \\ a_{23} \sinh(B_2 x) + a_{24} \cosh(B_2 x) \end{array} \right] }
+     \eqn{ \left[ \begin{array}{c} \psi_1^H(x) \\ \psi_2^H (x) \end{array} \right] = \left[ \begin{array}{c} a_{11} \sin(B_1 x) + a_{12} \cos (B_1 x) \\ a_{21} \sinh(B_2 x) + a_{22} \cosh(B_2 x) \end{array} \right] =  \left[ \begin{array}{cc} r_1 & r_2 \\ 1 & 1 \end{array} \right] \left[ \begin{array}{c} a_{21} \sin(B_1 x) + a_{22} \cos (B_1 x) \\ a_{23} \sinh(B_2 x) + a_{24} \cosh(B_2 x) \end{array} \right] }
      where the fast-to-thermal flux ratio is defined as,
      \eqn{ r_m &= \frac{a_{11}}{a_{21}} = \frac{a_{12}}{a_{22}} = \frac{D_2 B_m^2 + \Sigma_{r2}}{\Sigma_{12}} }
 
 \item Next we find the particular solution, which is determined solely by quadratic transverse leakage, 
-  \eqn{ \psi_g^p (\xi) = c_{0g} + c_{1g} P_1(\xi) + c_{2g} P_2(\xi) }
-  where
-  \eqn{ \left[ \begin{array}{c} c_{10} \\ c_{20} \end{array} \right] = A^{-1} \left[ \begin{array}{c} -b_{10} + 6 D_1 c_{12} / \Delta x^2 \\ -b_{20} + 6 D_2 c_{22} / \Delta x^2 \end{array} \right] }
-  \eqn{ \left[ \begin{array}{c} c_{1p} \\ c_{2p} \end{array} \right] = A^{-1} \left[ \begin{array}{c} -b_{1p} \\ -b_{2p} \end{array} \right], &p &=1,2 }
+  \eqn{ \psi_g^P (\xi) = c_{0g} + c_{1g} P_1(\xi) + c_{2g} P_2(\xi) }
+  where  
+\eqn{ \left[ \begin{array}{c} c_{1p} \\ c_{2p} \end{array} \right] &= A^{-1} \left[ \begin{array}{c} -b_{1p} \\ -b_{2p} \end{array} \right], &p &=1,2.
+ &\left[ \begin{array}{c} c_{10} \\ c_{20} \end{array} \right] &= A^{-1} \left[ \begin{array}{c} -b_{10} + 6 D_1 c_{12} / \Delta x^2 \\ -b_{20} + 6 D_2 c_{22} / \Delta x^2 \end{array} \right]. }
+
 
 \item Hence the general solution in a node is, 
      \eqn{ \left[ \begin{array}{c} \psi_1^H(x) \\ \psi_2^H (x) \end{array} \right] = \left[ \begin{array}{cc} r_1 & r_2 \\ 1 & 1 \end{array} \right] \left[ \begin{array}{c} a_{21} \sin(B_1 x) + a_{22} \cos (B_1 x) \\ a_{23} \sinh(B_2 x) + a_{24} \cosh(B_2 x) \end{array} \right] + \left[ \begin{array}{c} \psi_1^P(x) \\ \psi_2^P (x) \end{array} \right] }
@@ -220,7 +232,7 @@ Reference: Sutton and Aviles' `Diffusion Theory Methods for Spatial Kinetics Cal
      \end{itemize}
      Hence there is no need for weighted residual equations because we have the exact solution to the 1D diffusion equation. Then all groups are solved simultaneously.
 
-   \item Interpretation: no need for weighted residual equations because we have exact solution to the 1D diffusion equation. The drawback is, all groups are solved simultaneously, so the generalization is very hard. But with the help of modal expansion, now we can do ANM for any number of energy groups. 
+   \item Pros and Cons: no need for weighted residual equations because we have exact solution to the 1D diffusion equation. The drawback is, all groups are solved simultaneously, so the generalization is very hard. But with the help of modal expansion, now we can do ANM for any number of energy groups. 
   \end{enumerate}
 
 \clearpage
@@ -234,7 +246,9 @@ Reference: Sutton and Aviles' `Diffusion Theory Methods for Spatial Kinetics Cal
     
   \item The analytic solution of thermal group diffusion equation is, 
     \eqn{ \psi_g(x) &= A \sinh(\kappa_g x) + B \cosh(\kappa_g x) + \Sum_{i=0}^4 c_i P_i \left(\frac{2x}{h}\right), &\kappa_g&=\sqrt{\frac{\Sigma_g}{D_g}} }
-    We end up with \textit{exponential homogeneous solution and polynomial particular solution}. Then we differentiate to get expression for net current at the interface: 
+    We end up with \textit{exponential homogeneous solution and polynomial particular solution}. 
+
+\item We differentiate to get expression for net current at the interface: 
     \eqn{ J_g(x) &= -D_g \ddx \psi_g(x) }
     We use the continuity of net currents/flux to get analytic expression for coupling. 
     \begin{figure}[ht]
@@ -283,7 +297,7 @@ In this section we show how the three nodal methods come down to be pretty much 
 \item Update $\keff$ and return to 2 until converged. 
 \end{enumerate}
 
-Next the non-linear iterative solution sequence was developed,
+Next \textbf{the non-linear iterative solution} sequence was developed,
 \begin{enumerate}
 \item  Guess $\keff$, solve the standard 3D finite difference equations. 
 

@@ -72,7 +72,7 @@ Another important point is that the \textit{heterogeneous corner point flux has 
 
 \item In order to satisfy the continuity conditions of reconstructed fluxes, the best-estimate homogeneous corner-point fluxes for each node are computed by, 
   \eqn{ \hat{\phi}_{g,i,j}^{hom,cp} = \frac{\phi_g^{het,cp}}{\phi_{g,i,j}^{fct,cp}} }
-  The reconstructed corner point fluxes are then continuous. \textit{CP ratio is the corner point analogue of ADF for assembly edges.}
+  The reconstructed corner point fluxes are then continuous. \textbf{CP ratio is the corner point analogue of ADF for assembly edges.}
 \end{itemize}
 Surface constrains preserve flux shape. Each corner has 4 surfaces connected to it. 
 
@@ -133,7 +133,7 @@ Basically a production-grade nodal code must have,
 \item Accumulated pin exposure models. 
 \end{itemize}
 
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \lecture{Adjoint Fluxes}
 The general idea of adjoint problem is that we can get a pretty accurate prediction of reactivity without knowning $\delta \psi$. There is no reactivity associated with a space and a time (it has a reactivity contribution). Reactivity is always integrated over the entier system because of the denominator. 
 
@@ -152,41 +152,41 @@ The fundamental mode solution, which is the one we are interested in, has everyw
 \clearpage
 \topic{Perturbation Theory Expression for Reactivity}
 \begin{enumerate}
-\item Again we start from the operator forms, 
-\eqn{ A \psi &= \frac{1}{k} M \psi &A^*\psi^* &= \frac{1}{k^*} M^* \psi^*  }
-We perturb the operators such that, 
-\eqn{ A^* &= A + \delta A   &M^*&=M + \delta M  &\psi^*&=\psi + \delta \psi }
-Then the perturbed system using expanded operators becomes, 
-\eqn{ (A + \delta A) (\psi + \delta \psi) - \frac{1}{k+\delta k} (M + \delta M) (\psi + \delta \psi) &=0 \label{perturbed-sys}}
+\item We start from an unperturbed system 
+\eqn{ A_0 \psi_0 &= \frac{1}{k_0} M_0 \psi_0 &A_0^*\psi_0^* &= \frac{1}{k_0^*} M^* \psi_0^*  }
 
-\item We expand the $\keff$ term, 
-\eqn{ \frac{1}{k+\delta k} = \frac{1}{k} \frac{1}{1 + \delta k /k} = \frac{1}{k} - \frac{\delta k}{k^2} + O(\delta k^2)  }
+\item The perturbed system has operators, 
+\eqn{ A &= A_0 + \delta A   &M &=M_0 + \delta M  &\psi &=\psi_0 + \delta \psi &k&=k_0+\delta k}
+and approximate the perturbed system with, 
+\eqn{ (A_0 + \delta A) (\psi_0 + \delta \psi) &= \frac{1}{k_0+\delta k} (M_0 + \delta M) (\psi_0 + \delta \psi) \label{perturbed-sys}}
+We first expand the $\keff$ term, 
+\eqn{ \frac{1}{k_0+\delta k} = \frac{1}{k_0} \frac{1}{1 + \delta k /k_0} = \frac{1}{k_0} - \frac{\delta k}{k_0^2} + O(\delta k^2)  }
 Plug back into Eq.~\ref{perturbed-sys}, 
 \begin{align}
-(A + \delta A) (\psi + \delta \psi) &= \frac{1}{k+\delta k} (M + \delta M) (\psi + \delta \psi) \\
-(A + \delta A) (\psi + \delta \psi) &= \left( \frac{1}{k} - \frac{\delta k}{k^2}  \right) (M + \delta M) (\psi + \delta \psi) \\
-A \psi + A \delta \psi + \delta A \psi &= \frac{1}{k} M \psi + \frac{1}{k} M \delta \psi + \frac{1}{k} \delta M \psi - \frac{\delta k}{k^2} M \psi + O(\delta^2)  
+(A_0 + \delta A) (\psi_0 + \delta \psi) &= \frac{1}{k_0+\delta k} (M_0 + \delta M) (\psi_0 + \delta \psi) \\
+(A_0 + \delta A) (\psi_0 + \delta \psi) &= \left( \frac{1}{k_0} - \frac{\delta k}{k_0^2}  \right) (M_0 + \delta M) (\psi_0 + \delta \psi) \\
+A_0 \psi_0 + A_0 \delta \psi + \delta A \psi_0 &= \frac{1}{k_0} M_0 \psi_0 + \frac{1}{k_0} M_0 \delta \psi + \frac{1}{k_0} \delta M \psi_0 - \frac{\delta k}{k_0^2} M_0 \psi_0 + O(\delta^2)  
 \end{align}
-\eqn{ \overbrace{ \left( A - \frac{1}{k} M \right) \psi}^{\to 0} + \left( A - \frac{1}{k} M \right) \delta \psi + \left( \delta A - \frac{1}{k} \delta M \right) \psi &= - \frac{\delta k}{k^2} M \psi + O(\delta^2)  }
-\eqn{ -\frac{\delta k}{k^2} M \psi &= \left( \delta A - \frac{1}{k} \delta M \right) \psi + \left( A - \frac{1}{k} M \right) \delta \psi + O (\delta^2) }
+\eqn{ \overbrace{ \left( A_0 - \frac{1}{k_0} M_0 \right) \psi_0}^{\to 0} + \left( A_0 - \frac{1}{k_0} M_0 \right) \delta \psi + \left( \delta A - \frac{1}{k_0} \delta M \right) \psi_0 &= - \frac{\delta k}{k_0^2} M_0  \psi_0 + O(\delta^2)  }
+\eqn{ -\frac{\delta k}{k_0^2} M_0 \psi_0 &= \left( \delta A - \frac{1}{k_0} \delta M \right) \psi_0 + \left( A_0 - \frac{1}{k_0} M_0 \right) \delta \psi + O (\delta^2) }
 Multiply by $\psi^*$ and integrating over phase space, 
-\eqn{ - \frac{\delta k}{k^2} \expect{ \psi^*, M \psi} &= \expect{ \psi^*, \left( \delta A - \frac{1}{k} \delta M \right) \psi } + \overbrace{ \expect{\psi^*, \left( A - \frac{1}{k} M \right) \delta \psi} }^{\textcircled{1}} + O(\delta^2) \label{perturbed-sys2} }
+\eqn{ - \frac{\delta k}{k_0^2} \expect{ \psi^*, M_0 \psi_0} &= \expect{ \psi^*, \left( \delta A - \frac{1}{k_0} \delta M \right) \psi_0 } + \overbrace{ \expect{\psi^*, \left( A_0 - \frac{1}{k_0} M_0 \right) \delta \psi} }^{\textcircled{1}} + O(\delta^2) \label{perturbed-sys2} }
 
-\item First-order perturbation theory: we use the definition of adjoint operator for any operator, 
-\eqn{ \textcircled{1} =  \expect{\psi^*, \left( A - \frac{1}{k} M \right) \delta \psi} =  \expect{\delta \psi, \left( A^* - \frac{1}{k^*} M^* \right) \psi^*} = 0 }
-because $\left( A^* - \frac{1}{k^*} M^* \right) \psi^* = 0$. Then Eq.~\ref{perturbed-sys2} becomes, 
-\eqn{ - \frac{\delta k}{k^2} &= \frac{\expect{ \psi^*, \left( \delta A - \frac{1}{k} \delta M \right) \psi }}{\expect{ \psi^*, M \psi} } + O(\delta^2) \label{perturbed-sys3} }
+\item First-order perturbation theory(FOP): we use the definition of adjoint operator for any operator, 
+\eqn{ \textcircled{1} =  \expect{\psi_0^*, \left( A_0 - \frac{1}{k_0} M_0 \right) \delta \psi} =  \expect{\delta \psi, \left( A_0^* - \frac{1}{k_0^*} M_0^* \right) \psi_0^*} = 0 }
+because $\left( A_0^* - \frac{1}{k_0^*} M_0^* \right) \psi_0^* = 0$. Then Eq.~\ref{perturbed-sys2} becomes, 
+\eqn{ - \frac{\delta k}{k_0^2} &= \frac{\expect{ \psi_0^*, \left( \delta A - \frac{1}{k_0} \delta M \right) \psi_0 }}{\expect{ \psi_0^*, M_0 \psi_0} } + O(\delta^2) \label{perturbed-sys3} }
 Notice that, 
 \begin{itemize}
- \item There are only second order errors in reactivity. 
- \item Notice Eq.~\ref{perturbed-sys3} is clearly much more accurate than our previous expression, which has a first order error in reactivity without knowing $\delta \psi$, 
-   \eqn{ - \frac{\delta k}{k^2} &= \frac{ \left(\delta A - \frac{1}{k} \delta M\right) \psi + \left( A - \frac{1}{k} M \right) \delta \psi}{M \psi} + O (\delta^2) }
+ \item There are only second order errors in reactivity, because the term multiplying $\delta \psi$ is zero, hence the first order error vanishes in the reactivity expression. 
+ \item Thus Eq.~\ref{perturbed-sys3} is clearly much more accurate than the 1st order accurate expression we had before we multiply by $\psi_0^*$ and integrate,
+   \eqn{ - \frac{\delta k}{k_0^2} &= \frac{ \left(\delta A - \frac{1}{k_0} \delta M\right) \psi_0 + \left( A_0 - \frac{1}{k_0} M_0 \right) \delta \psi}{M_0 \psi_0} + O (\delta^2) }
 \end{itemize}
 
  \item Finally making use of the definition of reactivity, 
-   \eqn{ \rho &= \frac{k-1}{k} &\Rightarrow \rho^* - \rho &= \frac{k^* - 1}{k^*} - \frac{k-1}{k} = \frac{\delta k}{k^* k} &\delta \rho &= \frac{\delta k}{k^2} + O(\delta k^2) }
+   \eqn{ \rho &= \frac{k-1}{k} &\Rightarrow \rho - \rho_0 &= \frac{k - 1}{k} - \frac{k_0-1}{k_0} = \frac{\delta k}{k k_0} &\delta \rho &= \frac{\delta k}{k_0^2} + O(\delta k^2) }
    One obtains the first order perturbation (FOP) expression for reactivity, 
-   \eqn{ \boxed{\delta \rho \approx \frac{\expect{\psi^*, \left( \frac{1}{k} \delta M - \delta A \right) \psi }}{\expect{\expect{\psi^*, M \psi}}}  } }
+   \eqn{ \boxed{\delta \rho \approx \frac{\expect{\psi_0^*, \left( \frac{1}{k_0} \delta M - \delta A \right) \psi_0 }}{\expect{\psi_0^*, M_0 \psi_0}}  } }
 \end{enumerate}
 Interpretations of the $\delta \rho$ equation, 
 \begin{itemize}
@@ -203,28 +203,34 @@ Interpretations of the $\delta \rho$ equation,
 
 \clearpage
 \topic{Relating Adjoint Flux to Neutron Population}
-Recall from the point kinetics that the neutron population is given by, 
+We consider the same problem two ways.
+\begin{enumerate}
+\item From the point kinetics that the neutron population is given by, 
 \begin{align}
-  \ddt N(t) &= \frac{\rho(t) - \Sum_i \beta_i}{\Gamma} N(t) + \Sum_i \lambda_i C_i(t) + Q \\
-  \ddt C_i (t) &= \frac{\beta_i}{\Gamma} N(t) - \lambda_i C_i (t)
+  \ddt N(t) &= \frac{\rho(t) - \Sum_i \beta_i}{\Lambda} N(t) + \Sum_i \lambda_i C_i(t) + Q \\
+  \ddt C_i (t) &= \frac{\beta_i}{\Lambda} N(t) - \lambda_i C_i (t)
 \end{align}
-For reactivity equals zero, 
-\eqn{ \ddt N(t) = Q \Rightarrow N(t) = N_0 + Q(t-t_0)}
-Thus neutron polulation grows linearly in time with an external source (Q = neutrons per second). But consider introducing $Q$ neutrons: at time zero at position, energy, and direction $(\vecr, \Omegahat, E)$ then
-\eqn{ \ddt N(t) &= Q  \delta (t - t_0) \Rightarrow N(\infty) = N_0 + Q x} 
+For criticality $\rho=0$, precursor populations are not changing $\frac{\beta_i}{\Lambda}N(t) = \lambda_i C_i(t)$, hence the RHS of $\ddt N(t)$ only have the source term left, 
+\eqn{ \ddt N(t) = Q}
+That is, for a constant external source $Q$ (unit: neutrons/s), neutron polulation grows linearly in time with $Q$,
+\eqn{  N(t) = N_0 + Q(t-t_0)}
+
+\item Now consider introducing $Q$ neutrons: at time zero at position, energy, and direction $(\vecr, \Omegahat, E)$ then
+\eqn{ \ddt N(t) &= Q  \delta (t - t_0) \Rightarrow N(\infty) = N_0 + Q \cdot X} 
 Or 
-\begin{align}
- \ddt N(t) &= Q \delta (t - t_0) \Rightarrow N(\infty) = N_0 + Q \psi^* (\vecr, \Omegahat, E)  \\
- \Aboxed{\frac{N(\infty) - N_0}{Q} &= \psi^* (\vecr, \Omegahat, E)  }
-\end{align}
-\hi{The adjoint flux is defined as the asymptotic increase in total neutron population of a critical reactor for a neutron introduced a position r, direction omega, and energy E.} The adjoint is only defined for what reaction that we are interested in: in a critical reactor, that is neutron population; in a subcritical system, like the one in detector, then it is whatever purpose, like detector response, that we are interested in. 
+\eqn{ \ddt N(t) &= Q \delta (t - t_0) \Rightarrow N(\infty) = N_0 + Q \psi^* (\vecr, \Omegahat, E)  }
+\end{enumerate}
+
+Combining the two methods, we get
+\eqn{  \Aboxed{\frac{N(\infty) - N_0}{Q} &= \psi^* (\vecr, \Omegahat, E)  } }
+\hi{The adjoint flux is defined as the asymptotic increase in total neutron population of a critical reactor for a neutron introduced a phase space (position $r$, direction $\omega$, and energy $E$).} The adjoint is only defined for what reaction that we are interested in: in a critical reactor, that is neutron population; in a subcritical system, like the one in detector, then it is whatever purpose, like detector response, that we are interested in. 
 
 
 \clearpage
 \topic{Multi-Group Real and Adjoint Flux Equations}
 \begin{align}
-- \gradient D_g (\vecr) \gradient \phi_g(\vecr) + \Sigma_{tg} (\vecr) \phi_g(\vecr) &= \chi_g \Sum_{g'=1}^G \nu \Sigma_{fg'} (\vecr) \phi_{g'}(\vecr) + \Sum_{g'=1}^G \Sigma_{sg'\to g} (\vecr) \phi_{g'}(\vecr) \\
- \gradient D_g (\vecr) \gradient \phi_g^* (\vecr) + \Sigma_{tg} (\vecr) \phi_g^* (\vecr) &= \chi_{g'} \Sum_{g'=1}^G \nu \Sigma_{fg} (\vecr) \phi_{g'}^* (\vecr) + \Sum_{g'=1}^G \Sigma_{sg\to g'} (\vecr) \phi_{g'}^*(\vecr)
+ -\gradient D_g (\vecr) \gradient \phi_g(\vecr) + \Sigma_{tg} (\vecr) \phi_g(\vecr) &= \chi_g \Sum_{g'=1}^G \nu \Sigma_{fg'} (\vecr) \phi_{g'}(\vecr) + \Sum_{g'=1}^G \Sigma_{sg'\to g} (\vecr) \phi_{g'}(\vecr) \\
+ -\gradient D_g (\vecr) \gradient \phi_g^* (\vecr) + \Sigma_{tg} (\vecr) \phi_g^* (\vecr) &= \nu \Sigma_{fg} (\vecr)\Sum_{g'=1}^G \chi_{g'} \phi_{g'}^* (\vecr) + \Sum_{g'=1}^G \Sigma_{sg\to g'} (\vecr) \phi_{g'}^*(\vecr)
 \end{align}
 For two group, infinite medium case, with effective downscatter only, 
 \begin{align}
@@ -233,16 +239,16 @@ For two group, infinite medium case, with effective downscatter only,
 - \Sigma_{12} & \Sigma_{a2} \end{array} \right] 
 \left[ \begin{array}{c}
 \phi_1 \\ \phi_2 \end{array} \right] &= 0  
-&\frac{\phi_2}{\phi_1} &= \frac{\Sigma_{12}}{\Sigma_{a2}}  
-&\kinf &= \frac{\nu \Sigma_{f1} \phi_1 + \nu \Sigma_{f2} \frac{\Sigma_{12}}{\Sigma_{a2}} }{\Sigma_{a1} + \Sigma_{12}}   \\
+&\frac{\phi_2}{\phi_1} &= \frac{\Sigma_{12}}{\Sigma_{a2}}   \\
 \left[ \begin{array}{cc}
 \Sigma_{a1} + \Sigma_{12} - \frac{1}{\kinf^*} \nu \Sigma_{f1} & - \Sigma_{12} \\
 - \frac{1}{\kinf^*} \nu \Sigma_{f2} & \Sigma_{a2} \end{array} \right] 
 \left[ \begin{array}{c}
 \phi_1^* \\ \phi_2^* \end{array} \right] &= 0  
 &\frac{\phi_2^*}{\phi_1^*} &= \frac{\frac{1}{\kinf^*} \nu \Sigma_{f2}}{\Sigma_{a2}}  
-&\kinf^* &= \frac{\nu \Sigma_{f1} \phi_1 + \nu \Sigma_{f2} \frac{\Sigma_{12}}{\Sigma_{a2}} }{\Sigma_{a1} + \Sigma_{12}} 
 \end{align}
+where 
+\eqn{ \kinf^* = \kinf = \frac{\nu \Sigma_{f1} \phi_1 + \nu \Sigma_{f2} \frac{\Sigma_{12}}{\Sigma_{a2}} }{\Sigma_{a1} + \Sigma_{12}} } 
 The above expressions show that knowing cross sections, we know $\kinf$, hence we know $\kinf^* = \kinf$, then we can solve for $\frac{\phi_2^*}{\phi_1^*}$. 
 \end{document}
 
@@ -254,9 +260,9 @@ The above expressions show that knowing cross sections, we know $\kinf$, hence w
 
 \begin{figure}[ht]
   \centering
-  \includegraphics[width=5in]{images/methd/adjoint-weighted-reactivity.png}
+  \includegraphics[width=5.5in]{images/methd/adjoint-weighted-reactivity.png}
   \\
-  \includegraphics[width=5in]{images/methd/adjoint-weighted-reactivity-2.png}
+  \includegraphics[width=5.5in]{images/methd/adjoint-weighted-reactivity-2.png}
   \caption{Adjoint Weighted Reactivity}
 \end{figure}
 

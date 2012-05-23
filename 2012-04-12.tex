@@ -5,37 +5,265 @@
 \maketitle
 
 \lecture{Exam 2 Review}
-\topic{General Background}
+\topic{Most Important Concepts}
 \begin{enumerate}
+\item $\kinf$. $\infty$ depend on integrated cross section only (cross sections that treat pin-cells as homogenized preserve exactly the MC fuel reactivity for infinite repeating lattices):
+  \begin{enumerate}
+  \item One group:  
+  \eqn{ \kinf &= \frac{\nu \bar{\Sigma}_f }{\bar{\Sigma}_a} }
+  \item Two group:
+    \eqn{ \kinf &= \frac{\nu \bar{\Sigma}_{f1} + \nu \bar{\Sigma}_{f2} \frac{\hat{\Sigma}_{s12} }{\bar{\Sigma}_{a2}}}{\bar{\Sigma}_{a1} + \hat{\Sigma}_{s12} }   }
+  \item Material buckling: the most general expression, 
+    \eqn{ B_m^2 = \frac{\frac{\nu \Sigma_f}{\keff} - \Sigma_a}{D} = \frac{\frac{1}{\keff} \frac{\nu \Sigma_f}{\Sigma_a} - 1}{D/\Sigma_a} = \frac{\frac{\kinf}{\keff} - 1}{M^2}  }
+    where $M^2$ is a measurement of the distance traveled before absorption.     If $\keff = 1$, the material buckling is uniquely determined by the cross sections, which gives us the \textit{infinite medium critical buckling}. 
+  \end{enumerate}
 
-\item Material $\kinf$: depend on integrated cross section only (cross sections that treat pin-cells as homogenized preserve exactly the MC fuel reactivity for infinite repeating lattices): 
-  \eqn{ \kinf &= \frac{\nu \bar{\Sigma}_f }{\bar{\Sigma}_a},  
-    &\kinf &= \frac{\nu \bar{\Sigma}_{f1} + \nu \bar{\Sigma}_{f2} \frac{\hat{\Sigma}_{s12} }{\bar{\Sigma}_{a2}}}{\bar{\Sigma}_{a1} + \hat{\Sigma}_{s12} }   }
-
-\item $\keff$: take into account leakage, notice $\keff$ does not depend on volume or flux. The one group and two group expressions are, 
+\item $\keff$: take into account leakage, notice $\keff$ does not depend on volume or flux. 
+  \begin{enumerate}
+  \item One group and two group, 
   \eqn{ \keff &= \frac{\nu \Sigma_f}{DB^2 + \Sigma_a}, &\kinf &= \frac{\nu \bar{\Sigma}_{f1} + \nu \bar{\Sigma}_{f2} \frac{\hat{\Sigma}_{s12} }{D_2 B^2 + \bar{\Sigma}_{a2}}}{D_1 B^2 + \bar{\Sigma}_{a1} + \hat{\Sigma}_{s12} }  } 
+  \item Critical buckling: means $B^2$ is the same for all energy groups. This is a common given condition in two-group diffusion problem.
+  \item Spectral hardening: see Section~\ref{spectral-hardening-section}. As U/H increases, the higher energy ranges become more important, and the peak of the thermal spectrum shifts to the right. Distribution of group-wise absorption shifts towards the higher energy. $1/v$ absorption of U238 becomes more significant. Self-shielding reduces the large resonance absorption fractions.
+  \end{enumerate}
 
-\item Materials bucklings,
-\eqn{ B_m^2 = \frac{\frac{\nu \Sigma_f}{\keff} - \Sigma_a}{D} }
-If $\keff = 1$, the material buckling is uniquely determined by the cross sections. See infinite medium critical buckling for more details. 
+\item Transport equation
+  \begin{enumerate}
+    \item Neutron balance: derived from transport equations (this expression is exact, because we haven't approximate $\vecJ$ yet. ),
+      \eqn{ \divergence \vecJ (\vecr, E) + \Sigma_t (\vecr, E) \phi(\vecr, E) = \Sum_i \int_{E'} \dE' \Sigma_s^i (\vecr, E'\to E) \phi(\vecr, E') + S_0 (\vecr, E) }
 
-\item Geometrical buckling: the allowable values that satisfy the boundary conditions are uniquely determined reactor geometry. See Table~\ref{diffusion-table}. 
-
-\item Infinite medium critical buckling: where migration area $M^2$ is a measurement of the distance travelled before absorption. 
-  \eqn{ B_m^2 = \frac{\nu \Sigma_f - \Sigma_a}{D} = \frac{\frac{\nu \Sigma_f}{\Sigma_a} - 1 }{\frac{D}{\Sigma_a}} = \frac{\kinf - 1}{M^2} }
-
-\item Divergence theorem: $\int_V (\divergence \vec{\phi} ) \dV = \int_S (\vec{\phi} \cdot \vecn) \dS$. In deriving the diffusion theorem from transport theorem, we use the divergence theorem to turn the surface integral into the volume integral,
+    \item Gauss theorem/Divergence theorem: $\int_V (\divergence \vec{\phi} ) \dV = \int_S (\vec{\phi} \cdot \vecn) \dS$. In deriving the diffusion theorem from transport theorem, we use the divergence theorem to turn the surface integral into the volume integral,
   \eqn{ \int \vecJ \cdot \vec{n} \dS = \int \divergence \vecJ \dV }
   From there we use the Fick's law, $\vecJ = - D \gradient \phi$ to get the leakage term $-D \laplacian \phi$. 
 
-\item Laplacian: see Table~\ref{diffusion-table}.
-
-\item Eigenvalues/eigenfunctions: 1D multi-group diffusion equations can be written as a matrix system, and $\keff$ is the eigenvalue of the system, and the flux is the eigenfunction: 
-  \eqn{ [A] [\phi] &= \frac{1}{\keff} [M] [\phi], & [A]^{-1} [M] [\phi] &= \keff [\phi] }
-  If using power iteration, we solve for $[A][\phi]^{n+1} = [M] [\phi]^n$, and $\keff$ can be solved from,
-  \eqn{ \keff = \frac{[M] [\phi]^{n+1} }{[M] [\phi]^n} }
+    \item Anisotropic scattering: we assumed isotropic scattering in lab system to approximate the transport coefficient: 
+      \eqn{ \Sigma_{tr}^i (E) = \Sigma_t^i (E) - \frac{2}{3A^i} \Sigma_s^i (E) }
+  \end{enumerate}
 
 
+\item Diffusion equation
+  \begin{enumerate}
+  \item Coefficient: 
+    \begin{itemize}
+    \item Transport cross section and diffusion coefficients: from the net current equation, assume the scattering is isotropic in the COM system, and use transport correction $P_0$ approximation, 
+      \eqn{ D &= \frac{1}{3 \Sigma_{tr} }, & \Sigma_{tr} &= \Sigma_t - \Sigma_{s1} = \Sigma_t - \frac{2}{3A} \Sigma_s }
+    \item Effective down-scattering cross section: 
+      \eqn{ \hat{\Sigma}_{s12} = \bar{\Sigma}_{s12} - \bar{\Sigma}_{s21} \frac{\phi_2}{\phi_1} }
+      Typically we can assume the up-scattering is zero: $\Sigma_{s21}  = 0$.
+    \item Removal cross section
+      \eqn{ \Sigma_{rg} = \Sigma_{tg} - \Sigma_{sgg} = \Sigma_{ag} + \Sum_{g'=1, g'\neq g}^G \Sigma_{sgg'}  }
+    \end{itemize}
+
+  \item Boundary condition
+    \begin{enumerate}
+    \item Zero flux boundary condition: $\phi(X) = 0$. 
+    \item `Zero Incoming Flux' bc; if integrating over all angles in half space, it gives us `Zero Incoming Partial Current':
+      \eqn{ \left. \psi(\vecr, E, \vecOmega) \right|_{\vecn \cdot \vecOmega < 0} &= 0, & J^- (\vecr_i, E) &= 0}
+      There are two formulism to solve this:
+      \begin{itemize}
+      \item Kord's formulism: 
+        \eqn{ J^- (\vecr, E) &= \frac{1}{4} \phi(\vecr, E) - \frac{1}{2} J_n (\vecr, E)  = 0, & \Aboxed{ \frac{J}{\phi} &= \frac{1}{2} } }
+      \item The more conventional approach is to approximate with extropolation boundary condition: 
+        \begin{align}
+          J^- &= \frac{1}{4} \phi + \frac{D}{2} \gradient \phi_n \\
+          \Aboxed{ \frac{\gradient \phi}{\phi} &= - \frac{1}{2D} = - \frac{3\Sigma_{tr}}{2} = - \frac{1}{d_{\mathrm{extrap}}}} 
+          \mbox{   where } d_{\mathrm{extrap}} = \frac{2}{3 \Sigma_{tr}}  = \frac{2}{3} \lambda_{\mathrm{tr}}
+        \end{align}
+        where $D$ is the property of the material inside, and $\lambda_{tr}$ is transport mean free path. The coefficient before $\lambda_{tr}$ can be 0.711 in other formulism. 
+      \end{itemize}
+    \end{enumerate}
+
+  \item Collapsing coefficients and D: 
+    \eqn{ \bar{\Sigma} &= \frac{\Sum \Sigma \phi}{\Sum \phi} &\bar{D} &= \frac{\Sum D \phi}{\Sum \phi} }
+  \end{enumerate}
+
+\item Multi-group approximation: know how to derive the following two. 
+  \begin{enumerate}
+    \item Scattering matrix: 
+
+    \item Reaction rate preservation
+  \end{enumerate}
+
+\item Analytical solution of one group diffusion equation: 
+  \begin{enumerate}
+  \item Helmholtz: from one-group diffusion equation, we assume spatial constant cross section and use buckling term, 
+  \eqn{ \laplacian \phi(\vecr) + B^2 \phi(\vecr) = 0 }
+  This equation is important in showing that $\phi(\vecr)$ has a constant curvature. 
+
+  \item Laplacian: see Table~\ref{diffusion-table}.
+
+  \item Geometrical buckling: the allowable values that satisfy the boundary conditions are uniquely determined reactor geometry. See Table~\ref{diffusion-table}
+
+  \item Reflector savings: See Section~\ref{critical-reflected-slab}
+
+  \item Eigenvalues/eigenfunctions: 1D multi-group diffusion equations can be written as a matrix system, and $\keff$ is the eigenvalue of the system, and the flux is the eigenfunction: 
+    \eqn{ [A] [\phi] &= \frac{1}{\keff} [M] [\phi], & [A]^{-1} [M] [\phi] &= \keff [\phi] }
+    If using power iteration, we solve for $[A][\phi]^{n+1} = [M] [\phi]^n$, and $\keff$ can be solved from,
+    \eqn{ \keff = \frac{[M] [\phi]^{n+1} }{[M] [\phi]^n} }
+  \end{enumerate}
+
+\item Two group diffusion equations: very simple set-up, continuity conditions, BCs. 
+  \begin{enumerate}
+  \item General expression: 
+    \begin{align}
+      \left\{ \begin{array}{c}
+        - D_1 \laplacian \phi_1 + (\Sigma_{a1} + \Sigma_{s12}) \phi_1 = \nu \Sigma_{f1} \phi_1 + \nu \Sigma_{f2} \phi_2 + S_1  \\
+        - D_2 \laplacian \phi_2 + \Sigma_{a2} \phi_2 = \Sigma_{s12} \phi_1 + S_2
+      \end{array} \right. 
+    \end{align}
+
+  \item Infinite medium: $\laplacian \phi \to 0$ for no leakage,
+    \begin{align}
+      \left\{ \begin{array}{c}
+        (\Sigma_{a1} + \Sigma_{s12} ) \phi_1 = \frac{1}{\kinf} ( \nu \Sigma_{f1} \phi_1 + \nu \Sigma_{f2} \phi_2 )   \\
+        \Sigma_{a2} \phi_2 = \Sigma_{s12} \phi_1
+      \end{array} \right. 
+    \end{align}
+    \begin{align}
+      \left[ \begin{array}{cc} 
+          \frac{\nu \bar{\Sigma}_{f1}}{\kinf} -  \bar{\Sigma}_{a1}  - \hat{\Sigma}_{s12} & \frac{\nu \bar{\Sigma}_{f2}}{\kinf}   \\
+          \hat{\Sigma}_{s12} &  - \bar{\Sigma}_{a2}  
+        \end{array} \right] 
+      \left[ \begin{array}{c} \phi_1 \\ \phi_2 \end{array} \right] = 0
+    \end{align}
+
+  \item Finite medium: has leakage term $DB^2$, 
+    \begin{align}
+      \left\{ \begin{array}{c}
+        (D_1 B^2 + \Sigma_{a1} + \Sigma_{s12} ) \phi_1 = \frac{1}{\keff} ( \nu \Sigma_{f1} \phi_1 + \nu \Sigma_{f2} \phi_2 )  \\
+        (D_2 B^2 +  \Sigma_{a2}) \phi_2 = \Sigma_{s12} \phi_1 
+      \end{array} \right. 
+    \end{align}
+    \begin{align}
+      \left[ \begin{array}{cc} 
+          \frac{\nu \bar{\Sigma}_{f1}}{\keff} - D_1 B^2 -  \bar{\Sigma}_{a1}  - \hat{\Sigma}_{s12} & \frac{\nu \bar{\Sigma}_{f2}}{\keff}   \\
+          \hat{\Sigma}_{s12} &  - D_2B^2 - \bar{\Sigma}_{a2}  
+        \end{array} \right] 
+      \left[ \begin{array}{c} \phi_1 \\ \phi_2 \end{array} \right] = 0
+    \end{align}
+
+  \item Interface conditions: 
+    \begin{enumerate}
+    \item Continuity of scalar flux: 
+      \eqn{ \phi(\vecr_i^-, E) = \phi(\vecr_i^+, E) }
+    \item Continuity of normal current:
+      \eqn{ \vecn \cdot D(\vecr_i^-, E) \gradient \phi(\vecr_i^-, E) = \vecn \cdot D(\vecr_i^+, E) \gradient \phi(\vecr_i^+, E) }
+    \end{enumerate}
+  \end{enumerate}
+
+
+
+\item Numerical solution of 1D diffusion equations\footnote{The most important topic in solving diffusion equations, especially the iterative methods}: See Appendix A \ref{appendixA}.
+\begin{enumerate}
+\item Finite-difference equation: 
+  \begin{align*}
+    - \hat{D}_1^{n-1,n} \phi_1^{n-1} - \hat{D}_1^{n,n+1} \phi_1^{n+1} + [ \Sigma_{r1}^n \Delta^n + \hat{D}_1^{n-1, n} + \hat{D}_1^{n,n+1} ] \phi_1^n 
+    &= \nu \Sigma_{f1}^n \phi_1^n \Delta^n + \nu \Sigma_{f2}^n \phi_2^n \Delta^n + S_1^n \Delta^n \\
+    - \hat{D}_2^{n-1,n} \phi_2^{n-1} - \hat{D}_2^{n,n+1} \phi_2^{n+1} + [\Sigma_{a2}^n \Delta^n + \hat{D}_2^{n-1.n} + \hat{D}_2^{n,n+1} ] \phi_2^n 
+    &= \Sigma_{s12}^n \phi_1^n \Delta^n + S_2^n \Delta^n 
+  \end{align*}
+
+\item Balance equation: 
+
+\item Interface flux: 
+  \eqn{J_n^+ &= - \hat{D}^{n,n+1} (\phi^{n+1} - \phi^n)  & J_n^- &= - \hat{D}^{n-1, n} (\phi^n - \phi^{n-1} ), & \hat{D}^{n,n+1} &= \frac{2 D^n D^{n+1}}{\Delta (D^n + D^{n+1})}   }
+\item BC: 
+  \begin{align}
+    \mbox{Zero Flux BC:} & J_g^N = -D_g^N \frac{ -\phi_g^N - \phi_g^N}{\Delta^N}  = \frac{2 D_g^N}{\Delta^N} \phi_g^N \\
+    \mbox{Zero Incoming Flux BC:} & J_g^N = \frac{2D_g^N}{\Delta^N} \left[ \frac{1}{1 + \frac{4 D_g^N}{\Delta^N}} \right] \phi_g^N 
+  \end{align}
+
+
+\item Matrix form: 
+  \begin{align}
+    \left[ \begin{array}{cc} 
+        [L_1 + D_1 + U_1] & [0] \\
+        -[T_2] & [L_2 + D_2 + U_2] \\
+      \end{array} \right] 
+    \left[ \begin{array}{c}
+        \phi_1 \\ \phi_2 \\ \end{array} \right] 
+    = \left[ {\begin{array}{cc} \left[M_1\right] & \left[M_2\right] \\ \left[0\right] & \left[0\right] \end{array}} \right] 
+    \left[ \begin{array}{c}
+        \phi_1 \\ \phi_2 \\ \end{array} \right] 
+    + 
+    \left[ \begin{array}{c} 
+        S_1 \\ S_2 \\ \end{array} \right] 
+  \end{align}
+  Whose compressed form is, 
+  \eqn{ [A] [\phi] = [M] [\phi] + [S] \label{diffusion-matrix-form} }
+
+\item Direct inversion: take Eq.~\ref{diffusion-matrix-form} and manipulate:
+  \eqn{  [A-M] [\phi] &= [S] &[\phi] &= [A-M]^{-1} [S] }
+  
+\item Fission source iterations: the equation we are trying to solve is,
+\eqn{ [A] [\phi]^{n+1} &= [M] [\phi]^n }
+An initial guess of the flux $\phi_i^{(0)}$ at each point and of the eigenvalue $\lambda^{(0)}$ is made and an initial fission source at each point is constructed $S_i^{(0)} = M \phi_i^{(0)}$. The Gaussian elimination is performed to determine $\phi_i^{(1)} = A^{-1} S_i^{(0)}$. Then we update the source term as well based on the flux. A new estimate of the eigenvalue is made from: 
+\eqn{ \keff = \frac{S_i^{(1)}}{S_i^{(0)}} }
+The process is continued until the eigenvalues obtained on two successive iterates differ by less than a threshold level. The rate our fission source converges depends on material, geometry etc.
+
+\item Gauss-Jacobi flux inner iterations: see screenshot below.
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=5in]{images/dfs/power-iteration-Gauss-Jacobi.png}
+\end{figure}
+
+\item Dominance ratio estimation: 
+Given an eigenvalue problem, if we specify the solved eigenvalues to be:
+\eqn{ |\lambda_1| > |\lambda_2| \ge |\lambda_3| \ge \cdots }
+then $|\lambda_1|$ is the spectral radius of the iteration matrix, and every mode has a dominance ratio,
+\eqn{ \dr_n = \frac{\lambda_n}{\lambda_1} }
+and power iteration kills of the lowest dominance ratio modes. The last remaining mode is the fundamental mode $dr = \frac{\lambda_2}{\lambda_1}$. If $|\lambda_1| \ge 1$, the ietration scheme is unstable and it would not converge. Convergence of the power method is slow when $d$ is close to unity; in fact in most numerical methods, convergence rate = 1 - dominance ratio.
+
+Dominance ratio measures the spatial decoupling, and it depends on: symmetric mode, core size (size $\up$, $\dr \up$, takes longer), decoupling of the radial zones, and of the axial zones. 
+
+\item Order of operations (not included in official list): Matrix inversion is of $N^3$, finding all eigenvalues is at least $N^2$, iterative inversion must be order $N$ to be practical, multi-level iteration is a necessity. 
+\end{enumerate}
+
+
+
+
+\item Fission product equations
+  \begin{enumerate}
+  \item Physics: see the balance equation. 
+    \begin{figure}[ht]
+      \centering
+      \includegraphics[width=4in]{images/dfs/nuclide-balance-equation.png}
+    \end{figure}
+
+  \item Analytic solution first order ODEs: 
+    \begin{align}
+      \dNdt + A(t) N(t) &= Y \\
+      \mbox{IF} &= e^{\int A(t) \dt} = e^{At} \\
+      e^{At} \dNdt + e^{At} A(t) N(t) &= e^{At} Y \\
+      \ddt[e^{At} N(t) ] &= e^{At} Y \\
+      e^{At} N(t) &= A^{-1} e^{At} Y + C 
+    \end{align}
+    Using the particular solution that $N_0 = N(t=0)$, then 
+    \eqn{ N_0 = A^{-1} Y + C \Rightarrow C = N_0 - A^{-1} Y } 
+    \eqn{ e^{At} N(t) = A^{-1} [e^{At} Y - Y ] + N_0 }
+    \eqn{ \boxed{ N(t) = e^{-At} N_0 + e^{-At} A^{-1} [e^{At} Y - Y ] } }
+    We can also write the above differential equation into the matrix form as in Figure~\ref{depletion-matrix}. Notice we asume fission yields, cross sections, and fluxes are constant over the time interval $t_{n-1}, t_n$,
+    \eqn{ [N(t_n)] = e^{-[A] \Delta t_n} [N(t_{n-1})] + e^{-[A]\Delta t_n} [A]^{-1} [e^{[A] \Delta t_n} Y - Y ] }
+    \begin{figure}[ht]
+      \centering
+      \includegraphics[width=5in]{images/dfs/fp-an-matrix-form.png} 
+    \end{figure}
+  \end{enumerate}
+
+\item Nuclide depletion equations: it is exactly the same as the FP equations. 
+  \begin{enumerate}
+  \item Capture: one line off the diagonal term. 
+  \item Beta decay: sits outside of the blocks; they couple the blocks. 
+  \item Matrix construction. 
+  \end{enumerate}
+
+\item Coupled first-order ODEs, matrix solution, look hard to know how to use IF to do 1st order ODE. 
+\end{enumerate}
+
+
+
+\clearpage
+\topic{Fission Product and Fuel Depletion}
+\begin{enumerate}
 \item Fission yields. General properties of fission products: most are highly unstable and rapidly decay; certain fission products are important to thermal spectrum ($\up$ thermal absorption xs, top three are: \ce{^{135} Xe}, \ce{^{103} Rh}, \ce{^{143} Nd}), but have little contribution to the fast spectrum. 
 \begin{figure}[ht]
   \centering
@@ -134,58 +362,6 @@ Sm behaves similar to Xe in the sense that both peaks after reactor shutdown (Sm
 \clearpage
 \topic{Analytical Diffusion Concepts} 
 \begin{enumerate}
-\item Transport cross section and diffusion coefficients: from the net current equation, assume the scattering is isotropic in the COM system, and use transport correction $P_0$ approximation, 
-  \eqn{ D &= \frac{1}{3 \Sigma_{tr} }, & \Sigma_{tr} &= \Sigma_t - \Sigma_{s1} = \Sigma_t - \frac{2}{3A} \Sigma_s }
-
-\item Effective down-scattering cross section: 
-  \eqn{ \hat{\Sigma}_{s12} = \bar{\Sigma}_{s12} - \bar{\Sigma}_{s21} \frac{\phi_2}{\phi_1} }
-  Typically we can assume the up-scattering is zero: $\Sigma_{s21}  = 0$.
-
-\item Removal cross section
-  \eqn{ \Sigma_{rg} = \Sigma_{tg} - \Sigma_{sgg} = \Sigma_{ag} + \Sum_{g'=1, g'\neq g}^G \Sigma_{sgg'}  }
-
-\item Two-group diffusion equations,
-  \begin{enumerate}
-    \item General expression: 
-      \begin{align}
-        \left\{ \begin{array}{c}
-          - D_1 \laplacian \phi_1 + (\Sigma_{a1} + \Sigma_{s12}) \phi_1 = \nu \Sigma_{f1} \phi_1 + \nu \Sigma_{f2} \phi_2 + S_1  \\
-          - D_2 \laplacian \phi_2 + \Sigma_{a2} \phi_2 = \Sigma_{s12} \phi_1 + S_2
-        \end{array} \right. 
-      \end{align}
-
-      \item Infinite medium: $\laplacian \phi \to 0$ for no leakage,
-       \begin{align}
-         \left\{ \begin{array}{c}
-         (\Sigma_{a1} + \Sigma_{s12} ) \phi_1 = \frac{1}{\kinf} ( \nu \Sigma_{f1} \phi_1 + \nu \Sigma_{f2} \phi_2 )   \\
-      \Sigma_{a2} \phi_2 = \Sigma_{s12} \phi_1
-      \end{array} \right. 
-         \end{align}
-      \begin{align}
-        \left[ \begin{array}{cc} 
-            \frac{\nu \bar{\Sigma}_{f1}}{\kinf} -  \bar{\Sigma}_{a1}  - \hat{\Sigma}_{s12} & \frac{\nu \bar{\Sigma}_{f2}}{\kinf}   \\
-            \hat{\Sigma}_{s12} &  - \bar{\Sigma}_{a2}  
-          \end{array} \right] 
-        \left[ \begin{array}{c} \phi_1 \\ \phi_2 \end{array} \right] = 0
-      \end{align}
-
-    \item Finite medium: has leakage term $DB^2$, 
-       \begin{align}
-         \left\{ \begin{array}{c}
-           (D_1 B^2 + \Sigma_{a1} + \Sigma_{s12} ) \phi_1 = \frac{1}{\keff} ( \nu \Sigma_{f1} \phi_1 + \nu \Sigma_{f2} \phi_2 )  \\
-           (D_2 B^2 +  \Sigma_{a2}) \phi_2 = \Sigma_{s12} \phi_1 
-         \end{array} \right. 
-       \end{align}
-      \begin{align}
-        \left[ \begin{array}{cc} 
-            \frac{\nu \bar{\Sigma}_{f1}}{\keff} - D_1 B^2 -  \bar{\Sigma}_{a1}  - \hat{\Sigma}_{s12} & \frac{\nu \bar{\Sigma}_{f2}}{\keff}   \\
-            \hat{\Sigma}_{s12} &  - D_2B^2 - \bar{\Sigma}_{a2}  
-          \end{array} \right] 
-        \left[ \begin{array}{c} \phi_1 \\ \phi_2 \end{array} \right] = 0
-      \end{align}
-
-\end{enumerate}
-
 \item Multi-group diffusion equations: See Section~\ref{multi-group-diffusion}. 
 \begin{align}
 & - \overbrace{\int_{E_g}^{E_{g-1}} \dE \divergence D(\vecr, E) \gradient \phi(\vecr, E)}^{\mbox{leakage/diffusion term }\textcircled{1}} + 
@@ -204,38 +380,14 @@ Cancel the within group scattering cross section and define the group-wise remov
   Albedo coefficient, the coefficient of reflection, is the measurement of how much flux is reflected back: 
   \eqn{ \alpha = \frac{J^-}{J^+} = \frac{\mbox{neutrons reflected back to the core}}{\mbox{neutrons leaving the core}} }
   
-\item Boundary conditions:
-  \begin{enumerate}
-  \item Zero flux boundary condition: $\phi(X) = 0$. 
-  \item `Zero Incoming Flux' bc; if integrating over all angles in half space, it gives us `Zero Incoming Partial Current':
-    \eqn{ \left. \psi(\vecr, E, \vecOmega) \right|_{\vecn \cdot \vecOmega < 0} &= 0, & J^- (\vecr_i, E) &= 0}
-    There are two formulism to solve this:
-    \begin{itemize}
-    \item Kord's formulism: 
-      \eqn{ J^- (\vecr, E) &= \frac{1}{4} \phi(\vecr, E) - \frac{1}{2} J_n (\vecr, E)  = 0, & \Aboxed{ \frac{J}{\phi} &= \frac{1}{2} } }
-    \item The more conventional approach is to approximate with extropolation boundary condition: 
-      \begin{align}
-        J^- &= \frac{1}{4} \phi + \frac{D}{2} \gradient \phi_n \\
-        \Aboxed{ \frac{\gradient \phi}{\phi} &= - \frac{1}{2D} = - \frac{3\Sigma_{tr}}{2} = - \frac{1}{d_{\mathrm{extrap}}}} 
-        \mbox{   where } d_{\mathrm{extrap}} = \frac{2}{3 \Sigma_{tr}}  = \frac{2}{3} \lambda_{\mathrm{tr}}
-      \end{align}
-      where $D$ is the property of the material inside, and $\lambda_{tr}$ is transport mean free path. The coefficient before $\lambda_{tr}$ can be 0.711 in other formulism. 
-    \end{itemize}
-  \end{enumerate}
 
-\item Interface conditions: 
-  \begin{enumerate}
-    \item Continuity of scalar flux: 
-      \eqn{ \phi(\vecr_i^-, E) = \phi(\vecr_i^+, E) }
-    \item Continuity of normal current:
-      \eqn{ \vecn \cdot D(\vecr_i^-, E) \gradient \phi(\vecr_i^-, E) = \vecn \cdot D(\vecr_i^+, E) \gradient \phi(\vecr_i^+, E) }
-  \end{enumerate}
+
 \end{enumerate}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \clearpage
-\topic{Other Diffusion-Related Equations}
+\topic{From Transport to Diffusion}
 \begin{enumerate}
 \item Balance equation derived from transport equations,
   \eqn{ \divergence \vecJ (\vecr, E) + \Sigma_t (\vecr, E) \phi(\vecr, E) = \Sum_i \int_{E'} \dE' \Sigma_s^i (\vecr, E'\to E) \phi(\vecr, E') + S_0 (\vecr, E) }
@@ -488,73 +640,10 @@ This expression is exact, because we haven't approximate $\vecJ$ yet.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \clearpage
-\topic{Numerical Diffusion Theory}
-\begin{enumerate}
-\item Finite-difference diffusion equation: 
-  \begin{enumerate}
-  \item Interface flux: 
-    \eqn{J_n^+ &= - \hat{D}^{n,n+1} (\phi^{n+1} - \phi^n)  & J_n^- &= - \hat{D}^{n-1, n} (\phi^n - \phi^{n-1} ), & \hat{D}^{n,n+1} &= \frac{2 D^n D^{n+1}}{\Delta (D^n + D^{n+1})}   }
 
-  \item Finite-difference equation: 
-    \begin{align*}
-      - \hat{D}_1^{n-1,n} \phi_1^{n-1} - \hat{D}_1^{n,n+1} \phi_1^{n+1} + [ \Sigma_{r1}^n \Delta^n + \hat{D}_1^{n-1, n} + \hat{D}_1^{n,n+1} ] \phi_1^n 
-      &= \nu \Sigma_{f1}^n \phi_1^n \Delta^n + \nu \Sigma_{f2}^n \phi_2^n \Delta^n + S_1^n \Delta^n \\
-      - \hat{D}_2^{n-1,n} \phi_2^{n-1} - \hat{D}_2^{n,n+1} \phi_2^{n+1} + [\Sigma_{a2}^n \Delta^n + \hat{D}_2^{n-1.n} + \hat{D}_2^{n,n+1} ] \phi_2^n 
-      &= \Sigma_{s12}^n \phi_1^n \Delta^n + S_2^n \Delta^n 
-    \end{align*}
-
-  \item BC: 
-    \begin{align}
-      \mbox{Zero Flux BC:} & J_g^N = -D_g^N \frac{ -\phi_g^N - \phi_g^N}{\Delta^N}  = \frac{2 D_g^N}{\Delta^N} \phi_g^N \\
-      \mbox{Zero Incoming Flux BC:} & J_g^N = \frac{2D_g^N}{\Delta^N} \left[ \frac{1}{1 + \frac{4 D_g^N}{\Delta^N}} \right] \phi_g^N 
-    \end{align}
-
-    \item Matrix form: 
-      \begin{align}
-        \left[ \begin{array}{cc} 
-            [L_1 + D_1 + U_1] & [0] \\
-            -[T_2] & [L_2 + D_2 + U_2] \\
-          \end{array} \right] 
-        \left[ \begin{array}{c}
-            \phi_1 \\ \phi_2 \\ \end{array} \right] 
-        = \left[ {\begin{array}{cc} \left[M_1\right] & \left[M_2\right] \\ \left[0\right] & \left[0\right] \end{array}} \right] 
-        \left[ \begin{array}{c}
-            \phi_1 \\ \phi_2 \\ \end{array} \right] 
-        + 
-        \left[ \begin{array}{c} 
-            S_1 \\ S_2 \\ \end{array} \right] 
-      \end{align}
-      Whose compressed form is, 
-      \eqn{ [A] [\phi] = [M] [\phi] + [S] }
-\end{enumerate}
-
-
-\item Fission source iterations: the equation we are trying to solve is,
-\eqn{ [A] [\phi]^{n+1} &= [M] [\phi]^n }
-An initial guess of the flux $\phi_i^{(0)}$ at each point and of the eigenvalue $\lambda^{(0)}$ is made and an initial fission source at each point is constructed $S_i^{(0)} = M \phi_i^{(0)}$. The Gaussian elimination is performed to determine $\phi_i^{(1)} = A^{-1} S_i^{(0)}$. Then we update the source term as well based on the flux. A new estimate of the eigenvalue is made from: 
-\eqn{ \keff = \frac{S_i^{(1)}}{S_i^{(0)}} }
-The process is continued until the eigenvalues obtained on two successive iterates differ by less than a threshold level. The rate our fission source converges depends on material, geometry etc.
-
-\item Gauss-Jacobi flux inner iterations: 
-\begin{figure}[ht]
-  \centering
-  \includegraphics[width=5in]{images/dfs/power-iteration-Gauss-Jacobi.png}
-\end{figure}
-
-\item Dominance ratio estimation: 
-Given an eigenvalue problem, if we specify the solved eigenvalues to be:
-\eqn{ |\lambda_1| > |\lambda_2| \ge |\lambda_3| \ge \cdots }
-then $|\lambda_1|$ is the spectral radius of the iteration matrix, and every mode has a dominance ratio,
-\eqn{ \dr_n = \frac{\lambda_n}{\lambda_1} }
-and power iteration kills of the lowest dominance ratio modes. The last remaining mode is the fundamental mode $dr = \frac{\lambda_2}{\lambda_1}$. If $|\lambda_1| \ge 1$, the ietration scheme is unstable and it would not converge. Convergence of the power method is slow when $d$ is close to unity; in fact in most numerical methods, convergence rate = 1 - dominance ratio.
-
-Dominance ratio measures the spatial decoupling, and it depends on: symmetric mode, core size (size $\up$, $\dr \up$, takes longer), decoupling of the radial zones, and of the axial zones. 
-
-\item Order of operations (not included in official list): Matrix inversion is of $N^3$, finding all eigenvalues is at least $N^2$, iterative inversion must be order $N$ to be practical, multi-level iteration is a necessity. 
-\end{enumerate}
 
 \clearpage
-\topic{Appendix A: Finite Difference 1D Transport Equation}
+\topic{Appendix A: Finite Difference 1D Transport Equation} \label{appendixA}
 In this chapter we are doing a fine-mesh finite difference (example: PDQ, CITATION). 
 \begin{figure}[ht]
   \centering

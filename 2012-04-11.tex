@@ -24,21 +24,40 @@ What happens doing actinide chain construction?
 
 \clearpage
 \topic{Chain Solutions}
-Recall our nuclide balance equation. For this model, we do not have the `direct production by fission' term anymore. \textcolor{red}{aren't Pu produced from fission?} No fission yield term. 
+Recall our nuclide balance equation. For this model, we do not have the `direct production by fission' term anymore.  No fission yield term. 
 
-Insert equations. 
-
-
-Compare fission product matrix form vs. actinides matrix form: 
+Compare fission product matrix form vs. actinides matrix formin Fig.~\ref{fp-an-matrix-form} : 
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=5in]{images/dfs/fp-an-matrix-form.png}
+  \caption{Nuclide Depletion Equations vs. Actinide in Matrix Form} \label{fp-an-matrix-form}
+\end{figure}
 \begin{itemize}
 \item Actinides matrix form has no fission yield term;
 \item Fission product matrix is decoupled; actinide matrix is not; 
 \end{itemize}
-In actinides matrix, blue circles are decay coupling term; a n2n reaction with isotope 2 produces isotopes 1. 
 
 
-There are 4 blocks for the 4 species; the decay terms sit outside of the blocks; they couple the blocks. The capture terms are one line off the diagonal term (NP238 decays so quickly that its capture cross section is zero and is not shown throug the spy function in matlab); We don't have above the diagonal term because we ignore the $n2n$ reaction and the $n \alpha$ reaction. The reason we ignore them is that having a sub-diagonal matrix we can invert analytically; whereas having a full matrix is a lot harder to invert. Another simplification we made is to ignore all meta-stable states and only have the ground states, hence ignoring branching. 
+More specifically, we focus on the actinides matrix, and notice: blue circles are decay coupling term; a n2n reaction with isotope 2 produces isotopes 1. 
 
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=5in]{images/dfs/nuclide-depletion-matrix-form.png}
+  \caption{Nuclide Depletion Equations vs. Actinide in Matrix Form} \label{nuclide-depletion-matrix} 
+    \end{figure}
+
+
+There are 4 blocks for the 4 species as in Fig.~\ref{actinide-block}. 
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=5in]{images/dfs/actinide-block.png}
+  \caption{Matrix Shape for Actinide Depletion Equations} \label{actinide-block} 
+    \end{figure}
+\begin{itemize}
+\item The decay terms sit outside of the blocks; they couple the blocks.
+\item  The capture terms are one line off the diagonal term (NP238 decays so quickly that its capture cross section is zero and is not shown throug the spy function in matlab); 
+\item We don't have above the diagonal term because we ignore the $n2n$ reaction and the $n \alpha$ reaction. The reason we ignore them is that having a sub-diagonal matrix we can invert analytically; whereas having a full matrix is a lot harder to invert. Another simplification we made is to ignore all meta-stable states and only have the ground states, hence ignoring branching. 
+\end{itemize}
 
 \clearpage
 \topic{Understanding Results}
