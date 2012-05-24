@@ -111,10 +111,28 @@
 \end{enumerate}
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\clearpage
+\topic{2012 Qualify Exam Problems}
+\begin{enumerate}
+\item General knowlege.
+\begin{enumerate}
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=6in]{images/qual/general_knowledge.png}
+\end{figure}
+\item 
+
+\item Fission cross section at 0.1eV and 300K for \ce{U^{235}} is 250b, for \ce{Pu^{239}} is about 475b. 
+
+\item The pdf is a flat distribution, so it is equally likely to get anywhere below 1.0 MeV, then the change of below 100 keV is 100 keV/1 MeV = 10\%. 
+
+\item 
+
+
+\end{enumerate}
 
 \clearpage
-\topic{2011 Qualify Exam Problems}
-\begin{enumerate}
 \item Steady-state problems. 
 \begin{enumerate}
 \begin{figure}[ht]
@@ -189,9 +207,30 @@ Then we can solve for $B^2$ given $\keff = 1$.
     \item Fast energy: flux in the fuel region is cos shape, and suddenly drop to 0 at the interface because the Reflectonium has an infinite large absorption cross section in fast energy. 
     \item Thermal energy: Reflectonium is a perfect reflector for the thermal region, hence the flux's slope should approach zero at the interface. 
   \end{itemize}
+\end{enumerate}
 
+
+\clearpage
+\item Transient Reactor Analysis.
+\begin{enumerate}
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=6in]{images/qual/transient.png}
+\end{figure}
+\item $\displaystyle \rho = \frac{\keff - 1}{\keff}, \Lambda = \frac{1}{v \nu \Sigma_f}.
+$
+\item $\Lambda$ is prompt neutron lifetime, $\lambda$ is decay constant. 
+\item We use the inhour equation, and can ignore the $\omega \Lambda$ term can go away because $\Lambda$ is so small, 
+  \eqn{ \rho &= \omega \Lambda + \Sum_i \frac{\beta_i \omega}{\omega + \lambda_i} \approx \Sum_i \frac{\beta_i \omega}{\omega + \lambda_i} }
+  Because we only have one group cross section, 
+  \eqn{ \rho = 0.1 \beta = \frac{\beta \omega}{\omega + \lambda}}
+  where $\lambda = \frac{\ln 2}{\tau}$. Thus $\omega = 7.7 \times 10^{-3}, T = \frac{1}{\omega} = 130$s. 
+\item We use prompt jump approximation, 
+  \eqn{ \frac{T(0^+)}{T_0} = \frac{\beta}{\beta - \rho} = \frac{\beta}{\beta - 0.1 \beta} = 1.111}
 
 \end{enumerate}
+
+
 \end{enumerate}
 %%%%%%%%%%%%%%%%%%%%%%%%% Qualify Exam End %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 

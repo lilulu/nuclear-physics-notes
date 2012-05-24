@@ -54,8 +54,11 @@ Then we replace $P_{f\to m} = 1 - P_{f\to f}$ and get,
 Divide both sides by the number of neutrons, we get a balance equation in unit of cross section:
 \eqn{ \sigma_{t}^F (u) \phi_f (u) = \sigma_{pot}^F P_{f\to f} +  \sigma_{t}^F (1 - P_{f\to f}) }
 That is, if we know $P_{f\to f}$, we can solve for the spatially averaged energy shape of the flux in the fuel. 
+\end{enumerate}
 
-\item Wigner's Approximation of $P_{f\to f}$, Obtaining $\phi_f(u)$.
+\clearpage
+\subtopic{Wigner's Approximation of $P_{f\to f}$}
+ Obtaining $\phi_f(u)$.
 In this section we compute numerically the fuel-to-fuel first flight collision probability $P_{f\to f}$, hence obtaining an expression for the heterogeneous energy shape of flux in fuel $\phi_f(u)$. 
 
 Wigner approximates $P_{f\to f}$ in terms of the mean chord length $l$: 
@@ -68,19 +71,15 @@ $P_{f\to f}$ simplifies to,
 \eqn{ P_{f\to f} = \frac{\sigma_{t,f} (u)}{\sigma_{t,f} (u) + \sigma_e} }
 Hence $\phi_f(u)$ can be written as, 
 \eqn{ \boxed{ \phi_f (u) = \frac{\sigma_{pot, f} + \sigma_e}{\sigma_{t,f} (u) + \sigma_e } = \frac{\sigma_{pot, f} + \sigma_e}{\sigma_{r,f} (u) + \sigma_{pot, f} + \sigma_e} } }
-
-
-
-\item \hi{Heterogeneous/Homogeneous Equivalence} suggests that the effects of heterogeneity are equivalent to some dilution cross section in a homogeneous mixture:
+\hi{Heterogeneous/Homogeneous Equivalence} suggests that the effects of heterogeneity are equivalent to some dilution cross section in a homogeneous mixture:
 \begin{align}
 \mbox{Homogeneous mixture energy shape of flux } \phi(u) &= \frac{\sigma_{pot, f} + \sigma_d}{\sigma_{r,f} (u) + \sigma_{pot, f} + \sigma_d}   & \sigma_d &= \frac{N_m \sigma_m}{N_r}  \\
 \mbox{Heterogeneous energy shape of flux in the fuel } \phi_f(u) &= \frac{\sigma_{pot, f} + \sigma_e}{\sigma_{r,f} (u) + \sigma_{pot, f} + \sigma_e}   & \sigma_e &= \frac{S_f}{4 V_f N_r} 
 \end{align}
 
-\uline{Example: calculate corresponding cross sections.} Given a PWR with a 0.41 cm radius pellet, \ce{^{238}U} number density of $4.0 \times 10^{22} \cm^{-3}$, enriched to 3\%, and fuel density is 10 g/cc. 
-
-\textbf{Answer:} 
-If the system is homogeneous uranium and hydrogen, then the dilution cross section looks like:
+\textbf{Example: calculate corresponding cross sections.} Given a PWR with a 0.41 cm radius pellet, \ce{^{238}U} number density of $4.0 \times 10^{22} \cm^{-3}$, enriched to 3\%, and fuel density is 10 g/cc. 
+\begin{itemize}
+\item If the system is homogeneous uranium and hydrogen, then the dilution cross section looks like:
 \eqn{ \sigma_d &=  \frac{N_m \sigma_m}{N_r}  = \frac{1}{0.2} 20 \fsp \barn = 100 \fsp \barn/\mbox{resonance atom} }
 If the system is 2 region, and we homogeneous the fuel region, then
 \begin{align}
@@ -89,37 +88,57 @@ If the system is 2 region, and we homogeneous the fuel region, then
 \sigma_b^{het} &= \sigma_b^{hom} + \sigma_e = 64 \fsp \barn \\ 
 \sigma_s^F &= \sigma_{pot}^R + \sigma_b^{hom} = \sigma_{pot}^{238} + 0.05 \sigma_{pot}^{235} + 2 \sigma_{pot}^O = 11.4 + 0.05 (11.3) + 2 (4.0) = 20 \fsp \barn 
 \end{align} 
+\end{itemize}
 
-
-\item Bell's Refinements of the Wigner's Collision Probability. Bell Factor $b$ can be read off a plot given opacity (average chord times total cross section) and geometry (eg: homogeneous medium, infinite plate, sphere etc). It is then used to approximate $P_{f\to f}$ and hence $\phi_f(u)$:
+\clearpage
+\subtopic{Bell's Refinements of the Wigner's Collision Probability}. 
+Bell Factor $b$ can be read off a plot given opacity (average chord times total cross section) and geometry (eg: homogeneous medium, infinite plate, sphere etc). It is then used to approximate $P_{f\to f}$ and hence $\phi_f(u)$:
 \eqn{ P_{f\to f} &= \frac{\sigma_{t,f} (u)}{b \sigma_e + \sigma_{t,f} (u)}  & \phi_f(u) &=\phi_f (u) = \frac{\sigma_{pot, f} + b \sigma_e}{\sigma_{t,f} (u) + b \sigma_e }  }
 Bell's refinement does nothing to the infinite opacity case, but could be a factor of 50\% or even a factor of 3 difference as opacity approaches zero. 
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=3.5in]{images/r-m/bell.png}
+  \caption{Bell's Factor for Various Geometris} \label{bell}
+\end{figure}
 
-\item Arrays of Rods, Dancoff Factor.
+\clearpage
+\subtopic{Arrays of Rods, Dancoff Factor}
 Notice our model so far is an isolated pin (that is, a fuel pin surrounded by an almost infinite moderator). Now we are going to discuss arrays of rods. The major difference is that not all neutrons leaving a fuel pin would have their next interaction in the moderator. 
 
 We hence define the \hi{Dancoff Factor C}:
 \eqn{ C = 1 - \frac{ \left. P_{f\to f} \right|_{\mbox{isolated rods}}}{ \left. P_{f\to f} \right|_{\mbox{arrays of rods}}}   }
-To find the Dancoff factor for a system, we can look it up on a plot using the radius of the rods (in units of mean free path) and the lattice size/radius of rods. If the moderator is opaque, the Dancoff factor becomes zero; if transparent, the Danoff factor trends to 1.0. LWRs typically have a C of 0.3. 
+$C$ depends on: the radius of the rods (in units of mean free path) and the lattice size/radius of rods, as plotted in Fig.~\ref{dancoff}. 
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=4in]{images/r-m/dancoff.png}
+  \caption{Dancoff Factor} \label{dancoff}
+\end{figure}
+\textbf{Notice if the moderator is opaque, the Dancoff factor becomes zero; if transparent, the Danoff factor trends to 1.0.}  LWRs typically have a C of 0.3. 
 \eqn{ P_{f\to f}  = \frac{\sigma_{t,f} (u)}{\frac{(1-C)b}{(1-C) + Cb} \sigma_e + \sigma_{t,f} (u)}  } 
 C changes the coefficient in front of the escape cross section from $\sigma_e \to \frac{(1-C)b}{1-C + Cb} \sigma_e$. For a typical PWR pin, that is reduced by 0.7 to 0.8.
 
-\uline{Example: Find Dancoff Factor} Given water at 1 g/cc with a number density of $6.6 \times 10^{24}$ H atoms/cc, hydrogen xs of 20 barns, a PWR pin with 0.41 cm radius, a lattice pitch of 1.26cm. 
-
-\textbf{Answer:} we first find the mean free path: 
+\textbf{Example: Find Dancoff Factor.} Given water at 1 g/cc with a number density of $6.6 \times 10^{24}$ H atoms/cc, hydrogen xs of 20 barns, a PWR pin with 0.41 cm radius, a lattice pitch of 1.26cm. 
+\begin{itemize}
+\item We first find the mean free path: 
 \eqn{ mfp = \frac{1}{\Sigma} = \frac{1}{N \sigma} =  \frac{1}{0.066 \times 10^{24} \times  20 \times 10^{-24}} =  0.76 \cm }
 Then we find the parameter one, pellet radius over mfp = $\frac{0.41 \cm}{0.76 \cm}  = 0.54$, the other parameter is the lattice size over pellet radius $\frac{1.26 \cm}{0.41 \cm} = 3.07$. Using these two parameters, we can read off the plot that $C = 0.3$. For a Bell factor of about 1.1, the escape xs is reduced by,
 \eqn{ \frac{ (1-C)b}{(1-C) + Cb} = 0.774} 
+\end{itemize}
 
-\item Carlvik's Refinements of the Bell's Collision Probability.
-\begin{figure}
-  \centering
-  \includegraphics[width=4in]{images/r-m/Carlvik-refinement.png}
-  \caption{Definition and Properties of Calvik's Refinement} \label{Calvik}
-\end{figure}
 
-Carlvik's two-term approximation is what is actually used in production tools nowaday. To use it, we essentially look up the resonance integral (or group xs) twice, once with $\sigma_e$ multiplied by $\alpha_1$ and the second time with $\sigma_e$ multiplied by $\alpha_2$, each of them are simple functions of the Dancoff factor. To double check, we let Dancoff factor to go to 1, and there should be no escape from the fuel; let Dancoff factor go to 0, we should get isolated rod. 
+\clearpage
+\subtopic{Carlvik's Refinements of the Bell's Collision Probability}
+\eqn{ P_{ff} \approx \frac{\beta \sigma_{t,f}}{\alpha_1 + \sigma_e + \sigma_{t,f}} + \frac{(1-\beta) \sigma_{t,f}}{\alpha_2 \sigma_e + \sigma_{t,f}} }
+where
+\eqn{ \alpha_1 &= \frac{5A+6 - \sqrt{A^2 + 36A + 36}}{2(A+1)}, &\alpha_2 &= \frac{5A+6 + \sqrt{A^2 + 36A + 36}}{2(A+1)} &\beta&= \frac{\frac{4A+6}{A+1} - \alpha_1}{\alpha_2 - \alpha1} &A&= \frac{1-C}{C} }
+Carlvik's two-term approximation is what is actually used in production tools nowaday. To use it, we essentially look up the resonance integral (or group xs) twice, once with $\sigma_e$ multiplied by $\alpha_1$ and the second time with $\sigma_e$ multiplied by $\alpha_2$, each of them are simple functions of the Dancoff factor: 
+\eqn{ \RIeff = \beta \int_{u1}^{u2} \sigma_r (u) \frac{\sigma_{pot, f} + \alpha_1 \sigma_e}{\sigma_{r,f}(u) + \sigma_{pot, f} + \alpha_1 \sigma_e} \du + (1-\beta) \int_{u1}^{u2} \sigma_r (u) \frac{\sigma_{pot,f} + \alpha_2 \sigma_e}{\sigma_{r,f}(u) + \sigma_{pot,f} + \alpha_2 \sigma_e} \du }
+To double check, 
+\begin{itemize}
+\item $C\to 1, \alpha_1 \to 0, \beta \to 1$, e.g., there is no escape from fuel.
+\item $C\to 0, \alpha_1 \to 2, \alpha_2 \to 3, \beta \to 2$, e.g., isolated rod.
+\item FOr intermediate values of $C$, each coefficient is a monotonic function.
+\end{itemize}
 
-\end{enumerate}
 
 \end{document}

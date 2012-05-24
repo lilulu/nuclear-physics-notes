@@ -248,7 +248,7 @@ For two group, infinite medium case, with effective downscatter only,
 &\frac{\phi_2^*}{\phi_1^*} &= \frac{\frac{1}{\kinf^*} \nu \Sigma_{f2}}{\Sigma_{a2}}  
 \end{align}
 where 
-\eqn{ \kinf^* = \kinf = \frac{\nu \Sigma_{f1} \phi_1 + \nu \Sigma_{f2} \frac{\Sigma_{12}}{\Sigma_{a2}} }{\Sigma_{a1} + \Sigma_{12}} } 
+\eqn{ \kinf^* = \kinf = \frac{\nu \Sigma_{f1}  + \nu \Sigma_{f2} \frac{\Sigma_{12}}{\Sigma_{a2}} }{\Sigma_{a1} + \Sigma_{12}} } 
 The above expressions show that knowing cross sections, we know $\kinf$, hence we know $\kinf^* = \kinf$, then we can solve for $\frac{\phi_2^*}{\phi_1^*}$. 
 \end{document}
 
@@ -257,17 +257,18 @@ The above expressions show that knowing cross sections, we know $\kinf$, hence w
   \includegraphics[width=5in]{images/methd/adjoint-spec.png}
   \caption{PWR Lattice Adjoint Spectrum}
 \end{figure}
+We are also interested in adjoint weighted reactivity expression as in Fig.~\ref{adjoint-weighted-reactivity}. Recall that PKE assumes flux shape does not change with respect with time. We use adjoint flux weighted PKE to account for the flux change. \hi{$\beta$ is very sensitive to adjoint flux.} 
 
 \begin{figure}[ht]
   \centering
   \includegraphics[width=5.5in]{images/methd/adjoint-weighted-reactivity.png}
   \\
   \includegraphics[width=5.5in]{images/methd/adjoint-weighted-reactivity-2.png}
-  \caption{Adjoint Weighted Reactivity}
+  \caption{Adjoint Weighted Reactivity} \label{adjoint-weighted-reactivity}
 \end{figure}
 
 \begin{figure}[ht]
   \centering
   \includegraphics[width=5in]{images/methd/beta-effective.png}
-  \caption{LWR Beta Effective}
+  \caption{LWR Beta Effective and I-bar}
 \end{figure}

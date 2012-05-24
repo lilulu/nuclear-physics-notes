@@ -5,10 +5,9 @@
 \maketitle
 
 
-\clearpage
-\topic{Exam 3 Re-cap}
+\lecture{Exam 3 Review}
 \begin{enumerate}
-\item Delayed neutrons concepts\footnote{not on official review sheet}: 
+\item Delayed neutrons concepts: 
   \begin{itemize}
   \item Burst measurement: prompt neutrons; saturated: total neutrons. 
   \item Dominant FP that emits delayed neutrons: Br-37. 
@@ -36,22 +35,23 @@
             + \! \Sum_j \left( \! \chi_p^j (E) (1 \! - \! \beta^j) +  \! \Sum_i \chi_d^i (E) \beta_i^j \! \right) \! \int \bsp \nu \Sigma_f^j  S \dE'  }{\int \bsp \dE \int \bsp \dr \Sum_j \left( \chi_p^j (E) (1-\beta^j) + \Sum_i \chi_d^i (E) \beta_i^j \right) \int \bsp \nu \Sigma_f^j S \dE'} 
         \end{align}
         \normalsize
-        \eqn{ \Aboxed{ \rho(t) &= \frac{\keff - 1.0}{\keff}  } }
+        \eqn{  \rho(t) &= \frac{\keff - 1.0}{\keff}  } 
 
       \item The delayed neutron fraction, 
         \begin{align}
           \beta_i (t) &= \frac{\int \bsp \dE \int \bsp \dr \left[ \Sum_j \chi_d^j (E) \beta^j \int_0^{\infty} \nu \Sigma_f^j (\vecr, E', t) S(\vecr, E') \dE' \right] }{\int \bsp \dE \int \bsp \dr \Sum_j \left( \chi_p^j (E) (1-\beta^j) + \Sum_i \chi_d^i (E) \beta_i^j \right) \int \bsp \nu \Sigma_f^j S \dE'} 
         \end{align}
 
-      \item Prompt neutron lifetime, 
+      \item Prompt neutron lifetime, which is $\sim 1/v$ of shape divided by almost-instantenous-fission-rate. 
+
         \begin{align}
           \Lambda (t) &= \frac{\int \bsp \dE \int \bsp  \dr \left[ \frac{1}{v} S(\vecr, E) \right] }{\int \bsp \dE \int \bsp \dr \Sum_j \left( \chi_p^j (E) (1-\beta^j) + \Sum_i \chi_d^i (E) \beta_i^j \right) \int \bsp \nu \Sigma_f^j S \dE'} 
         \end{align}
         \eqn{ \Aboxed{ \Lambda(t) &\approx \frac{1}{v \nu \Sigma_f} \xrightarrow{\mathrm{criticality}} \frac{1}{v \Sigma_a} } }
-        The prompt neutron life $\Gamma \sim 1/v$ of shape divided by almost-instantenous-fission-rate. 
+
       \item The $i$-th precursor, 
         \eqn{ C_i (t) = \int \dE \int \dr C_i (\vecr, t) }
-      \item The total eternal source, 
+      \item The total external source, 
         \eqn{ Q(t) = \int \dE \int \dr Q (\vecr, t) }
       \end{enumerate}
 
@@ -75,7 +75,8 @@
     \item Asymptotic periods: we can only use Inhour equation for asymptotic period, that is, a stable condition indicated by a constant period. Thus to use Inhour equation, we have to make the reactor stable first. For any time dependent problem, we have to use the more general IK. 
   \end{enumerate}
 
-\item Reactivity units
+\item Reactivity units: 
+
 \begin{table}[ht]
   \centering
   \begin{tabular}{|c|c|c|} \hline
@@ -110,7 +111,7 @@ where $[A] = \mathrm{diag}[\lambda_i], [Y(t)] = \frac{\mathrm{diag}[\beta_i]}{\L
     \item Temperature behavior, Doppler coefficients. We can find the temperature when $P(t)$ returns to $P_0$ to be,     
       \eqn{ \Aboxed{ T_{fuel}^{end} &= \frac{2 (\rho_{rod} - \beta)}{\alpha} + T_{fuel}^0 } }
 
-    \item More take-away messages:
+    \item Take-away messages:
       \begin{itemize}
       \item $\Delta T_{fuel}^{end} = 2 \Delta T_{fuel}^{peak}$. 
       \item F-N model is a good estimation because temperature is basically integrated power, hence the speed of reactivity insertion does not matter, it is the amount of reactivity inserted over time that matters. 
@@ -121,11 +122,10 @@ where $[A] = \mathrm{diag}[\lambda_i], [Y(t)] = \frac{\mathrm{diag}[\beta_i]}{\L
 
 \item Transient feedback effects
   \begin{enumerate}
-  \item Time constants. 
+  \item Time constants: recall the asymptotic power decay time constant is just that of the longest precursor. 
   \item Power level changes: power overshoot is proportional to the reactivity change rate, but not the asymptotic value. 
   \end{enumerate}
 
-\clearpage
 %%%%%%%%%%%%%%%%%% Nodal %%%%%%%%%%%%%%%%%%%%
 \item Nodal methods\footnote{weighted residual is not on the final}. The point of Nodal methods is that we can achieve high accuracy with large node size (compared with finite difference methods). We turn a 3D PDE into 3 1D ODE that are coupled through averaged transverse leakage terms. 
     \begin{align*}
@@ -180,9 +180,9 @@ where $[A] = \mathrm{diag}[\lambda_i], [Y(t)] = \frac{\mathrm{diag}[\beta_i]}{\L
 
 \clearpage
 %%%%%%%%%%%%%%%%%%% Homogenenization methods %%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Homogenization methods \footnote{discontinuity factors are very important!}
+\item Homogenization methods
   \begin{enumerate}
-    \item Discontinuity factors: since the homogenized flux distribution in each node is affected by $D$, and the choice of the flux weighted $D$ is somewhat arbitrary, the interface fluxes can be different. We define DF: 
+    \item \textbf{Discontinuity factors}: since the homogenized flux distribution in each node is affected by $D$, and the choice of the flux weighted $D$ is somewhat arbitrary, the interface fluxes can be different. We define DF: 
       \eqn{ f_{gi,j}^{u-} &= \frac{\phi_{gi,j}^u (u_l)}{\hat{\phi}_{gi,j}^u (u_l)}, &f_{gi,j}^{u+} &= \frac{\phi_{gi,j}^u (u_{l+1})}{\hat{\phi}_{gi,j}^u (u_{l+1})} }
       ADFs are the homogeneous analogy to the heterogeneous assembly calculation (which is calculating a single-node problem with zero net current BC). ADFs are simply ratios of the surface-averaged fluxes to the cell-averaged fluxes in the heterogeneous assembly calculation.
 
@@ -211,7 +211,7 @@ where $[A] = \mathrm{diag}[\lambda_i], [Y(t)] = \frac{\mathrm{diag}[\beta_i]}{\L
       \item  The reconstructed corner point fluxes are then continuous. \textbf{CP ratio is the corner point analogue of ADF for assembly edges.}
       \end{itemize}
   \end{enumerate}
-
+  Side note: there are two entirely different problems. One is an eigenvalue problem, using homogenized cross section, and output $k$, and the flux computed would be continuous. The other is a fixed-source problem, using $\keff$ as input (hence $J$ at interface), and generate discontinuous flux. 
 
 
 \clearpage
@@ -249,7 +249,7 @@ Plug the above approximation into Eq.~\ref{pertb3} and simplify, we reach the FO
       &\frac{\phi_2^*}{\phi_1^*} &= \frac{\frac{1}{\kinf^*} \nu \Sigma_{f2}}{\Sigma_{a2}}  
     \end{align}
     where 
-    \eqn{ \kinf^* = \kinf = \frac{\nu \Sigma_{f1} \phi_1 + \nu \Sigma_{f2} \frac{\Sigma_{12}}{\Sigma_{a2}} }{\Sigma_{a1} + \Sigma_{12}} } 
+    \eqn{ \kinf^* = \kinf = \frac{\nu \Sigma_{f1} + \nu \Sigma_{f2} \frac{\Sigma_{12}}{\Sigma_{a2}} }{\Sigma_{a1} + \Sigma_{12}} } 
     In the above example, we effectively have $M \phi = 0, M^* \phi^* = 0$, and by definition, the adjoint of Hermitean conjugate of a mtatrix is just complex-conjugating each of its element and then transposing, 
     \eqn{ M^* = \left[ \begin{array}{cc} a_{11} & a_{12} \\ a_{21} & a_{22} \end{array} \right]^* = \left[ \begin{array}{cc} a_{11}^* & a_{12}^* \\ a_{21}^* & a_{22}^* \end{array} \right]^T = \left[ \begin{array}{cc} a_{11}^* & a_{21}^* \\ a_{12}^* & a_{22}^* \end{array} \right] }
  

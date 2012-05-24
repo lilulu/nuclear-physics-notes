@@ -105,7 +105,7 @@ In steady-state transport or diffusion equation, we do not treat delayed neutron
 \eqn{ \Aboxed{ \rho(t) &= \frac{\keff - 1.0}{\keff}  } }
 
 
-\item The delayed neutron fraction, 
+\item The delayed neutron fraction (notice although this is called delayed neutron fraction, there is $\chi_p^j(E)$ term in it), 
 \begin{align}
 \beta_i (t) &= \frac{\int \bsp \dE \int \bsp \dr \left[ \Sum_j \chi_d^j (E) \beta^j \int_0^{\infty} \nu \Sigma_f^j (\vecr, E', t) S(\vecr, E') \dE' \right] }{\int \bsp \dE \int \bsp \dr \Sum_j \left( \chi_p^j (E) (1-\beta^j) + \Sum_i \chi_d^i (E) \beta_i^j \right) \int \bsp \nu \Sigma_f^j S \dE'} 
 \end{align}
@@ -228,7 +228,7 @@ To estimate the prompt jump, we do the prompt jump approximation (easy to do in 
 T(0^+) &= \frac{\Lambda \lambda}{\beta - \rho} C(0^+) = \frac{\Lambda \lambda}{\beta - \rho} \left[ \frac{\beta}{\Lambda \lambda} T_0 \right] \\
 \Aboxed{ \frac{T(0^+)}{T_0} &= \frac{\beta}{\beta - \rho} }
 \end{align}
-Example: given a reactivity change of $-0.1\beta$, the prompt jump is $\frac{T(0^+)}{T_0} = \frac{\beta}{\beta - 0.1 \beta} = 1.111$. 
+Example: given a reactivity change of $0.1\beta$, the prompt jump is $\frac{T(0^+)}{T_0} = \frac{\beta}{\beta - 0.1 \beta} = 1.111$. 
 
 \subtopic{In-hour Equations: The Simpliest Inverse Kinetics Application}
 From the PKEs as in Eq.~\ref{in-hour}, we can derive the In-hour Equation. We assume the solution is in the form of,

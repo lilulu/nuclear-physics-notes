@@ -55,11 +55,10 @@
   \begin{enumerate}
     \item Infinite media: In infinite medium, the flux shape near resonance depends only on the ratio of the number density of the moderator to the resonance absorber and the moderator cross section. The absolute numbers are not needed until we move into a finite medium and start to worry about leakage. \textbf{2012 Spring Exam 1, \#14}, the infinite dilute microscopic absorption cross section is (similarly any infinitely dilute group cross section), 
       \eqn{ \expect{\sigma} &= \frac{\int_{E_1}^{E_2} \sigma(E) \phi(E) \dE}{\int_{E_1}^{E_2} \phi(E) \dE} = \frac{\int_{E_1}^{E_2} \sigma(E) \frac{1}{E} \dE}{\int_{E_1}^{E_2} \frac{1}{E}  \dE} = \frac{RI}{\ln\left(\frac{E_2}{E_1} \right)} }
-
-    \item Dilution factors: dilution cross section, 
+      Infinite dilute implies that here is no neutrons being absorbed by the resonances. Recall that in HW2 when our U/H is small, the flux is not perturbed by U238 resonances at all, suggesting that the resonance escape probability is one. [1]
+    \item Dilution factors/dilution cross section/background cross section, 
       \eqn{ \sigma_d = \frac{N_m \sigma_m}{N_r} }
-
-
+      where $r$ is most likely a scatter. 
 
     \item Resonance Integral
       \begin{enumerate}
@@ -70,17 +69,11 @@
       \item RI represents the average absorption xs characterizing the resonance, averaged over the flux within the resonance. It is sort of like the averaged reaction rate, or collision density. 
         
       \item Relating to $\sigma_g, \sigma_d$: 
-        \eqn{ \RIeff &= \sigma_g \ln{\frac{E_2}{E_1}}  & \RIeff^{u1\to u2} &= \int_{u1}^{u2} \sigma_a^R (u) \frac{\sigma_d}{\sigma_a^R(u) + \sigma_d} \du  }
-
-      \item As temperature increases, $\RIeff$ increases becasue the broadened resonance increases the energy range over which abosprtion occurs. There is less flux depression, whereas the area under the cross section is about the same, result in an increase in the $\RIeff$. \textbf{Spring 2012 Exam 1 \#16:} the infinite dilute RI is independent of temperature because in Doppler broadening the area under the resonance is constant. 
-
-      \item As U/H increases, $\RIeff$ decreases because of energy self-shielding: as U/H increases, more and more self-shielding, the flux is more depressed, result in smaller $\RIeff$. A second consequence is that the higher energy range becomes more important. See Section~\ref{spectral-hardening-section}. 
+        \eqn{ \RIeff &= \sigma_g \ln \left(\frac{E_2}{E_1} \right)  & \RIeff^{u1\to u2} &= \int_{u1}^{u2} \sigma_a^R (u) \frac{\sigma_d}{\sigma_a^R(u) + \sigma_d} \du  }
 
       \item Narrow resonance $\RIeff$ approximation: assume any scattering with the resonant material scatters neutrons below the resonance energy. 
         \textbf{Spring 2012 Exam 1 \#18}, assuming $1/E$ spectrum, homogeneous mixture of a scattering material and a resonance absorpting material. 
         \eqn{ \RI_{NR} = \int_{E_1}^{E_2} \sigma_r (E) \frac{\sigma_{pr} + \sigma_d}{\sigma_r(E) + \sigma_{pr} + \sigma_d} \frac{1}{E} \dE = \sigma_r \frac{\sigma_{pr} + \sigma_d}{\sigma_r + \sigma_{pr} + \sigma_d} \ln \left(\frac{E_2}{E_1} \right) }        
-        where the \uline{background/dilution cross section} for a homogeneous system is (where the underscript $m$ most likely means scattering), 
-        \eqn{ \sigma_d = \frac{N_m}{N_r} \sigma_m  }
         
       \item Wide resonance $\RIeff$ approximation: assume scattering with the resonance material leaves the neutron within the resonance energy and they will be absorbed. \textbf{Spring 2012 Exam 1 \#19}.
         \eqn{ \RI_{WR} = \int_{E_1}^{E_2} \sigma_r (E) \frac{\sigma_d}{\sigma_r(E) + \sigma_d} \frac{1}{E} \dE = \sigma_r \frac{ \sigma_d}{\sigma_r +  \sigma_d} \ln \left(\frac{E_2}{E_1} \right) }  
@@ -90,13 +83,14 @@
 \item Doppler effects
   \begin{enumerate}
     \item Psi/chi functions
-      \begin{figure}
+
+      \begin{figure}[ht]
         \centering
         \includegraphics[width=6in]{images/r-m/psi-chi-plot.png}
       \end{figure}
 
-    \item Finite dilution
-    \item Temperature effects
+    \item Finite dilution: as U/H increases, $\RIeff$ decreases because of energy self-shielding: as U/H increases, more and more self-shielding, the flux is more depressed, result in smaller $\RIeff$. A second consequence is that the higher energy range becomes more important. See Section~\ref{spectral-hardening-section}. 
+    \item Temperature effects: as temperature increases, $\RIeff$ increases becasue the broadened resonance increases the energy range over which abosprtion occurs. There is less flux depression, whereas the area under the cross section is about the same, result in an increase in the $\RIeff$. \textbf{Spring 2012 Exam 1 \#16:} the infinite dilute RI is independent of temperature because in Doppler broadening the area under the resonance is constant. 
   \end{enumerate}
 
 \item Monte Carlo
@@ -124,18 +118,29 @@
         \item Material 1 is infinitely dilute, so we assume the flux is shaped entirely by material 2 and hence is not affected by the resonances. $p = 1$. 
       \end{itemize}
 
-    \item Collision probabilities 
-
     \item 2-region reciprocity relation:
       \eqn{ P_{1\to 2} \Sigma_1 V_1 = P_{2\to 1} \Sigma_2 V_2 }
 
+    \item Collision probability: the most basic form is, 
+      \eqn{ P_{ff} = \frac{\sigma_{t,f}(u)}{\sigma_e + \sigma_{t,f}(u)} }
 
-    \item Wigner's rational models, with Bell's refinment and Dancoff correction factor, 
+    \item Bell's refinement of the Wigner's rational models, where $b$ depends on geometry and material (opacity) as plotted in Fig.~\ref{bell}.
+      \eqn{ P_{ff} = \frac{\sigma_{t,f}(u)}{b \sigma_e + \sigma_{t,f}(u) } }     
+      and with Dancoff correction factor, 
       \eqn{ P_{f\to f}  = \frac{\sigma_{t,f} (u)}{\frac{(1-C)b}{(1-C) + Cb} \sigma_e + \sigma_{t,f} (u)}  } 
-      where Dancoff factor is approximated from slide 28 Lec7, escape cross section is calculated for a cylinder to be $\Sigma_e = \frac{1}{2r}$.  Upon getting $P_{ff}$, we find $P_{fm} = 1 - P_{ff}$, then use reciprocity to find $P_{mf}$. See \textbf{Spring 2012 Exam 1: \#20}. 
+      where escape cross section is calculated for a cylinder to be $\Sigma_e = \frac{1}{2r}$.  Upon getting $P_{ff}$, we find $P_{fm} = 1 - P_{ff}$, then use reciprocity to find $P_{mf}$. See \textbf{Spring 2012 Exam 1: \#20}. 
 
-    \item Dancoff factors
+    \item Dancoff factors: If the moderator is opaque, the Dancoff factor becomes zero; if transparent, the Danoff factor trends to 1.0. See Fig.~\ref{dancoff} for plot. 
 
+    \item Solving for spatially averaged energy shape of flux in the fuel\footnote{not on the official review sheet} from the first collision rate balance equation.  We construct a first collision rate balance equation (next collision for neutrons in fuel from slowing down source and uncollided flux): 
+      \eqn{ N_f \sigma_{t,f} \phi_f V_f = Q_f V_f P_{ff} + Q_m V_m P_{mf} }
+      where $Q$ is the slowing down source, and it is assumed to arise from the $1/E$ constant lethargy flux above the resonance energy, 
+      \eqn{ Q_m &= N_m \sigma_{s,m} \Phi &Q_f &= N_f \sigma_{pot, f} \Phi }
+      Substuiting and dividing by $\Phi$, we get an expression of the fine structure energy shape of flux $f_f = \phi_f / \Phi$, 
+      \eqn{ N_f \sigma_{t,f} f_f V_f = N_f \sigma_{pot,f} V_f P_{ff} + N_m \sigma_{s,m} V_m P_{mf} }
+      Using reciprocity relation and plug in $P_{ff} = \frac{\sigma_{t.f}}{\sigma_{t,f} + \sigma_e}$, we get the \uline{heterogeneous energy shape} of flux in the fuel: 
+      \eqn{ f_f(u) = \frac{\sigma_{pot,f} + \sigma_e}{\sigma_{r,f}(u) + \sigma_{pot,f} + \sigma_e} }
+     Comparing with the narrow resonance expression for the homogeneous mixture's energy shape of flux, we notice the only difference the two $\sigma_e$ are replaced by $\sigma_d$. 
 
     \item $1/E$ fluxes: true except when resonant absorber is present (recall we keep using 1/E for spectrum above the resonance). 
   \begin{itemize}
@@ -156,7 +161,14 @@
   \begin{enumerate}
     \item Flux disadvantage factors
     \item Fine structure effects
-    \item Coefficients
+    \item Coefficients: 
+      \begin{itemize}
+        \item Source from fission spectrum: chi, Maxwell spectrum.
+        \item $\sigma_s^H$: read in.
+        \item $\sigma_a^H$: $1/v$ absorber.
+        \item $\sigma_s^U$: resonance scattering cross section using $\psi, \chi$>
+        \item Scattering kernel: for larger than 4eV, asymptotic down scattering. FOr less than 4eV, thermal scattering, approximaetd by elastic scattering for Monatomic/Maxwellian free gas. 
+      \end{itemize}
   \end{enumerate}
 \end{enumerate}
 
@@ -201,10 +213,6 @@
   Assume $\phi \sim \frac{1}{E}$,
   \eqn{ \sigma_g = \frac{\RI_{\eff}}{\ln(E_2/E_1)} = \frac{\Sum_{i \in g} RI_i }{\ln{\frac{E_{g-1}}{E_g} }}   }
  
-\item Self-shielding: 
-
-\item Slowing down equations. 
-
 \item More spectrum: 
   \begin{enumerate}
   \item $E > 0.5$ MeV: $\phi(E) = \frac{\chi(E)}{\Sigma_t(E)}$.
@@ -220,22 +228,11 @@
     \includegraphics[width=0.3\textwidth]{images/sl-d/spec-2.uncrop.pdf} & replace source neutrons with neutron emission spectrum \\
     \includegraphics[width=0.3\textwidth]{images/sl-d/spec-3.uncrop.pdf} & add in real H elastic scattering xs (to divide the flux counter by) \\
     \includegraphics[width=0.3\textwidth]{images/sl-d/spec-4.uncrop.pdf} & add in thermalization in hydrogen ($<$ 4 eV, thermal scattering) \\
-    \includegraphics[width=0.3\textwidth]{images/sl-d/spec-5.uncrop.pdf} & add in 1/v H absorber (effective only in the thermal range) \\
+    \includegraphics[width=0.3\textwidth]{images/sl-d/spec-5.uncrop.pdf} & add in $1/v$ H absorber (effective only in the thermal range) \\
     \includegraphics[width=0.3\textwidth]{images/sl-d/spec-7.uncrop.pdf} & add in U238 resonance absorption cross section \\
   \end{tabular}
   \caption{Physics and Their Corresponding Spectra in MC code} \label{plot-MC}
 \end{table}
-
-\topic{Concepts I got wrong in Exam 1}
-\begin{enumerate}
-\item $1/v$ cross section shape due to thermal motion. [2]
-\item Thermal scattering kernel: notice for symmetry; know how to go from pdf to cdf etc. [1]
-\item Resonance Integral: only include the resonance cross section, not the potential cross section. [2]
-\item Infinite dilute implies that here is no neutrons being absorbed by the resonances. Recall that in HW2 when our U/H is small, the flux is not perturbed by U238 resonances at all, suggesting that the resonance escape probability is one. [1]
-\item Calculate effective RI through $\RIeff = \int \sigma_r \phi \frac{1}{E} \dE.$ There is no integration of flux on the bottom (only introduced group xs's definition for the simulation's purpose). [2]
-\item Calculate probabilities in 2 region setup. [3]
-\item Monte Carlo tallies: U238 absorption rate can be estimated as $\Sum \frac{\Sigma_a}{\Sigma_t}$, the U238 absorption rate per atom is $\Sum \frac{\sigma_a}{\Sigma_t}$. [2]
-\end{enumerate}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%% Exam 1 Review End %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
