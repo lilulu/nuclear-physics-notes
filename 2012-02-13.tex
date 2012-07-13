@@ -197,7 +197,7 @@ whose common values are: $\zeta_{H} = 1, \zeta_D = 0.725, \zeta_C = 0.158, \zeta
 For $E_2 = 2\times 10^6 \eV, E_1 = 0.1 \eV$, the number of collisions is: $n_H = 17, n_D = 23, n_C = 106, n_U = 2000$. 
 
 \subtopic{Result: Flux vs. Energy}
-\begin{figure}
+\begin{figure}[ht]
   \centering
   \includegraphics[width=3in]{images/sl-d/flux-vs-energy-1.png}
   \includegraphics[width=3in]{images/sl-d/flux-vs-energy-2.png}
@@ -211,7 +211,7 @@ There are two ways to understand flux here.
 Figure~\ref{fve} presents the results from th generation-based flux. Notice with insufficient number of generations (left plot), the flux tails down at lower energies, meaning that some neutrons are not slowed down entirely yet. With sufficient number of generations (right plot), we get a \hi{1/E spectrum}. 
 
 \subtopic{Result: Flux vs. Lethargy}
-\begin{figure}
+\begin{figure}[ht]
   \centering
   \includegraphics[width=3in]{images/sl-d/flux-vs-lethargy-1.png}
   \includegraphics[width=3in]{images/sl-d/flux-vs-lethargy-2.png}
@@ -228,7 +228,7 @@ Model: Maxwell spectrum:
 Simulation: constructing a cdf for Maxwell distribution (when constructing any cdf, it is a good practice to sample immediately and double check with the pdf); for each neutron, generate a random number $\xi \in [0,1]$, and use $\xi = cdf(E)$ to reverse-lookup for $E$, and this is the fission emission energy of that neutron. 
 
 Characteristics of our spectrum so far: a spectrum is the shape in energy; the spectrum is independent on the number of incoming neutrons; for one specie, the spectrum is independent of its cross section; for two species, only the relative cross section matters. 
-\begin{figure}
+\begin{figure}[ht]
   \centering
   \includegraphics[width=3in]{images/sl-d/spec-1.uncrop.pdf}
   \includegraphics[width=3in]{images/sl-d/spec-2.uncrop.pdf}
@@ -261,7 +261,7 @@ e^{\frac{E-E'}{kT}} \erf{\sqrt{\frac{E}{kT}}} & E' > E \\
 \right.
 \end{align}
 Two samples are plotted in Figure~\ref{ts-C-H}. Notice that a) E = 1kT to 25kT provides a good cover of range, and even at 1200K, 1kT = 0.1 eV, and 25kT = 2.5eV, so 4eV is a typical upper scattering cutoff; b) the $\frac{E'}{E}$ axis shows that there is a good probability that the neutron would gain energy from the elastic scattering(the lower the initial neutron energy, the closer it is to the target nuclei thermal agitation, the more probable is upper scattering). In fact this is the difference between this thermal energy model and the previous high-energy model.  
-\begin{figure}
+\begin{figure}[ht]
   \centering
   \includegraphics[width=3in]{images/sl-d/ts_H.uncrop.pdf}
   \includegraphics[width=3in]{images/sl-d/ts_C.uncrop.pdf}
@@ -269,7 +269,7 @@ Two samples are plotted in Figure~\ref{ts-C-H}. Notice that a) E = 1kT to 25kT p
 \end{figure}
 
 Adding the thermal scattering into our slowing down and thermalization in hydrogen model, we observe a peak in the thermal range as well. To make the height more realistic, we have to add in the hydrogen absorption cross section (a 1/v distribution, only affect the thermal range). The absorbing strength is picked such that the absorption-to-scattering ratio is something reasonable, like 0.2. 
-\begin{figure}
+\begin{figure}[ht]
   \centering
   \includegraphics[width=3in]{images/sl-d/spec-4.uncrop.pdf}
   \includegraphics[width=3in]{images/sl-d/spec-5.uncrop.pdf}
@@ -285,7 +285,7 @@ In the next two subsections, we are going to cover when do the above conditions 
 
 \subtopic{Adding Target in Motion: Important for U238 Resonances at Hot Fuel Conditions}
 Thermal agitation does not matter that much for non-resonance conditions; that is, when the cross section changes reasonably slow, a small $\Delta v$, hence a small $\Delta E$ does not change the cross section much. This is not true anymore for U238 resonances, because when cross section changes very rapidly (especially true in the scattering cross section than the absorption cross section), target motion/thermal agitation would affect up scattering quite significantly. As shown in Figure~\ref{timr}, it could be a 10\% increase in LWR U238 Doppler.  
-\begin{figure}
+\begin{figure}[ht]
   \centering
   \includegraphics[width=4in]{images/sl-d/target-in-motion-resonance.png}
   \caption{Target Motion Is Important for U239 Resonances} \label{timr}
