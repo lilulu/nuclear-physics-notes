@@ -1,0 +1,113 @@
+% Created by texstrip, will be overwritten -- do not edit
+\date{October 24, 2011}
+
+\maketitle
+
+\lecture{Scattering of A Neutron by a Proton}
+We have discussed the bound state of a deuteron (a neutron plus a proton) in Section~\ref{2H-bound-state}. To gain more insights for the essential properties of nuclear force, we will look at scattering of a neutron by a proton, in particular taking into account the l-s coupling in $V_{\mathrm{nuc}}$. See more reference here\footnote{Krane 4.2, 11.8., Liboff 14.1}.
+
+\topic{Quantum Mechanical Scattering Cross Sections}
+Scattering cross-section of neutron from proton is around 20 barns from 1eV to $10^6$ eV \footnote{it is not till we introduce spin-spin coupling that we can explain this high scattering cross section}. 
+\begin{align*}
+\psi_{\mathrm{inc}} &= \mbox{planar wave function} = e^{i (\uline{k} \uline{r} - wt)} = e^{ikz}, \fsp J_{\mathrm{inc}} = \mbox{flux of incoming wave} = \frac{\hbar k}{\mu} \\
+\psi_{\mathrm{sc}} &= \mbox{spherical wave function} =  f(\theta) \frac{e^{i (\uline{k} \uline{r} - wt)}}{r} = f(\theta) \frac{e^{ikr}}{r}, \fsp J_{\mathrm{sc}} = \mbox{flux of scattering wave} = \frac{\hbar k}{\mu r^2} |f(\theta)|^2
+\end{align*}
+Cross section is the probability that an incoming wave scatters along the solid angle $\Omega+\dOmega$:
+\[ \dsigmadOmega = \mbox{Angular Differential x-s} = \sigma(\theta) \fsp \Rightarrow \sigma = \int \sigma(\theta) \dOmega \]
+We will show in a second that the above expression $= |f(\theta)|^2$, and keep in mind the $\sigma(\theta)$ is the angular differential x-s, whereas $\sigma$ is the total x-s. 
+
+If we specify a small area on the spherical surface along the solid angle $\Omega$, then we can represent the area with $\Omega$:
+\[ \dA = r^2 \dOmega = r^2 \sin \theta \dtheta \dphi \]
+Then we know:
+\[ \dsigma J_{\mathrm{inc}} = J_{\mathrm{sc}} \dA = J_{\mathrm{sc}} r^2 \dOmega \Rightarrow \dsigmadOmega = \frac{J_{\mathrm{sc}} r^2}{J_{\mathrm{inc}}} = \sigma(\theta)  \]
+
+\topic{Scattering Amplitude}
+We define the scattering amplitude $f(\theta)$ as: 
+\[ \psi_{\mathrm{sc}} = \mbox{spherical wave function} = f(\theta) \frac{e^{i (\uline{k} \uline{r} - wt)}}{r} \]
+In its most general form, $f(\theta)$ is anisotropic. It is a scattering intensity as a function of scattering angle. 
+
+
+\begin{align}
+J &= \frac{\hbar}{2 i m} \left[ \psi^* \gradient \psi - \psi \gradient \psi^* \right] \\
+&= \frac{\hbar}{2 \mu i} \left[ \psi^* \dpsidr - \psi \dpsidr^* \right] \\
+\left. \begin{array}{c}
+J_{\mathrm{inc}} = \frac{\hbar k}{\mu} b^2  \\
+J_{\mathrm{sc}} = \frac{\hbar k}{\mu r^2} b^2 |f(\theta)|^2 \\
+\end{array} \right\} &\Rightarrow \dsigmadOmega = \frac{J_{\mathrm{sc}} r^2}{ J_{\mathrm{inc}}} = |f(\theta)|^2 
+\end{align}
+The significance of the above equation is that the angular differential x-section is proportional to the scattering amplitude square. 
+
+We will solve for the scattering amplitude using Method of Partial Waves. The result is in Eq.~\ref{f-theta}. 
+
+\topic{Method of Partial Waves \& Phase Shifts} 
+To find $f(\theta)$, we solve the Schrodinger Equation for wave function $\psi(\uline{r}, t) = \psi(\uline{r}) e^{-iEt/\hbar}$:
+\eqn{\left[ - \frac{\hbar^2}{2 \mu} \uline{\gradient}^2 + V(\uline{r}) \right] \psi (\uline{r}) = E \psi(\uline{r}) }
+We've already solved for this problem for the bound state condition ($E <0$), whereas now we consider the scattering case $E>0$, with the boundary condition:
+\eqn{\psi(r) \xrightarrow{r \gg r_0} \psi_{\mathrm{inc}} + \psi_{\mathrm{sc}} = e^{i \uline{k r}} + f(\theta) \frac{e^{ikr}}{r} \label{BC}}
+
+\begin{enumerate}
+\item Set-up Partial Wave: we expand the $\psi(r)$ into $\psi(r, \theta)$, notice there is no $\phi$ dependence because of $V(r)$. Then we can write $\psi(r,\theta)$ into the summation of partial waves:
+\eqn{\psi(r,\theta) = \Sum_{l=0}^{\infty} R_l(r) P_l (\cos \theta) }
+in which $P_l (\cos \theta)$ is the Legende Polynomial, 
+
+\item Simplify Schrodinger Equation, consider radial function: 
+\begin{align*}
+\left. \begin{array}{c}
+\left(- \frac{\hbar^2}{2 \mu} \uline{\gradient}^2 + V(\uline{r}) - E  \right) \psi(r,\theta) = 0 \\
+u_l (r) = r R_l (r) 
+\end{array} \right\} 
+\left( -\frac{\hbar^2}{2 \mu} \pprn2 +\frac{\hbar^2 l(l+1)}{2 \mu r^2} + V(\uline{r}) - E  \right) u_l (r) &= 0 \\
+\left( \pprn2 - \frac{l(l+1)}{r^2} - \frac{2\mu}{\hbar^2} V(\uline{r}) + \overbrace{\frac{2\mu}{\hbar^2} E}^{\to k^2}  \right) u_l (r) &= 0 \\
+\end{align*}
+
+\item For $r\le r_0$, $V(r) \neq 0$:
+\begin{align*}
+\left( \pprn2 - \frac{l(l+1)}{r^2} - \frac{2\mu}{\hbar^2} V(\uline{r}) + k^2  \right) u_l (r) &= 0 \\
+\end{align*}
+We don't actually pursue this case. Indeed, we only consider the extreme case $V (r) =0$. 
+
+\item For $r>r_0$, $V(r) =0$:
+\begin{align*}
+\left( \pprn2 - \frac{l(l+1)}{r^2} + k^2  \right) u_l (r) &= 0 \\
+u_l (r) &= B_l r j_l (kr) + C_l r n_l (kr)  
+\end{align*}
+in which $j_l (kr)$ are Spherical Bessel Functions, and $n_l (kr)$ are Spherical Neumann Functions:
+\[ j_l (x) \xrightarrow{x \gg 1} \frac{1}{x} \sin \left( x - \frac{l \pi}{2} \right), \fsp \fsp n_l \xrightarrow{x \gg 1} - \frac{1}{x} \cos \left( x - \frac{l \pi}{2} \right)  \]
+For the extreme case $r \gg r_0, kr \gg 1$, then we can apply our Boundary Condition: 
+\eqn{ u_l (r) \xrightarrow{kr \gg 1} \frac{B_l}{k} \sin \left( kr - \frac{l \pi}{2} \right) - \frac{C_l}{k} \cos \left( kr - \frac{l \pi}{2} \right)  = \frac{A_l}{k} \sin \left( kr - \frac{l \pi}{2} + \delta_l \right) \label{delta_l}}
+in which 
+\[ \delta_l = \mbox{phase shift of each partial wave after interact with $V(r)$} \]
+\eqn{\psi(r,\theta) \xrightarrow{kr \gg 1} = \Sum_{l=0}^{\infty} \frac{A_l}{kr} \sin \left( kr - \frac{l \pi}{2} + \delta_l \right) P_l (\cos \theta) \label{sol} }
+Eq.~\ref{sol} is the solution to the Schrodinger Equation for the extreme of $kr \gg 1$. 
+
+Keep in mind that we are after $f(\theta)$, and we will apply the BC we defined above to solve for $f(\theta)$. 
+
+
+
+\end{enumerate}
+
+
+\subtopic{Phase Shifts}
+A phase shift $\delta_l$ is defined in the above section in Eq.~\ref{delta_l}. We can determine $\delta_l$ analytically \footnote{try using the trigonometry $\sin(a+b) = \sin(a) \cos (b) + \cos(a) \sin(b)$?}. Keep in mind that $\delta_l$ is the phase shift for each of the partial wave that can scatter. It is a result of a partial wave interacting with the potential.  
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=4.5in]{images/scattering-potential-phase-shift.png}
+\end{figure}
+
+\subtopic{Angular Differential Cross Section, Total Cross Section}
+Start with the solution of Schroedinger equation after partial wave expansion as in Eq.~\ref{sol}, we apply BC Eq.~\ref{BC}. To do so, we need to expand two terms: 
+\begin{itemize}
+\item $ f(\theta) = \Sum_{l=0}^{\infty} f_l P_l (\cos \theta) $
+\item $e^{ikz} = e^{ikr \cos \theta} \xrightarrow{kr \gg 1} \Sum_l  \frac{i^l (2l+1)}{kr} \sin \left( kr - \frac{l \pi}{2} \right) P_l (\cos \theta) = \Sum_l  \frac{i^l (2l+1)}{kr} \frac{1}{2i} \left[ e^{ i \left( kr - \frac{l \pi}{2} \right)} - e^{ -i \left( kr - \frac{l \pi}{2} \right)} \right] P_l (\cos \theta)$. 
+\end{itemize}
+Then we equate the coefficient before the same l state, and solve for $f(\theta)$ as: 
+\begin{align}
+f(\theta) &= \frac{1}{K} \Sum_{l=0}^{\infty} (2l+1) e^{i \delta_l} \sin \delta_l P_l (\cos \theta) \label{f-theta} \\
+\sigma (\theta) &= |f(\theta)|^2 = \frac{1}{K^2} \left| \Sum_{l=0}^{\infty} (2l+1) e^{i \delta_l} \sin \delta_l P_l (\cos \theta) \right|^2 \label{sigma-theta} \\
+\sigma &= \int \dOmega \sigma(\theta) = \frac{4 \pi}{K^2} \Sum_{l=0}^{\infty} (2l+1) e^{i \delta_l} \sin^2 \delta_l  \label{sigma} 
+\end{align}
+Notice, Eq.~\ref{f-theta} $\sim$ Eq.~\ref{sigma} are the general expression. In the example demonstrated below, we are going to consider some cases that the above solutions simplify. 
+
+
+

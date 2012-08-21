@@ -1,0 +1,155 @@
+% Created by texstrip, will be overwritten -- do not edit
+\date{September 28, 2011}
+
+\maketitle
+
+\topic{Bound States Definition}
+Recall in Section~\ref{unbound-states}, we define a bound state as when $ x \to \infty, |\psi|^2 \to 0$. Bound states are commonly find in nuclear structure (in the example of Finite Square Well, a is the radius of the nucleus, and V is the nucleus interaction potential). Bellow is a few examples of bound states. 
+
+
+
+%%%%%%%%%%%%%%%%%%%% FSW %%%%%%%%%%%%%%%%%%%%%%%%%%%
+\topic{Finite Square Well}
+This potential admits both bound states (with $E < 0$) and scattering states (with $E>0$). We will look at the bound states only\footnote{See Liboff 8.1, Krane 2.3 for more details}. We didn't really do this in class, but I just want to add a word: If we work out the scattering case of FSW, it turns out the transmission probability is sort of oscillating with respect of $E$, and the energies for perfect transmission turn out to precisely the allowed energies for the infinite square well \footnote{See Griffiths p79-82.}:
+\[ E_n + V_0 = \frac{n^2 \pi^2 \hbar^2}{2 m (2a)^2} \]
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=4in]{images/FSW.png}
+    \caption{Finite Square Well Diagram}
+\end{figure}
+
+
+\uline{Intuitively}, we know:
+\begin{itemize}
+\item Inside the well, $KE = E_n - (-V_0) = E_n + V_0 > 0$, hence oscillatory wave. 
+\item Outside the well, $KE = E_n - 0 = E_n <0$, hence finite propagation, analogous to the penetration we had in rectangular barrier before. When the energy is negative, instead of having $A e^{ikx} + B e^{-ikx}$ terms, we have $C e^{\kappa x} + D e^{-\kappa x}$ in which $\kappa$ is positive. 
+\end{itemize}
+
+%%%%%%%%%%%%%% Re-write Eqns %%%%%%%%%%%%
+\subtopic{Re-write Schrodinger Equations}
+\begin{align*}
+\hat{H} \psi_n(x)  &= E_n \psi_n (x) & \Rightarrow - \frac{\hbar^2}{2m }   \dpsidxn2 + V(x) \psi_n (x) = E_n \psi_n (x) \\
+|x| < a \fsp - \frac{\hbar^2}{2m } \dpsidxn2  -  (V_0 + E_n) \psi_n (x) &= 0 & \Rightarrow \dpsidxn2 + k^2 \psi_n (x) = 0 \\
+|x| > a \fsp - \frac{\hbar^2}{2m } \dpsidxn2  -  E_n \psi_n (x) &= 0 & \Rightarrow \dpsidxn2 - \kappa^2 \psi_n (x) = 0 \\
+\end{align*}
+in which 
+\[ k = \sqrt{\frac{2m (V_0 + E_n)}{\hbar^2}} >0; \fsp \fsp \kappa = \sqrt{-\frac{2m E_n}{\hbar^2}} > 0 \] 
+
+
+Knowing that these states are bounded, that is $|\psi (x \to \pm \infty)|^2 \to 0$, hence to the left of FSW only the $C e^{\kappa x}$ is left, and to the right of the FSW only the $D e^{-\kappa x}$ is left. In the FSW, we re-write $A^{\prime} e^{ikx} + B^{\prime} e^{-ikx} = A \sin (kx) + B \cos(kx)$ for convenience. 
+
+
+
+
+
+
+\subtopic{Defined Parity}
+Energy eigenfunctions in a symmetric position have a \textbf{`defined parity'} that is either odd or even in x. Definition of parity: $\sin(kx)$ is an odd parity because $\sin k(-x) = - \sin kx$. $\cos (kx)$ is an even parity because $\cos k(-x) = \cos kx$. 
+
+
+%%%%%%%%%%%%% Odd Parity %%%%%%%%%%%%%%%%%%%%%%%
+\subsubtopic{Odd Parity Solutions}
+\subsubsubtopic{Apply Boundary Conditions}
+The BCs are: $\psi(a^+) = \psi(a^-), \psi^{\prime}(a^+) = \psi^{\prime}(a^-)$: 
+\begin{align*}
+A \sin (ka) &= D e^{-\kappa a } \\
+A k \cos (ka) &= - D \kappa e^{-\kappa a} 
+= - \kappa A \sin (ka) \\
+\end{align*}
+\eqn{\Rightarrow  \kappa = - k \cot (ka)\label{BC}} 
+
+since $k = \sqrt{ \frac{2 m (V_0 + E)}{\hbar^2} }$, this is implying that there is certain constraint on E (as we hinted earlier that E should be in the form of $E_n$), both in term of the range, also in term of the permitted values. 
+
+\subsubsubtopic{Define Potential Well Strength $\Lambda$}
+Let's define $\Lambda$ as $-\alpha \cot \alpha = \sqrt{\Lambda^2 - \alpha^2}$. From what we know about k and $\kappa$, we know:
+\[ k^2 a^2 + \kappa^2 a^2 = \frac{2m V_0 a^2}{\hbar^2} = \Lambda^2 = \mbox{Strength of Potential Well} \]
+We call $\Lambda^2$ the strength of potential well, which depends on $V_0$ the depth of the well, and a the width of the well. 
+
+\subsubsubtopic{Analytically Finding Constrains}
+\begin{align}
+\begin{cases} 
+\kappa^2 a^2 = \Lambda^2 - k^2 a^2  & \kappa a = \sqrt{\Lambda^2 - k^2 a^2} \\
+Eq.\ref{BC} \times a                & \kappa a = - ka \cot (ka)
+\end{cases}
+\end{align}
+\eqn{ \Rightarrow \boxed{ ka \cot (ka) = - \sqrt{ \Lambda^2 - k^2 a^2 } }  }
+
+If we consider $ka$ as the variable $x$, then the RHS is the bottom-right portion of a circle with $r = \Lambda$. The LHS is a $x \times \cot(x)$ curve that we can easily plot as well.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=4in]{images/FSW-odd-graph-ka.png}
+    \caption{Finite Square Well (Odd Parity), Constrains on $ka$}
+\end{figure}
+
+\begin{enumerate}
+    \item Finite Square Well vs. Infinite Potential Barrier:
+    \begin{itemize}
+    \item Similarity: the boundary conditions impose constrains on energies for both problems. 
+    \item Difference: infinite barrier problem's number of possible energy states is infinite (because the potential is barrier is infinite!); finite square well's strength $\Lambda^2$ limits the number of $E_n$ to be finite.  
+    \end{itemize}
+    
+    \item $\Lambda = \frac{\pi}{2}$ is the minimum $\Lambda$ value that allows any intersection. Wells weaker than $\frac{\pi}{2}$ would have no solution, that is, no bound state. 
+     
+    \item Bound states mean $\Lambda > \frac{\pi}{2}$, which can be translated into constrains on $V_0$:
+    \begin{align}
+    \Lambda^2 &= \frac{2m V_0 a^2}{\hbar^2} > \frac{\pi^2}{4} \Rightarrow V_0 \ge \frac{\pi^2 \hbar^2}{8 m a^2} 
+    \end{align}
+    
+    \item Number of bound states depends on $\Lambda$:
+%    \begin{align*}
+%    \begin{dcases*}
+%     \frac{\pi}{2} < \Lambda < \frac{3\pi}{2}   & 1 solution \\
+%     \frac{3\pi}{2} < \Lambda < \frac{5 \pi}{2} & 2 solutions \\
+%     n \pi  - \frac{\pi}{2} < \Lambda < n \pi  + \frac{\pi}{2} & n solutions
+%    \end{dcases*}
+%    \end{align*}
+\end{enumerate}
+
+
+\subsubsubtopic{Graphically Finding Constrains}
+We fit can fit the our $\sin$ curve wave function diagram, and notice that the $\sin$ wave inside the well must `bend down' on the boundary to match the decaying solution outside the well. This is essentially applying the boundary conditions graphically instead of analytically.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=4in]{images/FSW-odd-graph-psi.png}
+    \caption{Finite Square Well (Odd Parity), Graphically Finding Constrains}
+\end{figure}
+
+The above diagram demonstrates the maximum wavelength condition, that is, 
+\[ \lambda = 4a \Rightarrow k = \frac{2 \pi}{\lambda} = \frac{\pi}{2a} \]
+Apply that bound state requires $|KE| <|V_0|$: 
+\[ V_0 > |KE| = \frac{\hbar^2 k^2}{2m} = \frac{\hbar^2 \pi^2}{8 ma^2} \]
+
+\subsubtopic{Even Parity Solutions}
+We essentially repeat what we did for the odd parity solutions but use $\cos(ka)$ instead of $\sin(ka)$ forms this time:
+\begin{align*}
+A \cos (ka) &= D e^{-\kappa a} \\
+-A k \sin (ka) &= - D \kappa e^{-\kappa a} = - A \kappa \cos (ka) \\
+k \tan (ka) &= \kappa \\
+ka \tan (ka) &= \kappa a = \sqrt{\Lambda^2 - k^2 a^2} 
+\end{align*}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=4in]{images/FSW-even-graph-ka.png}
+    \caption{Finite Square Well(Even Parity), Constrains on $ka$}
+    \label{FSW-even-graph-ka}
+\end{figure}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=4in]{images/FSW-even-graph-psi.png}
+    \caption{Finite Square Well (Even Parity), Graphically Finding Constrains}
+    \label{FSW-even-graph-psi}
+\end{figure}
+
+\begin{itemize}
+\item In Figure~\ref{FSW-even-graph-ka}, we plot the two sides of the constrain equation. In 1D regardless of the value of $\Lambda$ we always have at least one intersection. This implies that the even parity solution requires no bound state condition. 
+
+\item In Figure~\ref{FSW-even-graph-psi}, we plot $\psi(x)$ vs. $x$, and notice that any $\cos(kx)$ can provide some concavity that let the out-of-the-well to be exponentially decaying. To put it differently, matching is possible no matter how long the wavelength is. KE can go to zero if needed to make BC work out. 
+
+\item In reality, when we go to 3D, the odd solution will carry over, and the even solution will not be present. But for now just keep in mind that \textit{1D even solution has no bound state condition}. 
+\end{itemize}
+

@@ -1,0 +1,177 @@
+% Created by texstrip, will be overwritten -- do not edit
+\date{November 16, 2011}
+
+\maketitle
+
+\topic{Basic Decay Concepts}
+Three Basic Decay Types\footnote{See Krane 3.3, 6.1-6.5.}:
+\begin{enumerate}
+\item $\alpha$ decay:
+Example: \ce{_{88}^{236} Ra \to ^{232}_{86} Rn + \alpha}, $KE_{\alpha} = 4.8$ MeV, $Q \to \lambda, t_{1/2} = 1600$ years. 
+\item $\beta$ decay: \ce{n \to p^+ + e^- + \gamma}, Example: \ce{p^+ \to n + e^+ + \gamma}
+\item $\gamma$ decay: \ce{X^* \to X}, excited state to lower Energy state.
+\end{enumerate}
+
+Decay mechanisms: $\lambda = -\frac{\dNdt}{N(t)} =$ decay constant, describe probability of decay per unit time. It is a constant for each decay. 
+\begin{align}
+\dNdt (t) &= - \lambda N(t) \\
+N(t) &= N_0 e^{-\lambda  t} \\
+N(t_{1/2}) &= \frac{1}{2} N(0) \\
+t_{1/2} &= \frac{\ln 2}{\lambda} 
+\end{align}
+
+Decay Mode 1: Parent $N_1$ decay into daughter productor $N_2$: 
+\begin{align}
+N_1 (t) &= N_0 e^{-\lambda t} \\
+N_2 (t) &= N_0 - N_1 (t) = N_0 (1 - e^{-\lambda t}) 
+\end{align}
+
+Decay Mode 2: Parent $N_1$ decay parallelly into daughters $N_{2,a}$ (with $\lambda_a$) and $N_{2,b}$ (with $\lambda_b$). The total decay constant is just $\lambda-t = \lambda_a + \lambda_b$. 
+\begin{align}
+N_1 (t) &= N_0 e^{-\lambda_t t} \\
+N_{2,a} (t) &= \frac{\lambda_a}{\lambda_t} N_0 (1 - e^{-\lambda_t t}) \\
+N_{2,b} (t) &= \frac{\lambda_b}{\lambda_t} N_0 (1 - e^{-\lambda_t t})
+\end{align}
+
+%%%%%%%%%%%%%%%% Alpha Decay %%%%%%%%%%%%%%%%%%%%%%%%%
+\topic{Alpha Decay} \footnote{See Krane 8, Liboff 4.2 and 4.5 for more details}
+\begin{itemize}
+\item Why $\alpha$ decay occurs? Answer: Coulomb Repulsion Effect. Coulomb force increases super-linearly with respect to binding energy. There is a need to get rid of some protons. 
+
+\item Concept of `Spontaneous Fission': spontaneous means some KE appears suddenly in the system for no apparent cause; it must be from the decrease in the mass of the system. It is in the form of: $A \to \frac{A}{2} + \frac{A}{2}$ with Q = 200 MeV. 
+\item Why is the $\alpha$ particle chosen for spontaneously carrying away the positive charge?
+    \begin{enumerate}
+    \item  \ce{^4_2 He_2} is doubly magic, very stable, tightly bound structure;
+    \item \ce{^4_2 He_2} has relatively small mass compared with the mass of its separate constituents (beats \ce{^{12} C}, \ce{^{18} O}). It is favored as an emitted particle if we hope to have the disintegration products as light as possible and thus get the largest possible release of KE. 
+    \end{enumerate}
+\item To determine whether a decay mode is possible, we need to check two things:
+    \begin{enumerate}
+    \item $Q > 0$. For instance, from Table~\ref{232-U}, for U-232, \ce{^4 H} is the only energetically possible decay mode. Decay through emission of lighter particles is not possible because they require energy instead of release energy;
+    \item The disintegration constant for alpha emission cannot be too small, or say, the half-life must be less than $10^{16}$y. This is the reason why heavier particle emission is rarely observed: $\log t_{1/2} \propto \frac{1}{\sqrt{Q_{\alpha}}}$. $t_{1/2}$ is very sensitive to Q. Doubling Q may reduce the $t_{1/2}$ by a $10^{20}$ order of magnitude. Example, see Table~\ref{Th}. 
+    \end{enumerate}
+\end{itemize}
+\begin{table}
+\centering
+\begin{tabular}{|c|c|c|c|} \hline
+Particle & Q (MeV) & $t_{1/2}$ in s & Notes \\ \hline
+\ce{^{218} Th} & 9.85 & $10^{-7}$ s & strong alpha emitter? \\ \hline
+\ce{^{232} Th} & 4 & $10^{17}$ s & weak? \\ \hline 
+\end{tabular}
+\caption{Comparison of Q and half-lives of \ce{^{218} Th}, \ce{^{232} Th}\label{Th} }
+\end{table}
+\begin{table}
+    \centering
+    \begin{tabular}{|c|c|} \hline
+    \ce{^{232} U} Emitted & Energy Release Q (MeV) \\ \hline 
+    \ce{^1 H} & -6.12 \\ \hline
+    \ce{^2 H} & -10.70 \\ \hline
+    \ce{^3 He} & -9.92 \\ \hline
+    \ce{^4 He} & 5.41 \\ \hline
+    \ce{^7 Li} & -1.94 \\ \hline
+    \end{tabular}
+    \caption{Energy Release from \ce{^{232} U} $\alpha$ Decay Energies \label{232-U}}
+\end{table}
+
+\subtopic{Energies of alpha-decay}
+Recall alpha decay process is \ce{^A_Z X_N \to ^4_2 He_2 + ^{A-4}_{Z-2} \Xp_{N-2}}. Apply Conservation of Energy:
+\begin{align}
+m_X c^2 &= m_{\Xp} c^2 + KE_{\Xp} + m_{\alpha} c^2 + KE_{\alpha} \\
+(m_X - m_{\Xp} - m_{\alpha} ) c^2 &= KE_{\Xp} + KE_{\alpha} = Q \label{Q-alpha}\\
+B(\Xp) + B(\alpha) - B(X) &= 0 \label{B-alpha} 
+\end{align}
+in which Eq~\ref{Q-alpha} is the net energy release in the decay (the total KE). The decay will occur spontaneously only if $Q >0$. 
+
+Apply Conservation of Linear Momentum:
+\begin{align}
+0 &= P_{\Xp} - P_{\alpha} \\
+P_{\Xp}^2 &= P_{\alpha}^2 \\
+KE_{\Xp} m_{\Xp} &= KE_{\alpha} m_{\alpha} \\
+KE_{\Xp} &= KE_{\alpha} \frac{m_{\alpha}}{m_{\Xp}} 
+\end{align}
+Together,
+\begin{align}
+Q &= KE_{\alpha} + KE_{\alpha} \frac{m_{\alpha}}{m_{\Xp}} \\
+KE_{\alpha} &= \boxed{ Q \left( 1 - \frac{4}{A} \right) } \approx 98\% Q
+\end{align}
+That is, given $Q$, we can find $KE_{\alpha}$, and keep in mind that A is typically very large. Around 98\% of the Q goes into KE of the $\alpha$ particles, and only about 2\% goes into KE of the daughter particle (because it is heavy!), which comes out to be 100 keV typically. 
+
+Having a large Q means the isotope is a strong $\alpha$ emitter. Typically we define a strong $\alpha$ emitter to have $A > 190$ 
+
+
+\subtopic{Theory of alpha-emission}
+Assumptions:
+\begin{itemize}
+\item The $\alpha$ particle is pre-formed: before emission it is held together with the daughter product; Assume the distance between the two is $a$. 
+\item Within the volume of $r<a$, the interaction potential between the two is attractive; 
+\item Outside, coulomb potential dominates which is repulsive. 
+\end{itemize}
+For $\alpha$ decay to happen, the energy available to the $\alpha$ particle has to be positive: $Q > 0$. There is a region from $r=a$ to $r=b$ that th maximum available KE, Q, is smaller than the Coulomb potential. Then the only possible way the wave can travel beyond this potential barrier is to quantum tunneling. 
+\begin{align}
+\mbox{Decay Constant } &=f \cdot P_T \\
+f &= \frac{v_{\alpha}}{a} = \frac{v_{\alpha}}{1.25 A^{1/3}} 
+\end{align}
+If we plug in $V = -V_0 = -50 \MeV, Q_{\alpha} = 5 \MeV, KE_{\alpha} = Q - V = 55 \MeV = \frac{1}{2} m_{\alpha} V_{\alpha}^2$, we can find that $f = 5 \times 10^{21} \s^{-1}$, which is a higher frequency than nuclear vibration frequency (around $10^{12} \sim 10^{14} \s^{-1}$). 
+
+Now we can consider the tunneling probability $P_T$ from $r$ to $r +\dr$. 
+\begin{align}
+P_T &= \frac{|e^{-k_2 (r+\dr)}|^2}{e^{-k_2 r}} = e^{-2 k_2 \dr} \\
+k_2 &= \sqrt{\frac{2m(V (r) -Q)}{\hbar^2}} \\
+\dP_T &= e^{-2k_2 (r) \dr} \\
+P_T &= \prod_i \dP_{\tau} = \exp \left(-2 \int_a^b k_2 (r) \dr \right) = e^{-2 G}
+\end{align}
+in which $G = \int_a^b k_2 (r) \dr$ is the \textbf{Gamow Factor}. We are going to jump to the result of $G$: 
+\begin{align}
+G &= \int_a^b k_2 (r) \dr = \int_a^b \sqrt{\frac{2 \mu}{\hbar^2} \left( \frac{Z_{\alpha} Z_D e^2}{r} - Q_{\alpha} \right)} \dr \\
+&= \sqrt{\frac{2 \mu}{\hbar^2 Q_{\alpha}}} (Z_{\alpha} Z_D e^2) \left[ \arccos \sqrt{x} - \sqrt{x(1-x)} \right] \\
+&\xrightarrow{x = \frac{a}{b} < 1} \sqrt{\frac{2 \mu}{\hbar^2 Q_{\alpha}}} (Z_{\alpha} Z_D e^2) \left[ \frac{\pi}{2} - 2 \sqrt{x} \right]
+\end{align}
+in which $ x = \frac{a}{b} < 1$, and we can solve for $b$ for setting the potential to equal to the energy. 
+\begin{align}
+2G &= \sqrt{ 
+\underbrace{ \left(\frac{2 \pi e^2 Z_{\alpha} Z_D}{\hbar c}\right)^2 \frac{\mu c^2}{2} }_{\mbox{Gamow Energy } E_G}
+\frac{1}{Q}} \left[ 1 - \frac{4}{\pi} \sqrt{x} \right] \\
+&= \sqrt{\frac{E_G}{Q}} \left[ 1 - \frac{4}{\pi} \sqrt{x} \right]
+\end{align}
+
+For \ce{^{238} U}, we calculate:
+\begin{align}
+\left[ 1 - \frac{4}{\pi} \sqrt{x} \right] &= 0.51 \\
+E_G &= \left( \frac{2 \pi \times e^2 \times 2 \times 90}{197} \right)^2 \left( \frac{4 \times 234}{4 + 234} \times \frac{938}{2} \right) = 125,700 \MeV  \\
+\sqrt{\frac{E_G}{Q}} &= \sqrt{ \frac{125700}{4.25} } = 172 \\
+2 G &= 172 \times 0.51 = 88 \\
+P_T &= e^{-88} = 6 \times 10^{-39} \\
+\lambda_{\alpha} &= f \times P_T = 4 \times 10^{21} \s^{-1} \times 6 \times 10^{-39} \\
+&= 2.4 \times 10^{-17} \s^{-1} \\
+t_{1/2} &= \frac{0.693}{\lambda} = 3 \times 10^{16} \s = 10^9 \mbox{ yr} 
+\end{align} 
+Implications of Gamow's model:
+\begin{enumerate}
+\item Strong dependency on $Q$ because $E_G$ is so large. Recall the graph we had that doubling $Q$ results in a $10^{20}$ change in $t_{1/2}$. In fact, the modeled $E_G$ is a bit to large compared with measured values as see in Table~\ref{Q-t}. Another factor to take into account is that the $x = \frac{a}{b}$ term: as $A \up$, the spherical shape deforms, hence spherical approximation may not be all that accurate.
+\begin{table}
+    \centering
+    \begin{tabular}{|c|c|c|} \hline
+     & \ce{^{220} Th} & \ce{^{232} Th} \\ \hline
+     Q (MeV) & 8.95 & 4.08 \\ \hline
+     $t_{1/2}$, measured ($\s^{-1}$) & $10^{-5}$ & $10^{17}$ \\ \hline
+     $t_{1/2}$, model ($\s^{-1}$) & $3 \times 10^{-7}$ & $10^{16}$ \\ \hline     
+    \end{tabular}
+    \caption{Half-lives Predicted from Gamow's Model vs. Measurements \label{Q-t}}
+\end{table}
+\item \textcolor{red}{If we take into account the angular momentum, then the potential barrier would be larger, hence making xxx}
+\item $P_T$ describes each time the alpha particle bounds off the barrier, this is the probability that it would make it out. 
+\item Why alpha-decay not \ce{^{12} C} decay? 
+\begin{table}
+    \centering
+    \begin{tabular}{|c|c|c|c|} \hline
+    & $(Z_{p} Z_D)^2$ & $\mu$-dependency & $P_T$ \\ \hline
+    $\alpha$ &  $(2 (Z-2))^2 \sim 4Z^2$ & 3.9 & $\exp(-\sqrt{16})$ \\ \hline
+    \ce{^{12} C} & $(6(Z-6))^2 \sim 36 Z^2$ & 11.4 & $\exp(-\sqrt{432})$ \\ \hline
+    \end{tabular}
+    \caption{Comparison of alpha decay vs. \ce{^{12}C} decay\label{alpha-vs-C}}
+\end{table}
+See Table~\ref{alpha-vs-C}. We consider $E_G \sim (Z_{\alpha} Z_D)^2 \mu c^2$, and the Tunneling Probability of the two comes out to be $\frac{P_T^{\alpha}}{P_T^C} \sim \frac{\exp(-\sqrt{16})}{\exp(-\sqrt{432})} \sim \exp(16)$
+\end{enumerate}
+
+
+
+

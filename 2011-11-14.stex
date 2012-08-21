@@ -1,0 +1,87 @@
+% Created by texstrip, will be overwritten -- do not edit
+\date{November 14, 2011}
+
+\maketitle
+
+\subtopic{Coulomb Contribution}
+Electrostatic potential of nucleons. The total charge is $Ze$, we consider a constant charge distribution $\rho = \frac{Ze}{\frac{4\pi}{3} R^3}.$ If we consider a small shell from $r$ to $r + \dr$, then the Coulomb force between the spherical core and the shell is $ \int_0^r \frac{1}{r} \left( \frac{4}{3} \pi r^3 \rho \right) \left( 4 \pi r^2 \dr \rho \right) = \frac{3}{5} \frac{Z^2 e^2}{R}$. Then we have to correct the term by taking into account that xxx, so the result is:
+\eqn{V_{coul} = \frac{3}{5} \frac{Z(Z-1)e^2}{R} = \frac{3}{5} \frac{Z(Z-1) e^2}{r_0 A^{1/3}} = 0.72 \frac{Z(Z-1)}{A^{1/3}} \fsp \MeV }
+
+\subtopic{Asymmetry Contribution}
+This term comes from the asymmetry from neutrons and protons. There is no isotope that has way more neutrons than protons. Typically, 
+\begin{align*}
+\begin{dcases*}
+Z \sim 0.4 N & Large A \\
+Z \sim N & Small A
+\end{dcases*}
+\end{align*}
+The reason less protons is favored for large A is because Coulomb contribution competes with Asymmetry term and Coulomb term wins at larger A. 
+
+One way to approach this problem is to consider the difference between the number of neutrons and the number of protons is $N-Z$, and we can consider that we convert $\frac{N-Z}{2}$ number of protons to neutrons, which comes with an energy penalty on the order of $\Delta \frac{(N-Z)^2}{4}$, in which $\Delta$ is the energy difference between two states. An approximation of $\Delta$ can be: $\Delta \sim \frac{50 \fsp \MeV}{A/2}$. Then the asymmetry term is:
+\eqn{E_{assym} = 25 \MeV \frac{(N-Z)^2}{A} }
+
+
+\subtopic{Parity Contribution}
+\begin{enumerate}
+\item Even N, even Z: tightly bound, gain binding energy, $\sim a_p A^{-3/4}$;
+\item Odd A: nothing. 
+\item Odd N, odd Z: weakly bound, lose binding energy, $\sim -a_p A^{-3/4}$. 
+\end{enumerate}
+
+
+\subtopic{Summary}
+The different terms' contribution to the binding energy looks like Figure~\ref{binding-effect}. The peak at around $A = 60$ is a result of the surface effect and the Coulomb effect. 
+\begin{figure}
+    \centering
+    \includegraphics[width=4in]{images/rd/binding-effect.png}
+    \caption{Relative Contributions to the Binding Energy Per Nucleon Showing the Importance of the Various Terms in te Semi-empirical Weizacker Formula \label{binding-effect}}
+\end{figure}
+
+\topic{Semi-Empirical Mass Formula (SEMF): Mass Parabolas, Stability}
+Now that we have found the binding energy, we can write an expression for the mass. The mass formula comes out to be \textbf{parabolas}, and the minimum mass corresponds to stability\footnote{This is an important point: notice in Eq.~\ref{BAZ}, the smaller the mass, the larger the binding energy, and binding energy is a negative term, so the smaller the total energy, the more stable. }.
+\begin{align}
+B(A,Z) &= \left[ Z m_H + N m_n - m(A,Z) \right] c^2  \label{BAZ}\\
+m(A,Z) c^2 &= \left[ Z m_H + N m_n \right] c^2 - B(A,Z) \\
+&= Z^2 (\cdots) + Z(\cdots) + C 
+\end{align}
+Since the $m(A,Z)$ comes out to be a parabola for constant A $m(Z)$(notice, we are fixing A!!!), then there exists a $Z$ such that $m(Z)$ is minimum, and this is the most stable one. Of course this is a simple approximation that does not take into account stuffs like paring effect yet. 
+
+If we take the derivative of the $m(A,Z)$ equation and set it to zero, we find $Z_{min}$ to be: 
+\eqn{ Z_{min} \approx \frac{A/2}{2 + \frac{1}{4} \frac{a_c}{a_{sym}} A^{3/4}} }
+At small A, $Z_{min} \sim \frac{A}{2}$. At large A, $Z_{min} < \frac{A}{2} \sim 0.41 A$. 
+
+If we go back to our parabola graph of M vs Z fixing A, at $Z > Z_{min}$, there are too many protons; $Z < Z_{min}$, there are too many neutrons. By nature these nuclei want to undergo decay to reach stability. 
+
+Proton-rich nuclei go through $\beta^+$ decays: \ce{p^+ \to n + \beta^+ + \gamma}, or Electron Capture (E.C.): \ce{p + e^- \to n + \gamma}. Example: \ce{^{16}_9 F_7 \to ^{16}_8 O_8 + \beta^+ + \gamma}. 
+
+Neutron-rich nuclei go through $\beta^-$ decays: \ce{n \to p + \beta^- + \gamma}. Example: \ce{^{16}_7 N_9 \to ^{16}_8 O_8 + \beta^- + \gamma}.
+
+The important thing to keep in mind for beta decay is that $M_{final} < M_{initial}$, that is, goes down on the M vs. Z curve.
+
+Two examples of the above discussion are in Figure~\ref{A135} and Figure~\ref{A102}.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=4in]{images/rd/M-Z-A135.png}
+    \caption{Mass vs. Z diagram for A=135 \label{A135}}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=4in]{images/rd/M-Z-A102.png}
+    \caption{Mass vs. Z diagram for A=102 \label{A102}}
+\end{figure}
+
+
+
+
+\lecture{Radioactive Decay}
+Particle, $\alpha, \beta^+, \beta^-$. $\gamma$ goes through excited state to lower energy. Theory of decay: E, p, L. A demonstration can be found in Figure~\ref{Z-N-grid}.
+\begin{figure}
+    \centering
+    \includegraphics[width=4in]{images/rd/Z-N-grid.png}
+    \caption{Radioactive Decay Demonstration \label{Z-N-grid}}
+\end{figure}
+
+
+

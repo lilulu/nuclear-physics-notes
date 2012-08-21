@@ -1,0 +1,83 @@
+% Created by texstrip, will be overwritten -- do not edit
+\date{December 5, 2011}
+
+\maketitle
+
+\subsubtopic{Differential Cross Section Depend on Energy}
+The big map of how differential cross section is dependent on energy is shown in Figure~\ref{sigma-vs-T}.
+\begin{figure}
+    \centering
+    \includegraphics[width=4in]{images/ni/sigma-vs-T.png}
+    \caption{Scattering Cross Section Depends on Energy for Graphite\label{sigma-vs-T}}
+\end{figure}
+In this class we are going to focus on the low energy range. 
+
+\begin{enumerate}
+\item For region 1 low energy, $E < kT$, $v$ is neutron velocity, $V$ is nuclear velocity:
+\begin{align}
+f(V) &= 4 \pi \left( \frac{M}{2 \pi k_B T} \right)^{3/2} V^2 \exp \left( - \frac{MV^2}{2 k_B T} \right) \\
+v \sigma_s (v) &= \int \dV (v-V) \sigma(|v-V|) f(V) \\
+\sigma(v) &= \frac{\sigma_{so}}{\beta^2} \left[ \left(\beta^2 + \frac{1}{2} \right) \mathrm{erf}(\beta) + \frac{1}{\sqrt{\pi}} \beta e^{-\beta^2} \right] \\
+\beta^2 &= \frac{A E}{k_B T}\\
+\mathrm{erf}(\beta) &= \int_0^{\beta} \frac{2}{\sqrt{\pi}} e^{-t^2} \dt = 
+\begin{dcases*}
+\to 0 & $\beta \to 0$ \\
+\to 1 & $\beta \to \infty$ 
+\end{dcases*} \\
+\sigma (v) &= 
+\begin{dcases*}
+\mbox{constant } \frac{1}{v}& $E \ll k_B T$ \\
+\mbox{constant } \sigma_{so}, \mathrm{E-independent, isotropic} & $E \gg k_B T$ 
+\end{dcases*} 
+\end{align}
+The results of the above discussion are shown in Figure~\ref{sigma-vs-T-low-energy} using the example of non-crystal water. 
+\begin{figure}
+    \centering
+    \includegraphics[width=4in]{images/ni/sigma-vs-T-low-energy.png}
+    \caption{Scattering Cross Section Depends on Energy, Low Energy Range\label{sigma-vs-T-low-energy}}
+\end{figure}
+\item Region 2 is low energy again. Notice this region is a result of the inter-planar structure, hence non-crystal material would not have this region, like in Figure~\ref{sigma-vs-T-low-energy}. The wavelength in this region $\lambda_n \approx$ inter-planar spacing; The first spike, in particular, is called \textbf{Bragg-cutoff} whose wavelength is the solution of the Bragg's Law, on the order of $d$ (lattice parameter). 
+
+Each of the later spikes (not as large as the first one though) correspond to a different wavelength/lattice parameter, and the reflective waves are constructive interference. Constructive interference leads to Bragg's Law, in which $d$ can be along any direction:
+\eqn{ 2d \sin \theta = n \lambda} 
+
+\item Region 3 is the S-wave Potential Scattering range. We've briefly covered this already. 
+
+\item Region 4 is the Resonance Region that we are going to cover with details. We will introduce the `compound nucleus formation' that account for strong interaction between neutron and nucleus that the neutron can penetrate into the nucleus, create disturbance in the nucleus, lead to a intermediate state that include the neutron in the nucleus, and we call this the `Compound Nucleus (CN).' Then the CN would decay. We use this formation to explain: resonance neutron scattering $(n,n)$; $(n,\gamma)$; fission $(n,f)$.   
+\eqn{ a+X \to C^* \to Y + b}
+
+First we discuss reaction with $Q < 0$ in general. 
+Insert image here. 
+\begin{align*}
+a + X  &\to C^* \to b + Y \\
+\sigma (a,b) &= \sigma_C (T_i) P_b (E) \\ 
+\end{align*}
+in which $\sigma_C (T_i)$ is the formation, $P_b$ is the decay probability. The formation process is more important. 
+
+\begin{enumerate}
+\item Elastic Resonance Scattering \ce{n + ^A_Z X \to ^{A+1}_Z X^* \to n + ^A_Z X}.
+\item Inelastic Resonance Scattering \ce{n+^A_Z X \to ^{A+1}_Z X^* \to n+ ^A_Z X^*}.
+\item Radiative Capture $(n, \gamma)$: \ce{n + ^A_Z X \to ^{A+1}_Z X \to \gamma + ^{A+1}_Z X}. Notice in this case the neutron is not released. Example: \ce{ n+ ^{238} U \to ^{239} U^* \to ^{239} U + \gamma }, in which $T_n^* = 6.67 \fsp \eV$.
+
+Insert image. 
+
+Breit-Wigner: Single-level Resonance: 
+\begin{align}
+\sigma_{n, \gamma} (T_i) &= \sigma_c (T_i) P_{\gamma} (E) \\
+\sigma_{n, \gamma} (T_i) &= 
+\end{align}
+
+\end{enumerate}
+
+
+
+
+
+\end{enumerate}
+
+
+
+
+
+
+%|1|ssmrt/31Xs2xUd5shSP39Q1TCbY=|SSl5bfq0t+U8MvllNgsB6IhmYhE= ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAnebSIxeypUjslaZVh4Kp3YkLQWsEJKAul3k1uoL9SDfUb+7xUyHCrmvS38tYlnfCZutnKGYHEuQeXPnHteVGxAJhkkMmf/J0x/DHPG9nd9qlDdDn+dE++k7A2zaq3uVt/0JHraIaDA5hsmaPd1zzCkY+YefLCdyzhBiUhaqbar7YcmHYR/60nGlGGtPcRam2mijesvGgCF6p0/8sUBgeXr76o7CXwGZeTpmet835BfzuX4dRHqEo3Rx+AGMDzXfzjdbQv6ez4O2V3h9yRgaiY5L3FEsY97FnJsSPe8Yt9Ai5EtmXeu/VOkw7BSKN9kLvfUReggkinnF3ODvJDFymQQ==
