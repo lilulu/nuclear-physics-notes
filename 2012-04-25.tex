@@ -185,12 +185,16 @@ N &= \left[ \begin{array}{c} T \\ C_1 \\ C_2 \\ C_3 \end{array} \right]
 
 \item Instantaneous rod withdraw with 8 delayed groups. The intial part of the transient is slightly more complicated in Fig.~\ref{4a} than 1-group case in Fig.~\ref{ex3}(single delayed group is very sensitive to the time-constant). Fig.~\ref{4b} shows that, if we wait long enough,  we reach secular equilibrium between power and precursor rate that the precursor rates have the same shapes as the power, altough the rates may be off by a factor. 
   \begin{figure}[ht]
-    \subfigure[Short Term Behavior]{
-     \includegraphics[width=3in]{images/pke/ex4.png}
-     \label{4a} }
-    \subfigure[Long Term Behavior]{
-     \includegraphics[width=3in]{images/pke/ex4b.png}
-     \label{4b} }
+    \begin{subfigure}[b]{0.45\textwidth}
+      \centering
+      \includegraphics[width=\textwidth]{images/pke/ex4.png}
+      \caption{Short Term Behavior} \label{4a} 
+    \end{subfigure}
+    \begin{subfigure}[b]{0.45\textwidth}
+      \centering
+      \includegraphics[width=\textwidth]{images/pke/ex4b.png}
+      \caption{Long Term Behavior} \label{4b} 
+    \end{subfigure}
     \caption{PKE Example 4, Instant Rod Withdrawal With 8 Delayed Groups} \label{ex4}
   \end{figure}
 
@@ -335,12 +339,16 @@ The red lines in Fig.~\ref{ik-ex1} point out the location of the excore detector
 
 \subtopic{SCRAM/Rod Drop Analysis}
   \begin{figure}[ht]
-    \subfigure[No Fluctuation]{
-     \includegraphics[width=3in]{images/pke/ik-ex2a.png}
-     \label{ik-ex2a} }
-    \subfigure[With Fluctuation]{
-     \includegraphics[width=3in]{images/pke/ik-ex2b.png}
-     \label{ik-ex2b} }
+    \begin{subfigure}[b]{0.45\textwidth}
+      \centering
+      \includegraphics[width=\textwidth]{images/pke/ik-ex2a.png}      
+      \caption{No Fluctuation} \label{ik-ex2a} 
+    \end{subfigure}
+    \begin{subfigure}[b]{0.45\textwidth}
+      \centering
+      \includegraphics[width=\textwidth]{images/pke/ik-ex2b.png}      
+      \caption{With Fluctuation} \label{ik-ex2b} 
+    \end{subfigure}
     \caption{IK Example 2, Rod Drop for SCRAM Reactivity} \label{ik-ex2}
   \end{figure}
 This example produces a scram, then measure power change and infer $T(t)$, thus estimate reactivity. The rough method use Prompt Jumpt Approximation. More accurately, we need to model all the neutron sources, including ($\alpha,n$) reactions etc.
