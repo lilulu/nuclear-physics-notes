@@ -7,3 +7,8 @@
 \classname{Engineering: Nuclear Reactors}
 \professor{Mujid S. Kazimi}
 \schoolname{Massachusetts Institute of Technology}
+
+
+% for 2011-11-10.tex
+\usepackage{caption}
+\usepackage{subcaption}
