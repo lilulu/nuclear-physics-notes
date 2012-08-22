@@ -8,3 +8,7 @@
 \classname{Neutron Interactions \& Applications}
 \professor{Ben Forget}
 \schoolname{Massachusetts Institute of Technology}
+
+% for 2012-05-15.tex
+\usepackage{caption}
+\usepackage{subcaption}
