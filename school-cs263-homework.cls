@@ -2,4 +2,4 @@
 \LoadClass{school-cs263}
 \ProvidesClass{school-cs263-homework}
 
-\usepackage{school-style-homework}
+\usepackage[exercise]{school-style-homework}

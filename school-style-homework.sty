@@ -24,7 +24,7 @@
   \HRule \\[0.4cm]
          {\huge \bfseries \@classcode\\
            \@classname\\
-           Homework \#\@assignment }\\[0.4cm]
+           Homework \#\@assignment}\\[0.4cm]
    \HRule \\[1.5cm]
 
    \begin{minipage}{0.4\textwidth}
@@ -45,8 +45,24 @@
 \clearpage
 }
 
+\DeclareOption{exercise}{%
+  \def\exercise#1{\gdef\@exercise{#1}}
+  \renewcommand{\maketitle}{%
+    \thispagestyle{empty}
+    \begin{flushright}
+      \@author\\
+      \@date\\
+    \end{flushright}
+    \begin{flushleft}
+      \textit{\@classcode\ Homework \@assignment\ Exercise \@exercise:}\\
+    \end{flushleft}
+  }
+}
+
 \pagestyle{fancy}
 
 \newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
 \newcommand{\note}[1]{\textbf{#1}}
 \newcommand{\questiontext}[1]{\textbf{#1}}
+
+\ProcessOptions{\relax}
