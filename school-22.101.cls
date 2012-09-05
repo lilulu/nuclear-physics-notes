@@ -14,3 +14,4 @@
 
 % used in 2011-09-12.tex
 \newtheorem{axiom}{Axiom}
+\newtheorem{subaxiom}{Axiom}[axiom]
