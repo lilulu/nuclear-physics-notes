@@ -11,3 +11,6 @@
 % used in 2011-12-13.tex Final Review
 \usepackage{caption}
 \usepackage{subcaption}
+
+% used in 2011-09-12.tex
+\newtheorem{axiom}{Axiom}
