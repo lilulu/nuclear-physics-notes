@@ -5,21 +5,53 @@
 \maketitle
 
 
-\lecture{Quantum Mechanics Fundamendals}
-Nucleus (protons \& neutrons) are the smallest units in this course. 
-
-\uline{Two problems in this course:}
+\lecture{Overview of This Class}
+This class (first taken Fall 2011, sitting in again Fall 2012) is delivered in \uline{three parts}:
 \begin{enumerate}
-\item (statics) Properties of force that holds neutrons and protons together. 
-
-Sample sections: nuclear structure, stability (scattering). 
-
-\item (dynamics) Behavior of atoms of many particles. 
-
-Sample sections: nuclear decay, neutron interactions, nuclear reaction. 
+\item Quantum mechanics fundamentals. 
+\item Nuclear structure and nuclear decays.
+\item Interactions in nuclear matter and nuclear reactions.
 \end{enumerate}
 
-\uline{Nuclear Nomenclature}
+Prof. Yildiz summarizes the class into \uline{two major problems}:
+\begin{enumerate}
+\item Statics: properties of force that holds neutrons and protons together. Sample sections: nuclear structure, stability (scattering). 
+
+\item Dynamics: behavior of atoms of many particles. Sample sections: nuclear decay, neutron interactions, nuclear reaction. 
+\end{enumerate}
+
+
+
+The recommended texts are: 
+\begin{itemize}
+\item Introductory Nuclear Physics by Krane 1988.
+\item Introductory Quantum Mechanics by Liboff, 2003.
+\end{itemize}
+
+\vspace{0.5cm}
+Introductory question: is an exothermic reaction always spontaneous? 
+\begin{enumerate}
+\item $Q = $ energy out $-$ energy in. 
+\item To find $Q$: it is the mass defecate. 
+\item To find mass: we solve it from the binding energy. 
+\item To model binding energy for simple model of the nucleus: we use the liquid-drop model: nucleons act like water. Thus we arrive at the Semi-Empirical Mass Formula (SEMF): volume, surface, coulomb, symmetry, pairing.  
+\item From SEMF, we derive the B/A vs. A plot, where exothermic reactions increase the binding energy per nucleon (B/A), whether it's from the left to right or the right to left.
+\end{enumerate}
+The answer is, an exothermic reaction does not always have to be spontaneous. A spontaneous reaction has to be exothermic. 
+
+
+The common questions we are going to address in this class include,
+\begin{itemize}
+\item Why some material are fissile, others fissionable, and very rarely we have spontaneous fission?
+\item Why is it so hard to obtain fusion on earth?
+\end{itemize}
+
+\lecture{Quantum Mechanics Fundamentals}
+Prof. Cappellaro thinks it is important to review linear algebra for the quantum mechanics portion of the class. 
+
+
+\topic{Nuclear Nomenclature}
+Nucleus (protons \& neutrons) are the smallest units in this course. We start with some nuclear nomenclature:
 \begin{enumerate}
 \item Protons and neutrons are around the size of 1 femmi ($10^{-13}$ cm, or $10^{-15}$ m). 
 
@@ -76,10 +108,75 @@ There are a few important points:
 The probability of alpha decay $P^{\alpha \to} \neq 0$. The explanation is quantum tunneling. We need a set of principles that explain the physical behavior of the very small particles, like atomic (atoms, molecules), subatomic (electron, neutron, proton, etc). 
 
 While we are measuring any observable, they will be associated with a probability -- so we are not going to measure/predict an observable with certain precision, but rather with probability. 
-
 \end{enumerate}
 
 
+\topic{Wave \& Particle behavior: de Broglie Wave}
+\eqn{ \lambda = \frac{h}{P} }
+in which P is the momentum of the particle, and h is Planck's constant. There are observables that we can solve for: position, energy, momentum, spin, etc. 
+
+
+\topic{A Linear Algebra Review}
+
+\begin{enumerate}
+\item Ket: A vector $\vec{v}$ can be written as $\ket{v}$ in the Diract notation. 
+
+\item Vector space is a collection of vectors $\left\{ \vec{v} \right\}$. 
+
+\item A complex Hilbert space is the space of states: $a \vec{v} = a \ket{v}$. 
+
+\item Operator: takes in a vector, and outputs another vector. The operators can be any mathematical expression, for instance,
+\eqn{ \hat{A} (x) = f(x) = \ddx  }
+The operators are mathematical expressions, so they obey math rules, like,
+\eqn{ \hat{A}^2 (x) = \ddxn2 }
+
+\item Hermilian operator: have real eigenvalues. Example: 
+  \eqn{ A \ket{\psi} &= \ket{\phi} & \frac{\derivative f(x)}{\dx} &= g(x) }
+
+\item Eigenvalues/eiganvectors: 
+  \eqn{ A \ket{n} = a_n \ket{n} \label{eigenvalue-eq}}
+  What it means is, given a vector $\ket{n}$, an operator $A$ generates a vector that lines on the same line with $\ket{n}$ but with maybe different magnitude. Another way to write Eq.~\ref{eigenvalue-eq} is, 
+  \eqn{ \left[ \begin{array}{cc} c & d \\ e & f \end{array} \right] \left[ \begin{array}{c} v_1 \\ v_2 \end{array} \right] = a \left[ \begin{array}{c} v_1 \\ v_2 \end{array} \right] }
+
+\item Dual of vector: 
+  \eqn{ \vec{\psi} \cdot \vec{\phi} = c \label{dual-of-vectors}} 
+  Recall that vectors can be written as ket. When we dot two vectors though, we would write one as a ket, the other as a bra, thus Eq.~\ref{dual-of-vectors} becomes, 
+  \eqn{ \braket{\psi}{\phi} = c}
+  To calculate $\braket{\psi}{\phi}$, in vector notation, 
+  \eqn{ \vec{\psi} \cdot \vec{\phi} = |\vec{\psi}| |\vec{\phi}| \cos \theta }
+  In Diract notation, we would integrate, 
+  \eqn{ \braket{\psi}{\phi} = \int_{-\infty}^{\infty} \phi^* (x) \psi(x) \dx }
+  A property of the braket is that, 
+  \eqn{ \braket{\psi}{\phi} = \braket{\phi}{\psi}^* }
+
+
+
+
+\item How Prof. Yildiz approaches eigenvalues/eiganvectors: \hi{observables A is associated with eigenvalues of the operator $\hat{A}$.} The eigenvalue problem of $\hat{A}$ is:
+\eqn{ \hat{A} u_n(\underline{x}) = a_n u_n(\underline{x}), n=1,2,3,\cdots }
+in which $a_n$ are the possible values of the observables A, and $u_n(\underline{x})$ are the eigenfunctions. 
+
+The properties associated with the eigenfunctions are: 
+\begin{enumerate}
+\item $u_n(\underline{x})$ is orthonormal. 
+\eqn{ \int u_m^* (\underline{x}) u_n(\underline{x}) \dV = \left\{ \begin{array}{c} 0, m\neq n \\ 1, m=n \end{array} \right.  }
+
+\item `Complete:' any function $f(\underline{x})$ can be represented as a linear superposition of the eigenfunctions $u_n(\underline{x})$:
+  \eqn{  f(\underline{x}) = \Sum_n C_n u_n(\underline{x} ) }
+  We can find $C_n$ by using the orthonormal properties of the eigenfunctions:
+  \eqn{ C_n = \int \dV f(\underline{x}) u_n^* (\underline{x}) }
+  We can approve the above expression by plugging in what $f(\underline{x})$ is:
+  \begin{align}
+    & \int \dV f(\underline{x}) u_n^* (\underline{x}) = \int \dV  u_n^* (\underline{x}) \Sum_m C_m u_m(\underline{x}) = \Sum_m C_m \int \dV u_n^*(\underline{x}) u_m (\underline{x}) = C_n
+  \end{align}
+\end{enumerate}
+
+Example: given a matrix:
+\eqn{ \underline{\underline{M}} = \left[ \begin{array}{cc} 2 & 1 \\ 1 & 2 \end{array} \right] }
+We can solve for the eigenvalues to be 1 and 3, and the eigenfunctions are:
+\eqn{ \underline{u}_1 = \frac{1}{\sqrt{2}} \left[ \begin{array}{c} 1 \\ -1 \end{array} \right], \underline{u}_2 = \frac{1}{\sqrt{2}} \left[ \begin{array}{c} 1 \\ 1 \end{array} \right]   }
+That is to say, 1 and 3 are the possible values of your observables, and the two eigenfunctions are orthonormal, and the linear superposition of them can form any vector in this space.
+\end{enumerate}
 
 
 \end{document}
