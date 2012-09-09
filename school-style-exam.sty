@@ -7,10 +7,11 @@
 
 \def\assignment#1{\gdef\@assignment{#1}}
 \def\classcode#1{\gdef\@classcode{#1}}
+\def\exam#1{\gdef\@exam{#1}}
 
 % Sets a simple header/footer
 \lhead{\@author}
-\chead{\@classcode\ Final Exam Solution}
+\chead{\@classcode\ \@exam\ Solution}
 \rhead{\@date}
 \lfoot{}
 \cfoot{\thepage}
@@ -23,7 +24,7 @@
   \vspace{2in}
   \HRule \\[0.4cm]
          {\huge \bfseries \@classcode\ \@classname\\
-           Final Exam Solutions \\ [0.4cm]
+           \@exam\ Solutions \\ [0.4cm]
 }
    \HRule \\[1.5cm]
 
