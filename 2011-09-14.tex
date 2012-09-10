@@ -19,7 +19,18 @@ There are two pieces:
 \end{subaxiom}
 \end{axiom}
 
-Given an observable A, we find the operator $\hat{A}$, and the corresponding eigenvalues $a_i$ through $\hat{A} u_i = a_i u_i$. Then the probability of measuring the $i$-th eigenvalue is:
+Another way to put the above two  statements are, 
+\begin{itemize}
+\item Observable eigenvalues are all possible outcomes of a measurement. 
+\item System state determine probabilities of a measurement. 
+\end{itemize}
+
+To solve for the probability of a measurement, we need to complete two steps, 
+\begin{enumerate}
+\item Given an operator $A$, we find the basis $\left\{ \ket{a_n} \right\}$. 
+\item $\ket{\psi}$ is the system state, find $C_n = \braket{a_n}{\psi}$, then $P(a_n) = |C_n|^2$. 
+\end{enumerate}
+Explanation: given an observable A, we find the operator $\hat{A}$, and the corresponding eigenvalues $a_i$ through $\hat{A} u_i = a_i u_i$. Then the probability of measuring the $i$-th eigenvalue is:
 \eqn{ P(a_i) = |C_i|^2 }
 in which $C_i$ is the expansion coefficient of $\psi(\uline{x}, t)$ with eigenfunction of $\hat{A}$. The completeness property of eigenfunctions tells us that we can expand $\ket{\psi}$ with a linear superposition of its eigenfunctions:
 \begin{align}

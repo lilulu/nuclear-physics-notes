@@ -5,15 +5,22 @@
 \maketitle
 
 \topic{Four Quantum Mechanics Postulates}
+A high-level overview of the four postulates, 
+\begin{enumerate}
+\item State. 
+\item Physical properties/observables. 
+\item Measurements. 
+\end{enumerate}
+
 \subtopic{Postulate 1: Wave Functions Live in Hilbert Space}
-\begin{axiom} There are two versions:
-  \begin{subaxiom}
+\begin{axiom} 
     The state function/state is a wave function that contains all knowledge pertained to that particle. 
-  \end{subaxiom}
-  \begin{subaxiom}
-    The properties of a quantum system are completely defined by specification of its state vector $\ket{\psi}$. The state vector is an element of a complex Hilbert space $H$ called the space of states. 
-  \end{subaxiom}
 \end{axiom}
+Two other ways to state this postulate are: 
+\begin{itemize}
+\item The state of a physical system is described by a state vector $\ket{\psi}$. $\left\{ \ket{\psi} \right\}$ form a Hilbert space.
+\item The properties of a quantum system are completely defined by specification of its state vector $\ket{\psi}$. The state vector is an element of a complex Hilbert space $H$ called the space of states.
+\end{itemize}
 A quantum state $\psi(\uline{x}, t)$ is complex in space and time, is normalized, and contains all knowledge (aka any physical behavior associated with the state) we may be interested in learning about the physical behavior. 
 
 
@@ -22,53 +29,85 @@ A quantum state $\psi(\uline{x}, t)$ is complex in space and time, is normalized
 \begin{axiom} 
     The \uline{permissible} values of the observables are the eigenvalues from solving the associated mathematical operators.
 \end{axiom}
-    A longer version is: `with every physical property $A$ there exists an associated linear, Hermitian operator $\hat{A}$ called observable which acts in the Hilbert space $H$. The eigenvalues of the operator are the possible values of the physical properties.' 
+Two other ways to state this postulate are:
+\begin{itemize}
+\item Physical properties (observables) are described by operators A. Eg., $\ket{\phi} = A \ket{\psi}$. 
+\item With every physical property $A$ there exists an associated linear, Hermitian operator $\hat{A}$ called observable which acts in the Hilbert space $H$. The eigenvalues of the operator are the possible values of the physical properties.
+\end{itemize}
+
+\hi{Hermitian operators} mean that eigenvalues are real, and eigenvectors form an orthorgonal basis. Hermitian operators are always self-adjoint, because self-adjoint means $A = A^*$ which is always going to be true for operators with real eigenvalues. 
 
 
 For example, a 1D free particle system can be solved using its operators to find the permissible values of the observables. 
 \begin{enumerate}
 \item \uline{Operators Definitions in 1D Free Particle Problem.} Position operators by definition are: $\hat{x}, \hat{y}, \hat{z}$ (or the vector $\hat{\underline{x}}$). Momentum operators by definition are:
-\eqn{ \hat{p}_x &= - i \hbar \ppx,  &\hat{p}_y &= - i \hbar \ppy, &\hat{p}_z &= - i \hbar \ppz, & \Aboxed{\hat{p} &=  -i \hbar \gradient} }
+  \eqn{ \hat{p}_x &= - i \hbar \ppx,  &\hat{p}_y &= - i \hbar \ppy, &\hat{p}_z &= - i \hbar \ppz, & \Aboxed{\hat{p} &=  -i \hbar \gradient} }
 
-Classically, energy is: $E = KE + PE = \frac{1}{2m} (p_x^2 + p_y^2 + p_z^2) + V(x,y,z)$. Quantum mechanically, the energy operators are:
-\eqn{ \hat{H} = \frac{1}{2m} \left( \hat{p}_x^2 + \hat{p}_y^2 + \hat{p}_z^2 \right) + V(\hat{x}, \hat{y}, \hat{z}) = \boxed{ - \frac{\hbar^2}{2m} \laplacian + V(\hat{x}, \hat{y}, \hat{z})} }
+  Classically, energy is: $E = KE + PE = \frac{1}{2m} (p_x^2 + p_y^2 + p_z^2) + V(x,y,z)$. Quantum mechanically, the energy operators are:
+  \eqn{ \hat{H} = \frac{1}{2m} \left( \hat{p}_x^2 + \hat{p}_y^2 + \hat{p}_z^2 \right) + V(\hat{x}, \hat{y}, \hat{z}) = \boxed{ - \frac{\hbar^2}{2m} \laplacian + V(\hat{x}, \hat{y}, \hat{z})} }
+
+
+
+\item \uline{Position eigenvalue problem for 1D free particle.} The position eigenvalue problem is:
+  \eqn{ \hat{x} \ket{u_n} &= x_n \ket{u_m}  }
+  There are two important aspects of this (and any) eigenvalue problem: 
+  \begin{enumerate}
+  \item Describing the coefficients $C_n$. Using the bracekt notation for inner product, we can describe the state as (and keep in mind that the two different notations for continuous basis vs. discretized basis)\footnote{To keep it general, we use $C_n$ instead of $x_n$ for the eigenvalues for now.}. 
+    \eqn{ \ket{\psi} = \int \dx C(x) \ket{u_n} = \Sum C_n \ket{u_n}  \label{ket-psi}}
+    where 
+    \eqn{ C_n = \braket{u_n}{\psi} \label{Cn}}
+
+
+  \item Describing basis. In the above equation, $\left\{ \ket{u_n} \right\}$ are the basis for position operator. 
+    Plug Eq.~\ref{Cn} into Eq.~\ref{ket-psi}, 
+    \begin{align}
+      \ket{\psi} &= \int \dx C(x) \ket{x} = \int \braket{x}{\psi} \ket{x} \dx \xrightarrow{\psi(x) = \ket{\psi}} \int \bra{x} \psi(x) \ket{x} \dx \\
+      &\int x u_n(x)\ket{x} \dx = \int x_n u_n (x) \ket{x} \dx = \int x_n \delta (x-x_n) \ket{x} \dx 
+    \end{align}
+    \hi{Diract delta function $\delta(x-x_n)$ is the eigenfunction of position operator.} 
+
+    \eqn{ \ket{u_n} &= \delta (x - x_n) }
+    That is, $u_n(x_n) = \infty, u_n (x\neq x_n) = 0,$ and we can prove that the area under the delta curve to be 1: 
+    \begin{align}
+      \int_{-\infty}^{\infty} \dx f(x) \delta(x-x_n) &=  \int_{-\infty}^{\infty} \dx x \delta(x-x_n) = x_n = f(x) \\
+      \Rightarrow \int_{-\infty}^{\infty} \dx \delta(x-x_n) &= 1 
+    \end{align}
+  \end{enumerate}
 
 \item \uline{Momentum eigenvalue problem for 1D free particle.} The momentum eigenvalue problem is, 
-\eqn{ \hat{P} u_n(\uline{x}) &= p_n u_n(\uline{x}) \\
-  -i\hbar \ppx u_n(\uline{x}) &= p_n u_n(\uline{x}) \\
-\ppx u_n &= i \frac{p_n}{\hbar} u_n   \\
- u_n &= A e^{i \frac{p_n}{\hbar} x} = A e^{ikx} = A (\cos kx + i \sin kx) }
-where
-\eqn{ \lambda &= \frac{h}{p} = \frac{2 \pi \hbar}{p} =  \frac{2\pi}{k} &
-k &= \frac{p}{\hbar} = \frac{2\pi}{\lambda} }
+\begin{align}
+  \hat{P} \ket{u_n} &= p_n \ket{u_n}  &   \hat{P} u_n(\uline{x}) &= p_n u_n(\uline{x}) \\
+  -i\hbar \ppx u_n(\uline{x}) &= p_n u_n(\uline{x}) &  \ppx u_n &= i \frac{p_n}{\hbar} u_n   \\
+  u_n &= A e^{i \frac{p_n}{\hbar} x} = A e^{ikx} = A (\cos kx + i \sin kx) 
+\end{align}
+where we define $\boxed{k = \frac{p}{\hbar}}$ \footnote{$\hbar$ being the reduced Planck constant $\hbar = \frac{h}{2\pi}$. $h, \hbar$ are invented to convert between energy and wavelength after people realize that they are really the same thing with different units.}, and combine with the De Broglie wavelength $\lambda = \frac{h}{p}$, we can obtain the relation of $ \boxed{k \lambda = 2 \pi}$ two ways, 
+\eqn{k &= \frac{p}{\hbar} = \frac{2\pi}{\lambda} & \lambda &= \frac{h}{p} = \frac{2 \pi \hbar}{p} =  \frac{2\pi}{k}}
 \textcolor{blue}{The eigenfunction of the momentum eigenvalue problem gives us a de Broglie wave traveling to the right hand, and the momentum value, or the eigenvalue of the problem is $p_n = \hbar k$.} Note this is a continuous solution, meaning there is no restriction on wavelength $\lambda$ or wave number k, because this is a 1D free particle problem. 
 
-Is $\cos kx$ a wave function satisfying the momentum eigenvalue problem? We can consider:
+\textbf{Example:} Is $\cos kx$ a wave function satisfying the momentum eigenvalue problem? \\
+\textbf{Answer:} We can consider:
 \eqn{ \cos kx = \frac{1}{2} (e^{ikx} + e^{-ikx})  }
 This is to say the eigenfunction $\cos kx$ is actually the combination of a wave traveling to the right $e^{ikx}$ and a wave traveling to the left $e^{-ikx}$, and it is not the solution of the momentum eigenvalue problem, hence it does NOT satisfy the momentum eigenvalue problem. 
 
 
-\item \uline{Position eigenvalue problem for 1D free particle.} The position eigenvalue problem is:
-\eqn{ \hat{x} V_j (x) = x_j V_j (x) }
-\eqn{ \Rightarrow V_j (x) = \delta (x - x_j) }
-That is, $V_j(x_j) = \infty, V_j (x\neq x_j) = 0,$ and we can prove that the area under the delta curve to be 1: 
-\begin{align}
-\int_{-\infty}^{\infty} \dV f(x) \delta(x-x_j) &=  \int_{-\infty}^{\infty} \dV x \delta(x-x_j) = x_j = f(x) \\
-\Rightarrow \int_{-\infty}^{\infty} \dV \delta(x-x_j) &= 1 
-\end{align}
-
-
-\item \uline{Energy eigenvalue problem for 1D free particle.} The energy operator is defined as a Hamiltonian Operator: 
-\eqn{ \hat{H}  = -\frac{\hbar^2}{2m} \gradient^2 + V(x,y,z)}
+\item \uline{Energy eigenvalue problem for 1D free particle.} The energy operator is Hamiltonian: 
+\eqn{ \hat{H}  = \frac{\hat{p} \cdot \hat{p}}{2m} + \hat{V}  = -\frac{\hbar^2}{2m} \gradient^2 + V(x,y,z)}
 For free particles, we can drop the potential term. The energy eigenvalue problem becomes,
 \begin{align}
- \hat{H} W_n (\uline{x}) &= E_n W_n (\uline{x} ) \\
- -\frac{\hbar^2}{2m} \gradient^2 W_n (\uline{x}) &= E_n W_n (\uline{x} ) \\
- \ppxn2 W_n + \frac{2m E_n}{\hbar^2} W_n &= 0 \\
- \ppxn2 W_n + k^2 W_n &= 0  \\
- W_n &= A \sin kx + B \cos kx = A^{\prime} e^{ikx} + B^{\prime} e^{-ikx}
+  \hat{H} \ket{u_n} &= E_n \ket{u_n} &  \hat{H} u_n (\uline{x}) &= E_n u_n (\uline{x} ) \\
+  -\frac{\hbar^2}{2m} \gradient^2 u_n (\uline{x}) &= E_n u_n (\uline{x} )  &  \ppxn2 u_n + \frac{2m E_n}{\hbar^2} u_n &= 0 \\
+ \ppxn2 u_n + k^2 u_n &= 0   & u_n &= A e^{ikx} + B e^{-ikx} 
 \end{align}
-where we replaced $\frac{2m E_n}{\hbar^2}$ with $k_n^2$ because:
+The solution can be written in two ways, 
+\begin{align}
+  u_n = \left\{ 
+  \begin{array}{cc}
+    A e^{ikx} + B e^{-ikx} & \mbox{Travelling Wave} \\
+    A' \sin kx + B' \cos kx  & \mbox{Stationary Wave} 
+  \end{array}
+  \right.
+\end{align}
+Keep in mind that we replaced $\frac{2m E_n}{\hbar^2}$ with $k_n^2$ because:
 \eqn{ p = \hbar k \Rightarrow k = \frac{p}{\hbar} = \frac{\sqrt{2 m E}}{\hbar} }
 Keep in mind that for free particles there is no restriction on the $k$, position or anything else. 
 
