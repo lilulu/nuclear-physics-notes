@@ -159,14 +159,14 @@ N &= \left[ \begin{array}{c} T \\ C_1 \\ C_2 \\ C_3 \end{array} \right]
 \clearpage
 \topic{Application of PKEs}
 \begin{enumerate}
-\item Instantaneous reactor scram from criticality($\rho = - 8 \beta$). Power goes almost instantly to about 10\%, then it ultimately decays with time constant of longest lived precursor (55s in this case). 
+\item Instantaneous reactor scram from criticality($\rho = - 8 \beta$). Power goes almost instantly to about 10\%, then it ultimately decays with time constant of longest lived precursor (Br87 with a half-life of 55s). 
   \begin{figure}[ht]
     \centering
     \includegraphics[width=5in]{images/pke/ex1.png}
     \caption{PKE Example 1, Instant Reactor Scram} 
   \end{figure}
 
-\item 2s rod drop scram ($\rho = - 8 \beta$). Again, power goes to about 10\% when rod fully inserted, and power ultimately decays with time constant of the longest lived precursor (55s). 
+\item 2s rod drop scram ($\rho = - 8 \beta$). This is a common assumption to make for real application because rods are dropping to replace the water. Again, power goes to about 10\% when rod fully inserted, and power ultimately decays with time constant of the longest lived precursor (55s).  
   \begin{figure}[ht]
     \centering
     \includegraphics[width=3in]{images/pke/ex2.png}
@@ -174,7 +174,7 @@ N &= \left[ \begin{array}{c} T \\ C_1 \\ C_2 \\ C_3 \end{array} \right]
   \end{figure}
 
 \clearpage
-\item Instantaneous rod withdraw ($\rho = 0.1 \beta$). In this senario, there is only one delayed neutron precursor group, and we withdraw rod instantly. The reactor wants to response immediately (hence the jump) but it does not have enough delayed neutron to sustain that increase, hence the jump is not enough and it will increase for the rest of the way, until ultimately power increases with time constant of the longest precursor group (55s). See next section for the derivation of prompt jump estimation. 
+\item Instantaneous rod withdraw ($\rho = 0.1 \beta$). In this senario, there is only one delayed neutron precursor group, and we withdraw rod instantly. \textcolor{blue}{The reactor wants to response immediately (hence the jump) but it does not have enough delayed neutron to sustain that increase, hence the jump is not enough and it will increase for the rest of the way}, until ultimately power increases with time constant of the longest precursor group (55s). See next section for the derivation of prompt jump estimation. 
   \begin{figure}[ht]
     \centering
     \includegraphics[width=3.5in]{images/pke/ex3.png}
@@ -183,7 +183,9 @@ N &= \left[ \begin{array}{c} T \\ C_1 \\ C_2 \\ C_3 \end{array} \right]
  
 
 
-\item Instantaneous rod withdraw with 8 delayed groups. The intial part of the transient is slightly more complicated in Fig.~\ref{4a} than 1-group case in Fig.~\ref{ex3}(single delayed group is very sensitive to the time-constant). Fig.~\ref{4b} shows that, if we wait long enough,  we reach secular equilibrium between power and precursor rate that the precursor rates have the same shapes as the power, altough the rates may be off by a factor. 
+\item \uline{Instantaneous rod withdraw with 8 delayed groups.} The intial part of the transient is slightly more complicated in Fig.~\ref{4a} than 1-group case in Fig.~\ref{ex3}(single delayed group is very sensitive to the time-constant). 
+
+Fig.~\ref{4b} shows that, if we wait long enough, the power becomes an asymptotic exponential rise. We reach \hi{secular equilibrium} between power and precursor rate that the precursor rates have the same shapes as the power, altough the rates may be off by a factor. 
   \begin{figure}[ht]
     \begin{subfigure}[b]{0.45\textwidth}
       \centering
@@ -198,21 +200,21 @@ N &= \left[ \begin{array}{c} T \\ C_1 \\ C_2 \\ C_3 \end{array} \right]
     \caption{PKE Example 4, Instant Rod Withdrawal With 8 Delayed Groups} \label{ex4}
   \end{figure}
 
-\item 2s rod insertion with 8 delayed groups ($\rho = -0.1 \beta$). 
+\item \uline{2s rod insertion with 8 delayed groups ($\rho = -0.1 \beta$).}
   \begin{figure}[ht]
     \centering
     \includegraphics[width=6in]{images/pke/ex5.png}
     \caption{PKE Example 5, Two Second Rod Insertion} 
   \end{figure}
 
-\item Regulating rod withdrawal/insertion. Senario: rod is moved in for 2s, hold for 20s, re-positioned in 2s. \textbf{Power does not come back to the original state, because we are solving for an eigenvalue problem, and what the asymptotic power is depends on how to get there.} In the withdrawal case, the precursor builds up and is continuing to build up during the second phase, so the power ends up higher than initially. 
+\item \uline{Regulating rod withdrawal/insertion.} Senario: rod is moved in for 2s, hold for 20s, re-positioned in 2s. \textbf{Power does not come back to the original state, because we are solving for an eigenvalue problem, and what the asymptotic power is depends on how to get there.} In the withdrawal case, the precursor builds up and is continuing to build up during the second phase, so the power ends up higher than initially\footnote{it is almost like driving, except there is no friction.}.
   \begin{figure}[ht]
     \centering
     \includegraphics[width=6in]{images/pke/ex6.png}
     \caption{PKE Example 6, Rod Withdrawal and Insertion} 
   \end{figure}
 
-\item Super-prompt criticality (failed housing). Senario: rod is moved in for 1s. The point is, power ascension is very sensitive as $\rho \approx \beta$. \textbf{When $\rho > \beta$, reactivity does not have to wait for the delayed neutrons anymore, changes can happen instantaneously.}
+\item \uline{Super-prompt criticality/rod ejection/failed housing.} Senario: rod is moved in for 1s. The point is, power ascension is very sensitive as $\rho \approx \beta$. \textbf{When $\rho > \beta$, reactivity does not have to wait for the delayed neutrons anymore, changes can happen instantaneously.} Thus if your data is more than 5\% uncertain, the answer would vary quite a lot. 
   \begin{figure}[ht]
     \centering
     \includegraphics[width=6in]{images/pke/ex7.png}
@@ -250,13 +252,9 @@ Recall that $\beta = \Sum_i \beta_i$, we can write the reactivity as,
 \eqn{ \rho = \omega \Lambda + \Sum_i \left( \beta_i - \frac{\lambda_i \beta_i}{\omega + \lambda_i} \right) }
 That is, 
 \eqn{ \Aboxed{ \rho &= \omega \Lambda + \Sum_i \frac{\beta_i \omega}{\omega + \lambda_i}} }
-The point is, we can compute $\rho$ using inhour equation if we know $\beta_i, \omega, \lambda_i$. Another typically assumption is to set $\omega \Lambda \to 0$ because the prompt neutron lifetime is so small (with the exception of super prompt in which case $\omega$ is huge). The specific steps of computing $\rho$ for a reactor, 
-\begin{enumerate}
-\item Withdraw reactor control rod.
-\item Measure reactivity period $T$ (make sure $T$ is constant before we measure it).
-\item Use inhour equation to compute reactivity: $\omega = \frac{1}{T}$, plug $\omega$ into inhour equation. 
-\end{enumerate}
-This is how control rods are calibrated, and how small sample worths are measured. 
+Interpretation: we can compute $\rho$ using inhour equation if we know $\beta_i, \omega, \lambda_i$. 
+A typically assumption is to set $\omega \Lambda \to 0$ because the prompt neutron lifetime is so small (with the exception of super prompt in which case $\omega$ is huge). Another way to put it is that the frequency of the reactor is going to be small. 
+
 
 \subtopic{Reactivity Units}
 \begin{table}[ht]
@@ -273,7 +271,27 @@ This is how control rods are calibrated, and how small sample worths are measure
   \caption{Common Reactivity Units}
 \end{table}
 
-\subtopic{Applications of Inhour: HZP Rod Worth Measurement}
+
+
+\subtopic{Application 1: Computing Reactivity of Core}
+Steps of computing $\rho$ for a reactor, 
+\begin{enumerate}
+\item Withdraw reactor control rod.
+\item Measure reactivity period $T$ (make sure $T$ is constant before we measure it).
+\item Use inhour equation to compute reactivity: $\omega = \frac{1}{T}$, plug $\omega$ into inhour equation. 
+\end{enumerate}
+This is how control rods are calibrated, and how small sample worths are measured. We would drive a sample in, and then out, etc. Just make sure that the reactor period is constant before you take a measurement of the reactor period (though this put a requirement on the reactivity, as if the reactivity is too large or too small then we might go over the range in side of which we can ignore feedback). 
+
+
+There are a couple of potential issues, [FIXME].
+\begin{enumerate}
+\item In-hour assumes constant $\beta_i$, where in reality Bete-effective can be changed by rod worth by 3\%. For instance, when we drive the control rod in the center of a core, we drive the flux towards the outter edge of the core and thus change beta. 
+
+\item To perform an accurate measurement, we really need to perform calculation. 
+\end{enumerate}
+
+
+\subtopic{Applications 2: HZP Rod Worth Measurement}
 Inhour equation can be used to measure HZP rod worth due to Boron dilution. The steps are: 
 \begin{enumerate}
 \item Make reactor stable (this is important, because without asymptotic period we cannot use the Inhour equation). 
@@ -290,9 +308,10 @@ Fig.~\ref{inhour-app} demonstrate this process. The problem is, the entire proce
 \end{figure}
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Inverse Kinetics %%%%%%%%%%%%%%%%%%%%%%%
 \clearpage
 \topic{Derivation of IK}
-Assume we know the amplitude function $T(t)$ (that is, we are given a desired reactor power shape vs. time), we can solve for the pre-cursor function $C(t)$; then plugging back in the PKEs, we can get $\rho(t)$, that is, how to operator reactor to achieve the desired power shape. 
+Assume we know the amplitude function $T(t)$ (that is, we are given a desired reactor power shape vs. time), we can solve for the precursor function $C(t)$; then plugging back in the PKEs, we can get $\rho(t)$, that is, how to operator reactor to achieve the desired power shape. 
 \begin{enumerate}
 \item Given $T(t)$, we can solve for the precursor equations, 
 \begin{align}
@@ -325,6 +344,7 @@ That is, we can solve for the time-varying concentrations of precursors for any 
 
 \clearpage
 \topic{Applications of IK}
+IK is what is being used in production now. 
 \subtopic{PWR Boration/Dilution}
 \begin{figure}[ht]
   \centering
@@ -351,14 +371,14 @@ The red lines in Fig.~\ref{ik-ex1} point out the location of the excore detector
     \end{subfigure}
     \caption{IK Example 2, Rod Drop for SCRAM Reactivity} \label{ik-ex2}
   \end{figure}
-This example produces a scram, then measure power change and infer $T(t)$, thus estimate reactivity. The rough method use Prompt Jumpt Approximation. More accurately, we need to model all the neutron sources, including ($\alpha,n$) reactions etc.
+This example produces a scram, then measure power change and infer $T(t)$, thus estimate reactivity. The rough method use Prompt Jumpt Approximation. More accurately, we need to model all the neutron sources, including ($\alpha,n$) reactions etc. In reality, there are noisy signals in measured power and reactivity data; we need to smooth them out with a fitted function before we can apply IK with external neutron sources. The point is that we can use IK instead of prompt jump approximation to gain precision. 
 
-In reality, there are noisy signals in measured power and reactivity data; we need to smooth them out with a fitted function before we can apply IK with external neutron sources. 
-
-This technique is not used in the US that much because it is harsh your system and it requires work to bring the system back to critical. But it is one of the best ways to demonstrate to the licensing committee that a reactor is capable to scram.  
+This technique is not used in the US that much because it is harsh on your system and it requires work to bring the system back to critical. But it is one of the best ways to demonstrate to the licensing committee that a reactor is capable to scram.  
 
 \subtopic{Dynamic Rod Worth}
-We start with a critical reactor, and drive a control rod in and out and repeat with a different rod. The advantages are: no need to do boron dilution, and it takes 15 mins for each rod. This technique is widely used by Westinghouse to estimate their rod worth. 
+This technique is widely used by Westinghouse to estimate their rod worth: starting with a critical reactor, and drive a control rod in and out and repeat with a different rod. 
+
+The advantages are: no need to do boron dilution, and it takes 15 mins for each rod. 
 \begin{figure}[ht]
   \centering
   \includegraphics[width=4in]{images/pke/ik-ex3b.png}
@@ -367,7 +387,7 @@ We start with a critical reactor, and drive a control rod in and out and repeat 
 
 Alternatively, we can do sub-critical source multiplication, that is, IK with a source in the reactor. This way we don't even need to start with a critical reactor. This technique has only been used in experimental reactors but not so much in power reactors because it requires detailed knowledge about the source distribution. 
 
-Note: we should be careful about power leve, as power can change from a few watts to 20,000 MW in less than a second! 
+Note: we should be careful about power level. As shown in Fig.~\ref{power-range}, power can change from a few watts to 20,000 MW in less than a second! In order to make IK valid, we have to bring power down to make sure there is no thermal feedback. So it is a balance between getting a good signal and making sure there is no thermal feedback, thus people end up running the reactor in the intermediate range. 
 \begin{figure}[ht]
   \centering
   \includegraphics[width=4in]{images/pke/power-range.png}
