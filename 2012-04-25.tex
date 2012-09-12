@@ -5,57 +5,119 @@
 \maketitle
 
 \lecture{Point Kinetics Without Feedback}
+In this section, we would discuss: 
+\begin{enumerate}
+\item The importance of neutron precursor data ($\beta$) and emission spectram ($\chi$) and how they are being treated in diffusion equation. 
+
+\item Delayed neutron physics. 
+
+\item Delayed neutron models: PKE (know how to solve), prompt jump approximation, In-hour equation, IK. 
+\end{enumerate}
+
+
 \topic{Physics of Delayed Neutrons}
-\textbf{Prompt neutrons}: more than 99\% of all neutrons are emitted in $<10^{-10}$s after the fission (prompt neutron lifetime in a PWR is about $2 \times 10^{-5}$ sec). Example: A reactor was operated at 1W, a control rod was moved to produce an excess reactivity of $0.0005 \Delta k$, what would the power be 1s later? 
+\textbf{Prompt neutrons}: more than 99\% of all neutrons are emitted in $<10^{-10}$s after the fission (prompt neutron lifetime in a PWR is about $2 \times 10^{-5}$ sec). 
+
+\vspace{0.5cm}
+\textbf{Delayed neutrons}:
+\begin{enumerate}
+\item Importance. Assume no delayed neutrons, a reactor was operated at 1W, a control rod was moved to produce an excess reactivity of $0.0005 \Delta k$, what would the power be 1s later? 
 \begin{align}
 P(t) &= P_0 (1.0005)^{t/(2\times 10^{-5})} = 1 W (1.0005)^{1/(2\times 10^{-5})} = 70,000 MW 
 \end{align}
-The above calculation means that this reactor would be virtually impossible to control! Fortunately, delayed netrons exist and the reactor time constant depend on more than just prompt neutron lifetime. 
+This reactor would be virtually impossible to control! Fortunately, delayed netrons exist and the reactor time constant depend on more than just prompt neutron lifetime. 
 
-\textbf{Delayed neutrons}:
-\begin{enumerate}
-\item Measurement: delayed neutrons can be measured by counting neutrons emission after a pulsed irradiation of a pure U235 foil. Burst measurement represents the amount of prompt neutrons; saturated measurement represents the total amount of neutrons. 
-\item Emission: delayed neutrons are emitted through the decay of fission products, of which Br-37 is a dominant FP that emits delayed neutrons. 
-\item Delayed yields depend on fissioning species and neutron energy (keep in mind that U238 produce 4\% delayed neutron per fission, more than U235's 1.7\% delayed neutron per fission, making U238 a very important isotope when it comes to delayed neutrons). 
+\item Review steady-state diffusion equation, and notice: 
+  \begin{itemize}
+  \item $\chi$ is the spectrum. So integrating $\chi$ over all energy should always give us 1. 
+  \item $\chi_d^i (E)$: delayed neutron groups, typically 6-8 groups. 
+  \item $\beta^j$ is delayed neutron fraction. 
+  \end{itemize}
+
+\item Measurement: delayed neutrons can be measured by counting neutrons emission after a pulsed irradiation of a pure U235 foil. 
+  \begin{itemize}
+  \item Burst measurement: the amount of prompt neutrons.
+  \item Saturated measurement: the total amount of neutrons. 
+  \item Measurement vs. evaluation: the data are recorded from measurements, but upon different evaluations the final data would be different. 
+  \end{itemize}
+
+\item Neutron Precursor data. Delayed neutrons are emitted through the decay of fission products. 
+  \begin{itemize}
+  \item Br-37 is a dominant FP that emits delayed neutrons. 
+  \item Delayed neutron precursors are embedded in fission species delayed yields. 
+  \item Fast group absolute yield for U239 is 0.0063, U235 is 0.0165, and U238 is 0.0412. Just be aware that to model the $\chi$ term technically we need to know the delayed neutron spectrum etc. 
+    \end{itemize}
+
+\item  \textcolor{blue}{Delayed yields ($\beta$) depend on fissioning species and neutron energy.}
   \begin{itemize}
   \item Absolute yield: number of delayed neutrons per fission; unit: 1/fission. 
-  \item Relative yield: absolute yield of an isotope divided by total absolute yield by all isotopes; 
+  \item Relative yield: absolute yield of an isotope divided by total absolute yield by all isotopes. 
   \item Delayed neutron fraction: absolute yield divided by $\bar{\nu}$. Number of delayed neutrons devided by number of total fission neutrons. 
+  \item 6 group yields and decay constants depend on fissioning species, as in Table~\ref{yield-depend-on-species}.
+    \begin{table}[ht]
+      \centering
+      \includegraphics[width=4in]{images/pke/yield-depend-on-species.png}
+      \caption{Yields and decay constants depend on fissioning species} \label{yield-depend-on-species}
+    \end{table}
+  \item U238 produce 4\% delayed neutron per fission, more than U235's 1.7\% delayed neutron per fission, making U238 a very important isotope when it comes to delayed neutrons.
   \end{itemize}
   \begin{table}[ht]
     \centering
     \includegraphics[width=4in]{images/pke/abs-yield.png}
     \caption{Absolute Total Yields of Delayed Neutrons} \label{abs-yield} 
   \end{table}
-\item Modern trend: makes the 6-group to 8-group, and each group has a fixed decay constants (the one that dominants in the group, that is, largest half-life). This way, all isotopes have the same half-life for the same group; but different isotopes would still have different delayed neutron fraction. Remember the terms circled in blue.  
-\item Delayed neutrons spectrum vs. energy: average prompt neutron emission energy is 2 MeV; average delayed neutron emission energy is 0.4 MeV. Both spectrum comes out to be Maxwellian, except the delayed one is shifted as in Fig.~\ref{fission-spec}. Delayed neutron comes out in the thermal energy range, which makes them more likely to fission. 
-  \begin{figure}[ht]
-    \centering
-    \includegraphics[width=4in]{images/pke/fission-spec.png}
-    \caption{Prompt and Delayed Fission Neutron Spectrum} \label{fission-spec} 
-  \end{figure}
-\item Delayed energy group: neutron spectra have similar shapes for all delayed groups. However different energy groups have different mean energies. 
-  \begin{figure}[ht]
-    \centering
-    \includegraphics[width=4in]{images/pke/delayed-fission-spec.png}
-    \caption{Delayed Fission Neutron Spectrum} \label{delayed-fission-spec} 
-  \end{figure}
-\item Take-away message: delayed neutron spectra vary only slightly for different fissioning nuclides; but the spectra depends significantly on the delayed neutron group. 
+
+\item Modeling $\beta$. There are two ideas,  
+  \begin{itemize}
+  \item Why not use direct measured fission product yields and measured fission product neutron emission rates? Issue: insufficient data to use directly for production analysis. There is a fairly large difference between experimental data and calculated data, making it hard to find a direct agreement on what is the correct fission product yields and emissionrates. 
+  \item Keep track of all precursors. We make a 6-group to 8-group model\footnote{Typically 8-group and above would start to produce good fitting; anything less than 8 group you run into the risk of having too many precursors/half-lives lumped in the same energy group and causing trouble.}, and each group has a fixed/homogeneous decay constants (the one that dominants in the group, that is, largest half-life). This way, all isotopes have the same half-life for the same group; but different isotopes would still have different delayed neutron fraction. Remember the terms circled in blue.  
+    \begin{table}[ht]
+      \centering
+      \includegraphics[width=5in]{images/pke/8-group-fixed-decay-constants.png}
+      \caption{8-group Fixed Decay Constans for All Species}
+    \end{table}
+  \end{itemize}
+
+
+\item Delayed neutrons spectrum $\chi$.
+  \begin{itemize}
+  \item U238 is extremely important for delayed neutrons.
+  \item Delayed neutrons are produced at lower energy than prompt neutrons: average prompt neutron emission energy is 2 MeV; average delayed neutron emission energy is 0.4 MeV. 
+  \item Delayed neutron comes out in the thermal energy range, which makes them more likely to fission. 
+  \item Both spectrum comes out to be Maxwellian shapes for all the delayed groups, except the delayed one is shifted as in Fig.~\ref{fission-spec}. Keep in mind that these Maxwellian curves we use are approximations; real data is often discrete in nature. 
+    \begin{figure}[ht]
+      \centering
+      \includegraphics[width=4in]{images/pke/fission-spec.png}
+      \caption{Prompt and Delayed Fission Neutron Spectrum} \label{fission-spec}
+    \end{figure}
+  \item Delayed energy group: neutron spectra have similar shapes for all delayed groups. However different energy groups have different mean energies. 
+    \begin{figure}[ht]
+      \centering
+      \includegraphics[width=4in]{images/pke/delayed-fission-spec.png}
+      \caption{Delayed Fission Neutron Spectrum} \label{delayed-fission-spec} 
+    \end{figure}
+  \item Summary: \hi{Delayed neutron spectra vary only slightly for different fissioning nuclides; but the spectra depends significantly on the delayed neutron group} (in real production tools, there is a separate $\chi$ for each energy group). 
+  \end{itemize}
 \end{enumerate}
 
 \clearpage
-\topic{Derivation of PKE}
-In steady-state transport or diffusion equation, we do not treat delayed neutrons directly. But the fission emission spectrum must be properly weighted with prompt and delayed contributions. Notice one issue is, we need fission rates to get $\chi$, and we need $\chi$ to get fission rates, so the real way to solve the balance equation is to iterate, though this is not how it is done normally.
+\topic{Derivation of PKE from Diffusion Equation}
 \begin{enumerate}
 \item We start from the diffusion equation: \hi{The steady-state diffusion equation}\footnote{Know this for the final}: 
 \small
 \begin{align}
-& - \divergence D(\vecr, E, t) \gradient \phi(\vecr, E, t) + \Sigma_t (\vecr, E, t) \phi(\vecr, E, t) = \int_0^{\infty} \Sigma_s (\vecr, E'\to E, t) \phi(\vecr, E', t) \dE' \\
-&+ \Sum_j \chi_T^j (E) \int_0^{\infty} \nu \Sigma_p^j (\vecr, E', t) \phi(\vecr, E', t) \dE' + Q(\vecr, E, t) 
+& - \divergence D(\vecr, E) \gradient \phi(\vecr, E) + \Sigma_t (\vecr, E) \phi(\vecr, E) = \int_0^{\infty} \Sigma_s (\vecr, E'\to E) \phi(\vecr, E') \dE' \\
+&+ \Sum_j \chi_T^j (E) \int_0^{\infty} \nu \Sigma_p^j (\vecr, E') \phi(\vecr, E') \dE' + Q(\vecr, E) 
 \end{align}
 \normalsize
+\begin{itemize}
+\item In steady-state transport or diffusion equation, we do not treat delayed neutrons directly. Instead the fission emission spectrum must be properly weighted with prompt and delayed contributions. 
 
-\item \hi{The time-dependent neutron diffusion equation}: where $\beta^j = \Sum_i \beta_i^j$ is the delayed fission fraction (0.66\% for instance), 
+\item A chicken-and-egg problem: we need fission rates to compute $\chi(E)$, and we need $\chi(E)$ to get fission rates, so the real way to solve the balance equation is to iterate, though this is not how it is done normally.
+\end{itemize}
+
+
+\item \hi{The time-dependent neutron diffusion equation}: in transient diffusion equations, the delayed neutrons must be treated explicitly. $\beta^j = \Sum_i \beta_i^j$ is the delayed fission fraction (0.66\% for instance), 
   \begin{align}
     \ppt \left[ \frac{1}{v} \phi(\vecr, E, t) \right] &= \divergence D(\vecr, E, t) \gradient \phi(\vecr, E, t) - \Sigma_t (\vecr, E, t) \phi(\vecr, E, t) 
 \notag \\
@@ -64,8 +126,11 @@ In steady-state transport or diffusion equation, we do not treat delayed neutron
     &+ \Sum_i \chi_d^i (E) \lambda_i C_i (\vecr, t) + Q(\vecr, E, t)\\
     \ppt C_i (\vecr, t) &= \Sum_j \beta_i^j \int_0^{\infty} \nu \Sigma_p^j (\vecr, E', t) \phi(\vecr, E', t) \dE'  - \lambda_i C_i (\vecr, t) 
   \end{align}
+  where $i$ is for isotropes, $j$ is for energy groups. 
 
-\item Assume that flux can be separated into a space/energy term and a time-dependent term: $\phi(\vecr, E, t) = S(\vecr, E) T(t)$ ($S(\vecr, E)$ is the Shape function,  $T(t)$ is the amplitude function). Plug it into the above expressions. 
+\item Assume that flux can be separated into a space/energy term and a time-dependent term: 
+  \eqn{ \phi(\vecr, E, t) = S(\vecr, E) T(t) }
+where $S(\vecr, E)$ is the Shape function,  $T(t)$ is the amplitude function (remember this approximation may not always be valid, and certainly in some cases it would not be a good approximation). Plug it into the above expressions. 
   \begin{align}
     \ppt \left[ \frac{1}{v} S(\vecr, E) T(t) \right] &= 
     \Bigg\{ \divergence D(\vecr, E, t) \gradient S(\vecr, E) - \Sigma_t (\vecr, E, t) S(\vecr, E)   \notag \\
@@ -77,7 +142,6 @@ In steady-state transport or diffusion equation, we do not treat delayed neutron
   \end{align}
 
 
-\clearpage
 \item Integrate over all space and energy and normalize to $\int \dE \int \dr \frac{1}{v} S(\vecr, E) = 1.0$, 
   \begin{align}
     \ddt \left[ T(t) \right] &= 
@@ -96,6 +160,7 @@ In steady-state transport or diffusion equation, we do not treat delayed neutron
 \item We define a set of terms to simplify the expression. For simplicity concern, we omit the dependency on the following terms. $D(\vecr, E, t), \Sigma_t (\vecr, E, t), \Sigma_f(\vecr, E, t),  S(\vecr, E), \chi(E)$. 
 \begin{enumerate}
 \item Reactivity $\rho(t)$, where the top is the diffusion equation, and the bottom is fission rate if all the neutrons show up instatenously. 
+\eqn{ \rho = \frac{\mbox{net production}}{\mbox{perturbation denomenator (sum of all fission in the system)}} }
 \scriptsize
 \begin{align}
 \rho (t) &= \frac{\int \bsp \dE \! \int \bsp \dr \Bigg\{ \!\divergence \! D  \gradient S  - \! \Sigma_t S  + \! \int \bsp \Sigma_s (\vecr \!, E' \bsp \to \bsp E, t) S \! \dE'   
@@ -109,6 +174,8 @@ In steady-state transport or diffusion equation, we do not treat delayed neutron
 \begin{align}
 \beta_i (t) &= \frac{\int \bsp \dE \int \bsp \dr \left[ \Sum_j \chi_d^j (E) \beta^j \int_0^{\infty} \nu \Sigma_f^j (\vecr, E', t) S(\vecr, E') \dE' \right] }{\int \bsp \dE \int \bsp \dr \Sum_j \left( \chi_p^j (E) (1-\beta^j) + \Sum_i \chi_d^i (E) \beta_i^j \right) \int \bsp \nu \Sigma_f^j S \dE'} 
 \end{align}
+If we don't worry about the fissioning spectra, we would have $\beta \approx \beta_i$. 
+
 
 \item Prompt neutron lifetime, 
 \begin{align}
