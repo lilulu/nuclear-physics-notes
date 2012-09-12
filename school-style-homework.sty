@@ -57,6 +57,13 @@
       \textit{\@classcode\ Homework \@assignment\ Exercise \@exercise:}\\
     \end{flushleft}
   }
+
+  \renewcommand{\section}[1]{%
+  \large%
+  \begin{flushleft}%
+    \textbf{#1}%
+  \end{flushleft}%
+  \normalsize}
 }
 
 \pagestyle{fancy}
