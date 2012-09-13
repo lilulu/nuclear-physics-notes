@@ -40,7 +40,74 @@ C_i &= \int \dV u_i^* (\uline{x}) \psi(\uline{x}) = \mbox{Probability Amplitude}
 
 Given the observable or the operator, we can solve for the eigenfunctions. Then if we also know the state function, we can solve for the expansion coefficient, and then the probability associated with each eigenvalues. This is what we mean in Postulate 2 that the state function contains all the information (aka knowing it we can solve for everything else). 
 
+
+
+\subtopic{Postulate 4} 
+\hi{Introduce time dependence, equation of motion, and time-dependent Schrodinger equation}
+
+
+%%%%%%%%%%%%%%%%%% 
+\topic{Measurements}
+Concerning measurements, there are two postulates that are useful: 
+\begin{itemize}
+\item Postulate 2: all outcomes are eigenvalues of observables. 
+\item Postulate 3: given $\ket{\psi}$ we can find the probability of measuring $a_k$ to be $P(a_k) = \left| \braket{a_k}{\psi} \right|^2$. 
+\end{itemize}
+
 \begin{enumerate}
+\item Example: given $\ket{x} = \alpha \ket{x_1} + \beta \ket{x_2} + \gamma \ket{x_3}$, and knowing that position eigenfunctions are delta functions, we can write the wavefunction as, 
+  \eqn{ \psi(x) = \alpha \delta(x-x_1) + \beta \delta(x-x_2) + \gamma \delta(x-x_3) }
+  Then given any random $x_4$ (that does not equal $x_1, x_2, x_3$), it would always be an eigenvalue so it is `possible', though $P(x_4) = 0$. Whereas 
+  \eqn{ P(x_2) = \frac{|\beta|^2}{|\alpha|^2 + |\beta|^2 + |\gamma|^2} }
+  To expand on this problem, we re-define our eigenfunction to be, 
+  \eqn{ \ket{\psi} = \Sum_k \alpha_k \ket{x_k} }
+  then 
+  \eqn{\int_{-\infty}^{\infty} \alpha(x') \delta(x'-x) \dx' =  \alpha(x) = \psi(x) }
+  and 
+  \eqn{ P(x) = |\psi(x)|^2} 
+  thus  wafefunctions is the probability amplitude to find system at position $x$. Thus from $\int_{-\infty}^{\infty} P(x) \dx = 1$, we know $|\psi(x)| = 1$. 
+    
+
+\item Example: given a wavefunction $\ket{\psi} = \ket{p}$, find probability to measure momentum and position. The eigenvalue problem is $\hat{p} \ket{p} = p\ket{p}$ where $p = \hbar k$. 
+  \begin{itemize}
+  \item To measure momentum, we know all $p \in R$ are `possile'. Then $\ket{p} = A e^{ikx}$. 
+  \item To measure position, we know the probability of finding the position at $x'$ is, 
+    \eqn{ P(x') = \left| \int_{-\infty}^{\infty} \delta(x-x') A e^{ikx} \dx  \right|^2 = |A e^{ikx'}|^2 = |A|^2  }
+  \item Interpretation: for free particle problem, the probability of finding a particle anywhere is the same. The wavefunction describes a travelling wave that is everywhere. For this situation, we describe `flux of particles'(unit is 1/s\footnote{notice the $P(x)$ here is not unitless. Probability is technically $P(x,x+\dx) \dx = |\psi(x)|^2 \dx$, thus $P(x)$ is more like a probability density with a unit of 1/m.}), 
+    \eqn{ \Gamma = P(x) \cdot v = |\psi(x)|^2 \frac{p}{m} = |\psi(x)|^2 \frac{\hbar k}{m} = |A|^2 \frac{\hbar k}{m}  }
+    \eqn{ \Rightarrow |A|^2 = \frac{\Gamma m}{\hbar k} }
+  \end{itemize}
+
+\item Expand on the last two problems, now we assume a random $\psi(x)$, and a measurement of $\hat{p}$ would yield, 
+  \eqn{ P(k) = |A^* \int (e^{ikx})^* \psi(x) \dx |^2 = |A|^2 |\int e^{-ikx} \psi(x) \dx |^2 }
+  where the $\int e^{-ikx} \psi(x) \dx $ is the Fourier Transform of $\psi(x)$ into the momentum space. That is, \hi{State in momentum basis in the Fourier Transform of $\psi(x)$.}
+
+\item Expectation vlaues: 
+  \eqn{ \left<x\right> = \int P(x) x \dx = \int \psi(x)^* [x \psi(x)] \dx = \int \psi(x)^* \hat{x} \psi(x) \dx} 
+  For a general operator $A$, 
+  \eqn{ \left<A\right> =  \int \psi(x)^* A \psi(x) \dx = \braket{\psi}{A \psi} }
+
+\item What-ever-theory: 
+  \eqn{ \Delta A^2 = \left<A^2\right> - \left<A\right>^2 }
+
+
+\item For a free particle problem, energy and momentum share the same eigenfunctions, thus $\hat{H}, \hat{p}$ are compatible, but $\hat{H}, \hat{x}$ are not and $\hat{p}, \hat{x}$ are not neither. 
+  \begin{itemize}
+    \item Given a system, we measure the energy and get $K = \frac{\hbar^2 k^2}{2m}$. Then we measure the momentum (there could be $\pm k$) and get $k$, thus our state collapes to $\ket{\psi} = A e^{ikx}$. Then we measure energy again, we are going to get $K$ again, and measure momentum again and would get $k$ again. 
+    \item Given a system, we measure the energy and get $K$. Then we measure the position and get $x$. If we measure energy again, we are not necessarily going to get $K$ again, and if we measure position again we might not $x$ again neither. 
+  \end{itemize}
+  Two operators commute (meaning they have common eigenvectors) if and only if, 
+  \eqn{ \bracket{A, B} = 0}
+  Example: 
+  \eqn{ \bracket{\hat{x}, \hat{p} } \psi(x) = \hat{x} \hat{p} \psi(x) - \hat{p} \hat{x} \psi(x) = \hat{x} \left[ - i \hbar \ddx \psi \right] - \left[ - i \hbar \ddx (x \psi ) \right] = -i \hbar x \dpsidx + i \hbar [ \psi + x \dpsidx] = i \hbar \psi(x) }
+
+\item \hi{Heisenberg Uncertainty Principle:} measurements disturbe the system of interest. 
+  \eqn{ \Delta p \Delta x \ge \frac{\hbar}{2} }
+  \hi{Robertson} generalized the above principle to be, 
+  \eqn{ \Delta A \Delta B \ge \frac{1}{2} | \left< \bracket{A, B} \right> | }
+  Thus, $\Delta x \Delta k \ge \frac{1}{2}$. 
+
+
 \item \uline{Example: Probability for position measurements for a 1D free particle.} 
 \eqn{ C_j &= \int \dx \delta (x-x_j) \psi(x) = \psi(x_j) & \Rightarrow P(x_j) &= |\psi(x_j)|^2  }
 This is suggesting that the probability of finding a particle between 0 and L is the highest at L/2. This expression is right, except that the probably at an exact point in the space is actually ill-defined, so the probability of position measurement should really be:
@@ -98,10 +165,6 @@ The two examples we've done so far are the common probabilities:
 
   \end{enumerate}
 \end{enumerate}
-
-  \subtopic{Postulate 4} 
-\hi{Introduce time dependence, equation of motion, and time-dependent Schrodinger equation}
-
 
 
 \end{document}

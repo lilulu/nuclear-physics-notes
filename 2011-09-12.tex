@@ -10,7 +10,10 @@ A high-level overview of the four postulates,
 \item State. 
 \item Physical properties/observables. 
 \item Measurements. 
+\item 
 \end{enumerate}
+The connection/difference between the first two postulates is that a state/wavefunction can only be inferred by a physical property/operator. 
+
 
 \subtopic{Postulate 1: Wave Functions Live in Hilbert Space}
 \begin{axiom} 
@@ -52,7 +55,7 @@ For example, a 1D free particle system can be solved using its operators to find
   \eqn{ \hat{x} \ket{u_n} &= x_n \ket{u_m}  }
   There are two important aspects of this (and any) eigenvalue problem: 
   \begin{enumerate}
-  \item Describing the coefficients $C_n$. Using the bracekt notation for inner product, we can describe the state as (and keep in mind that the two different notations for continuous basis vs. discretized basis)\footnote{To keep it general, we use $C_n$ instead of $x_n$ for the eigenvalues for now.}. 
+  \item Describing the coefficients $C_n$. Using the braket notation for inner product, we can describe the state as (and keep in mind that the two different notations for continuous basis vs. discretized basis)\footnote{To keep it general, we use $C_n$ instead of $x_n$ for the eigenvalues for now.}. 
     \eqn{ \ket{\psi} = \int \dx C(x) \ket{u_n} = \Sum C_n \ket{u_n}  \label{ket-psi}}
     where 
     \eqn{ C_n = \braket{u_n}{\psi} \label{Cn}}
@@ -62,8 +65,16 @@ For example, a 1D free particle system can be solved using its operators to find
     Plug Eq.~\ref{Cn} into Eq.~\ref{ket-psi}, 
     \begin{align}
       \ket{\psi} &= \int \dx C(x) \ket{x} = \int \braket{x}{\psi} \ket{x} \dx \xrightarrow{\psi(x) = \ket{\psi}} \int \bra{x} \psi(x) \ket{x} \dx \\
-      &\int x u_n(x)\ket{x} \dx = \int x_n u_n (x) \ket{x} \dx = \int x_n \delta (x-x_n) \ket{x} \dx 
+      &\int x u_n(x)\ket{x} \dx = \int x_n u_n (x) \ket{x} \dx = \int x_n \delta (x-x_n) \ket{x} \dx  
     \end{align}
+
+    \begin{align}
+      \braket{x}{x'} &= \delta (x-x') \\
+      \braket{x}{\psi} &= \psi(x) \\
+      \ket{\psi} &= \int \braket{x}{\psi} \ket{x}  \dx \\
+      \ket{x'} &= \int \braket{x}{x'} \ket{x}  \dx  = \int \delta (x-x') \ket{x}
+    \end{align}
+
     \hi{Diract delta function $\delta(x-x_n)$ is the eigenfunction of position operator.} 
 
     \eqn{ \ket{u_n} &= \delta (x - x_n) }
