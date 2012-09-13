@@ -14,11 +14,13 @@
   \caption{Energy Groups in Multi-Gruop Diffusion Theory} \label{energy-groups}
 \end{figure}
 
-\item Define group terms. We define the yet unknown group fluxes by the integrals of the flux over individual groups,
+\item Define group terms. We define the yet unknown group fluxes by the integrals of the flux over individual groups. \textcolor{blue}{Be careful about the units: $\phi_g(\vecr)$ is the real flux, $\phi(\vecr, E)$ is really the flux density}. 
 \eqn{ \phi_g(\vecr) = \int_{E_g}^{E_{g-1}} \phi(\vecr, E) \dE }
 The group cross sections are defined such that the reaction rates in each interval are preserved,
 \eqn{ \sigma_{xg}^i (\vecr) = \frac{1}{\phi_g (\vecr)} \int_{E_g}^{E_{g-1}} \sigma_x^i (\vecr, E) \phi(\vecr, E) \dE = \frac{\int_{E_g}^{E_{g-1}} \sigma_x^i (\vecr, E) \phi(\vecr, E) \dE}{\int_{E_g}^{E_{g-1}} \phi(\vecr, E) \dE} }
 Group constants are typically determined using neutron spectra obtained by solving local problems with approximate boundary conditions, like our MC code. Group wise cross sections cannot match the details of Monte Carlo spectrum calculation, so it is imperative that \textit{detailed resonance effects are contained in the multi-group cross sections} when produced from some detailed spectral calculations. 
+
+Be careful that this implementation does not have volume term in it because we are considering an infinite system. 
 
 \item Integrate steady-state diffusion equation over each of the $g$ energy groups: 
 \begin{align}
@@ -34,9 +36,10 @@ Group constants are typically determined using neutron spectra obtained by solvi
     \begin{align}
       \textcircled{1} &=\int_{E_g}^{E_{g-1}} \dE \divergence D(\vecr, E) \gradient \phi(\vecr, E) =  \divergence D_g(\vecr) \int_{E_g}^{E_{g-1}} \dE \gradient \phi(\vecr, E) = \divergence D_g (\vecr) \gradient \phi_g(\vecr) 
     \end{align}
-    The group diffusion coefficient $D_g$ should be a tensor (a 3x3 symmetric matrix, called the Eddington tensor); but in application, we assume that $D_g$ is the same for all directions. That is, the tensor is approximated by a diagonal matrix: 
+    The group diffusion coefficient $D_g$ should be a tensor (a 3x3 symmetric matrix, called the Eddington tensor); but in application, we assume that $D_g$ is the same for all directions. That is, the tensor is approximated by a diagonal matrix (or call it current-weighted-diffusion-coefficient): 
     \eqn{ D_g^u (\vecr) = \frac{\int_{E_g}^{E_{g-1}} \dE D(\vecr, E) \ppu \phi(\vecr, E) }{\ppu \phi_g}, u = x,y,z} 
-    A more accurate approach is to let $D_g$ be the same in the x-y plane, but different in axial direction. 
+    It is not a great definition because for an infinite system $\ppu \phi = 0$ which would give us 0 over 0. A more accurate approach is to let $D_g$ be the same in the x-y plane, but different in axial direction. 
+
   \item Total interaction term: 
     \begin{align}
       \textcircled{2} &= \int_{E_g}^{E_{g-1}} \dE \Sigma_t(\vecr, E) \phi(\vecr, E) = \Sigma_{tg}(\vecr) \int_{E_g}^{E_{g-1}} \dE \phi(\vecr, E) = \Sigma_{tg} (\vecr) \phi_g(\vecr) 

@@ -14,7 +14,9 @@ Recall the two-group neutron balance equations:
 \item Total fission source is: 
   \eqn{S_f(r) = \nu \Sigma_{f1} (r) \phi_1 (r) + \nu \Sigma_{f2} (r) \phi_2(r) }
   $\chi_1 = 1, \chi_2 = 0$ which implies that fission source in the thermal group is zero.
-\item Scattering source: we define effective down-scattering, so up-scattering is zero $\Sigma_{21}(r) = 0$. 
+\item Scattering source: we define effective down-scattering, so up-scattering is zero $\Sigma_{21}(r) = 0$. Then our down-scattering becomes an effective down-scattering cross section by conserving reaction rates (as usual), 
+  \eqn{\hat{\Sigma_{12}} = \Sigma_{12} - \Sigma_{21} \frac{\phi_2}{\phi_1} }
+
 \item Two-group diffusion equations: 
   \begin{align}
     \left\{ \begin{array}{c}
@@ -45,7 +47,7 @@ By continuity of the net current, we can set the above two equations to equal to
 \eqn{  -D_g^n \frac{\phi_g^S - \phi_g^n}{\Delta/2} =  - D_g^{n+1} \frac{\phi_g^{n+1} - \phi_g^s}{\Delta/2} }
 From where we can solve for the interface flux, 
 \eqn{ \phi_g^s = \frac{D_g^{n+1} \phi_g^{n+1} + D_g^n \phi_g^n}{D_g^n + D_g^{n+1}}} 
-Then we can get th net current in terms of mesh fluxes: 
+Then we can get the net current in terms of mesh fluxes (\textcolor{red}{notice the $J_n^+, J_n^-$ here are net currents not partial currents!!!}): 
 \eqn{ J_n^+ = - \frac{2D_g^n}{\Delta} \left[ \frac{ D^{n+1} \phi^{n+1} + D^n \phi^n}{D^n + D^{n+1}} - \phi^n \right] = - \overbrace{\frac{2 D^n D^{n+1} }{\Delta (D^n + D^{n+1})}}^{\to \hat{D}^{n,n+1}} (\phi^{n+1} - \phi^{n}) }
 That is, 
 \eqn{ J_n^+ &= - \hat{D}^{n,n+1} (\phi^{n+1} - \phi^n)  & J_n^- &= - \hat{D}^{n-1, n} (\phi^n - \phi^{n-1} ), & \hat{D}^{n,n+1} &= \frac{2 D^n D^{n+1}}{\Delta (D^n + D^{n+1})}  \label{net-current}} 
@@ -53,7 +55,7 @@ That is,
 
 \subtopic{Derivation of Finite Difference Equations}
 Plug Eq.~\ref{net-current} back into diffusion equations, we get, 
-\eqn{ \hat{D}_1^{n-1,n} (\phi_1^n - \phi_1^{n-1})  - \hat{D}_1^{n,n+1} (\phi_1^{n+1} - \phi_1^n) + \Sigma_{r1}^n \phi_1^n \Delta^n &= \mu \Sigma_{f1}^n \phi_1^n \Delta^n + \mu \Sigma_{f2}^n \phi_2^n \Delta^n + S_1 \Delta^n} 
+\eqn{ \hat{D}_1^{n-1,n} (\phi_1^n - \phi_1^{n-1})  - \hat{D}_1^{n,n+1} (\phi_1^{n+1} - \phi_1^n) + \Sigma_{r1}^n \phi_1^n \Delta^n &= \nu \Sigma_{f1}^n \phi_1^n \Delta^n + \nu \Sigma_{f2}^n \phi_2^n \Delta^n + S_1 \Delta^n} 
 \eqn{ \hat{D}_2^{n-1,n} (\phi_2^n - \phi_2^{n-1})  - \hat{D}_2^{n,n+1} (\phi_2^{n+1} - \phi_2^n) + \Sigma_{a2}^n \phi_2^n \Delta^n &= \Sigma_{s12}^n \phi_1^n \Delta^n + S_2 \Delta^n} 
 Rearranging terms by fluxes, we get, 
 \eqn{ - \hat{D}_1^{n-1,n} \phi_1^{n-1} - \hat{D}_1^{n,n+1} \phi_1^{n+1} + [ \Sigma_{r1}^n \Delta^n + \hat{D}_1^{n-1, n} + \hat{D}_1^{n,n+1} ] \phi_1^n = \nu \Sigma_{f1}^n \phi_1^n \Delta^n + \nu \Sigma_{f2}^n \phi_2^n \Delta^n + S_1^n \Delta^n} 
@@ -62,7 +64,7 @@ Rearranging terms by fluxes, we get,
 \subtopic{Derivation of Boundary Condition}
 Interior of the geometry, the boundary conditions are implied. The exterior boundaries have to be specified. There are two types of boundary conditions:
 \begin{enumerate}
-\item Zero Flux BC: 
+\item Zero Flux BC: flux in node $N$ going from $\phi_g^N$ at the center to 0 at the BC. We can either think of the flux as keep going to be $-\phi_g^N$ in the imaginary-right-node, or calculate the slope by doing $\phi_g^N / (\Delta /2)$,
 \eqn{ J_g^N = -D_g^N \frac{ -\phi_g^N - \phi_g^N}{\Delta^N}  = \frac{2 D_g^N}{\Delta^N} \phi_g^N }
 \item Zero Incoming Current BC:
 \eqn{ J^- = \frac{1}{4} \phi - \frac{1}{2} J_n = 0 }
@@ -70,15 +72,15 @@ which implies,
 \begin{align}
   J_g^N &= \frac{\phi_g^s}{2} = -D_g^N \frac{\phi_g^s - \phi_g^N}{\Delta/2} \\
   &= - \frac{2 D_g^N}{\Delta^N} \frac{\frac{2D_g^N}{\Delta^N} - 1}{\frac{1}{2} + \frac{2D_g^N}{\Delta}} \phi_g^N \\
-  &= \boxed{ \frac{2D_g^N}{\Delta^N} \left[ \frac{1}{1 + \frac{4 D_g^N}{\Delta^N}} \right] \phi_g^N } \label{JgN}
+  &= \boxed{ \frac{2D_g^N}{\Delta^N} \left[ \frac{1}{1 + \frac{4 D_g^{N+1}}{\Delta^N}} \right] \phi_g^N } \label{JgN}
 \end{align}
-In Eqn.~\ref{JgN}, if $D \to 0$, we get zero flux boundary condition; if $D \to \infty$, we get zero current boundary condition. 
+In Eq.~\ref{JgN}, if $D \to 0$, we get zero flux boundary condition; if $D \to \infty$, we get zero current boundary condition. So we can actually use Eq.~\ref{JgN} for three different conditions: zero current, zero flux, zero incoming current. 
 \end{enumerate}
 
 \clearpage
 \topic{Matrix Representation of 1D Slab Diffusion Equations}
 \subtopic{Construct Matrix}
-If we use $L$ for the $\phi^{n-1}$ term, $U$ for the $\phi^{n+1}$ term, $D$ for the $\phi^n$ term, $T$ for the transport term, we can express the finite difference equation in matrix form as: 
+If we use $L$ for the $\phi^{n-1}$ term, $U$ for the $\phi^{n+1}$ term, $D$ for the $\phi^n$ term, $T$ for the transport term, we can express the finite difference equation in matrix form as a net distruction term: 
 \begin{align}
 [L_1 + D_1 + U_1] [\phi_1] &= [M_1] [\phi_1] + [M_2][\phi_2] + [S_1] \\
 [L_2 + D_2 + U_2] [\phi_2] &= [T_2] [\phi_1] + [S_2] 
@@ -100,7 +102,7 @@ S_1 \\ S_2 \\ \end{array} \right]
 \end{align}
 Whose compressed form is, 
 \eqn{ [A] [\phi] = [M] [\phi] + [S] }
-The two matrix are plotted in Figure~\ref{matrix-form}. Notice there are missing points in A; explaination: Block matrix: there is no coupling of group 1 left flux to the group 2 right flux. 
+The two matrix are plotted in Figure~\ref{matrix-form}. Notice there are missing points in A. Explaination: Block matrix: the $L+D+U$ term should only be doing in-group stuff, and the missing points would have been throwing group 1 stuff into group 2 when it is not supposed to do it. 
 \begin{figure}[ht]
   \centering
   \includegraphics[width=6in]{images/dfs/matrix-form.png}
@@ -116,7 +118,7 @@ The two matrix are plotted in Figure~\ref{matrix-form}. Notice there are missing
 \end{align}
 In this method, we guess $\keff$, and given a source we can solve for the flux. We can either use Matlab to solve the $Ax = b$ system, or we use Gaussian elimination/forward elimination backward substitution by hand. The basic idea is to subtract $a_{i,i-1}/a_{i-1,i-1}$ times the $(i-1)$th equation from the $i$th equation to eliminate the $a_{i,i-1}$ element in the $i$th equation. The modified $i$th equation is then divided by $a_{i,i}$. This process is repeated successively for $i=1$ through $i = I-1$. 
 
-We never solve real questions this way, because the flux approaches the right shape as we increase the $\keff$ to approach the correct $\keff$, but once we pass the correct $\keff$, the flux can be entirely inverted to become negative (now that I think about it, this is fine because the flux solved can be arbitrarily scaled). If we have a super-critical problem, then the only way to get criticality with an additional source is through negative flux. A reactor is like an amplifier; the closer it is to criticality the more amplification it is; when critical, the amplification is infinity. 
+We never solve real questions this way, because the flux approaches the right shape (as $\keff \to \keff_{\mathrm{correct}}$), but once $\keff > \keff_{\mathrm{correct}}$, the flux can be entirely inverted to become negative (recall that the 1/M curve goes to 0 when we become critical, implying that $M \to \infty$. Having a negative flux is fine because the flux solved can be arbitrarily scaled). If we have a super-critical problem, then the only way to get criticality with an additional source is through negative flux. A reactor is like an amplifier; the closer it is to criticality the more amplification it is; when critical, the amplification is infinity. 
 
 
 \subtopic{Method 2: Direct Matlab Eigenvalue Solver}
@@ -128,7 +130,7 @@ We can solve for $\keff$ directly from:
 Notice that the eigenvectors are arbitrarily normalized; hence it is fine if the flux is negative. 
 
 
-\subtopic{Method 3: Power Iterations}
+\subtopic{Method 3: Power Iterations with Matlab's Direct Matrix Inverter}
 The equation we are trying to solve is,
 \eqn{ [A] [\phi]^{n+1} &= [M] [\phi]^n }
 An initial guess of the flux $\phi_i^{(0)}$ at each point and of the eigenvalue $\lambda^{(0)}$ is made and an initial fission source at each point is constructed $S_i^{(0)} = M \phi_i^{(0)}$. The Gaussian elimination is performed to determine $\phi_i^{(1)} = A^{-1} S_i^{(0)}$. Then we update the source term as well based on the flux. A new estimate of the eigenvalue is made from: 
@@ -140,13 +142,22 @@ The process is continued until the eigenvalues obtained on two successive iterat
   \caption{Power Iteration Convergence Rate (left) and Dominance Ratio (right)}
 \end{figure}
 
-\subtopic{Method 3+: Power Iterations with Gauss-Jacobi Numerical Inversion of Flux Matrix}
-In a steady-state problem, it does not matter whether we fully converge our flux iteration. 
+\subtopic{Method 3+: Power Iteration with Matlab's GMRES Numerical Invertion} 
+With no pre-conditioner, GMRES is actually longer than Method 3. 
+
+
+\subtopic{Method 4: Power Iteration with Point-Jacobi Iterative Flux Matrix Inversion}
+In a steady-state problem, it does not matter whether we fully converge our flux iteration. $m$ is fission iteration, $i$ is .
 \begin{figure}[ht]
   \centering
   \includegraphics[width=6in]{images/dfs/power-iteration-Gauss-Jacobi.png}
   \caption{Power Iteration With Gauss-Jacobi Numerical Inversion of Matrix}
 \end{figure}
+
+
+\subtopic{Method 5: Power Iteration with Gauss-Seidal Iterative Flux Matrix Inversion} 
+
+
 
 \clearpage
 \topic{Matrix Representation of Higher Dimensions Diffusion Equations}
@@ -162,7 +173,7 @@ In a steady-state problem, it does not matter whether we fully converge our flux
 \end{figure}
 
 \clearpage
-\topic{Dominance Ratio}
+\topic{Dominance Ratio/Eigenvalue Separation}
 Given an eigenvalue problem, if we specify the solved eigenvalues to be:
 \eqn{ |\lambda_1| > |\lambda_2| \ge |\lambda_3| \ge \cdots }
 then $|\lambda_1|$ is the spectral radius of the iteration matrix, and every mode has a dominance ratio,
@@ -187,11 +198,11 @@ Dominance ratio measures the spatial decoupling. It depends on:
   \label{dominance-size}
 \end{figure}
 
-\item Decoupling of radial zones from inserting control rod, having asymmetric core loadings, or having xenon distributions. 
+\item Decoupling of radial zones from inserting control rod, having asymmetric core loadings, or having xenon distributions. For instance, in BWRs if we insert control rods to make the core into two halves, then it would take a lot longer to converge. 
 
 \item Decoupling of axial zones form partially inserting control rods, axial fuel enrichment zoning, and axial burnable absorber loading. 
 \end{enumerate}
-
+Dominance ratio should be a physical property, so it should not depend on mesh size. 
 
 \clearpage
 \topic{Summary}
@@ -202,6 +213,7 @@ Remember for real 3D problem,
 \item Iterative inversion must be order $N$ to be practical for large problems;
 \item Multi-level iteration is a practical necessity. 
 \item Dominance ratio measures spatial decoupling-ness.
+\item Gauss-Seidal is twice as Point-Jacobi. 
 \end{itemize}
 
 

@@ -43,23 +43,22 @@ This reactor would be virtually impossible to control! Fortunately, delayed netr
 
 \item Neutron Precursor data. Delayed neutrons are emitted through the decay of fission products. 
   \begin{itemize}
-  \item Br-37 is a dominant FP that emits delayed neutrons. 
+  \item Br-87 is a dominant FP that emits delayed neutrons (longest half-life). 
   \item Delayed neutron precursors are embedded in fission species delayed yields. 
-  \item Fast group absolute yield for U239 is 0.0063, U235 is 0.0165, and U238 is 0.0412. Just be aware that to model the $\chi$ term technically we need to know the delayed neutron spectrum etc. 
     \end{itemize}
 
 \item  \textcolor{blue}{Delayed yields ($\beta$) depend on fissioning species and neutron energy.}
   \begin{itemize}
   \item Absolute yield: number of delayed neutrons per fission; unit: 1/fission. 
   \item Relative yield: absolute yield of an isotope divided by total absolute yield by all isotopes. 
-  \item Delayed neutron fraction: absolute yield divided by $\bar{\nu}$. Number of delayed neutrons devided by number of total fission neutrons. 
+  \item \hi{Delayed neutron fraction $\beta$: absolute yield (\# of delayed neutrons per fission) divided by $\bar{\nu}$ (total fission neutrons) = percentage of neutrons that are delayed.}
   \item 6 group yields and decay constants depend on fissioning species, as in Table~\ref{yield-depend-on-species}.
     \begin{table}[ht]
       \centering
       \includegraphics[width=4in]{images/pke/yield-depend-on-species.png}
       \caption{Yields and decay constants depend on fissioning species} \label{yield-depend-on-species}
     \end{table}
-  \item U238 produce 4\% delayed neutron per fission, more than U235's 1.7\% delayed neutron per fission, making U238 a very important isotope when it comes to delayed neutrons.
+  \item \textcolor{blue}{U238 produce 4\% delayed neutron per fission, more than U235's 1.7\% delayed neutron per fission}, making U238 a very important isotope when it comes to delayed neutrons. Fast group absolute yield for U238 is 0.0412, U235 is 0.0165, U239 is 0.0063 as in Table~\ref{abs-yield}. Keep in mind:  model the $\chi$ term technically we need to know the delayed neutron spectrum etc. 
   \end{itemize}
   \begin{table}[ht]
     \centering
@@ -70,11 +69,11 @@ This reactor would be virtually impossible to control! Fortunately, delayed netr
 \item Modeling $\beta$. There are two ideas,  
   \begin{itemize}
   \item Why not use direct measured fission product yields and measured fission product neutron emission rates? Issue: insufficient data to use directly for production analysis. There is a fairly large difference between experimental data and calculated data, making it hard to find a direct agreement on what is the correct fission product yields and emissionrates. 
-  \item Keep track of all precursors. We make a 6-group to 8-group model\footnote{Typically 8-group and above would start to produce good fitting; anything less than 8 group you run into the risk of having too many precursors/half-lives lumped in the same energy group and causing trouble.}, and each group has a fixed/homogeneous decay constants (the one that dominants in the group, that is, largest half-life). This way, all isotopes have the same half-life for the same group; but different isotopes would still have different delayed neutron fraction. Remember the terms circled in blue.  
+  \item Keep track of all precursors. We make a 6-group to 8-group model\footnote{Typically 8-group and above would start to produce good fitting; anything less than 8 group you run into the risk of having too many precursors/half-lives lumped in the same energy group and causing trouble.}, and each group has a fixed/homogeneous decay constants (the one that dominants in the group, that is, largest half-life). This way, all isotopes have the same half-life for the same group; but different isotopes would still have different delayed neutron fraction. Remember the terms circled in blue in Table~\ref{8-group-data} (the delayed neutron fraction listed in this table might be in \% unit, because U235 thermal fission fraction should be 0.0067.).  
     \begin{table}[ht]
       \centering
-      \includegraphics[width=5in]{images/pke/8-group-fixed-decay-constants.png}
-      \caption{8-group Fixed Decay Constans for All Species}
+      \includegraphics[width=7in]{images/pke/8-group-fixed-decay-constants.png}
+      \caption{8-group Fixed Decay Constans for All Species} \label{8-group-data}
     \end{table}
   \end{itemize}
 
@@ -216,11 +215,6 @@ N &= \left[ \begin{array}{c} T \\ C_1 \\ C_2 \\ C_3 \end{array} \right]
 \frac{\beta_3}{\Lambda} & & & -\lambda_3 \end{array} \right] 
 \left[ N(t) \right] 
 \end{align}
-
-%\begin{figure}[ht]
-%  \centering
-%  \includegraphics[width=4in]{images/pke/matrix-form.png}
-%\end{figure}
 \end{enumerate}
 
 \clearpage

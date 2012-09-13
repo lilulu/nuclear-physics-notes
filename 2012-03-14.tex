@@ -17,9 +17,11 @@ Hence we turn to deterministic codes, like diffusion theory. Common neutronics a
 \item 2D Lattice transport/depletion calculation: approximate boundary conditions;
 \item 3D simulation using few group diffusion models: 
   \begin{enumerate}
-  \item 3D Noval Approach: solve unique lattice in detail; treat each assembly as homogenized; solve 3D homogenized-asssembly few-group diffusion problem. 
   \item 3D Pin Approach: solve unique pins or lattice in detail; treat each pin as homogenized; solve 3D homogenized pin few-group diffusion problem. 
+
+  \item 3D Noval Approach: solve unique lattice in detail; treat each assembly as homogenized; solve 3D homogenized-asssembly few-group diffusion problem. 
   \end{enumerate}
+  The only difference between 3D pin approach and 3D noval approach is to treat a pin as a node vs. to treat an assembly as a node. For BWRs, that's about 2-3\% difference in power; for PWRs, that's only 1\% difference in power. 
 \end{enumerate}
 
 
@@ -119,6 +121,14 @@ The scattering kernel is nasty, because a) $\Sigma_s$ depends on energy, hence w
 This balance equation is basically equalling the source and the sink. Notice this equation is exact so far. But since we do not know what $\vec{J}$ is, we need to approximate it somehow. 
 \end{enumerate}
 
+Basically going from transport to diffusion theory we drop the $\Omega$ dependency. Thus we define the scalar flux $\phi(\vecr, E)$ and the net current $\vecJ (\vecr, E)$: 
+\eqn{ \int_{4\pi} \dOmega \psi(\vecr, E, \vecOmega) &= \phi (\vecr, E) & \int_{4\pi} \dOmega \vecOmega \psi(\vecr, E, \vecOmega) = \vecJ (\vecr, E) }
+
+The only reason we brought up the transport theory is that we need to set the boundary condition right.  
+
+
+
+
 \clearpage
 \topic{Net Current Equation}
 \begin{enumerate}
@@ -201,6 +211,7 @@ The problem with this method is that flux collapse under-predict transport.
 
 \clearpage
 \topic{Boundary Conditions}
+Again, recall that the only reason we brought up transport theory in this course is to set the boundary condition straight. 
 \begin{enumerate}
 \item Zero flux boundary condition:
   \eqn{ \phi (0) = 0 }
@@ -219,7 +230,7 @@ There are two formulism to solve this:
       \Aboxed{ \frac{\gradient \phi}{\phi} &= - \frac{1}{2D} = - \frac{3\Sigma_{tr}}{2} = - \frac{1}{d_{\mathrm{extrap}}}} 
 \mbox{   where } d_{\mathrm{extrap}} = \frac{2}{3 \Sigma_{tr}}  = \frac{2}{3} \lambda_{\mathrm{tr}}
     \end{align}
-    where $D$ is the property of the material inside, and $\lambda_{tr}$ is transport mean free path. Notice that the exact coefficient in $d_{\mathrm{extrap}}$ may be different. 
+    where $D$ is the property of the material inside, and $\lambda_{tr}$ is transport mean free path. Notice that the exact coefficient in $d_{\mathrm{extrap}}$ may be different. Take into account that thermal neutron mean free path is on the order of 1cm, so $d_{\mathrm{extrap}}$ is even less than 1 cm, which means that we don't really care about it for LWR cores. 
   \end{itemize}
 
 \item \hi{Albedo boundary condition} is the measurement of how much flux is reflected back: 
@@ -229,7 +240,7 @@ There are two formulism to solve this:
 
 \clearpage
 \topic{Interface Conditions/Continuity Conditions}
-There are two continuity conditions:
+There are two conditions that cannot change instanteneously across the boundary. Though the gradient of flux can change instanteneously if the diffusion coefficients change. 
 \begin{enumerate}
 \item Continuity of angular flux: 
   \eqn{ \psi(\vecr_i^-, E, \vecOmega) = \psi(\vecr_i^+, E, \vecOmega) }
@@ -243,10 +254,15 @@ There are two continuity conditions:
     \frac{\gradient \phi(\vecr_i^-, E)}{\gradient \phi(\vecr_i^+, E)} &= \frac{D(\vecr_i^-, E)}{D(\vecr_i^+, E)} 
   \end{align}
 \end{enumerate}
+
+
 \begin{figure}
   \centering
   \includegraphics[width=4in]{images/dfs/boundary-interface.png}
   \caption{Boundary Conditions and Interface Conditions} \label{boundary-interface}
 \end{figure}
+
+
+
 
 \end{document}
