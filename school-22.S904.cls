@@ -1,9 +1,9 @@
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \LoadClass{school-base}
-\ProvidesClass{school-22.213}
+\ProvidesClass{school-22.S904}
 
 \usepackage{school-style-class}
-\classcode{22.213}
+\classcode{22.S904}
 \classname{Nuclear Reactor Kinetics and Dynamics}
 \professor{Kord Smith}
 \schoolname{Massachusetts Institute of Technology}
