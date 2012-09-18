@@ -57,6 +57,7 @@ That is,
 Plug Eq.~\ref{net-current} back into diffusion equations, we get, 
 \eqn{ \hat{D}_1^{n-1,n} (\phi_1^n - \phi_1^{n-1})  - \hat{D}_1^{n,n+1} (\phi_1^{n+1} - \phi_1^n) + \Sigma_{r1}^n \phi_1^n \Delta^n &= \nu \Sigma_{f1}^n \phi_1^n \Delta^n + \nu \Sigma_{f2}^n \phi_2^n \Delta^n + S_1 \Delta^n} 
 \eqn{ \hat{D}_2^{n-1,n} (\phi_2^n - \phi_2^{n-1})  - \hat{D}_2^{n,n+1} (\phi_2^{n+1} - \phi_2^n) + \Sigma_{a2}^n \phi_2^n \Delta^n &= \Sigma_{s12}^n \phi_1^n \Delta^n + S_2 \Delta^n} 
+
 Rearranging terms by fluxes, we get, 
 \eqn{ - \hat{D}_1^{n-1,n} \phi_1^{n-1} - \hat{D}_1^{n,n+1} \phi_1^{n+1} + [ \Sigma_{r1}^n \Delta^n + \hat{D}_1^{n-1, n} + \hat{D}_1^{n,n+1} ] \phi_1^n = \nu \Sigma_{f1}^n \phi_1^n \Delta^n + \nu \Sigma_{f2}^n \phi_2^n \Delta^n + S_1^n \Delta^n} 
 \eqn{ - \hat{D}_2^{n-1,n} \phi_2^{n-1} - \hat{D}_2^{n,n+1} \phi_2^{n+1} + [\Sigma_{a2}^n \Delta^n + \hat{D}_2^{n-1.n} + \hat{D}_2^{n,n+1} ] \phi_2^n = \Sigma_{s12}^n \phi_1^n \Delta^n + S_2^n \Delta^n }
@@ -74,7 +75,7 @@ which implies,
   &= - \frac{2 D_g^N}{\Delta^N} \frac{\frac{2D_g^N}{\Delta^N} - 1}{\frac{1}{2} + \frac{2D_g^N}{\Delta}} \phi_g^N \\
   &= \boxed{ \frac{2D_g^N}{\Delta^N} \left[ \frac{1}{1 + \frac{4 D_g^{N+1}}{\Delta^N}} \right] \phi_g^N } \label{JgN}
 \end{align}
-In Eq.~\ref{JgN}, if $D \to 0$, we get zero flux boundary condition; if $D \to \infty$, we get zero current boundary condition. So we can actually use Eq.~\ref{JgN} for three different conditions: zero current, zero flux, zero incoming current. 
+In Eq.~\ref{JgN}, notice $D_g^{N+1}$ does not really exist, but we make it up so that we can write multiple BCs in the same form. That is, if $D \to 0$, we get zero flux boundary condition; if $D \to \infty$, we get zero current boundary condition. So we can actually use Eq.~\ref{JgN} for three different conditions: zero current, zero flux, zero incoming current. 
 \end{enumerate}
 
 \clearpage
@@ -153,10 +154,27 @@ In a steady-state problem, it does not matter whether we fully converge our flux
   \includegraphics[width=6in]{images/dfs/power-iteration-Gauss-Jacobi.png}
   \caption{Power Iteration With Gauss-Jacobi Numerical Inversion of Matrix}
 \end{figure}
+The outter loop is on $i$ which is the fission source iteration index, 
+\begin{align}
+A \phi^{i+1} &= \frac{1}{\keff} M \phi^i \\
+\keff^{i+1} &= \frac{M \phi^{i+1}}{M \phi^i} \\
+A &= D + O \Rightarrow D \phi^{m+1} = \frac{1}{\keff} M \phi^i - O \phi^m 
+\end{align}
+The inner loop is on $m$ which is the flux iteration index, 
+\eqn{ \phi^{m+1} = D^{-1} \left( \frac{1}{\keff} M \phi^i - O \phi^m \right) }
+
+
 
 
 \subtopic{Method 5: Power Iteration with Gauss-Seidal Iterative Flux Matrix Inversion} 
-
+The outter loop is almost the same as Point-Jacobi, except the A is handled differently, 
+\begin{align}
+A &= L + D + U  \\
+(L + D ) \phi^{m+1} &= \frac{1}{\keff} M \phi^i - U \phi^m 
+\end{align}
+Then the inner loop is on $m$ again which is the flux iteration index, 
+\eqn{ \phi^{m+1} &= (L + D)^{-1} \left( \frac{1}{\keff} M \phi^i - U \phi^m \right) }
+\textcolor{blue}{Notice these Point-Jacobi and Gauss-Seidal only work with 2D problem that we can easily split a matrix into L, D, U, and they would not work well with 3D and above.} 
 
 
 \clearpage
