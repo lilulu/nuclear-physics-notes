@@ -5,13 +5,33 @@
 \maketitle
 
 \lecture{Time-Dependent Schrodinger Equation}
-This is where the 4th postulate comes into play. The time-dependence follows the following relation:
-\eqn{ i\hbar \dpsidt = \hat{H} \psi }
-Plug in the Hamiltonian $\hat{H}$, we get: 
-\eqn{ i\hbar \dpsidt - \frac{\hbar^2}{2m} \gradient^2 \psi + V(x,t) \psi }
-We have to give it an initial condition $\psi(x,0)$ to solve for an expression. Depend on the form of the initial state, we can find different solutions. 
+This is where the 4th postulate comes into play. The time dependent Schrodinger Equation in position basis is, 
+\eqn{ i\hbar \dpsidt = \hat{H} \psi (x,t) }
+Plugging in the Hamiltonian $\hat{H}$, we get: 
+\eqn{ i\hbar \dpsidt = \hat{H} \psi =  - \frac{\hbar^2}{2m} \laplacian \left[ \psi + V(x,t) \psi (x,t) \right] }
+Use separation of variables, we define, 
+\eqn{ \psi(x,t) = \phi(x) f(t) }
+Then SEQ becomes, 
+\eqn{ i \hbar \dfdt \frac{1}{f} = - \frac{-\hbar^2}{2m} \dphidxn2 \frac{1}{\phi} + V(x) -  E  }
+The above equation has two components, the position dependent part, and the time dependent part: 
+\begin{enumerate}
+\item The eigenvalue equation for energy, which is the time independent SEQ, is, 
+  \eqn{ - \frac{\hbar^2}{2m} \dphidxn2 + V(x) \phi(x) = E \phi(x) }
+\item The time dependent part is, 
+  \eqn{ i \hbar \dfdt = E f(t) }
+  Thus $f(t) = f(0) e^{-iEt/\hbar}$ and one particular solution of the TD-SEQ is, 
+  \eqn{ \psi(x,t) = \phi(x) e^{iEt/\hbar} }
+\end{enumerate}
+
+
+
+
 
 \topic{Time-Independence of Energy Probability}
+The idea is, we can get rid of the time dependency when we square for probability, 
+\eqn{ \expect{A} = \bra{\psi} A \ket{\psi} = \int \psi(x,t)^*  A \psi(x,t) \dx }
+
+
 \subtopic{Simplified Initial State: One Single Eigenstate}
 The Simplified initial state is just a constant times the m-th order time-independent wave function:
 \eqn{ \psi(x,0) = C_m(0) \psi_m(x) }
@@ -31,7 +51,7 @@ Interpretation: if we have one initial measured energy $E_m$, that is at time ze
 
 \subtopic{General Form of Solution}
 Now that our wavefunction is a super-position of multiple eigenstates:
-\eqn{ \boxed{ \psi(x,t) = \Sum_n C_n (t) \psi_n (\uline{x}) }  }
+\eqn{ \boxed{ \psi(x,t) = \Sum_n C_n (t) \psi_n (\uline{x}) e^{-i E_n t/\hbar}  } }
 We solve the Schrodinger Equation again:
 \begin{align}
 i \hbar \ppsipt &= \Sum_n i \hbar \ppt C_n (t) \psi_n (\uline{x}) \\
@@ -121,6 +141,11 @@ Application: we know $\Phat, \Hhat$ commute, thus chances are they have the same
 
 
 \subsubtopic{The Derivative of Expectation Value}
+Derivation by Prof. Cappellaro: 
+\eqn{ A \to \expect{A(t)} = \bra{\psi(t)} A \ket{\psi(t)} }
+\eqn{ \frac{\derivative \expect{A(t)}}{\dt} = \ppt \bra{\psi} A \ket{\psi} + \bra{\psi} \pApt \ket{\psi} + \bra{\psi A} \ppt \ket{\psi} }
+
+Derivation by Prof. Yildiz,
 \begin{align}
 \expect{A} &= \int \dx^3 \psi^* \Ahat \psi \\
 \ddt \expect{A} &= \int \dx^3 \left( \ddt \psi^* \Ahat \psi \right) = \int \dx^3 \left( \overbrace{\ddt \psi^* \Ahat \psi}^{\textcircled{3}} + \overbrace{\psi^* \Ahat \ddt \psi}^{\textcircled{2}} + \overbrace{\psi^* \ddt \hat{A} \psi}^{\textcircled{1}} \right) \\
@@ -135,6 +160,7 @@ Application: we know $\Phat, \Hhat$ commute, thus chances are they have the same
 \uline{Application:} If we plug in $\phat$ for $\Ahat$, and take into account that $\left[ \Hhat, \phat \right] = 0$ because $\Hhat = \frac{\phat^2}{2m}$, then,
 \eqn{ \ddt \expect{\phat} = \frac{i}{\hbar} \expect{\left[ \Hhat, \phat \right]} + 0 = 0 }
 That is to say, momentum is conserved in time. We can plug in $\Hhat$ and get the same thing out, suggesting the energy is conserved in time. In fact any operator that commute with $\Hhat$ would have an expectation value not dependent of time.  Notice we assume that the potential is time independent. 
+
 
 
 \end{document}
