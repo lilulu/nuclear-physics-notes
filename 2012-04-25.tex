@@ -148,14 +148,128 @@ where $S(\vecr, E)$ is the Shape function,  $T(t)$ is the amplitude function (re
     & + \int_0^{\infty} \Sigma_s (\vecr, E'\to E, t) S(\vecr, E') \dE'   \notag \\
     &+ \Sum_j \left( \chi_p^j (E) (1-\beta^j) + \Sum_i \chi_d^i (E) \beta_i^j \right) \int_0^{\infty} \nu \Sigma_f^j (\vecr, E', t) S(\vecr, E') \dE'   \notag \\
     &- \Sum_j \chi_p^j (E) \beta^j \int_0^{\infty} \nu \Sigma_f^j (\vecr, E', t) S(\vecr, E') \dE' \Bigg\} T(t)  \notag \\
-    &+ \int \dE \int \dr \left[ \Sum_i \chi_d^i (E) \lambda_i C_i (\vecr, t) + Q(\vecr, E, t)\right]   
+    &+ \int \dE \int \dr \left[ \Sum_i \chi_d^i (E) \lambda_i C_i (\vecr, t) + Q(\vecr, E, t)\right]   \label{PKE-1}
   \end{align}
   \begin{align}
     \ddt \left[ \int \dE \int \dr C_i (\vecr, t) \right] &= \int \dE \int \dr \left\{ \Sum_j \beta_i^j \int_0^{\infty} \nu \Sigma_p^j (\vecr, E', t) S(\vecr, E') \dE' \right\} T(t) \notag \\
-    &- \lambda_i \int \dE \int \dr C_i (\vecr, t) 
+    &- \lambda_i \int \dE \int \dr C_i (\vecr, t)  \label{PKE-2}
   \end{align}
 
 
+\item Simplify energy dependency. In Eq.~\ref{PKE-1}, notice in the term $\Sum_j \chi_p^j (E) \beta^j \int_0^{\infty} \nu \Sigma_f^j (\vecr, E', t) S(\vecr, E') \dE'$, only $\chi_p^j(E)$ depends on energy, we can use $\int \chi_p^j (E) \dE = 1$ to get rid of the energy integral in Eq.~\ref{PKE-1}, 
+  \begin{align}
+    \ddt \left[ T(t) \right] &= 
+    \int \dE \int \dr \Bigg\{ \divergence D(\vecr, E, t) \gradient S(\vecr, E) - \Sigma_t (\vecr, E, t) S(\vecr, E)   \notag \\
+    & + \int_0^{\infty} \Sigma_s (\vecr, E'\to E, t) S(\vecr, E') \dE'   \notag \\
+    &+ \Sum_j \left( \chi_p^j (E) (1-\beta^j) + \Sum_i \chi_d^i (E) \beta_i^j \right) \int_0^{\infty} \nu \Sigma_f^j (\vecr, E', t) S(\vecr, E') \dE'  \Bigg\} T(t)  \notag \\
+    &- \int \dr \Bigg\{ \Sum_j \beta^j \int_0^{\infty} \nu \Sigma_f^j (\vecr, E', t) S(\vecr, E') \dE' \Bigg\} T(t)  \notag \\
+    &+ \int \dE \int \dr \left[ \Sum_i \chi_d^i (E) \lambda_i C_i (\vecr, t) + Q(\vecr, E, t)\right]   \label{PKE-3}
+  \end{align}
+  In a similar fashion, notice Eq.~\ref{PKE-2} no term has a $E$ dependency, so we can cross out the $\int \dE$ in every term to get, 
+    \begin{align}
+    \ddt \left[ \int \dr C_i (\vecr, t) \right] &= \int \dr \left\{ \Sum_j \beta_i^j \int_0^{\infty} \nu \Sigma_p^j (\vecr, E', t) S(\vecr, E') \dE' \right\} T(t) \notag \\
+    &- \lambda_i \int \dr C_i (\vecr, t)  \label{PKE-4}
+  \end{align}
+
+
+\item Assume no net current (leakage) out of the reactor model\footnote{Recall we used Gauss theory to make the volume integral into surface integral, thus creating zero leakage for certain BCs.}, thus $\divergence D(\vecr, E, t) \gradient S(\vecr, E) \to 0$. Assume no external source of prompt or delayed neutrons, thus $Q(\vecr, E, t) \to 0$. 
+
+
+\item Assume \hi{prompt fission spectrum $\chi_d^j$ is independent of fissioning species $j$}, that is, we drop the $j$ dependency on prompt terms $\chi_p^j, \beta^j$, 
+\eqn{ \Sum_j \chi_p^j (1 - \beta^j) = \chi_p (1 - \beta) }
+
+\item Assume \hi{delayed fission yield $\beta^j$ is independent of fissioning species $j$}, that is, we drop the $j$ dependency on delayed terms, 
+\eqn{ \Sum_j \beta^j &= \beta  & \Sum_j \beta_i^j &= \beta_i }
+The last two assumptions together, we can write $\Sigma_f^j \to \Sigma_f$. 
+
+\item Assume \hi{delayed fission spectrum $\chi_d^i$ is independent of delayed neutron group $i$}\footnote{we saw from data two lectures ago that $\chi$ is slightly dependent on neutron group, but we don't care much about it for this context.}, that is, we drop the $i$ dependency on $\chi_d^i$, 
+\eqn{ \Sum_i \chi_d^i (E) \lambda_i C_i = \chi_d (E) \Sum_i \lambda_i C_i }
+
+\item Assume \hi{delayed neutron yield $\beta$ is independent of space}, together with the last assumption, we can write, 
+\eqn{ \Sum_j \Sum_i \chi_d^i (E) \beta_i^j  = \chi_d (E) \beta }
+Thus we reach, 
+
+  \begin{align}
+    \ddt \left[ T(t) \right] &= 
+    \int \dE \int \dr \Bigg\{  - \Sigma_t (\vecr, E, t) S(\vecr, E)   + \int_0^{\infty} \Sigma_s (\vecr, E'\to E, t) S(\vecr, E') \dE'   \notag \\
+    &+ \left\{ \chi_p (E) (1-\beta) + \chi_d (E) \beta \right\} \int_0^{\infty} \nu \Sigma_f^j (\vecr, E', t) S(\vecr, E') \dE'  \Bigg\} T(t)  \notag \\
+    &-  \beta \int \dr \Bigg\{ \int_0^{\infty} \nu \Sigma_f (\vecr, E', t) S(\vecr, E') \dE' \Bigg\} T(t)  
+    + \int \dE \int \dr \left[ \chi_d (E) \Sum_i \lambda_i C_i (\vecr, t) \right]   \label{PKE-5}
+  \end{align}
+    \begin{align}
+    \Aboxed{ \ddt \left[ \int \dr C_i (\vecr, t) \right] &=  \beta_i \int \dr \left\{ \int_0^{\infty} \nu \Sigma_f (\vecr, E', t) S(\vecr, E') \dE' \right\} T(t)  - \lambda_i \int \dr C_i (\vecr, t)  } \label{PKE-6}
+  \end{align}
+
+
+\item We further assume that $\int \dE \chi_d (E)  = 1$, thus the last term simplifies, and two long terms cancel out, 
+  \eqn{ \int \dE \dr \chi_d(E) \beta \int_0^{\infty} \nu \Sigma_f^i (\vecr, E', t) S(\vecr, E') \dE' T(t) - \beta \int \dr \int_0^{\infty} \nu \Sigma_f (\vecr, E' t) S(\vecr, E') \dE' T(t) = 0  \notag } 
+Thus Eq.~\ref{PKE-5} becomes, 
+  \begin{align}
+    \ddt \left[ T(t) \right] &= 
+    \int \dE \int \dr \Bigg\{  - \Sigma_t (\vecr, E, t) S(\vecr, E)   + \int_0^{\infty} \Sigma_s (\vecr, E'\to E, t) S(\vecr, E') \dE'   \notag \\
+    &+ \chi_p (E) (1-\beta) \int_0^{\infty} \nu \Sigma_f (\vecr, E', t) S(\vecr, E') \dE'  \Bigg\} T(t)  +  \int \dr  \Sum_i \lambda_i C_i (\vecr, t)    \label{PKE-7}
+  \end{align}
+
+
+\item Traditionally we weight the PKEs by adjoint flux, not by unity.  We add $\phi^*$ because the prompt neutron spectrum has energy dependency, but no $\phi^*$ for precursors because precursors emission is not energy dependency, it is just a fission rate.\footnote{We add $\int \dE$ back on the last term in Eq.~\ref{PKE-7} after adding in $\phi^*$. We give $\beta_i$ its spatial dependency back in both equations. Though $\lambda_i$ does not depend on fissioning species, meaning they are not spatially dependence.}
+  \begin{align}
+  \Aboxed{ \ddt \left[ T(t) \right] &=  
+    \int \dE \int \dr  \phi^* (\vecr, E) \left\{  - \Sigma_t (\vecr, E, t) S(\vecr, E)   + \int_0^{\infty} \Sigma_s (\vecr, E'\to E, t) S(\vecr, E') \dE'  \right. } \notag \\
+    \Aboxed{ &+  \left. \chi_p (E) (1-\beta (\vecr)) \int_0^{\infty} \nu \Sigma_f (\vecr, E', t) S(\vecr, E') \dE'  \right\} T(t)  + \int \dE \int \dr \phi^*(\vecr, E)  \chi_d (E) \Sum_i \lambda_i C_i (\vecr, t)  }   \label{PKE-8}
+  \end{align}
+\end{enumerate}
+
+
+
+\topic{Multi-Group PKEs}
+Based on Eq.~\ref{PKE-6} and Eq.~\ref{PKE-8}, 
+\begin{enumerate}
+\item \hi{Multi-group PKEs}: normalize $\Sum_g \expect{ \int \dr \phi_g^* (\vecr) \frac{1}{v_g(\vecr, t)} S_g (\vecr) } = 1.0$, we basically add a $_g$ subscript to every term applicable, and convert any $\int \dE A(E)$ to $\Sum_{g} A_{g}$, 
+  \begin{align}
+ \ddt \left[ T(t) \right] &=  
+    \int \dr  \phi_g^* (\vecr)  \left\{  - \Sigma_{t,g} (\vecr, t) S_g(\vecr) T_g(t)   + \Sum_{g'} \Sigma_{s, g' \to g} (\vecr, t) S_{g'}(\vecr) T_{g'} (t)  \right.  \notag \\
+    &+  \left. \chi_{p,g} (E) (1-\beta (\vecr)) \Sum_{g'} \nu \Sigma_{f,g'} (\vecr, t) S_{g'} (\vecr) T_{g'}(t) \right\}  + \int \dr \phi^*(\vecr) \chi_{d,g}  \Sum_i \lambda_i C_i (\vecr, t)    \label{PKE-9}  \\
+     \ddt \left[ \int \dr C_i (\vecr, t) \right] &=   \int \dr \beta_i (\vecr) \Sum_g \nu \Sigma_{f,g} (\vecr, t) S_g (\vecr) T_g(t)   - \lambda_i \int \dr C_i (\vecr, t)  \label{PKE-10}
+  \end{align}
+
+
+\item \hi{2-group PKEs}\footnote{Very Important! Know this for the exam!!!}:
+  \begin{align}
+  \ddt \left[ T_1(t) \right] &=   \int \dr  \phi_1^* (\vecr)  \left\{  - \Sigma_{r,1} (\vecr,t) S_1(\vecr) T_1(t)  + [1-\beta (\vecr)][\nu \Sigma_{f,1} (\vecr, t) S_{1} (\vecr) T_{1}(t) + \nu \Sigma_{f,2} (\vecr, t) S_2 (\vecr) T_2 (t)] \right\} \notag \\
+    &+ \int \dr \phi^*(\vecr)   \Sum_i \lambda_i C_i (\vecr, t)     \label{PKE-11} \\
+   \ddt \left[ T_2(t) \right] &=  
+    \int \dr  \phi_2^* (\vecr)  \left[ - \Sigma_{a,2} (\vecr,t) S_2(\vecr) T_2(t) + \Sigma_{s12} (\vecr, t) S_1 (\vecr) T_1 (t)  \right]   \label{PKE-12}
+  \end{align}
+  \begin{align}
+   \ddt \left[ \int \dr C_i (\vecr, t) \right] &=   \int \dr \beta_i (\vecr) \left[ \nu \Sigma_{f,1} (\vecr, t) S_1 (\vecr) T_1(t) + \nu \Sigma_{f,2} (\vecr, t) S_2 (\vecr) T_2 (t) \right]   - \lambda_i \int \dr C_i (\vecr, t)  \label{PKE-13}
+  \end{align}
+  The assumptions made include, 
+  \begin{enumerate}
+    \item No leakage out of the core. 
+    \item All fission neutrons born in the fast group. 
+    \item All delayed neutron born in the fast group. 
+    \item Downscattering is replaced by effective downscattering. No upscattering. 
+  \end{enumerate}
+
+\item We can further write the 2-group PKEs in matrix form as in Table~\ref{matrix-2-group-PKEs}. 
+  \begin{table}[ht]
+    \centering
+    \includegraphics[width=6.5in]{images/pke/matrix-2-group-PKEs.png}
+    \caption{Matrix Form of 2-Group PKE Diffusion Equations} \label{matrix-2-group-PKEs}
+  \end{table}
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+
+\topic{PKE Parameters}
+\begin{enumerate}
 \item We define a set of terms to simplify the expression. For simplicity concern, we omit the dependency on the following terms. $D(\vecr, E, t), \Sigma_t (\vecr, E, t), \Sigma_f(\vecr, E, t),  S(\vecr, E), \chi(E)$. 
 \begin{enumerate}
 \item Reactivity $\rho(t)$, where the top is the diffusion equation, and the bottom is fission rate if all the neutrons show up instatenously. 
@@ -188,7 +302,19 @@ The prompt neutron life $\Gamma \sim 1/v$ of shape divided by almost-instantenou
   \eqn{ Q(t) = \int \dE \int \dr Q (\vecr, t) }
 \end{enumerate}
 
-\item Using the freshly defined terms, we get the classic \hi{point kinetics equations (PKE)},
+\item 2-group PKE parameters.  Recall that $\rho(t)$ does not describe how much neutrons there are at a specific time; it describes how much neutrons there would be eventually.  Notice $\beta$ only depends on group 1 because all delayed neutrons are born in group 1. Similarly $\Gamma$ is the prompt neutron life time, thus not depends on $\phi_2^*$ at all. 
+\scriptsize
+\begin{align}
+\rho(t) &= \frac{  \int \dr  \phi_1^* (\vecr)  \left\{  - \Sigma_{r,1} (\vecr,t) S_1(\vecr) T_1(t)  + [\nu \Sigma_{f,1} (\vecr, t) S_{1} (\vecr) T_{1}(t) + \nu \Sigma_{f,2} (\vecr, t) S_2 (\vecr) T_2 (t)] \right\}
++  \int \dr  \phi_2^* (\vecr)  \left[ - \Sigma_{a,2} (\vecr,t) S_2(\vecr) T_2(t) + \Sigma_{s12} (\vecr, t) S_1 (\vecr) T_1 (t)  \right]  }
+{\int \dr \phi_1^* (\vecr)  [\nu \Sigma_{f,1} (\vecr, t) S_{1} (\vecr) T_{1}(t) + \nu \Sigma_{f,2} (\vecr, t) S_2 (\vecr) T_2 (t)] } 
+\end{align}
+\normalsize
+\eqn{ \beta_i (t) = \frac{\int \dr \phi_1^* (\vecr) \beta_i (\vecr, t)  [\nu \Sigma_{f,1} (\vecr, t) S_{1} (\vecr)  + \nu \Sigma_{f,2} (\vecr, t) S_2 (\vecr) ] }{\int \dr \phi_1^* (\vecr, t)   [\nu \Sigma_{f,1} (\vecr, t) S_{1} (\vecr) + \nu \Sigma_{f,2} (\vecr, t) S_2 (\vecr) ] } }
+\eqn{ \Lambda(t) = \frac{1}{\int \dr \phi_1^* (\vecr, t) [\nu \Sigma_{f,1} (\vecr, t) S_{1} (\vecr) + \nu \Sigma_{f,2} (\vecr, t) S_2 (\vecr) ]} }
+\eqn{ C_i (t) = \int \dr C_i (\vecr, t) }
+
+\item Using the defined PKE parameters, we get the classic \hi{point kinetics equations (PKE)},
 \eqn{ \Aboxed{ \ddt T(t) &= \frac{\rho(t) - \Sum_i \beta_i (t) }{\Lambda (t)} T(t) + \Sum_i \lambda_i C_i (t) + Q(t) } }
 \eqn{ \Aboxed{ \ddt C_i (t) &= \frac{\beta_i (t)}{\Lambda (t)} T(t) - \lambda_i C_i (t) }  }
 Remember that the above classic PKEs are obtained using \uline{assumptions}: 
