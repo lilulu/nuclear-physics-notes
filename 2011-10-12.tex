@@ -98,4 +98,65 @@ A couple of things about the Spherical Harmonics:
 \item $L_z$ is not continuous. Given a $L^2$, we can draw a bunch of cones, each surface describe the superposition of possible eigenfunctions. L will never entirely align with the z axis. 
 \end{itemize}
 
+
+\subtopic{Summary of Quantum Numbers}
+\begin{enumerate}
+\item Orbital Angular Momentum Quantum Number $l$: integers, $0 \le l \le n$. A subset of j is the solution from orbital component. 
+\item Total Angular Momentum Quantum Number $j$: integer steps, $|l-s|, \cdots, |l+s|$. It completely construct $l$ and $s$. 
+\item $m_j$: $-j, \cdots j$ (includes 0 when j is an integer, and does not include 0 when j is a half-integer). It's degeneracy is $2j+1$. 
+\end{enumerate}
+
+\begin{table}[h!]
+\begin{tabular}{|p{1.5in}|p{1.5in}|p{1.5in}|p{1.5in}|} \hline
+ & $\Lhat$ & $\Shat$ &$\Jhat = \Lhat + \Shat$ \\ \hline
+\multirow{3}{*}{Commutating Relations} &
+   $\left[ \Lhat_x, \Lhat_y \right] = i \hbar \Lhat_z$ &  $\left[ \Shat_x, \Shat_y \right] = i \hbar \Shat_z$ &  $\left[ \Jhat_x, \Jhat_y \right] = i \hbar \Jhat_z$ \\
+&  $\left[ \Lhat_y, \Lhat_z \right] = i \hbar \Lhat_x$ &  $\left[ \Shat_y, \Shat_z \right] = i \hbar \Shat_x$ &  $\left[ \Jhat_y, \Jhat_z \right] = i \hbar \Jhat_x$ \\
+&  $\left[ \Lhat_z, \Lhat_x \right] = i \hbar \Lhat_y$ &  $\left[ \Shat_z, \Shat_x \right] = i \hbar \Shat_y$ &  $\left[ \Jhat_z, \Jhat_x \right] = i \hbar \Jhat_y$ \\ \hline
+Quantum Numbers & $ l = 0,1,2,\cdots $ & $s = 0, 1/2, 1, \cdots$               & $ j =|l-s|,\cdots, |l+s|$ \\
+(all in integer steps) & $-l \le m_l \le l  $  & $ -s \le m_s \le s$  & $-j \le m_j \le j$  \\ \hline
+\multirow{2}{*}{Eigenvalues} 
+& $\expect{L^2} = \hbar^2 l (l+1)$ 
+& $\expect{S^2} = \hbar^2 s (s+1)$
+& $\expect{J^2} = \hbar^2 j(j+1)$\\ 
+& $\expect{L_z} = \hbar m_l$ 
+& $\expect{S_z} = \hbar m_s$ 
+& $\expect{J_z} =  \hbar m_j$  \\ \hline
+\end{tabular}
+\caption{Comparison of Quantum Numbers $l,s,j$}
+\label{quantum-numbers}
+\end{table}
+
+
+\topic{Additions of Angular Momentum}
+Examples:
+\begin{enumerate}
+\item $2e^-: \Lhat = \Lhat_1 + \Lhat_2 $ 
+\item $ 1 e^-: \Jhat = \Lhat + \Shat$
+\item \ce{^2H} = p+n: l =0. $\Jhat = \Shat_p + \Shat_n$. 
+\end{enumerate}
+
+\uline{Example 1: Adding Two Orbital Momentum:} we want to find the $(l,m)$ associated with $\Lhat= \Lhat_1 + \Lhat_2$ from the four quantum numbers $l_1, m_1, l_2, m_2$. 
+\begin{itemize}
+\item $\Lhat^2 = (\Lhat_1 + \Lhat_2)^2 $
+\item $ \Lhat_z = \Lhat_{1z} + \Lhat_{2z} \Rightarrow m_{\mathrm{max}} = m_{\mathrm{1,max}} + m_{\mathrm{2,max}} = l_1 + l_2.$
+$\fsp l_{\mathrm{max}} = m_{\mathrm{max}} = l_1 + l_2.$
+\item $ \mbox{Total \# of independent states } N = (2 l_1 + 1) (2l_2 + 1) = \Sum_{l_{\mathrm{min}}}^{l_{\mathrm{max}}} (2l+1).$
+$\fsp\Rightarrow l_{\mathrm{min}} = |l_2 - l_1 |.$ That is,
+\eqn{ l = |l_2 - l_1|, \cdots , l_1 + l_2}
+\end{itemize}
+
+\uline{Example 2: Adding Two Electrons}
+
+Given: $ 2e^-$, 1 $e^-$ \@ $l_1 = 1$, 1 $e^-$ \@ $l_2 = 2$. Answer: 
+\begin{itemize}
+\item $l = 1,2,3$.
+\item $L = \hbar \sqrt{l (l+1)} = \hbar \sqrt{2}, \hbar \sqrt{6}, \hbar \sqrt{12}.$.
+\item $N = \Sum_1^3 (2l+1) = 3 + 5 + 7 = 15$, or $N = 3 \times 5 = 15$. 
+\end{itemize}
+
+
+
+
+
 \end{document}

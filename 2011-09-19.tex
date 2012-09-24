@@ -4,29 +4,48 @@
 \begin{document}
 \maketitle
 
-\lecture{Time-Independent Schrodinger Equation in One Dimension}
+\lecture{Solve Time-Independent SEQ with 5 Potentials} \label{TISEQ}
 Time-independent SEQ is important for two reasons:
 \begin{enumerate}
 \item We care about energy eigenvalue problem, which is time independent because energy conserves and thus do not change with respect to time. 
-\item Solutions of time-independent SEQ are stationary states. For instance, \uline{if $\ket{\psi} = \ket{E}$, then the system is stationary.}
+\item Solutions of time-independent SEQ are stationary states. For instance, \textbf{if $\ket{\psi} = \ket{E}$, then the system is stationary.}
 \end{enumerate}
+In this section, we will cover 3 unbounded systems (free particle, simple step barrier, rectangular barrier), and 2 bounded systems (infinite potential well, finite potential well). 
 
-To solve the specific SEQ, we need to know the potential. In this chapter, we will cover two types of potentials:
+%%%%%%%%%%%%%%%%%% Overview %%%%%%%%%%%%%%%%%%%
+\topic{Unbound vs. Bound States}
+To solve the specific SEQ, we need to know the potential. In this class we have two types of potentials:
 \begin{enumerate}
-\item Unbound States (Scattering States): we define bound states to be the ones satisfying:
-\eqn{ |\psi|^2 \to 0, x \to \infty  \mbox{ or } \int_{-\infty}^{\infty} |\psi|^2 \dx < \infty}
-Later we will learn that a simplified way to characterize unbound states is $E > 0$. We will go over three examples:
-\begin{enumerate}
-\item Free Particle.
-\item Simple Step Barrier.
-\item Rectangular Barrier.
-\end{enumerate}
+\item \hi{Unbound States: where $E > 0$.}
+  \begin{enumerate}
+  \item Scattering states, travelling of waves.  We define bound states to be the ones satisfying:
+    \eqn{ |\psi|^2 \to 0, x \to \infty  \mbox{ or } \int_{-\infty}^{\infty} |\psi|^2 \dx < \infty}
+  \item Continuous energy; all energies are solutions. 
+  \item BC problem for the energy eigenvalue equation. 
+  \item Common problems:
+    \begin{itemize}
+    \item Free Particle: Chapter~\ref{free-particle}.
+    \item Simple Step Barrier: Chapter~\ref{simple-step-barrier}.
+    \item Rectangular Barrier: Chapter~\ref{rectangular-barrier}.
+    \end{itemize}
+  \end{enumerate}
 
-\item Bound States: commonly find in nuclear structure (in the example of Finite Square Well, $a$ is the radius of the nucleus, and $V$ is the nucleus interaction potential). We will discuss the case of Finite Square Well. A simplified way to characterize bound states is $E<0$. 
+  \item \hi{Bound States: where $E<0$.}
+    \begin{enumerate}
+      \item System constrained in a region of space (e.g., bound particles as atoms/nuclei, commonly found in nuclear structures). 
+      \item Quantization of energy (energy levels).
+      \item BC problem for $E_n$ eigenvalue equation. 
+      \item Common problems: 
+        \begin{itemize}
+        \item Infinite square well with $E<0$, see Chapter~\ref{infinite-square-well}. 
+        \item Finite square well with $E<0$. We first solve it in Chapter~\ref{finite-square-well}, then solve it in the context of deuteron in Chapter~\ref{2H-bound-state} by adding in $l$ and $s$.
+        \end{itemize}
+        Notice we specify $E<0$, because we can have a finite square well, but if the particles have $E>0$, then the particles can travel everywhere as a free particle, making it a unbound state. 
+    \end{enumerate}
 \end{enumerate}
 
 %%%%%%%%%%%%%%% Free Particle %%%%%%%%%%%%%%%
-\topic{Free Particle, Concept of Flux}
+\topic{Free Particle, Concept of Flux\label{free-particle}}
 Recall we solved already 1D free particle problem and found, 
 \begin{itemize}
 \item $\hat{H} = \hat{K} = \frac{\hat{p}^2}{2m} = - \frac{\hbar^2}{2m} \laplacian$. 
@@ -60,7 +79,11 @@ in which we used the relation $\uline{p} = \hbar \uline{k}$. Then we consider th
 Then in a simplified 1D case, $\theta$ can only take either 0 (in which case k is the same direction as r) or 1 (in which case k is the opposite direction of r). So our original $\psi = A e^{ikx}$ expression is actually two possibilities, either $+x, k>0$ or $-x, k<0$, whichever way when we multiply them, the product comes out to be positive. 
 \end{itemize}
 
-\topic{Simple Step Barrier}
+
+
+
+%%%%%%%%%%%%%%%%
+\topic{Simple Step Barrier} \label{simple-step-barrier}
 Set-up: Case A has an incoming KE of $E_A > V_H$. Case B has an incoming KE of $E_B < V_H$. Classically, we can predict that in case A the particle will continue travelling in region II, but with a reduced KE of $E_A - V_H$. In Case B, the particle will simply be reflected back with $E_B$. 
 
 \subtopic{Case A: $E > V$}

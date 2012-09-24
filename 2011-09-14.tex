@@ -133,38 +133,6 @@ That is to say, $\psi(x), \Phi(k)$ carry the same information, just with differe
 The two examples we've done so far are the common probabilities:
 \eqn{ \boxed{ P(x \to x+\dx) \dx = |\psi(x)|^2 \dx = \mbox{wavefunction itself} } }
 \eqn{ \boxed{ P(\hbar(k \to k + \dk) ) \dk = |\Phi(k)|^2 \dk = \mbox{F.T. of wavefunction}  }}
-
-\item Example: \uline{1D particle in a box,} which is an energy eigenvalue problem. We are given a box with the potential:
-  \eqn{ V(x) = \left\{ \begin{array}{cc} 0 & 0 \le x \le L \\ \infty & x<0, x>L  \end{array} \right. }
-  So there are infinite potential walls at location x=0 and x=L. Then we can immediately know the boundary conditions should be: $\psi_n (0) = 0, \psi_n(L) = 0$. 
-
-  \textbf{Answer:} We divide the problem into two parts:
-  \begin{enumerate}
-  \item Outside: 
-    \eqn{ \hat{H} = \frac{\hat{p}^2}{2m} + V = \infty }
-  \item Inside: 
-    \eqn{ \hat{H} = \frac{\hat{p}^2}{2m} + V = \frac{\hat{p}^2}{2m} }
-    \eqn{ -\frac{\hbar^2}{2m} \ppxn2 \psi_n = E_n \psi_n \Rightarrow \ppxn2 \psi_n + k^2 \psi_n = 0 }
-    Two BCs: $\psi_n (0) = \psi_n(L) =0$. 
-    
-    The solution is in the form of $\psi_n (x) = A \sin kx + B \cos kx$, apply BCs, we get $B=0, k_n = \frac{n \pi}{L} $. Now that we have constrain for k values, then the energy values are discrete/quantized as well: 
-    \eqn{ E_n = \frac{\hbar^2 k^2_n}{2m} = \frac{\hbar^2 \pi^2 n^2}{2 m L^2} = n^2 \cdot E_1  }
-    This has nothing to do with the quantum mechanical law itself -- it is really just the BC imposed that require the system to be discrete and quantized. 
-    
-    Then we find A through normalization process:
-    \eqn{ \int_0^L A^2 \sin^2 (k_n x) = 1 \Rightarrow A = \sqrt{\frac{2}{L}} }
-    \eqn{ \psi_n = \sqrt{\frac{2}{L}} \sin (k_n x)  }
-    
-  
-  \item \textbf{Interpretation:} There is a minimum energy related to the dimension of the box (the narrower the box, the higher the energy needs to be). The next possible states are: $4E_1, 9E_2,$ etc. For each energy, we are also able to define the state function as in Figure~\ref{particle-in-box}.
-  \begin{figure}
-    \centering
-    \includegraphics[width=4in]{images/qm/1Dparticle-in-box.png}
-    \caption{Particle in Box Wave Function\label{particle-in-box}}
-  \end{figure}
-
-  \end{enumerate}
 \end{enumerate}
-
 
 \end{document}

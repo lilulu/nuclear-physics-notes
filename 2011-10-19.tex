@@ -6,7 +6,7 @@
 
 
 \topic{Analytical Relations between $V_0, r_0, E_B$ \label{2H-relation}}
-In this section we consider the interaction between a neutron and a proton of the form of spherical well and $l=0$, and find analytical relations between the well depth $V_0$, well width $r_0$, and binding energy $E_B$.  
+In this section we consider the interaction between a neutron and a proton of the form of spherical well with $l=0$, and find analytical relations between the well depth $V_0$, well width $r_0$, and binding energy $E_B$.  
 
 \begin{figure}[h!]
     \centering
@@ -25,17 +25,20 @@ in which $E<0$ (bound state), and the potential well of $-V_0$ goes from $0$ to 
 \item For $r < r_0$, $ \psi_n (r) = A \sin k_1 r + B \cos k_1 r; \fsp k_1 = \frac{\sqrt{2 \mu (E+V_0)}}{\hbar}.$
 Notice it is $E - (-V_0) = E + V_0$. 
 
-\item For $r > r_0$, $\psi_n (r) = C e^{-k_2 r} + D e^{k_2 r}$.
+\item For $r > r_0$, $\psi_n (r) = C e^{-k_2 r} + D e^{k_2 r}$. 
 \end{enumerate}
 
-\item Apply Boundary Conditions:
+\item Apply boundary conditions:
 \begin{enumerate}
-\item $\psi_n (r=0) \neq \infty \Rightarrow  u_{nl} (r=0) = 0 \Rightarrow B = 0$ (because the equation is in the form of $A \sin(kr)/r + B \cos (kr)/r$). 
+\item $\psi_n (r=0) \neq \infty \Rightarrow  u_{nl} (r=0) = 0 \Rightarrow B = 0$, because the equation is in the form of $A \sin(kr)/r + B \cos (kr)/r$. 
 
-\item $\psi_n (r \to \infty) \neq \infty \Rightarrow u_{nl} (r\to \infty) = 0 \Rightarrow D = 0$. 
-
-\item $\psi_n, \psi^{\prime}_n$ are continuous at $r_0 \Rightarrow k_1 \cot (k_1 r_0) = - k_2.$ Notice this is the same as the odd-parity square well problem. 
+\item $\psi_n (r \to \infty) \neq \infty \Rightarrow u_{nl} (r\to \infty) = 0 \Rightarrow D = 0$. Notice we use symmetry in this problem. If we were to distinguish between the two sides of the well, then to the right of the well $u_n(x) = C e^{-k_2 x}$, and to the left of the well $u_n (x) = C' e^{k_2 x}$. 
 \end{enumerate}
+
+\item Apply interface conditions: $\psi_n, \psi^{\prime}_n$ are continuous at $r_0$: 
+\eqn{ \Rightarrow k_1 \cot (k_1 r_0) = - k_2 }
+Notice this is the same as the odd-parity square well problem in Chapter~\ref{finite-square-well}. 
+
 
 \item We reach a transcendental equation describing the dependency of $V_0, r_0, E_B$ on each other:
 \eqn{ \boxed{ \cot (k_1 r_0 ) = -\frac{k_2}{k_1} = - \sqrt{\frac{-E}{E+V_0}}  } \label{H2-V_0}}
