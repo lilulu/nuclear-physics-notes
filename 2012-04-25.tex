@@ -413,17 +413,60 @@ Fig.~\ref{4b} shows that, if we wait long enough, the power becomes an asymptoti
 
 
 \clearpage
-\topic{Inhour Equation}
-\subtopic{Prompt-Jump Approximations}
-To estimate the prompt jump, we do the prompt jump approximation (easy to do in 1 group). 
+\topic{Prompt-Jump Approximations}
+Prompt-jump approximation is used to estimate prompt-jump (of course). 
+\begin{enumerate}
+\item In a subcritical transient, assume precursors dominant, and prompt neutron changes are negligible, 
+\begin{align}
+\ddt P(t) &= \frac{\rho - \beta}{\Lambda} P(t) + \Sum_1^K \lambda_k C_k(t) + S (t) \\
+\ddt C_k(t) &= \frac{\beta_k}{\Lambda} P(t) - \lambda_k C_k(t) 
+\end{align}
+We set $\ddt P(t) = 0$, and can solve for $P(t)$ and get an expression for $\ddt C_k(t)$: 
+\begin{align}
+P(t) &= \frac{\Lambda}{\beta -\rho} S(t) + \frac{\Gamma}{\beta -\rho} \Sum_1^K \lambda_k C_k (t) \\
+\ddt C_k (t) &= \frac{\beta_k}{\beta - \rho} S(t) + \frac{\beta_k}{\beta - \rho} \Sum_{k'=1}^K \lambda_{k'} C_{k'} (t) - \lambda_k C_k (t)
+\end{align}
+
+
+\item Assume one precursor group and no source, 
 \begin{align}
 \ddt T(t) &\approx 0 = \frac{\rho - \beta}{\Lambda} T(t) + \lambda C(t) \\
 T(0^+) &= \frac{\Lambda \lambda}{\beta - \rho} C(0^+) = \frac{\Lambda \lambda}{\beta - \rho} \left[ \frac{\beta}{\Lambda \lambda} T_0 \right] \\
 \Aboxed{ \frac{T(0^+)}{T_0} &= \frac{\beta}{\beta - \rho} }
 \end{align}
-Example: given a reactivity change of $0.1\beta$, the prompt jump is $\frac{T(0^+)}{T_0} = \frac{\beta}{\beta - 0.1 \beta} = 1.111$. 
 
-\subtopic{In-hour Equations: The Simpliest Inverse Kinetics Application}
+
+\item Assume one precursor group, a constant source and a constant $\rho$, 
+\begin{align}
+\ddt C(t) &= \frac{\lambda \rho}{\beta - \rho} C(t) + \frac{\beta}{\beta - \rho} S (t) \\
+C(t) &= \left\{
+\begin{array}{cc}
+S \cdot t + C_0 & \rho = 0 \\
+\left( C_0 + \frac{\beta}{\lambda \rho} S \right) e^{\frac{\lambda \rho}{\beta - \rho} t} - \frac{\beta}{\lambda \rho} S &  \rho \neq 0 
+\end{array}  \right.  \\
+P(t) &= \left\{ 
+\begin{array}{cc}
+\frac{\lambda \Lambda}{\beta} (S \cdot t + C_0) + \frac{\Lambda}{\beta} S & \rho = 0 \\
+\frac{\lambda \Lambda}{\beta - \rho} \left( \frac{\beta}{\lambda \rho} S + C_0 \right) e^{ \frac{\lambda \rho}{\beta - \rho} t} - \frac{\Lambda}{\rho} S & \rho \neq 0
+\end{array} \right. 
+\end{align}
+
+
+\item Interpretation: 
+\begin{itemize}
+\item \hi{Prompt jump approximation only works when $\rho < \beta$!} The smaller $\rho$ is compared to $\beta$, the more accurate the prompt jump approximation is, because at small reactivity, we can assume the change in prompt neutrons are negligible compare with delayed neutrons (or say precursors dominates), in which case it is valid to set $\ddt P(t) = 0$. 
+
+\item If $\rho = 0$, both $P(t), C(t)$ increases linearly with respect to time. 
+
+\item If $\rho$ is slightly larger than 0, both $P(t), C(t)$ explodes exponentially. Eg., given a reactivity change of $0.1\beta$, the prompt jump is $\frac{T(0^+)}{T_0} = \frac{\beta}{\beta - 0.1 \beta} = 1.111$. 
+\end{itemize}
+\end{enumerate}
+
+
+
+
+\topic{Inhour Equations}
+\subtopic{Inhour Equation: The Simpliest Inverse Kinetics Application}
 From the PKEs as in Eq.~\ref{in-hour}, we can derive the In-hour Equation. We assume the solution is in the form of,
 \eqn{ T(t) &\approx C_i (t) \approx e^{\omega t}  }
 Then $\ddt T(t) \approx \omega T(t), \ddt C_i(t) \approx \omega C_i(t)$, and hence PKEs in Eq.~\ref{in-hour} becomes, 
