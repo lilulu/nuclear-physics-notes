@@ -4,7 +4,7 @@
 
 \usepackage{school-style-class}
 \classcode{22.39}
-\classname{Integration of Reactor Design, Operations and Safety}
+\classname{Reactor Design, Operations and Safety}
 \professor{Emilio Baglietto}
 \schoolname{Massachusetts Institute of Technology}
 
