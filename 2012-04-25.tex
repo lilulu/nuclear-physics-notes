@@ -100,7 +100,7 @@ This reactor would be virtually impossible to control! Fortunately, delayed netr
 \end{enumerate}
 
 \clearpage
-\topic{Derivation of PKE from Diffusion Equation}
+\topic{Generalized PKE from Diffusion Equation}
 \begin{enumerate}
 \item We start from the diffusion equation: \hi{The steady-state diffusion equation}\footnote{Know this for the final}: 
 \small
@@ -184,11 +184,12 @@ The last two assumptions together, we can write $\Sigma_f^j \to \Sigma_f$.
 
 \item Assume \hi{delayed fission spectrum $\chi_d^i$ is independent of delayed neutron group $i$}\footnote{we saw from data two lectures ago that $\chi$ is slightly dependent on neutron group, but we don't care much about it for this context.}, that is, we drop the $i$ dependency on $\chi_d^i$, 
 \eqn{ \Sum_i \chi_d^i (E) \lambda_i C_i = \chi_d (E) \Sum_i \lambda_i C_i }
-
-\item Assume \hi{delayed neutron yield $\beta$ is independent of space}, together with the last assumption, we can write, 
+Together with the last assumption, 
 \eqn{ \Sum_j \Sum_i \chi_d^i (E) \beta_i^j  = \chi_d (E) \beta }
-Thus we reach, 
 
+\item Assume \hi{delayed neutron yield $\beta$ is independent of space}, that is, $\beta (\vecr) \to \beta$. 
+
+  Taking into account all the assumptions we made, we reach, 
   \begin{align}
     \ddt \left[ T(t) \right] &= 
     \int \dE \int \dr \Bigg\{  - \Sigma_t (\vecr, E, t) S(\vecr, E)   + \int_0^{\infty} \Sigma_s (\vecr, E'\to E, t) S(\vecr, E') \dE'   \notag \\
@@ -265,12 +266,9 @@ Based on Eq.~\ref{PKE-6} and Eq.~\ref{PKE-8},
 
 
 
-
-
-
+\clearpage
 \topic{PKE Parameters}
-\begin{enumerate}
-\item We define a set of terms to simplify the expression. For simplicity concern, we omit the dependency on the following terms. $D(\vecr, E, t), \Sigma_t (\vecr, E, t), \Sigma_f(\vecr, E, t),  S(\vecr, E), \chi(E)$. 
+First we consider one energy group only. We define a set of terms to simplify the expression. For simplicity concern, we omit the dependency on the following terms. $D(\vecr, E, t), \Sigma_t (\vecr, E, t), \Sigma_f(\vecr, E, t),  S(\vecr, E), \chi(E)$. 
 \begin{enumerate}
 \item Reactivity $\rho(t)$, where the top is the diffusion equation, and the bottom is fission rate if all the neutrons show up instatenously. 
 \eqn{ \rho = \frac{\mbox{net production}}{\mbox{perturbation denomenator (sum of all fission in the system)}} }
@@ -302,18 +300,32 @@ The prompt neutron life $\Gamma \sim 1/v$ of shape divided by almost-instantenou
   \eqn{ Q(t) = \int \dE \int \dr Q (\vecr, t) }
 \end{enumerate}
 
-\item 2-group PKE parameters.  Recall that $\rho(t)$ does not describe how much neutrons there are at a specific time; it describes how much neutrons there would be eventually.  Notice $\beta$ only depends on group 1 because all delayed neutrons are born in group 1. Similarly $\Gamma$ is the prompt neutron life time, thus not depends on $\phi_2^*$ at all. 
-\scriptsize
+
+Next we consider \textbf{2-group PKE parameters.}
+\small
 \begin{align}
-\rho(t) &= \frac{  \int \dr  \phi_1^* (\vecr)  \left\{  - \Sigma_{r,1} (\vecr,t) S_1(\vecr) T_1(t)  + [\nu \Sigma_{f,1} (\vecr, t) S_{1} (\vecr) T_{1}(t) + \nu \Sigma_{f,2} (\vecr, t) S_2 (\vecr) T_2 (t)] \right\}
-+  \int \dr  \phi_2^* (\vecr)  \left[ - \Sigma_{a,2} (\vecr,t) S_2(\vecr) T_2(t) + \Sigma_{s12} (\vecr, t) S_1 (\vecr) T_1 (t)  \right]  }
-{\int \dr \phi_1^* (\vecr)  [\nu \Sigma_{f,1} (\vecr, t) S_{1} (\vecr) T_{1}(t) + \nu \Sigma_{f,2} (\vecr, t) S_2 (\vecr) T_2 (t)] } 
+\rho(t) &= \bigg\{  \int \dr  \phi_1^* (\vecr)  \left\{  - \Sigma_{r,1} (\vecr,t) S_1(\vecr) T_1(t)  + [\nu \Sigma_{f,1} (\vecr, t) S_{1} (\vecr) T_{1}(t) + \nu \Sigma_{f,2} (\vecr, t) S_2 (\vecr) T_2 (t)] \right\}   \notag \\ 
+&+  \int \dr  \phi_2^* (\vecr)  \left[ - \Sigma_{a,2} (\vecr,t) S_2(\vecr) T_2(t) + \Sigma_{s12} (\vecr, t) S_1 (\vecr) T_1 (t)  \right]  \bigg\} \notag \\
+& \bigg/
+\bigg\{\int \dr \phi_1^* (\vecr)  [\nu \Sigma_{f,1} (\vecr, t) S_{1} (\vecr) T_{1}(t) + \nu \Sigma_{f,2} (\vecr, t) S_2 (\vecr) T_2 (t)] \bigg\} 
 \end{align}
+
 \normalsize
 \eqn{ \beta_i (t) = \frac{\int \dr \phi_1^* (\vecr) \beta_i (\vecr, t)  [\nu \Sigma_{f,1} (\vecr, t) S_{1} (\vecr)  + \nu \Sigma_{f,2} (\vecr, t) S_2 (\vecr) ] }{\int \dr \phi_1^* (\vecr, t)   [\nu \Sigma_{f,1} (\vecr, t) S_{1} (\vecr) + \nu \Sigma_{f,2} (\vecr, t) S_2 (\vecr) ] } }
 \eqn{ \Lambda(t) = \frac{1}{\int \dr \phi_1^* (\vecr, t) [\nu \Sigma_{f,1} (\vecr, t) S_{1} (\vecr) + \nu \Sigma_{f,2} (\vecr, t) S_2 (\vecr) ]} }
 \eqn{ C_i (t) = \int \dr C_i (\vecr, t) }
 
+Observations:
+\begin{itemize}
+\item \textbf{$\rho(t)$ does not describe how much neutrons there are at a specific time; it describes how much neutrons there would be eventually.} 
+\item $\beta$ has no $T(t)$ temporal dependency. 
+\item $\beta$ only depends on $\phi_1^*$ but not $\phi_2^*$, because all delayed neutrons are born in group 1, hence we do not care about the neutron importance in group 2. 
+\item Similarly $\Lambda$ is the prompt neutron life time, thus only the importance of group 1 neutrons matters. 
+\end{itemize}
+
+
+\topic{Using PKE Parameters to Define PKE}
+\begin{enumerate}
 \item Using the defined PKE parameters, we get the classic \hi{point kinetics equations (PKE)},
 \eqn{ \Aboxed{ \ddt T(t) &= \frac{\rho(t) - \Sum_i \beta_i (t) }{\Lambda (t)} T(t) + \Sum_i \lambda_i C_i (t) + Q(t) } }
 \eqn{ \Aboxed{ \ddt C_i (t) &= \frac{\beta_i (t)}{\Lambda (t)} T(t) - \lambda_i C_i (t) }  }

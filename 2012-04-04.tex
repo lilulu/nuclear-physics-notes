@@ -4,7 +4,7 @@
 \begin{document}
 \maketitle
 
-\lecture{Finite Difference Diffusion Equations (Two Group)}
+\lecture{Two-Group Finite Difference Diffusion}
 Reference: Stacy's Section 3.10. 
 
 \topic{Neutron Balance Equation}
@@ -56,7 +56,7 @@ Now we consider three neighboring cells with the same width, and following the p
 
 
 \topic{Linear Finite Difference Equations}
-Plug Eq.~\ref{net-current} back into diffusion equations, we get, 
+Plug the interface flux in Eq.~\ref{net-current} back into diffusion equations, we get, 
 \eqn{ \hat{D}_1^{n-1,n} (\phi_1^n - \phi_1^{n-1})  - \hat{D}_1^{n,n+1} (\phi_1^{n+1} - \phi_1^n) + \Sigma_{r1}^n \phi_1^n \Delta^n &= \nu \Sigma_{f1}^n \phi_1^n \Delta^n + \nu \Sigma_{f2}^n \phi_2^n \Delta^n + S_1 \Delta^n} 
 \eqn{ \hat{D}_2^{n-1,n} (\phi_2^n - \phi_2^{n-1})  - \hat{D}_2^{n,n+1} (\phi_2^{n+1} - \phi_2^n) + \Sigma_{a2}^n \phi_2^n \Delta^n &= \Sigma_{s12}^n \phi_1^n \Delta^n + S_2 \Delta^n} 
 
@@ -66,29 +66,35 @@ Rearranging terms by fluxes, we get \textbf{the linear finite-difference diffusi
 \eqn{ \boxed{- \hat{D}_2^{n-1,n} \phi_2^{n-1} - \hat{D}_2^{n,n+1} \phi_2^{n+1} + [\Sigma_{a2}^n \Delta^n + \hat{D}_2^{n-1.n} + \hat{D}_2^{n,n+1} ] \phi_2^n = \Sigma_{s12}^n \phi_1^n \Delta^n  + S_2 \Delta^n} }
 \normalsize
 
+\clearpage
 \topic{BCs for Finite-Difference Equation}
-Interior BCs are implied, whereas the exterior boundaries have to be specified. There are two types of boundary conditions:
+Interior BCs are implied, whereas the exterior BCs have to be specified. 
 \begin{enumerate}
-\item Zero flux: flux at the RHS of node $N$ is zero.  We can either think of the flux as keep going to be $-\phi_g^N$ in the imaginary-$N+1$-node\footnote{we have to interpolate the node center value from the node edge value because in linear difference equation the center value is the averaged value which is what we care about.}, or calculate the slope by doing $\phi_g^N / (\Delta /2)$,
+\item Zero current: $J_g^N = 0$. 
+
+\item Zero flux: flux at the RHS of node $N$ is zero.  We can either think of the flux as keep going to be $-\phi_g^N$ in the imaginary $N+1$ node\footnote{we have to interpolate the node center value from the node edge value because in linear difference equation the center value is the averaged value which is what we care about.}, or calculate the slope by doing $\phi_g^N / (\Delta /2)$,
 \eqn{ J_g^N = -D_g^N \frac{ -\phi_g^N - \phi_g^N}{\Delta^N}  = \frac{2 D_g^N}{\Delta^N} \phi_g^N }
+
 \item Zero incoming current: there is no partial current coming in from RHS,
 \eqn{ J_N^- = \frac{1}{4} \phi - \frac{1}{2} J_N = 0 }
 which implies,
 \begin{align}
-  J_g^N &= \frac{\phi_g^s}{2} = -D_g^N \frac{\phi_g^s - \phi_g^N}{\Delta/2} \\
-  &= - \frac{2 D_g^N}{\Delta^N} \frac{\frac{2D_g^N}{\Delta^N} - 1}{\frac{1}{2} + \frac{2D_g^N}{\Delta}} \phi_g^N \\
+  J_g^N &= \frac{\phi_g^s}{2} = -D_g^N \frac{\phi_g^s - \phi_g^N}{\Delta/2} = - \frac{2 D_g^N}{\Delta^N} \frac{\frac{2D_g^N}{\Delta^N} - 1}{\frac{1}{2} + \frac{2D_g^N}{\Delta}} \phi_g^N \\
   &= \frac{2D_g^N}{\Delta^N} \left[ \frac{1}{1 + \frac{4 D_g^{N}}{\Delta^N}} \right] \phi_g^N  \label{JgN}
 \end{align}
-\item Zero current: $J_g^N = 0$. 
 \end{enumerate}
 
 Inspired by Eq.~\ref{JgN}, we make up a coefficient C to unify 3 BCs: 
-\eqn{ \boxed{ J_g^N = \frac{2 D_g^N \phi_g^N}{\Delta + C \cdot D_g^N} } } 
+\eqn{ \boxed{ J_g^N = \frac{2 D_g^N \phi_g^N}{\Delta^N + C \cdot D_g^N} } } 
 \begin{itemize}
 \item If $C \to 0$, we get zero flux BC.  
 \item If $C = 4$, we get zero incoming current BC $J_{\mathrm{in}} = 0$.
 \item If $C \to \infty$, we get zero flux BC $J_g^N = 0$. 
 \end{itemize}
+
+Alternatively, we can also take Eq.~\ref{JgN} and make the $D_g^N$ term into the diffusion coefficient of the imaginary $N+1$ node: 
+\eqn{ J_g^N  = \frac{2D_g^N}{\Delta^N} \left[ \frac{1}{1 + \frac{4 D_g^{N+1}}{\Delta^N}} \right] \phi_g^N  }
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%% Matrix Representation %%%%%%%%%%%%%%%%
 \lecture{Matrix Representation of 1D Slab Diffusion Equations}
