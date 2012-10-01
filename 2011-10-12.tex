@@ -4,36 +4,173 @@
 \begin{document}
 \maketitle
 
-\subtopic{Case 1, $\ddt \expect{x}, \hat{H} = \frac{\hat{p}^2}{2m} + V(x) $}
-
-\begin{align}
-\ddt \expect{x} &= \frac{i}{\hbar} \expect{\left[ \hat{H}, \hat{x} \right]} \\
-&= \frac{i}{\hbar} \expect{\left[ \frac{\hat{p}^2}{2m} + V(x), \hat{x} \right]} \\
-&= \frac{i}{\hbar} \expect{\left[ \frac{\hat{p}^2}{2m} , \hat{x} \right]} \\
-&= \frac{i}{2m\hbar} \expect{\left[ \hat{p}^2 , \hat{x} \right]} \\
-&= \frac{i}{2m\hbar} (-2i\hbar \hat{p} ) \\
-&= \boxed{\frac{1}{m} \expect{p} = \expect{v}}
-\end{align}
-
-\subtopic{Case 2, $\ddt \expect{p}, \hat{H} = \frac{\hat{p}^2}{2m} + V(x) $}
-
-\begin{align}
-\ddt \expect{p} &= \frac{i}{\hbar} \expect{\left[ \hat{H}, \hat{p} \right]} \\
-&= \frac{i}{\hbar} \expect{\left[ \frac{\hat{p}^2}{2m} + V(x), \hat{p} \right]} \\
-&= \frac{i}{\hbar} \expect{\left[ V(x) , \hat{p} \right]} \\
-&= \frac{i}{\hbar} \expect{\left[ V(x), - i\hbar \ppx \right]} \\
-&= \frac{i}{\hbar} \expect{(-i\hbar) (V(x) \ppx - \ppx V(x))} \\
-&= \frac{i}{\hbar} \expect{i\hbar\pVpx} \\
-&= \boxed{- \expect{\pVpx} = \expect{\mathrm{Force}} }
-\end{align}
-This is called Ehrenfest's Principle, which is a quantum mechanical equation for average/expectation values of p(t). 
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%% Angular Momentum %%%%%%%%%%%%%%%%%%%%
 \lecture{Angular Momentum}
 Angular momentum is a conserved quantity in a central force field. While a general potential is dependent on the spatial coordinate:
 \eqn{ V(\uline{x}) = V(r,\theta, \phi)   }
 a special potential that is only depend on radius (no $\theta, \phi$ dependency) is called a central force field because of its rotational symmetry. 
 
+\topic{Physical Meaning of Momentums}
+\textbf{Momentum is a generator of translation.}\footnote{This lecture is given on Oct. 1, 2012 by Prof. Ju Li.} We consider an operator $T$ that moves a $\psi(x)$ to $\psi(x-\Delta x)$: 
+\eqn{ T \psi(x) = \psi(x-\Delta x)} 
+We perform the Taylor expansion on $\psi(x - \Delta x)$: 
+\begin{align}
+  \psi(x - \Delta x) &= \psi(x) + (-\Delta x) \ppsipx + \frac{(-\Delta x)^2}{2!} \ppsipxn2 + \frac{(-\Delta x)^3}{3!} \ppsipxn3 + \cdots \\
+  &= \left[ 1 - \Delta x \ppx + \frac{(-\Delta x \ppxn2)^2}{2!} + \frac{(-\Delta x \ppxn3)^3}{3!} + \cdots \right] \psi(x) 
+\end{align}
+Using $e^x = 1 + x + \frac{x^2}{2!} + \frac{x^3}{3!} + \cdots$, we can write, 
+\begin{align}
+  \psi(x - \Delta x) &= \exp \left( -\Delta x \ppx \right) \psi(x) \\
+  &= \exp \left(- \frac{i \Delta x (-i \hbar \ppx)}{\hbar} \right) \psi(x) \\
+  &= \exp \left(-\frac{i \Delta x \cdot \hat{P} }{\hbar} \right) \psi(x)
+\end{align}
+That is, the position transform vector is the momentum operator. 
 
+
+\textbf{Angular momentum is a generator of rotation.} We consider an operator $R(n, \theta)$ that rotate a $\psi$ to $\psi_{\mathrm{rotational}}$: 
+\eqn{ R(\vec{n}, \theta) \psi = \psi_{\mathrm{rotational}} }
+We can prove that 
+\eqn{ R(\vec{n}, \theta) = \exp \left( - \frac{i \theta}{\hbar} \vec{n} \cdot \vec{J} \right) }
+So we want to prove, 
+\begin{align}
+\bra{\psi_{\mathrm{rot}}} V \ket{\psi_{\mathrm{rot}}} &= R(\vec{n}, \theta) \bra{\psi} V \ket{\psi} \\
+\bra{\psi} R^+ V R \ket{\psi} &= \bra{\psi} \exp \left( \frac{i \theta \vec{n} \cdot \vec{J} }{\hbar} \right) V \exp \left( - \frac{i \theta \vec{n} \cdot \vec{J} }{\hbar} \right) \ket{\psi} 
+\end{align}
+where we can expand: 
+\begin{align}
+V + \frac{i \theta}{\hbar} [ \vec{n} \cdot \vec{J}, \vec{V} ] &= \left( 1 + \frac{i \theta n J}{\hbar} \right) V \left(  1 - \frac{i \theta n J}{\hbar} \right) \\
+&= V + \frac{i \theta V}{\hbar} - \frac{i \theta V}{\hbar}  
+\end{align}
+
+
+\topic{Mathematical Derivation of Angular Momentum Commutators}
+First we introduce the Levi-Civita symbols. 
+\begin{itemize}
+\item Index rule: 
+  \eqn{ w_i = \epsilon_{ijk} n_j V_k = \Sum_j \Sum_k \epsilon_{ijk} n_j V_k }
+\item Changing index: 
+  \eqn{ \epsilon_{ijk} = - \epsilon_{jik} = -\epsilon_{ikj} }
+  \eqn{ \epsilon_{ijk} \epsilon_{ij'k'} = \delta_{jj'} \delta_{kk'} - \delta_{jk'} \delta_{j'k} }
+\item Final results: other terms are 0, 
+\eqn{ \epsilon_{123} &= \epsilon_{231} = \epsilon_{312} = 1 & \epsilon_{213} &= \epsilon_{312} = \epsilon_{132} = -1 }
+\end{itemize}
+
+
+After simplification, we can show that, 
+\begin{align}
+\bra{\psi} \frac{i}{\hbar} [n_j J_j, V] \ket{\psi}  &= \vec{n} \cross \bra{\psi} \vec{V} \ket{\psi} \\
+\bra{\psi} \frac{i}{\hbar} [n_j J_j, V_i] \ket{\psi} &= \epsilon_{i,j,k} n_j \bra{\psi} V_k \ket{\psi} \\
+\frac{i}{\hbar} [J_j, V_i] &= \epsilon_{ijk} V_k \\
+[V_i, J_j] &= i \hbar \epsilon_{ijk} V_k \\
+[\vec{x}, \vec{P} ] &= i \hbar \epsilon_{ijk} V_k \\
+\vec{J} &= \vec{L} = \vec{x} \cross \vec{P} 
+\end{align}
+
+
+Application of commutators:
+\begin{enumerate}
+\item 
+\eqn{ J^2 &= \vec{J} \cdot \vec{J} = J_x^2 + J_y^2 + J_z^2 = J_i J_i }
+\item Using $[AB,C] = A[B,C] + [A,C] B$, 
+\eqn{ J^2 &= [J^2, J_3] &= [J_i J_i, J_3] = J_i [J_i, J_3] + [J_i, J_3] J_i }
+\item Further simplify, 
+\eqn{ J^2 &= J_i (i \hbar \epsilon_{i3k} J_k) + (i\hbar \epsilon_{i3k} J_k) J_i  = i\hbar \epsilon_{i3k} (J_i J_k + J_k J_i) = 0 }
+\item Basically we've shown that for any $n_x, n_y, n_z$, 
+\eqn{ [J^2, \vecn \cdot \vec{J} ] = [J^2, n_x J_x + n_y J_y + n_z J_z] = 0}
+\item If we define the raising operator $J_+ = J_x + iJ_y$, and the lowering operator $J_- = J_x - iJ_y$. Using last rule, we know immediately that 
+\eqn{ [J^2, J_+] = [J^2, J_-] = 0} 
+\item Now we show how $J_+, J_-$ relate to $J_z$: 
+  \begin{enumerate}
+  \item To start, 
+    \begin{align}
+      [J_-, J_z] &= [J_x - i J_y, J_z]  \\
+      &= \left( \epsilon_{132} J_y - i \epsilon_{231} J_x \right) i \hbar \\
+      &= \hbar (J_x - i J_y)  = \hbar J_- 
+    \end{align}
+  \item We add an arbitrary basis $\ket{z}$ to both side and flip the order inside of the commutator, 
+    \eqn{ [J_z, J_-] \ket{z} &= - \hbar J_- \ket{z} }
+    We further simplify the LHS: 
+    \eqn{ J_z J_- \ket{z} - J_- J_z \ket{z} = J_z J_- \ket{z} - z \hbar \ket{z} }
+    Hence, 
+    \eqn{ J_z J_- \ket{z} = z \hbar J_- \ket{z} - \hbar J_- \ket{z} = (z-1) \hbar J_- \ket{z} \label{loweringop} } 
+  \item Keep in mind that \uline{by definition}, 
+    \eqn{ J_z \ket{z} = z \hbar \ket{z} }
+    In a similar fashion for some unknown $\beta$ we can write 
+    \eqn{ J^2 \ket{z} = \beta \ket{z} }
+  \item Eq.~\ref{loweringop} gives us a sense that the lowering operator stays in the same `family', though its eigenvalue is one less. 
+    \begin{align}
+      J_- \ket{z} &= \alpha \hbar \ket{z-1} \\
+      \bra{z} J_+ J_- \ket{z} &= |\alpha|^2 \hbar^2 \\
+      \mathrm{LHS} &= (J_x + i J_y) (J_x - iJ_y) = J_x^2 + i (J_y J_x - J_x J_y) + J_y^2 \\
+      &= J_x^2 + J_y^2 + \hbar J_z = J^2 - J_z^2 + \hbar J_z \\
+      \bra{z} J^2 - J_z^2 + J_z \hbar \ket{z} &= |\alpha|^2 \hbar^2 \\
+      \bra{z} J^2 \ket{z} - z^2 \hbar^2 + z^2 \hbar^2 &= |\alpha|^2 \hbar^2 \\
+      \bra{z} J^2 \ket{z} &= |\alpha|^2 \hbar^2 
+    \end{align}
+    where the $\bra{z} J^2 \ket{z}$ term is kind the $\beta \hbar^2$ term that keeps $J^2$ in the same family. 
+  \item We have to worry about we cannot just infinitely lower $z$. That is, the $\beta$ term has to satisfy the following three relations: 
+    \begin{align}
+      \left\{ \begin{array}{c} 
+        z_{\max} - z_{\min} = \mathrm{integer}  \\
+        \beta - z_{\min}^2 + z_{\min} = 0 \\
+        \beta - z_{\max}^2 - z_{\max} = 0
+      \end{array}
+      \right. 
+    \end{align}
+    The only solution is, 
+    \eqn{ z_{\min} = - z_{\max} = \left\{ \begin{array}{cc} \mathrm{integer} & \mathrm{Bosons} \\ \mbox{half integer} & \mathrm{Fermions}  \end{array} \right.   }
+    Then we can write 
+    \eqn{ |\alpha| = \sqrt{j(j+1) - m(m-1)} }
+  \item If we call $z_{\max} = j$, and make up a $m = z \in [-j, j]$, then we have 
+    \begin{align}
+      \Aboxed{J^2 \ket{j m} &= j(j+1) \hbar^2 \ket{j m}} \\
+      \Aboxed{J_z \ket{j m} &= m\hbar \ket{j m} } \\
+      \Aboxed{ J_{\pm} \ket{j m} &= \sqrt{j(j+1) - m(m\pm 1)} \hbar \ket{jm\pm 1} }
+    \end{align}
+
+  \item Now if we consider a half-spin particle (neutrons, protons, electrons), that is $j = 1/2$. We can use the matrix notation, where bra becomes row vector, ket becomes column vector, and scalar becomes matrix. We can re-write the ket basis into 
+    \eqn{ \ket{\frac{1}{2}} &= \left( \begin{array}{c} 1 \\ 0 \end{array} \right) & \ket{-\frac{1}{2}} &= \left( \begin{array}{c} 0 \\ 1 \end{array} \right) }
+    Then we can solve the $\frac{\hbar}{2} \ket{\frac{1}{2}} = J_z \ket{\frac{1}{2}}, - \frac{\hbar}{2} \ket{-\frac{1}{2}} = J_z \ket{-\frac{1}{2}}$ equations for the-now-matrix-$J_z$: 
+    \begin{align}
+      \frac{\hbar}{2}  \left( \begin{array}{c} 1 \\ 0 \end{array} \right) &=  \left( \begin{array}{cc} a & c \\ b & d   \end{array} \right)  \left( \begin{array}{c} 1 \\ 0 \end{array} \right) = \begin{array}{c} a \\ b \end{array} \\
+      - \frac{\hbar}{2}  \left( \begin{array}{c} 0 \\ 1 \end{array} \right) &=  \left( \begin{array}{cc} a & c \\ b & d   \end{array} \right)  \left( \begin{array}{c} 0 \\ 1 \end{array} \right) = \begin{array}{c} c \\ d \end{array} \\
+      J_z &= \frac{\hbar}{2} \left( \begin{array}{cc} 1 & 0 \\ 0 & -1 \end{array} \right) 
+    \end{align}
+    Similarly we can solve for the matrix representation of $J_+, J_-$ as well, 
+    \begin{align}
+      J_+ \ket{ \frac{1}{2} } &= 0  \\
+      \left( \begin{array}{c} a \\ b \end{array} \right) &= 0 \\
+      J_+ \ket{ - \frac{1}{2} } &= \hbar \sqrt{-j(j+1) - m(m+1)} \ket{\frac{1}{2} }  \\
+      &= \hbar \sqrt{ \frac{1}{2} \frac{3}{2} - \left( - \frac{1}{2} \right) \left( - \frac{1}{2} + 1 \right) } \ket{ \frac{1}{2} } \\
+      &= \ket{ \frac{1}{2} } \\
+      \Aboxed{J_+ &= \hbar \left( \begin{array}{cc} 0 & 1 \\ 0 & 0 \end{array} \right)}
+    \end{align}
+    We know that $J_-$ is just the transpose of $J_+$, hence, 
+    \eqn{ \Aboxed{J_- &= \hbar \left( \begin{array}{cc} 0 & 0 \\ 1 & 0 \end{array} \right)}}
+    Knowing what $J_+, J_-$ are, and knowning that $J_+ = J_x + i J_y, J_- = J_x - iJ_y$, and knowing that $J_i = \frac{\hbar}{2} \sigma_i$ where $\sigma_i$ is the Pauli matrix obeying $[ \sigma_i, \sigma_j] = 2 \epsilon_{ijk} \sigma_k$, we can write $J_x, J_y, J_z$: 
+    \begin{align}
+      J_x &= \frac{\hbar}{2} \left( \begin{array}{cc} 0 & 1 \\ 1 & 0 \end{array} \right) \\
+      J_y &= \frac{\hbar}{2} \left( \begin{array}{cc} 0 & -i \\ i & 0 \end{array} \right) \\
+      J_z &= \frac{\hbar}{2} \left( \begin{array}{cc} 1 & 0 \\ 0 & -1 \end{array} \right) 
+    \end{align}
+
+  \item Comment: We typically draw spins on a sphere. The reason is,  for instance if we make a z measurement and get $m = j$ (we could get $m = j-1$ etc), 
+    \begin{itemize}
+      \item Sphere, because $J^2 = j(j+1) \hbar^2$. The basis/direction is $\ket{m =j}$. 
+      \item The circular motion is from that, if we make a z measurement, there is still uncertainty in the x and y term. That is, we know the average x measurement should be zero from 
+        \eqn{ \bra{m=j} J_x \ket{m=j}  = 0} 
+        But the fluctuation in $x,y$ are not zero, as we don't know exactly what they are, only the sum of their products: 
+        \eqn{ \expect{J_x^2} + \expect{J_y^2} + (j \hbar)^2 = j^2 \hbar^2 + j^2 \hbar^2 }
+    \end{itemize}
+
+
+\end{enumerate}
+\end{enumerate}
+
+
+
+
+%%%%%%%%%%%%%%%% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \topic{Orbital Angular Momentum}
 This is similar to its classical description of angular momentum. 
 

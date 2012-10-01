@@ -162,5 +162,28 @@ Derivation by Prof. Yildiz,
 That is to say, momentum is conserved in time. We can plug in $\Hhat$ and get the same thing out, suggesting the energy is conserved in time. In fact any operator that commute with $\Hhat$ would have an expectation value not dependent of time.  Notice we assume that the potential is time independent. 
 
 
+\subtopic{Case 1, $\ddt \expect{x}, \hat{H} = \frac{\hat{p}^2}{2m} + V(x) $}
+
+\begin{align}
+\ddt \expect{x} &= \frac{i}{\hbar} \expect{\left[ \hat{H}, \hat{x} \right]} \\
+&= \frac{i}{\hbar} \expect{\left[ \frac{\hat{p}^2}{2m} + V(x), \hat{x} \right]} \\
+&= \frac{i}{\hbar} \expect{\left[ \frac{\hat{p}^2}{2m} , \hat{x} \right]} \\
+&= \frac{i}{2m\hbar} \expect{\left[ \hat{p}^2 , \hat{x} \right]} \\
+&= \frac{i}{2m\hbar} (-2i\hbar \hat{p} ) \\
+&= \boxed{\frac{1}{m} \expect{p} = \expect{v}}
+\end{align}
+
+\subtopic{Case 2, $\ddt \expect{p}, \hat{H} = \frac{\hat{p}^2}{2m} + V(x) $}
+
+\begin{align}
+\ddt \expect{p} &= \frac{i}{\hbar} \expect{\left[ \hat{H}, \hat{p} \right]} \\
+&= \frac{i}{\hbar} \expect{\left[ \frac{\hat{p}^2}{2m} + V(x), \hat{p} \right]} \\
+&= \frac{i}{\hbar} \expect{\left[ V(x) , \hat{p} \right]} \\
+&= \frac{i}{\hbar} \expect{\left[ V(x), - i\hbar \ppx \right]} \\
+&= \frac{i}{\hbar} \expect{(-i\hbar) (V(x) \ppx - \ppx V(x))} \\
+&= \frac{i}{\hbar} \expect{i\hbar\pVpx} \\
+&= \boxed{- \expect{\pVpx} = \expect{\mathrm{Force}} }
+\end{align}
+This is called Ehrenfest's Principle, which is a quantum mechanical equation for average/expectation values of p(t). 
 
 \end{document}
