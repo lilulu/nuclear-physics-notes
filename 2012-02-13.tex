@@ -323,4 +323,75 @@ A couple of important points:
 \item 4 eV is the typicall up-scattering cutoff energy. For an incident neutron energy higher than 4 eV, use asymptotic elastic down scattering. 
 \end{itemize}
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\clearpage
+\topic{Slowing Down From TE}
+This lecture is given on Oct. 2 by Prof. Forget. We start from the TE: 
+\eqn{ \frac{1}{v} \pphipt + \Omega \gradient \phi + \Sigma_t \phi &= \int \dE \int \dOmega \Sigma_s \phi + \frac{\chi(E)}{4 \pi} \int \dE v \Sigma_f \phi + S }
+Apply assumptions:
+\begin{enumerate}
+\item Assume steady state, so $\frac{1}{v} \pphipt \to 0$. 
+\item Assume infinite medium, so no streaming term $\Omega \gradient \phi \to 0$. 
+\item Assume no source, so $S \to 0$. 
+\end{enumerate}
+If we have the time dependency part, flux changes with respect to time and is driven by source. Once we go into steady state and take away the source, \textbf{TE becomes an eigenvalue problem, and we need to add a $k$ on the bottom of the fission term}, also notice that our TE only depends on energy now,  
+\eqn{ \Sigma_t (E) \phi(E) &= \int_0^{\infty} \dE' \Sigma_s (E'\to E) \phi(E') + \frac{\chi(E)}{k} \int_0^{\infty} \dE' \nu(E') \Sigma_f(E') \phi(E') }
+If we re-write assuming the fission source is an external source of neutrons $S_f$ (notice it's energy independent): 
+\eqn{ \Sigma_t(E) \phi(E) &= \int_0^{\infty} \dE' \Sigma_s (E' \to E) \phi(E') + \chi(E) S_f }
+where we can subsitute $P(E'\to E) = \frac{1}{(1-\alpha)E'}$ into $\Sigma_s(E' \to E) = \Sigma_s(E') P(E' \to E)$. Alternatively we can write the TE in lethargy space: 
+\eqn{ \Sigma_t(u) \phi(u) = \int_{-\infty}^u \Sigma_s(u \to u') \phi(u') \du' + \chi(u) S_f }
+
+\begin{enumerate}
+\item Fast range ($>0.1$MeV): Assume no upscattering, and any scattering event is likely to slow neutrons below 0.1 MeV. Then our TE becomes, 
+  \eqn{ \Sigma_t (E) \phi(E) &= \chi(E) S_f  & \phi(E) &= \frac{\chi(E) S_f}{\Sigma_t} }
+ \hi{$\chi(E)$ dominantes}, because $\Sigma_t$ is fairly flat in the fast range, and $S_f = \frac{\nu \Sigma_f \phi}{k}$ which is proportional to $\phi(E)$ anyway (or say flux scales with source), so we are left with the distribution of prompt neutrons dominant the flux in the fast range. 
+
+\item Slowing down region/resonance region $[1\eV, 0.1 \MeV]$. We define a slowing down density: 
+  \eqn{ q(E) = \mbox{ number of minimum slowing down past energy }E}
+  Again assume no upscattering, 
+  \eqn{ q(E) = \int_E^{\infty} \chi(E') S_f \dE' - \int_E^{\infty} \Sigma_a(E') \phi(E') \dE' }
+  In the presence of scattering, all neutrons born from fission will reach $E$ unless absorbed. That is, from the general expression $\int_0^{\infty} \chi(E') \dE' = 1$, we can approximate $\int_{0.1}^{\infty} \chi(E') \dE' = 1$, thus only leaving the energy independent $S_f$ term:  
+  \begin{align}
+    q(E) &= - \int_E^{\infty} \Sigma_a (E') \phi(E') \dE' + S_f \\
+    &= \int_{\infty}^E \Sigma_a (E') \phi(E') \dE' + S_f  \\
+    \Aboxed{ \frac{\derivative q(E)}{\dE} &= - \Sigma_a (E) \phi(E) } 
+  \end{align}
+  Comments/notes: 
+  \begin{itemize}
+    \item If absorption increases, less neutrons would make it to $E$, then $q(E)$ should be smaller. 
+    \item $q(E)$ decreases proportional to $\Sigma_a$. 
+    \item If $\Sigma_a = 0, q(E) = $ constant. 
+  \end{itemize}
+
+In reactor applications, most absorptions happen in the resonances of \ce{^{238} U}. \ce{^{238}U}'s cross section changes by order of magnitudes for each resonance, so we can assume that $\Sigma_a = 0$ between resonances (also because between resonances there is no quantum effect between compound nuclides). That is, $q(E)=$ constant between resonances. Consider our TE again with $\Sigma_a = 0$, 
+      \eqn{ \Sigma_s (E) \phi(E) = \int_0^{\infty} \Sigma_s (E'\to E) \phi(E') \dE' }
+      Plug in $\Sigma_s (E' \to E) = \Sigma_s (E') P(E' \to E) = \frac{\Sigma_s (E')}{(1-\alpha) E'}$. Also assume: below birth $E$ of fission neutrons, below inelastic scattering threshold, single scattering nuclei, 
+      \eqn{ \Sigma_s (E) \phi(E) = \int_0^{E/\alpha} \frac{1}{(1-\alpha)E'} \Sigma_s (E') \phi(E') \dE' }
+      We know (magically) that the solution of the above integral is of the form, 
+      \eqn{ \Sigma_s (E) \phi(E) = \frac{\mbox{C}}{E} }
+      [FIXME] insert image. 
+
+      Motivated by the above image, we define $q(E)$ in terms of scattering, 
+      \eqn{ q(E) = \int_E^{E/\alpha} \left[ \int_{\alpha E'}^{E'} \frac{1}{(1-\alpha) E''} \Sigma_s(E'') \phi(E'') \dE'' \right] \dE' } 
+      Plug in $\Sigma_s \phi = C/E$, integrate twice, we get, 
+      \eqn{ q(E) = \left[ 1 + \frac{\alpha}{1-\alpha} \ln \alpha \right] C = \xi C }
+      Consider $\Sigma_s (E) \phi(E) E = C$, that is $q(E) = \xi \Sigma_s (E) \phi(E) E$, we reach \footnote{a subtle point here is that the equations here are the asymptotic values. Recall the Placzek Transient is due to the discontinuity of the flux at $u = \epsilon$, and its derivative at $u = 2 \epsilon$ etc where $\epsilon$ is the maximum lethargy gain. The discontinuity is more noticable for heavy nuclides, and disappear for hydrogen.}, 
+      \eqn{ \Aboxed{ \phi(E) &= \frac{q(E)}{\xi \Sigma_s (E) E} }  }
+      In lethargy space, 
+      \eqn{ \Aboxed{ \phi(u) &= \frac{q(u)}{\xi \Sigma_s (\mu) } } }
+
+      Recap: 
+      \begin{itemize}
+      \item We define $q(E)$ is, which is \# neutrons crossing the boundary. $q(E)$ depends on: neutrons born (if no absorption, all neutrons born would all cross boundary at some point), and absorption. 
+      \item Between resonances, we assume absorption cross section is zero (absorption comes from quantum effects between compound nuclides), and scattering cross section is constant (the compound nuclide scattering cross section is again zero because no QM between nuclides, potential scattering is constant around $4 \pi R^2$). That is, $\Sigma_a = 0, \Sigma_s (E) = $constant, $q(E) = $ constant, then
+      \eqn{ \Aboxed{ \phi(E) &\approx \frac{1}{E} } } 
+      \end{itemize}
+
+
+
+
+
+\end{enumerate}
+
 \end{document}
