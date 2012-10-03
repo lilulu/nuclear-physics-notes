@@ -10,10 +10,11 @@ Angular momentum is a conserved quantity in a central force field. While a gener
 \eqn{ V(\uline{x}) = V(r,\theta, \phi)   }
 a special potential that is only depend on radius (no $\theta, \phi$ dependency) is called a central force field because of its rotational symmetry. 
 
+Section.~\ref{section-physical-angular-momentum} through \ref{section-Pauli} were given on Oct. 1-3, 2012 by Prof. Ju Li. 
 
 %%%%%%%%%%%%%%% 12 Fall %%%%%%%%%%%%%%%%%
-\topic{Physical Meaning of Momentums}
-\textbf{Momentum is a generator of translation.}\footnote{This lecture is given on Oct. 1, 2012 by Prof. Ju Li.} We consider an operator $T$ that moves a $\psi(x)$ to $\psi(x-\Delta x)$: 
+\topic{Physical Meaning of Momentums \label{section-physical-angular-momentum}}
+\hi{Momentum is a generator of translation.} We consider an operator $T$ that moves a $\psi(x)$ to $\psi(x-\Delta x)$: 
 \eqn{ T \psi(x) = \psi(x-\Delta x)} 
 We perform the Taylor expansion on $\psi(x - \Delta x)$: 
 \begin{align}
@@ -30,14 +31,14 @@ Using $e^x = 1 + x + \frac{x^2}{2!} + \frac{x^3}{3!} + \cdots$, we can write,
 Eq.~\ref{momentum-meaning} implies that the position transform vector is the momentum operator. 
 
 
-\textbf{Angular momentum is a generator of rotation.} We consider an operator $R(n, \theta)$ that rotate a $\psi$ to $\psi_{\mathrm{rot}}$: 
+\hi{Angular momentum is a generator of rotation.} We consider an operator $R(n, \theta)$ that rotate a $\psi$ to $\psi_{\mathrm{rot}}$: 
 \eqn{ R(\vec{n}, \theta) \psi = \psi_{\mathrm{rot}} }
 We can prove that 
 \eqn{ R(\vec{n}, \theta) = \exp \left( - \frac{i \theta}{\hbar} \vec{n} \cdot \vec{J} \right) \label{scalar-R} }
 where $\vec{n}$ is the axis of rotation, $\theta$ is the amount of rotation in radian.  Keep in mind this $R(\vec{n}, \theta)$ is a scalar operator. 
 
 
-\topic{A Mathematical Approach: How Angular Momentum Commutes With Others}
+\topic{Angular Momentum's Commutation Relations}
 Now we are going to approach a measurement of an arbitrary vector operator $V$(the vector notation is ommited in this section) from two angles:
 \begin{enumerate}
 \item Recall the expression for $R(\vecn, \theta)$ in Eq.~\ref{scalar-R}. Then for an arbitrary vector operator $V$, a measurement can be written as, 
@@ -112,7 +113,7 @@ Now that we know some fundamental properties of $\vec{J}$, we can do the followi
       \bra{z} J^2 \ket{z} &= |\alpha|^2 \hbar^2 
     \end{align}
     To help understanding, we define for some unknown $\beta$, 
-    \eqn{ J^2 \ket{z} = \beta \hbar \ket{z} }
+    \eqn{ J^2 \ket{z} = \beta \hbar^2 \ket{z} }
     Then the $\bra{z} J^2 \ket{z}$ term is kind of like the $\beta^2 \hbar^2$ term that keeps $J^2$ in the same family. 
 
   \item We cannot infinitely lower $z$. That is, the $\beta$ term has to satisfy the following three relations: 
@@ -181,11 +182,79 @@ Background: the Levi-Civita symbols:
 \end{enumerate}
 
 
-%%%%%%%%%%%%%%%% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\topic{Orbital Angular Momentum}
+
+\topic{Addition of Angular Momentum}
+Consider the angular momentum (orbital angular momentum, spin, etc) of two systems $J_1, J_2$. We can construct the total momentum and the z-component: 
+\eqn{ J^2 &= (J_1 + J_2)(J_1 + J_2) = J_1^2 + 2 J_1 J_2 + J_2^2 & J_z &= J_{1z} + J_{2z} }
+We are interested in evaluating how $J^2, J_z$ commutes with $H = V(r) + l \cdot S V_{\mathrm{so}} (r) + \frac{\gradient^2}{2 \mu}$, where $l \cdot S = J_1 \cdot J_2$. 
+
+\begin{enumerate}
+\item Since they operate on different particles, it must be that $[J_1, J_2] = 0$. 
+
+\item If we have a spherical potential $V(r)$ that only depends on $r$, we know it commutes with $J^2, J_z$: 
+\eqn{ [V(r), J^2] &= [V(r), J_z] = 0 }
+because orbital angular momentum $J$'s only depends on $\theta, \phi$, spin $J$ lives in spin space, so angular momentum does not depend on $r$ hence they commutes with $V(r)$. 
+
+\item We have shown that $[J_1^2, \vec{n} \cdot J_1] = 0$, we can stretch this analogy: even $J_2$ is an operator instead of a value, because $J_2$ lives in a different space than $J_1$, hence we have 
+  \eqn{ [J_1^2, J_1 \cdot J_2] = 0 }
+  Similarly we can show $[J_2^2, J_1 \cdot J_2] = 0$, hence 
+  \eqn{ [J_1 \cdot J_2, J^2] = 0 }
+
+\item 
+  \eqn{ [J_1 \cdot J_2, J_{1z}] &\neq 0  & [J_1 \cdot J_2, J_{2z}] &\neq 0   }
+  and we can show that
+  \begin{align}
+    [J_1 \cdot J_2, J_z] &= [J_{1i} J_{2i}, J_{1z} + J_{2z}] \\
+    &= [J_{1i}, J_{13}] J_{2i} + J_{1i} [J_{2i}, J_{23}] \\
+    &= i \hbar \epsilon_{i3k} J_{1k} J_{2i} + J_{1k} i \hbar \epsilon_{k3i} J_{2i} \\
+    &= 0 
+  \end{align}
+
+\item Observations: 
+  \begin{itemize}
+  \item \hi{$J^2, J_z$ commute with the Hamiltonian}. That is, $J^2, J_z$ are conserved. 
+
+  \item $J_{1z}, J_{2z}$ commute with the Hamiltonian as well with no spin-orbiting coupling. From the space $\ket{j m j_1 j_2}$ (corresponds to $J^2, J_z, J_1^2, J_2^2$) we can construct two subspaces $\ket{m_1 j_1}, \ket{m_2 j_2}$. 
+
+  \item But once we have spin-orbit coupling $l \cdot S$ term, then $J_{1z}, J_{2z}$ are no longer conserved, the two subspaces are coupled, 
+    \eqn{ \{\ket{j m j_1 j_2} \} \in J_1 \otimes J_2  } 
+    We want to prove that the coupled space's dimension is correct. We want to show 
+    \eqn{ \dim J = (\dim J_1) \otimes (\dim J_2)} 
+    where 
+    \eqn{ \mathrm{RHS} &= (2j_1 + 1)(2 j_2 + 1) }
+    \eqn{ \mathrm{LHS} &= \Sum_{j = j_1 - j_2}^{j_1 + j_2} (2 j + 1) = \frac{2(j_1 + j_2) + 1 + \cdots 2(j_1 - j_2) + 1}{2} \cross (2 j_2 + 1) = (2j_1 + 1)(2 j_2 + 1) = \mathrm{RHS} } 
+    For coupled spaces, need the Clebsch-Gordan coefficients\footnote{A subtle point: in the RHS, $\bra{j_1 m_1 j_2 m_2}$ can be written in any order, say, $\bra{j_1 m_1} \bra{j_2 m_2}$.}, 
+    \eqn{ C_{m_1 m_2} (j,j_1, j_2) \equiv \braket{j_1 m_1 j_2 m_2}{j m j_1 j_2} }
+    These are nothing but the eigenvectors of the diagonalization process. Total $J_z$ is conserved, but $J_{1z}, J_{2z}$ are not. [FIXME] insert image. 
+  \end{itemize}
+\end{enumerate}
+
+\topic{Pauli Exclusion Principle \label{section-Pauli}}
+Let's define a two-particle state vector $\ket{\Psi}$, the two particles are at $X_1, X_2$, and we define $X$ such that 
+\eqn{ X =  x \otimes \{ \up, \down \} }
+We cannot tell the two particles apart, thus 
+\eqn{ \bra{\Psi} x_1 y_1^2 S_{1z} \ket{\Psi} = \bra{\Psi} x_2 y_2^2 S_{2z} \ket{\Psi} }
+But we can permute the two particles and get different results depend on the particle property, 
+\eqn{ \Psi(X_1, X_2) = e^{i \theta} \Psi(X_2, X_1) }
+where
+ \eqn{ \theta = \left\{ \begin{array}{cc} \theta = \pi, e^{i \theta} = -1 & \mbox{2 Fermions} \\ \theta = 2 \pi, e^{i \theta} = 1 & \mbox{2 Bosons} \end{array} \right. }
+We extend this argument into many-particle system and define a permutation operator $\hat{P}_{ij}$, 
+\eqn{ \hat{P}_{ij} \Psi(X_1, X_2, \cdots X_i, \cdots, X_j, \cdots, X_N) = \Psi (X_1, X_2, \cdots X_j, \cdots, X_i, \cdots X_N) }
+We know that $\hat{P}_{ij}$ commutes with the Hamiltonian, $[H, \hat{P}_{ij}] = 0$, and we know $\hat{P}_{ij} = \pm 1$ ($+1$ for Bosons, $-1$ for Fermions). 
+
+Assume it is possible to have two identical Fermions $X_i = X_j = X_o$, that is, 
+\eqn{ \Psi (X_1, X_2, \cdots X_0, \cdots, X_0, \cdots X_N) = - \Psi (X_1, X_2, \cdots X_0, \cdots, X_0, \cdots X_N) } 
+The only $\Psi$ that would satisfy the above function is $\Psi = 0$, thus \hi{two Fermions (protons, neutrons, electrons) cannot occupy the exact same spatial position and spin state.} 
+
+
+
+
+%%%%%%%%%%%%%%%% end of Fall 2012 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\topic{Orbital Angular Momentum Overview}
 This is similar to its classical description of angular momentum. 
 
-\subtopic{Construct Cartesian Components of $\hat{L}$}
+\begin{enumerate}
+\item Construct Cartesian Components of $\hat{L}$. 
 We define the orbital angular momentum like:
 \begin{align}
 \hat{\uline{L}} &= \hat{\uline{r}} \cross \hat{\uline{p}} \\
@@ -194,7 +263,7 @@ We define the orbital angular momentum like:
 \hat{\uline{L}}_z &= \hat{x} \hat{p}_y - \hat{y} \hat{p}_x = - i\hbar \left( x \ppy - y \ppx \right) 
 \end{align}
 
-\subtopic{Check the Components We Just Constructed}
+\item Check the Components We Just Constructed. 
 The question we want to ask is, `can we find the eigenvalues of each of the operators simultaneously?'
 
 To answer the above question, we consider whether the components commute with each other. Because if $\left[ \hat{L}_x, \hat{L}_y \right] = 0$, that is to say we can pin $L_x, L_y$ at the same time. 
@@ -206,7 +275,7 @@ Though when we derive it for real (see notes), they come out to be:
 
 That is to say, $\hat{L}_x, \hat{L}_y, \hat{L}_z$ do not have common eigenstates, and that we cannot find $L_x, L_y, L_z$ simultaneously. 
 
-\subtopic{Define the Orbital Angular Momentum Operator $\Lhat^2$}
+\item Define the Orbital Angular Momentum Operator $\Lhat^2$. 
 What the above argument leads to is the $\hat{L}^2$,  a more physical term, and the square root of its eigenvalue is the angular momentum. 
 \eqn{ \left[ \hat{L}^2, \hat{L}_x   \right] =  \left[ \hat{L}^2, \hat{L}_y   \right] =  \left[ \hat{L}^2, \hat{L}_z   \right] = 0   }
 We can solve for the total angular momentum and the azimuthal component simultaneously in a coordinate system as illustrated in Figure~\ref{3DCS}. 
@@ -218,14 +287,14 @@ We can solve for the total angular momentum and the azimuthal component simultan
 \eqn{ \hat{L}_z = - i \hbar \ppphi }
 \eqn{ \hat{L}^2 =  - \hbar^2 \left[ \frac{1}{\sin \theta} \pptheta \left( \sin \theta \pptheta \right) + \frac{1}{\sin^2 \theta} \ppphin2  \right] }
 
-\subtopic{Define the Total Angular Momentum $\Jhat$}
+\item Define the Total Angular Momentum $\Jhat$. 
 We define the Total Angular Momentum as:
 \eqn{ \Jhat = \Lhat + \Shat }
 Notice we cannot solve for the three components of $\Jhat$ simultaneously neither, because: 
 \eqn{ \left[ \Jhat_x, \Jhat_y \right] = i \hbar \Jhat_z,  \left[ \Jhat_y, \Jhat_z \right] = i \hbar \Jhat_x, \left[ \Jhat_z, \Jhat_x \right] = i \hbar \Jhat_y }
 
 
-\subtopic{Eigenvalues of $\Lhat, \Jhat$}
+\item Eigenvalues of $\Lhat, \Jhat$. 
 See Liboff 9.3 for how we get the following equations: 
 \eqn{ \boxed{ \hat{L}^2 \phi_{l,m} (\theta, \phi) = \hbar^2 l (l+1) \phi_{l,m} (\theta, \phi ), \fsp \fsp \hat{L}_z \phi_{l,m} (\theta, \phi) = \hbar m \phi_{l,m} (\theta, \phi ) } }
 in which $l = 0,1,2, \cdots, m = -l, -l+1, \cdots, 0, \cdots l$. If we solve for $\hat{L}_x$ or $\hat{L}_y$ instead we will reach the same results as above. 
@@ -234,7 +303,7 @@ Similarly $\Jhat$ would give us:
 \eqn{  \Jhat^2 \phi_{l,m} (\theta, \phi) = \hbar^2 j (j+1) \phi_{l,m} (\theta, \phi ), \fsp \fsp \Jhat_z \phi_{l,m} (\theta, \phi) = \hbar m_j \phi_{l,m} (\theta, \phi )  }
 in which $j = 0,1/2,1,3/2,2, \cdots, m = -j, \cdots, j$. If we solve for $\Jhat_x$ or $\Jhat_y$ instead we will reach the same results as above. 
 
-\subtopic{Eigenfunctions $\phi_{l,m}$ is Spherical Harmonics $Y_l^m(\theta, \phi)$}
+\item Eigenfunctions $\phi_{l,m}$ is Spherical Harmonics $Y_l^m(\theta, \phi)$. 
 The eigenfunction in the above equation, $\phi_{l,m}$, are commonly called the \textbf{Spherical Harmonics $Y_l^m (\theta, \phi)$}:
 \eqn{ Y_l^m (\theta, \phi) = \frac{1}{\sqrt{2 \pi}} e^{im\phi} P_l^m (\phi)   }
 A couple of things about the Spherical Harmonics:
@@ -245,46 +314,58 @@ A couple of things about the Spherical Harmonics:
 \item Degeneracy: \textbf{For a given $l$ value, there are $2l+1$ number of degeneracy.} For instance, for $l=5$, we have 11 eigenstates $Y_5^5, Y_5^4, \cdots Y_5^{-5}$ that correspond to the same $l$, or the same $L^2 = 30 \hbar^2$. That is, for the same $L^2$, the projection onto the azimuthal plan are degenerate.  
 \item $L_z$ is not continuous. Given a $L^2$, we can draw a bunch of cones, each surface describe the superposition of possible eigenfunctions. L will never entirely align with the z axis. 
 \end{itemize}
-
-
-\subtopic{Summary of Quantum Numbers}
-\begin{enumerate}
-\item Orbital Angular Momentum Quantum Number $l$: integers, $0 \le l \le n$. A subset of j is the solution from orbital component. 
-\item Total Angular Momentum Quantum Number $j$: integer steps, $|l-s|, \cdots, |l+s|$. It completely construct $l$ and $s$. 
-\item $m_j$: $-j, \cdots j$ (includes 0 when j is an integer, and does not include 0 when j is a half-integer). It's degeneracy is $2j+1$. 
 \end{enumerate}
 
-\begin{table}[h!]
-\begin{tabular}{|p{1.5in}|p{1.5in}|p{1.5in}|p{1.5in}|} \hline
- & $\Lhat$ & $\Shat$ &$\Jhat = \Lhat + \Shat$ \\ \hline
-\multirow{3}{*}{Commutating Relations} &
-   $\left[ \Lhat_x, \Lhat_y \right] = i \hbar \Lhat_z$ &  $\left[ \Shat_x, \Shat_y \right] = i \hbar \Shat_z$ &  $\left[ \Jhat_x, \Jhat_y \right] = i \hbar \Jhat_z$ \\
-&  $\left[ \Lhat_y, \Lhat_z \right] = i \hbar \Lhat_x$ &  $\left[ \Shat_y, \Shat_z \right] = i \hbar \Shat_x$ &  $\left[ \Jhat_y, \Jhat_z \right] = i \hbar \Jhat_x$ \\
-&  $\left[ \Lhat_z, \Lhat_x \right] = i \hbar \Lhat_y$ &  $\left[ \Shat_z, \Shat_x \right] = i \hbar \Shat_y$ &  $\left[ \Jhat_z, \Jhat_x \right] = i \hbar \Jhat_y$ \\ \hline
-Quantum Numbers & $ l = 0,1,2,\cdots $ & $s = 0, 1/2, 1, \cdots$               & $ j =|l-s|,\cdots, |l+s|$ \\
-(all in integer steps) & $-l \le m_l \le l  $  & $ -s \le m_s \le s$  & $-j \le m_j \le j$  \\ \hline
-\multirow{2}{*}{Eigenvalues} 
-& $\expect{L^2} = \hbar^2 l (l+1)$ 
-& $\expect{S^2} = \hbar^2 s (s+1)$
-& $\expect{J^2} = \hbar^2 j(j+1)$\\ 
-& $\expect{L_z} = \hbar m_l$ 
-& $\expect{S_z} = \hbar m_s$ 
-& $\expect{J_z} =  \hbar m_j$  \\ \hline
-\end{tabular}
-\caption{Comparison of Quantum Numbers $l,s,j$}
-\label{quantum-numbers}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% SUMMARY %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\topic{Summary} 
+\begin{enumerate}
+\item Commutating relations: 
+
+\item Quantum numbers, 
+\begin{enumerate}
+\item $l$ (orbital): integers, $0 \le l \le n$. A subset of j is the solution from orbital component. 
+\item $j$ (total): integer steps, $|l-s|, \cdots, |l+s|$. It completely construct $l$ and $s$. 
+\item $m_j$ (z-component of total): $-j, \cdots j$ (includes 0 when j is an integer, and does not include 0 when j is a half-integer). It's degeneracy is $2j+1$. 
+\end{enumerate}
+\end{enumerate}
+
+\begin{table}[ht]
+  \begin{tabular}{|p{1.5in}|p{1.5in}|p{1.5in}|p{1.5in}|} \hline
+    & $\Lhat$ & $\Shat$ &$\Jhat = \Lhat + \Shat$ \\ \hline
+    \multirow{3}{*}{Commutating Relations} &
+    $\left[ \Lhat_x, \Lhat_y \right] = i \hbar \Lhat_z$ &  $\left[ \Shat_x, \Shat_y \right] = i \hbar \Shat_z$ &  $\left[ \Jhat_x, \Jhat_y \right] = i \hbar \Jhat_z$ \\
+    &  $\left[ \Lhat_y, \Lhat_z \right] = i \hbar \Lhat_x$ &  $\left[ \Shat_y, \Shat_z \right] = i \hbar \Shat_x$ &  $\left[ \Jhat_y, \Jhat_z \right] = i \hbar \Jhat_x$ \\
+    &  $\left[ \Lhat_z, \Lhat_x \right] = i \hbar \Lhat_y$ &  $\left[ \Shat_z, \Shat_x \right] = i \hbar \Shat_y$ &  $\left[ \Jhat_z, \Jhat_x \right] = i \hbar \Jhat_y$ \\ \hline
+    Quantum Numbers & $ l = 0,1,2,\cdots,n $ & $s = 0, 1/2, 1, \cdots$               & $ j =|l-s|,\cdots, |l+s|$ \\
+    (all in integer steps) & $-l \le m_l \le l  $  & $ -s \le m_s \le s$  & $-j \le m_j \le j$  \\ \hline
+    \multirow{2}{*}{Eigenvalues} 
+    & $\expect{L^2} = \hbar^2 l (l+1)$ 
+    & $\expect{S^2} = \hbar^2 s (s+1)$
+    & $\expect{J^2} = \hbar^2 j(j+1)$\\ 
+    & $\expect{L_z} = \hbar m_l$ 
+    & $\expect{S_z} = \hbar m_s$ 
+    & $\expect{J_z} =  \hbar m_j$  \\ \hline
+  \end{tabular}
+  \caption{Comparison of Quantum Numbers $l,s,j$} \label{quantum-numbers}
 \end{table}
 
 
-\topic{Additions of Angular Momentum}
+\textbf{Know how to add angular momentum.} 
 Examples:
+\begin{enumerate}
+\item Find $\Lhat, \Jhat$ for 2 electrons, 1 electron, and a hydrogen atom. 
+
+\textbf{Answer:} 
 \begin{enumerate}
 \item $2e^-: \Lhat = \Lhat_1 + \Lhat_2 $ 
 \item $ 1 e^-: \Jhat = \Lhat + \Shat$
 \item \ce{^2H} = p+n: l =0. $\Jhat = \Shat_p + \Shat_n$. 
 \end{enumerate}
 
-\uline{Example 1: Adding Two Orbital Momentum:} we want to find the $(l,m)$ associated with $\Lhat= \Lhat_1 + \Lhat_2$ from the four quantum numbers $l_1, m_1, l_2, m_2$. 
+\item Adding Two Orbital Momentum.  
+
+\textbf{Answer:} we want to find the $(l,m)$ associated with $\Lhat= \Lhat_1 + \Lhat_2$ from the four quantum numbers $l_1, m_1, l_2, m_2$. 
 \begin{itemize}
 \item $\Lhat^2 = (\Lhat_1 + \Lhat_2)^2 $
 \item $ \Lhat_z = \Lhat_{1z} + \Lhat_{2z} \Rightarrow m_{\mathrm{max}} = m_{\mathrm{1,max}} + m_{\mathrm{2,max}} = l_1 + l_2.$
@@ -294,17 +375,16 @@ $\fsp\Rightarrow l_{\mathrm{min}} = |l_2 - l_1 |.$ That is,
 \eqn{ l = |l_2 - l_1|, \cdots , l_1 + l_2}
 \end{itemize}
 
-\uline{Example 2: Adding Two Electrons}
 
-Given: $ 2e^-$, 1 $e^-$ \@ $l_1 = 1$, 1 $e^-$ \@ $l_2 = 2$. Answer: 
+\item Adding two electrons. Given: $ 2e^-$, 1 $e^-$ \@ $l_1 = 1$, 1 $e^-$ \@ $l_2 = 2$. 
+
+\textbf{Answer:}
 \begin{itemize}
 \item $l = 1,2,3$.
 \item $L = \hbar \sqrt{l (l+1)} = \hbar \sqrt{2}, \hbar \sqrt{6}, \hbar \sqrt{12}.$.
 \item $N = \Sum_1^3 (2l+1) = 3 + 5 + 7 = 15$, or $N = 3 \times 5 = 15$. 
 \end{itemize}
-
-
-
+\end{enumerate}
 
 
 \end{document}
