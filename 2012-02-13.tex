@@ -335,7 +335,8 @@ Apply assumptions:
 \item Assume infinite medium, so no streaming term $\Omega \gradient \phi \to 0$. 
 \item Assume no source, so $S \to 0$. 
 \end{enumerate}
-If we have the time dependency part, flux changes with respect to time and is driven by source. Once we go into steady state and take away the source, \textbf{TE becomes an eigenvalue problem, and we need to add a $k$ on the bottom of the fission term}, also notice that our TE only depends on energy now,  
+
+When we had the time dependent term $\pphipt$, flux changes with respect to time and is driven by source. Once we go into steady state and take away the source, \textbf{TE becomes an eigenvalue problem, and we need to add a $k$ on the bottom of the fission term}. Notice that our TE only depends on energy now,  
 \eqn{ \Sigma_t (E) \phi(E) &= \int_0^{\infty} \dE' \Sigma_s (E'\to E) \phi(E') + \frac{\chi(E)}{k} \int_0^{\infty} \dE' \nu(E') \Sigma_f(E') \phi(E') }
 If we re-write assuming the fission source is an external source of neutrons $S_f$ (notice it's energy independent): 
 \eqn{ \Sigma_t(E) \phi(E) &= \int_0^{\infty} \dE' \Sigma_s (E' \to E) \phi(E') + \chi(E) S_f }
@@ -345,22 +346,21 @@ where we can subsitute $P(E'\to E) = \frac{1}{(1-\alpha)E'}$ into $\Sigma_s(E' \
 \begin{enumerate}
 \item Fast range ($>0.1$MeV): Assume no upscattering, and any scattering event is likely to slow neutrons below 0.1 MeV. Then our TE becomes, 
   \eqn{ \Sigma_t (E) \phi(E) &= \chi(E) S_f  & \phi(E) &= \frac{\chi(E) S_f}{\Sigma_t} }
- \hi{$\chi(E)$ dominantes}, because $\Sigma_t$ is fairly flat in the fast range, and $S_f = \frac{\nu \Sigma_f \phi}{k}$ which is proportional to $\phi(E)$ anyway (or say flux scales with source), so we are left with the distribution of prompt neutrons dominant the flux in the fast range. 
+ \hi{$\chi(E)$ dominantes fast flux}, because $\Sigma_t$ is fairly flat in the fast range, and $S_f = \frac{\nu \Sigma_f \phi}{k}$ which is proportional to $\phi(E)$ anyway (or say flux scales with source), so we are left with the distribution of prompt neutrons dominant the flux in the fast range. 
 
 \item Slowing down region/resonance region $[1\eV, 0.1 \MeV]$. We define a slowing down density: 
   \eqn{ q(E) = \mbox{ number of minimum slowing down past energy }E}
-  Again assume no upscattering, 
+  Again assume no upscattering. In the presence of scattering, all neutrons born from fission will reach $E$ unless absorbed, 
   \eqn{ q(E) = \int_E^{\infty} \chi(E') S_f \dE' - \int_E^{\infty} \Sigma_a(E') \phi(E') \dE' }
-  In the presence of scattering, all neutrons born from fission will reach $E$ unless absorbed. That is, from the general expression $\int_0^{\infty} \chi(E') \dE' = 1$, we can approximate $\int_{0.1}^{\infty} \chi(E') \dE' = 1$, thus only leaving the energy independent $S_f$ term:  
+  From the general expression $\int_0^{\infty} \chi(E') \dE' = 1$, we can approximate $\int_{0.1}^{\infty} \chi(E') \dE' = 1$, thus only leaving the energy independent $S_f$ term:  
   \begin{align}
     q(E) &= - \int_E^{\infty} \Sigma_a (E') \phi(E') \dE' + S_f \\
-    &= \int_{\infty}^E \Sigma_a (E') \phi(E') \dE' + S_f  \\
     \Aboxed{ \frac{\derivative q(E)}{\dE} &= - \Sigma_a (E) \phi(E) } 
   \end{align}
   Comments/notes: 
   \begin{itemize}
     \item If absorption increases, less neutrons would make it to $E$, then $q(E)$ should be smaller. 
-    \item $q(E)$ decreases proportional to $\Sigma_a$. 
+    \item $q(E)$ decreases proportional to $\Sigma_a$, because in our approximation the source term becomes indpendent of energy. 
     \item If $\Sigma_a = 0, q(E) = $ constant. 
   \end{itemize}
 
@@ -370,9 +370,14 @@ In reactor applications, most absorptions happen in the resonances of \ce{^{238}
       \eqn{ \Sigma_s (E) \phi(E) = \int_0^{E/\alpha} \frac{1}{(1-\alpha)E'} \Sigma_s (E') \phi(E') \dE' }
       We know (magically) that the solution of the above integral is of the form, 
       \eqn{ \Sigma_s (E) \phi(E) = \frac{\mbox{C}}{E} }
-      [FIXME] insert image. 
 
-      Motivated by the above image, we define $q(E)$ in terms of scattering, 
+      \begin{figure}[ht]
+        \centering
+        \includegraphics[width=4in]{images/sl-d/sl-d-energy.png}
+        \caption{Slowing Down in Energy} \label{sl-d-energy}
+      \end{figure}
+
+      Motivated by Fig.~\ref{sl-d-energy}, we define $q(E)$ in terms of scattering, 
       \eqn{ q(E) = \int_E^{E/\alpha} \left[ \int_{\alpha E'}^{E'} \frac{1}{(1-\alpha) E''} \Sigma_s(E'') \phi(E'') \dE'' \right] \dE' } 
       Plug in $\Sigma_s \phi = C/E$, integrate twice, we get, 
       \eqn{ q(E) = \left[ 1 + \frac{\alpha}{1-\alpha} \ln \alpha \right] C = \xi C }
@@ -380,6 +385,12 @@ In reactor applications, most absorptions happen in the resonances of \ce{^{238}
       \eqn{ \Aboxed{ \phi(E) &= \frac{q(E)}{\xi \Sigma_s (E) E} }  }
       In lethargy space, 
       \eqn{ \Aboxed{ \phi(u) &= \frac{q(u)}{\xi \Sigma_s (\mu) } } }
+
+      \begin{figure}[ht]
+        \centering
+        \includegraphics[width=6.5in]{images/sl-d/resonance-flux.png}
+        \caption{Flux Between Resonances} \label{resonance-flux}
+      \end{figure}
 
       Recap: 
       \begin{itemize}
