@@ -200,14 +200,12 @@ because orbital angular momentum $J$'s only depends on $\theta, \phi$, spin $J$ 
   Similarly we can show $[J_2^2, J_1 \cdot J_2] = 0$, hence 
   \eqn{ [J_1 \cdot J_2, J^2] = 0 }
 
-\item 
+\item We can show that $J_{iz}$ does not commute with $J_1 \cdot J_2$, but $J_z$ does: 
   \eqn{ [J_1 \cdot J_2, J_{1z}] &\neq 0  & [J_1 \cdot J_2, J_{2z}] &\neq 0   }
-  and we can show that
   \begin{align}
     [J_1 \cdot J_2, J_z] &= [J_{1i} J_{2i}, J_{1z} + J_{2z}] \\
     &= [J_{1i}, J_{13}] J_{2i} + J_{1i} [J_{2i}, J_{23}] \\
-    &= i \hbar \epsilon_{i3k} J_{1k} J_{2i} + J_{1k} i \hbar \epsilon_{k3i} J_{2i} \\
-    &= 0 
+    &= i \hbar \epsilon_{i3k} J_{1k} J_{2i} + J_{1k} i \hbar \epsilon_{k3i} J_{2i} = 0 
   \end{align}
 
 \item Observations: 
@@ -222,12 +220,20 @@ because orbital angular momentum $J$'s only depends on $\theta, \phi$, spin $J$ 
     \eqn{ \dim J = (\dim J_1) \otimes (\dim J_2)} 
     where 
     \eqn{ \mathrm{RHS} &= (2j_1 + 1)(2 j_2 + 1) }
-    \eqn{ \mathrm{LHS} &= \Sum_{j = j_1 - j_2}^{j_1 + j_2} (2 j + 1) = \frac{2(j_1 + j_2) + 1 + \cdots 2(j_1 - j_2) + 1}{2} \cross (2 j_2 + 1) = (2j_1 + 1)(2 j_2 + 1) = \mathrm{RHS} } 
-    For coupled spaces, need the Clebsch-Gordan coefficients\footnote{A subtle point: in the RHS, $\bra{j_1 m_1 j_2 m_2}$ can be written in any order, say, $\bra{j_1 m_1} \bra{j_2 m_2}$.}, 
+    \eqn{ \mathrm{LHS} &= \Sum_{j = j_1 - j_2}^{j_1 + j_2} (2 j + 1) = \frac{2(j_1 + j_2) + 1 + \cdots 2(j_1 - j_2) + 1}{2} \cross (2 j_2 + 1) \\
+      &= (2j_1 + 1)(2 j_2 + 1) = \mathrm{RHS} } 
+    For coupled spaces, we need the Clebsch-Gordan coefficients\footnote{A subtle point: in the RHS, $\bra{j_1 m_1 j_2 m_2}$ can be written in any order, say, $\bra{j_1 m_1} \bra{j_2 m_2}$.}, 
     \eqn{ C_{m_1 m_2} (j,j_1, j_2) \equiv \braket{j_1 m_1 j_2 m_2}{j m j_1 j_2} }
-    These are nothing but the eigenvectors of the diagonalization process. Total $J_z$ is conserved, but $J_{1z}, J_{2z}$ are not. [FIXME] insert image. 
+    Clebsch-Gordan coefficients are nothing but the eigenvectors of the diagonalization process. Notice total $J_z$ is conserved, but $J_{1z}, J_{2z}$ are not, as seen in Fig.~\ref{addition-of-momentum}
   \end{itemize}
 \end{enumerate}
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=3in]{images/qm/addition-of-momentum.png}
+  \caption{Addition of Two Momentum, Conservation of z-component} \label{addition-of-momentum} 
+\end{figure}
+
+
 
 \topic{Pauli Exclusion Principle \label{section-Pauli}}
 Let's define a two-particle state vector $\ket{\Psi}$, the two particles are at $X_1, X_2$, and we define $X$ such that 
@@ -321,13 +327,24 @@ A couple of things about the Spherical Harmonics:
 \topic{Summary} 
 \begin{enumerate}
 \item Commutating relations: 
+  \begin{enumerate}
+  \item Most basic properties about angular momentum:
+    \eqn{ [V_i, J_j] &= i \hbar \epsilon_{ijk} V_k     & [J^2, \vecn \cdot J] &= 0 }
+  \item Raising and lowering operators, 
+    \eqn{ [J_z, J_-] &= - \hbar J_-   &J_- \ket{z} &= \alpha \ket{z-1} }
+  \item Conclusion: 
+    \eqn{ J^2 \ket{jm} &= j (j+1) \hbar^2 \ket{j m }    & J_z \ket{jm} &= m \hbar \ket{j m} }
+    \eqn{ J_{\pm} \ket{jm} &= \hbar \sqrt{j(j+1) - m(m\pm 1)} \ket{jm \pm 1}  }
+    \eqn{ J_x \ket{jm} &= \frac{\hbar}{2} (\sqrt{j(j+1) - m(m+1)} \ket{jm+1} + \sqrt{j(j+1) - m(m-1)} \ket{jm-1})  }
+    \eqn{J_y \ket{jm} &= \frac{\hbar}{2} (-\sqrt{j(j+1) - m(m+1)} \ket{jm+1} + \sqrt{j(j+1) - m(m-1)} \ket{jm-1})  }    
+  \end{enumerate}
 
 \item Quantum numbers, 
-\begin{enumerate}
-\item $l$ (orbital): integers, $0 \le l \le n$. A subset of j is the solution from orbital component. 
-\item $j$ (total): integer steps, $|l-s|, \cdots, |l+s|$. It completely construct $l$ and $s$. 
-\item $m_j$ (z-component of total): $-j, \cdots j$ (includes 0 when j is an integer, and does not include 0 when j is a half-integer). It's degeneracy is $2j+1$. 
-\end{enumerate}
+  \begin{enumerate}
+  \item $l$ (orbital): integers, $0 \le l \le n$. A subset of j is the solution from orbital component. 
+  \item $j$ (total): integer steps, $|l-s|, \cdots, |l+s|$. It completely construct $l$ and $s$. 
+  \item $m_j$ (z-component of total): $-j, \cdots j$ (includes 0 when j is an integer, and does not include 0 when j is a half-integer). It's degeneracy is $2j+1$. 
+  \end{enumerate}
 \end{enumerate}
 
 \begin{table}[ht]
