@@ -6,6 +6,19 @@
 
 \clearpage
 \topic{Resonance Models}
+%%%% 12 fall 
+We derive 
+
+We now get 
+\begin{align}
+ (\Sigma_{t1} + \Sigma_{t0} (u)) \Psi(u) \psi(u) &= \Psi(u) R_0 \psi(u) + \Psi(u) \Sigma_{t1}     \\
+... \\
+r_0 \psi(u) + \sigma_d &= (\sigma_d + \sigma_{to}(u)) \psi(u) 
+\end{align}
+
+
+%%%% 12 fall end
+
 \begin{enumerate}
 \item The wide resonance approximation is: 
 \begin{align}
@@ -20,6 +33,19 @@ The wide resonance approximation says that we ignore scattering of U238 because 
 
 Wide resonance approximations match direct MC results near infinite dilution. 
 
+
+%
+Wide resonance assumes that the resonances are so large that we can assume the reaction rate is constant. 
+
+
+\eqn{ r_0 \psi(u) &= \int_{u-\epsilon_0}^u \frac{1}{1-\alpha_0} e^{-(u-u')} \overbrace{ \sigma_{so} (u') \psi(u')}^{\mathrm{constant}} \du' = \sigma_s (u) \psi(u)  }
+Then we arrive at, 
+\eqn{ \psi_{WR} (u) &= \frac{\sigma_d}{\sigma_{to} (u) - \sigma_{s0} (u) + \sigma_d}  }
+
+
+
+%
+
 \item Narrow Resonance Approximations. Narrow resonance approximations assume the opposite of the wide resonance approximation, that the neutron is going to be out of the resonance upon one scattering. This approximation is good for higher energy. For instance, at 100 keV, scattering lose 1 keV, which is larger than the 25 eV spacing of \ce{^{238}U}. 
 \begin{align}
 \phi_{NR} (u) &= \frac{\sigma_{pot}^R + \sigma_d}{\sigma_{a}^R + \sigma_{pot}^R + \sigma_d } \\
@@ -29,6 +55,27 @@ Wide resonance approximations match direct MC results near infinite dilution.
 \end{align}
 However, the results on the slides come out to be that narrow resonance approximation is not really any better than the wide resonance approximation at higher energy, so there must be some other physics going on. 
 
+% 12fall 
+
+Assume resonance is very narrow, thus cross section remains the same, thus $\phi(E) \propto 1/E, \phi(u) = $constant. Thus we can write, 
+\eqn{ r_0 \psi(u) = \int_{u-\epsilon_0}^u \frac{1}{1- \alpha_0} e^{-(u-u;)} \sigma_{s0}(u') \phi(u') \du' }
+where $\phi(u') = 1, \sigma_{s0} (u')\approx \sigma_{po}$ potential scattering, also 
+\eqn{ \int_{u-\epsilon}^u \frac{1}{1-\alpha_0} e^{-(u-u')} \du' = 1} 
+Thus narrow resonance approximation leads to, 
+\eqn{ r_0 \psi(u) = \sigma_{po}}
+That is, 
+\eqn{ \sigma_{po} + \sigma_d &= (\sigma_d + \sigma_{t0} (u)) \psi_{NR} (u) & \psi_{NR} (u) &= \frac{\sigma_{po} + \sigma_d}{\sigma_d + \sigma_{to} (u) } }
+
+Narrow resonance approximation is good at high energies. For fast reactor applications for instance narrow resonance is used a lot. 
+
+
+
+
+
+
+
+
+% end of 12fall
 \item Narrow vs. Wide Resonance Approximations\label{narrow-wide-compr}. 
 Wide resonance approximation agrees pretty well with MC results without U238 scattering; narrow resonance approximation agrees alright with the MC results with U238 scattering. Notice adding in scattering would change the low dilution factor results. See Figure~\ref{wide-vs-narrow}.
 
@@ -45,6 +92,16 @@ Compare with MC results using real U238 and U235 xs data, the real results fall 
   \includegraphics[width=4in]{images/r-m/narrow-vs-wide-resonance.png}
   \caption{Comparison Of Wide and Narrow Resonance Approximation} \label{wide-vs-narrow}
 \end{figure}
+
+
+% 12fall
+\item Goldstein-Cohen Model: since isotopes are going to be somewhere between the two extremes, we consider a linear combination of $\psi_{NR}, \psi_{WR}$, 
+\eqn{ \psi_{GC} (u) = \frac{\lambda_g \sigma_{po} + \sigma_d}{\sigma_{to}(u) - (1-\lambda_g) \sigma_{so}(u) + \sigma_d } }
+where $\lambda_g$ depends on isotope and energy band. When $\lambda_g = 1$ we get the $\psi_{NR}$, $\lambda_g = 0$ we get the $\psi_{WR}$. 
+
+Alternatively, we can discretize our energy group very finely, then we would not need any resonance models. 
+
+
 
 \item NJOY Modeling of Resonance Parameters. \textbf{Normal procedure} for generating multi-group xs in a code like NJOY includes:
 \begin{enumerate}
@@ -73,8 +130,41 @@ Compare with MC results using real U238 and U235 xs data, the real results fall 
 \item Evaluate group cross section (or RI) using Dancoff, potential and escape cross sections by interpolating cross section (or RI) tables at appropriate temperatures. 
 \end{enumerate}
 The point is, for real application, it is rarely possible to just use someone else's cross section table; we almost certainly need to generate xs suitable for our application. 
-
 \end{enumerate}
+
+
+
+%%%%%%%% 12 Fall 
+\clearpage
+\topic{Examples Using Resonance Models}
+\begin{enumerate}
+\item One resonant isotope. Assume we have \ce{H_2 O} and \ce{^{235} U}. Then we do, 
+\begin{align}
+\sigma_d &= \frac{N_H \sigma_H + N_0 \sigma_o}{N_U} 
+\end{align}
+We evaluate $\psi$. Then ,
+\eqn{ \sigma_{U,g} = \frac{\int \sigma_{U}(u) \psi(u) \du}{\int \psi(u) \du} }
+
+\item Multiple resonant isotopes. Assume we have \ce{H_2 O}, \ce{^{235}U}, and \ce{^{238} U}. 
+  \begin{enumerate}
+  \item Assume \ce{^{235} U} is the only resonant isotope, then 
+    \eqn{ \sigma_d = \frac{N_{238} \sigma_{238} + N_H \sigma_H + N_O \sigma_O}{N_{235} } }
+    Then we solve for $\psi(u)$ then $\sigma_{235}$. 
+  \item Assume \ce{^{238} U} is the only resonant isotope. 
+  \end{enumerate}
+  We repeat the above steps until the flux converges. 
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+
+
 
 
 \end{document}
