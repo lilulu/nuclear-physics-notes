@@ -6,6 +6,20 @@
 
 \clearpage
 \topic{Resonance Models}
+Reference: Alain Hebert's Applied Reactor Physics (p.199-202), Duderstadt's p.343-347. 
+
+Recall the assumptions we made for slowing down equation: 
+\begin{itemize}
+\item Steady state.
+\item Infinite medium: there is no spacial dependency. 
+\item No external source. 
+\item S-wave elastic scattering (that is isotropic in COM frame) for light nuclides, 
+    \eqn{ \Sigma_s (E' \to E) &= \frac{\Sigma_s(E')}{(1-\alpha)E'} &\mbox{for } E < E' < \frac{E}{\alpha} }
+  where $\alpha = (A-1/A+1)^2$.
+\end{itemize}
+For resonance models, we have to take into account inelastic scattering for heavy isotopes by introducing the 0-th and 1-st Legrendre modes. 
+
+
 %%%% 12 fall 
 Recall the slowing down equation for resonance region $[1\eV, 0.1 \MeV]$, 
 \begin{align}
@@ -15,7 +29,7 @@ Recall the slowing down equation for resonance region $[1\eV, 0.1 \MeV]$,
 
 Next we manipulate the above equations:
 \begin{itemize}
-\item We facterize $\Phi(u) = \phi(u) \Psi(u)$, where $\phi(u)$ is the fine structure/self-shielding factor that models the resonances, $\Psi(u)$ is the flux outside the resonance. 
+\item We facterize $\Phi(u) = \phi(u) \Psi(u)$, where $\phi(u)$ is the fine structure/self-shielding factor that models the resonances, $\Psi(u)$ is the flux outside the resonance (Hebert calls it `macroscopic flux', and it represents the asymptotic behavior of flux between resonances). 
 
 \item Because of the 1/E flux between resonances (or constant in lethargy) $\Phi(u) = \frac{q(u)}{\xi \Sigma_s}$, we write the RHS of Eq.~\ref{resonance-sl-d-eqn} as $R \Phi(u)$. $R$ has two components. We do not know what $R_0$ is yet,
 \eqn{  R_0 \Phi(u) &= R_0 \phi(u) \Psi(u) = \int_{u-\epsilon_0}^u \frac{1}{1-\alpha_0} e^{-(u-u')} \Sigma_{s0}(u') \phi(u') \Psi(u') \du'  }
@@ -150,22 +164,57 @@ For real application, it is rarely possible to just use someone else's cross sec
 %%%%%%%% 12 Fall 
 \clearpage
 \topic{Examples Using Resonance Models}
+Recall:
+\begin{itemize}
+\item Flux facterization $\Phi(u) = \phi(u) \Psi(u)$ where $\phi$ is the fine structure function, $\Psi(u)$ is the flux outside the resonance. 
+\item Dilution cross section: 
+  \eqn{ \sigma_d = \frac{\Sum_{\mathrm{moderator}} N_m \sigma_m}{N_r} }
+\item Narrow resonance approximation\footnote{the only energy/lethargy dependent term on the RHS should be $\sigma_{to}(u)$.}:
+  \eqn{ \phi_{NR} (u) = \frac{\sigma_{po} + \sigma_d}{\sigma_d + \sigma_{to}(u)} }
+\end{itemize}
+
+There are two possibilites in using NR approximation to calculate the condensed cross section depends on the number of resonant isotopes: 
 \begin{enumerate}
-\item One resonant isotope. Assume we have \ce{H_2 O} and \ce{^{235} U}. Then we do, 
+\item One resonant isotope. Assume we have \ce{H_2 O} and \ce{^{235} U}. 
 \begin{align}
-\sigma_d &= \frac{N_H \sigma_H + N_0 \sigma_o}{N_U} 
+\sigma_d &= \frac{N_H \sigma_H + N_O \sigma_O}{N_U} 
 \end{align}
-We evaluate $\psi$. Then ,
+We evaluate $\phi$ using narrow resonance approximation: 
+  \eqn{ \phi_{NR} (u) = \frac{\sigma_{po} + \sigma_d}{\sigma_d + \sigma_{to}(u)} }
+Then the flux-weighted resonant material cross section is,
 \eqn{ \sigma_{U,g} = \frac{\int \sigma_{U}(u) \psi(u) \du}{\int \psi(u) \du} }
 
 \item Multiple resonant isotopes. Assume we have \ce{H_2 O}, \ce{^{235}U}, and \ce{^{238} U}. 
+
+  \textbf{Solution 1:}
   \begin{enumerate}
-  \item Assume \ce{^{235} U} is the only resonant isotope, then 
-    \eqn{ \sigma_d = \frac{N_{238} \sigma_{238} + N_H \sigma_H + N_O \sigma_O}{N_{235} } }
-    Then we solve for $\psi(u)$ then $\sigma_{235}$. 
+  \item Assume \ce{^{235} U} is the only resonant isotope, then we solve an energy independent $\sigma_d$ by 
+    \eqn{ \sigma_d = \frac{N_{238} \bar{\sigma}_{238} + N_H \sigma_H + N_O \sigma_O}{N_{235} } }
+    Then we solve for $\psi(u)$:
+      \eqn{ \phi_{NR} (u) = \frac{\sigma_{po,235} + \sigma_d}{\sigma_d + \sigma_{to,235}(u)} \label{NR-flux-eqn}  }
+    Then calculate the collapsed $\bar{\sigma}_{235}$:
+    \eqn{ \bar{\sigma}_{235} = \frac{\int \sigma_{235} (u) \phi(u) \du}{\int \phi(u) \du}  \label{flux-collapse-235}  }
   \item Assume \ce{^{238} U} is the only resonant isotope. 
+    \eqn{ \sigma_d = \frac{N_{235} \bar{\sigma}_{235} + N_H \sigma_H + N_O \sigma_O}{N_{238} } }
+    Then we solve for $\psi(u)$:
+      \eqn{ \phi_{NR} (u) = \frac{\sigma_{po,238} + \sigma_d}{\sigma_d + \sigma_{to,238}(u)} }
+    Then calculate the collapsed $\bar{\sigma}_{238}$:
+    \eqn{ \bar{\sigma}_{238} = \frac{\int \sigma_{238} (u) \phi(u) \du}{\int \phi(u) \du}   }
   \end{enumerate}
-  We repeat the above steps until the flux converges. 
+  Then we feed $\bar{\sigma}_{238}$ back into step 1 and repeat the process until $\bar{\sigma}_{235}, \bar{\sigma}_{238}$ converge, which happen fairly fast with a simple resonance. 
+
+
+\textbf{Solution 2 (Nate/Gene)}: 
+
+In Eq.~\ref{flux-collapse-235}, $\phi(u)$ shows up in both the top and the bottom of the equation, so if we scale $\phi(u)$ by any non-energy dependent term as they would just cancel out, the solution would not change. Recall $\phi(u)$ as in Eq.~\ref{NR-flux-eqn}, the top $\sigma_{po,r} + \sigma_d$ is energy-independent, and $N_r$ is energy-independent as well, that is, 
+\eqn{ \phi_{NR} (u) = \frac{\sigma_{po,r} + \sigma_d}{\sigma_d + \sigma_{to,r}(u)} \to \frac{1}{\sigma_d + \sigma_{to,r}(u)} \to  \frac{1}{N_r \sigma_d + N_r \sigma_{to,r}(u)} \to \frac{1}{\Sum_{\mathrm{moderators}} N_m \sigma_m + N_r \sigma_{to,r}(u)} }
+Then the total flux is fine structure times a $1/E$ dependency, 
+\eqn{ \Phi (E) = \frac{1}{E \left[ \Sum_{\mathrm{moderators}} N_m \sigma_m + N_r \sigma_{to,r}(E)\right]} }
+Then we don't have to compute $\sigma_d$ anymore. For each resonant isotope, the three steps becomes two steps: calculating $\Phi$ using last step's condensed cross section, and update this step's condensed cross section with $\Phi$-collapsed cross section. 
+
+So effectively narrow resonance suggest, 
+\eqn{ \Phi (E)  = \frac{1}{E \Sigma_t (E)} }
+
 \end{enumerate}
 
 

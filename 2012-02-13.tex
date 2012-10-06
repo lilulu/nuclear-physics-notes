@@ -331,9 +331,12 @@ This lecture is given on Oct. 2 by Prof. Forget. We start from the TE:
 \eqn{ \frac{1}{v} \pphipt + \Omega \gradient \phi + \Sigma_t \phi &= \int \dE \int \dOmega \Sigma_s \phi + \frac{\chi(E)}{4 \pi} \int \dE v \Sigma_f \phi + S }
 Apply assumptions:
 \begin{enumerate}
-\item Assume steady state, so $\frac{1}{v} \pphipt \to 0$. 
-\item Assume infinite medium, so no streaming term $\Omega \gradient \phi \to 0$. 
-\item Assume no source, so $S \to 0$. 
+\item Steady state, so $\frac{1}{v} \pphipt \to 0$. 
+\item Infinite medium, so no streaming term $\Omega \gradient \phi \to 0$. 
+\item No source, so $S \to 0$. 
+\item Slowing down happens with elastic scattering is isotropic in the center of mass system (s-wave elastic scattering), that is, 
+  \eqn{ \Sigma_s (E' \to E) &= \frac{\Sigma_s(E')}{(1-\alpha)E'} &\mbox{for } E < E' < \frac{E}{\alpha} }
+  where $\alpha = (A-1/A+1)^2$. In assuming s-wave, the slowing down model only applies for neutrons below 1MeV in light moderators and neutrons below 0.1 MeV in heavier materials, since the average $\bar{\mu_0} = 0.07 A^{2/3}E$ [MeV].  For neutrons above 0.1 MeV, inelastic scattering from heavy nuclei becomes important and cannot be ignored, which is why in this section (slowing down) we are going to assume elastic scattering, but in the next section (resonance models) we are going to take into account inelastic scattering. 
 \end{enumerate}
 
 When we had the time dependent term $\pphipt$, flux changes with respect to time and is driven by source. Once we go into steady state and take away the source, \textbf{TE becomes an eigenvalue problem, and we need to add a $k$ on the bottom of the fission term}. Notice that our TE only depends on energy now,  
