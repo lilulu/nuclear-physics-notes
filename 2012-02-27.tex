@@ -4,11 +4,16 @@
 \begin{document}
 \maketitle
 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%% Resonance Models Day 3 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \clearpage
 \topic{Resonance Models}
+
+%%%% 12 fall material %%%%
 Reference: Alain Hebert's Applied Reactor Physics (p.199-202), Duderstadt's p.343-347. 
 
-Recall the assumptions we made for slowing down equation: 
+Recall the assumptions we made for slowing down equation in Section~\ref{slowing-down-from-te}: 
 \begin{itemize}
 \item Steady state.
 \item Infinite medium: there is no spacial dependency. 
@@ -17,10 +22,10 @@ Recall the assumptions we made for slowing down equation:
     \eqn{ \Sigma_s (E' \to E) &= \frac{\Sigma_s(E')}{(1-\alpha)E'} &\mbox{for } E < E' < \frac{E}{\alpha} }
   where $\alpha = (A-1/A+1)^2$.
 \end{itemize}
+
 For resonance models, we have to take into account inelastic scattering for heavy isotopes by introducing the 0-th and 1-st Legrendre modes. 
 
 
-%%%% 12 fall 
 Recall the slowing down equation for resonance region $[1\eV, 0.1 \MeV]$, 
 \begin{align}
 \Sigma_t (u) \Phi(u) &= \int_{u-\epsilon}^u \frac{1}{1 - \alpha} e^{-(u-u')} \Sigma_s (u') \Phi(u') \du' \label{resonance-sl-d-eqn} \\
@@ -48,7 +53,6 @@ R_0 \phi + \Sigma_{t1} &= (\Sigma_{t1}  + \Sigma_{t0} ) \phi
 
 
 There are a couple of ways to approximate $r_0 \phi(u)$. 
-
 %%%% 12 fall end
 
 \begin{enumerate}

@@ -6,7 +6,7 @@
 
 
 %%%%%%%%%%%%%%%%%%%%%%%% Neutron Slowing Down and Thermalization %%%%%%%%%%%%%%%
-\lecture{Neutron Slowing Down and Thermalization}
+\lecture{Slowing Down \& Thermalization in Infinite Medium} \label{slowing-down-thermalization}
 
 \topic{Summary: Reuss Ch 7 Neutron Slowing Down}
 \begin{enumerate}
@@ -326,7 +326,7 @@ A couple of important points:
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \clearpage
-\topic{Slowing Down From TE}
+\topic{Slowing Down From TE} \label{slowing-down-from-te}
 This lecture is given on Oct. 2 by Prof. Forget. We start from the TE: 
 \eqn{ \frac{1}{v} \pphipt + \Omega \gradient \phi + \Sigma_t \phi &= \int \dE \int \dOmega \Sigma_s \phi + \frac{\chi(E)}{4 \pi} \int \dE v \Sigma_f \phi + S }
 Apply assumptions:
@@ -348,7 +348,7 @@ where we can subsitute $P(E'\to E) = \frac{1}{(1-\alpha)E'}$ into $\Sigma_s(E' \
 
 \begin{enumerate}
 \item Fast range ($>0.1$MeV): Assume no upscattering, and any scattering event is likely to slow neutrons below 0.1 MeV. Then our TE becomes, 
-  \eqn{ \Sigma_t (E) \phi(E) &= \chi(E) S_f  & \phi(E) &= \frac{\chi(E) S_f}{\Sigma_t} }
+  \eqn{ \Sigma_t (E) \phi(E) &= \chi(E) S_f  & \Aboxed{\phi(E) &= \frac{\chi(E) S_f}{\Sigma_t} } }
  \hi{$\chi(E)$ dominantes fast flux}, because $\Sigma_t$ is fairly flat in the fast range, and $S_f = \frac{\nu \Sigma_f \phi}{k}$ which is proportional to $\phi(E)$ anyway (or say flux scales with source), so we are left with the distribution of prompt neutrons dominant the flux in the fast range. 
 
 \item Slowing down region/resonance region $[1\eV, 0.1 \MeV]$. We define a slowing down density: 
@@ -385,9 +385,7 @@ In reactor applications, most absorptions happen in the resonances of \ce{^{238}
       Plug in $\Sigma_s \phi = C/E$, integrate twice, we get, 
       \eqn{ q(E) = \left[ 1 + \frac{\alpha}{1-\alpha} \ln \alpha \right] C = \xi C }
       Consider $\Sigma_s (E) \phi(E) E = C$, that is $q(E) = \xi \Sigma_s (E) \phi(E) E$, we reach \footnote{a subtle point here is that the equations here are the asymptotic values. Recall the Placzek Transient is due to the discontinuity of the flux at $u = \epsilon$, and its derivative at $u = 2 \epsilon$ etc where $\epsilon$ is the maximum lethargy gain. The discontinuity is more noticable for heavy nuclides, and disappear for hydrogen.}, 
-      \eqn{ \Aboxed{ \phi(E) &= \frac{q(E)}{\xi \Sigma_s (E) E} }  }
-      In lethargy space, 
-      \eqn{ \Aboxed{ \phi(u) &= \frac{q(u)}{\xi \Sigma_s (\mu) } } }
+      \eqn{ \Aboxed{ \phi(E) &= \frac{q(E)}{\xi \Sigma_s (E) E} }  & \phi(u) &= \frac{q(u)}{\xi \Sigma_s (\mu)  } }
 
       \begin{figure}[ht]
         \centering
@@ -395,12 +393,19 @@ In reactor applications, most absorptions happen in the resonances of \ce{^{238}
         \caption{Flux Between Resonances} \label{resonance-flux}
       \end{figure}
 
-      Recap: 
-      \begin{itemize}
-      \item We define $q(E)$ is, which is \# neutrons crossing the boundary. $q(E)$ depends on: neutrons born (if no absorption, all neutrons born would all cross boundary at some point), and absorption. 
-      \item Between resonances, we assume absorption cross section is zero (absorption comes from quantum effects between compound nuclides), and scattering cross section is constant (the compound nuclide scattering cross section is again zero because no QM between nuclides, potential scattering is constant around $4 \pi R^2$). That is, $\Sigma_a = 0, \Sigma_s (E) = $constant, $q(E) = $ constant, then
-      \eqn{ \Aboxed{ \phi(E) &\approx \frac{1}{E} } } 
-      \end{itemize}
+
+\clearpage
+\topic{Summary}
+
+\begin{enumerate}
+\item Not near sources or resonance (Duderstadt): 
+
+
+
+We define $q(E)$ is, which is \# neutrons crossing the boundary. $q(E)$ depends on: neutrons born (if no absorption, all neutrons born would all cross boundary at some point), and absorption. 
+\item Between resonances, we assume $\Sigma_a =0$, and $\Sigma_s$ = constant (the compound nuclide scattering cross section is again zero because no QM between nuclides, potential scattering is constant around $4 \pi R^2$). Then 
+  \eqn{\Aboxed{q(u) &= S_0} & \Aboxed{ \phi(u) &= \frac{S_0}{\xi \Sigma_s(u)}}}
+\end{enumerate}
 
 
 

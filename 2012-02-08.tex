@@ -5,15 +5,39 @@
 \maketitle
 
 \lecture{Introduction}
-\topic{Course Objectives}
+\topic{Course Coverage}
 \begin{itemize}
-  \item Continuous energy transport, reduction to multi-group diffusion group;
-  \item Resonance absorption and spatial self-shielding models;
   \item Calculation of neutron spectra;
+  \item Resonance absorption and spatial self-shielding models;
+  \item Continuous energy transport, reduction to multi-group diffusion group;
   \item Determination of few-group diffusion constants;
   \item Elementary reactor transient analysis.
 \end{itemize}
 
+\begin{table}[ht]
+  \centering
+  \begin{tabular}{|p{1in}|p{2in}|p{0.65in}|p{0.6in}|p{1.5in}|} \hline
+    Topics & Break down  & This notes & Reuss & Others \\ \hline
+    %
+    \multicolumn{1}{|c|}{\multirow{2}{*}{Calculating Spectra}} & Slowing down \& thermalization in infinite medium   & Ch.~\ref{slowing-down-thermalization} & Ch.7, 9  & Duderstadt p.316-332, Hebert 4.2.3 \\ 
+    & Resonance Models & Ch.~\ref{resonance-model-chap} & Ch.2.7, Ch.8 & Duderstadt p.333-347 \\ \hline
+    %
+    \multirow{3}{*}{Diffusion Equations} & Continuous energy derivation & Ch.~\ref{intro-to-diffusion-theory} & Ch.5, 6 & \\ 
+    & One group: analytical & Ch.~\ref{1g-criticality}, \ref{1g-source} & Ch.10  &  \\ 
+    & Multi group: derivation, numerical solutions & Ch.~\ref{multi-group-diffusion},\ref{2g-finite-difference}, \ref{matrix-representation-of-1d-slab} & Ch.10  &  Stacy 3.10. \\ \hline
+    %
+   \multirow{5}{*}{Dynamics \& Kinetics} & Fission product, depletion & Ch.~\ref{fission-product-poisoning}, \ref{fuel-depletion} & Ch.11, 12 &  \\
+    & PKEs, with and without feedback & Ch.~\ref{PKE-without-feedback}, \ref{PKE-with-feedback}  & Ch.4, 13 & \\
+    & Nodal Methods  & Ch.~\ref{nodal-methods}  &  & Smith's paper \\
+    & Homogenization, Dehomogenization & Ch.~\ref{homogenization}, \ref{de-homogenization}  &  &Smith, Palmtag, Rempse, Jiang \\
+    & Adjoint, perturbation & Ch.~\ref{adjoint-fluxes} & Ch.16 & \\ \hline 
+  \end{tabular}
+  \caption{Topics Covered in This Class}
+\end{table}
+
+
+
+\clearpage
 \topic{Sample Exercises}
 \uline{Example 1: Estimate the Mean Free Path of a Fission Neutron in an LWR} 
 \begin{figure}[ht]
@@ -97,6 +121,7 @@ Operators associated with the Boltzmann equation (3.2.3).
 \item Four factor formula (3.3.2). 
 \end{enumerate}
 %%%%%%%%%%%%%%%%%%%%%%% End of Ch 3 %%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
 
 
 
