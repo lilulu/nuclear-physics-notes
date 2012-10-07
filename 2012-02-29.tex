@@ -7,86 +7,234 @@
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%% Resonance Models Day 4 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \clearpage
-\topic{Dilution Cross Section/Dilution Factor}
-In an infinite homogeneous medium with one resonance absorber and one moderator,  we write removal rates equals scattering rates (see Reuss 8.2.1 for a similar derivation), 
+\topic{RI Approximations: Narrow Resonance vs. Wide Resonance}
+%%%% 12 fall material %%%%
+Reference: Alain Hebert's Applied Reactor Physics (p.199-202, Livolant-Jeanpierre approximation), Duderstadt's p.343-347. 
+
+Recall the assumptions we made for slowing down equation in Section~\ref{slowing-down-from-te}: 
+\begin{itemize}
+\item Steady state.
+\item Infinite medium: there is no spacial dependency. 
+\item No external source. 
+\item S-wave elastic scattering (that is isotropic in COM frame) for light nuclides, 
+    \eqn{ \Sigma_s (E' \to E) &= \frac{\Sigma_s(E')}{(1-\alpha)E'} &\mbox{for } E < E' < \frac{E}{\alpha} }
+\end{itemize}
+
+For resonance models, we further consider, 
+\begin{itemize}
+\item Neutron flux has achieved its asymptotic behavior $\phi(E) \sim 1/E$ before reaching the resonance energy. 
+\item The moderator has a constant $\sigma_s$ and a negligible $\sigma_a$ (at least over the resonance range): 
+  \eqn{ \Sigma_t^M (E) \sim \Sigma_s^M (E) = \Sigma_{po}^M }
+\item The resonant material can scatter anisotropically hence we introduce the 0th and 1st order Legrendre modes. 
+\end{itemize}
+
+Recall the slowing down equation for the resonance region of $[1\eV, 0.1 \MeV]$ is, 
+\eqn{ \Sigma_t (u) \Phi(u) &= \int_{u-\epsilon}^u \frac{1}{1 - \alpha} e^{-(u-u')} \Sigma_s (u') \Phi(u') \du' \label{resonance-sl-d-eqn} } 
+
+
+\subtopic{Livolant-Jeanpierre Approximation}
 \begin{align}
-\left[ N_r \sigma_r (u) + N_m \sigma_m (u) \right] \phi (u) &= \int_{-\infty}^u N_m \sigma_m (u') \phi(u') P(u' \to u) \du' \\ 
-&= N_m \sigma_m \int_{-\infty}^u \phi(u') P(u' \to u) \du' \\
-&= N_m \sigma_m C \\
-\phi(u) &\propto \frac{N_m \sigma_m}{N_r \sigma_r(u) + N_m \sigma_m} \\
-\phi(u) &\propto \frac{ \frac{N_m}{N_r} \sigma_m}{\sigma_r(u) + \frac{N_m}{N_r} \sigma_m}  \label{flux-shape}
+(\Sigma_{t1}(u) + \Sigma_{t0} (u)) \Phi(u) &= \int_{u - \epsilon_0}^u \frac{1}{1 - \alpha_0} e^{-(u-u')} \Sigma_{s0}(u') \Phi(u') \du' + \int_{u-\epsilon_1}^u \frac{1}{1 - \alpha_1} e^{-(u-u')} \Sigma_{s1} (u') \Phi(u') \du'  
 \end{align}
-In the above derivation we made two assumptions:
+We manipulate the above equations:
 \begin{itemize}
-\item The moderator's xs is independent of energy near resonances. For almost any moderators we can pick, the assumption that the elastic scattering xs is constant is valid in the thermal range as in Figure~\ref{scatter-xs}. 
-\item $\int \phi(u') P(u' \to u) \du'$ is constant. We know that the flux above the resonance is 1/E and hence constant in lethargy. If we assume scattering into the resonance comes from this constant lethargy region, then the resonance lethargy is constant as well. 
+\item We facterize $\Phi(u) = \phi(u) \Psi(u)$, where $\phi(u)$ is the fine structure/self-shielding factor that models the resonances, $\Psi(u)$ is the flux outside the resonance (Hebert calls it `macroscopic flux', and it represents the asymptotic behavior of flux between resonances). 
+
+\item Because of the 1/E flux between resonances (or constant in lethargy) $\Phi(u) = \frac{q(u)}{\xi \Sigma_s}$, we write the RHS of Eq.~\ref{resonance-sl-d-eqn} as $R \Phi(u)$. $R$ has two components. We do not know what $R_0$ is yet,
+\eqn{  R_0 \Phi(u) &= R_0 \phi(u) \Psi(u) = \int_{u-\epsilon_0}^u \frac{1}{1-\alpha_0} e^{-(u-u')} \Sigma_{s0}(u') \phi(u') \Psi(u') \du'  }
+But for the 1st order, we apply the 1/E flux between resonance part and get rid of the $\phi(u)$ term, 
+\eqn{ R_1 \Phi(u) &= \Sigma_{t1} \Psi(u)  }
+
+\item Then we can write (omitting every term's $u$ dependency), then cancel out $\Psi$ on both sides, 
+\begin{align}
+ (\Sigma_{t1} + \Sigma_{t0}) \Psi \phi &= R_0 \Psi \phi +  \Sigma_{t1} \Psi    \\
+R_0 \phi + \Sigma_{t1} &= (\Sigma_{t1}  + \Sigma_{t0} ) \phi 
+\end{align}
+
+\item If we divide by $N_0$ (the resonance nuclide number density), we get 
+\eqn{ r_0 \phi + \sigma_d &= (\sigma_d + \sigma_{to}) \phi }
 \end{itemize}
-Eq.~\ref{flux-shape} suggests that \textit{in infinite medium the flux shape near resonance depends only on the ratio of the number density of the moderator to the resonance absorber and the moderator cross section.} But once we move into a finite medium or we take into account leakage, then the absolute number densities are needed.
- 
-To capture the ratio of number densities and the moderator cross section, we define \hi{dilution cross section} as,
-\eqn{ \boxed{ \sigma_d = \frac{N_m \sigma_m}{N_r} } }
-Then the flux shape near resonance is,
-\eqn{ \boxed{ \phi(u) \propto \frac{\sigma_d}{\sigma_r + \sigma_d} } }
-This flux shapes let us to compute approximated effective RI. Recall RI is defined as, $\RI = \int \sigma_r (u) \du$. Then the approximated effective RI is,
-\eqn{ \boxed{ \RI_{\eff} = \int \sigma_r(u) \frac{\sigma_d}{\sigma_r + \sigma_d} \du }  }
-Two extremes of $\RI_{\eff}$ and $\sigma_d$:
+
+
+There are a couple of ways to approximate $r_0 \phi(u)$. 
+\begin{enumerate}
+\item Wide resonance assumes that the resonances are so large that we can assume the reaction rate (for the fine structure) is constant. 
+\eqn{ r_0 \phi(u) &= \int_{u-\epsilon_0}^u \frac{1}{1-\alpha_0} e^{-(u-u')} \overbrace{ \sigma_{so} (u') \phi(u')}^{\mathrm{constant}} \du' = \sigma_{s0} (u) \phi(u)  }
+Then we arrive at, 
+\eqn{ \phi_{WR} (u) &= \frac{\sigma_d}{\sigma_{to}^R (u) - \sigma_{s0}^R (u) + \sigma_d} = \frac{\sigma_d}{\sigma_{a}^R (u) +  \sigma_d }  }
+\begin{align}
+\RIeff^{\gamma} &= \int \sigma_{\gamma}^R (u) \phi_{WR} (u) \du \\
+&= \int \sigma_{\gamma}^R (u) \frac{\sigma_d}{\sigma_a^R(u) + \sigma_d} \du \\
+&= \Ln{\frac{E_2}{E_1}} \frac{ \int \sigma_{\gamma}^R (E) \frac{\sigma_d}{\sigma_{a}^R(E) + \sigma_d} \frac{1}{E} \dE}{ \int \frac{\sigma_d}{\sigma_{a}^R(E) + \sigma_d} \frac{1}{E} \dE}
+\end{align}
+Comments:
 \begin{itemize}
-\item As $\sigma_d \to \infty$, the entire media is moderator, we reach the limit of infinite dilute, $\RI_{\eff} \to \RI$; we should get within 1\% of the ENDFVII xs data;
-\item As $\sigma_d \to 0$, analytically our assumptions do not hold true any more, but the MC is true that as $\RI_{\eff} \to 0, \phi \to 0$ as seen in Figure~\ref{energy-self-shielding}. Interpretation: as we have no moderator, every atom is essentially self-shield because they are all resonant isotopes, hence infinite flux depression.  
+\item WR $\RI_{\eff}$ only depends on cross sections: $\sigma_d$ is assumed to be based on material composition of the reactor, and $\sigma_r(E)$ are from libraries. There is no need for flux spectrum. 
+
+\item WR says that we ignore scattering of U238 because its width is large compared with the approximately 1\% energy it can lose upon scattering. To improve this approximation, sometimes people use the potential scattering of 11.39 barns. 
+
+\item WR approximations match direct MC results near infinite dilution. 
 \end{itemize}
-The scattering down to resonance is independent of the resonance. In other words, if the spectrum above a resonance returns to 1/E as in Figure~\ref{1overE}, the group cross sections will be independent of higher energy absorptions. This may be related to what we talk about before, that 
+
+
+
+\item Narrow resonance approximations assume resonance is very narrow, and a neutron is going to be out of the resonance upon one scattering, thus \textbf{cross section remains the same, thus $\Phi(E) \propto 1/E, \Phi(u) = $constant.} Thus we can write, 
+\eqn{ r_0 \phi(u) = \int_{u-\epsilon_0}^u \frac{1}{1- \alpha_0} e^{-(u-u')} \sigma_{s0}(u') \Phi(u') \du' }
+where $\Phi(u') = 1, \sigma_{s0} (u')\approx \sigma_{po}$ potential scattering, also 
+\eqn{ \int_{u-\epsilon}^u \frac{1}{1-\alpha_0} e^{-(u-u')} \du' = 1} 
+Thus narrow resonance approximation leads to, 
+\eqn{ r_0 \phi(u) = \sigma_{po}}
+That is, 
+\eqn{ \sigma_{po} + \sigma_d &= (\sigma_d + \sigma_{t0} (u)) \phi_{NR} (u) & \phi_{NR} (u) &= \frac{\sigma_{po}^R + \sigma_d}{\sigma_d + \sigma_{to}^R (u)} = \frac{\sigma_{pot}^R + \sigma_d}{\sigma_{a}^R + \sigma_{pot}^R + \sigma_d } }
+\begin{align}
+\RIeff^{\gamma} &= \int \sigma_{\gamma}^R (u) \phi_{NR} (u) \du \\
+&= \int \sigma_{\gamma}^R (u) \frac{\sigma_{pot}^R + \sigma_d}{\sigma_a^R(u) + \sigma_{pot}^R + \sigma_d} \du \\
+&= \Ln{\frac{E_2}{E_1}} \frac{ \int \sigma_{\gamma}^R (E) \frac{\sigma_{pot}^R + \sigma_d}{\sigma_{a}^R(E) + \sigma_{pot}^R + \sigma_d} \frac{1}{E} \dE}{ \int \frac{\sigma_{pot}^R + \sigma_d}{\sigma_{a}^R(E) + \sigma_{pot}^R + \sigma_d} \frac{1}{E} \dE}
+\end{align}
+Comments:
+\begin{itemize}
+\item NR approximation is good for higher energy. For instance, at 100 keV, scattering lose 1 keV, which is larger than the 25 eV spacing of \ce{^{238}U}. 
+
+\item However, the results on the slides come out to be that narrow resonance approximation is not really any better than the wide resonance approximation at higher energy, so there must be some other physics going on. 
+
+\item Narrow resonance approximation is good at high energies. For fast reactor applications for instance narrow resonance is used a lot. 
+\end{itemize}
+
+\item Narrow vs. Wide Resonance Approximations\label{narrow-wide-compr}. 
+Wide resonance approximation agrees pretty well with MC results without U238 scattering; narrow resonance approximation agrees alright with the MC results with U238 scattering. Notice adding in scattering would change the low dilution factor results. See Figure~\ref{wide-vs-narrow}.
+
+Compare with MC results using real U238 and U235 xs data, the real results fall between the wide and the narrow approximations for the high dilution factor; but for the low dilution factor, that is, when there are lots of resonance material (uranium), the physics gets complicated: 
+\begin{itemize}
+\item Non 1/E slowing down sources;
+\item Non constant moderator xs;
+\item Resonance scattering alters sources;
+\item We may have multiple resonance in each RI group; that is, each of our RI does not include a single resonance anymore;
+\item Resonance interference between \ce{^{235}U} and \ce{^{238}U}; eg: \ce{^{238}U}'s resonance spacing is 25 eV, whereas \ce{^{235}U}'s resonance spacing is 5 eV, that is, for each \ce{^{238}U} resonance, there are multiple \ce{^{235}U} resonances on top of it. 
+\end{itemize}
 \begin{figure}
   \centering
-  \includegraphics[width=3in]{images/r-m/resonance-1-over-E.png}
-  \caption{The 1/E Spectrum Above A Resonance Suggests Group XS Independent of Higher Energy Absorption} \label{1overE}
+  \includegraphics[width=4in]{images/r-m/narrow-vs-wide-resonance.png}
+  \caption{Comparison Of Wide and Narrow Resonance Approximation} \label{wide-vs-narrow}
 \end{figure}
+
+\item Goldstein-Cohen Model: since isotopes are going to be somewhere between the two extremes, we consider a linear combination of $\psi_{NR}, \psi_{WR}$, 
+\eqn{ \phi_{GC} (u) = \frac{\lambda_g \sigma_{po} + \sigma_d}{\sigma_{to}(u) - (1-\lambda_g) \sigma_{so}(u) + \sigma_d } }
+where $\lambda_g$ depends on isotope and energy band. When $\lambda_g = 1$ we get the $\psi_{NR}$, $\lambda_g = 0$ we get the $\psi_{WR}$. 
+
+Alternatively, we can discretize our energy group very finely, then we would not need any resonance models. 
+\end{enumerate}
+
+
+
+\subtopic{Duderstadt's Formalism} 
+Duderstadt (p.343-345) supplies a somewhat simplier approach. 
+\begin{enumerate}
+\item NR: assume the resonance width is small compared to the average energy loss in a collision with the resonant material: 
+  \eqn{ \bar{\Delta E}^R = \frac{1 - \alpha^R}{2} E_0 \gg \Gamma_p }
+
+
+\end{enumerate}
+
+
+
 
 
 \clearpage
-%%%%%%%%%%%%%%%%%%%%%%%%% RESONANCE ESCAPE PROBABILITY %%%%%%%%%%%%%%%%%%%%%%%%
-\topic{Resonance Escape Probability}
-We define $p$ as the ratio of the therm neutron absorption rate over absorption rate at all energies; it is the fraction of neutrons absorbed thermally over all neutrons absorbed in the cell; hence it is the probability that a neutron will escape capture at energies above thermal; finally since most of the non-thermal capture in natural or slightly enriched uranium lattices is in the resonance part of the slowing down region, it is the \hi{resonance escape probability}\footnote{Henry, p. 110}. 
-\begin{align}
-p &= \exp \left( - \frac{N_R \RI_{\eff}}{\xi \Sigma_m} \right)  = \exp \left( - \frac{\RI_{\eff}}{\xi \sigma_d} \right)
-\end{align}
-Notice: (1) this expression is only an approximation; (2) \textit{p only depends on effective RI and dilution cross section.} For instance, in a hydrogen system with $\sigma_d = 200$, we can tabulate the p values as in Table~\ref{p-values}. The last entry tells us that \textit{about 20\% of neutrons are absorbed in U238 resonances.}
-\begin{table}
-  \centering
-  \includegraphics[width=1.5in]{images/r-m/resonance-escape-probability.png}
-  \caption{Resonance Escape Probability For A Hydrogen System} \label{p-values}
-\end{table}
+\subtopic{Examples Using Resonance Models}
+Recall:
+\begin{itemize}
+\item Flux facterization $\Phi(u) = \phi(u) \Psi(u)$ where $\phi$ is the fine structure function, $\Psi(u)$ is the flux outside the resonance. 
+\item Dilution cross section: 
+  \eqn{ \sigma_d = \frac{\Sum_{\mathrm{moderator}} N_m \sigma_m}{N_r} }
+\item Narrow resonance approximation\footnote{the only energy/lethargy dependent term on the RHS should be $\sigma_{to}(u)$.}:
+  \eqn{ \phi_{NR} (u) = \frac{\sigma_{po} + \sigma_d}{\sigma_d + \sigma_{to}(u)} }
+\end{itemize}
 
-\textbf{Derivation of $p$ expression:}
+There are two possibilites in using NR approximation to calculate the condensed cross section depends on the number of resonant isotopes: 
 \begin{enumerate}
-\item Assumptions: only elastic down scatter above the resonance, $\sigma_{a,m} = 0, \sigma_{s} = $const, and only a single resonance absorber. 
-\item Start from our balance equation (scattering in = resonance absorption),
+\item One resonant isotope. Assume we have \ce{H_2 O} and \ce{^{235} U}. 
 \begin{align}
-\frac{S}{\zeta(u)} \du &= \left[ N_r \sigma_{a,r} (u) + \Sigma_m \right] \phi(u) \du = N_r \left[ \sigma_{a,r} (u) + \sigma_d \right] \phi(u) \du \\
-\Rightarrow \phi(u) &= \frac{S}{\zeta(u) N_r \left[ \sigma_{a,r} (u) + \sigma_d \right] } 
+\sigma_d &= \frac{N_H \sigma_H + N_O \sigma_O}{N_U} 
 \end{align}
-Define resonance escape probability as:
-\begin{align}
-p &= \frac{S - \int N_r \sigma_a(u) \phi(u) \du}{S} \\
-&= 1 - \frac{\int N_r \sigma_a(u) \frac{S}{\zeta(u) N_r \left[ \sigma_{a,r} (u) + \sigma_d \right] } \du }{S} \\
-&= 1 - \int \frac{\sigma_{a,r} (u) }{\zeta(u) \left[ \sigma_{a,r} (u) + \sigma_d \right] } \du
-\end{align}
-\item Assume the mean logarithmic energy decrement is independent of lethargy, 
-\eqn{ p = 1 - \frac{1}{\zeta} \int \frac{\sigma_{a,r} (u)}{\sigma_{a,r} (u) + \sigma_d} \du }
-\item Use our definition of effective RI,
-\eqn{ \RI_{\eff}^{u1 \to u2} = \int_{u1}^{u2} \frac{\sigma_{a,r} (u) \sigma_d}{\sigma_{a,r} (u) + \sigma_d} \du }
-We can write $p$ in terms of $\RI$:
-\eqn{ \boxed{p^{1\to 2} = 1 - \frac{\RI_{\eff}^{u1 \to u2}}{\zeta \sigma_d} } }
-\item Since the source is incrementally reduce with each successive resonance,
-\eqn{ p^{u1 \to uN} = \left( 1 - \frac{\RI_{\eff}^{u1 \to u2}}{\zeta \sigma_d} \right) \left( 1 - \frac{\RI_{\eff}^{u2 \to u3}}{\zeta \sigma_d} \right)
-  \cdots \left( 1 - \frac{\RI_{\eff}^{uN-1 \to uN}}{\zeta \sigma_d} \right) }
-We approximate the sequence as,
-\eqn{ p^{u1 \to uN} = \exp \left( - \frac{\Sum_{u1}^{uN-1} \RI_{\eff}^u}{\zeta \sigma_d} \right) }
-or
-\eqn{ \boxed{ p \approx \exp \left( - \frac{\RI_{\eff}}{\zeta \sigma_d} \right) = \exp \left( - \frac{N_r \RI_{\eff}}{\zeta \Sigma_m} \right)  } }
-which for hydrogen system becomes, 
-\eqn{ p \approx \exp \left( - \frac{\RI_{\eff}}{\sigma_d} \right) }
+We evaluate $\phi$ using narrow resonance approximation: 
+  \eqn{ \phi_{NR} (u) = \frac{\sigma_{po} + \sigma_d}{\sigma_d + \sigma_{to}(u)} }
+Then the flux-weighted resonant material cross section is,
+\eqn{ \sigma_{U,g} = \frac{\int \sigma_{U}(u) \psi(u) \du}{\int \psi(u) \du} }
+
+\item Multiple resonant isotopes. Assume we have \ce{H_2 O}, \ce{^{235}U}, and \ce{^{238} U}. 
+
+  \textbf{Solution 1:}
+  \begin{enumerate}
+  \item Assume \ce{^{235} U} is the only resonant isotope, then we solve an energy independent $\sigma_d$ by 
+    \eqn{ \sigma_d = \frac{N_{238} \bar{\sigma}_{238} + N_H \sigma_H + N_O \sigma_O}{N_{235} } }
+    Then we solve for $\psi(u)$:
+      \eqn{ \phi_{NR} (u) = \frac{\sigma_{po,235} + \sigma_d}{\sigma_d + \sigma_{to,235}(u)} \label{NR-flux-eqn}  }
+    Then calculate the collapsed $\bar{\sigma}_{235}$:
+    \eqn{ \bar{\sigma}_{235} = \frac{\int \sigma_{235} (u) \phi(u) \du}{\int \phi(u) \du}  \label{flux-collapse-235}  }
+  \item Assume \ce{^{238} U} is the only resonant isotope. 
+    \eqn{ \sigma_d = \frac{N_{235} \bar{\sigma}_{235} + N_H \sigma_H + N_O \sigma_O}{N_{238} } }
+    Then we solve for $\psi(u)$:
+      \eqn{ \phi_{NR} (u) = \frac{\sigma_{po,238} + \sigma_d}{\sigma_d + \sigma_{to,238}(u)} }
+    Then calculate the collapsed $\bar{\sigma}_{238}$:
+    \eqn{ \bar{\sigma}_{238} = \frac{\int \sigma_{238} (u) \phi(u) \du}{\int \phi(u) \du}   }
+  \end{enumerate}
+  Then we feed $\bar{\sigma}_{238}$ back into step 1 and repeat the process until $\bar{\sigma}_{235}, \bar{\sigma}_{238}$ converge, which happen fairly fast with a simple resonance. 
+
+
+\textbf{Solution 2 (Nate/Gene)}: 
+
+In Eq.~\ref{flux-collapse-235}, $\phi(u)$ shows up in both the top and the bottom of the equation, so if we scale $\phi(u)$ by any non-energy dependent term as they would just cancel out, the solution would not change. Recall $\phi(u)$ as in Eq.~\ref{NR-flux-eqn}, the top $\sigma_{po,r} + \sigma_d$ is energy-independent, and $N_r$ is energy-independent as well, that is, 
+\eqn{ \phi_{NR} (u) = \frac{\sigma_{po,r} + \sigma_d}{\sigma_d + \sigma_{to,r}(u)} \to \frac{1}{\sigma_d + \sigma_{to,r}(u)} \to  \frac{1}{N_r \sigma_d + N_r \sigma_{to,r}(u)} \to \frac{1}{\Sum_{\mathrm{moderators}} N_m \sigma_m + N_r \sigma_{to,r}(u)} }
+Then the total flux is fine structure times a $1/E$ dependency, 
+\eqn{ \Phi (E) = \frac{1}{E \left[ \Sum_{\mathrm{moderators}} N_m \sigma_m + N_r \sigma_{to,r}(E)\right]} }
+Then we don't have to compute $\sigma_d$ anymore. For each resonant isotope, the three steps becomes two steps: calculating $\Phi$ using last step's condensed cross section, and update this step's condensed cross section with $\Phi$-collapsed cross section. 
+
+So effectively narrow resonance suggest, 
+\eqn{ \Phi (E)  = \frac{1}{E \Sigma_t (E)} }
+
 \end{enumerate}
+
+
+
+
+\subtopic{Resonance Parameters in Production Tools}
+How does a production tool uses resonance parameters?
+
+\textbf{Normal procedure} for generating multi-group xs in a code like NJOY includes:
+\begin{enumerate}
+\item Use code to Doppler broaden cross sections for each resonance isotope for range of temperatures (eg, 300, 600, 900, 2000K); 
+\item Use code to apply the narrow or wide resonance models for a range of dilution xs (eg, 20000, 2000, 200, 20 barns); 
+\item Edit RIs or multi-group xs for your desired energy structure; 
+\item Build tables of xs vs. dilution xs and temperature;
+\item For downstream computations, interpolate for the dilution cross section and temperature of each material in the simulation to obtain accurate multigroup cross sections for that specific applications. 
+\end{enumerate}
+
+\textbf{A better procedure} for generating multi-group cross sections includes:
+\begin{enumerate}
+\item Same;
+\item Use code to solve real neutron slowing down problem for a range of dilution cross sections (eg, 20000, 2000, 200, 20 barns);
+\item Consider including a mix of resonance absorbers to make the spectrum as appropriate to the desired application as possible;
+\item Same;
+\item Same;
+\item Same.
+\end{enumerate}
+
+\textbf{For downstream applications} that require cross section data, for each resonance group,
+\begin{enumerate}
+\item For each composition, evaluate the material temperature and isotopic densities. 
+\item Evaluate Dancoff from pin diameter, lattice pitch, etc. 
+\item Compute the escape cross section for each resonance absorber.
+\item Evaluate group cross section (or RI) using Dancoff, potential and escape cross sections by interpolating cross section (or RI) tables at appropriate temperatures. 
+\end{enumerate}
+
+For real application, it is rarely possible to just use someone else's cross section table; we almost certainly need to generate xs suitable for our application. 
+
+
+
+
+
 
 
 

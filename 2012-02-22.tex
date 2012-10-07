@@ -4,9 +4,10 @@
 \begin{document}
 \maketitle
 
-%%%%%%%%%%%%%%%%%%%%%%%%% Resonance Models Day 2 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%% Resonance Day 2: Important Parameters %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \clearpage
-\topic{Resonance Integrals vs. Group Cross Section}
+\topic{Important Parameters}
+\subtopic{Resonance Integrals}
 We introduce \hi{(Infinite) Resonance Integrals} as flux weighted (that is, weighted with 1/E spectrum $\phi(E) \sim \frac{1}{E}$) microscopic cross section: 
 \begin{align}
 \RI &=  - \int_{u1}^{u2} \sigma(u) \du \\
@@ -23,7 +24,9 @@ Notice,
 \item RI is useful for inter-comparing libraries or cross section models. It is a classic way to evaluate new resonance data typically from 0.5 eV to 10 keV. We use RI to check our resonance data, in particularly the three big resonances at 6.67, 21, 26 eV. Numerical test of the SLBW RIs shows that the RI comes out to be within 1\% of ENDF/B-VII Reich-Moore data (Lec 6, slide 17, with 0.01 eV as spacing in histogram). 
 \end{itemize}
 
-\hi{Group cross section} is a similar but much more useful quantity. From its definition, we see $\sigma_g$ does not depend on the flux normalization: 
+
+\subtopic{Group Cross Section}
+Group cross section is a similar but much more useful quantity. From its definition, we see $\sigma_g$ does not depend on the flux normalization: 
 \begin{align}
 \sigma_g &= \frac{\int_{E_1}^{E_2} \sigma(E) \phi(E) \dE }{\int_{E_1}^{E_2} \phi(E) \dE} 
 \end{align}
@@ -43,152 +46,90 @@ Notice\footnote{Review here for exam}:
 \item Effective RI can be computed from group cross sections and group energy bounds as in Eq.~\ref{RIeff}; As spectrum approaches 1/E, the effective RI computed from group cross sections will approach infinite RI. 
 \end{itemize}
 
-
 \clearpage
-%%%%%%%%%%%%%%%%%%%%%% Doppler Broadening %%%%%%%%%%%%%%%%%%
-\topic{Doppler Broadening/Temperature Effects On Cross Section}
-\hi{Doppler Broadening} means, as the temperature increases, the width of the spectrum decreases, although the area under the curve stays the same\footnote{References: Reuss Section 8.4; Handbook of Nuclear Engineering Chapter 4 Section 3; Duderstadt p.337-338; Bell p.433 (points out the area under the cross section curve is constant; hence the absorption rate is proportional to the magnitude of the flux in a sense.)}. 
-There are two possibilities: 
+\subtopic{Dilution Cross Section/Dilution Factor}
+In an infinite homogeneous medium with one resonance absorber and one moderator,  we write removal rates equals scattering rates (see Reuss 8.2.1 for a similar derivation), 
+\begin{align}
+\left[ N_r \sigma_r (u) + N_m \sigma_m (u) \right] \phi (u) &= \int_{-\infty}^u N_m \sigma_m (u') \phi(u') P(u' \to u) \du' \\ 
+&= N_m \sigma_m \int_{-\infty}^u \phi(u') P(u' \to u) \du' \\
+&= N_m \sigma_m C \\
+\phi(u) &\propto \frac{N_m \sigma_m}{N_r \sigma_r(u) + N_m \sigma_m} \\
+\phi(u) &\propto \frac{ \frac{N_m}{N_r} \sigma_m}{\sigma_r(u) + \frac{N_m}{N_r} \sigma_m}  \label{flux-shape}
+\end{align}
+In the above derivation we made two assumptions:
+\begin{itemize}
+\item The moderator's xs is independent of energy near resonances. For almost any moderators we can pick, the assumption that the elastic scattering xs is constant is valid in the thermal range as in Figure~\ref{scatter-xs}. 
+\item $\int \phi(u') P(u' \to u) \du'$ is constant. We know that the flux above the resonance is 1/E and hence constant in lethargy. If we assume scattering into the resonance comes from this constant lethargy region, then the resonance lethargy is constant as well. 
+\end{itemize}
+Eq.~\ref{flux-shape} suggests that \textit{in infinite medium the flux shape near resonance depends only on the ratio of the number density of the moderator to the resonance absorber and the moderator cross section.} But once we move into a finite medium or we take into account leakage, then the absolute number densities are needed.
+ 
+To capture the ratio of number densities and the moderator cross section, we define \hi{dilution cross section} as,
+\eqn{ \boxed{ \sigma_d = \frac{N_m \sigma_m}{N_r} } }
+Then the flux shape near resonance is,
+\eqn{ \boxed{ \phi(u) \propto \frac{\sigma_d}{\sigma_r + \sigma_d} } }
+This flux shapes let us to compute approximated effective RI. Recall RI is defined as, $\RI = \int \sigma_r (u) \du$. Then the approximated effective RI is,
+\eqn{ \boxed{ \RI_{\eff} = \int \sigma_r(u) \frac{\sigma_d}{\sigma_r + \sigma_d} \du }  }
+Two extremes of $\RI_{\eff}$ and $\sigma_d$:
+\begin{itemize}
+\item As $\sigma_d \to \infty$, the entire media is moderator, we reach the limit of infinite dilute, $\RI_{\eff} \to \RI$; we should get within 1\% of the ENDFVII xs data;
+\item As $\sigma_d \to 0$, analytically our assumptions do not hold true any more, but the MC is true that as $\RI_{\eff} \to 0, \phi \to 0$ as seen in Figure~\ref{energy-self-shielding}. Interpretation: as we have no moderator, every atom is essentially self-shield because they are all resonant isotopes, hence infinite flux depression.  
+\end{itemize}
+The scattering down to resonance is independent of the resonance. In other words, if the spectrum above a resonance returns to 1/E as in Figure~\ref{1overE}, the group cross sections will be independent of higher energy absorptions. This may be related to what we talk about before, that 
+\begin{figure}
+  \centering
+  \includegraphics[width=3in]{images/r-m/resonance-1-over-E.png}
+  \caption{The 1/E Spectrum Above A Resonance Suggests Group XS Independent of Higher Energy Absorption} \label{1overE}
+\end{figure}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%% RESONANCE ESCAPE PROBABILITY %%%%%%%%%%%%%%%%%%%%%%%%
+\clearpage
+\subtopic{Resonance Escape Probability}
+We define $p$ as the ratio of the therm neutron absorption rate over absorption rate at all energies; it is the fraction of neutrons absorbed thermally over all neutrons absorbed in the cell; hence it is the probability that a neutron will escape capture at energies above thermal; finally since most of the non-thermal capture in natural or slightly enriched uranium lattices is in the resonance part of the slowing down region, it is the \hi{resonance escape probability}\footnote{Henry, p. 110}. 
+\begin{align}
+p &= \exp \left( - \frac{N_R \RI_{\eff}}{\xi \Sigma_m} \right)  = \exp \left( - \frac{\RI_{\eff}}{\xi \sigma_d} \right)
+\end{align}
+Notice: (1) this expression is only an approximation; (2) \textit{p only depends on effective RI and dilution cross section.} For instance, in a hydrogen system with $\sigma_d = 200$, we can tabulate the p values as in Table~\ref{p-values}. The last entry tells us that \textit{about 20\% of neutrons are absorbed in U238 resonances.}
+\begin{table}
+  \centering
+  \includegraphics[width=1.5in]{images/r-m/resonance-escape-probability.png}
+  \caption{Resonance Escape Probability For A Hydrogen System} \label{p-values}
+\end{table}
+
+\textbf{Derivation of $p$ expression:}
 \begin{enumerate}
-\item Infinite RI (infinite dilution factor, negligible absorber concentration, $\Sigma_t \sim \Sigma_s^M$) is independent of temperature becase the area under the psi chi curves are constant. The absorber concentration is too low to perturb the flux, hence no flux depression and no self-shielding.  
-\item Effective RI (finite concentration of \ce{^{238} U}) is dependent of temperature and the resonant material density because of the energy self-shielding effect as in Figure~\ref{Doppler}: 
-  \begin{itemize}
-  \item If temperature increases, $\RI_{\eff}$ would increase, because the broadened resonance increases the energy range over which abosrption occurs, which outweighs the lowering of the resonance peak. Reason: Energy self-shielding (the strong absorption of the resonance tends to shield the absorber nucleir from neutrons with energy $E\sim E_0$, hence the term `flux depression').  As temperature increases, the resonance is broadened by the Doppler effect, the neutron flux depression is decreased, whereas the area under the cross section curve is essentially constant. Hence the resonance absorption which is the energy-integrated reaction rate $\Sigma_a(E) \phi(E)$ increases with increasing temperature. 
-  \item If U/H increases, there are two consequences: one is that the flux is more depressed hence the $\RIeff$ decreases; secondly the higher energies become more important as we would later see in Section~\ref{spectral-hardening-section}. 
-  \item \textit{The higher the concentration of U238, the larger the Doppler temperature effects become.}
-  \end{itemize}
+\item Assumptions: only elastic down scatter above the resonance, $\sigma_{a,m} = 0, \sigma_{s} = $const, and only a single resonance absorber. 
+\item Start from our balance equation (scattering in = resonance absorption),
+\begin{align}
+\frac{S}{\zeta(u)} \du &= \left[ N_r \sigma_{a,r} (u) + \Sigma_m \right] \phi(u) \du = N_r \left[ \sigma_{a,r} (u) + \sigma_d \right] \phi(u) \du \\
+\Rightarrow \phi(u) &= \frac{S}{\zeta(u) N_r \left[ \sigma_{a,r} (u) + \sigma_d \right] } 
+\end{align}
+Define resonance escape probability as:
+\begin{align}
+p &= \frac{S - \int N_r \sigma_a(u) \phi(u) \du}{S} \\
+&= 1 - \frac{\int N_r \sigma_a(u) \frac{S}{\zeta(u) N_r \left[ \sigma_{a,r} (u) + \sigma_d \right] } \du }{S} \\
+&= 1 - \int \frac{\sigma_{a,r} (u) }{\zeta(u) \left[ \sigma_{a,r} (u) + \sigma_d \right] } \du
+\end{align}
+\item Assume the mean logarithmic energy decrement is independent of lethargy, 
+\eqn{ p = 1 - \frac{1}{\zeta} \int \frac{\sigma_{a,r} (u)}{\sigma_{a,r} (u) + \sigma_d} \du }
+\item Use our definition of effective RI,
+\eqn{ \RI_{\eff}^{u1 \to u2} = \int_{u1}^{u2} \frac{\sigma_{a,r} (u) \sigma_d}{\sigma_{a,r} (u) + \sigma_d} \du }
+We can write $p$ in terms of $\RI$:
+\eqn{ \boxed{p^{1\to 2} = 1 - \frac{\RI_{\eff}^{u1 \to u2}}{\zeta \sigma_d} } }
+\item Since the source is incrementally reduce with each successive resonance,
+\eqn{ p^{u1 \to uN} = \left( 1 - \frac{\RI_{\eff}^{u1 \to u2}}{\zeta \sigma_d} \right) \left( 1 - \frac{\RI_{\eff}^{u2 \to u3}}{\zeta \sigma_d} \right)
+  \cdots \left( 1 - \frac{\RI_{\eff}^{uN-1 \to uN}}{\zeta \sigma_d} \right) }
+We approximate the sequence as,
+\eqn{ p^{u1 \to uN} = \exp \left( - \frac{\Sum_{u1}^{uN-1} \RI_{\eff}^u}{\zeta \sigma_d} \right) }
+or
+\eqn{ \boxed{ p \approx \exp \left( - \frac{\RI_{\eff}}{\zeta \sigma_d} \right) = \exp \left( - \frac{N_r \RI_{\eff}}{\zeta \Sigma_m} \right)  } }
+which for hydrogen system becomes, 
+\eqn{ p \approx \exp \left( - \frac{\RI_{\eff}}{\sigma_d} \right) }
 \end{enumerate}
 
 
-\textbf{Why do resonance broaden?} 
 
-If a neutron's energy equals that of the resonance, it will be absorbed. If it is
-slightly above or below the resonance energy, it will scatter off the U-238 nuclei
-without absorption. As the fuel heats up, the nuclei vibrate and this changes the
-relative speed between the neutron and the nuclei. Hence, the neutron is
-effectively at a different energy. What are the consequences? Suppose a neutron
-is initially slightly below the resonance energy. If the nucleus moves toward the
-neutron, the relative speed between the two goes up. Hence, that neutron will be
-absorbed.
-
-But for every neutron that is now newly absorbed, one that was previously at the
-resonance energy is now too high and it only scatters off the nucleus. So, why is
-there a net increase in absorption? The reason is that scattered neutron loses only
-a slight amount of energy (small object bouncing off a large one) and on its next
-collision, which will likely be with the fuel again, it will be absorbed. Thus, U-
-238 resonances broaden because (1) the U-238 nuclei vibrate more rapidly on heat
-up and (2) the fuel is separate from the coolant so that successive interactions
-occur in the fuel.
-
-\begin{figure}
-  \begin{subfigure}[b]{0.45\textwidth}
-    \centering
-    \includegraphics[width=\textwidth]{images/r-m/Doppler-RI-1.png}
-    \caption{U/H = 0.001} \label{UH0.01}
-  \end{subfigure}
-  \begin{subfigure}[b]{0.45\textwidth}
-    \centering
-    \includegraphics[width=\textwidth]{images/r-m/Doppler-RI-2.png}
-    \caption{U/H = 0.1} \label{UH0.1}
-  \end{subfigure}
-  \caption{Impact of Temperature On Effective RI, Doppler Broadening} \label{Doppler}
-\end{figure}
-
-
-\clearpage
-%%%%%%%%%%%%%%%%%%% SELF-SHIELDING %%%%%%%%%%%%%%%%%%%%%
-\topic{Self-Shielding Effects On Spectrum}
-Self-shielding/flux depression is first observed through: 
-\begin{table}[ht]
-  \centering
-  \begin{tabular}{|l|p{6cm}|p{6cm}|} \hline
-    & Observation & Explaination \\ \hline
-    Spatial 
-    & if natural uranium was made into a lump surrounded by moderator, resonance absorption $\down \down$  
-    & U238 in the center of a pin is `shielded' from neutrons in the moderator \\ \hline
-    Energy
-    & if U/H $\up$, absorption rate per atom (for neutrons slowed down in a water \& U mix) $\down$   
-    & the magnitude of absorption is proportional to the width of the resonance;  \\ \hline
-  \end{tabular}
-  \caption{Observation Concerning Self-Shielding}
-  \end{table}
-
-\subtopic{Spatial self-shielding} 
-In a sentence, lumped configuration shields the fuel region from neutrons with $E \sim E_0$, hence decreasing resonance absorption and increasing $p$. As fuel diameter increases, the RI -- and therefore the absorption -- decreases. 
-
-For a homogenized medium, the value of p for natural uranium is about 0.70.
-However, larger values exist for the heterogeneous case. This is because of a
-phenomenon called ``spatial self-shielding.'' The idea is to keep the fuel and
-moderator separate. Neutrons slow down in a stepwise manner. Some collisions
-will cause neutrons to jump over the energies that correspond to the U238
-resonances. Others will land in resonance energies. What happens to these neutrons? 
-Suppose a neutron has an energy close to that of a U-238 resonance. 
-\begin{itemize}
-\item If a neutron scatters off U238 it will lose
-only a small amount of energy. In this case, the neutron is
-left near the resonance energy.
-\item If it scatters off moderator it will lose a lot of its energy.  In this case the neutron is removed from that energy.
-\end{itemize}
-
-What then is the effect of homogeneous or heterogeneous fuel? If the fuel and
-moderator are separate and the neutron is in the moderator, chances are it will
-collide with another moderator atom and be scattered out of the resonance region.
-So, heterogeneous arrangements favor resonance escape. In contrast, if the fuel
-and moderator are infinitely mixed (homogeneous) or if the fuel rod/moderator
-volumes repeat on small scales with dimensions less than a diffusion length, the
-next collision may again be with fuel and the neutron will be absorbed.
-Heterogeneous arrays are sometimes called ``lumped'' meaning that the fuel and
-moderator are separate, widely spread entities.
-
-Notice both $f$ and $p$ depends on the moderator-to-fuel ratio and there is a trade-off
-between the two\footnote{It should be noted that if one separates the fuel and moderator (large amounts of
-moderator between fuel rods), one decreases the thermal utilization. For f to be
-large, one seeks to maximize absorption in the fuel and hence minimize spatial
-self-shielding which could lead to absorption in the moderator. Thus, there is a
-tradeoff between f and p. Both depend on the moderator-to-fuel volume ratio.
-Optimal designs have both f and p at about 0.9.}. 
-
-\subtopic{Energy self-shielding}
-In a sentence, \textit{the strong absorption of the resonance tends to shield the absorber nuclei from neutrons with energy$\sim E_0$, hence creating the flux depression at $E_0$.}
-
-As we increase the U/H ratio, the RI decreases in the three big resonance regions, and we see big dips on the spectrum plot. There are so much U238 in the fuel, that there is no flux in the fuel anymore. 
-
-As we increase the number of uranium atoms by a factor of 10, the number of absorption per atom is decreased by a factor of 3. That is, the total aborption still increases, but the absorption per atom decreases. Figure~\ref{energy-self-shielding} illustrates that RI are very dependent on the density of resonant materials.
-\begin{figure}
-  \centering
-  \includegraphics[width=4.5in]{images/r-m/self-shielding.png}
-  \caption{Impact of Energy Self-Shielding On Effective RI} \label{energy-self-shielding}
-\end{figure}
-
-
-
-\clearpage
-%%%%%%%%%%%%%%%%%%%%% SPECTRAL HARDENING %%%%%%%%%%%%%%%%%%
-\topic{Spectral Hardening Shifts Resonant Absorption Rates}\label{spectral-hardening-section}
-\textbf{As U/H increases, the higher energy ranges become more important, and the peak of the thermal spectrum shifts to the right. Distribution of group-wise absorption shifts towards the higher energy. $1/v$ absorption of U238 becomes more significant. Self-shielding reduces the large resonance absorption fractions. } See Figure~\ref{spectral-hardening}. 
-\begin{figure}[ht]
-  \centering
-  \includegraphics[width=4in]{images/r-m/spectral-hardening.png}
-  \caption{Impact of Spectral Hardening On RI} \label{spectral-hardening}
-\end{figure}
-
-``As the temperature of the core material increases, the thermal neutrons maintain a Maxwellian energy distribution one but shifted increasingly towards higher energies. The thermal spectrum is said to harden. If all the cross sections in the core
-had exactly a 1/v dependence, there would be no change in the thermal-neutron
-interaction rates. However, most heavy nuclides have resonances near the upper end
-of the thermal energy range and their cross sections, consequently, are not exactly
-1/v in the thermal energy region. For example 239Pu has a large resonance at about 0.3 eV, and, as the thermal neutrons shift in energy towards this resonance, more neutrons are absorbed by 239Pu and thus the fission rate increases, thus producing a positive reactivity feedback. By contrast, hardening the thermal neutron spectrum causes a very slight decrease in absorption by 235U. 
-
-This hardening of the thermal neutron spectrum with increasing temperature
-is taken to an extreme in the TRIGA class of reactors which use as fuel enriched 235U blended in zirconium hydride. As the fuel temperature increases, vibrating hydrogen atoms trapped in the zirconium-hydride crystal lattice can transfer some
-of their vibratiorial energy (about 0.13 eV) to thermal neutrons, thereby removing
-them from the thermal energy region so they are less likely to be absorbed by the
-fuel. This very rapid negative reactivity feedback effect is the reason these reactors
-can be operated in a pulse mode, in which a large positive reactivity is inserted into
-the core by rapidly removing a control rod to make the reactor very super prompt
-critical. However, the ZrH negative temperature feedback acts within a few ms to
-stop the runaway chain reaction, which has increased the reactor power by many
-thousands of times the initial power, and brings the reactor power back to safe
-limits.'' (Shultis, p.286-297). 
 
 
 
