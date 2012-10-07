@@ -42,20 +42,20 @@ P(w) \dw &= \frac{e^{-w}}{1 - \alpha} \dw \\
 \end{align}
 $\xi$ is like the efficiency of slowing down by a nucleus. That is, neutrons advance by $\xi$ lethargy units on average at each collision. Then to overcome the total lethargy interval $U = \ln \frac{E_0}{E_1}$, the number of collisions needed is:
 \eqn{ n = \frac{U}{\xi} }
-\begin{figure}
+\begin{table}
   \centering
   \includegraphics[width=3in]{images/sl-d/slowing-down-parameter.png}
-  \caption{Slowing Down parameters}
-\end{figure}
+  \caption{Slowing Down parameters}\label{slowing-down-parameter}
+\end{table}
 
 \item Moderating power is the best measure of a material's ability to slow down neutrons. It has two forms:
 \eqn{\mbox{per atom basis} = \xi \sigma_s \fsp \fsp \fsp \mbox{per volume basis} = \xi \Sigma_s   }
 A good moderating material should have: high slowing down (hence light nuclei), low capture (D, Be, C), moderating power (take into account both high slowing down and high scattering xs). Water has the highest moderating power, but it requires an enriched fuel (around 1\%). 
-\begin{figure}
+\begin{table}
   \centering
-  \includegraphics[width=3in]{images/sl-d/moderator-comparison.png}
-  \caption{Comparison of Characteristics of Moderators}
-\end{figure}
+  \includegraphics[width=4in]{images/sl-d/moderator-comparison.png}
+  \caption{Comparison of Characteristics of Moderators}\label{moderator-comparison}
+\end{table}
 
 \item Laws of inelastic collision. Elastic scattering is important for moderators because they are light; inelastic scattering is important for heavy materials like the fuel because they have almost no elastic collision. Minimum energy of the neutron for an inelastic collision is:
 \eqn{ E_{\mathrm{threshold}} = \frac{A+1}{A} Q } 
@@ -151,9 +151,15 @@ A good moderating material should have: high slowing down (hence light nuclei), 
 %%%%%%%%%%%%%%%%%%%%%% end of Ch 9 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-\topic{Developing An Infinite-medium Monte Carlo Neutronics}
-\subtopic{Isotopic Importance by Infinite Medium Reactor Materials}
-\begin{table}
+
+\clearpage
+%%%%%%%%%%%%%%%%%%%%%% start of MC %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\topic{A MC Infinite Medium Model}
+This Monte Carlo Model we develope for this chapter and next chapter is for infinite medium. 
+\subtopic{Calculating Isotopic Importance}
+Given an infintie medium LWR with volume fraction listed in Table.~\ref{volume-fraction}, we can calculate isotopes' number densities: 
+
+\begin{table}[ht]
   \centering
   \begin{tabular}{|c|c|c|c|} \hline
     Reactor & Fuel & Coolant \& Moderator & Structural  \\ \hline \hline
@@ -162,9 +168,9 @@ A good moderating material should have: high slowing down (hence light nuclei), 
     HTGR & 5\% & 90\% & 2\% \\ \hline
     SFR & 60\% & 30\% & 10\% \\ \hline
   \end{tabular}
-  \caption{Volume Fraction/Isotopic Importance of Reactor Materials} \label{volume-fraction}
+  \caption{Volume Fraction/Isotopic Importance of Reactor Materials for Typical LWRs} \label{volume-fraction}
 \end{table}
-For a typical LWR, we can find common isotopes' number densities by using the volume fraction in Table~\ref{volume-fraction}: 
+
 \begin{align}
 N^H_c &= 0.55 \times 1 \g/\cm^3 \frac{N_{AV} \mathrm{molecule}/\mol}{18 \g/\mol} 2/\mathrm{molecule}  = 3.68 \times 10^{22} \\
 N^O_c &= 0.55 \times 1 \g/\cm^3 \frac{N_{AV} \mathrm{molecule}/\mol}{18 \g/\mol} 1/\mathrm{molecule}  = 1.84 \times 10^{22} \\
@@ -175,10 +181,11 @@ N^{Zr} &= 0.10 \times 6.6 \g/\cm^3 \frac{N_{AV} \mathrm{molecule}/\mol}{90 \g/\m
 \end{align}
 That is, in a typical LWR the relative number densities come out to be around: 
 \eqn{\boxed{H = 1, O = 1, U238 = 0.4, U235 = 0.02, Zr = 0.15   }}
-Notice hydrogen's and oxygen's number densities are approximately the same. 
+Notice \hi{hydrogen's and oxygen's number densities are about the same.} 
 
-\subtopic{Absorption and Scattering Cross Sections}
-See Figure~\ref{scatter-xs}, Figure~\ref{capture-xs} for common cross sections. Notice absorption and scattering tend to line up in terms of energy. 
+
+\subtopic{Abtracting Cross Sections}
+See Figure~\ref{scatter-xs}, Figure~\ref{capture-xs} for common cross sections. Notice resonance absorption and scattering tend to line up in terms of energy. 
 
 \uline{Practice: Why can we use sodium as coolant if its capture cross section is so high?}  
 
@@ -187,71 +194,102 @@ See Figure~\ref{scatter-xs}, Figure~\ref{capture-xs} for common cross sections. 
 
 \clearpage
 %%%%%%%%%%%% Elastic Scattering %%%%%%%%%%%%%%%%%%%%%%
-\topic{Models for High Energy Elastic Scattering Physics}
-Assume isotropic scattering in COM (target at rest in Lab system), then the minimum final energy is,
-\eqn{ \frac{E_{\mathrm{min}}}{E_0} = \alpha = \left( \frac{A-1}{A+1} \right)^2 } 
-We define \hi{mean log energy decrement},
-\eqn{ \boxed{ \zeta = 1 + \frac{\alpha \ln(\alpha)}{1 - \alpha}  }  }
-whose common values are: $\zeta_{H} = 1, \zeta_D = 0.725, \zeta_C = 0.158, \zeta_U = 0.0084$ (so the higher $A$ is, the small $\zeta$ is). Then the number of collisions required to slow a particle from $E_2$ to $E_1$ is: 
-\eqn{ n = \frac{\ln(E_2 / E_1)}{\zeta} }
-For $E_2 = 2\times 10^6 \eV, E_1 = 0.1 \eV$, the number of collisions is: $n_H = 17, n_D = 23, n_C = 106, n_U = 2000$. 
+\subtopic{High Energy: Elastic Scattering}
+For high energy, we assume no absorption and scattering is isotropic in COM (target at rest in Lab system). Then we arrive at some important parameters/properties: 
+\begin{enumerate}
+\item After each collision, the minimum final energy is,
+\eqn{ \boxed{ \alpha = \frac{E_{\mathrm{min}}}{E_0}  = \left( \frac{A-1}{A+1} \right)^2 } }
 
-\subtopic{Result: Flux vs. Energy}
+\item Mean log energy decrement:
+\eqn{ \boxed{ \zeta = 1 + \frac{\alpha \ln(\alpha)}{1 - \alpha}  }  }
+Examples: $\zeta_{H} = 1, \zeta_D = 0.725, \zeta_C = 0.158, \zeta_U = 0.0084$. \hi{$A \up, \zeta \down$.} 
+
+\item The number of collisions required to slow a particle from $E_2$ to $E_1$ is: 
+\eqn{ \boxed{ n = \frac{\ln(E_2 / E_1)}{\zeta} }  }
+Examples: for $E_2 = 2\times 10^6 \eV, E_1 = 0.1 \eV$, the number of collisions is: $n_H = 17, n_D = 23, n_C = 106, n_U = 2000$. 
+
+\item Flux vs. energy:
 \begin{figure}[ht]
   \centering
   \includegraphics[width=3in]{images/sl-d/flux-vs-energy-1.png}
   \includegraphics[width=3in]{images/sl-d/flux-vs-energy-2.png}
   \caption{Flux vs. Energy} \label{fve}
 \end{figure}
+
 There are two ways to understand flux here. 
 \begin{itemize}
 \item Particle based: we let all the neutrons to scatter till death; then for each energy interval, if we add up the number of neutrons with energies in that interval; we get the flux corresponding to each interval.  
-\item Generation based: we let each neutron scatter once in each generation, save all the number of neutrons vs. energy data, and add up all the generations, this would effectively give us flux vs. energy as well[FIXME]. 
+\item Generation based (as in Fig.~\ref{fve}): we let each neutron scatter once in each generation, save all the number of neutrons vs. energy data, and add up all the generations, this would effectively give us flux vs. energy as well. Notice with insufficient number of generations (left plot), the flux tails down at lower energies, meaning that some neutrons are not slowed down entirely yet. With sufficient number of generations (right plot), we get a \hi{1/E spectrum} for COM elastic scattering only. 
 \end{itemize}
-Figure~\ref{fve} presents the results from th generation-based flux. Notice with insufficient number of generations (left plot), the flux tails down at lower energies, meaning that some neutrons are not slowed down entirely yet. With sufficient number of generations (right plot), we get a \hi{1/E spectrum}. 
 
-\subtopic{Result: Flux vs. Lethargy}
+\item Flux vs. lethargy: as in Fig.~\ref{fvl}, flux is a constant in lethargy space. 
 \begin{figure}[ht]
   \centering
   \includegraphics[width=3in]{images/sl-d/flux-vs-lethargy-1.png}
   \includegraphics[width=3in]{images/sl-d/flux-vs-lethargy-2.png}
   \caption{Flux vs. Lethargy} \label{fvl}
 \end{figure}
-A 1/E spectrum in energy space is a constant value in lethargy space as in Figure~\ref{fvl}. 
 
-Caution about number of bins: When we are plotting, we are really plotting the expectation value of the numbers of neutrons; so if we ask `how many neutrons would there be at x energy level' the answer should be zero. So the bins have to be fine enough to see the details, but not too fine that the bins got no more neutrons. 
+Caution about number of bins: When we are plotting, we are really plotting the expectation value of the numbers of neutrons. 
+
+\uline{Practise: how many neutrons would there be at x energy level?}  
+
+\textbf{Answer:} zero. So the bins have to be fine enough to see the details, but not too fine that the bins got no more neutrons. 
+\end{enumerate}
+
 
 \clearpage
-\topic{Models for Fission Neutron Emission Spectrum ($\chi$)}
-Model: Maxwell spectrum:
+\subtopic{High Energy: Add Fission Emission Spectrum $\chi$}
+We model the fission emission spectrum $\chi(E)$ as a Maxwell spectrum:
 \eqn{ \chi(E) \dE = \frac{2\pi}{(\pi T)^{3/2}} \sqrt{E} \exp\left( - \frac{E}{T} \right) \dE }
 Simulation: constructing a cdf for Maxwell distribution (when constructing any cdf, it is a good practice to sample immediately and double check with the pdf); for each neutron, generate a random number $\xi \in [0,1]$, and use $\xi = cdf(E)$ to reverse-lookup for $E$, and this is the fission emission energy of that neutron. 
 
-Characteristics of our spectrum so far: a spectrum is the shape in energy; the spectrum is independent on the number of incoming neutrons; for one specie, the spectrum is independent of its cross section; for two species, only the relative cross section matters. 
+Characteristics of spectra after adding in $\chi(E)$ (caution: Fig.~\ref{spe1} is plotted with $x$-axis being energy, but it is still in lethargy space): 
+\begin{enumerate}
+\item The spectrum is independent on the number of incoming neutrons; 
+
+\item For one specie, the spectrum is independent of its cross section; for two species, only the relative cross section matters. 
+
+\item The effect of $\chi(E)$: smooth out the shart edge at the highest energy cutoff (Fig.~\ref{spe1} middle plot).
+
+\item Fission source peak: so far we reach a constant spectrum in lethargy. To obtain the fission source peak around 2 MeV, we have to divide the flux count by the hydrogen cross section:
+  \eqn{\phi(E) \propto \Sum_N \Sum_g N_g^n \tau_g^n = \Sum_n \Sum_g N_g^n \frac{1}{\Sigma(E_g^n)}   }
+  Recall the hydrogen scattering cross section decreases from 0 to 1 eV, stays constant between 1 eV to 10 keV, and decreases again afterwards. In the fast energies, the decreased hydrogen absorption cross section increases the flux, causing the 1.7 MeV peak. 
+\end{enumerate}
+
 \begin{figure}[ht]
   \centering
-  \includegraphics[width=3in]{images/sl-d/spec-1.uncrop.pdf}
-  \includegraphics[width=3in]{images/sl-d/spec-2.uncrop.pdf}
-  \includegraphics[width=3in]{images/sl-d/spec-3.uncrop.pdf}
+  \includegraphics[width=4in]{images/sl-d/spec-1.uncrop.pdf}
+  \\
+  \includegraphics[width=4in]{images/sl-d/spec-2.uncrop.pdf}
+  \\
+  \includegraphics[width=4in]{images/sl-d/spec-3.uncrop.pdf}
   \caption{Spectrum, Added in Fission Neutron Emission Spectrum and Hydrogen Scattering XS} \label{spe1}
 \end{figure}
 
-Fission source peak: so far we reach a flat spectrum. To obtain the peak around 2 MeV (fission source peak), we have to divide the flux count by the hydrogen cross section:
-\eqn{\phi(E) \propto \Sum_N \Sum_g N_g^n \tau_g^n = \Sum_n \Sum_g N_g^n \frac{1}{\Sigma(E_g^n)}   }
-Recall the hydrogen scattering cross section decreases from 0 to 1 eV, constant between 1 eV to 10 keV, and decrease afterwards. In the fast energies, the decreased hydrogen absorption cross section and the neutron fission emission spectrum (peaks at 1.7 MeV, average at 2 MeV). 
+
 
 
 \clearpage
-\topic{Models for Equilibrium Thermal Scattering Physics}
-\subtopic{Elastic Scattering for Monatomic (Maxwellian) Free Gas}
-Maxwellian free gas has elastic scattering cross section dependent on A, energy, and temperature:
+\subtopic{Thermal Energy ($<4$ eV): Equilibrium Thermal Scattering}
+For the thermal energy range, we are going to start with elastic scattering from stationary, free particle. Then we would consider the effects of having the target in motion and adding chemical bound.
+\begin{enumerate}
+\item We make three assumptions for the thermal energy range, 
+  \begin{itemize}
+  \item A monatomic free gas, that is, a Maxwellian distribution. 
+  \item The target is at rest. 
+  \item The target is free from chemical bonds. 
+  \end{itemize}
+
+Then the elastic scattering cross section dependent on $A$, $E$, and temperature $T$:
 \begin{align}
-  \sigma(E) f_s (E \to E') = &\frac{\sigma_{s0} \eta^2}{2E} \left[ \erf{\eta \sqrt{\frac{E'}{kT}} - \rho \sqrt{\frac{E}{kT}} } \mp \erf{\eta \sqrt{\frac{E'}{kT}} + \rho \sqrt{\frac{E}{kT}} } \right. \\
+  \sigma(E) f_s (E \to E') = &\frac{\sigma_{s0} \eta^2}{2E} \left[ \erf{\eta \sqrt{\frac{E'}{kT}} - \rho \sqrt{\frac{E}{kT}} } \mp \erf{\eta \sqrt{\frac{E'}{kT}} + \rho \sqrt{\frac{E}{kT}} } \right. \notag \\
     & \left. + e^{\frac{E - E'}{kT}} \left( \erf{ \eta \sqrt{\frac{E}{kT}} - \rho \sqrt{\frac{E'}{kT}} }  \pm \erf{\eta \sqrt{\frac{E}{kT}} + \rho \sqrt{\frac{E'}{kT}} } \right) \right] 
 \end{align}
 where the upper signs are for $E' > E$< and the lower signs for $E' < E$, and the $\eta, \rho$ terms are:
 \eqn{ \eta &= \frac{A+1}{2 \sqrt{A}} & \rho &= \frac{A-1}{2 \sqrt{A}} }
-For proton gas (A=1), we can simplify the energy transfer function to be,
+
+\item For a proton gas (A=1), we can simplify the energy transfer function to be,
 \begin{align}
 \sigma_s(E) f_s(E\to E') = \frac{\sigma_{s0}}{E} \left\{ 
 \begin{array}{cc}
@@ -260,73 +298,69 @@ e^{\frac{E-E'}{kT}} \erf{\sqrt{\frac{E}{kT}}} & E' > E \\
 \end{array}
 \right.
 \end{align}
-Two samples are plotted in Figure~\ref{ts-C-H}. Notice that a) E = 1kT to 25kT provides a good cover of range, and even at 1200K, 1kT = 0.1 eV, and 25kT = 2.5eV, so 4eV is a typical upper scattering cutoff; b) the $\frac{E'}{E}$ axis shows that there is a good probability that the neutron would gain energy from the elastic scattering(the lower the initial neutron energy, the closer it is to the target nuclei thermal agitation, the more probable is upper scattering). In fact this is the difference between this thermal energy model and the previous high-energy model.  
+
 \begin{figure}[ht]
   \centering
   \includegraphics[width=3in]{images/sl-d/ts_H.uncrop.pdf}
   \includegraphics[width=3in]{images/sl-d/ts_C.uncrop.pdf}
   \caption{Thermal Scattering Probability vs. Energy for Hydrogen and Graphite} \label{ts-C-H}
 \end{figure}
+Observations: 
+\begin{enumerate}
+\item In Fig.~\ref{ts-C-H}: E = 1kT to 25kT provides a good cover of range, and even at 1200K, 1kT = 0.1 eV, and 25kT = 2.5eV, so 4eV is a typical upper scattering cutoff. 
 
-Adding the thermal scattering into our slowing down and thermalization in hydrogen model, we observe a peak in the thermal range as well. To make the height more realistic, we have to add in the hydrogen absorption cross section (a 1/v distribution, only affect the thermal range). The absorbing strength is picked such that the absorption-to-scattering ratio is something reasonable, like 0.2. 
+\item In Fig.~\ref{ts-C-H}: the $\frac{E'}{E}$ axis shows that there is a good probability that the neutron would gain energy from the elastic scattering(the lower the initial neutron energy, the closer it is to the target nuclei thermal agitation, the more probable is upper scattering). In fact this is the difference between this thermal energy model and the previous high-energy model.  
+
+
+\item We can add the thermal scattering into our MC model and observe a peak in the thermal range as in the left plot of Fig.~\ref{spe2}. To make the height more realistic, we add in the hydrogen absorption cross section (a $1/v$ distribution, only affect the thermal range) as in the right plot of Fig.~\ref{spe2}. The absorbing strength is picked such that the absorption-to-scattering ratio is something reasonable, like 0.2. 
 \begin{figure}[ht]
   \centering
   \includegraphics[width=3in]{images/sl-d/spec-4.uncrop.pdf}
   \includegraphics[width=3in]{images/sl-d/spec-5.uncrop.pdf}
-  \caption{Spectrum, Added in Thermal Scattering and 1/v Hydrogen Absorption XS} \label{spe1}
+  \caption{Spectrum, Added in Thermal Scattering and $1/v$ Hydrogen Absorption XS} \label{spe2}
 \end{figure}
+\end{enumerate}
 
-Notice that in the above thermal scattering model, we made two assumptions:
-\begin{itemize}
-\item The target is at rest;
-\item Free target. 
-\end{itemize}
-In the next two subsections, we are going to cover when do the above conditions fail. 
-
-\subtopic{Adding Target in Motion: Important for U238 Resonances at Hot Fuel Conditions}
-Thermal agitation does not matter that much for non-resonance conditions; that is, when the cross section changes reasonably slow, a small $\Delta v$, hence a small $\Delta E$ does not change the cross section much. This is not true anymore for U238 resonances, because when cross section changes very rapidly (especially true in the scattering cross section than the absorption cross section), target motion/thermal agitation would affect up scattering quite significantly. As shown in Figure~\ref{timr}, it could be a 10\% increase in LWR U238 Doppler.  
+\item Adding Target in Motion (important for U238 resonances at hot fuel conditions). Thermal agitation does not matter that much for non-resonance conditions; that is, when $\dsigma/\dE$ is small, a small $\Delta v$ hence a small $\Delta E$ does not change the cross section much. This is not true anymore for U238 resonances, because when cross section changes very rapidly (especially true in the scattering cross section than the absorption cross section), target motion/thermal agitation would affect up scattering quite significantly. As shown in Figure~\ref{timr}, it could be a 10\% increase in LWR U238 Doppler.  
 \begin{figure}[ht]
   \centering
-  \includegraphics[width=4in]{images/sl-d/target-in-motion-resonance.png}
-  \caption{Target Motion Is Important for U239 Resonances} \label{timr}
+  \includegraphics[width=6in]{images/sl-d/target-in-motion-resonance.png}
+  \caption{Target Motion Is Important for U238 Resonances} \label{timr}
 \end{figure}
+
 We will cover resonance models later, for now we just need to know that the weird dips in scattering cross section is a result of the interacting wave between the potential scattering and the compound nuclear scattering. 
 
-Caution about cutoff energy: the resonance scattering cross section changes significantly around the resonance energies, and if our cutoff energy is placed right before the peak, the results would be wrong. 
+\item Adding chemical bound to get bound elastic scattering of H in \ce{H_2 O} molecules. So far we've only talked about free gas; in the case of tightly bound atoms at very low energy, the vibrations within a molecule due to the chemical bond come into play:
+  \eqn{\sigma_{\mathrm{bound}} = \left( 1 + \frac{1}{A_{\mathrm{atom}}} \right) \sigma_{\mathrm{free}}  }
+  For bound water molecule for instance, 
+  \eqn{ \sigma_{\mathrm{water}}^H = (1+1)^2 \sigma_H = 4 \sigma_H }
+  The dependency on $A$ suggests that \textit{the bound elastic scattering matters for light nuclei, and not so much for heavy nuclei}. In the case of hydrogen, the free gas model would still provide the right shape, but the probability can be off by a factor of 10. In the case of graphite, the free gas model does not provide the right shape. The lower energy you want to go, the more careful you need to be. 
+
+  Elastic scattering for bound molecules can be characterized by,
+  \eqn{ \frac{\derivative^2 \sigma}{\dOmega \dE'} (E\to E', \Omega\to \Omega')  = \frac{\sigma_b}{4 \pi kT} \sqrt{ \frac{E'}{E}} e^{-\frac{\beta}{2}} S(\alpha, \beta)   }
+  where $\sigma_b$ is the bound scattering cross section for the material, $kT$ is in eV, $S(\alpha, \beta)$ is the symmetric form of the thermal scattering law,
+  \eqn{ S(\alpha, \beta) = \frac{\exp{-\frac{\alpha^2 + \beta^2}{4 \alpha}} }{\sqrt{4\pi \alpha}} }
+  where $\alpha, \beta$ depends on two terms:
+  \begin{itemize}
+  \item The momentum transfer $\kappa$,
+    \eqn{ \alpha = \frac{E' + E - 2 \sqrt{E' E} \cos \theta}{A kT} = \frac{\hbar^2 \kappa^2}{2 M kT} } 
+    where $A$ is the ratio of the mass of the scattering atom to the neutron mass.
+  \item The energy transfer $\epsilon$,
+    \eqn{ \beta = \frac{E' - E}{kT} = \frac{\epsilon}{kT} }
+  \end{itemize}
+
+\item Recap: 
+  \begin{itemize}
+  \item Thermal scattering distributions: generate cdf for energies, like from 0.1kT to 8kT.  
+  \item 4 eV is the typicall up-scattering cutoff energy. For an incident neutron energy higher than 4 eV, use asymptotic elastic down scattering. 
+  \end{itemize}
+\end{enumerate}
+%%%%%%%%%%%%%%%%%%%%%% start of MC %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-\subtopic{Adding Chemical Bound: Bound Elastic Scattering of H in Water Molecule}
-So far we've only talked about free gas; in the case of tightly bound atoms at very low energy, the vibrations within a molecule due to the chemical bond come into play:
-\eqn{\sigma_{\mathrm{bound}} = \left( 1 + \frac{1}{A_{\mathrm{atom}}} \right) \sigma_{\mathrm{free}}  }
-For bound water molecule for instance, 
-\eqn{ \sigma_{\mathrm{water}}^H = (1+1)^2 \sigma_H = 4 \sigma_H }
-The dependency on $A$ suggests that \textit{the bound elastic scattering matters for light nuclei, and not so much for heavy nuclei}. In the case of hydrogen, the free gas model would still provide the right shape, but the probability can be off by a factor of 10. In the case of graphite, the free gas model does not provide the right shape. The lower energy you want to go, the more careful you need to be. 
-
-Elastic scattering for bound molecules can be characterized by,
-\eqn{ \frac{\derivative^2 \sigma}{\dOmega \dE'} (E\to E', \Omega\to \Omega')  = \frac{\sigma_b}{4 \pi kT} \sqrt{ \frac{E'}{E}} e^{-\frac{\beta}{2}} S(\alpha, \beta)   }
-where $\sigma_b$ is the bound scattering cross section for the material, $kT$ is in eV, $S(\alpha, \beta)$ is the symmetric form of the thermal scattering law,
-\eqn{ S(\alpha, \beta) = \frac{\exp{-\frac{\alpha^2 + \beta^2}{4 \alpha}} }{\sqrt{4\pi \alpha}} }
-where $\alpha, \beta$ depends on two terms:
-\begin{itemize}
-\item The momentum transfer $\kappa$,
-\eqn{ \alpha = \frac{E' + E - 2 \sqrt{E' E} \cos \theta}{A kT} = \frac{\hbar^2 \kappa^2}{2 M kT} } 
-where $A$ is the ratio of the mass of the scattering atom to the neutron mass.
-\item The energy transfer $\epsilon$,
-\eqn{ \beta = \frac{E' - E}{kT} = \frac{\epsilon}{kT} }
-\end{itemize}
-
-
-\subtopic{Recap}
-A couple of important points:
-\begin{itemize}
-\item Thermal scattering distributions: generate cdf for energies, like from 0.1kT to 8kT.  
-\item 4 eV is the typicall up-scattering cutoff energy. For an incident neutron energy higher than 4 eV, use asymptotic elastic down scattering. 
-\end{itemize}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%% start of Analytical %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \clearpage
-\topic{Slowing Down From TE} \label{slowing-down-from-te}
+\topic{Analytical Derivation From TE} \label{slowing-down-from-te}
 This lecture is given on Oct. 2 by Prof. Forget. We start from the TE: 
 \eqn{ \frac{1}{v} \pphipt + \Omega \gradient \phi + \Sigma_t \phi &= \int \dE \int \dOmega \Sigma_s \phi + \frac{\chi(E)}{4 \pi} \int \dE v \Sigma_f \phi + S }
 Apply assumptions:
@@ -334,9 +368,9 @@ Apply assumptions:
 \item Steady state, so $\frac{1}{v} \pphipt \to 0$. 
 \item Infinite medium, so no streaming term $\Omega \gradient \phi \to 0$. 
 \item No source, so $S \to 0$. 
-\item Slowing down happens with elastic scattering is isotropic in the center of mass system (s-wave elastic scattering), that is, 
+\item Slowing down happens through elastic scattering that is isotropic in the center of mass system (s-wave elastic scattering), that is, 
   \eqn{ \Sigma_s (E' \to E) &= \frac{\Sigma_s(E')}{(1-\alpha)E'} &\mbox{for } E < E' < \frac{E}{\alpha} }
-  where $\alpha = (A-1/A+1)^2$. In assuming s-wave, the slowing down model only applies for neutrons below 1MeV in light moderators and neutrons below 0.1 MeV in heavier materials, since the average $\bar{\mu_0} = 0.07 A^{2/3}E$ [MeV].  For neutrons above 0.1 MeV, inelastic scattering from heavy nuclei becomes important and cannot be ignored, which is why in this section (slowing down) we are going to assume elastic scattering, but in the next section (resonance models) we are going to take into account inelastic scattering. 
+  where $\alpha = (A-1/A+1)^2$. In assuming s-wave, the slowing down model only applies for neutrons below 1MeV in light moderators and neutrons below 0.1 MeV in heavier materials, since the average $\bar{\mu_0} = 0.07 A^{2/3}E$ [MeV].  For neutrons above 0.1 MeV, inelastic scattering from heavy nuclei becomes important and cannot be ignored (but I don't think we've ever addressed inelastic scattering in this course).
 \end{enumerate}
 
 When we had the time dependent term $\pphipt$, flux changes with respect to time and is driven by source. Once we go into steady state and take away the source, \textbf{TE becomes an eigenvalue problem, and we need to add a $k$ on the bottom of the fission term}. Notice that our TE only depends on energy now,  
@@ -392,25 +426,53 @@ In reactor applications, most absorptions happen in the resonances of \ce{^{238}
         \includegraphics[width=6.5in]{images/sl-d/resonance-flux.png}
         \caption{Flux Between Resonances} \label{resonance-flux}
       \end{figure}
+\end{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%% end of Analytical %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 \clearpage
 \topic{Summary}
-
 \begin{enumerate}
-\item Not near sources or resonance (Duderstadt): 
+\item Properties of isotropic elastic scattering/asymptotic downscattering (which we assume for larger than 4 eV). See Table.~\ref{slowing-down-parameter} for common values. 
+  \begin{enumerate}
+    \item After each collision, the minimum energy is characterized by: 
+      \eqn{ \alpha = \frac{E_{\mathrm{min}}}{E_0} = \left( \frac{A-1}{A+1} \right)^2 }
+      
+    \item Mean log energy decrement: $A \up, \xi \down$. 
+      \eqn{ \xi = 1 + \frac{\alpha}{1-\alpha} \ln \alpha} 
 
+    \item Number of collisions required to slow a particle from $E_i$ to $E_f$:
+      \eqn{ n = \frac{\ln(E_i/E_f)}{\xi} }
+  \end{enumerate}
 
+\item Not near sources or resonance (Duderstadt p.319): 
+  \eqn{ \Phi(u) \sim \frac{1}{\Sigma_s(u)} }
 
-We define $q(E)$ is, which is \# neutrons crossing the boundary. $q(E)$ depends on: neutrons born (if no absorption, all neutrons born would all cross boundary at some point), and absorption. 
-\item Between resonances, we assume $\Sigma_a =0$, and $\Sigma_s$ = constant (the compound nuclide scattering cross section is again zero because no QM between nuclides, potential scattering is constant around $4 \pi R^2$). Then 
-  \eqn{\Aboxed{q(u) &= S_0} & \Aboxed{ \phi(u) &= \frac{S_0}{\xi \Sigma_s(u)}}}
+\item Fast energy range, $\chi(E)$ dominantes flux:
+  \eqn{ \Phi(E) = \frac{\chi(E) S_f}{\Sigma_t(E)} }
+
+\item Resonance energy range: 
+  \begin{enumerate}
+    \item Assumptions: between resonances $\Sigma_a =0$, and $\Sigma_s$ = constant (the compound nuclide scattering cross section is again zero because no QM between nuclides, potential scattering is constant around $4 \pi R^2$). 
+
+    \item Collision rate density 
+      \eqn{ F(E) = \Sigma_s (E) \Phi(E) }
+      It is discontinuous for non-hydrogen atoms at $\alpha^n E_0$ which are the minimum energy a neutron can slow down to in the $n$-th collision. 
+
+    \item Slow down density $q(E)$: \# neutrons crossing the boundary. $q(E)$ depends on: neutrons born (if no absorption, all neutrons born would all cross boundary at some point), and absorption: 
+      \eqn{ q(E) = \int_{u-\ln(1/\alpha)}^u \du' F_c (u') \int_u^{u'+\ln (1/\alpha)} \du'' \frac{e^{u' - u''}}{1-\alpha} }
+      We can reach an general expression for $q(E)$:
+      \eqn{ \frac{\dq(E)}{\dE} =  - \Sigma_a (E) \Phi(E) }
+
+    \item If we further assumes there is no absorption at all, all source $S_0$ eventually slow down to $E$. $F(E)$ would eventually reach it's asymptotic solution of: 
+      \eqn{ F(E) &\to \frac{S_0}{\xi E}   & F(u) &\to \frac{S_0}{\xi} }
+      \eqn{\Aboxed{q(u) &= S_0} & \Aboxed{ \Phi(u) &= \frac{S_0}{\xi \Sigma_s(u)}}}
+  \end{enumerate}
 \end{enumerate}
 
 
 
 
 
-\end{enumerate}
 
 \end{document}
