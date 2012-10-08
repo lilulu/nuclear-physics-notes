@@ -27,7 +27,6 @@ For resonance models, we further consider,
 \item Neutron flux has achieved its asymptotic behavior $\phi(E) \sim 1/E$ before reaching the resonance energy. 
 \item The moderator has a constant $\sigma_s$ and a negligible $\sigma_a$ (at least over the resonance range): 
   \eqn{ \Sigma_t^M (E) \sim \Sigma_s^M (E) = \Sigma_{po}^M }
-\item The resonant material can scatter anisotropically hence we introduce the 0th and 1st order Legrendre modes. 
 \end{itemize}
 
 Recall the slowing down equation for the resonance region of $[1\eV, 0.1 \MeV]$ is, 
@@ -35,35 +34,39 @@ Recall the slowing down equation for the resonance region of $[1\eV, 0.1 \MeV]$ 
 
 
 \subtopic{Livolant-Jeanpierre Approximation}
-\begin{align}
-(\Sigma_{t1}(u) + \Sigma_{t0} (u)) \Phi(u) &= \int_{u - \epsilon_0}^u \frac{1}{1 - \alpha_0} e^{-(u-u')} \Sigma_{s0}(u') \Phi(u') \du' + \int_{u-\epsilon_1}^u \frac{1}{1 - \alpha_1} e^{-(u-u')} \Sigma_{s1} (u') \Phi(u') \du'  
-\end{align}
-We manipulate the above equations:
+
+We manipulate Eq.~\ref{resonance-sl-d-eqn}:
 \begin{itemize}
 \item We facterize $\Phi(u) = \phi(u) \Psi(u)$, where $\phi(u)$ is the fine structure/self-shielding factor that models the resonances, $\Psi(u)$ is the flux outside the resonance (Hebert calls it `macroscopic flux', and it represents the asymptotic behavior of flux between resonances). 
 
-\item Because of the 1/E flux between resonances (or constant in lethargy) $\Phi(u) = \frac{q(u)}{\xi \Sigma_s}$, we write the RHS of Eq.~\ref{resonance-sl-d-eqn} as $R \Phi(u)$. $R$ has two components. We do not know what $R_0$ is yet,
-\eqn{  R_0 \Phi(u) &= R_0 \phi(u) \Psi(u) = \int_{u-\epsilon_0}^u \frac{1}{1-\alpha_0} e^{-(u-u')} \Sigma_{s0}(u') \phi(u') \Psi(u') \du'  }
-But for the 1st order, we apply the 1/E flux between resonance part and get rid of the $\phi(u)$ term, 
-\eqn{ R_1 \Phi(u) &= \Sigma_{t1} \Psi(u)  }
+\item For the resonant material (R) and the moderating material (M), we define the slowing down operator using the zeroth Legendre moment of the differential scattering cross section, 
+\eqn{ R^R = \int_0^{\infty} \du' \Sigma_{s0}^R(u'\to u) \phi(\mu') }
+\eqn{ R^M = \int_0^{\infty} \du' \Sigma_{s0}^M(u'\to u) \phi(\mu') }
 
-\item Then we can write (omitting every term's $u$ dependency), then cancel out $\Psi$ on both sides, 
-\begin{align}
- (\Sigma_{t1} + \Sigma_{t0}) \Psi \phi &= R_0 \Psi \phi +  \Sigma_{t1} \Psi    \\
-R_0 \phi + \Sigma_{t1} &= (\Sigma_{t1}  + \Sigma_{t0} ) \phi 
-\end{align}
+\item Then the slowing down equation becomes, 
+  \eqn{ (\Sigma_{t}^R (u) + \Sigma_{t}^M (u)) \Phi(u) &= \int_{u - \epsilon^R}^u \frac{ e^{-(u-u')} \Sigma_{s}^R (u') \Phi(u')}{1 - \alpha^R} \du' + \int_{u-\epsilon^M}^u \frac{e^{-(u-u')} \Sigma_{s}^M (u') \Phi(u')}{1 - \alpha^M}  \du'  }
+  We do not know what $R^R$ is yet besides its definition,
+  \eqn{  R^R \Phi(u) &= R^R \phi(u) \Psi(u) = \int_{u-\epsilon^R}^u \frac{1}{1-\alpha^R} e^{-(u-u')} \Sigma_{s}^R(u') \phi(u') \Psi(u') \du'  }
+  But for $R^M$, we apply the $1/E$ flux between resonances and get rid of the $\phi(u)$ term, 
+  \eqn{ R^M \Phi(u) &= \Sigma_{t}^M \Psi(u)  }
 
-\item If we divide by $N_0$ (the resonance nuclide number density), we get 
-\eqn{ r_0 \phi + \sigma_d &= (\sigma_d + \sigma_{to}) \phi }
+\item Then we can write (omitting $u$ dependency for simplicity) and cancel out $\Psi$ on both sides, 
+  \begin{align}
+    (\Sigma_{t}^R + \Sigma_t^M) \Psi \phi &= R^R \Psi \phi +  \Sigma_{t}^M \Psi  \\
+    R^R \phi + \Sigma_t^M &= (\Sigma_t^M  + \Sigma_{t}^R ) \phi 
+  \end{align}
+
+\item If we divide by $N^R$ (the resonance nuclide number density), we get 
+  \eqn{ r^R \phi + \sigma_d &= (\sigma_d + \sigma_{t}^R) \phi }
 \end{itemize}
 
 
-There are a couple of ways to approximate $r_0 \phi(u)$. 
+There are a couple of ways to approximate $r^R \phi(u)$. 
 \begin{enumerate}
 \item Wide resonance assumes that the resonances are so large that we can assume the reaction rate (for the fine structure) is constant. 
-\eqn{ r_0 \phi(u) &= \int_{u-\epsilon_0}^u \frac{1}{1-\alpha_0} e^{-(u-u')} \overbrace{ \sigma_{so} (u') \phi(u')}^{\mathrm{constant}} \du' = \sigma_{s0} (u) \phi(u)  }
+\eqn{ r^R \phi(u) &= \int_{u-\epsilon^R}^u \frac{1}{1-\alpha^R} e^{-(u-u')} \overbrace{ \sigma_{s}^R (u') \phi(u')}^{\mathrm{constant}} \du' = \sigma_{s}^R (u) \phi(u)  }
 Then we arrive at, 
-\eqn{ \phi_{WR} (u) &= \frac{\sigma_d}{\sigma_{to}^R (u) - \sigma_{s0}^R (u) + \sigma_d} = \frac{\sigma_d}{\sigma_{a}^R (u) +  \sigma_d }  }
+\eqn{ \phi_{WR} (u) &= \frac{\sigma_d}{\sigma_{t}^R (u) - \sigma_{s}^R (u) + \sigma_d} = \frac{\sigma_d}{\sigma_{a}^R (u) +  \sigma_d }  }
 \begin{align}
 \RIeff^{\gamma} &= \int \sigma_{\gamma}^R (u) \phi_{WR} (u) \du \\
 &= \int \sigma_{\gamma}^R (u) \frac{\sigma_d}{\sigma_a^R(u) + \sigma_d} \du \\
@@ -81,13 +84,13 @@ Comments:
 
 
 \item Narrow resonance approximations assume resonance is very narrow, and a neutron is going to be out of the resonance upon one scattering, thus \textbf{cross section remains the same, thus $\Phi(E) \propto 1/E, \Phi(u) = $constant.} Thus we can write, 
-\eqn{ r_0 \phi(u) = \int_{u-\epsilon_0}^u \frac{1}{1- \alpha_0} e^{-(u-u')} \sigma_{s0}(u') \Phi(u') \du' }
-where $\Phi(u') = 1, \sigma_{s0} (u')\approx \sigma_{po}$ potential scattering, also 
-\eqn{ \int_{u-\epsilon}^u \frac{1}{1-\alpha_0} e^{-(u-u')} \du' = 1} 
+\eqn{ r^R \phi(u) = \int_{u-\epsilon^R}^u \frac{1}{1- \alpha^R} e^{-(u-u')} \sigma_{s}^R (u') \Phi(u') \du' }
+where $\Phi(u') = 1, \sigma_{s}^R (u')\approx \sigma_{po}^R$ potential scattering, also 
+\eqn{ \int_{u-\epsilon}^u \frac{1}{1-\alpha^R} e^{-(u-u')} \du' = 1} 
 Thus narrow resonance approximation leads to, 
-\eqn{ r_0 \phi(u) = \sigma_{po}}
+\eqn{ r^R \phi(u) = \sigma_{po}^R}
 That is, 
-\eqn{ \sigma_{po} + \sigma_d &= (\sigma_d + \sigma_{t0} (u)) \phi_{NR} (u) & \phi_{NR} (u) &= \frac{\sigma_{po}^R + \sigma_d}{\sigma_d + \sigma_{to}^R (u)} = \frac{\sigma_{pot}^R + \sigma_d}{\sigma_{a}^R + \sigma_{pot}^R + \sigma_d } }
+\eqn{ \sigma_{po}^R + \sigma_d &= (\sigma_d + \sigma_{t}^R (u)) \phi_{NR} (u) & \phi_{NR} (u) &= \frac{\sigma_{po}^R + \sigma_d}{\sigma_d + \sigma_{t}^R (u)} = \frac{\sigma_{po}^R + \sigma_d}{\sigma_{a}^R + \sigma_{po}^R + \sigma_d } }
 \begin{align}
 \RIeff^{\gamma} &= \int \sigma_{\gamma}^R (u) \phi_{NR} (u) \du \\
 &= \int \sigma_{\gamma}^R (u) \frac{\sigma_{pot}^R + \sigma_d}{\sigma_a^R(u) + \sigma_{pot}^R + \sigma_d} \du \\
@@ -115,7 +118,7 @@ Compare with MC results using real U238 and U235 xs data, the real results fall 
 \end{itemize}
 \begin{figure}
   \centering
-  \includegraphics[width=4in]{images/r-m/narrow-vs-wide-resonance.png}
+  \includegraphics[width=5in]{images/r-m/narrow-vs-wide-resonance.png}
   \caption{Comparison Of Wide and Narrow Resonance Approximation} \label{wide-vs-narrow}
 \end{figure}
 
@@ -131,9 +134,19 @@ Alternatively, we can discretize our energy group very finely, then we would not
 \subtopic{Duderstadt's Formalism} 
 Duderstadt (p.343-345) supplies a somewhat simplier approach. 
 \begin{enumerate}
-\item NR: assume the resonance width is small compared to the average energy loss in a collision with the resonant material: 
-  \eqn{ \bar{\Delta E}^R = \frac{1 - \alpha^R}{2} E_0 \gg \Gamma_p }
+\item NR: assume the resonance width is small compared to the average energy loss in a collision with the resonant material (since the average energy loss $\sim \frac{(1-\alpha^R)E_0}{2}$, one can expect that NR is valid for high energy): 
+  \eqn{ \Gamma_p \ll \bar{\Delta E}^R = \frac{1 - \alpha^R}{2} E_0  }
+  Then the resonant scattering integral can be approximated by replacing $\Phi(E)$ by its asymptotic form: 
+  \eqn{ \int_E^{E/\alpha^R} \dE' \frac{\Sigma_a^R(E') \Phi(E')}{(1 - \alpha^R) E'} \approx \frac{\Sigma_p^R}{1 - \alpha^R} \int_E^{E/\alpha^R} \frac{\dE'}{E'} \frac{1}{E'} = \frac{\Sigma_p^R}{E}  }
+  Then the slowing down equation is, 
+  \eqn{ \Sigma_t(E) \Phi(E) &= \frac{\Sigma_s^M + \Sigma_p^R}{E} & \Phi_{NR} (E) &= \frac{\Sigma_s^M + \Sigma_p^R}{\Sigma_t(E) E} }
 
+\item WR: assume the resonance width is wide compared to the energy loss: 
+  \eqn{ \bar{\Delta E}^R = \frac{1 - \alpha^R}{2} E_0 \ll \Gamma_p \ll  \bar{\Delta E}^M }
+  WR can be referred to as `NR infinite mass absorber' (NRIM): resonant material is infinitely massive such that neutrons suffer no energy loss in a collision with the resonant materials. That is, as $A^R \to \infty, \alpha^R = (A^R - 1/A^R + 1)^2 \to 1$, and 
+  \eqn{ \lim_{\alpha^R \to 1} \int_E^{E/\alpha^R} \frac{\Sigma_s^R (E') \Phi(E') \dE'}{(1-\alpha^R) E'} \to \Sigma_s^R (E) \Phi(E) \lim_{\alpha^R \to 1} \int_E^{E/\alpha^R} \frac{\dE'}{1 - \alpha^R} = \Sigma_s^R (E) \Phi(E) }
+  Then slowing down equation becomes, 
+  \eqn{ \Sigma_t(E) \Phi(E) &= \Sigma_s^R (E) \Phi(E) + \frac{\Sigma_s^M}{E} & \Phi_{WR} &= \frac{\Sigma_s^M}{(\Sigma_t(E) - \Sigma_s^M(E))E} }
 
 \end{enumerate}
 
