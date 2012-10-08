@@ -14,7 +14,7 @@ Section.~\ref{section-physical-angular-momentum} through \ref{section-Pauli} wer
 
 %%%%%%%%%%%%%%% 12 Fall %%%%%%%%%%%%%%%%%
 \topic{Physical Meaning of Momentums \label{section-physical-angular-momentum}}
-\hi{Momentum is a generator of translation.} We consider an operator $T$ that moves a $\psi(x)$ to $\psi(x-\Delta x)$: 
+\hi{Momentum is a generator of translation.} Consider an operator $T$ that transforms $\psi(x)$ to $\psi(x-\Delta x)$: 
 \eqn{ T \psi(x) = \psi(x-\Delta x)} 
 We perform the Taylor expansion on $\psi(x - \Delta x)$: 
 \begin{align}
@@ -38,7 +38,7 @@ We can prove that
 where $\vec{n}$ is the axis of rotation, $\theta$ is the amount of rotation in radian.  Keep in mind this $R(\vec{n}, \theta)$ is a scalar operator. 
 
 
-\topic{Angular Momentum's Commutation Relations}
+\topic{Properties of Angular Momentum}
 Now we are going to approach a measurement of an arbitrary vector operator $V$(the vector notation is ommited in this section) from two angles:
 \begin{enumerate}
 \item Recall the expression for $R(\vecn, \theta)$ in Eq.~\ref{scalar-R}. Then for an arbitrary vector operator $V$, a measurement can be written as, 
@@ -66,8 +66,8 @@ The two ways should yield same result, so we can equate Eq.~\ref{measurement-1} 
 \Aboxed{ [V_i, J_j] &= i \hbar \epsilon_{ijk} V_k }  \label{J-basic}
 \end{align}
 
-Recall that $[\vec{x}, \vec{P} ] = i \hbar \epsilon_{ijk} V_k$. Thus, 
-\eqn{ \Aboxed{ \vec{J} &= \vec{L} = \vec{x} \cross \vec{P}  } \label{defn-J} }
+Recall that $[\vec{x}, \vec{P} ] = i \hbar \epsilon_{ijk} V_k$. Thus, the angular momentum (really the orbital angular momentum $\vec{L}$ as we haven't discuss spin yet) is, 
+\eqn{ \Aboxed{ \vec{L} &= \vec{x} \cross \vec{P}  } \label{defn-J} }
 
 \clearpage
 Now that we know some fundamental properties of $\vec{J}$, we can do the following to make use of them.
@@ -94,34 +94,40 @@ Now that we know some fundamental properties of $\vec{J}$, we can do the followi
     \eqn{ [J_z, J_-] \ket{z} &= - \hbar J_- \ket{z} \label{Eq1} }
     We define, 
     \eqn{ J_z \ket{z} = z \hbar \ket{z} \label{eigen-Jz} }
-    Then we can simplify the LHS of Eq.~\ref{Eq1}: 
+    We simplify the LHS of Eq.~\ref{Eq1}: 
     \eqn{ [J_z, J_-] \ket{z}  = J_z J_- \ket{z} - J_- J_z \ket{z} = J_z J_- \ket{z} -  J_- z \hbar \ket{z} \label{Eq2} }
-    Equate the RHS of Eq.~\ref{Eq1} and Eq.~\ref{Eq2}, 
+    Equate Eq.~\ref{Eq2} and the RHS of Eq.~\ref{Eq1}, 
     \eqn{ J_z J_- \ket{z} = z \hbar J_- \ket{z} - \hbar J_- \ket{z} = (z-1) \hbar J_- \ket{z} \label{loweringop} } 
-    Eq.~\ref{loweringop} implies that $J_-$ keeps us in the same `family'/eigen-vector which is $\ket{z}$, though lower the eigenvalue by 1: $J_z$'s original eigenvalue is $z\hbar$; after applying $J_-$, $J_z$ has an eigenvalue of $(z-1) \hbar$. 
-    
-  \item Following the last bullet point, we must have, 
-    \eqn{ J_- \ket{z} = \alpha \hbar \ket{z-1} }
-    To find out the magnitude of $\alpha$, we evaluate
+    Eq.~\ref{loweringop} tells us that $J_-$ lowers $z$ to $z-1$. 
+    \begin{itemize}
+    \item Griffiths approaches it using the harmonic oscillator model, thus $J_-$ lowers the energy from $E$ to $E-\hbar \omega$, thus reducing $n$ to $n-1$. 
+    \item My interpretation of  Eq.~\ref{loweringop} is, comparing 
+      \eqn{ J_z \left(J_- \ket{z} \right) &= (z-1) \hbar \left(J_- \ket{z}\right) 
+        & J_z \ket{z} &= z \hbar \ket{z} } 
+      implies 
+      \eqn{ J_- \ket{z} = \alpha \hbar \ket{z-1}  \label{guess-of-J-} }
+    \end{itemize}
+
+  \item To find out the magnitude of $\alpha$ in Eq.~\ref{guess-of-J-}, we evaluate
     \eqn{  \bra{z} J_+ J_- \ket{z} &= |\alpha|^2 \hbar^2  }
     Start by evaluating $J_+, J_-$ then substitute back into the above expression, 
     \begin{align}
       J_+ J_- &= (J_x + i J_y) (J_x - iJ_y) = J_x^2 + i (J_y J_x - J_x J_y) + J_y^2 \\
       &= J_x^2 + J_y^2 + \hbar J_z = J^2 - J_z^2 + \hbar J_z \\
-      \bra{z} J^2 - J_z^2 + J_z \hbar \ket{z} &= |\alpha|^2 \hbar^2 \\
-      \bra{z} J^2 \ket{z} - z^2 \hbar^2 + z^2 \hbar^2 &= |\alpha|^2 \hbar^2 \\
-      \bra{z} J^2 \ket{z} &= |\alpha|^2 \hbar^2 
+      |\alpha|^2 \hbar^2 &= \bra{z} J^2 - J_z^2 + J_z \hbar \ket{z} \\
+      &= \bra{z} J^2 \ket{z} - z^2 \hbar^2 + z^2 \hbar^2 \\
+      &= \bra{z} J^2 \ket{z}
     \end{align}
     To help understanding, we define for some unknown $\beta$, 
     \eqn{ J^2 \ket{z} = \beta \hbar^2 \ket{z} }
-    Then the $\bra{z} J^2 \ket{z}$ term is kind of like the $\beta^2 \hbar^2$ term that keeps $J^2$ in the same family. 
+    %Then the $\bra{z} J^2 \ket{z}$ term is kind of like the $\beta^2 \hbar^2$ term that keeps $J^2$ in the same family. 
 
   \item We cannot infinitely lower $z$. That is, the $\beta$ term has to satisfy the following three relations: 
     \begin{align}
       \left\{ \begin{array}{c} 
         z_{\max} - z_{\min} = \mathrm{integer}  \\
-        \beta - z_{\min}^2 + z_{\min} = 0 \\
-        \beta - z_{\max}^2 - z_{\max} = 0
+        \beta = z_{\min}^2 - z_{\min}  \\
+        \beta = z_{\max}^2 + z_{\max}
       \end{array}
       \right. 
     \end{align}
@@ -141,35 +147,6 @@ Now that we know some fundamental properties of $\vec{J}$, we can do the followi
   \end{enumerate}
 \end{enumerate}
 
-
-  \topic{Spin Angular Momentum}
- Consider a half-spin particle (neutrons, protons, electrons), that is $j = 1/2$. We can use the matrix notation, where bra becomes row vector, ket becomes column vector, and scalar becomes matrix. We can re-write the ket basis into 
-    \eqn{ \ket{\frac{1}{2}} &= \left( \begin{array}{c} 1 \\ 0 \end{array} \right) & \ket{-\frac{1}{2}} &= \left( \begin{array}{c} 0 \\ 1 \end{array} \right) }
-    Then we can solve the $\frac{\hbar}{2} \ket{\frac{1}{2}} = J_z \ket{\frac{1}{2}}, - \frac{\hbar}{2} \ket{-\frac{1}{2}} = J_z \ket{-\frac{1}{2}}$ equations for the-now-matrix-$J_z$: 
-    \begin{align}
-      \frac{\hbar}{2}  \left( \begin{array}{c} 1 \\ 0 \end{array} \right) &=  \left( \begin{array}{cc} a & c \\ b & d   \end{array} \right)  \left( \begin{array}{c} 1 \\ 0 \end{array} \right) = \begin{array}{c} a \\ b \end{array} \\
-      - \frac{\hbar}{2}  \left( \begin{array}{c} 0 \\ 1 \end{array} \right) &=  \left( \begin{array}{cc} a & c \\ b & d   \end{array} \right)  \left( \begin{array}{c} 0 \\ 1 \end{array} \right) = \begin{array}{c} c \\ d \end{array} \\
-      J_z &= \frac{\hbar}{2} \left( \begin{array}{cc} 1 & 0 \\ 0 & -1 \end{array} \right) 
-    \end{align}
-    Similarly we can solve for the matrix representation of $J_+, J_-$ as well, 
-    \begin{align}
-      J_+ \ket{ \frac{1}{2} } &= 0  \\
-      \left( \begin{array}{c} a \\ b \end{array} \right) &= 0 \\
-      J_+ \ket{ - \frac{1}{2} } &= \hbar \sqrt{-j(j+1) - m(m+1)} \ket{\frac{1}{2} }  \\
-      &= \hbar \sqrt{ \frac{1}{2} \frac{3}{2} - \left( - \frac{1}{2} \right) \left( - \frac{1}{2} + 1 \right) } \ket{ \frac{1}{2} } \\
-      &= \ket{ \frac{1}{2} } \\
-      \Aboxed{J_+ &= \hbar \left( \begin{array}{cc} 0 & 1 \\ 0 & 0 \end{array} \right)}
-    \end{align}
-    We know that $J_-$ is just the transpose of $J_+$, hence, 
-    \eqn{ \Aboxed{J_- &= \hbar \left( \begin{array}{cc} 0 & 0 \\ 1 & 0 \end{array} \right)}}
-    Knowing what $J_+, J_-$ are, and knowning that $J_+ = J_x + i J_y, J_- = J_x - iJ_y$, and knowing that $J_i = \frac{\hbar}{2} \sigma_i$ where $\sigma_i$ is the Pauli matrix obeying $[ \sigma_i, \sigma_j] = 2 \epsilon_{ijk} \sigma_k$, we can write $J_x, J_y, J_z$: 
-    \begin{align}
-      J_x &= \frac{\hbar}{2} \left( \begin{array}{cc} 0 & 1 \\ 1 & 0 \end{array} \right) \\
-      J_y &= \frac{\hbar}{2} \left( \begin{array}{cc} 0 & -i \\ i & 0 \end{array} \right) \\
-      J_z &= \frac{\hbar}{2} \left( \begin{array}{cc} 1 & 0 \\ 0 & -1 \end{array} \right) 
-    \end{align}
-
-
 Background: the Levi-Civita symbols:
 \begin{enumerate}
 \item Index rule: summation is implied when different index shows up in adjacent terms:
@@ -180,6 +157,35 @@ Background: the Levi-Civita symbols:
 \item Final results: other terms are 0, 
 \eqn{ \epsilon_{123} &= \epsilon_{231} = \epsilon_{312} = 1 & \epsilon_{213} &= \epsilon_{312} = \epsilon_{132} = -1 }
 \end{enumerate}
+
+\clearpage
+\topic{Properties of Spin}
+Consider a half-spin particle (neutrons, protons, electrons), that is $j = 1/2$. We can use the matrix notation, where bra becomes row vector, ket becomes column vector, and scalar becomes matrix. We can re-write the ket basis into 
+\eqn{ \ket{\frac{1}{2}} &= \left( \begin{array}{c} 1 \\ 0 \end{array} \right) & \ket{-\frac{1}{2}} &= \left( \begin{array}{c} 0 \\ 1 \end{array} \right) }
+Then we can solve the $\frac{\hbar}{2} \ket{\frac{1}{2}} = J_z \ket{\frac{1}{2}}, - \frac{\hbar}{2} \ket{-\frac{1}{2}} = J_z \ket{-\frac{1}{2}}$ equations for the-now-matrix-$J_z$: 
+\begin{align}
+  \frac{\hbar}{2}  \left( \begin{array}{c} 1 \\ 0 \end{array} \right) &=  \left( \begin{array}{cc} a & c \\ b & d   \end{array} \right)  \left( \begin{array}{c} 1 \\ 0 \end{array} \right) = \left( \begin{array}{c} a \\ b \end{array} \right) \\
+  - \frac{\hbar}{2}  \left( \begin{array}{c} 0 \\ 1 \end{array} \right) &=  \left( \begin{array}{cc} a & c \\ b & d   \end{array} \right)  \left( \begin{array}{c} 0 \\ 1 \end{array} \right) = \left( \begin{array}{c} c \\ d \end{array} \right) \\
+  \Rightarrow J_z &= \frac{\hbar}{2} \left( \begin{array}{cc} 1 & 0 \\ 0 & -1 \end{array} \right) 
+\end{align}
+Similarly we can solve for the matrix representation of $J_+, J_-$ as well, 
+\begin{align}
+  J_+ \ket{ \frac{1}{2} } &= 0  \Rightarrow \left( \begin{array}{c} a \\ b \end{array} \right) = 0 \\
+  J_+ \ket{ - \frac{1}{2} } &= \hbar \sqrt{-j(j+1) - m(m+1)} \ket{\frac{1}{2} }  \\
+  &= \hbar \sqrt{ \frac{1}{2} \frac{3}{2} - \left( - \frac{1}{2} \right) \left( - \frac{1}{2} + 1 \right) } \ket{ \frac{1}{2} } = \ket{ \frac{1}{2} } \\
+  \Aboxed{J_+ &= \hbar \left( \begin{array}{cc} 0 & 1 \\ 0 & 0 \end{array} \right)}
+\end{align}
+We know that $J_-$ is just the transpose of $J_+$ (Griffiths calls them the Hermitian conjugate, p.47), hence, 
+\eqn{ \Aboxed{J_- &= \hbar \left( \begin{array}{cc} 0 & 0 \\ 1 & 0 \end{array} \right)}}
+Knowing what $J_{\pm}, J_+ = J_x + i J_y, J_- = J_x - iJ_y, J_i = \frac{\hbar}{2} \sigma_i$ where $\sigma_i$ is the Pauli matrix obeying $[ \sigma_i, \sigma_j] = 2 \epsilon_{ijk} \sigma_k$, we can write $J_x, J_y, J_z$: 
+\begin{align}
+  J_x &= \frac{\hbar}{2} \left( \begin{array}{cc} 0 & 1 \\ 1 & 0 \end{array} \right) \\
+  J_y &= \frac{\hbar}{2} \left( \begin{array}{cc} 0 & -i \\ i & 0 \end{array} \right) \\
+  J_z &= \frac{\hbar}{2} \left( \begin{array}{cc} 1 & 0 \\ 0 & -1 \end{array} \right) 
+\end{align}
+
+
+
 
 
 
@@ -212,13 +218,13 @@ because orbital angular momentum $J$'s only depends on $\theta, \phi$, spin $J$ 
   \begin{itemize}
   \item \hi{$J^2, J_z$ commute with the Hamiltonian}. That is, $J^2, J_z$ are conserved. 
 
-  \item $J_{1z}, J_{2z}$ commute with the Hamiltonian as well with no spin-orbiting coupling. From the space $\ket{j m j_1 j_2}$ (corresponds to $J^2, J_z, J_1^2, J_2^2$) we can construct two subspaces $\ket{m_1 j_1}, \ket{m_2 j_2}$. 
+  \item $J_{1z}, J_{2z}$ commute with the Hamiltonian if there is no spin-orbiting coupling. From the space $\ket{j m j_1 j_2}$ (corresponds to $J^2, J_z, J_1^2, J_2^2$) we can construct two subspaces $\ket{m_1 j_1}, \ket{m_2 j_2}$. 
 
-  \item But once we have spin-orbit coupling $l \cdot S$ term, then $J_{1z}, J_{2z}$ are no longer conserved, the two subspaces are coupled, 
+  \item With the spin-orbit coupling $l \cdot S$, $J_{1z}, J_{2z}$ are no longer conserved, the two subspaces are coupled, 
     \eqn{ \{\ket{j m j_1 j_2} \} \in J_1 \otimes J_2  } 
-    We want to prove that the coupled space's dimension is correct. We want to show 
+    We want to prove that the coupled space's dimension is correct, that is, 
     \eqn{ \dim J = (\dim J_1) \otimes (\dim J_2)} 
-    where 
+    Proof:
     \eqn{ \mathrm{RHS} &= (2j_1 + 1)(2 j_2 + 1) }
     \eqn{ \mathrm{LHS} &= \Sum_{j = j_1 - j_2}^{j_1 + j_2} (2 j + 1) = \frac{2(j_1 + j_2) + 1 + \cdots 2(j_1 - j_2) + 1}{2} \cross (2 j_2 + 1) \\
       &= (2j_1 + 1)(2 j_2 + 1) = \mathrm{RHS} } 
@@ -229,7 +235,7 @@ because orbital angular momentum $J$'s only depends on $\theta, \phi$, spin $J$ 
 \end{enumerate}
 \begin{figure}[ht]
   \centering
-  \includegraphics[width=3in]{images/qm/addition-of-momentum.png}
+  \includegraphics[width=4in]{images/qm/addition-of-momentum.png}
   \caption{Addition of Two Momentum, Conservation of z-component} \label{addition-of-momentum} 
 \end{figure}
 
@@ -256,9 +262,8 @@ The only $\Psi$ that would satisfy the above function is $\Psi = 0$, thus \hi{tw
 
 
 %%%%%%%%%%%%%%%% end of Fall 2012 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\topic{Orbital Angular Momentum Overview}
-This is similar to its classical description of angular momentum. 
-
+\topic{Angular Momentum Review}
+This section provides a less mathematical and more classical approach to recap some important concepts in orbital angular momentum and spin. 
 \begin{enumerate}
 \item Construct Cartesian Components of $\hat{L}$. 
 We define the orbital angular momentum like:
@@ -272,9 +277,7 @@ We define the orbital angular momentum like:
 \item Check the Components We Just Constructed. 
 The question we want to ask is, `can we find the eigenvalues of each of the operators simultaneously?'
 
-To answer the above question, we consider whether the components commute with each other. Because if $\left[ \hat{L}_x, \hat{L}_y \right] = 0$, that is to say we can pin $L_x, L_y$ at the same time. 
-
-Though when we derive it for real (see notes), they come out to be:
+To answer the above question, we consider whether the components commute with each other. Because if $\left[ \hat{L}_x, \hat{L}_y \right] = 0$, that is to say we can pin $L_x, L_y$ at the same time. After we derive it for real (see notes), they come out to be:
 \eqn{ \left[ \hat{L}_x, \hat{L}_y \right] = i \hbar ( \hat{x} \hat{P}_y - \hat{y} \hat{P}_x) = i\hbar \hat{L}_z }
 \eqn{ \left[ \hat{L}_y, \hat{L}_z \right] = i \hbar ( \hat{y} \hat{P}_z - \hat{z} \hat{P}_y) = i\hbar \hat{L}_x }
 \eqn{ \left[ \hat{L}_z, \hat{L}_x \right] = i \hbar ( \hat{z} \hat{P}_x - \hat{x} \hat{P}_z) = i\hbar \hat{L}_y }
@@ -293,33 +296,32 @@ We can solve for the total angular momentum and the azimuthal component simultan
 \eqn{ \hat{L}_z = - i \hbar \ppphi }
 \eqn{ \hat{L}^2 =  - \hbar^2 \left[ \frac{1}{\sin \theta} \pptheta \left( \sin \theta \pptheta \right) + \frac{1}{\sin^2 \theta} \ppphin2  \right] }
 
-\item Define the Total Angular Momentum $\Jhat$. 
-We define the Total Angular Momentum as:
+\item Define the Total Angular Momentum $\Jhat$:
 \eqn{ \Jhat = \Lhat + \Shat }
 Notice we cannot solve for the three components of $\Jhat$ simultaneously neither, because: 
-\eqn{ \left[ \Jhat_x, \Jhat_y \right] = i \hbar \Jhat_z,  \left[ \Jhat_y, \Jhat_z \right] = i \hbar \Jhat_x, \left[ \Jhat_z, \Jhat_x \right] = i \hbar \Jhat_y }
+\eqn{ \left[ \Jhat_x, \Jhat_y \right] &= i \hbar \Jhat_z,  &\left[ \Jhat_y, \Jhat_z \right] &= i \hbar \Jhat_x, &\left[ \Jhat_z, \Jhat_x \right] &= i \hbar \Jhat_y }
 
 
 \item Eigenvalues of $\Lhat, \Jhat$. 
 See Liboff 9.3 for how we get the following equations: 
-\eqn{ \boxed{ \hat{L}^2 \phi_{l,m} (\theta, \phi) = \hbar^2 l (l+1) \phi_{l,m} (\theta, \phi ), \fsp \fsp \hat{L}_z \phi_{l,m} (\theta, \phi) = \hbar m \phi_{l,m} (\theta, \phi ) } }
-in which $l = 0,1,2, \cdots, m = -l, -l+1, \cdots, 0, \cdots l$. If we solve for $\hat{L}_x$ or $\hat{L}_y$ instead we will reach the same results as above. 
+\eqn{  \hat{L}^2 \phi_{l,m} (\theta, \phi) &= \hbar^2 l (l+1) \phi_{l,m} (\theta, \phi)  & \hat{L}_z \phi_{l,m} (\theta, \phi) &= \hbar m \phi_{l,m} (\theta, \phi)  }
+where $l = 0,1,2, \cdots, m = -l, -l+1, \cdots, 0, \cdots l$. If we solve for $\hat{L}_x$ or $\hat{L}_y$ instead we will reach the same results as above. 
 
 Similarly $\Jhat$ would give us:
-\eqn{  \Jhat^2 \phi_{l,m} (\theta, \phi) = \hbar^2 j (j+1) \phi_{l,m} (\theta, \phi ), \fsp \fsp \Jhat_z \phi_{l,m} (\theta, \phi) = \hbar m_j \phi_{l,m} (\theta, \phi )  }
-in which $j = 0,1/2,1,3/2,2, \cdots, m = -j, \cdots, j$. If we solve for $\Jhat_x$ or $\Jhat_y$ instead we will reach the same results as above. 
+\eqn{ \Aboxed{\Jhat^2 \phi_{l,m} (\theta, \phi) &= \hbar^2 j (j+1) \phi_{l,m} (\theta, \phi )}
+& \Aboxed{ \fsp \fsp \Jhat_z \phi_{l,m} (\theta, \phi) &= \hbar m_j \phi_{l,m} (\theta, \phi ) }}
+where $j = 0,1/2,1,3/2,2, \cdots, m = -j, \cdots, j$. If we solve for $\Jhat_x$ or $\Jhat_y$ instead we will reach the same results as above. 
 
-\item Eigenfunctions $\phi_{l,m}$ is Spherical Harmonics $Y_l^m(\theta, \phi)$. 
-The eigenfunction in the above equation, $\phi_{l,m}$, are commonly called the \textbf{Spherical Harmonics $Y_l^m (\theta, \phi)$}:
-\eqn{ Y_l^m (\theta, \phi) = \frac{1}{\sqrt{2 \pi}} e^{im\phi} P_l^m (\phi)   }
-A couple of things about the Spherical Harmonics:
-\begin{itemize}
-\item $\psi( r, \theta, \phi) = R(r) Y_{lm} (\theta, \phi)$. 
-\item $\int_0^{2\pi} \dphi \int_0^{\pi} \sin \theta \dtheta |Y_{lm} (\theta, \phi) |^2 = 1.$
-\item Spherical Harmonics also implies that the unit of angular momentum is $\hbar$.
-\item Degeneracy: \textbf{For a given $l$ value, there are $2l+1$ number of degeneracy.} For instance, for $l=5$, we have 11 eigenstates $Y_5^5, Y_5^4, \cdots Y_5^{-5}$ that correspond to the same $l$, or the same $L^2 = 30 \hbar^2$. That is, for the same $L^2$, the projection onto the azimuthal plan are degenerate.  
-\item $L_z$ is not continuous. Given a $L^2$, we can draw a bunch of cones, each surface describe the superposition of possible eigenfunctions. L will never entirely align with the z axis. 
-\end{itemize}
+\item Eigenfunctions $\phi_{l,m}$. The eigenfunction in the above equation, $\phi_{l,m}$, are commonly called the \textbf{Spherical Harmonics $Y_l^m (\theta, \phi)$}:
+  \eqn{ Y_l^m (\theta, \phi) = \frac{1}{\sqrt{2 \pi}} e^{im\phi} P_l^m (\phi)   }
+  Comments:
+  \begin{itemize}
+  \item $\psi( r, \theta, \phi) = R(r) Y_{lm} (\theta, \phi)$. 
+  \item $\int_0^{2\pi} \dphi \int_0^{\pi} \sin \theta \dtheta |Y_{lm} (\theta, \phi) |^2 = 1.$
+  \item Spherical Harmonics also implies that the unit of angular momentum is $\hbar$.
+  \item Degeneracy: \textbf{For a given $l$ value, there are $2l+1$ number of degeneracy.} For instance, for $l=5$, we have 11 eigenstates $Y_5^5, Y_5^4, \cdots Y_5^{-5}$ that correspond to the same $l$, or the same $L^2 = 30 \hbar^2$. That is, for the same $L^2$, the projection onto the azimuthal plan are degenerate.  
+  \item $L_z$ is not continuous. Given a $L^2$, we can draw a bunch of cones, each surface describe the superposition of possible eigenfunctions. L will never entirely align with the z axis. 
+  \end{itemize}
 \end{enumerate}
 
 
@@ -341,14 +343,14 @@ A couple of things about the Spherical Harmonics:
 
 \item Quantum numbers, 
   \begin{enumerate}
-  \item $l$ (orbital): integers, $0 \le l \le n$. A subset of j is the solution from orbital component. 
+  \item $l$ (orbital): integers, $0 \le l \le n$. A subset of $j$ is the solution from orbital component. 
   \item $j$ (total): integer steps, $|l-s|, \cdots, |l+s|$. It completely construct $l$ and $s$. 
-  \item $m_j$ (z-component of total): $-j, \cdots j$ (includes 0 when j is an integer, and does not include 0 when j is a half-integer). It's degeneracy is $2j+1$. 
+  \item $m_j$ (z-component of total): $-j, \cdots j$ (includes 0 when $j$ is an integer, and does not include 0 when $j$ is a half-integer). Its degeneracy is $2j+1$. 
   \end{enumerate}
 \end{enumerate}
 
 \begin{table}[ht]
-  \begin{tabular}{|p{1.5in}|p{1.5in}|p{1.5in}|p{1.5in}|} \hline
+  \begin{tabular}{|p{1.5in}|p{1.2in}|p{1.2in}|p{1.2in}|} \hline
     & $\Lhat$ (Orbital) & $\Shat$ (Spin) &$\Jhat = \Lhat + \Shat$ (Total) \\ \hline
     \multirow{3}{*}{Commutating Relations} &
     $\left[ \Lhat_x, \Lhat_y \right] = i \hbar \Lhat_z$ &  $\left[ \Shat_x, \Shat_y \right] = i \hbar \Shat_z$ &  $\left[ \Jhat_x, \Jhat_y \right] = i \hbar \Jhat_z$ \\
@@ -376,24 +378,23 @@ Examples:
 \textbf{Answer:} 
 \begin{enumerate}
 \item $2e^-: \Lhat = \Lhat_1 + \Lhat_2 $ 
-\item $ 1 e^-: \Jhat = \Lhat + \Shat$
-\item \ce{^2H} = p+n: l =0. $\Jhat = \Shat_p + \Shat_n$. 
+\item $1e^-: \Jhat = \Lhat + \Shat$
+\item \ce{^2H = p + n}: $l =0. \Jhat = \Shat_p + \Shat_n$. 
 \end{enumerate}
 
-\item Adding Two Orbital Momentum.  
+\item Adding Two Orbital Momentum $\Lhat= \Lhat_1 + \Lhat_2$ of two independent systems.
 
-\textbf{Answer:} we want to find the $(l,m)$ associated with $\Lhat= \Lhat_1 + \Lhat_2$ from the four quantum numbers $l_1, m_1, l_2, m_2$. 
+\textbf{Answer:} we want to find the $(l,m)$ from the four quantum numbers $l_1, m_1, l_2, m_2$.
 \begin{itemize}
 \item $\Lhat^2 = (\Lhat_1 + \Lhat_2)^2 $
 \item $ \Lhat_z = \Lhat_{1z} + \Lhat_{2z} \Rightarrow m_{\mathrm{max}} = m_{\mathrm{1,max}} + m_{\mathrm{2,max}} = l_1 + l_2.$
 $\fsp l_{\mathrm{max}} = m_{\mathrm{max}} = l_1 + l_2.$
-\item $ \mbox{Total \# of independent states } N = (2 l_1 + 1) (2l_2 + 1) = \Sum_{l_{\mathrm{min}}}^{l_{\mathrm{max}}} (2l+1).$
-$\fsp\Rightarrow l_{\mathrm{min}} = |l_2 - l_1 |.$ That is,
+\item $ \mbox{Total \# of independent states } N = (2 l_1 + 1) (2l_2 + 1) = \Sum_{l_{\mathrm{min}}}^{l_{\mathrm{max}}} (2l+1) \Rightarrow l_{\mathrm{min}} = |l_2 - l_1 |.$ Thus,
 \eqn{ l = |l_2 - l_1|, \cdots , l_1 + l_2}
 \end{itemize}
 
 
-\item Adding two electrons. Given: $ 2e^-$, 1 $e^-$ \@ $l_1 = 1$, 1 $e^-$ \@ $l_2 = 2$. 
+\item Adding two electrons, given $l_1 = 1, l_2 = 2$. 
 
 \textbf{Answer:}
 \begin{itemize}
