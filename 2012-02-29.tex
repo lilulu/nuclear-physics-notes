@@ -34,7 +34,6 @@ Recall the slowing down equation for the resonance region of $[1\eV, 0.1 \MeV]$ 
 
 
 \subtopic{Livolant-Jeanpierre Approximation}
-
 We manipulate Eq.~\ref{resonance-sl-d-eqn}:
 \begin{itemize}
 \item We facterize $\Phi(u) = \phi(u) \Psi(u)$, where $\phi(u)$ is the fine structure/self-shielding factor that models the resonances, $\Psi(u)$ is the flux outside the resonance (Hebert calls it `macroscopic flux', and it represents the asymptotic behavior of flux between resonances). 
@@ -53,11 +52,11 @@ We manipulate Eq.~\ref{resonance-sl-d-eqn}:
 \item Then we can write (omitting $u$ dependency for simplicity) and cancel out $\Psi$ on both sides, 
   \begin{align}
     (\Sigma_{t}^R + \Sigma_t^M) \Psi \phi &= R^R \Psi \phi +  \Sigma_{t}^M \Psi  \\
-    R^R \phi + \Sigma_t^M &= (\Sigma_t^M  + \Sigma_{t}^R ) \phi 
+   (\Sigma_t^M  + \Sigma_{t}^R ) \phi &=  R^R \phi + \Sigma_t^M  
   \end{align}
 
 \item If we divide by $N^R$ (the resonance nuclide number density), we get 
-  \eqn{ r^R \phi + \sigma_d &= (\sigma_d + \sigma_{t}^R) \phi }
+  \eqn{ (\sigma_d + \sigma_{t}^R) \phi &= r^R \phi + \sigma_d }
 \end{itemize}
 
 
@@ -76,7 +75,7 @@ Comments:
 \begin{itemize}
 \item WR $\RI_{\eff}$ only depends on cross sections: $\sigma_d$ is assumed to be based on material composition of the reactor, and $\sigma_r(E)$ are from libraries. There is no need for flux spectrum. 
 
-\item WR says that we ignore scattering of U238 because its width is large compared with the approximately 1\% energy it can lose upon scattering. To improve this approximation, sometimes people use the potential scattering of 11.39 barns. 
+\item WR ignores U238 scattering because its width is large compare with the approximately 1\% energy it can lose upon scattering (this statement seems to suggest that WR ignores U238 resonant scattering xs, whereas the comparison with MC seems to suggest WR ignores U238 potential scattering xs). To improve this approximation, sometimes people use the potential scattering of 11.39 barns. 
 
 \item WR approximations match direct MC results near infinite dilution. 
 \end{itemize}
@@ -98,15 +97,12 @@ That is,
 \end{align}
 Comments:
 \begin{itemize}
-\item NR approximation is good for higher energy. For instance, at 100 keV, scattering lose 1 keV, which is larger than the 25 eV spacing of \ce{^{238}U}. 
+\item NR approximation is good for higher energy. For instance, at 100 keV, scattering lose 1 keV, which is larger than the 25 eV spacing of \ce{^{238}U}. For fast reactor applications for instance narrow resonance is used a lot. 
 
-\item However, the results on the slides come out to be that narrow resonance approximation is not really any better than the wide resonance approximation at higher energy, so there must be some other physics going on. 
-
-\item Narrow resonance approximation is good at high energies. For fast reactor applications for instance narrow resonance is used a lot. 
+\item However, the results on the slides come out to be that narrow resonance approximation is not really any better than the wide resonance approximation at higher energy, so there must be some other physics going on, see next section. 
 \end{itemize}
 
-\item Narrow vs. Wide Resonance Approximations\label{narrow-wide-compr}. 
-Wide resonance approximation agrees pretty well with MC results without U238 scattering; narrow resonance approximation agrees alright with the MC results with U238 scattering. Notice adding in scattering would change the low dilution factor results. See Figure~\ref{wide-vs-narrow}.
+\item Compare with MC\label{narrow-wide-compr}. As in Figure~\ref{wide-vs-narrow}, WR agrees pretty well with MC results without U238 potential scattering; NR agrees alright with the MC results with U238 potential scattering. Notice adding in scattering would change the low dilution factor results.
 
 Compare with MC results using real U238 and U235 xs data, the real results fall between the wide and the narrow approximations for the high dilution factor; but for the low dilution factor, that is, when there are lots of resonance material (uranium), the physics gets complicated: 
 \begin{itemize}
@@ -135,14 +131,14 @@ Alternatively, we can discretize our energy group very finely, then we would not
 Duderstadt (p.343-345) supplies a somewhat simplier approach. 
 \begin{enumerate}
 \item NR: assume the resonance width is small compared to the average energy loss in a collision with the resonant material (since the average energy loss $\sim \frac{(1-\alpha^R)E_0}{2}$, one can expect that NR is valid for high energy): 
-  \eqn{ \Gamma_p \ll \bar{\Delta E}^R = \frac{1 - \alpha^R}{2} E_0  }
+  \eqn{ \Gamma_p \ll \overline{\Delta E}^R = \frac{1 - \alpha^R}{2} E_0  }
   Then the resonant scattering integral can be approximated by replacing $\Phi(E)$ by its asymptotic form: 
   \eqn{ \int_E^{E/\alpha^R} \dE' \frac{\Sigma_a^R(E') \Phi(E')}{(1 - \alpha^R) E'} \approx \frac{\Sigma_p^R}{1 - \alpha^R} \int_E^{E/\alpha^R} \frac{\dE'}{E'} \frac{1}{E'} = \frac{\Sigma_p^R}{E}  }
   Then the slowing down equation is, 
   \eqn{ \Sigma_t(E) \Phi(E) &= \frac{\Sigma_s^M + \Sigma_p^R}{E} & \Phi_{NR} (E) &= \frac{\Sigma_s^M + \Sigma_p^R}{\Sigma_t(E) E} }
 
 \item WR: assume the resonance width is wide compared to the energy loss: 
-  \eqn{ \bar{\Delta E}^R = \frac{1 - \alpha^R}{2} E_0 \ll \Gamma_p \ll  \bar{\Delta E}^M }
+  \eqn{ \overline{\Delta E}^R = \frac{1 - \alpha^R}{2} E_0 \ll \Gamma_p \ll  \overline{\Delta E}^M }
   WR can be referred to as `NR infinite mass absorber' (NRIM): resonant material is infinitely massive such that neutrons suffer no energy loss in a collision with the resonant materials. That is, as $A^R \to \infty, \alpha^R = (A^R - 1/A^R + 1)^2 \to 1$, and 
   \eqn{ \lim_{\alpha^R \to 1} \int_E^{E/\alpha^R} \frac{\Sigma_s^R (E') \Phi(E') \dE'}{(1-\alpha^R) E'} \to \Sigma_s^R (E) \Phi(E) \lim_{\alpha^R \to 1} \int_E^{E/\alpha^R} \frac{\dE'}{1 - \alpha^R} = \Sigma_s^R (E) \Phi(E) }
   Then slowing down equation becomes, 
@@ -178,7 +174,7 @@ Then the flux-weighted resonant material cross section is,
 
 \item Multiple resonant isotopes. Assume we have \ce{H_2 O}, \ce{^{235}U}, and \ce{^{238} U}. 
 
-  \textbf{Solution 1:}
+  \textbf{Solution 1 (Livolant-Jeanpierre):}
   \begin{enumerate}
   \item Assume \ce{^{235} U} is the only resonant isotope, then we solve an energy independent $\sigma_d$ by 
     \eqn{ \sigma_d = \frac{N_{238} \bar{\sigma}_{238} + N_H \sigma_H + N_O \sigma_O}{N_{235} } }
@@ -196,7 +192,7 @@ Then the flux-weighted resonant material cross section is,
   Then we feed $\bar{\sigma}_{238}$ back into step 1 and repeat the process until $\bar{\sigma}_{235}, \bar{\sigma}_{238}$ converge, which happen fairly fast with a simple resonance. 
 
 
-\textbf{Solution 2 (Nate/Gene)}: 
+\textbf{Solution 2 (Dederstadt)}: 
 
 In Eq.~\ref{flux-collapse-235}, $\phi(u)$ shows up in both the top and the bottom of the equation, so if we scale $\phi(u)$ by any non-energy dependent term as they would just cancel out, the solution would not change. Recall $\phi(u)$ as in Eq.~\ref{NR-flux-eqn}, the top $\sigma_{po,r} + \sigma_d$ is energy-independent, and $N_r$ is energy-independent as well, that is, 
 \eqn{ \phi_{NR} (u) = \frac{\sigma_{po,r} + \sigma_d}{\sigma_d + \sigma_{to,r}(u)} \to \frac{1}{\sigma_d + \sigma_{to,r}(u)} \to  \frac{1}{N_r \sigma_d + N_r \sigma_{to,r}(u)} \to \frac{1}{\Sum_{\mathrm{moderators}} N_m \sigma_m + N_r \sigma_{to,r}(u)} }
@@ -245,7 +241,18 @@ How does a production tool uses resonance parameters?
 For real application, it is rarely possible to just use someone else's cross section table; we almost certainly need to generate xs suitable for our application. 
 
 
-
+\subtopic{Recap}
+\begin{table}[ht]
+  \centering
+  \begin{tabular}{|c|p{2in}|p{2.5in}|} \hline
+     & Narrow Resonance & Wide Resonance  \\ \hline
+    Assumptions & $\Gamma_p \ll \overline{\Delta E}^R \Rightarrow \sigma_s^R = \sigma_{po}^R = $const. $\phi(u)=$ const.  & $ \overline{\Delta E}^R \ll \Gamma_p \ll \overline{\Delta E}^M \Rightarrow \sigma_s^R(u) \phi(u)$ = const. \\ \hline
+    Fine structure $\phi(u)$ & $\displaystyle \frac{\sigma_{po}^R + \sigma_d}{\sigma_{t}^R (u) + \sigma_d} = \frac{\sigma_{po}^R + \sigma_d}{\sigma_{a}^R(u) + \sigma_{po}^R + \sigma_d }$ &  $\displaystyle \frac{\sigma_d}{\sigma_{t}^R (u) - \sigma_{s}^R (u) + \sigma_d} = \frac{\sigma_d}{\sigma_{a}^R (u) +  \sigma_d }$   \\ \hline
+    Total $\Phi (E)$ &  $\displaystyle\frac{\Sigma_s^M + \Sigma_p^R}{\Sigma_t(E) E}$  & $\displaystyle\frac{\Sigma_s^M}{(\Sigma_t(E) - \Sigma_s^M(E))E}$ \\ \hline 
+    Comments & Good for high energy.   & Ignore $\sigma_{po}^R$ b/c width.  \\ \hline
+  \end{tabular}
+  \caption{Comparison of Narrow and Wide Resonances}
+\end{table}
 
 
 
