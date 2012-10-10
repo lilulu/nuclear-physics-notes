@@ -6,15 +6,15 @@
 
 
 \topic{Analytical Relations between $V_0, r_0, E_B$ \label{2H-relation}}
-In this section we consider the interaction between a neutron and a proton of the form of spherical well with $l=0$, and find analytical relations between the well depth $V_0$, well width $r_0$, and binding energy $E_B$.  
-
+In this section we consider an easiest form of nucleon-nucleon potential (the interaction between a neutron and a proton): a spherical well with $l=0$ (as in Fig.~\ref{deuteron-potential}), 
+\eqn{ V(r) = \left\{ \begin{array}{cc} -V_0 & r \le r_0 \\ 0 & r > r_0   \end{array} \right. }
 \begin{figure}[h!]
     \centering
     \includegraphics[width=2in]{images/deuteron/deuteron-potential.png}
-    \caption{Deuteron Potential Well}
+    \caption{Deuteron Potential Well} \label{deuteron-potential}
 \end{figure}
 
-
+We solve for analytical relations between the well depth $V_0$, well width $r_0$, and binding energy $E_B$: 
 \begin{enumerate}
 \item We can simplify the eigenvalue problem for deutrons to be:
 \eqn{   \left[ - \frac{\hbar^2}{2 \mu}  \pprn2  +  V_{\mathrm{nuc}} (r) - E_n  \right] u_n (r)  = 0  }
@@ -22,17 +22,21 @@ in which $E<0$ (bound state), and the potential well of $-V_0$ goes from $0$ to 
 
 \item Write out general form of solutions:  
 \begin{enumerate}
-\item For $r < r_0$, $ \psi_n (r) = A \sin k_1 r + B \cos k_1 r; \fsp k_1 = \frac{\sqrt{2 \mu (E+V_0)}}{\hbar}.$
-Notice it is $E - (-V_0) = E + V_0$. 
+\item For $r \le r_0$, notice $E - (-V_0) = E + V_0$. 
+\eqn{ u_n (r) &= A \sin k_1 r + B \cos k_1 r  & k_1 &= \frac{\sqrt{2 \mu (E+V_0)}}{\hbar} }
 
-\item For $r > r_0$, $\psi_n (r) = C e^{-k_2 r} + D e^{k_2 r}$. 
+\item For $r > r_0$, 
+\eqn{ u_n (r) = C e^{-k_2 r} + D e^{k_2 r} }
 \end{enumerate}
 
 \item Apply boundary conditions:
 \begin{enumerate}
-\item $\psi_n (r=0) \neq \infty \Rightarrow  u_{nl} (r=0) = 0 \Rightarrow B = 0$, because the equation is in the form of $A \sin(kr)/r + B \cos (kr)/r$. 
+\item Recall $\psi_n (r) = \frac{u_n(r)}{r}$, then 
+\eqn{ \psi_n (r=0) \neq \infty \Rightarrow  u_{nl} (r=0) = 0 \Rightarrow B = 0}
 
-\item $\psi_n (r \to \infty) \neq \infty \Rightarrow u_{nl} (r\to \infty) = 0 \Rightarrow D = 0$. Notice we use symmetry in this problem. If we were to distinguish between the two sides of the well, then to the right of the well $u_n(x) = C e^{-k_2 x}$, and to the left of the well $u_n (x) = C' e^{k_2 x}$. 
+\item Using symmetry:
+\eqn{ \psi_n (r \to \infty) \neq \infty \Rightarrow u_{nl} (r\to \infty) = 0 \Rightarrow D = 0}
+If we were to distinguish between the two sides of the well, then to the right of the well $u_n(x) = C e^{-k_2 x}$, and to the left of the well $u_n (x) = C' e^{k_2 x}$. 
 \end{enumerate}
 
 \item Apply interface conditions: $\psi_n, \psi^{\prime}_n$ are continuous at $r_0$: 
@@ -71,8 +75,7 @@ Together, that is to say,
 
 \begin{figure}
     \centering
-    \subfloat[Gounde State]{\includegraphics[width=0.5\textwidth]{images/deuteron/deuteron-ground-state.png}}   
-    \subfloat[1st Excited State]{\includegraphics[width=0.3\textwidth]{images/deuteron/deuteron-excited-state.png}}
+    \includegraphics[width=5in]{images/deuteron/deuteron-states.png}
     \caption{Deutrium Ground State, 1st Excited State Potential Energy}    \label{deuteron-bound}
 \end{figure}
 
@@ -100,7 +103,7 @@ In general, we assume deuteron ground state (n,p) interaction means $J=1$\footno
 
 \begin{figure}[h!]
     \centering
-    \includegraphics[width=3in]{images/deuteron/deuteron-possible-config.png}
+    \includegraphics[width=5in]{images/deuteron/deuteron-possible-config.png}
     \caption{Possible Configurations for Two Spin 1/2 Particles}
 \end{figure}
 

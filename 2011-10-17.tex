@@ -7,7 +7,18 @@
 
 %%%%%%%%%%%%%%%%%% New Part: Nuclear Structure %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \lecture{Bound State of A Deuteron, Finite Square Well\label{2H-bound-state}}
-Recall that we've solved the simple finite square well problem in Chapter~\ref{finite-square-well} (recall the even parity and odd parity cases). Now we consider the simplest bound state nucleus: a deuteron \ce{^2H}. We will show that a bound state problem can be reduced into three components:
+Recall that we've solved the simple finite square well problem in Chapter~\ref{finite-square-well} (recall the even parity and odd parity cases). Now we consider the simplest bound state nucleus: a deuteron \ce{^2H}. 
+
+Some facts about deuteron: 
+\begin{itemize}
+\item \ce{^2_1 H_1} is consist of a neutron and a proton. It's nuclear radius is 2.1 fm. 
+\item The binding energy of a deuteron is, 
+  \eqn{ (m(n) + m(\ce{^1H}) - m(\ce{^2 H})) c^2 = 2.22 \MeV} 
+  which is very small compare with other particles. This is the lowest point on a B/A vs. A curve (generating a 1.11 MeV/A point, where the maximum is about 8 MeV/A). 
+\end{itemize}
+
+
+We will show that a bound state problem can be reduced into three components:
 \begin{itemize}
 \item An eigenvalue problem (Section \ref{2H-eigenvalue});
 \item An analytical relation and a quantitative relation between $V_0, \Gamma_0, E_0$ (Section \ref{2H-relation});
@@ -26,24 +37,60 @@ in which
 \end{align}
 We assume central potential. 6-degrees of freedom = \# of coordinates in the state vector
 
-\item Convert to Center-of-Mass frame: 
+\item Define Center-of-Mass (COM) frame: 
+\eqn{
+ H &\to H_{\mathrm{CM}} + H_{\mathrm{Rel}}, 
+&(\uline{x}_p, \uline{p}_p; \uline{x}_n, \uline{p}_n) &\to (\uline{r}, \uline{p}_{\mathrm{Rel}}; \uline{R}, \uline{p}_{\mathrm{CM}} ) 
+}
 \begin{align}
- H \to H_{\mathrm{CM}} + H_{\mathrm{Rel}}, \fsp \fsp (\uline{x}_p, \uline{p}_p; \uline{x}_n, \uline{p}_n) \to (\uline{r}, \uline{p}_{\mathrm{Rel}}; \uline{R}, \uline{p}_{\mathrm{CM}} ) \\
 \begin{dcases*} 
-\uline{R} = \frac{1}{m_n + m_p} (\uline{x}_p x_p + \uline{x}_n x_n) & C.M. position\\
+\uline{R} = \frac{1}{m_n + m_p} (m_p \uline{x}_p + m_n \uline{x}_n ) & C.M. position\\
 \uline{r} = \uline{x}_p - \uline{x}_n & Relative position \\
 \uline{p}_{\mathrm{CM}} = \uline{p}_{n} + \uline{p}_p & Momentum of CM \\
 \uline{p}_{\mathrm{Rel}} = \frac{m_p \uline{p}_n - m_n \uline{p}_p}{m_n + m_p} & Momentum of coordinate relative to C.M \\
 \end{dcases*}
 \end{align}
-Then a deuteon Hamiltonian becomes:
-\begin{align}
-\Hhat_d &= \overbrace{\frac{1}{2 \underbrace{M}_{=m_n + m_p}} \uline{\Phat}_{\mathrm{CM}}^2}^{ = \hat{E}_{\mathrm{CM}} \to  0} + \frac{1}{2 \underbrace{\mu}_{=\frac{m_n m_p}{m_n + m_p}}} \uline{\Phat}_{\mathrm{Rel}}^2 + V_{\mathrm{nuc}} (\uline{r}) \\
-&= \frac{1}{2 \mu} \uline{\Phat}_{\mathrm{Rel}}^2 + V_{\mathrm{nuc}} (\uline{r}) = -\frac{\hbar^2}{2 \mu} \gradient_r^2 + V_{\mathrm{nuc}} (\uline{r}) 
-\end{align}
-in which $\gradient_r^2$ is Laplacian in relative coordinates. Now we've reduced the problem into a `single-particle' problem that described the reduced mass $\mu$ about the center of mass in $\uline{r}$. 
 
-\item A qualitative evaluation of $V_{\mathrm{nuc}} (\uline{r})$ \footnote{Krane, p.80}: 
+\item With some math, we can transform the $(n,p)$ two body problem into an effectively single particle eigenvlaue problem: 
+\begin{align}
+[\derivative \vec{R}, \derivative \vec{r}] &= [ \derivative \vec{x}_n \derivative \vec{x}_p] \left[ \begin{array}{cc} 
+\frac{m_n}{m_n + m_p} & -1 \\ 
+\frac{m_p}{m_n + m_p} & 1 
+\end{array} \right]   \\
+f(\vec{R}, \vec{r}) &= [ \derivative \vec{x}_n, \derivative \vec{x}_p]  \left[ \begin{array}{c} \uline{\gradient}_n \\ \uline{\gradient}_p \end{array} \right] f(x_n, x_p)  \\
+&= [ \derivative \vec{R}, \derivative \vec{r}]  \left[ \begin{array}{c} \uline{\gradient}_R \\ \uline{\gradient}_r \end{array} \right] f(x_n, x_p)  
+\end{align}
+\begin{align}
+\Rightarrow 
+\left[ \begin{array}{cc} 
+\frac{m_n}{m_n + m_p} & -1 \\ 
+\frac{m_p}{m_n + m_p} & 1 
+\end{array} \right]   
+\left[ \begin{array}{c} \uline{\gradient}_R \\ \uline{\gradient}_r \end{array} \right] 
+&=  \left[ \begin{array}{c} \uline{\gradient}_n \\ \uline{\gradient}_p \end{array} \right]
+\end{align}
+We plug into our original definition of $K$: 
+\begin{align}
+K &= - \frac{\hbar^2 \uline{\gradient}_n^2}{2 m_n}  - \frac{\hbar^2 \uline{\gradient}_p^2}{2 m_p}  \\
+&= - \frac{\hbar^2}{2} [ \uline{\gradient}_n, \uline{\gradient}_p] \left[ \begin{array}{cc} \frac{1}{m_n} & 0 \\ 0 & \frac{1}{m_p} \end{array} \right] \left[ \begin{array}{c} \uline{\gradient}_n \\ \uline{\gradient}_p \end{array} \right] \\
+ &= - \frac{\hbar^2}{2} [ \uline{\gradient}_R, \uline{\gradient}_r] 
+\left[ \begin{array}{cc} \frac{m_n}{m_n+m_p} & \frac{m_p}{m_n+ m_p} \\ -1 & 1 \end{array} \right]
+\left[ \begin{array}{cc} \frac{1}{m_n} & 0 \\ 0 & \frac{1}{m_p} \end{array} \right] 
+\left[ \begin{array}{cc} \frac{m_n}{m_n+m_p} & -1 \\ \frac{m_p}{m_n+ m_p} & 1 \end{array} \right]
+\left[ \begin{array}{c} \uline{\gradient}_R \\ \uline{\gradient}_r \end{array} \right] \\
+&= - \frac{\hbar^2 \laplacian_R}{2 (m_1 + m_2)} - \frac{\hbar^2 \laplacian_r}{2 \mu} = - \frac{\hbar^2 \laplacian_R}{2M} - \frac{\hbar^2 \laplacian_r}{2 \mu} 
+\end{align}
+where $\mu$ is the reduced mass, $M$ is the total mass. So we have reduced a two body problem into effectively a single particle problem describing the reduced mass about the center of mass (where $B$ is the binding energy in the two-body problem): 
+\eqn{ \Hhat \psi(\vec{r}) &= - \vec{B} \psi(\vec{r}) }
+% \eqn{\Rightarrow e^{i \uline{K} \cdot \uline{R}} \psi(\uline{x}) &= \psi(\uline{x}_1 - \uline{x}_2) }
+
+We ignore the COM translation, and focus on a stationaty deuteron. 
+\begin{align}
+\Hhat_d &= \overbrace{\frac{\uline{\Phat}_{\mathrm{CM}}^2}{2M}}^{ = \hat{E}_{\mathrm{CM}} \to  0} + \frac{\uline{\Phat}_{\mathrm{Rel}}^2}{2\mu} + V_{\mathrm{nuc}} (\uline{r}) = \frac{\uline{\Phat}_{\mathrm{Rel}}^2}{2\mu} + V_{\mathrm{nuc}} (\uline{r}) = -\frac{\hbar^2}{2 \mu} \gradient_r^2 + V_{\mathrm{nuc}} (\uline{r}) 
+\end{align}
+
+
+\item Now we perform a qualitative evaluation of $V_{\mathrm{nuc}} (\uline{r})$ \footnote{Krane, p.80}: 
     \begin{enumerate}
     \item At short distances: very strong, overcome the Coulomb repulsion of protons in the nucleus; 
     \item At long distances: very week and negligible; 
@@ -87,23 +134,13 @@ In a sense, we defined a modified potential term $V_{\mathrm{eff}} (r)$ that tak
     \caption{$V_{\mathrm{eff}}$'s Effect on a Deutron}
     \label{V-eff}
 \end{figure}
-\textbf{Interpretations of Figure~\ref{V-eff}:}
+\textbf{How $V_{\mathrm{eff}}$ affects a deutron (Fig.~\ref{V-eff}):}
 \begin{enumerate}
 \item Original $V_{\mathrm{nuc}} (r)$ is mostly attractive (negative); 
 \item Angular momentum terms act as a repulsive barrier as it is positive;
-\item $V_{\mathrm{eff}} (r)$ is still mostly attractive (negative), but weaker than $V_{\mathrm{nuc}} (r)$, In a word, \textcolor{blue}{$V_{\mathrm{eff}}$ lifts the potential up from the original $V_{\mathrm{nuc}}$, making the interaction weaker;} 
+\item $V_{\mathrm{eff}} (r)$ is still mostly attractive (negative), but weaker than $V_{\mathrm{nuc}} (r)$. In a word, \textcolor{blue}{$V_{\mathrm{eff}}$ lifts the potential up from the original $V_{\mathrm{nuc}}$, making the interaction weaker;} 
 \item There are discrete bound states that fit into the potential. 
 \end{enumerate}
 
 Next: We've defined the particle potential. Now we are looking for the permitted energy levels $E_n$ that can fill in the potential. If we have a weaker potential, we can fit in less energy levels. Vice versa. In the next sections we will solve this problem for deutrons. 
-
-
-
-
-
-
-
-
-
-
 \end{document}

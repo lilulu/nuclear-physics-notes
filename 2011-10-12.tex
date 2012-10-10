@@ -13,7 +13,7 @@ a special potential that is only depend on radius (no $\theta, \phi$ dependency)
 Section.~\ref{section-physical-angular-momentum} through \ref{section-Pauli} were given on Oct. 1-3, 2012 by Prof. Ju Li. 
 
 %%%%%%%%%%%%%%% 12 Fall %%%%%%%%%%%%%%%%%
-\topic{Physical Meaning of Momentums \label{section-physical-angular-momentum}}
+\topic{Physical Meaning of Momenta \label{section-physical-angular-momentum}}
 \hi{Momentum is a generator of translation.} Consider an operator $T$ that transforms $\psi(x)$ to $\psi(x-\Delta x)$: 
 \eqn{ T \psi(x) = \psi(x-\Delta x)} 
 We perform the Taylor expansion on $\psi(x - \Delta x)$: 
@@ -38,7 +38,7 @@ We can prove that
 where $\vec{n}$ is the axis of rotation, $\theta$ is the amount of rotation in radian.  Keep in mind this $R(\vec{n}, \theta)$ is a scalar operator. 
 
 
-\topic{Properties of Angular Momentum}
+\topic{Properties of Angular Momenta}
 Now we are going to approach a measurement of an arbitrary vector operator $V$(the vector notation is ommited in this section) from two angles:
 \begin{enumerate}
 \item Recall the expression for $R(\vecn, \theta)$ in Eq.~\ref{scalar-R}. Then for an arbitrary vector operator $V$, a measurement can be written as, 
@@ -189,7 +189,7 @@ Knowing what $J_{\pm}, J_+ = J_x + i J_y, J_- = J_x - iJ_y, J_i = \frac{\hbar}{2
 
 
 
-\topic{Addition of Angular Momentum}
+\topic{Addition of Angular Momenta}
 Consider the angular momentum (orbital angular momentum, spin, etc) of two systems $J_1, J_2$. We can construct the total momentum and the z-component: 
 \eqn{ J^2 &= (J_1 + J_2)(J_1 + J_2) = J_1^2 + 2 J_1 J_2 + J_2^2 & J_z &= J_{1z} + J_{2z} }
 We are interested in evaluating how $J^2, J_z$ commutes with $H = V(r) + l \cdot S V_{\mathrm{so}} (r) + \frac{\gradient^2}{2 \mu}$, where $l \cdot S = J_1 \cdot J_2$. 
@@ -241,22 +241,38 @@ because orbital angular momentum $J$'s only depends on $\theta, \phi$, spin $J$ 
 
 
 
-\topic{Pauli Exclusion Principle \label{section-Pauli}}
-Let's define a two-particle state vector $\ket{\Psi}$, the two particles are at $X_1, X_2$, and we define $X$ such that 
+\topic{Pauli Exclusion Principle From Permutation Operator \label{section-Pauli}}
+\begin{enumerate}
+\item Motivate permutation operator in 2 particle system. Let's define a two-particle state vector $\ket{\Psi}$, the two particles are at $X_1, X_2$, and we define $X$ such that 
 \eqn{ X =  x \otimes \{ \up, \down \} }
 We cannot tell the two particles apart, thus 
 \eqn{ \bra{\Psi} x_1 y_1^2 S_{1z} \ket{\Psi} = \bra{\Psi} x_2 y_2^2 S_{2z} \ket{\Psi} }
 But we can permute the two particles and get different results depend on the particle property, 
 \eqn{ \Psi(X_1, X_2) = e^{i \theta} \Psi(X_2, X_1) }
 where
- \eqn{ \theta = \left\{ \begin{array}{cc} \theta = \pi, e^{i \theta} = -1 & \mbox{2 Fermions} \\ \theta = 2 \pi, e^{i \theta} = 1 & \mbox{2 Bosons} \end{array} \right. }
-We extend this argument into many-particle system and define a permutation operator $\hat{P}_{ij}$, 
+ \eqn{ \left\{ \begin{array}{ccc} \theta = \pi &  e^{i \theta} = -1 & \mbox{2 Fermions} \\ \theta = 2 \pi  & e^{i \theta} = 1 & \mbox{2 Bosons} \end{array} \right. }
+
+\item Define a general permutation operator in multi-particle system. 
+We extend this argument into many-particle system and define \textbf{a permutation operator $\hat{P}_{ij}$}, 
 \eqn{ \hat{P}_{ij} \Psi(X_1, X_2, \cdots X_i, \cdots, X_j, \cdots, X_N) = \Psi (X_1, X_2, \cdots X_j, \cdots, X_i, \cdots X_N) }
-We know that $\hat{P}_{ij}$ commutes with the Hamiltonian, $[H, \hat{P}_{ij}] = 0$, and we know $\hat{P}_{ij} = \pm 1$ ($+1$ for Bosons, $-1$ for Fermions). 
+
+Spin-statistics theorem says, 
+\eqn{  P_{ij} \ket{\psi} = \left\{  
+\begin{array}{cc} 
+  - \ket{\psi} & \mbox{if $i,j$ are the same gene (stationary, mass, charge, I, etc), and half-integer spins (Fermion)} \\
+  \ket{\psi} & \mbox{if $i,j$ are the same gene but integer spin (Boson)} \\
+  \pm \ket{\psi} & \mbox{if different genes.} 
+\end{array}
+\right. }
+That is, $\hat{P}_{ij} = \pm 1$ ($+1$ for Bosons, $-1$ for Fermions). 
+
+
+\item \textbf{Proof: Pauli Exclusion Principle}. 
 
 Assume it is possible to have two identical Fermions $X_i = X_j = X_o$, that is, 
 \eqn{ \Psi (X_1, X_2, \cdots X_0, \cdots, X_0, \cdots X_N) = - \Psi (X_1, X_2, \cdots X_0, \cdots, X_0, \cdots X_N) } 
 The only $\Psi$ that would satisfy the above function is $\Psi = 0$, thus \hi{two Fermions (protons, neutrons, electrons) cannot occupy the exact same spatial position and spin state.} 
+\end{enumerate}
 
 
 
