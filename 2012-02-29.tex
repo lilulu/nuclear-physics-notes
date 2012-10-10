@@ -51,7 +51,7 @@ We manipulate Eq.~\ref{resonance-sl-d-eqn}:
 
 \item Then we can write (omitting $u$ dependency for simplicity) and cancel out $\Psi$ on both sides, 
   \begin{align}
-    (\Sigma_{t}^R + \Sigma_t^M) \Psi \phi &= R^R \Psi \phi +  \Sigma_{t}^M \Psi  \\
+    (\Sigma_{t}^M + \Sigma_t^R) \Psi \phi &= R^R \Psi \phi +  \Sigma_{t}^M \Psi  \\
    (\Sigma_t^M  + \Sigma_{t}^R ) \phi &=  R^R \phi + \Sigma_t^M  
   \end{align}
 
@@ -65,7 +65,7 @@ There are a couple of ways to approximate $r^R \phi(u)$.
 \item Wide resonance assumes that the resonances are so large that we can assume the reaction rate (for the fine structure) is constant. 
 \eqn{ r^R \phi(u) &= \int_{u-\epsilon^R}^u \frac{1}{1-\alpha^R} e^{-(u-u')} \overbrace{ \sigma_{s}^R (u') \phi(u')}^{\mathrm{constant}} \du' = \sigma_{s}^R (u) \phi(u)  }
 Then we arrive at, 
-\eqn{ \phi_{WR} (u) &= \frac{\sigma_d}{\sigma_{t}^R (u) - \sigma_{s}^R (u) + \sigma_d} = \frac{\sigma_d}{\sigma_{a}^R (u) +  \sigma_d }  }
+\eqn{ \phi_{WR} (u) &= \frac{\sigma_d}{\sigma_{t}^R (u) - \sigma_{s}^R (u) + \sigma_d} = \frac{\sigma_d}{\sigma_{a}^R (u) +  \sigma_d } \label{WR-eqn} }
 \begin{align}
 \RIeff^{\gamma} &= \int \sigma_{\gamma}^R (u) \phi_{WR} (u) \du \\
 &= \int \sigma_{\gamma}^R (u) \frac{\sigma_d}{\sigma_a^R(u) + \sigma_d} \du \\
@@ -75,7 +75,7 @@ Comments:
 \begin{itemize}
 \item WR $\RI_{\eff}$ only depends on cross sections: $\sigma_d$ is assumed to be based on material composition of the reactor, and $\sigma_r(E)$ are from libraries. There is no need for flux spectrum. 
 
-\item WR ignores U238 scattering because its width is large compare with the approximately 1\% energy it can lose upon scattering (this statement seems to suggest that WR ignores U238 resonant scattering xs, whereas the comparison with MC seems to suggest WR ignores U238 potential scattering xs). To improve this approximation, sometimes people use the potential scattering of 11.39 barns. 
+\item WR ignores U238 scattering, as there is no U238 scattering cross section in Eq.~\ref{WR-eqn}. Interpretation: the resonance width is large compare with the approximately 1\% energy lose upon a scattering, thus we can ignore the U238 scattering. To improve this approximation, sometimes people add the potential scattering of 11.39 barns. 
 
 \item WR approximations match direct MC results near infinite dilution. 
 \end{itemize}
@@ -89,7 +89,7 @@ where $\Phi(u') = 1, \sigma_{s}^R (u')\approx \sigma_{po}^R$ potential scatterin
 Thus narrow resonance approximation leads to, 
 \eqn{ r^R \phi(u) = \sigma_{po}^R}
 That is, 
-\eqn{ \sigma_{po}^R + \sigma_d &= (\sigma_d + \sigma_{t}^R (u)) \phi_{NR} (u) & \phi_{NR} (u) &= \frac{\sigma_{po}^R + \sigma_d}{\sigma_d + \sigma_{t}^R (u)} = \frac{\sigma_{po}^R + \sigma_d}{\sigma_{a}^R + \sigma_{po}^R + \sigma_d } }
+\eqn{ \sigma_{po}^R + \sigma_d &= (\sigma_d + \sigma_{t}^R (u)) \phi_{NR} (u) & \phi_{NR} (u) &= \frac{\sigma_{po}^R + \sigma_d}{\sigma_{t}^R (u) + \sigma_d} \approx \frac{\sigma_{po}^R + \sigma_d}{\sigma_{a}^R + \sigma_{po}^R + \sigma_d } }
 \begin{align}
 \RIeff^{\gamma} &= \int \sigma_{\gamma}^R (u) \phi_{NR} (u) \du \\
 &= \int \sigma_{\gamma}^R (u) \frac{\sigma_{pot}^R + \sigma_d}{\sigma_a^R(u) + \sigma_{pot}^R + \sigma_d} \du \\
@@ -128,7 +128,7 @@ Alternatively, we can discretize our energy group very finely, then we would not
 
 
 \subtopic{Duderstadt's Formalism} 
-Duderstadt (p.343-345) supplies a somewhat simplier approach. 
+Duderstadt (p.343-345) approaches the RI approximation without the facterization of the flux:
 \begin{enumerate}
 \item NR: assume the resonance width is small compared to the average energy loss in a collision with the resonant material (since the average energy loss $\sim \frac{(1-\alpha^R)E_0}{2}$, one can expect that NR is valid for high energy): 
   \eqn{ \Gamma_p \ll \overline{\Delta E}^R = \frac{1 - \alpha^R}{2} E_0  }
@@ -246,8 +246,8 @@ For real application, it is rarely possible to just use someone else's cross sec
   \centering
   \begin{tabular}{|c|p{2in}|p{2.5in}|} \hline
      & Narrow Resonance & Wide Resonance  \\ \hline
-    Assumptions & $\Gamma_p \ll \overline{\Delta E}^R \Rightarrow \sigma_s^R = \sigma_{po}^R = $const. $\phi(u)=$ const.  & $ \overline{\Delta E}^R \ll \Gamma_p \ll \overline{\Delta E}^M \Rightarrow \sigma_s^R(u) \phi(u)$ = const. \\ \hline
-    Fine structure $\phi(u)$ & $\displaystyle \frac{\sigma_{po}^R + \sigma_d}{\sigma_{t}^R (u) + \sigma_d} = \frac{\sigma_{po}^R + \sigma_d}{\sigma_{a}^R(u) + \sigma_{po}^R + \sigma_d }$ &  $\displaystyle \frac{\sigma_d}{\sigma_{t}^R (u) - \sigma_{s}^R (u) + \sigma_d} = \frac{\sigma_d}{\sigma_{a}^R (u) +  \sigma_d }$   \\ \hline
+    Assumptions & $\Gamma_p \ll \overline{\Delta E}^R \Rightarrow \sigma_s^R = \sigma_{po}^R = $const. $\phi(u)=$ const.  & $ \overline{\Delta E}^R \ll \Gamma_p \ll \overline{\Delta E}^M \Rightarrow$ reaction rates $\sigma_s^R(u) \phi(u)$ = const. \\ \hline
+    Fine structure $\phi(u)$ & $\displaystyle \frac{\sigma_{po}^R + \sigma_d}{\sigma_{t}^R (u) + \sigma_d} \approx \frac{\sigma_{po}^R + \sigma_d}{\sigma_{a}^R(u) + \sigma_{po}^R + \sigma_d }$ &  $\displaystyle \frac{\sigma_d}{\sigma_{t}^R (u) - \sigma_{s}^R (u) + \sigma_d} = \frac{\sigma_d}{\sigma_{a}^R (u) +  \sigma_d }$   \\ \hline
     Total $\Phi (E)$ &  $\displaystyle\frac{\Sigma_s^M + \Sigma_p^R}{\Sigma_t(E) E}$  & $\displaystyle\frac{\Sigma_s^M}{(\Sigma_t(E) - \Sigma_s^M(E))E}$ \\ \hline 
     Comments & Good for high energy.   & Ignore $\sigma_{po}^R$ b/c width.  \\ \hline
   \end{tabular}
