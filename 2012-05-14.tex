@@ -156,95 +156,244 @@ We consider some common reactivity effects (negative effects):
 \begin{enumerate}
 \item CZP $\to$ HZP: moderator temperature coefficients must satisfy limits.
   \begin{itemize}
-    \item Moderator temperature coefficient cannot be too high; that is, boron concentration cannot be to high. Reason: when boron is high, adding more boron decreases the moderator density and increases the power. Sidenote: PWRs not only have boron in the coolant, but also in the rods.
-    \item Moderator temperature coefficient cannot be too low (otherwise steamlines may break: the huge amount of secondary loop flow would remove all the heat out of the primary loop); that is, we need to be careful when we increase power/burnup, because the following terms contribute to a more negative moderator temperature coefficient: Doppler feedback, Xe build-up, balance out the change brought by Boron. 
+  \item Moderator temperature coefficient cannot be too high; that is, boron concentration cannot be to high. Reason: when boron is high, adding more boron decreases the moderator density and increases the power. Sidenote: PWRs not only have boron in the coolant, but also in the rods.
+  \item Moderator temperature coefficient cannot be too low (otherwise steamlines may break: the huge amount of secondary loop flow would remove all the heat out of the primary loop); that is, we need to be careful when we increase power/burnup, because the following terms contribute to a more negative moderator temperature coefficient: Doppler feedback, Xe build-up, balance out the change brought by Boron. 
   \end{itemize}
+  \begin{figure}[ht]
+    \centering
+    \includegraphics[width=4in]{images/design/moderator-temp-coeff.png}
+    \caption{PWR Reactivity Effects: Moderator Temperature Coefficients} \label{PWR-rho}
+  \end{figure}
 
 \item \hi{HZP to HFP: $\rho \down$ due to resonance absorption (characterized by Doppler coefficient of reactivity).} As temperature increases, the thermal motion of the nuclei increases, causing a broadening of the cross section resonances and a lowering of their peaks. Because of the self-shielding of the nuclei in a material, the effective reaction rate $\up$ as temperature $\up$. Common isotopes that have large near thermal resonances: Xe135, Gd. 
 
 \item \hi{During HFP: Xe and Sm build-up decreases $\rho$.} Recall Fig.~\ref{major-capture}, where Xe and Sm are most important when it comes to poisoning effect. We arrive at the following conclusions for the equilibrium concentration: 
-\eqn{ \left\{ \begin{array}{cc} I_{\infty} \propto \phi_0 & \phi_0 \up, I_{\infty} \up \\ X_{\infty} = \frac{(\gamma_I + \gamma_X) \Sigma_f \phi_0}{\lambda_X + \sigma_a^X \phi_0} & \phi_0 \up, X_{\infty} \mbox{ saturates.}   \end{array} \right. }
+  \eqn{ \left\{ \begin{array}{cc} I_{\infty} \propto \phi_0 & \phi_0 \up, I_{\infty} \up \\ X_{\infty} = \frac{(\gamma_I + \gamma_X) \Sigma_f \phi_0}{\lambda_X + \sigma_a^X \phi_0} & \phi_0 \up, X_{\infty} \mbox{ saturates.}   \end{array} \right. }
 
-Important concepts about Iodine/Xe:
-\begin{itemize}
-\item After startup, it takes about 30 hours for the two to reach saturation. 
-\item After shutdown, Xe peaks in 9 hours (because Iodine decays into Xe, adding about 3000 pcm reactivity) and decays away in 60 hours. 
-\item If we perform a rapid startup after a scram, Xe would be too high, thus the flux may be too high, which immediately burn out Xe and causing an \textbf{overshoot}. 
-\item Long term, a PWR core burns about 1000 pcm/month. So the 3000 pcm Xenon peak takes about 3 months to burn out. 
-\end{itemize}
+  Important concepts about Iodine/Xe:
+  \begin{itemize}
+  \item After startup, it takes about 30 hours for the two isotopes to reach saturation. 
+  \item After shutdown, Xe peaks in 9 hours (because Iodine decays into Xe, adding about 3000 pcm reactivity) and decays away in 60 hours. 
+  \item If we perform a rapid startup after a scram, Xe would be too high, thus the flux may be too high, which immediately burn out Xe and causing an \textbf{overshoot}. 
+  \item Long term, a PWR core burns about 1000 pcm/month. So the 3000 pcm Xenon peak takes about 3 months to burn out. 
+  \end{itemize}
 
-Important concepts about Pm/Sm: 
-\begin{itemize}
-\item 
-\end{itemize}
-
-See Section~\ref{FP-Xenon} and \ref{FP-Sm} for more details.
-
+  Important concepts about Pm/Sm: 
+  \begin{itemize}
+  \item After startup, it takes about 600 hours for the two isotopes to reach saturation. 
+  \item After shutdown, Sm peaks in 200 hours, but never decay away unlike Xe. 
+  \item Following a refueling outage, Sm reactivity peaks by 200-300 pcm after shutdown, and then return to equilibrium about 100 hours after restart. 
+  \end{itemize}
+  See Section~\ref{FP-Xenon} and \ref{FP-Sm} for more details.
 
 \item \hi{HFP Xe equilibrium: fuel depletion decreases $\rho$.}
 \end{enumerate}
 
-
-\begin{figure}[ht]
-  \centering
-  \includegraphics[width=4in]{images/design/moderator-temp-coeff.png}
-  \caption{PWR Reactivity Effects: Moderator Temperature Coefficients} \label{PWR-rho}
-\end{figure}
-
-
-
 \begin{table}[ht]
   \centering
   \begin{tabular}{c|c|c} \hline
-    Condition & Reactivity effects & Change in $\Delta \rho$ \\ \hline
+    Condition & Reactivity effects & Decrease in $\Delta \rho$ \\ \hline
     CZP & Moderator density change & 2-5\% \\ \hline
     HZP & Resonance Absorption/Doppler Coefficient & 1-2\% \\ \hline
     \multirow{2}{*}{HFP} & 0 to equil. Xe & 2-3\% \\ 
     & 0 to equil. Sm & 0.6\% \\ \hline
-    HFP, Equilibrium Xe & Fuel depletion & 5-10\% \\ \hline
+    HFP, Equilibrium Xe & Fuel depletion & 5-10\% \\ \hline \hline
+    Total during startup &   & 4600-10,000 pcm \\ \hline
   \end{tabular}
   \caption{Summary of PWR Reactivity Effects} \label{PWR-reactivity}
 \end{table}
 
+\clearpage
+\subtopic{Lattice Designs}
+Step 1 of PWR core design includes picking the enrichment, number of assemblies, and cycle length. As illustrated in Fig.~\ref{areva-lattice-design}, if we pick 330 days as cycle length, then we need about 4\% enrichment and a reload fraction of 1/4.02. Take-away message: \hi{the average number of U235 is kind of conserved in the sense that enrichment $\up$, number of assembly $\down$} (which is good because less disposal cost). 
+
+  \begin{figure}[ht]
+    \centering
+    \includegraphics[width=4in]{images/design/areva-lattice-design.png}
+    \caption{Areva's Chart Of Cycle length, \# Assemblies, Enrichment for PWRs} \label{areva-lattice-design}
+  \end{figure}
 
 
+\subtopic{Core Loading Patterns}
+Step 2 of PWR core design is to pick a core loading pattern. One example is in Fig.~\ref{PWR-core-loading}, where it is important to surround new fuel with burned fuel to reduce local peaking, as we know fresh fuels can have a $\keff = 1.3$. 
 
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=4in]{images/design/PWR-core-loading.png}
+  \caption{Sample PWRs Core Loading Pattern} \label{PWR-core-loading}
+\end{figure}
+
+We consider two famous patterns: 
+\begin{enumerate}
+\item Out/In Pattern. Notice the depletion terminates when boron becomes zero. Also the power peaking factor as a function of time increases first and then decreases. 
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=5in]{images/design/PWR-out-in.png}
+  \includegraphics[width=5in]{images/design/PWR-out-in-2.png}
+  \caption{PWR Out/In Loading Pattern} \label{PWR-out-in}
+\end{figure}
+
+\item In/In/Out Pattern (low leakage): the center fuel is taken from ancient batch; new fuels are surrounded by burned fuel; power at periphery is reduced. 
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=5in]{images/design/PWR-in-in-out.png}
+  \includegraphics[width=5in]{images/design/PWR-in-in-out-2.png}
+  \caption{PWR In/In/Out Loading Pattern} \label{PWR-in-in-out}
+\end{figure}
+\end{enumerate}
+
+
+\subtopic{PWR Reactivity Control} 
+In PWRs, about 1/2 assemblies have no control rods, so we need to use burnable absorbers etc. 
+\begin{enumerate}
+\item Burnable absorber. To control reactivity/power peaking in the In/In/Out pattern, we place burnable absorber (30,000pcm) in the interior fresh assemblies, and place no burnable absorber in the exterior assemblies (without burnable absorber, the power may be peaking by a factor of 3). 
+
+\item IFBA: pro is that it can be placed anywhere as it is just a thin layer of coating outside of fuel pins. The drawback is that IFBA produces He, which pressurizes the fuel pin and thus we need to design the core with extra platinum space or to use empty blanket. 
+\end{enumerate}
+
+
+\subtopic{Cycle Length and Equilibrium Cycle}
+We want to cluster fresh fuels (which is a good thing for $\keff$), but could lead to bad power peaking. To estimate cycle length though, we can place ALL fresh fuels on the inside and the depleted on the outside for a pretty accurate estimate of cycle length. 
+
+An important fact is (know how to calculate the following for the qual), 
+\eqn{ \boxed{ \mbox{1 Gwd/MT} = 30 \mbox{ days} = 30 \mbox{ million dollars} } }
+
+Equilibrium cycle: we repeat the same core shuffle pattern cycle after cycle until the cycle length stops changing as in Fig.~\ref{PWR-equil-cycle}. Desirable features we are looking for: very flat peak power, and power peaks moves from assembly to assembly between cycles. In practice, it is also common to design a 2-3 cycle pattern and repeat the pattern until equilibrium.
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=5in]{images/design/PWR-equil-cycle.png}
+  \caption{PWR Equilibrium Cycle} \label{PWR-equil-cycle}
+\end{figure}
 
 
 \clearpage
 \topic{BWR Core Designs} 
+Now we move to BWR core designs. A major difference is that BWRs are bigger than PWRs and thus reducing the power density from PWRs' 100 kW/L to BWRs' 50 kW/L. Reference: \href{http://www.ne.doe.gov/np2010/pdfs/ABWRReactorCoreNeutronics.pdf}{GE's ABWR seminar by LE Fennern}.
+
+\subtopic{Design Criteria} 
+Table~\ref{BWRs-criteria} lists the most important reactor physics core design criteria translated into plant technical specifications.
+\begin{table}[ht]
+  \begin{tabular}{|l|l|l|} \hline
+    Condition & Criteria & Abbreviation \\ \hline
+    \multirow{3}{*}{Pseudo Steady State} & Shut down margin (cold, highest worth rod out)  & SDM \\ 
+    & Max notch worth for startups &  \\
+    & Max linear heat generate rate & MLHGR \\ \hline
+    Normal Operations & Min critical power ratio & MCPR \\ \hline
+    LOCA Limits & Max average planer heat generation rate & MAPHGR \\ \hline
+    RIA Limits & Max calories per g enthalpy limit & CPG \\ \hline
+  \end{tabular}
+  \caption{BWRs Design Criteria and Acceptance Criteria} \label{BWRs-criteria}
+\end{table}
+For instance, 
+\begin{itemize}
+\item LOCA limit describes local behavior which is related to local power generated. 
+\item CPR is sensitive to spacers (because of dryout condition). When power increases or flow decreases, CPR tells us what thermal margin we have. 
+\item MCPR is chosen from generic transient analysis. Core design is performed to satisfy those limits. 
+\item Linear heat generation rate limits.
+  \begin{figure}[ht]
+    \centering
+    \includegraphics[width=4in]{images/design/BWR-LHGR.png}
+    \caption{Linear Heat Generation Rate Limits} 
+  \end{figure}
+\item MAPLHGR tech spec are designed to cover LOCA (eg., peak cladding temperature). 
+  \begin{figure}[ht]
+    \centering
+    \includegraphics[width=4in]{images/design/BWR-MAPLHGR.png}
+    \caption{MAPLHGR Designed to Cover LOCA} 
+    \end{figure}
+\end{itemize}
 
 
 
+\subtopic{Core Designs}
+Overall BWR core designs (lattice designs, core loading patterns) are nightmares because: BWRs have 800 assemblies compare with PWRs' 193; BWRs runs with CR inserted, while PWRs do not run with CR inserted; BWRs have no soluble boron (because we do not want to boil boron everywhere) thus we have to rely on other control mechanism. 
+\begin{enumerate}
+\item Modern trend has been pushing the fuel limits (increasing the power density from 40 kW/L to 50 kW/L to even higher as seen in Fig.~\ref{BWR-fuel-limits}. The issue with higher power density is that we need to install bigger pumps and deal with more vibration issues. 
+  \begin{figure}[ht]
+    \centering
+    \includegraphics[width=4in]{images/design/BWR-fuel-limits.png}
+    \caption{BWR Fuel Limits} \label{BWR-fuel-limits} 
+    \end{figure}
 
+\item Also 7x7 bundle are being pushed towards 11x11 bundle, which means linear heat generation rate decrease, though CPR may or may not increase. 
 
-\subtopic{Lattice Designs}
-
-
-\subtopic{Core Loading Patterns}
-
-
-
-\subtopic{Rod Patterns}
-
-
-
-\subtopic{Thermal Margins}
-
-
-
-
-\subtopic{Operational Analysis}
-
-
-
-\subtopic{Safety Analysis}
+\item Simple Control Cell Core (CCC) has been used by many annual cycles (common in Europe). The motivation is, when CRs are pulled out, local peaking factor would increase, thus a CCC with 20\% fresh fuel and low BU would be easy for an annual cycle. Though this is not the case in the US as there are not enough locations for CCC because we need to put about 37\% fresh fuel to sustain a longer cycle length. Again in CCC notice the check board pattern in which fresh fuels are surrounded by depleted fuel. 
+  \begin{figure}[ht]
+    \centering
+    \includegraphics[width=4in]{images/design/BWR-CCC.png}
+    \caption{BWR Control Cell Core (CCC) Layout} \label{BWR-CCC} 
+    \end{figure}
+\end{enumerate}
 
 
 
+\subtopic{Operational Analysis, Reactivity Control}
+Keep in mind that BWRs can operate at various flow rate (unlike PWRs whose flow rate is fixed).  There are three modes we consider for BWRs (to extend cycle length): 
+\begin{enumerate}
+\item Spectrum shifted operation: operate at reduced flow (70\%) to increase void, thus decreasing fuel density, hardening the spectrum, increasing U238 resonance absorption and produce more Pu, which would extend the cycle length. 
+\item Increase core flow operation.
+\item Coast down: maximize flow to increase reactivity, thus lowering feed water temperature and the power would coast. Coast down can last as long as 3 months down to 50\% power. 
+\end{enumerate}
+  \begin{figure}[ht]
+    \centering
+    \includegraphics[width=4in]{images/design/BWR-excess-rho.png}
+    \caption{BWRs Need to Have Hot Excess Reactivity} \label{BWR-excess-rho} 
+    \end{figure}
+
+There is a need to have hot excess reactivity, though we want to keep the reactivity swing flatter. Eg., \hi{PWRs have 20\% $\Delta k$ reactivity hold-down, whereas BWRs only have 2\% $\Delta k$ (the additional comes from Gd)}. Gd is integrated with fuel, very self-shielding with huge $\Sigma_a$, and behave like onion skin burning\footnote{Onion skin burning is used to describe when the cross section is very large ($\sigma_{Gd} = 10^6$b), a thin layer of the material would be burned out, then another thin layer slightly inside would be burned out, etc, like an onion peeling}. So the advantage of Gd over IFBA is the Gd can control burning by density as in Fig.~\ref{BWR-Gd} whereas IFBA can only burn constantly. We pick the Gd concentration and number of pins to flatten the reactivity vs. BU plot. Notice in Fig.~\ref{BWR-Gd}, 
+\begin{itemize}
+\item Know how to extrapolate to get no-Gd curve thus the hold-down. 
+\item 10 times Gd concentration only produces 25\% more hold-down due to self-shielding. 
+\item If put in enough Gd, the curve could be totally flat. 
+\item In one bundle, we can put multiple concentration of Gd. For instance, Sweden has done pellet-by-pellet design where every other pellet is all Gd. 
+\end{itemize}
+  \begin{figure}[ht]
+    \centering
+    \includegraphics[width=4in]{images/design/BWR-Gd.png}
+    \caption{BWRs Reactivity Flattening using Gd} \label{BWR-Gd} 
+    \end{figure}
+
+BWRs generate high void at top of the core which means that the bottom fuel is more burned, there are more fuel left on the top, and the flow is reduced at the top. To compensate for the bottom-heavy flux, we consider: 
+\begin{enumerate}
+\item Add water rods to keep more coolant in the top. 
+\item Add part length fuel rods to allow for more water at the top. 
+\item Have more absorber rods in the bottom of the bundle. 
+\item Use axial enrichment zoning to flatten the power. 
+\item Insert some shallow rods in the bottom of the core. 
+\end{enumerate}
+
+Comments:
+\begin{enumerate}
+\item PLRs make lattice more over-moderated when cold and lower reactivity (which is a shutdown margin improvement). 
+\item Deep inserted CR controls reactivity; shallowly inserted CR controls power peaking. 
+\item Towards the end of the cycle, we slowly remove all CRs, suddenly all the power rolls to the top, in which case we can lose all CPR margin. Thus end-of-cycle condition can be more limiting for BWRs as in Fig.~\ref{BWR-end}. 
+  \begin{figure}[ht]
+    \centering
+    \includegraphics[width=2in]{images/design/BWR-BOC.png}
+    \includegraphics[width=2in]{images/design/BWR-MOC.png}
+    \includegraphics[width=2in]{images/design/BWR-EOC.png}
+    \caption{BWRs Axial Power Shapes at BOC, MOC, and EOC} \label{BWR-cycle} 
+    \end{figure}
 
 
 
+  \begin{figure}[ht]
+    \centering
+    \includegraphics[width=4in]{images/design/BWR-limiting-end.png}
+    \caption{BWRs MFLCPR More Limiting Near End of Cycle} \label{BWR-end} 
+    \end{figure}
+\end{enumerate}
+
+
+
+The last step is illustrated in Fig.~\ref{BWR-startup}, as we design the startup sequence (power, flow and rods) when the core design is finished.
+  \begin{figure}[ht]
+    \centering
+    \includegraphics[width=6in]{images/design/BWR-startup-seq.png}
+    \caption{BWRs Design for Startup Sequence} \label{BWR-startup} 
+    \end{figure}
+
+\clearpage
 \topic{PWR Core Loading Pattern Optimization}
 Reference: Turinsky's `Core Isotopic Depletion and Fuel Management' in \textit{Handbook of Nuclear Engineering}, Springer (2010). 
 
