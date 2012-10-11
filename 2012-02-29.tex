@@ -73,6 +73,8 @@ Then we arrive at,
 \end{align}
 Comments:
 \begin{itemize}
+\item WR's $\sigma_s^R (u)$ term on the bottom is the resonant material's scattering cross section including both the potential scattering (hard sphere collision) and the compound nuclide scattering. That is, NR only accounts for the potential scattering cross section, whereas WR uses the entire scattering cross section. 
+
 \item WR $\RI_{\eff}$ only depends on cross sections: $\sigma_d$ is assumed to be based on material composition of the reactor, and $\sigma_r(E)$ are from libraries. There is no need for flux spectrum. 
 
 \item WR ignores U238 scattering, as there is no U238 scattering cross section in Eq.~\ref{WR-eqn}. Interpretation: the resonance width is large compare with the approximately 1\% energy lose upon a scattering, thus we can ignore the U238 scattering. To improve this approximation, sometimes people add the potential scattering of 11.39 barns. 
@@ -174,7 +176,7 @@ Then the flux-weighted resonant material cross section is,
 
 \item Multiple resonant isotopes. Assume we have \ce{H_2 O}, \ce{^{235}U}, and \ce{^{238} U}. 
 
-  \textbf{Solution 1 (Livolant-Jeanpierre):}
+  \textbf{Solution 1 (Livolant-Jeanpierre):} The idea is, we have to approximate $\sigma_d$ now that there are two resonant isotopes. The reason we emphasize on $\sigma_d$ is because in production tool we resolve the spectrum/group cross section for a number of dilution cross sections, and the data provided to the downstream applications would be a function of the diluion cross sections.  
   \begin{enumerate}
   \item Assume \ce{^{235} U} is the only resonant isotope, then we solve an energy independent $\sigma_d$ by 
     \eqn{ \sigma_d = \frac{N_{238} \bar{\sigma}_{238} + N_H \sigma_H + N_O \sigma_O}{N_{235} } }
