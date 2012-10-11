@@ -7,7 +7,7 @@
 \lecture{LWR Core Design}
 This lecture combines the PWR core loading pattern lecture given for 22.211 on 05/14/2012 and the LWR core design lecture given for 22.39 on 10/02/12, 10/04/12. 
 
-
+%%%%%%%%%%%%%% 10/02/12 22.39 Neutronics Lecture 1 %%%%%%%%%%%%
 \topic{Objectives \& Constrain}
 We have 3 objectives:
 \begin{enumerate}
@@ -60,7 +60,7 @@ Overview of reactor physics methods:
     \item Hence discrete transport method has never been used for full core calculation. 
   \end{itemize}
 
-\item Lattice code and nodal code (see Fig.~\ref{lattice-nodal-code}: we start with basic cross sections (for instance, from ENDF), generate multi-group library, perform an unit-cell calculation, perform a lattice calculation, and perform a whole core calculation. \textcolor{red}{unit cell calculation?}
+\item Lattice code and nodal code (see Fig.~\ref{lattice-nodal-code}: we start with basic cross sections (for instance, from ENDF), generate multi-group library, perform an unit-cell calculation, perform a lattice calculation, and perform a whole core calculation. \hi{Basically we go towards coarser energy groups in exchange for more spatial dimensions/details(1D to 2D to 3D).}
 \end{enumerate}
 \begin{figure}[ht]
   \centering
@@ -69,11 +69,11 @@ Overview of reactor physics methods:
 \end{figure}
 
 
-
+\clearpage
 \subtopic{Lattice Code}
 A lattice code calculation includes:
 \begin{enumerate}
-\item Pin spectrum calculation (energy domain). Lattice code solves for fine energy fluxes (1000s to 10,000s groups) with treatment of resolved resonances, and condense the cross sections to intermediate group cross sections (100s groups): 
+\item Pin spectrum calculation (energy domain, see Fig.~\ref{lattice-energy}). Lattice code solves for fine energy fluxes (1000s to 10,000s groups) with treatment of resolved resonances, and condense the cross sections to intermediate group cross sections (100s groups): 
   \eqn{ \sigma_{g} = \frac{\int_{E_{g-1}}^{E_{g}} \sigma(E) \phi(E) \dE  }{\int_{E_{g-1}}^{E_{g}} \phi(E) \dE}   }
 \begin{figure}[ht]
   \centering
@@ -81,7 +81,7 @@ A lattice code calculation includes:
   \caption{Lattice Code: Pin Spectrum Calculation} \label{lattice-energy}
 \end{figure}
 
-\item Intermediate group pin spatial calculation (spacial domain). Lattice code solves for radial distributions of nuclides and fluxes in each type of pin. For a lattice depletion code, we want to know is the pin-wise isotropic inventories vs. BU. Lattice code produces data library as a function of fuel BU, coolant density, fuel temperature, void, etc (so lattice code does not just solve for a steady state condition, it solves for about 2000 cases). 
+\item Intermediate group pin spatial calculation (spacial domain, see Fig.~\ref{lattice-space}). Lattice code solves for radial distributions of nuclides and fluxes in each type of pin. For a lattice depletion code, we want to know is the pin-wise isotropic inventories vs. BU. Lattice code produces data library as a function of fuel BU, coolant density, fuel temperature, void, etc (so lattice code does not just solve for a steady state condition, it solves for about 2000 cases). 
 \begin{figure}[ht]
   \centering
   \includegraphics[width=4in]{images/design/lattice-space.png}
@@ -93,12 +93,13 @@ A lattice code calculation includes:
 
 Comments: 
 \begin{itemize}
-\item For PWRs, $\rho$ vs. BU (with no burnable poisons) are just straight lines depending on enrichment. So long cycle and high BU we need high enrichment. So everyone is about 4\% enrichment in the US.  Corner pin power peaking: would be about 15\%. 
+\item One example of how lattice codes generate many lattices for possible uses: in PWRs, $\rho$ vs. BU (with no burnable poisons) are just straight lines depending on enrichment as in Fig.~\ref{lattice-rho-vs-BU}. Thus to achieve desirable long cycle and high BU, we need high enrichment, which is why almost all US fuel is around the 4-5\% enrichment level (currently fuels are made at 4.4\% enrichment; US regulation requires less than 5.2\% for trasportation reason).  
 \begin{figure}[ht]
   \centering
   \includegraphics[width=4in]{images/design/lattice-rho-vs-BU.png}
   \caption{Lattice Code: PWR Assembly Reactivity vs. Burnup, Enrichment} \label{lattice-rho-vs-BU}
 \end{figure}
+\item Corner pin power peaking in PWRs: about 15\%.
 \item Fission products absorption reduces reactivity of the fuel. 
 \item U235 depletion significantly reduces reactivity as fissile inventory is reduced. 
 \item Transmutation (particularly of U238) leads to complicated isotopic inventory. 
@@ -146,9 +147,78 @@ We have a number of ways to determine the accuracy/uncertainty of core physics m
 Side note: Westinghouse designs have 228 notches in a control rod, CE has 100 notches. 
 
 
+
+%%%%%%%%%%%%%% 10/04/12 22.39 Neutronics Lecture 2 %%%%%%%%%%%%
 \clearpage
-\topic{BWR Core Design} 
-\subtopic{Lattice Design}
+\topic{PWR Core Designs}
+\subtopic{Reactivity Effects} 
+We consider some common reactivity effects (negative effects): 
+\begin{enumerate}
+\item CZP $\to$ HZP: moderator temperature coefficients must satisfy limits.
+  \begin{itemize}
+    \item Moderator temperature coefficient cannot be too high; that is, boron concentration cannot be to high. Reason: when boron is high, adding more boron decreases the moderator density and increases the power. Sidenote: PWRs not only have boron in the coolant, but also in the rods.
+    \item Moderator temperature coefficient cannot be too low (otherwise steamlines may break: the huge amount of secondary loop flow would remove all the heat out of the primary loop); that is, we need to be careful when we increase power/burnup, because the following terms contribute to a more negative moderator temperature coefficient: Doppler feedback, Xe build-up, balance out the change brought by Boron. 
+  \end{itemize}
+
+\item \hi{HZP to HFP: $\rho \down$ due to resonance absorption (characterized by Doppler coefficient of reactivity).} As temperature increases, the thermal motion of the nuclei increases, causing a broadening of the cross section resonances and a lowering of their peaks. Because of the self-shielding of the nuclei in a material, the effective reaction rate $\up$ as temperature $\up$. Common isotopes that have large near thermal resonances: Xe135, Gd. 
+
+\item \hi{During HFP: Xe and Sm build-up decreases $\rho$.} Recall Fig.~\ref{major-capture}, where Xe and Sm are most important when it comes to poisoning effect. We arrive at the following conclusions for the equilibrium concentration: 
+\eqn{ \left\{ \begin{array}{cc} I_{\infty} \propto \phi_0 & \phi_0 \up, I_{\infty} \up \\ X_{\infty} = \frac{(\gamma_I + \gamma_X) \Sigma_f \phi_0}{\lambda_X + \sigma_a^X \phi_0} & \phi_0 \up, X_{\infty} \mbox{ saturates.}   \end{array} \right. }
+
+Important concepts about Iodine/Xe:
+\begin{itemize}
+\item After startup, it takes about 30 hours for the two to reach saturation. 
+\item After shutdown, Xe peaks in 9 hours (because Iodine decays into Xe, adding about 3000 pcm reactivity) and decays away in 60 hours. 
+\item If we perform a rapid startup after a scram, Xe would be too high, thus the flux may be too high, which immediately burn out Xe and causing an \textbf{overshoot}. 
+\item Long term, a PWR core burns about 1000 pcm/month. So the 3000 pcm Xenon peak takes about 3 months to burn out. 
+\end{itemize}
+
+Important concepts about Pm/Sm: 
+\begin{itemize}
+\item 
+\end{itemize}
+
+See Section~\ref{FP-Xenon} and \ref{FP-Sm} for more details.
+
+
+\item \hi{HFP Xe equilibrium: fuel depletion decreases $\rho$.}
+\end{enumerate}
+
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=4in]{images/design/moderator-temp-coeff.png}
+  \caption{PWR Reactivity Effects: Moderator Temperature Coefficients} \label{PWR-rho}
+\end{figure}
+
+
+
+\begin{table}[ht]
+  \centering
+  \begin{tabular}{c|c|c} \hline
+    Condition & Reactivity effects & Change in $\Delta \rho$ \\ \hline
+    CZP & Moderator density change & 2-5\% \\ \hline
+    HZP & Resonance Absorption/Doppler Coefficient & 1-2\% \\ \hline
+    \multirow{2}{*}{HFP} & 0 to equil. Xe & 2-3\% \\ 
+    & 0 to equil. Sm & 0.6\% \\ \hline
+    HFP, Equilibrium Xe & Fuel depletion & 5-10\% \\ \hline
+  \end{tabular}
+  \caption{Summary of PWR Reactivity Effects} \label{PWR-reactivity}
+\end{table}
+
+
+
+
+
+
+\clearpage
+\topic{BWR Core Designs} 
+
+
+
+
+
+\subtopic{Lattice Designs}
 
 
 \subtopic{Core Loading Patterns}
