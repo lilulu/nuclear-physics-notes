@@ -347,10 +347,15 @@ where $j = 0,1/2,1,3/2,2, \cdots, m = -j, \cdots, j$. If we solve for $\Jhat_x$ 
 \item Commutating relations: 
   \begin{enumerate}
   \item Most basic properties about angular momentum:
-    \eqn{ [V_i, J_j] &= i \hbar \epsilon_{ijk} V_k     & [J^2, \vecn \cdot J] &= 0 }
-  \item Raising and lowering operators, 
+    \eqn{ [V_i, J_j] &= i \hbar \epsilon_{ijk} V_k}
+    which leads to: $[L_x, L_y] = i \hbar L_z, [L_y, L_z] = i \hbar L_x, [L_z, L_x] = i \hbar L_y$. 
+    \eqn{[J^2, \vecn \cdot J] &= 0 }
+
+  \item Raising and lowering operators satisfy,
+    \eqn{ J_+ &= J_x + i J_y & J_- &= J_x - i J_y }
     \eqn{ [J_z, J_-] &= - \hbar J_-   &J_- \ket{z} &= \alpha \ket{z-1} }
-  \item Conclusion: 
+
+  \item Eigenvalues \& eigenvectors conclusion: 
     \eqn{ J^2 \ket{jm} &= j (j+1) \hbar^2 \ket{j m }    & J_z \ket{jm} &= m \hbar \ket{j m} }
     \eqn{ J_{\pm} \ket{jm} &= \hbar \sqrt{j(j+1) - m(m\pm 1)} \ket{jm \pm 1}  }
     \eqn{ J_x \ket{jm} &= \frac{\hbar}{2} (\sqrt{j(j+1) - m(m+1)} \ket{jm+1} + \sqrt{j(j+1) - m(m-1)} \ket{jm-1})  }
@@ -363,6 +368,9 @@ where $j = 0,1/2,1,3/2,2, \cdots, m = -j, \cdots, j$. If we solve for $\Jhat_x$ 
   \item $j$ (total): integer steps, $|l-s|, \cdots, |l+s|$. It completely construct $l$ and $s$. 
   \item $m_j$ (z-component of total): $-j, \cdots j$ (includes 0 when $j$ is an integer, and does not include 0 when $j$ is a half-integer). Its degeneracy is $2j+1$. 
   \end{enumerate}
+
+\item Angular momemtum addition: given any two of $s, l, j$ (or given $l_1, l_2$ and solving for total $l$), we can compute the 3rd one by taking integer steps from the difference to the maximum. Example: 
+  \eqn{ |s-l| &\le j \le s+l   & |s-j| &\le l \le s+j }
 \end{enumerate}
 
 \begin{table}[ht]

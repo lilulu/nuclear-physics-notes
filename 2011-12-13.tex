@@ -41,19 +41,29 @@ CGS unit: $\hbar c = 200 \fsp \MeV \cdot \fm$; the fine structure constant $\fra
 \item Decompose wave function into bases: 
 \begin{align}
 \psi(x) &= \Sum_{n=1}^{\infty} C_n w_n (x) & \psi (x,t) &= \Sum_{n=1}^{\infty} C_n w_n(x) e^{ \frac{-iE_nt}{\hbar} } \\
-P_n &= P(E_n) = |C_n|^2  & C_n &= \int \psi(x) w_n^* \dx
+P_n &= P(E_n) = |C_n|^2  & C_n &= \int w_n^* (x) \psi(x) \dx = \braket{w_n}{\psi}
 \end{align}
 
 \item Ehrefest theory: $ \ddt \expect{A} = \frac{i}{\hbar} \expect{\left[ \Hhat, \Ahat \right] } + \overbrace{\expect{\ddt \Ahat}}^{\to 0} $. Application: $\ddt \expect{x} = \frac{1}{m} \expect{p}$. 
 
 \item Position space: $\hat{p} = -i\hbar \ddx, \hat{H} = - \frac{\hbar^2}{2m} \nabla^2 + V(x) = \frac{\hat{p}^2}{2m} + V(x)$. 
 
-\item Phase space: $\phat = \hbar k, \expect{E_n} = \frac{\hbar^2 k^2}{2m}$. Use Fourier transform to transfer $x$ space into $k$ space:
+\item Phase space: $\phat = \hbar k, \expect{E_n} = \frac{\hbar^2 k^2}{2m}$. 
+
+\item Position and momentum operators. 
+\begin{align}
+[\hat{x}, \hat{p} ] &= i \hbar & [\hat{L}^2, \hat{H} ] &= 0 \\
+[ \hat{x}, \hat{p}^2] &= [\hat{x}, \hat{p} ] \hat{p} + \hat{p} [\hat{x}, \hat{p} ]  = 2 i \hbar \hat{p} & [\hat{x}^2, \hat{p} ] &= \hat{x} [\hat{x}, \hat{p} ] + [\hat{x}, \hat{p} ] \hat{x} = 2 i \hbar \hat{x} \\
+\ddt \expect{\hat{x}} &= \frac{\expect{\hat{p}}}{m} & \ddt \expect{\hat{p}} &= - \expect{ \dVdx }
+\end{align}
+
+\item Fourier transform between position space and momentum space:
 \eqn{ \phi(k) = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{\infty} e^{-ikx} \psi (x) \dx }
+\eqn{ \phi(x) = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{\infty} e^{ikx} \psi (k) \dk }
 
-\item Common potentials: 
 
-\begin{table}[h!]
+\item Common potentials: Notice, $e^{ikx}$ means traveling to the right, $e^{-ikx}$ means traveling to the left ($e^{-\kappa x}$ is decaying to the right, $e^{\kappa x}$ is reflecting back to the left). For calculating $T, R$, we do the ratio of flux, which is defined as: $\Gamma = |\psi|^2 \frac{\hbar k}{m}$. See HW2 \#2.
+\begin{table}[ht]
     \centering
     \begin{tabular}{|p{1.4in}|c|c|c|} \hline
     Potential & Allowed energies & Wave forms & Wave bases\\ \hline
@@ -67,22 +77,54 @@ P_n &= P(E_n) = |C_n|^2  & C_n &= \int \psi(x) w_n^* \dx
     \caption{Common Potentials}
 \end{table}
 
-Notice, $e^{ikx}$ means traveling to the right, $e^{-ikx}$ means traveling to the left. For calculating $T, R$, we do the ratio of flux, which is defined as: $\Gamma = |\psi|^2 \frac{\hbar k}{m}$. 
-
+\item Drawing wavefunction. Example: HW2 \#3. 
+\begin{itemize}
+\item Frequency/wavelength is related to KE $ = E - V$: the smaller KE is, the tighter the wavefunctions are. 
+\item Amplitude is related to the change in potential: every time potential changes (whether increase or decrease), amplitude decreases. If the potential does a jump change, amplitude just decreases; if the potential gradually decreases, then amplitude graduate decreases as well. 
+\end{itemize}
+  \begin{figure}[h!]
+    \centering
+    \includegraphics[width=4in]{../HW/HW2/images/HW2-3-graph.png}
+  \end{figure}
 \end{enumerate}
 
-\topic{Angular Momentum} 
-\begin{align}
-L^2 &= L_x^2 + l_y^2 + L_z^2 & [ \hat{L}_x, \hat{L}_y ] &= i \hbar \hat{L}_z \\
-L^2 \psi &= \hbar^2 l (l+1) \psi & L_z \psi &= \hbar m \psi \\
-[\hat{x}, \hat{p} ] &= i \hbar & [\hat{L}^2, \hat{H} ] &= 0 \\
-[ \hat{x}, \hat{p}^2] &= [\hat{x}, \hat{p} ] \hat{p} + \hat{p} [\hat{x}, \hat{p} ]  = 2 i \hbar \hat{p} & [\hat{x}^2, \hat{p} ] &= \hat{x} [\hat{x}, \hat{p} ] + [\hat{x}, \hat{p} ] \hat{x} = 2 i \hbar \hat{x} \\
-\ddt \expect{\hat{x}} &= \frac{\expect{\hat{p}}}{m} & \ddt \expect{\hat{p}} &= - \expect{ \dVdx }
-\end{align}
 
-\uline{Radial Schroedinger Equation:} 
+
+\topic{Angular Momentum} 
+  \begin{enumerate}
+  \item Most basic properties about angular momentum:
+    \eqn{ [V_i, J_j] &= i \hbar \epsilon_{ijk} V_k}
+    which leads to: $[L_x, L_y] = i \hbar L_z, [L_y, L_z] = i \hbar L_x, [L_z, L_x] = i \hbar L_y$. 
+    \eqn{[J^2, \vecn \cdot J] &= 0}
+
+  \item Raising and lowering operators satisfy,
+    \eqn{ J_+ &= J_x + i J_y & J_- &= J_x - i J_y }
+    \eqn{ [J_z, J_-] &= - \hbar J_-   &J_- \ket{z} &= \alpha \ket{z-1} }
+
+  \item Eigenvalues \& eigenvectors conclusion: 
+    \eqn{ J^2 \ket{jm} &= j (j+1) \hbar^2 \ket{j m }    & J_z \ket{jm} &= m \hbar \ket{j m} }
+    \eqn{ J_{\pm} \ket{jm} &= \hbar \sqrt{j(j+1) - m(m\pm 1)} \ket{jm \pm 1}  }
+    \eqn{ J_x \ket{jm} &= \frac{\hbar}{2} (\sqrt{j(j+1) - m(m+1)} \ket{jm+1} + \sqrt{j(j+1) - m(m-1)} \ket{jm-1})  }
+    \eqn{J_y \ket{jm} &= \frac{\hbar}{2} (-\sqrt{j(j+1) - m(m+1)} \ket{jm+1} + \sqrt{j(j+1) - m(m-1)} \ket{jm-1})  }    
+
+\item Quantum numbers, 
+  \begin{enumerate}
+  \item $l$ (orbital): integers, $0 \le l \le n$. A subset of $j$ is the solution from orbital component. 
+  \item $j$ (total): integer steps, $|l-s|, \cdots, |l+s|$. It completely construct $l$ and $s$. 
+  \item $m_j$ (z-component of total): $-j, \cdots j$ (includes 0 when $j$ is an integer, and does not include 0 when $j$ is a half-integer). Its degeneracy is $2j+1$. 
+  \end{enumerate}
+
+\item Angular momemtum addition: given any two of $s, l, j$ (or given $l_1, l_2$ and solving for total $l$), we can compute the 3rd one by taking integer steps from the difference to the maximum. Example: 
+  \eqn{ |s-l| &\le j \le s+l   & |s-j| &\le l \le s+j }
+  \end{enumerate}
+
+
+
+
+
+\subtopic{Radial Schroedinger Equation:} 
+Define $u_{nl} (r) = r \psi_{nl} (r)$,
 \begin{align}
-\mathrm{Define} \fsp \fsp u_{nl} (r) &= r \psi_{nl} (r) \\ 
 \left[ - \frac{\hbar^2}{2m} \ddrn2 + \overbrace{\frac{\hbar^2 l (l+1)}{2 \mu r^2} + V_{\mathrm{nuc}} (r) }^{V_{\mathrm{eff}} (r)} - E \right] u_{nl} (r) &= 0 
 \end{align}
 Eigenstate for $\hat{L}^2, \hat{L}_z, \hat{H}$ is the spherical harmonics $Y_l^m (\theta, \phi)$. 
@@ -95,7 +137,8 @@ To find $\expect{\lhat \cdot \shat}$:
 \expect{ \lhat \cdot \shat} &= \frac{\hbar^2}{2} \left[ j(j+1) - l(l+1) - s(s+1) \right] \\
 \expect{ \shat_p \cdot \shat_n} &= \frac{\hbar^2}{2} \left[ s(s+1) - s_p(s_p+1) - s_n(s_n+1) \right] 
 \end{align}
-\uline{Singlet vs. Triplet} 
+
+\subtopic{Singlet vs. Triplet} 
 Following the expressions in Radial Schroedinger Equation section, we can write: 
 \begin{align}
 \begin{dcases*}
@@ -116,7 +159,9 @@ S = 0 (\mathrm{singlet, anti-parallel, unbounded}).
 \end{align}
 Beyond this, we need the Clebsch-Gordan coefficients table to find the coefficients in 
 \eqn{\ket{s m} = \Sum_{m_1 + m_2 = m} C_{m_1 m_2 m}^{s_1 s_2 s} \ket{s_1 m_1} \ket{s_2 m_2} }
-\uline{Deuteron Example:} 
+
+
+\subtopic{Deuteron Example:} 
     \begin{enumerate}
     \item $l=0$ is the only bound state because: $V_{\mathrm{eff}} = V + \frac{\hbar^2 l(l+1)}{2 \mu r_0^2}$. 
     \eqn{ \Delta V = \frac{\hbar^2 l(l+1)}{2 \mu r_0^2} = \frac{(\hbar c)^2 l(l+1)}{2 (\mu c^2) r^2} = \frac{(200)^2 l(l+1)}{2 (500)(2.1)^2} = 10 l(l+1) \fsp \MeV   }
@@ -128,6 +173,8 @@ Beyond this, we need the Clebsch-Gordan coefficients table to find the coefficie
     We plug in $V_T = 35 \fsp \MeV, V_S = 22 \fsp \MeV$ to find that $V_0 = 32 \fsp \MeV, V_1 = 13 \fsp \MeV$. 
     \item $l>0$ can only exist for $s=1$, singlet well is less deep than triplet.     
     \end{enumerate}
+
+
 \clearpage
 %%%%%%%%%%%%%%%%%%%%%%%%% Topic 2 Nuclear Structure %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \topic{Nuclear Structure}
