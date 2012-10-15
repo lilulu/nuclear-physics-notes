@@ -150,6 +150,11 @@ Using integrating factors to solve the above first order ODE system (we solved t
 \end{align}
 We make use of that we know at full power,  flow rate is 30 W/g, $C_p = 300$J/kg-s, $\alpha = -3$ pcm/K, $V_{\mathrm{coolant}} = 2 \m/\s, T_{\mathrm{inlet}}^0 = 540 \K, T_{\mathrm{coolant}}^0 = 560 \K, T_{\mathrm{fuel}}^0 = 900 \K$, core height is 4m. 
 
+$c$ is the heat transfer coefficient, and $d$ is the axial transport term. 
+
+%%%%%%%%%%%%%%%%
+If we do not have heat transfer (axial or radial), then the fuel temperature/power would keep increasing instead of decrease slightly in p.13 Lec11. 
+
 
 \clearpage
 \topic{Solving the PKEs with Feedback}
@@ -191,6 +196,16 @@ Alternatively we can do the TH part first and then neutronics. The order matters
 
 Issue: solution requires very small time steps or synchronization iterations (e.g., another iteration?). 
 
+
+
+[FIXME]
+Take-away
+\begin{enumerate}
+\item With no synchronization step, the order of operator splits matters. 
+\item With synchronization step, the two splits should approach the same. Though coarse time step with fine synchronzization step is not as good as fine time step. With a fine enough time step, it shouldn't take more than 1 iteration to synchronize. 
+\end{enumerate}
+
+
  
 \subtopic{Augmented Matrix Equations for 1st Order Coupled ODE}
 Instead of solving for two 1st order matrix equations, we can put them together, and define a new $N(t)$: 
@@ -219,8 +234,19 @@ The solution requires no synchronization iteration and allows very large time st
 
 
 
+[FIXME]
+\begin{enumerate}
+\item Replace with its old time step value. 
+
+\item Alternativley, we can do a synchronization step. Effectively we are doing JFK in the sense that derivative of a term with two variables is just the derivative of one times the value of the 2nd term plus the derivative of the 2nd term times the 1st term. We ignore the 2nd term of Jacobian, and as shown later with a reasonable fine time step, we do not even need synchronization as the 2nd term of the Jacobian is so small. 
+\end{enumerate}
 
 
+Compare augmented solution with operator splitting, even with no synchronization, the augmented solution is more accurate than operator splitting. 
+
+Time step is far less important than the order of the operator. In the 0.5 dollar ramp insertion case, direct solution provides a factor of 10 more accuracy. 
+
+PKEs assume average properties: average reactivity goes into PKE, and average temperature goes into TH. 
 
 \clearpage
 \topic{Examples Using PKEs with Simple Feedbacks}
