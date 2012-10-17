@@ -4,16 +4,44 @@
 \begin{document}
 \maketitle
 
-\lecture{Scattering}
-We have discussed the bound state of a deuteron (a neutron plus a proton) in Chapter~\ref{2H-bound-state}. To gain more insights for the essential properties of nuclear force, we will look at scattering of a neutron by a proton, in particular taking into account the l-s coupling in $V_{\mathrm{nuc}}$. See more reference here\footnote{Krane 4.2, 11.8., Liboff 14.1}.
+\lecture{Nucleon-Nucleon Scattering}
+We have discussed the bound state of a deuteron (a neutron plus a proton) in Chapter~\ref{2H-bound-state}. To gain more insights for the essential properties of nuclear force, we will look at scattering of a neutron by a proton, in particular taking into account the l-s coupling in $V_{\mathrm{nuc}}$. 
+
+
+For this chapter, we are going to use relations, 
+\begin{itemize}
+\item QM flux: 
+  \eqn{ \vec{J} = \frac{i \hbar}{2 \mu} (\psi \gradient \psi^* - \psi^* \gradient \psi) }
+  For instance, in spherical coordinate system, 
+  \eqn{ \vec{J} &= \frac{\hbar}{2 i m} \left[ \psi^* \gradient \psi - \psi \gradient \psi^* \right] = \frac{\hbar}{2 \mu i} \left[ \psi^* \dpsidr - \psi \dpsidr^* \right] }
+\item Mass conservation: 
+  \eqn{ \ddt (\psi^* \psi) + \divergence \vec{J} = 0 }
+\end{itemize}
+
+
+Reference: Krane 4.2, 11.8., Liboff 14.1.
+
+
+
+
+
 
 \topic{Scattering Cross Sections}
-Scattering cross-section of neutron from proton is around 20 barns for $1 \sim 10^6$ eV \footnote{it is not till we introduce spin-spin coupling that we can explain this high scattering cross section}. 
+Recall that the scattering cross-section of neutron from proton is around 20 barns for $1 \sim 10^6$ eV \footnote{it is not till we introduce spin-spin coupling that we can explain this high scattering cross section}. 
+
+To derive relations about the scattering cross section, we start by defining the incoming wave as a planar wave, and the outgoing wave as a spherical one. We define the scattering amplitude $f(\theta)$ as in $\psi_{\mathrm{sc}} = f(\theta) \frac{e^{i (\uline{k} \uline{r} - wt)}}{r}$. 
 \begin{align}
-\psi_{\mathrm{inc}} &= \mbox{planar wave function} = e^{i (\uline{k} \uline{r} - wt)} = e^{ikz} &J_{\mathrm{inc}} &= \mbox{flux of incoming wave} = \frac{\hbar k}{\mu} \\
-\psi_{\mathrm{sc}} &= \mbox{spherical wave function} =  f(\theta) \frac{e^{i (\uline{k} \uline{r} - wt)}}{r} = f(\theta) \frac{e^{ikr}}{r} &J_{\mathrm{sc}} &= \mbox{flux of scattering wave} = \frac{\hbar k}{\mu r^2} |f(\theta)|^2 \\
+\psi_{\mathrm{inc}} &= e^{i (\uline{k} \uline{r} - wt)} = e^{ikz}  = e^{ikr \cos \theta} 
+&J_{\mathrm{inc}} &= \frac{\hbar k}{\mu} \\
+\psi_{\mathrm{sc}} &=  f(\theta) \frac{e^{i (\uline{k} \uline{r} - wt)}}{r} = f(\theta) \frac{e^{ikr}}{r} &J_{\mathrm{sc}} &= \frac{\hbar k}{\mu r^2} |f(\theta)|^2 \\
 \sigma(\theta) &= \mbox{Angular Differential xs} = \dsigmadOmega  &\sigma &= \int \sigma(\theta) \dOmega
 \end{align}
+
+
+
+
+
+
 Cross section is the probability that an incoming wave scatters along the solid angle $\Omega+\dOmega$. If we specify a small area on the spherical surface along the solid angle $\Omega$, then we can represent the area with $\Omega$:
 \begin{align}
 \dA &= r^2 \dOmega = r^2 \sin \theta \dtheta \dphi \\
@@ -21,22 +49,27 @@ Cross section is the probability that an incoming wave scatters along the solid 
 \dsigmadOmega &= \frac{J_{\mathrm{sc}} r^2}{J_{\mathrm{inc}}} = \sigma(\theta) 
 \end{align}
 
-\topic{Scattering Amplitude}
-We define the scattering amplitude $f(\theta)$ as in $\psi_{\mathrm{sc}} = f(\theta) \frac{e^{i (\uline{k} \uline{r} - wt)}}{r}$, then we can derive an expression about scattering amplitude:
+In the limit of $r \to \infty$, 
+\eqn{ \psi &\approx e^{ikr \cos \theta} + f(\theta) \frac{e^{ikr}}{r} }
+\eqn{ J_r &\approx \frac{|f(\theta)|^2}{r^2} \frac{\hbar k}{\mu}  & \Rightarrow r^2 \dOmega J_r &= |f(\theta)|^2 J_{in}}
+We can derive the relation for differential scattering cross section $\dsigmadOmega$ and the total scattering cross section $\sigma$, 
 \begin{align}
-J &= \frac{\hbar}{2 i m} \left[ \psi^* \gradient \psi - \psi \gradient \psi^* \right] = \frac{\hbar}{2 \mu i} \left[ \psi^* \dpsidr - \psi \dpsidr^* \right] \\
 \left. \begin{array}{c}
 J_{\mathrm{inc}} = \frac{\hbar k}{\mu} b^2  \\
 J_{\mathrm{sc}} = \frac{\hbar k}{\mu r^2} b^2 |f(\theta)|^2 \\
-\end{array} \right\} &\Rightarrow \dsigmadOmega = \frac{J_{\mathrm{sc}} r^2}{ J_{\mathrm{inc}}} = |f(\theta)|^2 
+\end{array} \right\} & \Rightarrow \boxed{\dsigmadOmega =  \frac{J_{\mathrm{sc}} r^2}{ J_{\mathrm{inc}}} = |f(\theta)|^2 }  \\
+\Aboxed{ \sigma &= \int \dOmega |f(\theta)|^2  = 2 \pi \int_{\pi}^0 \derivative \cos \theta |f(\theta)|^2 }
 \end{align}
-Properties of scattering amplitude: 
+Notes of scattering amplitude $f(\theta)$: 
 \begin{enumerate}
-\item $f(\theta)$ is anisotropic; 
-\item $f(\theta)$ is scattering intensity as a function of scattering angle; 
-\item Angular differential xs $\sigma(\theta)$ is proportional to the scattering amplitude squared; 
+\item $f(\theta)$ is scattering intensity as a function of scattering angle.
+\item Generally $f(\theta)$ is anisotropic. For $l=0$ though there is no angular dependency, $f(\theta) \to $ constant. 
+\item Angular differential xs $\sigma(\theta)$ is proportional to the scattering amplitude squared. Total scattering cross section is just angular differential cross section integrated over all angles.  
 \item To solve for $f(\theta)$, use Method of Partial Waves. The result is in Eq.~\ref{f-theta}. 
 \end{enumerate}
+
+
+
 
 \topic{Method of Partial Waves, Phase Shifts} 
 To find $f(\theta)$, we solve the Schrodinger Equation for wave function $\psi(\uline{r}, t) = \psi(\uline{r}) e^{-iEt/\hbar}$:

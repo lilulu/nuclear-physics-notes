@@ -6,7 +6,7 @@
 
 
 \topic{Analytical Relations between $V_0, r_0, E_B$ \label{2H-relation}}
-In this section we consider an easiest form of nucleon-nucleon potential (the interaction between a neutron and a proton): a spherical well with $l=0$ (as in Fig.~\ref{deuteron-potential}), 
+In this section we consider an easiest form of nucleon-nucleon potential (the interaction between a neutron and a proton): a spherical well as in Fig.~\ref{deuteron-potential}, assume s-wave ($l=0$),
 \eqn{ V(r) = \left\{ \begin{array}{cc} -V_0 & r \le r_0 \\ 0 & r > r_0   \end{array} \right. }
 \begin{figure}[h!]
     \centering
@@ -16,7 +16,7 @@ In this section we consider an easiest form of nucleon-nucleon potential (the in
 
 We solve for analytical relations between the well depth $V_0$, well width $r_0$, and binding energy $E_B$: 
 \begin{enumerate}
-\item We can simplify the eigenvalue problem for deutrons to be:
+\item From the eigenvalue problem, $l=0$ gets rid of the $L^2$ term:
 \eqn{   \left[ - \frac{\hbar^2}{2 \mu}  \pprn2  +  V_{\mathrm{nuc}} (r) - E_n  \right] u_n (r)  = 0  }
 in which $E<0$ (bound state), and the potential well of $-V_0$ goes from $0$ to $r$, and $-V_0 < E < 0$. 
 
@@ -47,28 +47,32 @@ Notice this is the same as the odd-parity square well problem in Chapter~\ref{fi
 \item We reach a transcendental equation describing the dependency of $V_0, r_0, E_B$ on each other:
 \eqn{ \boxed{ \cot (k_1 r_0 ) = -\frac{k_2}{k_1} = - \sqrt{\frac{-E}{E+V_0}}  } \label{H2-V_0}}
 
-\item To get an estimate of $V_0$, consider the special case of a barely bound state of $|V_0| \gg |E|$, $\cot (k_1 r_0) \to 0, k_1 r_0 = \frac{\pi}{2}$. For at least one bound state to fit at least 1 of the 1/4 sin wave: 
-\begin{enumerate}
-\item $ r_0 \gg \frac{1}{4}\lambda = \frac{1}{4}\frac{2 \pi}{k_1}  = \frac{\pi}{2k_1}  \Rightarrow k_1 \gg \frac{\pi}{2} \frac{1}{r_0} $
+\item Estimation of $V_0$.  [FIXME] 
+  \begin{enumerate}
+  \item The unbounded state (Prof. Yildiz):  consider the special case of a barely bound state of $|V_0| \gg |E|$, $\cot (k_1 r_0) \to 0, k_1 r_0 = \frac{\pi}{2}$. For at least one bound state to fit at least 1 of the 1/4 sin wave: 
+    \begin{enumerate}
+    \item $ r_0 \gg \frac{1}{4}\lambda = \frac{1}{4}\frac{2 \pi}{k_1}  = \frac{\pi}{2k_1}  \Rightarrow k_1 \gg \frac{\pi}{2} \frac{1}{r_0} $
+    \item $KE = \frac{\hbar^2 k_1^2}{2 \mu} < V_0$. 
+    \end{enumerate}
+    Together, that is to say,
+    \eqn{ \frac{\hbar^2 \pi^2}{8 \mu r_0^2} < V_0 \Rightarrow V_0 > \frac{\hbar^2 c^2}{\mu c^2} \frac{\pi^2}{8 r_0^2} = \frac{ (197 \fsp \MeV \fm )^2}{469 \MeV} \frac{\pi^2}{8 \times (2.1 \fsp \fm)^2 } = 23 \fsp \MeV  }
 
-\item $KE = \frac{\hbar^2 k_1^2}{2 \mu} < V_0$. 
-\end{enumerate}
-Together, that is to say,
-\eqn{ \frac{\hbar^2 \pi^2}{8 \mu r_0^2} < V_0 \Rightarrow V_0 > \frac{\hbar^2 c^2}{\mu c^2} \frac{\pi^2}{8 r_0^2} = \frac{ (197 \fsp \MeV \fm )^2}{469 \MeV} \frac{\pi^2}{8 \times (2.1 \fsp \fm)^2 } = 23 \fsp \MeV  }
+  \item The bound state $V_0$(Prof. Li):  plug in $E = -2.22$ MeV, $R = 2.1$ fm, $k_1 R = 1.8305$, we can solve for $V_0 = 35$ MeV for the bound state. 
 
-\item Using measured $r_0, E_B$, we can find $V_0$ using Eq.~\ref{H2-V_0}:
-\begin{itemize}
-\item $r_0$ can be measured from the scattering experiment. For \ce{^2H}, $r_0 = 2.1 \fm$. 
-\item E is the binding energy that is about $-2.22$ MeV. We can measure $E_B$ through: 
-    \begin{itemize}
-    \item mass spectroscopy;
-    \item measure the $\gamma$ energy in p + n $\to$ \ce{^2 H} + $\gamma$;
-    \item measure the $\gamma$ energy in $\gamma +$ \ce{^2H} $\to$ n + p;
-    \end{itemize}
-    The $2.22 \fsp \MeV$ binding energy is for ground state \ce{^2H} (we can tell it is ground state because excited states decay very rapidly). A binding energy of $2.22 \fsp \MeV$ is rather weak, because the average nucleus binding energy is $8 \fsp \MeV$. 
+  \item Using measured $r_0, E_B$, we can find $V_0$ using Eq.~\ref{H2-V_0}:
+    \begin{enumerate}
+    \item $r_0$ can be measured from the scattering experiment. For \ce{^2H}, $r_0 = 2.1 \fm$. 
+    \item E is the binding energy that is about $-2.22$ MeV. We can measure $E_B$ through: 
+      \begin{itemize}
+      \item mass spectroscopy;
+      \item measure the $\gamma$ energy in p + n $\to$ \ce{^2 H} + $\gamma$;
+      \item measure the $\gamma$ energy in $\gamma +$ \ce{^2H} $\to$ n + p;
+      \end{itemize}
+      The $2.22 \fsp \MeV$ binding energy is for ground state \ce{^2H} (we can tell it is ground state because excited states decay very rapidly). A binding energy of $2.22 \fsp \MeV$ is rather weak, because the average nucleus binding energy is $8 \fsp \MeV$. 
 
-\item We can solve for $V_0$ to be $35 \fsp \MeV$ for this case.
-\end{itemize}
+    \item We can solve for $V_0$ to be $35 \fsp \MeV$ for this case.
+    \end{enumerate}
+  \end{enumerate}
 
 
 \item The sign of $E$ is the ultimate measurement of whether a state is bounded or not. For instance, the ground state has an $E = -2.22 $ MeV, which is smaller than the averaged -8 MeV, hence the ground state of deuteron weakly bounded. The 1st excited state has $E = 265$ MeV, hence is it not bounded. See Figure~\ref{deuteron-bound} for details. 
@@ -93,19 +97,39 @@ The spin dependence of nuclear forces can be interpreted as $V_{\mathrm{nuc}}$ d
     \item In the context of n-p scattering, where spin dependence of $V_{\mathrm{nuc}}$ accounts for the measured scattering cross section (s-l coupling). 
 \end{itemize}
 
-In general, we assume deuteron ground state (n,p) interaction means $J=1$\footnote{measured spin of deuteron is $J=1$; no $J=0$ is found at the bound ground state; though there is J=0 for s=0, l=0},$l=0$\footnote{l=0 is the case 96\% the time; if $l\neq 0$, then $s_n+s_p =0$ would be anti-paralell, and 1 for parallel}, $S_p = S_n = \frac{1}{2}, \Jhat = \Lhat + \Shat_p + \Shat_n$. The possible angular momentum combinations that give us $J=1$ are: 
-\begin{itemize}
-\item $s_n s_p = \up \up \Rightarrow S=1, l=0 \Rightarrow J=1 $.
-\item $s_n s_p = \up \down \Rightarrow S = 0, l=1 \Rightarrow J=1$. 
-\item $s_n s_p = \up \up \Rightarrow S=1, l=1 \Rightarrow J=0,1,2$. 
-\item $s_n s_p = \up \up \Rightarrow S=1, l=2 \Rightarrow J = 1,2,3$.
-\end{itemize}
+In general, we assume deuteron ground state (n,p) interaction means $J=1$ from measurement\footnote{measured spin of deuteron is $J=1$; no $J=0$ is found at the bound ground state; though there is J=0 for s=0, l=0},$l=0$\footnote{l=0 is the case 96\% the time; if $l\neq 0$, then $s_n+s_p =0$ would be anti-paralell, and 1 for parallel}, $S_p = S_n = \frac{1}{2}, \Jhat = \Lhat + \Shat_p + \Shat_n$. 
+
+The possible angular momentum combinations that give us $J=1$ are: 
+\begin{enumerate}
+\item $S=1, L=0 (J=1) $.
+\item $S=0, L=1 (J=1)$. 
+\item $S=1, L=1 (J=0,1,2)$. 
+\item $S=1, L=2 (J = 1,2,3)$.
+\end{enumerate}
+
+[FIXME] To determine which combinations are possible:
+\begin{enumerate}
+\item From observation, we know ground state of deuteron has even parity: recall from the perturbation operator, we derived that the angular momentum parity $\Pi = -1$,  and recall parity's definition $\Pi = (-1)^l$, that is $l = $even, thus even parity. That is, out of the four possibilities listed above, only the ones with even $L$ can exist ($L=0, L=2$). Notice measurements only give us the bounded states.  
+
+\item From analytical derivation, we know that the well depth depends on the interaction of $l, s$: 
+  \begin{align}
+  \Delta V &= V_{s0} (r) \hat{L} \cdot \hat{S}
+  \end{align}
+  where we obtain $\hat{L} \cdot \hat{S}$ from: 
+  \begin{align}
+    \hat{J}^2 &= \hat{L}^2 + \hat{S}^2 + 2  \hat{L} \cdot \hat{S} \\
+    \hbar^2 j(j+1) &= \hbar^2 l(l+1) + \hbar^2 s(s+1) + 2 \hat{L} \cdot \hat{S} \\
+    \Delta V &= V_{s0} (r) \frac{\hbar^2}{2} \left[ j(j+1) - l(l+1) - s(s+1) \right] 
+  \end{align}
+\end{enumerate}
+
 
 \begin{figure}[h!]
     \centering
     \includegraphics[width=5in]{images/deuteron/deuteron-possible-config.png}
     \caption{Possible Configurations for Two Spin 1/2 Particles}
 \end{figure}
+
 
 The possible states are(using notations $\ket{s m}$)\footnote{Griffiths p.185, Liboff Table 11.3}: 
 \begin{align}
@@ -145,6 +169,8 @@ $V_0 <0, V_1 <0$ meaning they are both attractive \footnote{positive potential m
 
 \item Similar to $ \expect{S_p \cdot S_n} = \frac{\hbar^2}{2} \left[ s(s+1) - s_p (s_p + 1) - s_n (s_n + 1) \right] $, we can also write:
 \eqn{ \expect{L \cdot S_n} = \frac{\hbar^2}{2} \left[ j(j+1) - l (l + 1) - s (s + 1) \right] }
+
+\item How spin dependency affects the scattering cross sections: $\sigma_{S=0} = 67.8 \barn, \sigma_{S=1} = 4.6 \barn \Rightarrow \sigma = \frac{3}{4} \sigma_{S=1} + \frac{1}{4} \sigma_{S=0} = 20.4 \barn$. 
 \end{enumerate}
 
 
