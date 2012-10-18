@@ -347,7 +347,7 @@ We will cover resonance models later, for now we just need to know that the weir
 
   Elastic scattering for bound molecules can be characterized by,
   \eqn{ \frac{\derivative^2 \sigma}{\dOmega \dE'} (E\to E', \Omega\to \Omega')  = \frac{\sigma_b}{4 \pi kT} \sqrt{ \frac{E'}{E}} e^{-\frac{\beta}{2}} S(\alpha, \beta)   }
-  where $\sigma_b$ is the bound scattering cross section for the material, $kT$ is in eV, $S(\alpha, \beta)$ is the symmetric form of the thermal scattering law,
+  where $\sigma_b$ is the bound scattering cross section for the material, $kT$ is in eV, $S(\alpha, \beta)$ is the symmetric form of the thermal scattering law, since $\alpha, \beta$ depends on temperature, $S$ depends on temperature too. 
   \eqn{ S(\alpha, \beta) = \frac{\exp{-\frac{\alpha^2 + \beta^2}{4 \alpha}} }{\sqrt{4\pi \alpha}} }
   where $\alpha, \beta$ depends on two terms:
   \begin{itemize}
@@ -369,7 +369,8 @@ We will cover resonance models later, for now we just need to know that the weir
 
 %%%%%%%%%%%%%%%%%%%%%%% start of Analytical %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \clearpage
-\topic{Analytical Derivation From TE} \label{slowing-down-from-te}
+\topic{Analytical Derivation} \label{slowing-down-from-te}
+\subtopic{Derivation from TE} 
 This lecture is given on Oct. 2 by Prof. Forget. We start from the TE: 
 \eqn{ \frac{1}{v} \pphipt + \Omega \gradient \phi + \Sigma_t \phi &= \int \dE \int \dOmega \Sigma_s \phi + \frac{\chi(E)}{4 \pi} \int \dE v \Sigma_f \phi + S }
 Apply assumptions:
@@ -436,6 +437,28 @@ In reactor applications, most absorptions happen in the resonances of \ce{^{238}
         \caption{Flux Between Resonances} \label{resonance-flux}
       \end{figure}
 \end{enumerate}
+
+\subtopic{Convolution of 0K Cross Section} % 10/18/12 
+So far in our slowing down derivation, we have implicitaly assumed that the target is at rest. In reactor applications, thermal agitation is always present for the temperature of interest, and it increases as temperature increases. Thus we need to account for the relative energy between the neutron and the target. 
+
+We call $V_A$ the atom velocity, $V_n$ the neutron velocity, then the relative velocity is $V_R = V_n - V_A$. The convolution of 0K cross section is leads to \hi{the convolution integral}, 
+\eqn{ \bar{\sigma}_x(V_n) = \frac{1}{V_n} \int \derivative^3 v_a p(V_A) |V_n - V_A| \sigma_x (|V_n - V_A|) }
+where $p(V_A)$ is the Maxwellian distribution, and the $\sigma_x(|V_n - V_A|)$ is the 0K cross section at the corrected velocity $V_n - V_A$. 
+
+Essentially we `correct' the cross section using an average velocity distribution of the material at temperature T. The effect on resonance range is, 
+\begin{itemize}
+\item Resonances broaden as temperature increases. 
+\item The higher the temperature, the smoother the resonance would be, the smoother the cross section would be. 
+\item Resonances nearer to the thermal region would broaden more than resonances near the fast range. 
+\end{itemize}
+
+In the thermal range, the convolution of a constant cross section would increase the thermal cross section as temperature increases; more specifically, scattering cross section tends to be constant in low temperature, and becomes 1/v as temperature increases; thus at higher temperatures it is harder to tell absorption cross section (1/v) and scattering cross section apart. 
+
+Prof. Forget introduces SLBW here. \textcolor{blue}{The convolution integral will yield the expression in section 2.7.1 with Psi, Chi definitions of 8.4.3}. 
+
+$\Psi$ term shows up in both absorption and scattering cross section terms and it gives the shape of the cross section. $\Chi$ term only shows up in the scattering cross section and it represents the interference effect. The sum of $\Psi$ and $\Chi$ results in the dip before peaking that always shows up in the scattering cross section. 
+
+
 %%%%%%%%%%%%%%%%%%%%%%% end of Analytical %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
