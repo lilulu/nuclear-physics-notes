@@ -5,12 +5,118 @@
 \maketitle
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%% Exam 1 Review Begin %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\lecture{Exam 1 Review: Spectra Calculation}
-\topic{Most Important Concepts}
+\lecture{Spectra Calculation Review}
+\topic{Basics}
 \begin{enumerate}
-\item Basic Nuclear Data: know 1.0 kT correspond to 0.0253 eV. Know number density 
+\item Know 1.0 kT correspond to 0.0253 eV. Know $\displaystyle u = \ln \frac{E_{\mathrm{ref}}}{E}$. 
+
+\item Know number density 
   \eqn{ N = \frac{\rho N_A}{M} }
   where $N_A$ is  avogado's number, take $0.6022$, $\rho$ is density in g/cc, $M$ is atomic mass (unitless). 
+
+\item In an elastic scattering
+  \eqn{ \alpha = \frac{E_{\mathrm{min}}}{E_0} = \left( \frac{A-1}{A+1} \right)^2 < 1 }
+
+\item Mean log energy decrement:
+  \eqn{ \xi = 1 + \frac{\alpha \ln \alpha}{1-\alpha} }
+  The maximum $\xi$ is $1$ for hydrogen. $A \up, \xi \down$. 
+
+\item Number of collisions to slow neutrons from $E_i \to E_f$: 
+  \eqn{ n = \frac{ \ln (E_i/E_f)}{\xi} }
+
+\item Moderating power = $\xi \sigma_s$, a measurement of the slowing down ability. 
+\end{enumerate}
+
+
+\clearpage
+\topic{Elastic Scattering Cross Section} 
+\begin{enumerate}
+\item Lab system: $\theta$ is uniformly distributed, front favored. 
+  \eqn{ \frac{E_f}{E_i} = \frac{1}{2} \left[ 1 + \alpha + (1-\alpha) \cos \theta \right] } 
+
+\item CMCS: $\cos \theta$ is uniformly distributed, that is, elastic scattering is isotropic in CMCS. 
+  \eqn{ P(E_i \to E_f) &= \frac{1}{(1-\alpha) E_i}  &  E_f &\in [\alpha E_i, E_i] }
+  \eqn{ \sigma_s (E_i \to E_f) = \sigma_s (E_i) P(E_i \to E_f) }
+  \begin{figure}[ht]
+    \centering
+    \includegraphics[width=4in]{images/sl-d/prob.png}
+  \end{figure}
+
+
+  This concept was tested multiple times:
+  \begin{itemize}
+    \item  \textbf{12 Qual \#1c}: what's the probability of neutrons slowing down from 1 MeV to 100 keV from elastically scattering off Hydrogen? 
+
+      Answer: recall hydrogen has a flat distribution, so $P = \frac{100 \mathrm{keV}}{1 \MeV} = 10\%$. 
+    \item \textbf{12 Exam 1 \#11}: what's the probability that a neutron scattering off a hydrogen atom at 10 eV will have its next collision within the energy interval of Absorbium's $E_0$ = 6.67 eV resonance? 
+
+      Answer: Absorbium's resonance is from 6.17eV to 7.17eV. That's asking starting from 10eV what's the chance of falling in between 6.17eV and 7.17eV. Answer is 10\%. 
+
+    \item \textbf{12 Exam 1 \#12}: what's the probability that a neutron scattering off a hydrogen atom at 200 eV will have its next collision within the energy interval of Absorbium's $E_0$ = 57.3 eV resonance? 
+
+      Answer: the exact same thing as the last problem, we get $P = \frac{1 \eV}{200 \eV} = 0.0005$. 
+  \end{itemize}
+
+\end{enumerate}
+
+
+\clearpage
+\topic{Slowing Down Equation to Solve For Spectrum} 
+\begin{enumerate}
+\item Slowing down equation (omitting the $E$ dependency): 
+  \eqn{ \Sigma_t \phi = \int_0^{\infty} \Sigma_s (E' \to E) \phi (E') + \chi (E) S_f} 
+  
+\item Fast range: sl-d equation simplifies to, 
+  \eqn{ \Sigma_t \phi &= \chi S_f   & \phi(E) &= \frac{\chi(E) S_f}{\Sigma_t} }
+  
+\item Intermediate range: we define a slowing down density/current, 
+  \eqn{ q(E) = \mbox{\# neutrons cross energy $E$ per time per volume} }
+  sl-d equation simplifies to, 
+  \eqn{ \frac{\dq (E)}{\dE} = - \Sigma_a (E) \phi (E) }
+  For regions that we can assume $\Sigma_a = 0$ (e.g., between resonances), 
+  \eqn{ q(E) &= \mbox{constant},  & \phi(E) &= \frac{q(E)}{\xi \Sigma_s (E) E} }
+
+\item Thermal range: assume thermal equilibrium, pure scattering xs, infinite medium, we get a Maxwellian spectrum. See next section for more details.
+\end{enumerate}
+
+\clearpage
+\topic{Doppler Effect on Cross Sections}
+We only discuss thermal range for now. Resonance range is reserved for next time. 
+\begin{enumerate}
+\item Basic: Maxwellian spectrum $+$ stationary target $+$ free target. We get $\sigma_s$ depends on $A, E, T$. Using free gas model, now upscattering is possible. This is where we implemented those erf() functions and get plots like, 
+  \begin{figure}[ht]
+  \centering
+  \includegraphics[width=3in]{images/sl-d/ts_H.uncrop.pdf}
+  \includegraphics[width=3in]{images/sl-d/ts_C.uncrop.pdf}
+\end{figure}
+ 
+\textbf{12 Exam 1 \# 8}: 
+
+\textbf{12 Exam 1 \# 9}: 
+
+\textbf{12 Exam 1 \# 10}: 
+
+\item Add target motion/Doppler temperature effects: 
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=2in]{images/sl-d/Doppler.png}
+\end{figure}
+
+
+\textbf{12 Exam 1 \#4,5}: If the neutron cross section is independent of energy at a temperature of 0K, what energy shape do you expect for the neutron xs at 1200K? Why? 
+
+Answer: $1/v$ shape, thermal motion/vibration.
+
+\item Add chemical bond. 
+  \eqn{ \sigma_{\mathrm{bound}} = \left( \frac{A+1}{A} \right)^2 \sigma_{\mathrm{free}} }
+  Know the $S(\alpha, \beta)$ term. 
+\end{enumerate}
+
+
+\clearpage
+\topic{Important Concepts}
+\begin{enumerate}
+
 
 \item Four pieces of nuclear physics: 
   \begin{enumerate}

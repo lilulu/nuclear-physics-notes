@@ -196,10 +196,15 @@ Alternatively we can do the TH part first and then neutronics. The order matters
 
 Issue: solution requires very small time steps or synchronization iterations (e.g., another iteration?). 
 
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=4in]{images/methd/operator-split.png}
+  \caption{Operator Splitting}
+\end{figure}
 
 
 [FIXME]
-Take-away
+Take-away: 
 \begin{enumerate}
 \item With no synchronization step, the order of operator splits matters. 
 \item With synchronization step, the two splits should approach the same. Though coarse time step with fine synchronzization step is not as good as fine time step. With a fine enough time step, it shouldn't take more than 1 iteration to synchronize. 
