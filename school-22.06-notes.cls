@@ -3,3 +3,4 @@
 \ProvidesClass{school-22.06-notes}
 
 \usepackage{school-style-classnotes}
+\usepackage{wrapfig}
