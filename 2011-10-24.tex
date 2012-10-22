@@ -37,11 +37,6 @@ To derive relations about the scattering cross section, we start by defining the
 \sigma(\theta) &= \mbox{Angular Differential xs} = \dsigmadOmega  &\sigma &= \int \sigma(\theta) \dOmega
 \end{align}
 
-
-
-
-
-
 Cross section is the probability that an incoming wave scatters along the solid angle $\Omega+\dOmega$. If we specify a small area on the spherical surface along the solid angle $\Omega$, then we can represent the area with $\Omega$:
 \begin{align}
 \dA &= r^2 \dOmega = r^2 \sin \theta \dtheta \dphi \\
@@ -49,8 +44,9 @@ Cross section is the probability that an incoming wave scatters along the solid 
 \dsigmadOmega &= \frac{J_{\mathrm{sc}} r^2}{J_{\mathrm{inc}}} = \sigma(\theta) 
 \end{align}
 
-In the limit of $r \to \infty$, 
+In the limit of $r \to \infty$ (we would prove this relation at the end), 
 \eqn{ \psi &\approx e^{ikr \cos \theta} + f(\theta) \frac{e^{ikr}}{r} }
+where $f(\theta)$ is the angular modulation, and the $\frac{e^{ikr}}{r}$ is the spherical wave. 
 \eqn{ J_r &\approx \frac{|f(\theta)|^2}{r^2} \frac{\hbar k}{\mu}  & \Rightarrow r^2 \dOmega J_r &= |f(\theta)|^2 J_{in}}
 We can derive the relation for differential scattering cross section $\dsigmadOmega$ and the total scattering cross section $\sigma$, 
 \begin{align}
@@ -69,9 +65,55 @@ Notes of scattering amplitude $f(\theta)$:
 \end{enumerate}
 
 
+\topic{Born's Approach To Get Extreme Condition}
+This lecture was given by Prof. Li on 10/22/12. We assume that the proton is stationary, the neutron is a travelling wave (thus we know the energy should be $\displaystyle E = \frac{\hbar^2 k^2}{2\mu}$, thus we can simplify the SQE (where $x$ is the relative location): 
+\begin{align}
+\left[ - \frac{\hbar^2 \nabla^2}{2 \mu} + V(|x|) \right] \psi(x) &= E \psi(x) \\
+\left[ \nabla^2 - \frac{2 \mu V(|x|)}{\hbar^2} \right] \psi(x) &= - k^2 \psi(x) \\
+(\nabla^2 + k^2) \psi(x) &= \frac{2 \mu V(|x|)}{\hbar^2} \psi(x) \label{scat-seq}
+\end{align}
+Mathamatically, we know the solution to $\displaystyle (\laplacian + k^2) G(x) = \delta(x)$ is the Green's function in the form of $\displaystyle G(x) = - \frac{e^{ik|x}}{4 \pi |x|}$. Notice, when $r$ is small, $G(x) \to - \frac{1}{4 \pi |x|}$. This is good because we can easily show that $\displaystyle \laplacian \left( - \frac{1}{4 \pi |x|} \right) = \delta (x)$. That is, 
+\eqn{ (\laplacian + k^2) \psi(x) &= \delta(x - x') & \psi(x) &= - \frac{e^{ik |x - x'|}}{4 \pi |x-x'|} }
+That is to say, the solution to Eq.~\ref{scat-seq} should be, 
+\eqn{ \psi(x) &= e^{ikx} + \int \dV \frac{2 \mu V(|x'|) \psi(x')}{\hbar^2} \left( - \frac{e^{ik|x-x'|}}{4 \pi |x-x'|}  \right) }
+The above equation we arrives at is the Born's approach. It is not a final solution because it requires us to have knowledge of $\psi(x')$ to solve for $\psi(x)$. But Born was able to show that this form is useful for $r\to \infty$ senario (because $x'$ is bound, then when $x$ becomes large, $x'$ can be ignored), 
+\begin{align}
+|x-x'| &= \sqrt{(x-x')(x-x')} = \sqrt{|x|^2 - 2x \cdot x'} = |x| - \frac{x \cdot x'}{|x|} + O\left( \frac{1}{|x|} \right) 
+\end{align}
+Then the integral collapses to $f(\theta) \frac{e^{ikr}}{r}$. That is, 
+\eqn{ \psi(x) \xrightarrow{|x| \to \infty} e^{ikx} + f(\theta) \frac{e^{ikr}}{r}  \label{infty-psi-shape} }
+To look at this problem closely, we look at the scattering wave only, $\psi_{sc} (x) = f(\theta) \frac{e^{ikr}}{r}$. We know incoming current is $J_{in} = \frac{\hbar k}{\mu}$, and the scattering current is,
+\begin{align}
+J_{sc} &= \frac{i \hbar}{2\mu} \left( \psi \gradient \psi^* - \psi^* \gradient \psi \right) \\
+&= \frac{i \hbar}{2\mu} \left[ f (\theta) \frac{e^{ikr}}{r} \gradient \left(f^* (\theta) \frac{e^{-ikr}}{r} \right)   - \left(f^* (\theta) \frac{e^{-ikr}}{r} \right) \gradient \left( f (\theta) \frac{e^{ikr}}{r} \right)    \right] \\
+&= \frac{\hbar k}{\mu} \frac{|f(\theta)|^2}{r^2} \vec{e}_r  + O(r^{-3}) \\
+&\xrightarrow{r\to \infty} \frac{\hbar k}{\mu} \frac{|f(\theta)|^2}{r^2} \vec{e}_r
+\end{align}
+We further consider that $\dA = \dOmega r^2$(motivation: for Eq.~\ref{infty-psi-shape}'s unit to work out, $f(\theta)$ must have unit of distance), then 
+\eqn{ \dNdt &= J_{sc} \dA =  \frac{\hbar k}{\mu} \frac{|f(\theta)|^2}{r^2} r^2 \dOmega = J_{in} |f(\theta)|^2 \dOmega }
+We define a cross section term to capture the angle dependency, 
+\eqn{ \dsigma = |f(\theta)|^2 \dOmega }
+Then naturally we define the differential cross section, 
+\eqn{ \dsigmadOmega = |f(\theta)|^2 }
+Thus we can integrate to get the total cross section, 
+\eqn{ \sigma = \int \dOmega |f(\theta)|^2 = \int \dphi \int \derivative (\cos \theta) |f(\theta)|^2 = 2 \pi \int_{\pi}^0 \derivative \cos \theta |f(\theta)|^2 } 
+Meaning of $\dsigma$: all the neutrons entering within a small window $\dsigma$ would end up in the $r^2 \dOmega$ region after scattering, resulting in a current of $J_{sc} = J_{in} \dsigma$. 
+
+[FIXME] insert image. 
 
 
-\topic{Method of Partial Waves, Phase Shifts} 
+
+
+
+
+In the next section we would actually solve $\psi(x)$ as an eigenstate problem using Methods of Partial Wave. 
+
+
+
+
+
+
+\topic{Method of Partial Waves} 
 To find $f(\theta)$, we solve the Schrodinger Equation for wave function $\psi(\uline{r}, t) = \psi(\uline{r}) e^{-iEt/\hbar}$:
 \eqn{\left[ - \frac{\hbar^2}{2 \mu} \uline{\gradient}^2 + V(\uline{r}) \right] \psi (\uline{r}) = E \psi(\uline{r}) }
 We've already solved for this problem for the bound state condition ($E <0$), whereas now we consider the scattering case $E>0$, with the boundary condition:
@@ -80,6 +122,9 @@ We've already solved for this problem for the bound state condition ($E <0$), wh
 \begin{enumerate}
 \item Set-up Partial Wave: we expand the $\psi(r)$ into $\psi(r, \theta)$, notice there is no $\phi$ dependence because of $V(r)$. Then we can write $\psi(r,\theta)$ into the summation of partial waves, in which $P_l (\cos \theta)$ is the Legende Polynomial, 
 \eqn{\psi(r,\theta) = \Sum_{l=0}^{\infty} R_l(r) P_l (\cos \theta) }
+More rigorously we take into account $l$, 
+\eqn{\psi(r,\theta) = \Sum_{l=0}^{\infty} R_l(r) i^l (2l+1) P_l (\cos \theta) }
+where $P_l (\cos \theta) = Y_l^{m=0} (\theta, \phi)$. 
 
 \item Simplify Schrodinger Equation, consider radial function: 
 \begin{align}
@@ -96,41 +141,40 @@ u_l (r) = r R_l (r)
 \left( \pprn2 - \frac{l(l+1)}{r^2} - \frac{2\mu}{\hbar^2} V(\uline{r}) + k^2  \right) u_l (r) &= 0 
 \end{align}
 
-\item For $r>r_0$, $V(r) =0$: $j_l (kr)$ are Spherical Bessel Functions, and $n_l (kr)$ are Spherical Neumann Functions:
-\begin{align}
-\left( \pprn2 - \frac{l(l+1)}{r^2} + k^2  \right) u_l (r) &= 0  & u_l (r) &= B_l r j_l (kr) + C_l r n_l (kr)  \\
-j_l (x) &\xrightarrow{x \gg 1} \frac{1}{x} \sin \left( x - \frac{l \pi}{2} \right) & n_l (x) &\xrightarrow{x \gg 1} - \frac{1}{x} \cos \left( x - \frac{l \pi}{2} \right) 
-\end{align}
-For the extreme case $r \gg r_0, kr \gg 1$, then we can apply our Boundary Condition: 
+\item For $r>r_0$, $V(r) =0$: 
+\eqn{ \left( \pprn2 - \frac{l(l+1)}{r^2} + k^2  \right) u_l (r) &= 0  }
+The solution is in the form of $j_l (kr)$ (Spherical Bessel Functions) and $n_l (kr)$ (Spherical Neumann Functions):
+\eqn{ \Rightarrow u_l (r) &= B_l r j_l (kr) + C_l r n_l (kr) }
+
+\item For the extreme case $r \gg r_0, kr \gg 1$, 
+\eqn{ j_l (x) &\xrightarrow{x \gg 1} \frac{1}{x} \sin \left( x - \frac{l \pi}{2} \right) & n_l (x) &\xrightarrow{x \gg 1} - \frac{1}{x} \cos \left( x - \frac{l \pi}{2} \right)  }
+That is, 
 \eqn{ u_l (r) \xrightarrow{kr \gg 1} \frac{B_l}{k} \sin \left( kr - \frac{l \pi}{2} \right) - \frac{C_l}{k} \cos \left( kr - \frac{l \pi}{2} \right)  = \frac{A_l}{k} \sin \left( kr - \frac{l \pi}{2} + \delta_l \right) \label{delta_l}}
-in which $ \delta_l = \mbox{phase shift of each partial wave after interact with $V(r)$} $
-\eqn{ \boxed{ \psi(r,\theta) \xrightarrow{kr \gg 1} \Sum_{l=0}^{\infty} \frac{A_l}{kr} \sin \left( kr - \frac{l \pi}{2} + \delta_l \right) P_l (\cos \theta) \label{sol} } }
-Eq.~\ref{sol} is the solution to the Schrodinger Equation for the extreme of $kr \gg 1$. 
-
-Keep in mind that we are after $f(\theta)$, and we will apply the BC we defined above to solve for $f(\theta)$. 
-\end{enumerate}
-
-
-\topic{Phase Shifts}
-A phase shift $\delta_l$ is defined in the above section in Eq.~\ref{delta_l}. We can determine $\delta_l$ analytically \footnote{try using the trigonometry $\sin(a+b) = \sin(a) \cos (b) + \cos(a) \sin(b)$?}. Keep in mind that $\delta_l$ is the phase shift for each of the partial wave that can scatter. It is a result of a partial wave interacting with the potential.  
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width=4.5in]{images/scattering/scattering-potential-phase-shift.png}
-    \caption{Phase Shift, Scattering Length }
-\end{figure}
-
-\topic{Angular Differential Cross Section $\sigma (\theta)$, Total Cross Section $\sigma$}
-Start with the solution of Schroedinger equation after partial wave expansion as in Eq.~\ref{sol}, we apply BC Eq.~\ref{BC}. To do so, we need to expand two terms: 
-\begin{itemize}
-\item $ f(\theta) = \Sum_{l=0}^{\infty} f_l P_l (\cos \theta)$.
-\item $e^{ikz} = e^{ikr \cos \theta} \xrightarrow{kr \gg 1} \Sum_l  \frac{i^l (2l+1)}{kr} \sin \left( kr - \frac{l \pi}{2} \right) P_l (\cos \theta) = \Sum_l  \frac{i^l (2l+1)}{kr} \frac{1}{2i} \left[ e^{ i \left( kr - \frac{l \pi}{2} \right)} - e^{ -i \left( kr - \frac{l \pi}{2} \right)} \right] P_l (\cos \theta)$. 
-\end{itemize}
-Then we equate the coefficient before the same $l$ state, and solve for $f(\theta)$ as: 
+in which $ \delta_l = \mbox{phase shift of each partial wave after interact with $V(r)$}.$ Thus the solution to the Schrodinger Equation for the extreme of $kr \gg 1$ is,
+\eqn{ \psi(r,\theta) \xrightarrow{kr \gg 1} \Sum_{l=0}^{\infty} \frac{A_l}{kr} \sin \left( kr - \frac{l \pi}{2} + \delta_l \right) P_l (\cos \theta) \label{sol}  }
+We can apply the Boundary Condition in Eq.~\ref{BC}. To do so, we need to expand 
+\eqn{ f(\theta) = \Sum_{l=0}^{\infty} i^l (2l+1) f_l P_l (\cos \theta) }
+and expand, 
+\begin{align}
+e^{ikz} &= e^{ikr \cos \theta} = \Sum_l i^l (2l+1) j_l (kr) P_l (\cos \theta) \\
+& \xrightarrow{kr \gg 1} \Sum_l  \frac{i^l (2l+1)}{kr} \sin \left( kr - \frac{l \pi}{2} \right) P_l (\cos \theta) \\
+&= \Sum_l  \frac{i^l (2l+1)}{kr} \frac{1}{2i} \left[ e^{ i \left( kr - \frac{l \pi}{2} \right)} - e^{ -i \left( kr - \frac{l \pi}{2} \right)} \right] P_l (\cos \theta)
+\end{align}
+Then we equate the coefficient before the same $l$ state (taking into account the incoming plane wave), we have the equation, 
+\eqn{ a_l \sin \left( kr - \frac{l\pi}{2} + \delta_l \right) - \sin \left( kr - \frac{l \pi}{2} \right) = f_l e^{ikr} }
+To simplify and solve for $f_l$, we know $f_l$ is not a function of $r$, so 
+\eqn{ a_l \frac{e^{ikr - i l \pi/2 + i \delta_l } - e^{-ikr + i l\pi/2 - i \delta_l}}{2i} - \frac{e^{ikr - i l \pi/2} - e^{-ikr + i l\pi/2}}{2i} = f_l e^{ikr} }
+Thus we should get, 
+\eqn{ a_l &= e^{i\delta_l} & f_l &= e^{- \frac{i l \pi}{2} } \frac{e^{2i\delta_l} - 1}{2i} = (-i)^l e^{i \delta_l} \sin \delta_l }
+Then we can solve for the differential cross section and the total cross section,
 \begin{align}
 f(\theta) &= \frac{1}{k} \Sum_{l=0}^{\infty} (2l+1) e^{i \delta_l} \sin \delta_l P_l (\cos \theta) \label{f-theta} \\
 \sigma (\theta) &= |f(\theta)|^2 = \frac{1}{k^2} \left| \Sum_{l=0}^{\infty} (2l+1) e^{i \delta_l} \sin \delta_l P_l (\cos \theta) \right|^2 \label{sigma-theta} \\
-\sigma &= \int  \sigma(\theta) \dOmega= \frac{4 \pi}{k^2} \Sum_{l=0}^{\infty} (2l+1) e^{i \delta_l} \sin^2 \delta_l  \label{sigma} 
+\sigma &=  \int  \sigma(\theta) \dOmega = 2 \pi \int_{\pi}^0 \derivative \cos \theta |f(\theta)|^2   = \boxed{\frac{4 \pi}{k^2} \Sum_{l=0}^{\infty} (2l+1) \sin^2 \delta_l  \label{sigma} }
 \end{align}
-Notice, Eq.~\ref{f-theta} $\sim$ Eq.~\ref{sigma} are the general expression. In the example demonstrated below, we are going to consider some cases that the above solutions simplify. 
+where we use the mathematically expression that 
+\eqn{ \int_{\pi}^0 \derivative \cos \theta P_l (\cos \theta) P_{l'} (\cos \theta) = \frac{2 \delta_{ll'}}{2l+1} }
+Notice, Eq.~\ref{f-theta} $\sim$ Eq.~\ref{sigma} are the general expression. 
+\end{enumerate}
 
 \end{document}
