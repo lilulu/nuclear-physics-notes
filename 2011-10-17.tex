@@ -80,26 +80,21 @@ K &= - \frac{\hbar^2 \uline{\gradient}_n^2}{2 m_n}  - \frac{\hbar^2 \uline{\grad
 \left[ \begin{array}{cc} \frac{m_n}{m_n+m_p} & -1 \\ \frac{m_p}{m_n+ m_p} & 1 \end{array} \right]
 \left[ \begin{array}{c} \uline{\gradient}_R \\ \uline{\gradient}_r \end{array} \right] \\
 &= - \frac{\hbar^2 \laplacian_R}{2 (m_1 + m_2)} - \frac{\hbar^2 \laplacian_r}{2 \mu} \\
-&= - \frac{\hbar^2 \laplacian_R}{2M} - \frac{\hbar^2 \laplacian_r}{2 \mu}  \\
-&= \frac{P^2}{2M} + \frac{p^2}{2\mu} 
+&= - \frac{\hbar^2 \laplacian_R}{2M} - \frac{\hbar^2 \laplacian_r}{2 \mu} = \frac{P^2}{2M} + \frac{p^2}{2\mu} 
 \end{align}
-where $\mu$ is the reduced mass, $M$ is the total mass. 
-
-
-So we have reduced a two body problem into effectively a single particle problem describing the reduced mass about the center of mass (where $B$ is the binding energy in the two-body problem): 
+where $\mu$ is the reduced mass, $M$ is the total mass. So we have reduced a two body problem into  a single particle (the reduced mass) about the center of mass (where $B$ is the binding energy in the two-body problem): 
 \eqn{ \Hhat \psi(\vec{r}) &= - \vec{B} \psi(\vec{r}) }
 % \eqn{\Rightarrow e^{i \uline{K} \cdot \uline{R}} \psi(\uline{x}) &= \psi(\uline{x}_1 - \uline{x}_2) }
 
-We ignore the COM translation, and focus on a stationaty deuteron. 
+\item We ignore the COM translation, and focus on a stationaty deuteron. 
 \begin{align}
 \Hhat_d &= \overbrace{\frac{\uline{\Phat}_{\mathrm{CM}}^2}{2M}}^{ = \hat{E}_{\mathrm{CM}} \to  0} + \frac{\uline{\Phat}_{\mathrm{Rel}}^2}{2\mu} + V_{\mathrm{nuc}} (\uline{r}) = \frac{\uline{\Phat}_{\mathrm{Rel}}^2}{2\mu} + V_{\mathrm{nuc}} (\uline{r}) = -\frac{\hbar^2}{2 \mu} \gradient_r^2 + V_{\mathrm{nuc}} (\uline{r}) 
 \end{align}
 
-
 \item Now we perform a qualitative evaluation of $V_{\mathrm{nuc}} (\uline{r})$ \footnote{Krane, p.80}: 
     \begin{enumerate}
     \item At short distances: very strong, overcome the Coulomb repulsion of protons in the nucleus; 
-    \item At long distances: very week and negligible; 
+    \item At long distances (on the order of atomic size): very week and negligible; 
     \item Some particles, like $e^-$, are immute to $V_{\mathrm{nuc}}$;
     \item The nucleus potential looks like Figure~\ref{nuclear-potential-radius}. 
     \begin{figure}
@@ -115,22 +110,22 @@ We ignore the COM translation, and focus on a stationaty deuteron.
 - \frac{\hbar^2}{2 \mu} \uline{\gradient}_r^2 &= - \frac{\hbar^2}{2 \mu} \left[ \pprn2 + \frac{2}{r} \ppr \right] + \frac{1}{2 r^2 \mu} \overbrace{ (-\hbar^2) \left[ \frac{1}{\sin \theta} \pptheta \left( \sin \theta \pptheta \right) + \frac{1}{\sin^2 \theta} \ppphin2 \right]}^{\to \Lhat^2}  \\
 &= - \frac{\hbar^2}{2 \mu} \left[ \pprn2 + \frac{2}{r} \ppr \right] + \frac{\Lhat^2}{2 r^2 \mu} 
 \end{align}
+Basically we break the kinetics energy into a translatioal component and a rotational component. 
 
 \item Now we have our eigenvalue problem ($E$'s sign is negative because of a bound state, and its magnitude is the binding energy of the deuteron in this case):
 \eqn{ \left[ - \frac{\hbar^2}{2 \mu} \left( \pprn2 + \frac{2}{r} \ppr \right) + \frac{\Lhat^2}{2 r^2 \mu} + V_{\mathrm{nuc}} (\uline{r})  \right] \psi_n (r, \theta, \phi) = E_n \psi_n (r, \theta,\phi) }
 
 \item To evaluate the above eigenvalue problem, notice we have
 \eqn{ \left[ \Lhat^2, \Hhat \right]   = \left[ \Lhat_z , \Hhat \right] = 0 }
-suggesting that $\Lhat^2, \Lhat_z, \Hhat$ shares the same eigenstate, which is the spherical harmonics $Y_l^m (\theta, \phi)$. Then we can write the wave function as: 
+suggesting that $\Lhat^2, \Lhat_z, \Hhat$ shares the same eigenstate, which is the spherical harmonics $Y_l^m (\theta, \phi)$. Then we can write the wave function as:
 \eqn{ \psi_n (r, \theta, \phi) = \psi_{n,l} (r) Y_l^m (\theta, \phi) }
 Also we know 
 \eqn{ \Lhat^2 Y_l^m = \hbar^2 l(l+1) Y_l^m }
 Plug the eigenvalues of $\Lhat^2$ back into the eigenvalue problem: 
 \eqn{ \left[ - \frac{\hbar^2}{2 \mu}\left( \pprn2 + \frac{2}{r} \ppr \right)  + \frac{\hbar^2 l(l+1)}{2 \mu r^2 } + V_{\mathrm{nuc}} (\uline{r}) - E_{n,l}  \right] \psi_{n,l} (r) Y_l^m (\theta, \phi) = 0 }
-Notice that the above equation is only dependent on r, so we can cross out the $Y_l^m (\theta, \phi)$ term, and call the radial component of the state function
- \eqn{ u_n(r) = r \psi_n (r) = u_n (r) } 
+Notice that the above equation is only dependent on r, so we can cross out the $Y_l^m (\theta, \phi)$ term, and define $\displaystyle u_n(r) = r \psi_n (r)$,
  \eqn{  \boxed{ \left[ - \frac{\hbar^2}{2 \mu}  \pprn2  + \underbrace{\frac{\hbar^2 l(l+1)}{2 \mu r^2 } + V_{\mathrm{nuc}} (\uline{r}) }_{\to V_{\mathrm{eff}} (\uline{r})} - E_{n,l}  \right] u_n (r)  = 0 } }
-In a sense, we defined a modified potential term $V_{\mathrm{eff}} (r)$ that takes into account the angular momentum effect.  
+This is the called the \textbf{radial equation}. It is identical in form to the 1D Schrodinger equatio, except that the effective potential $V_{\mathrm{eff}} (r)$ contains an angular momentum term, which is called the \textbf{centrifugal term}. The centrifugal term `tends to throw the particle outward (away from the origin), just like the centrifugal (pseudo-)force in classical mechanics' (Griffths, Section 4.1)\footnote{My understanding: we started out with both radial and angular dependency; after separation of variables, we solved for the angular dependency and reached the radial equation. Effectively we went from the earth reference frame into a rotating reference frame (that's the only way we don't see rotational movement anymore), thus we need to add a pseudo centrifugal force to account for the change in reference frame.}.    
 \end{enumerate}
 
 \clearpage

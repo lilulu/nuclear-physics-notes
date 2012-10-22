@@ -47,22 +47,20 @@ Notice this is the same as the odd-parity square well problem in Chapter~\ref{fi
 \item We reach a transcendental equation describing the dependency of $V_0, r_0, E_B$ on each other:
 \eqn{ \boxed{ \cot (k_1 r_0 ) = -\frac{k_2}{k_1} = - \sqrt{\frac{-E}{E+V_0}}  } \label{H2-V_0}}
 
-\item Estimation of $V_0$.  [FIXME] 
+\item Estimation of $V_0$. 
   \begin{enumerate}
-  \item The unbounded state (Prof. Yildiz):  consider the special case of a barely bound state of $|V_0| \gg |E|$, $\cot (k_1 r_0) \to 0, k_1 r_0 = \frac{\pi}{2}$. For at least one bound state to fit at least 1 of the 1/4 sin wave: 
+  \item The minimum depth of a well, that is, a barely bound state:
     \begin{enumerate}
-    \item $ r_0 \gg \frac{1}{4}\lambda = \frac{1}{4}\frac{2 \pi}{k_1}  = \frac{\pi}{2k_1}  \Rightarrow k_1 \gg \frac{\pi}{2} \frac{1}{r_0} $
-    \item $KE = \frac{\hbar^2 k_1^2}{2 \mu} < V_0$. 
+    \item A barely bound state means $\displaystyle E \to 0, |V_0| \gg |E|, \cot (k_1 r_0) \to 0, k_1 r_0 \simeq \frac{\pi}{2}$. 
+    \item Alternatively, we can also consider, for outside the well to decrease, the width of the well has to be at least 1/4 of the $\sin$ wave: $\displaystyle r_0 \gtrsim \frac{1}{4}\lambda = \frac{1}{4}\frac{2 \pi}{k_1}  = \frac{\pi}{2k_1}  \Rightarrow k_1 \gtrsim \frac{\pi}{2} \frac{1}{r_0} $
     \end{enumerate}
     Together, that is to say,
-    \eqn{ \frac{\hbar^2 \pi^2}{8 \mu r_0^2} < V_0 \Rightarrow V_0 > \frac{\hbar^2 c^2}{\mu c^2} \frac{\pi^2}{8 r_0^2} = \frac{ (197 \fsp \MeV \fm )^2}{469 \MeV} \frac{\pi^2}{8 \times (2.1 \fsp \fm)^2 } = 23 \fsp \MeV  }
+    \eqn{ \mathrm{KE} = \frac{\hbar^2 k_1^2}{2\mu} = \frac{\hbar^2 \pi^2}{8 \mu r_0^2} < V_0 \Rightarrow V_0 > \frac{\hbar^2 c^2}{\mu c^2} \frac{\pi^2}{8 r_0^2} = \frac{ (197 \fsp \MeV \fm )^2}{469 \MeV} \frac{\pi^2}{8 \times (2.1 \fsp \fm)^2 } = 23 \fsp \MeV  }
 
-  \item The bound state $V_0$(Prof. Li):  plug in $E = -2.22$ MeV, $R = 2.1$ fm, $k_1 R = 1.8305$, we can solve for $V_0 = 35$ MeV for the bound state. 
-
-  \item Using measured $r_0, E_B$, we can find $V_0$ using Eq.~\ref{H2-V_0}:
+  \item The actual well depth of a Deuteron: using measured $r_0, E_B$, we can find $V_0$ using Eq.~\ref{H2-V_0}:
     \begin{enumerate}
     \item $r_0$ can be measured from the scattering experiment. For \ce{^2H}, $r_0 = 2.1 \fm$. 
-    \item E is the binding energy that is about $-2.22$ MeV. We can measure $E_B$ through: 
+    \item The binding energy $E = -2.22$ MeV. We can measure $E_B$ through: 
       \begin{itemize}
       \item mass spectroscopy;
       \item measure the $\gamma$ energy in p + n $\to$ \ce{^2 H} + $\gamma$;
@@ -70,7 +68,7 @@ Notice this is the same as the odd-parity square well problem in Chapter~\ref{fi
       \end{itemize}
       The $2.22 \fsp \MeV$ binding energy is for ground state \ce{^2H} (we can tell it is ground state because excited states decay very rapidly). A binding energy of $2.22 \fsp \MeV$ is rather weak, because the average nucleus binding energy is $8 \fsp \MeV$. 
 
-    \item We can solve for $V_0$ to be $35 \fsp \MeV$ for this case.
+    \item We can solve for $k_1 r \simeq 1.8305$, then the well depth of a deuteron is $V_0 = 35 \fsp \MeV$.
     \end{enumerate}
   \end{enumerate}
 
