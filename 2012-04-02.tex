@@ -14,13 +14,13 @@
   \caption{Energy Groups in Multi-Gruop Diffusion Theory} \label{energy-groups}
 \end{figure}
 
-\item Define group terms. We define the yet unknown group fluxes by the integrals of the flux over individual groups. \textcolor{blue}{Be careful about the units: $\phi_g(\vecr)$ is the real flux, $\phi(\vecr, E)$ is really the flux density}. 
+\item Define group terms. We define the yet unknown group fluxes by the integrals of the flux over individual groups. \textcolor{blue}{Be careful about the units: $\phi_g(\vecr)$ is the real flux, $\phi(\vecr, E)$ is really the flux density}. Similarly the reaction rate is actually reaction rate density. This implementation does not have volume term in it because we are considering an infinite system. 
 \eqn{ \phi_g(\vecr) = \int_{E_g}^{E_{g-1}} \phi(\vecr, E) \dE }
 The group cross sections are defined such that the reaction rates in each interval are preserved,
 \eqn{ \sigma_{xg}^i (\vecr) = \frac{1}{\phi_g (\vecr)} \int_{E_g}^{E_{g-1}} \sigma_x^i (\vecr, E) \phi(\vecr, E) \dE = \frac{\int_{E_g}^{E_{g-1}} \sigma_x^i (\vecr, E) \phi(\vecr, E) \dE}{\int_{E_g}^{E_{g-1}} \phi(\vecr, E) \dE} }
-Group constants are typically determined using neutron spectra obtained by solving local problems with approximate boundary conditions, like our MC code. Group wise cross sections cannot match the details of Monte Carlo spectrum calculation, so it is imperative that \textit{detailed resonance effects are contained in the multi-group cross sections} when produced from some detailed spectral calculations. 
+Group constants are typically determined using neutron spectra obtained by solving local problems with approximate boundary conditions, like our MC code. Group-wise cross sections cannot match the details of Monte Carlo spectrum calculation, so it is important that \textit{detailed resonance effects are contained in the multi-group cross sections} when produced from some detailed spectral calculations. For instance, we can approximate $\phi(E)$ using $\chi(E)$ for fast energies, using narrow resonances for intermediate energies, and Maxwellian distribution for the thermal energies. 
 
-Be careful that this implementation does not have volume term in it because we are considering an infinite system. 
+
 
 \item Integrate steady-state diffusion equation over each of the $g$ energy groups: 
 \begin{align}
@@ -51,14 +51,16 @@ Be careful that this implementation does not have volume term in it because we a
     \end{align}
   \item Source term: 
     \eqn{ \textcircled{3} =\int_{E_g}^{E_{g-1}} \dE S(\vecr, E) =  S_g(\vecr) }
-  \item Fission source term: 
+
+  \item Fission source term (this formation has only one fissioning species): 
     \eqn{ \textcircled{4} &=\int_{E_g}^{E_{g-1}} \dE \chi(E) \int_{E'} \dE' \nu \Sigma_f (\vecr, E') \phi(\vecr, E') =  \chi_g \Sum_{g'=1}^G \nu \Sigma_{fg} (\vecr) \phi_g(\vecr) }
         where 
         \eqn{ \chi_g &= \int_{E_g}^{E_{g-1}} \dE \chi(E), &\nu \sigma_{fg}^i (\vecr) &= \frac{1}{\phi_g(\vecr)} \int_{E_g}^{E_{g-1}} \nu(E) \sigma_f^i (E) \phi(\vecr, E) \dE }
 
   \item Scattering source term: 
   \begin{align}
-    \textcircled{5} &=\int_{E_g}^{E_{g-1}} \dE \int_{E'} \dE' \Sigma_s(\vecr, E'\to E) \phi(\vecr, E') = \int_{E_g}^{E_{g-1}} \dE \Sum_{g'=1}^G \int_{E_g'}^{E_{g'-1}} \dE' \Sigma_s(\vecr, E'\to E) \phi(\vecr, E') \\
+    \textcircled{5} &=\int_{E_g}^{E_{g-1}} \dE \int_{E'} \dE' \Sigma_s(\vecr, E'\to E) \phi(\vecr, E') \\
+    &= \int_{E_g}^{E_{g-1}} \dE \Sum_{g'=1}^G \int_{E_g'}^{E_{g'-1}} \dE' \Sigma_s(\vecr, E'\to E) \phi(\vecr, E') \\
     &= \Sum_{g'=1}^G \int_{E_g}^{E_{g-1}} \dE \int_{E_g'}^{E_{g'-1}} \dE' \Sigma_s(\vecr, E'\to E) \phi(\vecr, E') \\
     &= \Sum_{g'=1}^G \Sigma_{sg'g} (\vecr) \phi_{g'} (\vecr) 
   \end{align}
@@ -87,6 +89,43 @@ Notes:
   \item When RHS $=0$, the flux would be a straight line, $\gradient \phi = $ constant, $\laplacian \phi = 0$, there is no leakage/diffusion at every point, that is, there is no net neutrons leaving any point, the neutron diffusion breakes even at every point. The heat transfer analogy is that there is no heat leaving or entering any point. 
   \end{itemize}
 \end{itemize}
+
+
+\clearpage
+\topic{Matrix Form}
+If we keep the destruction terms on the LHS, and the construction terms on the RHS,
+\begin{align}
+\left[ \begin{array}{cccc} 
+    - D_1 \laplacian +  \Sigma_{r1} & & & \\
+    & -D_2 \laplacian  +  \Sigma_{r2} & & \\
+    & & \ddots & \\
+    & & &  - D_G \laplacian + \Sigma_{rG}  \end{array} \right] 
+\left[ \begin{array}{c} \phi_1 \\ \phi_2 \\ \vdots \\ \phi_G \end{array} \right]\\
+= \left[ \begin{array}{cccc} 
+\frac{\chi_1 \nu \Sigma_{f1}}{k} & \Sigma_{s21} + \frac{\chi_1 \nu \Sigma_{f2}}{k} & \cdots &  \Sigma_{sG1} + \frac{\chi_1 \nu \Sigma_{fG}}{k} \\
+\Sigma_{s12} + \frac{\chi_2 \nu \Sigma_{f1}}{k} & \frac{\chi_2 \nu \Sigma_{f2}}{k} & \cdots &  \Sigma_{sG2} + \frac{\chi_2 \nu \Sigma_{fG}}{k} \\
+\vdots & & \ddots &  \\
+\Sigma_{s1G} + \frac{\chi_G \nu \Sigma_{f1}}{k} & \Sigma_{s21} + \frac{\chi_1 \nu \Sigma_{f2}}{k} & \cdots & \frac{\chi_1 \nu \Sigma_{fG}}{k} \\
+\end{array} \right] 
+\left[ \begin{array}{c} \phi_1 \\ \phi_2 \\ \vdots \\ \phi_G \end{array} \right]
+\end{align}
+Alternatively, we can move the scattering terms to the LHS, 
+\begin{align}
+\left[ \begin{array}{cccc} 
+    - D_1 \laplacian +  \Sigma_{r1} & - \Sigma_{s21} & \cdots & - \Sigma_{sG1} \\
+    - \Sigma_{s12} & -D_2 \laplacian  +  \Sigma_{r2} & \cdots & - \Sigma_{sG2} \\
+    \vdots & \vdots & \ddots & \vdots \\
+    - \Sigma_{s1G} & - \Sigma_{s21} & \cdots &  - D_G \laplacian + \Sigma_{rG}  \end{array} \right] 
+\left[ \begin{array}{c} \phi_1 \\ \phi_2 \\ \vdots \\ \phi_G \end{array} \right]
+= \left[ \begin{array}{cccc} 
+\frac{\chi_1 \nu \Sigma_{f1}}{k} & \frac{\chi_1 \nu \Sigma_{f2}}{k} & \cdots & \frac{\chi_1 \nu \Sigma_{fG}}{k} \\
+\frac{\chi_2 \nu \Sigma_{f1}}{k} & \frac{\chi_2 \nu \Sigma_{f2}}{k} & \cdots &   + \frac{\chi_2 \nu \Sigma_{fG}}{k} \\
+\vdots & & \ddots &  \\
+\frac{\chi_G \nu \Sigma_{f1}}{k} & \frac{\chi_1 \nu \Sigma_{f2}}{k} & \cdots & \frac{\chi_1 \nu \Sigma_{fG}}{k} \\
+\end{array} \right] 
+\left[ \begin{array}{c} \phi_1 \\ \phi_2 \\ \vdots \\ \phi_G \end{array} \right]
+\end{align}
+Notes: we have the $k$ term in the equations to keep the fission source general. In the absence of spatial dependency (for instance, in this formulation we've only considered energy dependency so far and assume spatial homogenization), notice the RHS matrix has order 1 (this can be seen from that every row vector is a constant times the 1st row), leading to that there is only one eigenvalue, thus we do not have to worry about multiple eigenvalues. This implies that \hi{the eigenvalue is a measurement of the spatial dependency}. Once we add in the flux depending on both space and energy, we cannot easily write each row as the 1st row times a constant anymore. 
 
 
 

@@ -8,24 +8,28 @@
 Reference: Stacy's Section 3.10. 
 
 \topic{Neutron Balance Equation}
-Recall the two-group neutron balance equations:
+We start with the two-group neutron balance equations, and apply assumptions:
 \begin{itemize}
-\item Total fission source is: 
-  \eqn{S_f(r) = \nu \Sigma_{f1} (r) \phi_1 (r) + \nu \Sigma_{f2} (r) \phi_2(r) }
-  $\chi_1 = 1, \chi_2 = 0$ which implies that fission source in the thermal group is zero.
-\item Scattering source: we define effective down-scattering, so up-scattering is zero $\Sigma_{21}(r) = 0$. Then our down-scattering becomes an effective down-scattering cross section by conserving reaction rates (as usual), 
+\item Assume fission source is in the fast group. That is, $\chi_1 = 1, \chi_2 = 0$. 
+\item Assume no up-scattering. We define effective down-scattering, so up-scattering is zero $\Sigma_{21}(r) = 0$. Then our down-scattering becomes an effective down-scattering cross section by conserving reaction rates (as usual), 
   \eqn{\hat{\Sigma_{12}} = \Sigma_{12} - \Sigma_{21} \frac{\phi_2}{\phi_1} }
 
-\item Two-group diffusion equations: 
+\item Thus two-group diffusion equations are: 
   \begin{align}
     \left\{ \begin{array}{c}
       - D_1 \laplacian \phi_1 + (\Sigma_{a1} + \Sigma_{s12}) \phi_1 = \nu \Sigma_{f1} \phi_1 + \nu \Sigma_{f2} \phi_2 + S_1  \\
       - D_2 \laplacian \phi_2 + \Sigma_{a2} \phi_2 = \Sigma_{s12} \phi_1 + S_2
     \end{array} \right. \label{two-group-eq}
   \end{align} 
-\end{itemize}
 
-We can construct a finite spatial mesh in which cross sections are constant; integrate Eq.~\ref{two-group-eq} over for node $n$ with width $\Delta^n$,
+\item If we are in an infinite system that we can ignore the leakage term, then we can write out an eigenvalue problem in matrix form immediately. More specifically, \hi{without leakage, $\phi_1, \phi_2$ are flat}, and we can directly write out the ratio of the two: 
+  \eqn{ \frac{\phi_2}{\phi_1} = \frac{\Sigma_{s12}}{\Sigma_{a2}} }
+ and the eigenvalue: 
+ \eqn{ k = \frac{\nu \Sigma_{f1}}{\Sigma_{r1}} + \frac{\nu \Sigma_{f2} \Sigma_{s12}}{\Sigma_{R1} \Sigma_{r1}} }
+ Prof. Forget made a connection between the four factor formula and the 2 group theory: $\displaystyle p = \frac{\Sigma_{s12} \phi_1}{\Sigma_{r1} \phi_1} = \frac{\Sigma_{s12}}{\Sigma_{r1}}, k_1 = \eta_1 f_1 = \frac{\nu \Sigma_{f1}}{\Sigma_{r1}}, k_2 = \eta_2 f_2 = \frac{\nu \Sigma_{f2}}{\Sigma_{a2}}, \epsilon = 1 + \frac{k_1}{k_2}, k = \eta_1 f_1 + p \eta_2 f_2$. 
+
+
+\item However to keep it general, we need to approximate the leakage term by constructing a finite spatial mesh in which cross sections are constant. Integrate Eq.~\ref{two-group-eq} over for node $n$ with width $\Delta^n$,
 \eqn{-\int \ddx D_1^n \ddx \phi_1^n \dx + \Sigma_{r1}^n  \phi_1^n \Delta^n = \nu \Sigma_{f1}^n \phi_1^n \Delta^n + \nu \Sigma_{f2}^n \phi_2^n \Delta^n + S_1 \Delta^n} 
 \eqn{-\int \ddx D_2^n \ddx \phi_2^n  \dx + \Sigma_{a2}^n \phi_2^n \Delta^n = \Sigma_{s12}^n \phi_1^n \Delta^n + S_2 \Delta^n}
 We evaluate the integral term\footnote{Lectuer says use the divergence theorem $\int \divergence \vec{F} \dV = \int_S \vec{F} \cdot \vec{n} \dS$, I think this is just manipulating integral and $\int_{x_1}^{x_2} \ddx A \dx \to \left. A \right|_{x_2} - \left. A \right|_{x_1}$}, 
@@ -33,6 +37,10 @@ We evaluate the integral term\footnote{Lectuer says use the divergence theorem $
 where $n^+$ is the right surface of node $n$, $n^-$ is the left surface. Then the balance equations become,
 \eqn{ - \left. D_1^n \ddx \phi_1^n \right|_{n^+} + \left. D_1^n \ddx \phi_1^n \right|_{n^-} + \Sigma_{r1}^n  \phi_1^n \Delta^n = \nu \Sigma_{f1}^n \phi_1^n \Delta^n + \nu \Sigma_{f2}^n \phi_2^n \Delta^n + S_1 \Delta^n} 
 \eqn{- \left. D_2^n \ddx \phi_2^n \right|_{n^+} + \left. D_2^n \ddx \phi_2^n \right|_{n^-} + \Sigma_{a2}^n \phi_2^n \Delta^n = \Sigma_{s12}^n \phi_1^n \Delta^n + S_2 \Delta^n}
+
+\end{itemize}
+
+
 
 \topic{Interface Flux}
 Recall that net current is $J = -D \ddx \phi$ (which shows up in the balance equation, implying that it could help to manipulate this term). Assume neighboring cells have the same width as in Figure~\ref{diagram-finite-difference}, and we make a linear flux approximation between cell centers and cell edges, then the net currents at the cell edge have two formulations, 
