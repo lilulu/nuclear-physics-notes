@@ -185,12 +185,11 @@ The inner loop is on $m$ (the flux iteration index),
 
 
 \topic{Method 5: Power Iteration with Gauss-Seidal Iterative Flux Matrix Inversion} 
-The outter loop is almost the same as Point-Jacobi, except the we further distinguish between lower-diagonal and upper-diagonal terms, 
+The outter loop is almost the same as Point-Jacobi, 
 \begin{align}
 A &= L + D + U  \\
 (L + D ) \phi^{m+1} &= \frac{1}{\keff} M \phi^i - U \phi^m 
 \end{align}
-
 Then the inner loop is on $m$ (the flux iteration index), 
 \eqn{ \phi^{m+1} &= (L + D)^{-1} \left( \frac{1}{\keff} M \phi^i - U \phi^m \right) }
 \textcolor{blue}{Notice these Point-Jacobi and Gauss-Seidal only work with 2D problem that we can easily split a matrix into L, D, and U. 3D and above problems would be hard to solve using these two methods.} 
