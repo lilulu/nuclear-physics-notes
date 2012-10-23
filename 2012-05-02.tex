@@ -39,6 +39,28 @@ Approaches to 3D core problems:
 \item Nodal method: this is what production codes typically use. There is a huge push towards nodal method, because nodal methods take a mesh size of 20cm to be accurate, whereas Finite Difference method requires a mesh size of about 1 cm. 
 \end{enumerate}
 
+\textbf{Multilevel Approach} for LWRs (the reason we emphasize this approach is for LWRs is because the spatial mesh should agree with mean free path which depends on energies):
+\begin{enumerate}
+\item Spectral code to get from 1000s of energy groups to 100s of energy groups. 
+  \begin{enumerate}
+    \item Pin cell or homogenized medium. 
+    \item 0D or 1D spatial model.
+  \end{enumerate}
+
+\item Solve each unique lattice. 
+  \begin{enumerate}
+  \item Self-shielding corrections. 
+  \item 2D transport theory (100s energy groups). 
+  \item Homogenize parameters.
+  \end{enumerate}
+
+\item Solve nodal diffusion (3D diffusion equation with few energy groups). 
+\end{enumerate}
+
+For fast reactors, we solve a lattice with 10,000 groups and go straight to diffusion (with 30-40 energy groups) because the mean free path is too long. 
+
+
+
 \clearpage
 \topic{Derivation of Nodal Methods}
 Reference: Sutton and Aviles' `Diffusion Theory Methods for Spatial Kinetics Calculations' (1996). 
