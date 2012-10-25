@@ -96,29 +96,38 @@ Observations:
 
 \clearpage
 \topic{Derivation Of Diffusion Theory From Transport Theory}
+The goal of diffusion theory is to eliminate angular dependancy by integrating over all angles $\int_{4\pi} \dOmega$.
 \begin{enumerate}
 \item Start from the steady state continuous energy transport equation: 
-\eqn{ \vecOmega \cdot \gradient \psi(\vecr, E, \vecOmega) + \Sigma_t (\vecr, E) \psi(\vecr, E, \vecOmega) = \int \dE' \int \dOmega' \Sigma_s(\vecr, E'\to E, \vecOmega' \to \vecOmega) \psi(\vecr, E', \vecOmega') + S(\vecr, E, \vecOmega) }  
+\eqn{ \vecOmega \cdot \gradient \psi(\vecr, E, \vecOmega) + \Sigma_t (\vecr, E) \psi(\vecr, E, \vecOmega) &= \int \dE' \int \dOmega' \Sigma_s(\vecr, E'\to E, \vecOmega' \to \vecOmega) \psi(\vecr, E', \vecOmega')  \notag \\
+& \frac{\chi(E)}{4 \pi} \int \dE' \nu \Sigma_f (E') \phi(\vecr', E') + S(\vecr, E, \vecOmega) }  
+Notice the scattering term is discontinuous, that is, a neutron at $E', \vecOmega'$ can jump to $E, \vecOmega$; the distribution is a delta function not a smooth continuous distribution. Notice in the fission term on the RHS $\displaystyle \frac{\chi(E)}{4 \pi} \int \dE' \nu \Sigma_f (E') \phi(\vecr', E')$,  $\phi$ is the scalar flux as we can see the angular dependency is gone already, and the $4 \pi$ there is to balance $\phi$ in an equation of $\psi$. 
 
-\item Expand scattering source/flux in spherical harmonics, integrate over angle $\dOmega$,
+
+\item We treat the scattering kernel: $\displaystyle \Sigma_s(\vecr, E'\to E, \vecOmega' \to \vecOmega) \to \Sigma_s (\vecr, E'\to E, \mu_0)$ where $\mu_0 = \vecOmega' \cdot \vecOmega$ because scattering only depends on the angle between $\vecOmega, \vecOmega'$. We know for isotropic scattering, the scattering term becomes, 
+\eqn{ \int_0^{\infty} \dE' \int \dOmega \frac{\Sigma_{s0}(\vecr, E' \to E)}{4\pi} \int \psi(\vecr', E', \vecOmega') \dOmega' = \int \dE \Sigma_s (\vecr, E' \to E) \phi(\vecr, E') }
+More generally, we would expand $\Sigma_s (\mu_0)$ using Legendre polynomials, then the first term is the isotropic scattering $P_0(\mu_0) = 1$. The next term is $P_1 (\mu_0) = \mu_0$. Expand scattering source/flux in spherical harmonics, integrate over angle $\dOmega$,
 \begin{align}
  &\overbrace{\int_{4\pi} \dOmega \vecOmega \cdot \gradient \psi(\vecr, E, \vecOmega)}^{\textcircled{1}} 
-+ \Sigma_t (\vecr, E) \overbrace{\int_{4\pi} \dOmega \psi(\vecr, E, \vecOmega)}^{\textcircled{2}} \\
-&= \Sum_i \Sum_{l=0}^L \Sum_{k=-l}^l \overbrace{\left[\int_{4\pi} \dOmega Y_{lk} (\vecOmega) \right]}^{\textcircled{3}} \int \dE' \Sigma_s(\vecr, E'\to E) \psi_{lk}(\vecr, E') + \overbrace{\int_{4\pi} \dOmega S(\vecr, E, \vecOmega)}^{\textcircled{4}} 
++ \Sigma_t (\vecr, E) \overbrace{\int_{4\pi} \dOmega \psi(\vecr, E, \vecOmega)}^{\textcircled{2}} \notag \\
+&= \Sum_i \Sum_{l=0}^L \Sum_{k=-l}^l \overbrace{\left[\int_{4\pi} \dOmega Y_{lk} (\vecOmega) \right]}^{\textcircled{3}} \int \dE' \Sigma_s(\vecr, E'\to E) \psi_{lk}(\vecr, E') \notag \\
+&+ \overbrace{ \frac{\chi(E)}{4 \pi} \int \dE' \nu \Sigma_f (E') \phi(\vecr', E')  }^{\textcircled{4}} + \overbrace{\int_{4\pi} \dOmega S(\vecr, E, \vecOmega)}^{\textcircled{5}} 
 \end{align}
 The scattering kernel is nasty, because a) $\Sigma_s$ depends on energy, hence we have to integrate over all energy; b) $\Sigma_s$ depends on angle, hence we have to integrate over all angle; c) $\Sigma_s$ depends on isotope, hence we have to integrate over all isotopes. 
 
-\item Simplify the four angle integrals,
+\item Simplify the angular integrals, assuming that the source is isotropic
 \begin{align}
-\textcircled{1} &= \int_{4\pi} \dOmega (\divergence \vecOmega \psi) = \divergence \left[\int_{4\pi} \dOmega \vecOmega \psi \right] = \divergence \vec{J} (\vecr, E) \\
+\textcircled{1} &= \int_{4\pi} \dOmega \divergence (\vecOmega \psi) = \divergence \left(\int_{4\pi} \dOmega \vecOmega \psi \right) = \divergence \vec{J} (\vecr, E) \\
 \textcircled{2} &= \phi(\vecr, E) \\
 \textcircled{3} &= \sqrt{4\pi} \int_{4\pi} \dOmega \bar{Y}_{00}(\vecOmega) Y_{lk} (\vecOmega) = \sqrt{4\pi} \delta_{l0}\delta_{k0}, \fsp \fsp \sqrt{4 \pi } \psi_{00} = \phi \\
-\textcircled{4} &= S_0 (\vecr, E) 
+\textcircled{4} &= \chi(E) \int \dE' \nu \Sigma_f (E') \phi(\vecr, E') \\
+\textcircled{5} &= S_0 (\vecr, E) 
 \end{align}
+where we've defined the scalar current $\displaystyle J(\vecr, E) = \int \dOmega \vecOmega \psi (\vecr, E, \vecOmega)$, and scalar flux $\displaystyle \phi(\vecr, E) = \int \dOmega \psi(\vecr, E,  \vecOmega)$. We drop the $4 \pi$ on the bottom of term $\textcircled{4}$ because now every term is in scalar flux. 
 
-\item We obtain the balance equation:
-\eqn{ \boxed{ \divergence \vecJ (\vecr, E) + \Sigma_t (\vecr, E) \phi(\vecr, E) = \Sum_i \int_{E'} \dE' \Sigma_{s}^i (\vecr, E'\to E) \phi(\vecr, E') + S_0 (\vecr, E) }}
-This balance equation is basically equalling the source and the sink. Notice this equation is exact so far. But since we do not know what $\vec{J}$ is, we need to approximate it somehow. 
+\item We obtain the \hi{continuity equation}: \scriptsize
+\eqn{ \boxed{ \divergence \vecJ (\vecr, E) + \Sigma_t (\vecr, E) \phi(\vecr, E) = \Sum_i \int_{E'} \dE' \Sigma_{s}^i (\vecr, E'\to E) \phi(\vecr, E') + \chi(E) \int \dE' \nu \Sigma_f(E') \phi(\vecr, E')   + S_0 (\vecr, E) }} \normalsize
+This balance equation is basically equalling the source and the sink. Notice this equation is exact so far. The problem is this is one quation with two unknowns $\phi, J$. Thus we need to approximate $J$. 
 \end{enumerate}
 
 Basically going from transport to diffusion theory we drop the $\Omega$ dependency. Thus we define the scalar flux $\phi(\vecr, E)$ and the net current $\vecJ (\vecr, E)$: 
@@ -130,7 +139,15 @@ The only reason we brought up the transport theory is that we need to set the bo
 
 
 \clearpage
-\topic{Net Current Equation}
+\topic{P1 Approximation, Net Current Equation}
+Start from the continuity equation, we can expand the scalar flux using Legendre polynomials: 
+\eqn{ \psi(\vecr, E, \vecOmega) = \Sum_{l=0}^L \frac{2l+1}{4 \pi} \phi_l (\vecr, E) P_l (\vecOmega) }
+where $\displaystyle \phi_0 = \mbox{scalar flux} = \int \dOmega \phi(\vecr, E, \vecOmega), \phi_2 = J(\vecr, E) = \int \dOmega \phi(\vecr, E, \vecOmega)$. 
+
+
+The $P_1$ angular expansion would be, 
+\eqn{ \psi(\vecr, E, \vecOmega) \approx \frac{1}{4 \pi} \left[ \phi(\vecr, E) + 3 \vecOmega \cdot J(\vecr, E) \right] }
+
 \begin{enumerate}
 \item We start from transport equation again, multiple by $\Omega$ and integrate over all angles: 
 \begin{align}
@@ -155,6 +172,12 @@ We can simplify the angular integral terms:
 \textcircled{8} &= \vec{S}_1 (\vecr, E) 
 \end{align}
 
+
+
+
+
+
+
 \item We obtain the net current equation:
 \eqn{\boxed{ \frac{1}{3} \gradient \phi(\vecr, E) + \Sigma_t (\vecr, E) \vecJ(\vecr, E) = \Sum_i \int_{E'} \dE' \Sigma_{s1}^i (\vecr, E'\to E) \vecJ(\vecr, E') + \vec{S}_1(\vecr, E) } }
 \end{enumerate}
@@ -162,7 +185,19 @@ We can simplify the angular integral terms:
 
 \clearpage
 \topic{Scattering and Diffusion Coefficients}
-Start from the net current equation, assume the source is isotropic, then the source term goes away:
+We treat the scattering kernel: keeping the 1st angular moment of scattering, thus all the isotropic terms drop out (fission, source), and we are left with the linear terms: 
+\eqn{ \int \dE' \Sigma_{s1} (\vecr, E' \to E) J(\vecr, E') }
+We make the in-scattering approximation (may not be a good approximation!) that basically assume at low absorption, the in-scattering ($E'\to E$) is equivalent to/would balance with the out-scattering ($E \to E'$), notice we can pull out the $J$ term now as well,  
+\eqn{ \int \dE' \Sigma_{s1} (\vecr, E \to E') J(\vecr, E) = J(\vecr, E) \int \dE' \Sigma_{s1} (\vecr, E \to E') = J(\vecr, E) \overline{\mu}_0 \Sigma_{s0} (\vecr, E) }
+Then our net current equation becomes
+\eqn{ \frac{1}{3} \gradient \phi(\vecr, E) + \Sigma_t (\vecr, E) \vecJ(\vecr, E) = J(\vecr, E)  \overline{\mu}_0 \Sigma_{s0} (\vecr, E)  }
+which would yield
+\eqn{ J(\vecr, E) = - \frac{1}{3 \underbrace{\left[ \Sigma_t (\vecr, E) - \overline{\mu}_0 \Sigma_{s0} (\vecr, E)\right]}_{\Sigma_{tr}}} \gradient \phi(\vecr, E) }
+In Fick's law's land, we define $\displaystyle D = - \frac{1}{3 \Sigma_{tr}}$, then the flux is just $J = - D \gradient \phi$. 
+
+
+
+\uline{Alternative approach}: start from the net current equation, assume the source is isotropic, then the source term goes away:
 \eqn{ \frac{1}{3} \gradient \phi(\vecr, E) + \Sigma_t (\vecr, E) \vecJ(\vecr, E) = \Sum_i \int_{E'} \dE' \Sigma_{s1}^i (\vecr, E'\to E) \vecJ(\vecr, E')  }
 
 Next we can either assume scattering to be isotropic in the Lab system, or isotropic in the Center of Mass system. 
@@ -210,33 +245,38 @@ The problem with this method is that flux collapse under-predict transport.
 
 
 \clearpage
-\topic{Boundary Conditions}
-Again, recall that the only reason we brought up transport theory in this course is to set the boundary condition straight. 
+\topic{Boundary Conditions \label{diff-BC}}
+Again, recall that the only reason we brought up transport theory in this course is to set the boundary condition straight. See Section~\ref{finite-app-BC} for using these BCs in finite difference approximation. 
 \begin{enumerate}
-\item Zero flux boundary condition:
+\item Zero flux BC:
   \eqn{ \phi (0) = 0 }
 
-\item Zero incoming flux boundary condition (more accurate than zero flux, because there could still be flux leaking out the geometry):
+\item Vacuum BC, zero incoming flux, zero incoming current: 
 \eqn{ \left. \psi(\vecr, E, \vecOmega) \right|_{\vecn \cdot \vecOmega < 0} = 0}
 Integrating over all angles in half space, that is incoming partial current is zero, 
 \eqn{ J^- (\vecr_i, E) = 0}
 There are two formulism to solve this:
   \begin{itemize}
-  \item Kord's formulism: 
+  \item Kord's formulism: using $J^- (x_s) = \int_{-1}^0 |\mu| \phi(x, \mu) \dmu$, using $P_1$ approximation, 
     \eqn{ J^- (\vecr, E) &= \frac{1}{4} \phi(\vecr, E) - \frac{1}{2} J_n (\vecr, E)  = 0, & \Aboxed{ \frac{J}{\phi} &= \frac{1}{2} } }
   \item The more conventional approach is to approximate with extropolation boundary condition: 
     \begin{align}
       J^- &= \frac{1}{4} \phi + \frac{D}{2} \gradient \phi_n \\
       \Aboxed{ \frac{\gradient \phi}{\phi} &= - \frac{1}{2D} = - \frac{3\Sigma_{tr}}{2} = - \frac{1}{d_{\mathrm{extrap}}}} 
-\mbox{   where } d_{\mathrm{extrap}} = \frac{2}{3 \Sigma_{tr}}  = \frac{2}{3} \lambda_{\mathrm{tr}}
+\mbox{   where } d_{\mathrm{extrap}} = \frac{2}{3 \Sigma_{tr}}  = \frac{2}{3} \lambda_{\mathrm{tr}}  = 2 D
     \end{align}
     where $D$ is the property of the material inside, and $\lambda_{tr}$ is transport mean free path. Notice that the exact coefficient in $d_{\mathrm{extrap}}$ may be different. Take into account that thermal neutron mean free path is on the order of 1cm, so $d_{\mathrm{extrap}}$ is even less than 1 cm, which means that we don't really care about it for LWR cores. 
   \end{itemize}
+Note: in diffusion theory, we approximate the flux as linearly dependent on $D$, thus in diffusion land we can define an extropolated distrance at which the flux goes to zero. In reality the flux does not actually get to zero, as it would just exponentially decay outside the core and approaches zero (and argulably never reaches exactly zero). 
+
+\item Reflective BC: net current at surface is equal to 0. 
 
 \item \hi{Albedo boundary condition} is the measurement of how much flux is reflected back: 
 \eqn{ \alpha = \frac{J^- (\vecr_i, E)}{J^+ (\vecr_i, E)} }
-
 \end{enumerate}
+
+
+
 
 \clearpage
 \topic{Interface Conditions/Continuity Conditions}
@@ -262,7 +302,16 @@ There are two conditions that cannot change instanteneously across the boundary.
   \caption{Boundary Conditions and Interface Conditions} \label{boundary-interface}
 \end{figure}
 
+\clearpage
+\topic{Summary}
+FIXME
 
+
+Diffusion theory breaks down: 
+\begin{enumerate}
+\item Near interfaces. Example: MOX and UO2 fuel boundary. MOX has a stronger thermal absorption cross section (thus the thermal spectrum is more depressed by a factor of 4), the neutron experiences a big change at the interface. 
+\item Near strong absorbers. Example: control rods. 
+\end{enumerate}
 
 
 \end{document}

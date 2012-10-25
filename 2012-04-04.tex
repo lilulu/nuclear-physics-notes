@@ -75,15 +75,15 @@ Rearranging terms by fluxes, we get \textbf{the linear finite-difference diffusi
 \normalsize
 
 \clearpage
-\topic{BCs for Finite-Difference Equation}
-Interior BCs are implied, whereas the exterior BCs have to be specified. 
+\topic{BCs for Finite-Difference Equation \label{finite-app-BC} }
+Review Section.~\ref{diff-BC}. Interior BCs are implied, whereas the exterior BCs have to be specified. 
 \begin{enumerate}
-\item Zero current: $J_g^N = 0$. 
+\item Zero current, reflective BC: $J_g^N = 0$. 
 
 \item Zero flux: flux at the RHS of node $N$ is zero.  We can either think of the flux as keep going to be $-\phi_g^N$ in the imaginary $N+1$ node\footnote{we have to interpolate the node center value from the node edge value because in linear difference equation the center value is the averaged value which is what we care about.}, or calculate the slope by doing $\phi_g^N / (\Delta /2)$,
 \eqn{ J_g^N = -D_g^N \frac{ -\phi_g^N - \phi_g^N}{\Delta^N}  = \frac{2 D_g^N}{\Delta^N} \phi_g^N }
 
-\item Zero incoming current: there is no partial current coming in from RHS,
+\item Zero incoming flux, zero incoming current, vacuum BC: there is no partial current coming in from RHS,
 \eqn{ J_N^- = \frac{1}{4} \phi - \frac{1}{2} J_N = 0 }
 which implies,
 \begin{align}
