@@ -5,9 +5,23 @@
 \maketitle
 
 \lecture{One-Group Diffusion: Source Problem} \label{1g-source}
-We are going to cover six classical examples to understand the mechanics, boundary conditions, and interface conditions. Know these for the exam. We always start with the Balance Equation,
+We are going to cover some classical examples to understand the mechanics, boundary conditions, and interface conditions. Know these for the exam. 
+
+\begin{enumerate}
+\item For a non-multiplying medium ($\Sigma_f = 0$), and assume that $D, \Sigma_a$ are constant in space, we arrive at the \hi{inhomogeneous Helmholtz Equation}, 
+\eqn{ - D \laplacian \phi (\vecr) + \Sigma_a \phi (\vecr) = S(\vecr) }
+We define the diffusion length as $\displaystyle L = \sqrt{\frac{D}{\Sigma_a}}$, then the balance equation becomes, 
+\eqn{ - \laplacian \phi (\vecr) + \frac{1}{L^2} \phi(\vecr) = \frac{S(\vecr)}{D} }
+
+\item For a multiplying medium, we typically use $\displaystyle B^2 = \frac{\frac{\nu \Sigma_f}{\keff} - \Sigma_a}{D}$. 
+
+\item Recap:
 \eqn{ \laplacian \phi(\vecr) + B_m^2 \phi(\vecr) &= \laplacian \phi(\vecr) - \frac{1}{L^2} \phi(\vecr)= - \frac{S}{D} & B_m^2 = -\frac{1}{L^2} = \frac{\nu \Sigma_f - \Sigma_a}{D} 
 \label{bal-eqn}}
+\end{enumerate}
+
+
+
 
 
 \clearpage
@@ -36,69 +50,33 @@ Coefficients A and C are uniquely determined for a given source distribution:
 \item In the limit of $S\to 0$, the only physical solution is the trivial solution. 
 \end{itemize}
 
-\clearpage
-\topic{Point Source in Infinite Non-Multiplying Medium}
-Conside an infinite non-multiplying medium with a point source. Eq.~\ref{bal-eqn} become,
-\eqn{ \dphidrn2 + \frac{2}{r} \dphidr - \ols\phi = -\frac{S_0}{D} \delta(\vecr) }
-We look for the homogeneous solution, and set $w = r \phi$, 
-\eqn{ \dphidrn2 + \frac{2}{r} \dphidr - \ols\phi &= 0, &\dwdrn2 - \ols w &= 0}
-The solution is, 
-\eqn{ w &= Ae^{r/L} + B e^{-r/L}, & \phi(r) = A\frac{e^{r/L}}{r} + B \frac{e^{-r/L}}{r} }
-BC1: $\lim_{r\to \infty} \phi = 0, \Rightarrow A=0$.\\
- BC2: $\lim_{r\to 0} 4 \pi r^2 J(r) = S_0$ (specific solution), that is, 
-\begin{align}
-J &= -D \dphidr = DBe^{-r/L} \left( \frac{1}{r^2} + \frac{1}{rL} \right), 
-&\lim_{r\to 0} 4 \pi r^2 J(r) &= 4 \pi DB = S_0 &B &= \frac{S_0}{4 \pi D}
-\end{align}
-\eqn{\Aboxed{ \phi(r) &= \frac{S_0}{4\pi D} \frac{e^{-r/L}}{r}  } }
 
-Interpretations:
-\begin{enumerate}
-\item Extreme condition 1: no absorption: as $\Sigma_a \to 0, L\to \infty$, 
-  \eqn{\lim_{L\to \infty} \phi(r) = \frac{S_0}{4 \pi Dr}  = \mbox{Geometrical Attenuation}}
-\item Extreme condition 2: pure absorber. We can easily solve the transport kernel: 
-  \eqn{\phi(r) = \int_{V'} \frac{S(r') e^{-\Sigma_a|r-r'|}}{4\pi|r-r'|^2}  = \frac{S_0}{4 \pi r^2} }
-\item Diffusion results in a different shape for the decrease in neutron population as in Figure~\ref{dfs-shape}.
-  \begin{figure}
-    \centering
-    \includegraphics[width=4in]{images/dfs/dfs-shape.png}
-    \caption{Flux Shape Depent On Diffusion Coefficients}\label{dfs-shape}
-  \end{figure}
-\item At $r=0$ tere is a non-physical singularity due to the mathematical artifact of point sources;
-\item Diffusion theory is not valid near singularities;
-\item We can use diffusion kernel to solve source problems in non-multiplying media by superposition.
-\end{enumerate}
-
-\clearpage
-\topic{Plane Source in Infinite Non-Multiplying Medium}
-Consider an infinite non-multiplying medium with a plane source at $x=0$. Since the geometry is symmetric, we can solve for $x>0$ first. 
-\eqn{ \phi(x) = Ae^{x/L} + B e^{-x/L}} 
-BC1: $\lim_{x \to \infty} \phi(x) = 0, \Rightarrow \phi(x) = B e^{-x/L}$; BC2: $\lim_{x\to 0} J(r)  = \frac{S_0}{2}$, 
-\eqn{ J = -D \dphidx = B D e^{-x/L} }
-\eqn{ \phi(x) = \frac{S_0 L}{2D} e^{-x/L}}
-For the total geometry, we can simply place an absolute sign on $x$:
-\eqn{ \phi(x) = \frac{S_0 L}{2D} e^{-|x|/L}}
-If the source is placed at $x=b$, the solution becomes,
-\eqn{ \phi(x) = \frac{S_0 L}{2D} e^{-|x-b|/L} }
 
 
 \clearpage
 \topic{Plane Source in Finite Multiplying Medium with $\kinf < 1$}
-Consider a finite multiplying medium, $\kinf < 1$, a slab geometry from $0$ to $H$, and a plane source at $0$, 
+Consider a finite multiplying medium, $\kinf < 1$, a slab geometry from $0$ to $H$, and a plane source at $0$.  
 \eqn{ B_m^2 = \frac{\nu \Sigma_f - \Sigma_a}{D} &= \frac{k_{\infty} - 1}{L^2} < 0, & B_m^2 &\to -|B_m|^2}
-The homogeneous solution is, 
+\begin{enumerate}
+\item For the homogeneous solution, we assume there is no source, 
 \eqn{\dphidxn2 - |B_m|^2 \phi &= 0, &\phi(x) &= A\cosh(|B_m|x) + B \sinh(|B_m|x) }
-BCs: $\phi(0) = \phi_0, \phi(H) = 0$, we can solve for the coefficients, 
+
+\item BC 1: $\displaystyle \phi(0) = \phi_0, \phi(H) = 0$, we can solve for the coefficients, 
 \eqn{ \boxed{\phi(x) = \phi_0 \left[ \cosh(|B_m|x) - \frac{\cosh(|B_m|H)}{\sinh(|B_m|H)} \sinh(|B_m|x) \right] } }
-Extreme condition: if we let the size of the slab to go to infinity, 
+
+\item Extreme condition: if we let the size of the slab to go to infinity, 
 \eqn{\lim_{H \to \infty} \phi(x) = \phi_0 [\cosh(|B_m|x) - \sinh(|B_m|x)] = \phi_0 e^{-|B_m|x} = \frac{S_0L}{2D} e^{-|B_m|x} }
-Notice in both finite and infinite case, the fluxes have convex shapes; the finite curve is below the infinite curve though. 
+
+
+
+\item Notice in both finite and infinite case, the fluxes have convex shapes; the finite curve is below the infinite curve though. 
 \begin{figure}[ht]
   \centering
   \includegraphics[width=2.5in]{images/dfs/plane-multiplying-geo.png}
   \includegraphics[width=2.5in]{images/dfs/plane-multiplying-phi.png}
   \caption{Plane Source in Finite Multiplying Medium with $\kinf < 1$}
 \end{figure}
+\end{enumerate}
 
 
 \clearpage
