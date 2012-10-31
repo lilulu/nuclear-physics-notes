@@ -1,0 +1,31 @@
+%
+% Class for homework assignments, which are really anything that is short and
+% doesn't need much of a header.
+%
+\NeedsTeXFormat{LaTeX2e}[1995/12/01]
+\ProvidesClass{school-style-project}
+
+\def\assignment#1{\gdef\@assignment{#1}}
+\def\classcode#1{\gdef\@classcode{#1}}
+
+% Sets a simple header/footer
+\lhead{\@author}
+\chead{}
+\rhead{\@date}
+\lfoot{}
+\cfoot{\thepage}
+\rfoot{}
+
+% Sets a small title
+\renewcommand{\maketitle}{%
+  \thispagestyle{empty}
+  \begin{flushright}
+    \@author \\
+    \@date \\
+  \end{flushright}
+  \begin{flushleft}
+    \textit{\@title} \\
+  \end{flushleft}
+}
+
+\pagestyle{fancy}
