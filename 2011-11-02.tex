@@ -37,7 +37,41 @@ Notice $\sigma (\theta) = 2.3$ b is significantly smaller than the measured 20 b
 \end{align}\footnote{we can write $\sigma = 4 \pi \sigma(\theta)$ because l=0 is symmetric potential, so we don't need to integrate here} 
 Plug in $E_B = 2.22 \fsp \MeV, E^* = 0.077 \fsp \MeV$, $\sigma = 19$ b, which is a good approximation for 20b. 
 
-\topic{Nuclear Force Properties}
+
+Scattering experiments (by Prof. Li on 10/31/12): 
+we consider shotting a neutron at a neutron, shotting a proton at a neutron, shotting a proton at a proton: 
+\begin{itemize}
+\item $\displaystyle a^{\mathrm{singlet}}_{nn} = -16.6 \fm$. 
+\item $\displaystyle a^{\mathrm{singlet}}_{pp} = -7.82 \fm$. If we remove the Coulomb effect, $\displaystyle \tilde{a}^{\mathrm{singlet}}_{pp} = -17.1 \fm \sim a^{\mathrm{singlet}}_{nn}$. This is called `charge' symmetry. 
+\item $\displaystyle a^{\mathrm{singlet}}_{np} = -23.72 \fm$, which is called `nearly charge' independence. 
+\item $\displaystyle a^{\mathrm{triplet}}_{np} = 5.423 \fm$. There is only 1 weakly bound state. 
+\end{itemize}
+
+We add three pieces of physics that depends on spins: 
+\begin{enumerate}
+\item Spin-spin dependency. 
+\begin{align}
+ \frac{\expect{s_1 \cdot s_2}}{\hbar^2} &= \frac{S^2 - S_1^2 - S_2^2}{2 \hbar^2}  = \frac{S(S+1) - \frac{1}{2} \frac{3}{2} 2 }{2 \hbar^2} = \left\{  \begin{array}{cc} - \frac{3}{4} & S = 0 \\ \frac{1}{4}  & S= 1 \end{array} \right. \\
+V &= V_1 (r) \left( \frac{1}{4} - \frac{S_1 \cdot S_2}{\hbar^2} \right) + V_3 (r) \left( \frac{3}{4} + \frac{S_1 \cdot S_2}{\hbar^2} \right)
+\end{align}
+
+
+\item Spin-orbit dependency (velocity dependency). Basically $\displaystyle V_{so}(r) \to V_{so} (r) L \cdot S$. Spin polarizer that breaks the left and right symmetry: there is a concentration effect to the neutrons coming in with up spin to move upwards. 
+
+\item Tensorial-spin dependency (electric quadrapole): from experiments, we observe that deuteron with $I = 1, S=1$ is 96\% s-wave bound state, 4\% d wave ($l=2$). We know that $l=1$ is forbidden from $\pi = (-1)^l = 1^+$, so $l$ can only be even. Then the tensirial force: 
+\eqn{ V_T(r) = V \left[ 3 \frac{(S_1 \cdot x) (S_2 \cdot x)}{|x|^2} - S_1 \cdot S_2 \right] }
+where the $3 \frac{(S_1 \cdot x) (S_2 \cdot x)}{|x|^2}$ is non-centripetal (because a centripetal force should only be depend on $x^2$) and this term gives the d-wave characteristics.  
+\end{enumerate}
+
+[FIXME] insert plot of Singlet and triplet potential vs. r. 
+There is an approximate isospin symmetry between a neutron and a proton, that is, if we double swap the position and the spin of a neutron with a proton, we should preserve the symmetry. Given $S=0, \pi = -1$, then $L$ has to be odd, that is, $L=1,3,5$ and $L \neq 0$. Thus the triplet state $V_1(r) \to V_1(r) \frac{l(l+1)}{r^2}$, and it's this centripetal term that makes the triplet state potential positive (repulsive), not the original triplet (`naked triplet' as Prof. Li calls it) that is repulsive. The triplet implies that a neutron and a proton cannot be closer than 0.5 fm at any given time. 
+
+
+
+
+%%%%%%%%
+\topic{Summary} 
+Nuclear force properties: 
 \begin{enumerate}
 \item Strongly attractive at short distances. It provides the overall shell-model potential.
 \item At range on the order of the nuclear radius, the force distorts the nucleus. 
@@ -55,7 +89,10 @@ Plug in $E_B = 2.22 \fsp \MeV, E^* = 0.077 \fsp \MeV$, $\sigma = 19$ b, which is
 
 %%%%%%%%%%%%%%%%%%%% Nuclear Shell Model %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \lecture{Nuclear Shell Model}
-So far we have considered deuteron, which contains two particles. In this section we will consider heavier nuclei with multiple nucleons. While we can always do more scattering experiment, it is easier and more interesting to do an over simplified theory, the shell model, of which we can extract many microscopic description of properties. The shell model is analogous to the electronic structure of an atom, in that we fill shells with electrons as energy increases, while taking into account Pauli exclusive principle. Refer to Krane 5.1, 5.2 and Meyerhof 2.5. 
+So far we have considered deuteron, which contains two particles. In this section we will consider heavier nuclei with multiple nucleons. Moving from two body problem to many body problem sounds hard, though thanks to the \textit{paring effect}, we do not have to study every nucleon; it's the last one or two nucleon that matters. We consider the `liquid drop' model, that is, we assume neutrons and protons to be in a homogeneous `soup,' 
+
+
+While we can always do more scattering experiment, it is easier and more interesting to do an over simplified theory, the shell model, of which we can extract many microscopic description of properties. The shell model is analogous to the electronic structure of an atom, in that we fill shells with electrons as energy increases, while taking into account Pauli exclusive principle. Refer to Krane 5.1, 5.2 and Meyerhof 2.5. 
 
 There are a couple of assumptions/properties for shell model: 
 \begin{itemize}
@@ -118,6 +155,19 @@ Evidence for magic number and the shell model:
 \end{enumerate}
 
 
+\topic{Overview/Summary}
+The liquid drop model leads to the SEMF, which is a smooth curve; but we know from observations, there are isotopes diverse from the smooth curve in a pattern (i.e., the nuclide with magic numbers). 
+
+
+We consider the potential: The two extreme form is, when $R \to 0$ we get a harmonic oscillator potential, and when $a \to 0$ we get a square well. The real potential is somewhere between the two models. That's why we need the intermediate potential model. 
+
+
+To capture the magic numbers, we consider the orbital-spin coupling. $I = j_i$ where $i$ is the singlet of the last nucleon. $j_i = l_i + s_i = l\pm \frac{1}{2}$, that is, we get degeneracy.  We can either consider the modified potential $V_{so} \to V_{so} (l \cdot s)$  or we can consider the modified energy: 
+\eqn{ E_{j_i = l_i + 1/2} - E_{j_i = l_i - 1/2} = \expect{ \frac{ \left( l_i + \frac{1}{2} \right) \left( l_i + \frac{3}{2} \right) - \left( l_i - \frac{1}{2} \right) \left( l_i + \frac{1}{2} \right) }{2} V_{so} (r) } = \left( l_i + \frac{1}{2} \right) V_{so} (r) < 0  }
+If we ad the spin orbit dependence onto the intermediate form, we get a form close to observations. 
+
+
+
 \topic{Many-Body Hamiltonian} 
 We are going to make the ``independent particle assumptions" which enable us to replace an n-body problem with n single-body problem:
 \eqn{ \Hhat \approx \Sum_i \Hhat_i }
@@ -146,6 +196,8 @@ To model the potential, we will consider the following common ones:
 
 %%%%%%%%%%%%%%% Harmonic Oscillator %%%%%%%%%%%%
 \topic{Harmonic Oscillator Potential Model}
+
+
 \subtopic{Derive Potentials}
 We define the potential well as a parabolic well from $-R_0$ to $R_0$ with a maximum depth of $-V_0$: 
 \begin{align}
