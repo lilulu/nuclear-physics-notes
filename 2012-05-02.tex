@@ -5,6 +5,9 @@
 \maketitle
 
 \lecture{Nodal Diffusion Methods} \label{nodal-methods}
+The motivation is that we want a method that lives on coarse mesh. Using CMFD on a reactor application would yield somewhere between 5-10\% error. 
+
+
 \topic{3D Core Analysis Overview}
 Reference: \href{www.oecd-nea.org/dbprog/documents/MC03Smith.pdf}{`Reactor Core Methods' by Smith, MC 2003}. 
 There are a couple levels of complexity for performing 3D core analysis,
@@ -86,19 +89,26 @@ Reference: Sutton and Aviles' `Diffusion Theory Methods for Spatial Kinetics Cal
   \eqn{ \Sum_{u=x,y,z} \frac{\bar{J}_{gur} - \bar{J}_{gul}}{h_u} + \Sigma_{rg} \bar{\psi}_g &= \frac{1}{\keff} \chi_g \Sum_{g'=1}^G \nu \Sigma_{fg'} \bar{\psi}_{g'} + \Sum_{g'=1}^G \Sigma_{sg'g} \bar{\psi}_{g'} \label{nodal-balance} }
   Notice, 
   \begin{itemize}
+    \item Formally, we have not approximate yet. 
     \item The six surface-averaged currents are required to find the node-averaged flux which would determine nodal power;
     \item Surface-averaged currents are average of flux derivative on a surface, which equals derivative of average flux at the surface; 
     \item It is more efficient to work with diffusion equation for average flux rather than solving the diffusion equation for the point-wise fluxes in 3D. 
   \end{itemize}
+\end{enumerate}
 
-\item Transverse Integration: we need a set of equations for the surface average currents instead of solving 3D finite different equations directly. To do so, we pick a direction of interest (eg., x direction), and perform integration within node over 2D plane normal to that direction (eg., the grey surface in Figure~\ref{nodal-current}), then devide by the planar area. The LHS of Eq.~\ref{nodal-balance} becomes, 
+
+\clearpage
+\topic{Transverse Integration}
+We need a set of equations for the surface average currents instead of solving 3D finite different equations directly. To do so, we pick a direction of interest (eg., x direction), and perform integration within node over 2D plane normal to that direction (eg., the grey surface in Figure~\ref{nodal-current}), then devide by the planar area. The LHS of Eq.~\ref{nodal-balance} becomes, 
   \eqn{\Sum_{u=x,y,z} \frac{\bar{J}_{gur} - \bar{J}_{gul}}{h_u} + \Sigma_{rg} \bar{\psi}_g = \frac{1}{h_y h_z} \int_0^{h_z} \int_0^{h_y} (\divergence \vecJ_g(\vecr, E) + \Sigma_{rg} \psi_g (\vecr, E) ) \dy \dz }
 \begin{figure}[ht]
   \centering
   \includegraphics[width=0.28\textwidth]{images/methd/nodal-current.png}
   \caption{Integrate Within Node Over 2D Plane Normal to x-direction} \label{nodal-current}
 \end{figure}
-  \begin{enumerate}
+ 
+The RHS becomes not interesting after a while because it is just the average flux times cross sections. 
+ \begin{enumerate}
   \item Define dimensionless independent variables,
     \eqn{ \xi_x &= \frac{x}{h_x}, & \xi_y &= \frac{y}{h_y}, & \xi_z &= \frac{z}{h_z} }
     and we can transform the integration and the derivative operator as well, 
@@ -127,12 +137,12 @@ Reference: Sutton and Aviles' `Diffusion Theory Methods for Spatial Kinetics Cal
 
   \item Collect all the terms, we get the transverse integration of 3D diffusion equation, 
     \eqn{ \Sum_{u=y,z} \frac{\bar{J}_{gur}(\xi_x) - \bar{J}_{gul}(\xi_x)}{h_u} - \frac{D}{h_x^2} \frac{\derivative^2}{\dxi_x^2} \bar{\psi}_{gx} (\xi_x) + \Sigma_{rg} \bar{\psi}_{gx} (\xi_x) &=  \frac{1}{\keff} \chi_g \Sum_{g'=1}^G \nu \Sigma_{fg'}\psi_g(\xi_x) + \Sum_{g'=1}^G \Sigma_{sg'g} \psi_g(\xi_x)  }
-    If we define a \textbf{transverse leakage term} and move it to the RHS, 
+    If we define a \textbf{transverse leakage term} (the source that comes in the plane) and move it to the RHS, 
     \eqn{ L_{gu}(\xi_x) &= \frac{1}{h_u} \left( \bar{J}_{gur}(\xi_x) - \bar{J}_{gul}(\xi_x) \right), & u &= y,z }
     and also define the \textbf{diffusion equivalent group constant}, 
     \eqn{ \Sigma_{Dg}^x  = \frac{D}{h_x^2} }
     We get the transverse integrated 1D diffusion equation,
-    \eqn{ - \Sigma_{Dg}^x \frac{\derivative^2}{\dxi_x^2} \bar{\psi}_{gx} (\xi_x) + \Sigma_{rg} \bar{\psi}_{gx} (\xi_x) = \frac{1}{\keff} \chi_g \Sum_{g'=1}^G \nu \Sigma_{fg'} \bar{\psi}_{g'x} (\xi_x) + \Sum_{g'=1}^G \Sigma_{sg'g} \bar{\psi}_{g'x} (\xi_x) - L_{gy} (\xi_x) - L_{gz} (\xi_x)  } 
+    \eqn{ \boxed{ - \Sigma_{Dg}^x \frac{\derivative^2}{\dxi_x^2} \bar{\psi}_{gx} (\xi_x) + \Sigma_{rg} \bar{\psi}_{gx} (\xi_x) = \frac{1}{\keff} \chi_g \Sum_{g'=1}^G \nu \Sigma_{fg'} \bar{\psi}_{g'x} (\xi_x) + \Sum_{g'=1}^G \Sigma_{sg'g} \bar{\psi}_{g'x} (\xi_x) - L_{gy} (\xi_x) - L_{gz} (\xi_x)  }  }
 
   \item Repeat for the other two directions, we get a set of 3 directional 1D diffusion equations.
     \begin{align}
@@ -141,13 +151,19 @@ Reference: Sutton and Aviles' `Diffusion Theory Methods for Spatial Kinetics Cal
      \boxed{ - \Sigma_{Dg}^z \frac{\derivative^2}{\dxi_z^2} \bar{\psi}_{gz} (\xi_z) + \Sigma_{rg} \bar{\psi}_{gz} (\xi_z) = \frac{1}{\keff} \chi_g \Sum_{g'=1}^G \nu \Sigma_{fg'} \bar{\psi}_{g'z} (\xi_z) + \Sum_{g'=1}^G \Sigma_{sg'g} \bar{\psi}_{g'z} (\xi_z) - L_{gx} (\xi_z) - L_{gy} (\xi_z) } \notag
     \end{align}
 
-  \item Interpretations: we turn a 3D partial differential equation into three 1D ordinary differential equation that are coupled through average transverse leakage term. It is exact if the transverse leakage shape is known. 
+  \item Interpretations: 
+    \begin{itemize}
+    \item We turn a 3D partial differential equation into three 1D ordinary differential equation that are coupled through average transverse leakage term. 
+    \item It is exact if the transverse leakage shape is known. 
+    \item Why nodal methods work? As the node becomes bigger and bigger, it is less likely that a random neutron to stream right through the node (thus contributing to the $\vecJ$). That is, $\vecJ$ streaming out the node from the right side is insensitive to the transverse leakage term from the top and the bottom. [FIXME] insert image. 
+    \end{itemize}
   \end{enumerate}
 
-\item Approximation on transverse leakage: from observation, flux is insensitive to the transverse leakage shape, so we are going to perform a quandrature polynomial with 2nd order polynomials of the leakage term, and iteratively update them. Quadratic approximation in each node, 
+\textbf{Approximation On Transverse Leakage: Quadratic Approximation in Each Node} (Finnemann, KWU). 
+
+ From observation, flux is insensitive to the transverse leakage shape, so we are going to perform a quandrature polynomial with 2nd order polynomials of the leakage term, and iteratively update them. Quadratic approximation in each node, 
   \eqn{ L(\xi) = \bar{L} + l_1 P_1(\xi) + l_2 P_2(\xi) }
   We apply average TL conservation scheme to determine $l_1, l_2$. We use three node average transver leakages (the values of each node and its two adjacent nodes), and impose constraint of conserving the averages of two adjacent nodes. About how we handle the rest of this method, we present three methods in the following section. 
-\end{enumerate}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -182,7 +198,7 @@ Reference: Sutton and Aviles' `Diffusion Theory Methods for Spatial Kinetics Cal
     \eqn{ \int_0^1 P_1(\xi) \left( - \Sigma_D \frac{\derivative}{\dxi^2} \psi(\xi) + \Sigma_r \psi(\xi) - Q(\xi) \right) \dxi &= 0, & a_3 &= \frac{5 q_1 + 3 q_3 - 5 a_1 \Sigma_r}{3(60 \Sigma_D + \Sigma_r)} }
     Forcing the 2nd spatial moment of diffusion equation to go to zero gives us, 
     \eqn{ \int_0^1 P_2(\xi) \left( - \Sigma_D \frac{\derivative}{\dxi^2} \psi(\xi) + \Sigma_r \psi(\xi) - Q(\xi) \right) \dxi &= 0, & a_4 &= \frac{-7 q_2 + 3 q_4 + 7 a_2 \Sigma_r}{420(\Sigma_D + 3\Sigma_r)} }    
-    Notice we don't know $a_1, a_2$. But we get two pieces of information from the spatial moments. That gives us in total 2 spatial moments $\times$ 2 nodes $\times$ 2 groups $= 8$ constraints. Together that's 16 constraints for 16 unknowns. 
+    Notice how simple the expressions for $a_3, a_4$ come out to be. Notice $a_3$ only depends on the odd nodes; $a_4$ only depends on the even nodes. Notice we don't know $a_1, a_2$. But we get two pieces of information from the spatial moments. That gives us in total 2 spatial moments $\times$ 2 nodes $\times$ 2 groups $= 8$ constraints. Together that's 16 constraints for 16 unknowns. 
 
   \item The choice of the weighted residual equations is flexible -- the results are not very sensitive to the weights. For instance, we can choose the same expansion coefficients for $P_i$. 
 
@@ -204,9 +220,9 @@ Reference: Sutton and Aviles' `Diffusion Theory Methods for Spatial Kinetics Cal
       -D_2 \frac{\derivative^2 \psi_2(x)}{\dx^2} + \Sigma_{r2} \psi_2(x) - \Sigma_{12} \psi_1 (x) &= - L_2 (x) 
     \end{align}
 
-  \item The analytic solution is in the form of, 
+  \item The analytic solution is in the form of a homogeneous solution plus a particular solution,  
     \eqn{ \psi_g(x) = \psi_g^H (x) + \psi_g^P (x)}
-    where the trial homogeneous solution is, 
+    We consider a trial homogeneous solution in the buckling space, 
     \eqn{ \psi_g^H (x) = \hat{\psi}_g^H \exp(i Bx) }
    
 \item We find the homogeneous solution first. The characteristic equation is, 
@@ -220,7 +236,7 @@ Reference: Sutton and Aviles' `Diffusion Theory Methods for Spatial Kinetics Cal
       \left[ \begin{array}{c} 0 \\ 0 \end{array} \right] }
     For nontrivial solution, we set the determinant to zero, and re-write the expression in terms of $B^2$: 
     \eqn{ (B^2)^2 + \overbrace{\left( \frac{\Sigma_{r1}}{D_1} + \frac{\Sigma_{r2}}{D_2} - \frac{\frac{\nu \Sigma_{f1}}{\keff}}{D_1} \right)}^{2b} B^2 + \overbrace{ \left( 1 - \frac{\kinf}{\keff} \right) \frac{\Sigma_{r1}}{D_1} \frac{\Sigma_{r2}}{D_2} }^{c} = 0 }
-    The roots of characteristic equations are the \textbf{eigen-buckling}; more specifically, one of them is the \hi{fundamental mode}, and the other is the \hi{harmonic mode}\footnote{recall quadratic roots for $ax^2 + bx + c = 0$ are $x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$}, 
+    The roots of characteristic equations are the \textbf{eigen-buckling}; more specifically, one of them is the \hi{fundamental mode} (this is the fast group), and the other is the \hi{harmonic mode} (this is the thermal group)\footnote{recall quadratic roots for $ax^2 + bx + c = 0$ are $x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$}, 
     \begin{align}
       &\mbox{Fundamental Mode} &B_1^2&= b\left(-1 + \sqrt{1 - \frac{c}{b^2}} \right) = \left\{ \begin{array}{cc} > 0 & \kinf > \keff \\ < 0 & \kinf < \keff \end{array} \right. \\
       &\mbox{Harmonic Mode} &B_2^2&=b\left(-1 - \sqrt{1 - \frac{c}{b^2}} \right) <0
@@ -246,7 +262,7 @@ Reference: Sutton and Aviles' `Diffusion Theory Methods for Spatial Kinetics Cal
      \eqn{ \left[ \begin{array}{c} \psi_1^H(x) \\ \psi_2^H (x) \end{array} \right] = \left[ \begin{array}{cc} r_1 & r_2 \\ 1 & 1 \end{array} \right] \left[ \begin{array}{c} a_{21} \sin(B_1 x) + a_{22} \cos (B_1 x) \\ a_{23} \sinh(B_2 x) + a_{24} \cosh(B_2 x) \end{array} \right] + \left[ \begin{array}{c} \psi_1^P(x) \\ \psi_2^P (x) \end{array} \right] }
      That is, we have 4 coefficients to determine for a 2 group problem. 
      
-   \item BCs: quadratic transverse leakage for two nodes, node-average fluxes for two nodes. We have 8 unknown coefficients (4 per node times 2 nodes), and we have 9 constraints coming from: 
+   \item BCs: quadratic transverse leakage for two nodes, node-average fluxes for two nodes. We have 8 unknown coefficients (4 per node times 2 nodes), and we have 8 constraints coming from: 
      \begin{itemize}
        \item 4 node-averaged fluxes: 2 groups times 2 nodes;
        \item 2 flux interface continuity from 2 energy groups;
@@ -254,11 +270,18 @@ Reference: Sutton and Aviles' `Diffusion Theory Methods for Spatial Kinetics Cal
      \end{itemize}
      Hence there is no need for weighted residual equations because we have the exact solution to the 1D diffusion equation. Then all groups are solved simultaneously.
 
-   \item Pros and Cons: no need for weighted residual equations because we have exact solution to the 1D diffusion equation. The drawback is, all groups are solved simultaneously, so the generalization is very hard. But with the help of modal expansion, now we can do ANM for any number of energy groups. 
+   \item Comments:
+     \begin{enumerate}
+     \item The advantage of this analytical method is that we get an expression relating the net current and the flux, so the partial current never shows up. 
+     \item No need for weighted residual equations because we have exact solution to the 1D diffusion equation. 
+     \item The drawback is, all groups are solved simultaneously, so the generalization is very hard. But with the help of modal expansion, now we can do ANM for any number of energy groups.
+     \end{enumerate} 
   \end{enumerate}
 
 \clearpage
 \item Semi-Analytic Nodal Method (SANM) developed at Studsvik (1985). 
+  Motivation: NEM does a good job in the fast group but not that well in the thermal group, so we use the analytical solution for the thermal group. 
+
   \begin{enumerate}
   \item SANM uses NEM equations for the fast group, and performs transverse integrated 1D neutron diffusion equation for the thermal group, 
     \eqn{ -D_2 \frac{\derivative^2}{\dx^2} \psi_2(x) + \Sigma_{r2} \psi_2(x) &= \Sigma_{s12} \psi_1(x) - L_{y2} (x) = Q_2 (x) }
@@ -270,20 +293,27 @@ Reference: Sutton and Aviles' `Diffusion Theory Methods for Spatial Kinetics Cal
     \eqn{ \psi_g(x) &= A \sinh(\kappa_g x) + B \cosh(\kappa_g x) + \Sum_{i=0}^4 c_i P_i \left(\frac{2x}{h}\right), &\kappa_g&=\sqrt{\frac{\Sigma_g}{D_g}} }
     We end up with \textit{exponential homogeneous solution and polynomial particular solution}. 
 
-\item We differentiate to get expression for net current at the interface: 
+  \item We differentiate to get expression for net current at the interface: 
     \eqn{ J_g(x) &= -D_g \ddx \psi_g(x) }
     We use the continuity of net currents/flux to get analytic expression for coupling. 
+  \end{enumerate}
+
+\item Summary. SANM is advantage for two reasons: [FIXME]
+  \begin{enumerate}
+    \item As in Fig.~\ref{SANM-accuracy} the NEM predicts the center flux (where the instruments would be) wrong. 
+    \item Weighted residual has the advantage of capable of incorporating cross section's spatial dependence. 
+  \end{enumerate}
+
     \begin{figure}[ht]
       \centering
       \includegraphics[width=5in]{images/methd/SANM-accuracy.png}
-      \caption{Accuracy of SANM in Two-Group Application}
-    \end{figure}
-  \end{enumerate}
+      \caption{Accuracy of SANM in Two-Group Application} \label{SANM-accuracy}
+    \end{figure} 
 \end{enumerate}
 
 
 \clearpage
-\topic{Iterative Solution Technique}
+\topic{Nonlinear Iterative Technique To Reduce Storage}
 In this section we show how the three nodal methods come down to be pretty much the same. The classic solution sequance involves,
 \begin{enumerate}
 \item Guess $\keff$, approximate transverse leakages as zero.
@@ -315,7 +345,6 @@ In this section we show how the three nodal methods come down to be pretty much 
 \left[L_z\right] \end{array} \right] }
 
 \item We solve the 3D balance equation by fission source and flux/leakage iteration, similar to finite difference, but leakate term has group-to-group coupling. 
-
 \item Update $\keff$ and return to 2 until converged. 
 \end{enumerate}
 
@@ -330,6 +359,8 @@ It's almost finite difference, but higher order in the sense that we say if flux
 \item Redefine equivalent coupling terms to preserve nodal solution for current. Notice the coefficients $\alpha, \beta, \gamma, \delta$ are non-linear functions of the solution. 
   \eqn{ \left[ \begin{array}{c} J_1 \\ J_2 \end{array} \right] = \left[ \begin{array}{cc} \alpha & 0 \\ 0 & \gamma \end{array} \right] \left[ \begin{array}{c} \bar{\psi}_1^+ \\ \bar{\psi}_2^+ \end{array} \right]  
 - \left[ \begin{array}{cc} \beta & 0 \\ 0 & \delta \end{array} \right] \left[ \begin{array}{c} \bar{\psi}_1^- \\ \bar{\psi}_2^- \end{array} \right] }
+This is almost CMFD. As we solve the problem, we will slowly find out the 4 coefficients and if the solution converges it should be identical to the original matrix problem. 
+
 
 \item Set up global matrix equation,
   \eqn{ [A] [[\bar{\psi}]] = \frac{1}{\keff} [M] [[\bar{\psi}]] }
@@ -341,6 +372,28 @@ It's almost finite difference, but higher order in the sense that we say if flux
 This method is almost the same as CMFD, but with slightly different coefficients $\alpha, \beta, \gamma, \delta$. The point is, whether we do any one of the three nodal methods, we get a slightly different net current, the rest of the iteration looks the same. Mechanically, it is the same as the two-node two-group finite difference solution that we've already done. 
 
 
+
+
+\clearpage
+\topic{Solving the Eigenvalue Problem}
+
+[FIXME]
+
+Wielandt's fractional iteration: pro: faster; con: harder to invert the matrix. Though with the block formulism (and assume a large matrix), it is not any harder. 
+
+
+
+\clearpage
+\topic{Steady State Neutronics Algorithm}
+How SIMULATE3 does steady state neutronics: [FIXME]
+\begin{enumerate}
+\item Non-linear iteration to get spatial coupling coefficients. 
+\item 
+\end{enumerate}
+
+The overall steady-state iteration strategy. This would be covered in more details in 22.212. 
+
+[FIXME] insert image. 
 
 \clearpage
 \topic{Summary of Transverse Integration Methods}
