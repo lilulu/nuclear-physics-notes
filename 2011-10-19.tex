@@ -88,6 +88,8 @@ The additional potential needed for $l=1$ is 18.8 MeV, larger than the 2.2 MeV a
 \end{enumerate}
 
 
+
+%%%%%%%%%%%%% Spin Dependence %%%%%%%%%%%%%%%%%%%%%%%
 \topic{Spin of Deuteron, S-S Coupling, Spin Dependence of Nuclear Force \label{2H-spin}}
 The spin dependence of nuclear forces can be interpreted as $V_{\mathrm{nuc}}$ depends on whether spin is parallel or anti-parallel. More specifically, 
 \begin{itemize}
@@ -95,21 +97,19 @@ The spin dependence of nuclear forces can be interpreted as $V_{\mathrm{nuc}}$ d
     \item In the context of n-p scattering, where spin dependence of $V_{\mathrm{nuc}}$ accounts for the measured scattering cross section (s-l coupling). 
 \end{itemize}
 
-In general, we assume deuteron ground state (n,p) interaction means $J=1$ from measurement\footnote{measured spin of deuteron is $J=1$; no $J=0$ is found at the bound ground state; though there is J=0 for s=0, l=0},$l=0$\footnote{l=0 is the case 96\% the time; if $l\neq 0$, then $s_n+s_p =0$ would be anti-paralell, and 1 for parallel}, $S_p = S_n = \frac{1}{2}, \Jhat = \Lhat + \Shat_p + \Shat_n$. 
 
-The possible angular momentum combinations that give us $J=1$ are: 
+ We will discuss more on the spin dependence in Section~\ref{spin-scattering}. 
+In general, we assume deuteron ground state (n,p) interaction means $J=1$ from measurement\footnote{measured spin of deuteron is $J=1$; no $J=0$ is found at the bound ground state; though there is J=0 for s=0, l=0},$l=0$\footnote{l=0 is the case 96\% the time; if $l\neq 0$, then $s_n+s_p =0$ would be anti-paralell, and 1 for parallel}, $S_p = S_n = \frac{1}{2}, \Jhat = \Lhat \oplus \Shat_p \oplus \Shat_n$. The possible angular momentum combinations that give us $J=1$ are: 
 \begin{enumerate}
-\item $S=1, L=0 (J=1) $.
-\item $S=0, L=1 (J=1)$. 
-\item $S=1, L=1 (J=0,1,2)$. 
-\item $S=1, L=2 (J = 1,2,3)$.
+\item $S=1, L=0$.
+\item $S=0, L=1$. 
+\item $S=1, L=1$. 
+\item $S=1, L=2$.
 \end{enumerate}
 
-[FIXME] To determine which combinations are possible:
+To determine which combinations are possible for a bound state:
 \begin{enumerate}
-\item From observation, we know ground state of deuteron has even parity: recall from the perturbation operator, we derived that the angular momentum parity $\Pi = -1$,  and recall parity's definition $\Pi = (-1)^l$, that is $l = $even, thus even parity. That is, out of the four possibilities listed above, only the ones with even $L$ can exist ($L=0, L=2$). Notice measurements only give us the bounded states.  
-
-\item From analytical derivation, we know that the well depth depends on the interaction of $l, s$: 
+\item Orbital-spin dependence. From analytical derivation, we know that the well depth depends on the interaction of $l, s$: 
   \begin{align}
   \Delta V &= V_{s0} (r) \hat{L} \cdot \hat{S}
   \end{align}
@@ -119,26 +119,17 @@ The possible angular momentum combinations that give us $J=1$ are:
     \hbar^2 j(j+1) &= \hbar^2 l(l+1) + \hbar^2 s(s+1) + 2 \hat{L} \cdot \hat{S} \\
     \Delta V &= V_{s0} (r) \frac{\hbar^2}{2} \left[ j(j+1) - l(l+1) - s(s+1) \right] 
   \end{align}
-\end{enumerate}
 
-
-\begin{figure}[h!]
-    \centering
-    \includegraphics[width=5in]{images/deuteron/deuteron-possible-config.png}
-    \caption{Possible Configurations for Two Spin 1/2 Particles}
-\end{figure}
-
-
-The possible states are(using notations $\ket{s m}$)\footnote{Griffiths p.185, Liboff Table 11.3}: 
+\item Spin-spin dependence. The possible spin configurations are(using notations $\ket{s m}$)\footnote{Griffiths p.185, Liboff Table 11.3}: 
 \begin{align}
-\left\{ \begin{array}{l} 
+\left. \begin{array}{l} 
 \ket{1 1} = \up \up \\
 \ket{1 0} = \frac{1}{\sqrt{2}} (\up \down + \down \up ) \\
 \ket{1 -1} = \down \down
 \end{array} \right\}
-S = 1 (\mathrm{triplet, parallel, bounded}). \\
-\left\{ \ket{0 0} = \frac{1}{\sqrt{2}} (\up \down - \down \up ) \right\} 
-S = 0 (\mathrm{singlet, anti-parallel, unbounded}).
+S &= 1  (\mathrm{triplet, parallel, bounded}). \\
+\left. \ket{0 0} = \frac{1}{\sqrt{2}} (\up \down - \down \up ) \right\} 
+S &= 0  (\mathrm{singlet, anti-parallel, unbounded}).
 \end{align}
 
 Then we can add a spin-dependent modification to $V_{\mathrm{nuc}}$:
@@ -151,25 +142,38 @@ We can compute the modification for $(n,p)$ interaction:
 \Shat_p \cdot \Shat_n &= \frac{1}{2} (\Shat^2 - \Shat_p^2 - \Shat_n^2) \\
 \expect{\Shat_p \cdot \Shat_n}&= \frac{1}{2} (S(S+1) - S_p (S_p+1) - S_n (S_n+1) ) 
 = \left\{ \begin{array}{ccc} S=0 & -\frac{3}{4} \hbar^2 & \mbox{Singlet} \\ S=1 & \frac{1}{4} \hbar^2 & \mbox{Triplet} \end{array} \right. \\
-V_{\mathrm{nuc}} &= \boxed{ \left\{ \begin{array}{cccc} 
-V_0 (r) - \frac{3}{4} V_1(r)  & \mbox{Singlet}& \mbox{Weaker Interaction, Virtual State} & E^* = 0.077 \fsp \MeV, V_S = -23 \fsp \MeV \\ 
-V_0 (r) + \frac{1}{4} V_1(r)  & \mbox{Triplet}& \mbox{Stronger Interaction, Bound State} & E_B = -2.2 \fsp \MeV, V_T = -35 \fsp \MeV
+\Aboxed{V_{\mathrm{nuc}} &=  \left\{ \begin{array}{ccccc} 
+V_0 (r) - \frac{3}{4} V_1(r)  & \mbox{Singlet}& \mbox{Weaker interaction, virtual} & E^* = 0.077 \fsp \MeV & V_S = -23 \fsp \MeV \\ 
+V_0 (r) + \frac{1}{4} V_1(r)  & \mbox{Triplet}& \mbox{Stronger interaction, bound} & E_B = -2.2 \fsp \MeV & V_T = -35 \fsp \MeV
 \end{array}\right. } \\
 \end{align*}
-Interpretations/Observations/Applications:
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=5in]{images/deuteron/deuteron-possible-config.png}
+    \caption{Possible Configurations for Two Spin 1/2 Particles}
+\end{figure}
+
+Comments:
 \begin{enumerate}
-\item In the above boxed equation, $E^*, E_B$ are measured; $V_S, V_T$ are well-depth calculated using $E, r$ (recall last section);
-\item Only the triplet states are bounded for two reasons: one is that a singlet bound state of deuteron is not observed; the other is the different measurement values of $\sigma_s^s, \sigma_s^p$ (next lecture);
-\item Nucleon-nucleon (in this case n-p) interaction is strongly spin-dependent;
-\item We can solve for $V_0, V_1$ to be $V_0 = -32 \fsp \MeV, V_1 = -12 \fsp \MeV$ plugging in $V_S, V_T$.
-$V_0 <0, V_1 <0$ meaning they are both attractive \footnote{positive potential means repulsive; negative potential means repulsive}. $|V_0| > |V_1|$ means spin dependence is weaker than the spin-independent part. But both are significant contribution. 
-\item If n-p force is spin-independent, we would expect to find deuteron bound state with $s=1$ at the same energy; but find no $s=0$ bound state. 
-
-\item Similar to $ \expect{S_p \cdot S_n} = \frac{\hbar^2}{2} \left[ s(s+1) - s_p (s_p + 1) - s_n (s_n + 1) \right] $, we can also write:
-\eqn{ \expect{L \cdot S_n} = \frac{\hbar^2}{2} \left[ j(j+1) - l (l + 1) - s (s + 1) \right] }
-
 \item How spin dependency affects the scattering cross sections: $\sigma_{S=0} = 67.8 \barn, \sigma_{S=1} = 4.6 \barn \Rightarrow \sigma = \frac{3}{4} \sigma_{S=1} + \frac{1}{4} \sigma_{S=0} = 20.4 \barn$. 
+
+\item $E^*, E_B$ are measured results. Then we can calculate the well depths $V_S, V_T$ using $E, r$ (recall last section). 
+
+\item Then we can solve for $V_0, V_1$ from $V_S, V_T$: $V_0 = -32 \fsp \MeV, V_1 = -12 \fsp \MeV$. $V_0 <0, V_1 <0$ meaning they are both positive/attractive. $|V_0| > |V_1|$ means spin dependence is weaker than the spin-independent part. But both are significant contribution. 
+
+\item Only the triplet states are bounded for two reasons: one is that a singlet bound state of deuteron is not observed; the other is the different measurement values of $\sigma_s^s, \sigma_s^p$ (next lecture);
+
+%\item If n-p force is spin-independent, we would expect to find deuteron bound state with $s=1$ at the same energy; but find no $s=0$ bound state. 
 \end{enumerate}
+
+\item From observation/measurements, we know ground state of deuteron has even parity: recall from the perturbation operator, we derived that the angular momentum parity $\Pi = 1^+$,  and recall parity's definition $\Pi = (-1)^l$; that is, only the ones with even $L$ can exist (so only option 1 and 4 is possible). 
+\end{enumerate}
+
+
+
+
+
+
 
 
 \end{document}

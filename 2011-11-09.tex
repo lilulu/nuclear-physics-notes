@@ -6,7 +6,9 @@
 
 
 \topic{Ground-state Spin-Parity Assignments/Predictions}
-We define a \textbf{Total Angular Momentum of Nucleus} to be $I$ \footnote{what's the difference between $J, I$? }, and define parity to be $\pi = (-1)^l$. We are going to use the right-hand of Figure~\ref{ns-magic-numbers}.
+Notation: \ce{^A_p X_n}, proton number determines the type of isotope, neutron number determines isotones.  
+
+We define a \textbf{Total Angular Momentum of Nucleus} to be $I$, and define parity to be $\pi = (-1)^l$. We are going to use the right-hand of Figure~\ref{ns-magic-numbers}.
 \begin{figure}[ht]
     \centering
     \includegraphics[width=5in]{images/ns/magic-numbers.png}
@@ -14,8 +16,15 @@ We define a \textbf{Total Angular Momentum of Nucleus} to be $I$ \footnote{what'
     \label{ns-magic-numbers}
 \end{figure}
 
+\clearpage
 \subtopic{Nuclei with Odd A (\# of neutrons plus protons)} 
-Example: \ce{^{15}_{8}O_7}: 8p, 7n. \ce{^{17}_8 O_9}: 8p, 9n \footnote{notation: \ce{^A_p X_n}, proton number determines the type of isotope, neutron number determines isotones}. 
+Example: compare \ce{^{15}_{8}O_7} and \ce{^{17}_8 O_9} in Fig.~\ref{odd-A-nuclide}, we notice that the last nucleon filling the shell model is the one that contributes to the structure. 
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=4.5in]{images/ns/odd-A-nuclide.png}
+  \caption{The Last Nucleon Contributes To the Structure} \label{odd-A-nuclide}
+\end{figure}
 
 Process: 
 \begin{enumerate}
@@ -27,24 +36,32 @@ Process:
 \textbf{Pairing Effect for Larger $l$}: the residual terms we ignored at calculating single-particle Hamiltonian have an effect at short range for nucleons, resulting in a decreased energy and the orbital angular momentum tends to claps to zero. So the state with larger $l$ value is more favored to be filled. 
 
 Example: \ce{^{207}_{82} Pb_{125}}, see Figure~\ref{ns-Pb-125}.
-\begin{figure}
+\begin{figure}[ht]
     \centering
     \includegraphics[width=5in]{images/ns/Pb-125.png}
     \caption{Paring Effect Illustration (Odd A): Pb-125}
     \label{ns-Pb-125}
 \end{figure}
 
+
+
 \subtopic{Even Neutron, Even Proton} 
-Example: \ce{^{40}_{20}Ca_{20}}, \ce{^{36}_{18} A_{18}}, \ce{^{130}_{36} Sn_{80}}, $\cdots$
+Derived from the paring effect, nucleons want to minimize the energy by setting the pair's angular momentum to zero. Among the hundreds of stable or radioactive even-Z even-N nuclides, all have $I=0$. This is strong evidence for the nuclear paring force. Example: \ce{^{40}_{20}Ca_{20}}, \ce{^{36}_{18} A_{18}}, \ce{^{130}_{36} Sn_{80}}, $\cdots$. 
+
+
 \subtopic{Odd Neutron, Odd Proton}
+There are only 4 stable odd-Z odd-N nuclides: \ce{_1 H_1}, \ce{_3 Li_3}, \ce{_5 B_5}, \ce{_7 N_7}. 
+
+
 There is a tendency to align the spin of the last neutron state and the last proton state. We can flip either state, as long as we take the magnitude of the resulting $I$. See approach one of \ce{^{38} Cl_{21}} in Figure~\ref{ns-Cl-21}.
-\begin{figure}
+\begin{figure}[ht]
     \centering
     \includegraphics[width=5in]{images/ns/Cl-21.png}
     \caption{Flip Spin Effect Illustration (Odd-Odd): Cl-21}
     \label{ns-Cl-21}
 \end{figure}
-Alternative solution: Again we look at the last neutron and last proton, which are $1d_{3/2}, 1f_{7/2}$. Immediately we know $ \frac{7}{2} - \frac{3}{2} \le I \le \frac{7}{2} + \frac{3}{2}$. Consider Table~\ref{spin-l}, we know one is spin up, one is spin down, that is suggesting, we pick the opposite case for $I$, that is, $I=\frac{7}{2} - \frac{3}{2} =2$. The spin part is $(-1)^{L_p} (-1)^{L_n} = (-1)^3 (-1)^2 = -1$. Hence the result is $2^-$.  
+
+Alternative approach: Again we look at the last neutron and last proton, which are $1d_{3/2}, 1f_{7/2}$. Immediately we know $ \frac{7}{2} - \frac{3}{2} \le I \le \frac{7}{2} + \frac{3}{2}$. Consider Table~\ref{spin-l}, we know one is spin up, one is spin down, that is suggesting, we pick the opposite case for $I$, that is, $I=\frac{7}{2} - \frac{3}{2} =2$. The spin part is $(-1)^{L_p} (-1)^{L_n} = (-1)^3 (-1)^2 = -1$. Hence the result is $2^-$.  
 \begin{table}[ht]
 \centering
 \begin{tabular}{|c|c|c|} \hline

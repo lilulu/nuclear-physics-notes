@@ -4,120 +4,10 @@
 \begin{document}
 \maketitle
 
-\topic{Application of S-wave: n-p Scattering}
-We apply S-wave approximation to n-p scattering in a Finite Square Well with $-V_0$ potential:
-\begin{align}
-\begin{cases}
-u(r) = A \sin(k_1 r) & r \le r_0, k_1 = \frac{\sqrt{2 \mu (E+V_0)}}{\hbar} \\
-u(r) = C \sin(k_2 r + \delta_0) & r > r_0, k_2 = \frac{\sqrt{2 \mu E}}{\hbar} 
-\end{cases}
-\\
-\boxed{k_1 \cot (k_1 r_0) = k_2 \cot (k_2 r_0 + \delta_0) } \label{relation}
-\begin{cases}
-A \sin (k_1 r_0) = C \sin (k_2 r_0 + \delta_0) & u_1(r_0) = u_2(r_0) \\
-A k_1 \cos (k_1 r_0) = C k_2 \cos (k_2 r_0 + \delta_0) & u^{\prime}_1 (r_0) = u_2^{\prime} (r_0) 
-\end{cases}
-\end{align}
-Combine the transcendental relation Eq.~\ref{relation}, and the cross section relation Eq.~\ref{sigma} ($B$ means bound state, $E$ is the energy of the neutron, $E_B$ is the binding energy. ):
-\begin{align}
-k_2 r_0 + \delta_0 &= k_2 r_0 - ak_2 \approx -ak_2 \approx \delta_0 \\
-\mathrm{RHS} &= k_2 \cot (k_2 r_0 + \delta_0) \approx k_2 \cot (\delta_0) \\
-k_1 \cot (k_1 r_0) &\approx k_1^B \cot (k_1^B r_0) = - k_2^B  = k_2 \cot (\delta_0) \\
-\cot (\delta_0) &= -\frac{k_2^B}{k_2} \\
-\sin^2 (\delta_0) &= \frac{1}{1 + \cot^2 (\delta_0)} = \frac{1}{1 + \left( \frac{k_2^B}{k_2} \right)^2 } = \frac{k_2^2}{k_2^{B2} + k_2^2} \\
-\sigma &= \frac{4\pi}{k_2^2} \sin^2 (\delta_0) = \frac{4\pi}{k_2^2 + \left(k_2^B \right)^2 } = \frac{4\pi \hbar^2}{2 \mu (E + E_B) } \xrightarrow{E \ll E_B} \frac{4 \pi \hbar^2}{2 \mu} \frac{1}{E_B} \\
-&\xrightarrow{E_B = 2.22 \mathrm{ MeV}} 2.3 \mbox{ b} 
-\end{align}
-Notice $\sigma (\theta) = 2.3$ b is significantly smaller than the measured 20 b. The missing piece is the spin-spin coupling component.
-
-\textbf{Spin-spin Coupling}: Recall $S=0$ is singlet with P=1/4, $S=1$ is triplet with P = 3/4. 
-\begin{align}
-\sigma( \theta) &= \frac{3}{4} \sigma_T (\theta) + \frac{1}{4} \sigma_S (\theta) = \frac{3}{4} \frac{1}{k_2^2} \sin^2 (\theta_{ot} ) + \frac{1}{4} \frac{1}{k_2^2} \sin^2 (\theta_{os} ) \\
-\sigma &= 4 \pi \sigma (\theta) = \frac{4 \pi \hbar^2}{2 \mu} \left[ \frac{3}{4} \frac{1}{E_B} + \frac{1}{4} \frac{1}{E^*} \right] 
-\end{align}\footnote{we can write $\sigma = 4 \pi \sigma(\theta)$ because l=0 is symmetric potential, so we don't need to integrate here} 
-Plug in $E_B = 2.22 \fsp \MeV, E^* = 0.077 \fsp \MeV$, $\sigma = 19$ b, which is a good approximation for 20b. 
-
-
-
-\topic{Spin Dependence of Nuclear Force}
-This lecture is presented by Prof. Li on 10/31/12). We consider shotting a neutron at a neutron, shotting a proton at a neutron, shotting a proton at a proton. We use the notation `singlet' when the incoming particle's and the stationary particle's spins are misaligned, $S=0$; `triplet' when the incoming particle's and the stationary particle's spins are aligned, $S=1$. 
-\begin{enumerate}
-\item $\displaystyle a^{\mathrm{singlet}}_{nn} = -16.6 \fm$. 
-\item $\displaystyle a^{\mathrm{singlet}}_{pp} = -7.82 \fm$. If we remove the Coulomb effect, $\displaystyle \tilde{a}^{\mathrm{singlet}}_{pp} = -17.1 \fm \sim a^{\mathrm{singlet}}_{nn}$. This is called `charge' symmetry. 
-\item $\displaystyle a^{\mathrm{singlet}}_{np} = -23.72 \fm$ (which is called `nearly charge' independence because it is close to $a^{\mathrm{singlet}}_{nn}$). $\displaystyle \sigma_{S=0} = 67.8$ barn. 
-\item $\displaystyle a^{\mathrm{triplet}}_{np} = 5.423 \fm$. There is only 1 weakly bound state. $\displaystyle \sigma_{S=1} = 4.6$ barn. 
-\end{enumerate}
-
-The fact that $\sigma_{S=0} \neq \sigma_{S=1}$ implies that nucleon-nucleon force is spin-dependent. We consider the Hamiltonian operator and consider the following three spin dependences: 
-\begin{enumerate}
-\item Spin-spin dependency. 
-\begin{align}
- \frac{\expect{s_1 \cdot s_2}}{\hbar^2} &= \expect{\frac{S^2 - S_1^2 - S_2^2}{2 \hbar^2}}  =  \expect{\frac{S(S+1) - \frac{1}{2} \frac{3}{2} 2 \hbar^2}{2 \hbar^2} } = \left\{  \begin{array}{cc} - \frac{3}{4} & S = 0 \\ \frac{1}{4}  & S= 1 \end{array} \right. \\
-V_{ss} (r) &= V_1 (r) \left( \frac{1}{4} - \frac{S_1 \cdot S_2}{\hbar^2} \right) + V_3 (r) \left( \frac{3}{4} + \frac{S_1 \cdot S_2}{\hbar^2} \right)
-\end{align}
-Spin-spin dependence gives us $V_1(r)$ for singlet and $V_3(r)$ for triplet as in Fig.~\ref{total}, and both are attractive.
-
-
-\item Spin-orbit dependency (velocity dependency). Before we consider the spin-orbit effect, the unpolarized beam behaves as in Fig.~\ref{un-spin-orbit}. Adding the spin-orbit term: $\displaystyle V_{so}(r) = V (r) (L \cdot S)$. Spin polarizer that breaks the left and right symmetry: there is a concentration effect to the neutrons coming in with up spin to move upwards as shown in Fig.~\ref{spin-orbit}(notice the up and down arrows correspond to out of the paper and into the paper as we are considering a top view). $V_{so}(r)$ is a negative term as illustrated in Fig.~\ref{total}. 
-
-  \begin{figure}[ht]
-    \centering
-    \includegraphics[width=4in]{images/scattering/un-spin-orbit.png}
-    \caption{Scattering Experiment: Unpolarized Beam} \label{un-spin-orbit}
-  \end{figure}
-
-  \begin{figure}[ht]
-    \centering
-    \includegraphics[width=4in]{images/scattering/spin-orbit.png}
-    \caption{Scattering Experiment: Polarized Beam Due to Orbit-Spin Dependence} \label{spin-orbit}
-  \end{figure}
-
-\item Tensorial-spin dependency for bounded deuteron. From electric quadrupole measurements, we observe that deuteron with $I = 1, S=1$ is 96\% s-wave bound state ($l=0$), 4\% d wave ($l=2$). We know that $l=1$ is forbidden from $\pi = (-1)^l = 1^+$, so $l$ can only be even. Then the tensorial force: 
-\eqn{ V_T(r) = V \left[ 3 \frac{(s_1 \cdot x) (s_2 \cdot x)}{|x|^2} - s_1 \cdot s_2 \right] }
-where the $3 \frac{(s_1 \cdot x) (s_2 \cdot x)}{|x|^2}$ is non-centripetal (because a centripetal force should only be depend on $x^2$) and this term gives the d-wave characteristics.  The tensor force term breaks the conservation of orbital angular momentum, but does not break parity symmetry. The existence of this tensor force means that the real nucleon-nucleon potential is actually not central. But since $V_T(r)$ is not so large, the central potential model is still a good approximation. 
-\end{enumerate}
-
-\begin{figure}[ht]
-  \centering
-  \includegraphics[width=5in]{images/scattering/total-spin-dependency.png}
-  \caption{Nucleon-nucleon Potential Demonstrating How the Spin Dependency Changes the Potentials} \label{total}
-\end{figure}
-
-Fig.~\ref{total} put the three pieces together. Comments:
-\begin{itemize}
-\item There is an approximate isospin symmetry between a neutron and a proton, that is, if we double swap the position and the spin of a neutron with a proton, we should preserve the symmetry. 
-
-\item Why a deuteron bound state cannot be singlet? Given $S=0, \pi = -1$, then $L$ has to be odd. Thus we have to adjust the singlet state by adding in a centrifugal term: $V_1(r) \to V_1(r) \frac{l(l+1)}{r^2}$, and it's this centrifugal term that makes the singlet state potential positive (repulsive) as in Fig.~\ref{total}, not the original singlet (`naked singlet' as Prof. Li calls it) that is repulsive. 
-
-\item A neutron and a proton cannot be closer than 0.5 fm at any given time; thus it is called a repulsive core in Fig.~\ref{total}. 
-\end{itemize}
-
-
-
-%%%%%%%%
-\topic{Summary} 
-Nuclear force properties: 
-\begin{enumerate}
-\item Strongly attractive at short distances. It provides the overall shell-model potential.
-\item At range on the order of the nuclear radius, the force distorts the nucleus. 
-\item At range much smaller than the nuclear radius, the force makes the nucleus spherical and pairs up nucleons.
-\item Strongly spin dependence:
-    \begin{enumerate}
-    \item Spin-spin interaction: $V(r) = V_0(r) + V_1 (r) \frac{\Shat_1 \cdot \Shat_2}{\hbar^2} $, $\sigma_S \neq \sigma_T$
-    \item Spin-orbit interaction.
-    \item Tensorial-spin interaction. 
-    \end{enumerate}    
-\item Nearly charge-independent (Coulomb interaction excluded).
-\item The force saturates.
-\end{enumerate}
-
 
 
 %%%%%%%%%%%%%%%%%%%% Nuclear Shell Model %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\lecture{Nuclear Shell Model}
-So far we have considered deuteron, which contains two particles. In this section we will consider heavier nuclei with multiple nucleons. Moving from two body problem to many body problem sounds hard, though thanks to the \textit{paring effect}, we do not have to study every nucleon; it's the last one or two nucleon that matters. We consider the `liquid drop' model, that is, we assume neutrons and protons to be in a homogeneous `soup,' 
-
-
+\lecture{Nuclear Structure}
 While we can always do more scattering experiment, it is easier and more interesting to do an over simplified theory, the shell model, of which we can extract many microscopic description of properties. The shell model is analogous to the electronic structure of an atom, in that we fill shells with electrons as energy increases, while taking into account Pauli exclusive principle. Refer to Krane 5.1, 5.2 and Meyerhof 2.5. 
 
 There are a couple of assumptions/properties for shell model: 
@@ -143,7 +33,30 @@ Atomic physics is relatively easy because you have one particle (electron) sitti
 
 Structure of nucleus is more complex than the electronic structure of atoms because there is no center of attraction anymore; nucleons are held together by their mutual interactions which are more complicated than Coulomb force. 
 
-\topic{Evidence for Magic Number and Shell Model}
+
+\topic{Overview}
+\begin{enumerate}
+\item \textbf{Liquid Drop Model}. So far we have considered deuteron, which contains two particles. In this section we will consider heavier nuclei with multiple nucleons. Moving from two body problem to many body problem sounds hard, though thanks to the \textit{paring effect}, we do not have to study every nucleon; it's the last one or two nucleon that matters. We consider the `liquid drop' model, that is, we assume neutrons and protons to be in a homogeneous `soup.' 
+
+\item \textbf{SEMF}. The liquid drop model leads to the SEMF, which is a smooth curve; but we know from observations, there are isotopes diverse from the smooth curve in a pattern (i.e., the nuclide with magic numbers). See Section~\ref{magic-number}.
+
+
+\item \textbf{Intermediate Potential}. We consider the potential: The two extreme forms as seen in Fig.~\ref{potential-candidates} are, when $R \to 0$ we get a harmonic oscillator potential, and when $a \to 0$ we get a square well. The real potential is somewhere between the two models. That's why we need the intermediate potential model. See Section~\ref{candidate-potentials}.
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=5in]{images/ns/potential-candidates.png}
+  \caption{Two Potentials for Describing Nuclear Structure} \label{potential-candidates}
+\end{figure}
+
+\item \textbf{Spin Orbital Coupling}. To capture the magic numbers, we consider the orbital-spin coupling. $I = j_i$ where $i$ is the singlet of the last nucleon. $j_i = l_i + s_i = l\pm \frac{1}{2}$, that is, we get degeneracy.  We can either consider the modified potential $V_{so} \to V_{so} (l \cdot s)$  or we can consider the modified energy: 
+\eqn{ E_{j_i = l_i + 1/2} - E_{j_i = l_i - 1/2} = \expect{ \frac{ \left( l_i + \frac{1}{2} \right) \left( l_i + \frac{3}{2} \right) - \left( l_i - \frac{1}{2} \right) \left( l_i + \frac{1}{2} \right) }{2} V_{so} (r) } = \left( l_i + \frac{1}{2} \right) V_{so} (r) < 0  }
+If we add the spin orbit dependence onto the intermediate form, we get a form close to observations. See Section.~\ref{spin-orbit-coupling}. 
+\end{enumerate}
+
+
+
+
+\topic{Evidence for Magic Number and Shell Model} \label{magic-number}
 Each shell is filled with a given number of nucleons of each kind. Experiments indicate special features of the number of nucleons at the these `Nuclear Magic Numbers' (Z or N): 2, 8, 20, 28, 50, 82, 126 \footnote{For heavier undiscovered nuclei, N: $184, 196, 272, 318, \cdots$ Z: $114, 126, 164, \cdots$}. Nuclei with magic number of neutron or proton or both are very stable. Notice atomic magic numbers are different from nuclear magic numbers; they are: 2, 10, 18, 30, 36, 48, 54, ...
 
 Evidence for magic number and the shell model:
@@ -181,16 +94,7 @@ Evidence for magic number and the shell model:
 \end{enumerate}
 
 
-\topic{Overview/Summary}
-The liquid drop model leads to the SEMF, which is a smooth curve; but we know from observations, there are isotopes diverse from the smooth curve in a pattern (i.e., the nuclide with magic numbers). 
 
-
-We consider the potential: The two extreme form is, when $R \to 0$ we get a harmonic oscillator potential, and when $a \to 0$ we get a square well. The real potential is somewhere between the two models. That's why we need the intermediate potential model. 
-
-
-To capture the magic numbers, we consider the orbital-spin coupling. $I = j_i$ where $i$ is the singlet of the last nucleon. $j_i = l_i + s_i = l\pm \frac{1}{2}$, that is, we get degeneracy.  We can either consider the modified potential $V_{so} \to V_{so} (l \cdot s)$  or we can consider the modified energy: 
-\eqn{ E_{j_i = l_i + 1/2} - E_{j_i = l_i - 1/2} = \expect{ \frac{ \left( l_i + \frac{1}{2} \right) \left( l_i + \frac{3}{2} \right) - \left( l_i - \frac{1}{2} \right) \left( l_i + \frac{1}{2} \right) }{2} V_{so} (r) } = \left( l_i + \frac{1}{2} \right) V_{so} (r) < 0  }
-If we ad the spin orbit dependence onto the intermediate form, we get a form close to observations. 
 
 
 
@@ -221,10 +125,8 @@ To model the potential, we will consider the following common ones:
 \end{enumerate}
 
 %%%%%%%%%%%%%%% Harmonic Oscillator %%%%%%%%%%%%
-\topic{Harmonic Oscillator Potential Model}
-
-
-\subtopic{Derive Potentials}
+\topic{Potential Models} \label{candidate-potentials}
+\subtopic{Harmonic Oscillator Potential: Derivations}
 We define the potential well as a parabolic well from $-R_0$ to $R_0$ with a maximum depth of $-V_0$: 
 \begin{align}
 V_{\mathrm{nuc}} (r) &\approx - V_0 \left( 1 - \frac{r^2}{R_0^2} \right) = \frac{V_0}{R_0^2} (r^2 - R_0^2)  \\
@@ -261,6 +163,72 @@ V_0 & neutrons \\
 V_0 - \frac{3}{2} \frac{(Z-1) e^2}{R_0} & protons \\
 \end{dcases*}
 \end{align}
+
+
+\subtopic{Harmonic Oscillator Potential: Solutions}
+Since the potential is a central potential, the angular part of the solution to the Schrodinger equation is just $Y_{ml} (\theta, \phi)$ \footnote{The angular part to any central potential is harmonic oscillator}. The radial part for the 1D case can be expressed as the product of a finite polynomial and an exponential: 
+\eqn{\psi (r) =   \mbox{polynomials (n,l ) } \times \exp\left( - \frac{\alpha^2 r^2}{2} \right) }
+Some sample radial wavefunctions for 3D SHO problem can be found in Table~\ref{radial-wavefunction-SHO}. 
+
+\begin{table}[h!]
+    \centering
+    \includegraphics[width=6in]{images/shell/radial-wavefunction-SHO.png}
+    \caption{Sample Radial Wave Functions for 3D Simple Harmonic Oscillator (Table 2.4, Krane)}
+    \label{radial-wavefunction-SHO}
+\end{table}
+
+Harmonic Oscillator Energy Eigenvalues \footnote{See Liboff for details. $\frac{3}{2}$ is for 3D, it would be replaced by $\frac{1}{2}$ if we are discussing 1D}: 
+\eqn{ E_n = \hbar \omega \left( n + \frac{3}{2} \right) - V_0^{\prime}  }
+It is important to notice that energy does not depend on $l, m_l$, and not all values of $l$ are permitted for each $n$. From mathematical solution of the radial equation, the allowed quantum numbers: 
+\begin{enumerate}
+\item Given the Oscillator Level $n$, $l$ has to satisfy:
+\eqn{ l \le n, \mbox{if n is even, then l has to be even; n is odd, l has to be odd.} }
+\item Knowing $l$, $-l \le m_l \le l$, hence $2l+1$ degeneracy, also take into account $m_s = \pm \frac{1}{2}$, then the total degeneracy is \eqn{ D_l (l) = 2l+1, \fsp D_{l,s} (l) = 2(2l+1) = 4l+2 }
+\item Written $D_{l,s}$ as a function of $n$, the total number of degeneracy is: 
+\eqn{ D_l (n) = \frac{1}{2} (n+1)(n+2), \fsp D_{l,s} (n) = (n+1)(n+2) }
+\end{enumerate}
+
+Example: given $n =5$, $l = 1,3,5$. Then $ m_l = \pm 1, 0 (3); \pm 3, \pm 2, \pm 1, 0 (7); \pm 5, \pm 4, \pm 3, \pm 2, \pm 1, 0 (11)$. Together that is 21 degeneracy. Also take into account the 2 degeneracy of $m_s$, then in total there is 42 degeneracy. Notice this agrees with $D_n = (n+1)(n+2) = 42$. Table~\ref{energy-SHO} lists some lower energy levels \footnote{Spectroscopic Notation: $l=0 (s), l=1 (p), l=2 (d), l=3 (f), l=4 (g), l=5(h), l=6 (i), l=7(k), l=8(l), \cdots$. The letter is only associated with $l$ value, and the number distinguish this $(n,l)$ combination with a previous one}:  
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{|c|c|c|c|c|c|} \hline
+    n & Energy $\frac{V_0 + E }{\hbar \omega_0}$ & states $(n,l)$ & Spectroscopic Notation & $D_{l,s} (n)$  & Cumulation $ \left( \Sum_n D_n \right)$ \\ \hline 
+    0 & $3/2$ & (0,0) & 1s & 2 & 2 \\ \hline
+    1 & $5/2$ & (1,1) & 1p & 6 & 8\\ \hline
+    2 & $7/2$ & (2,0), (2,2) & 2s, 1d & 12 & 20 \\ \hline
+    3 & $9/2$ & (3,1), (3,3) & 2p, 1f & 20 & 40 \\ \hline
+    4 & $11/2$ & (4,0), (4,2), (4,4) & 3s, 2d, 1f & 30 & 70 \\ \hline
+    \end{tabular}
+    \caption{Lower Energy Levels of A Particle in a Central 3D Simple Harmonic Oscillator}
+    \label{energy-SHO}
+\end{table} 
+
+Two issues with the harmonic oscillator model:  
+\begin{enumerate}
+\item The total number of allowed energies are correct for $n = 0,1,2$, but off for higher magic numbers.  
+\item The separation energy:  
+\eqn{ \Delta E = \hbar \omega \left[ \left( n + 1 + \frac{3}{2} \right) - \left( n + \frac{3}{2} \right) \right] = \hbar \omega = \hbar \sqrt{\frac{2V_0}{m R_0^2} - \frac{(Z-1) e^2}{R_0^3} }  }
+For neutrons, if we plug in $R_0 = 1.25 A^{1/3} \fsp \fm$, and get ride of the coulomb term, then $V_0 \approx 50 A^{-1/3} \MeV$. We notice as A increases, $\Delta E $ approaches 10 MeV. That is to say, for a typical well depth of 50 MeV, we can fit around 4 oscillator energy levels in it, which does not agree with reality\footnote{there are clearly A's that have more than 4 possible energy levels.}. Notice the above discussion is for neutrons. The energy levels are shifted up for protons. 
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%% Intermediate Potentials %%%%%%%%%%%%%
+\subtopic{Intermediate Potential}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=4in]{images/shell/intermediate-form-potential.png}
+    \caption{Intermediate Form Potential Diagram}
+\end{figure}
+
+It is more representative of strong potential, with sufficiently sharp edge, and sufficiently smooth decay to reach zero around $R_0$. As seen in Figure~\ref{intermediate-energy}, again magical number 2,8, 20 are predicted correctly, but higher shell occupancy numbers are off. 
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=2in]{images/shell/intermediate-potential-energy.png}
+    \caption{Intermediate Form Energy Level Diagram, Krane Figure 5,6 (a)}
+    \label{intermediate-energy}
+\end{figure}
+
 
 
 \end{document}
