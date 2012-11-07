@@ -4,12 +4,8 @@
 \begin{document}
 \maketitle
 
-\topic{Basic Decay Concepts}
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=3in]{images/rd/Z-N-grid.png}
-    \caption{Radioactive Decay Demonstration \label{Z-N-grid}}
-\end{figure}
+
+\topic{Decay Mechanism}
 Three Basic Decay Types\footnote{See Krane 3.3, 6.1-6.5.} (see Figure~\ref{Z-N-grid}):
 \begin{enumerate}
 \item $\alpha$ decay:
@@ -17,33 +13,43 @@ Example: \ce{_{88}^{236} Ra \to ^{232}_{86} Rn + \alpha}, $T_{\alpha} = 4.8$ MeV
 \item $\beta$ decay: beta plus decay is \ce{n \to p + e^- + \nu}, beta minus decay is \ce{p \to n + e^+ + \bar{\nu}}
 \item $\gamma$ decay: \ce{X^* \to X + \gamma}, excited state to lower energy state.
 \end{enumerate}
-Decay mechanisms: $\lambda = -\frac{\dNdt}{N(t)} =$ decay constant, describe probability of decay per unit time. It is a constant for each decay. 
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=3in]{images/rd/Z-N-grid.png}
+    \caption{Radioactive Decay Demonstration \label{Z-N-grid}}
+\end{figure}
+
+
+Decay mechanisms: the decay constant describes probability of decay per unit time, and it is defined as, 
+\eqn{ \lambda = -\frac{\dNdt}{N(t)} } 
 \begin{align}
 \dNdt (t) &= - \lambda N(t) &  N(t) &= N_0 e^{-\lambda  t} \\
 N(t_{1/2}) &= \frac{1}{2} N(0) & t_{1/2} &= \frac{\ln 2}{\lambda} = \frac{0.693}{\lambda} \\
 \mbox{mean lifetime }\tau &= \frac{\int_0^{\infty} t \left| \dNdt \right| \dt }{\int_0^{\infty}  \left| \dNdt \right| \dt} = \frac{1}{\lambda} & \tau &= \frac{1}{\lambda}
 \end{align}
 
-Decay Mode 1: Parent $N_1$ decay into daughter product$N_2$: 
+Various decay modes: 
+\begin{enumerate}
+\item Parent $N_1$ decay into daughter product$N_2$: 
 \begin{align}
 N_1 (t) &= N_0 e^{-\lambda t} \\
 N_2 (t) &= N_0 - N_1 (t) = N_0 (1 - e^{-\lambda t}) 
 \end{align}
 
-Decay Mode 2: Parent $N_1$ decay parallelly into daughters $N_{2,a}$ (with $\lambda_a$) and $N_{2,b}$ (with $\lambda_b$). The total decay constant is just $\lambda_t = \lambda_a + \lambda_b$. 
+\item Parent $N_1$ decay parallelly into daughters $N_{2,a}$ (with $\lambda_a$) and $N_{2,b}$ (with $\lambda_b$). The total decay constant is just $\lambda_t = \lambda_a + \lambda_b$. 
 \begin{align}
 N_1 (t) &= N_0 e^{-\lambda_t t} \\
 N_{2,a} (t) &= \frac{\lambda_a}{\lambda_t} N_0 (1 - e^{-\lambda_t t}) \\
 N_{2,b} (t) &= \frac{\lambda_b}{\lambda_t} N_0 (1 - e^{-\lambda_t t})
 \end{align}
 
-Decay Mode 3: Parent $N_1$ decay into daughter $N_2$, which instantaneously decay into granddaughter $N_3$ through \ce{N_1 ->[\lambda_1] N_2 ->[\lambda_2] N_3}.
+\item Parent $N_1$ decay into daughter $N_2$, which instantaneously decay into granddaughter $N_3$ through \ce{N_1 ->[\lambda_1] N_2 ->[\lambda_2] N_3}.
 \begin{align}
 \frac{\derivative N_1}{\dt} &= -\lambda_1 N_1 (t)   & N_1 (t) &= N_{0} e^{-\lambda_1 t} \\
 \frac{\derivative N_2}{\dt} &= \lambda_1 N_1 (t) - \lambda_2 N_2(t)   & N_2 (t) &= N_{0} \frac{\lambda_1}{\lambda_2 - \lambda_1} \left( e^{-\lambda_1 t} - e^{-\lambda_2 t} \right) \\
 \frac{\derivative N_3}{\dt} &= \lambda_2 N_2 (t)    & N_3 (t) &= N_{0} \frac{\lambda_1 \lambda_2}{\lambda_2 - \lambda_1} \left( \frac{1 - e^{-\lambda_1 t} }{\lambda_1} - \frac{1- e^{-\lambda_2 t}}{\lambda_2} \right) 
 \end{align}
-
+\end{enumerate}
 
 %%%%%%%%%%%%%%%% Alpha Decay %%%%%%%%%%%%%%%%%%%%%%%%%
 \topic{Alpha Decay} 
