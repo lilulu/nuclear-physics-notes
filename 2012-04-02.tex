@@ -153,4 +153,22 @@ Notes: we have the $k$ term in the equations to keep the fission source general.
 \eqn{    \Rightarrow \psi &= \frac{1}{4\pi} \left[ \phi + 3 \Omegahat \cdot \vec{J} \right] }
 \end{enumerate}
 
+
+
+
+\clearpage
+\topic{Fundamental Mode Approximation}
+One way to evaluate the leakage is to consider the fundamental mode: assume that the shape function remains the same in different groups: $\phi_1(r) = \phi_1 \Phi (r), \phi_2 (r) = \phi_2 \Phi(r)$. Then the fundamental mode yields: 
+\eqn{ \laplacian \phi_g(r) + B_g^2 \phi_g (r) &= 0  \Rightarrow \laplacian \Phi (r) + B_g^2 \Phi(r) &=0 }
+Then the question is of course what do we do with $B_g^2$? $B_g^2$ depends on extrapolated distance (e.g., $\tilde{R} = R + 2D_g$) which depends on group. One way we can approximate is that we use $D_1$ because fast group leakage dominates. 
+
+Then our leakage term is $-\laplacian \phi_g^2 = D_g B_g^2$. 
+
+
+\clearpage
+\topic{1-1/2 Group Model} 
+Mean free path for thermal neutrons is 1-2cm, mfp for fast neutrons is 5-10cm. For 1-1/2 group model, we neglect thermal leakage (e.g., for a fast reactor, a large core like CANDU). Then we write our two group equation, cross out thermal leakage. 
+
+
+
 \end{document}

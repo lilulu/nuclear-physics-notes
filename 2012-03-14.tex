@@ -230,16 +230,18 @@ The transport cross section in the transport-corrected $P_o$ approximation for i
 \end{align}
 Under the assumption of isotropic scattering in COM, the mean value of cosine theta over the interval $-1,1$ is zero; the mean value of the cosine psi over the intervale $-1,1$ is $\frac{2}{3A}$, hence,
 \eqn{ \boxed{ \sigma_{tr}^i (E) = \sigma_t^i (E) - \frac{2}{3 A^i} \sigma_s^i(E) } }
-In summary, there are three ways to calculate diffusion coefficients: 
+
+How do we collapse $D$? 
 \begin{enumerate}
 \item Assuming isotropic scattering in lab system, we can calculate the flux-weighted total cross section,
 \eqn{ D &= \frac{1}{3 \Sigma_t},  &\Sigma_t &= \frac{\Sum \Sigma_t \phi}{\Sum \phi} }
 \item Flux-weighted transport cross section: 
 \eqn{ D &= \frac{1}{3 \Sigma_{tr}},& \Sigma_{tr} &= \frac{\Sum \Sigma_{tr} \phi}{\Sum \phi} }
 The problem with this method is that flux collapse under-predict transport. 
-\item Flux-weighted diffusion coefficient, and this is the most accurate one,
-\eqn{ D &= \frac{\Sum \frac{1}{3 \Sigma_{tr}} \phi }{\Sum \phi} }
-
+\item Most accurate: flux-weighted diffusion coefficient,
+\eqn{ D_g &=  = \frac{\Sum \frac{1}{3 \Sigma_{tr}} \phi }{\Sum \phi} }
+\item Curent weighted: 
+\eqn{ D_g &= \frac{\int_{E_g}^{E_{g-1}} D(E) \gradient \phi(E) \dE}{\int_{E_g}^{E_{g-1}} \gradient \phi(E) \dE } }
 
 \end{enumerate}
 

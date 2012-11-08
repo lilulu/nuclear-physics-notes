@@ -26,8 +26,13 @@ We start with the two-group neutron balance equations, and apply assumptions:
   \eqn{ \frac{\phi_2}{\phi_1} = \frac{\Sigma_{s12}}{\Sigma_{a2}} }
  and the eigenvalue: 
  \eqn{ k = \frac{\nu \Sigma_{f1}}{\Sigma_{r1}} + \frac{\nu \Sigma_{f2} \Sigma_{s12}}{\Sigma_{a2} \Sigma_{r1}} }
- Prof. Forget made a connection between the four factor formula and the 2 group theory: $\displaystyle p = \frac{\Sigma_{s12} \phi_1}{\Sigma_{r1} \phi_1} = \frac{\Sigma_{s12}}{\Sigma_{r1}}, k_1 = \eta_1 f_1 = \frac{\nu \Sigma_{f1}}{\Sigma_{r1}}, k_2 = \eta_2 f_2 = \frac{\nu \Sigma_{f2}}{\Sigma_{a2}}, \epsilon = 1 + \frac{k_1}{k_2}, k = k_1 + p k_2 = \eta_1 f_1 + p \eta_2 f_2$. 
+ Prof. Forget made a connection between the four-factor/sixe-factor formula and the 2 group theory: 
+\begin{enumerate}
+\item Four factor: $\displaystyle p = \frac{\Sigma_{s12} \phi_1}{\Sigma_{r1} \phi_1} = \frac{\Sigma_{s12}}{\Sigma_{r1}}, k_1 = \eta_1 f_1 = \frac{\nu \Sigma_{f1}}{\Sigma_{r1}}, k_2 = \eta_2 f_2 = \frac{\nu \Sigma_{f2}}{\Sigma_{a2}}, \epsilon = 1 + \frac{\nu \Sigma_{f1}}{\nu \Sigma_{f2}} \frac{\Sigma_{a2}}{\Sigma_{r1} \Sigma_{12}}, \kinf = \epsilon \eta p f$. 
 
+\item Six factor: $\displaystyle \keff = \epsilon \eta p f P_{1,NL} P_{2,NL}$ where $\displaystyle P_{1,NL} = \frac{1}{1 + L_1^2 B_g^2}, L_1^2 = \frac{D_1}{\Sigma_{r1}}, P_{2,NL} = \frac{1}{1 + L_2^2 B^2}, L_2^2 = \frac{D_2}{\Sigma_{a2}}$.  
+
+\end{enumerate}
 
 \item However to keep it general, we need to approximate the leakage term by constructing a finite spatial mesh in which cross sections are constant. Integrate Eq.~\ref{two-group-eq} over for node $n$ with width $\Delta^n$,
 \eqn{-\int \ddx D_1^n \ddx \phi_1^n \dx + \Sigma_{r1}^n  \phi_1^n \Delta^n = \nu \Sigma_{f1}^n \phi_1^n \Delta^n + \nu \Sigma_{f2}^n \phi_2^n \Delta^n + S_1 \Delta^n} 
