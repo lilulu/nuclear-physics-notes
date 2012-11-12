@@ -73,7 +73,12 @@ Notice this is the same as the odd-parity square well problem in Chapter~\ref{fi
   \end{enumerate}
 
 
-\item The sign of $E$ is the ultimate measurement of whether a state is bounded or not. For instance, the ground state has an $E = -2.22 $ MeV, which is smaller than the averaged -8 MeV, hence the ground state of deuteron weakly bounded. The 1st excited state has $E = 265$ MeV, hence is it not bounded. See Figure~\ref{deuteron-bound} for details. 
+\item The sign of $E$ is the ultimate measurement of whether a state is bounded or not. 
+\begin{enumerate}
+\item Ground state has a total energy of $E = -2.22 $ MeV, which is smaller than the averaged -8 MeV, hence the ground state of deuteron weakly bounded. 
+\item The 1st excited state has a total energy of $E = 265$ MeV, hence is it not bounded. Thus it is virtual. 
+\end{enumerate}
+See Figure~\ref{deuteron-bound} for details. 
 
 \begin{figure}
     \centering
@@ -99,28 +104,13 @@ The spin dependence of nuclear forces can be interpreted as $V_{\mathrm{nuc}}$ d
 
 
  We will discuss more on the spin dependence in Section~\ref{spin-scattering}. 
-In general, we assume deuteron ground state (n,p) interaction means $J=1$ from measurement\footnote{measured spin of deuteron is $J=1$; no $J=0$ is found at the bound ground state; though there is J=0 for s=0, l=0},$l=0$\footnote{l=0 is the case 96\% the time; if $l\neq 0$, then $s_n+s_p =0$ would be anti-paralell, and 1 for parallel}, $S_p = S_n = \frac{1}{2}, \Jhat = \Lhat \oplus \Shat_p \oplus \Shat_n$. The possible angular momentum combinations that give us $J=1$ are: 
+From measurements, deuteron ground state is mostly $J=1$, also possibly $J=0$.  $S_p = S_n = \frac{1}{2}, \Jhat = \Lhat \oplus \Shat_p \oplus \Shat_n$.
 \begin{enumerate}
-\item $S=1, L=0$.
-\item $S=0, L=1$. 
-\item $S=1, L=1$. 
-\item $S=1, L=2$.
-\end{enumerate}
+\item For $J=1$, $l=0$, the possible angular momentum combinations that give us $J=1$ are: $S=1, L=0; S=0, L=1; S=1, L=1; S=1, L=2$. From observation/measurements, we know ground state of deuteron has even parity: recall from the perturbation operator, we derived that the angular momentum parity $\Pi = 1^+$,  and recall parity's definition $\Pi = (-1)^l$; that is, only the ones with even $L$ can exist (so only option 1 and 4 is possible).
 
-To determine which combinations are possible for a bound state:
-\begin{enumerate}
-\item Orbital-spin dependence. From analytical derivation, we know that the well depth depends on the interaction of $l, s$: 
-  \begin{align}
-  \Delta V &= V_{s0} (r) \hat{L} \cdot \hat{S}
-  \end{align}
-  where we obtain $\hat{L} \cdot \hat{S}$ from: 
-  \begin{align}
-    \hat{J}^2 &= \hat{L}^2 + \hat{S}^2 + 2  \hat{L} \cdot \hat{S} \\
-    \hbar^2 j(j+1) &= \hbar^2 l(l+1) + \hbar^2 s(s+1) + 2 \hat{L} \cdot \hat{S} \\
-    \Delta V &= V_{s0} (r) \frac{\hbar^2}{2} \left[ j(j+1) - l(l+1) - s(s+1) \right] 
-  \end{align}
+\item For $J=0$, we can have $l=0, s=0$. 
 
-\item Spin-spin dependence. The possible spin configurations are(using notations $\ket{s m}$)\footnote{Griffiths p.185, Liboff Table 11.3}: 
+\item We consider the $l=0$ case (this is 96\% of the time), then the possible spin configurations are(using notations $\ket{s m}$)\footnote{Griffiths p.185, Liboff Table 11.3}: 
 \begin{align}
 \left. \begin{array}{l} 
 \ket{1 1} = \up \up \\
@@ -129,7 +119,7 @@ To determine which combinations are possible for a bound state:
 \end{array} \right\}
 S &= 1  (\mathrm{triplet, parallel, bounded}). \\
 \left. \ket{0 0} = \frac{1}{\sqrt{2}} (\up \down - \down \up ) \right\} 
-S &= 0  (\mathrm{singlet, anti-parallel, unbounded}).
+S &= 0  (\mathrm{singlet, antiparallel, unbounded}).
 \end{align}
 
 Then we can add a spin-dependent modification to $V_{\mathrm{nuc}}$:
@@ -164,9 +154,7 @@ Comments:
 \item Only the triplet states are bounded for two reasons: one is that a singlet bound state of deuteron is not observed; the other is the different measurement values of $\sigma_s^s, \sigma_s^p$ (next lecture);
 
 %\item If n-p force is spin-independent, we would expect to find deuteron bound state with $s=1$ at the same energy; but find no $s=0$ bound state. 
-\end{enumerate}
-
-\item From observation/measurements, we know ground state of deuteron has even parity: recall from the perturbation operator, we derived that the angular momentum parity $\Pi = 1^+$,  and recall parity's definition $\Pi = (-1)^l$; that is, only the ones with even $L$ can exist (so only option 1 and 4 is possible). 
+\end{enumerate} 
 \end{enumerate}
 
 

@@ -26,7 +26,7 @@ Reference: Krane 4.2, 11.8., Liboff 14.1.
 
 
 
-\topic{Scattering Cross Sections}
+\topic{Intro to Scattering Cross Sections}
 Recall that the scattering cross-section of neutron from proton is around 20 barns for $1 \sim 10^6$ eV \footnote{it is not till we introduce spin-spin coupling that we can explain this high scattering cross section}. 
 
 To derive relations about the scattering cross section, we start by defining the incoming wave as a planar wave, and the outgoing wave as a spherical one. We define the scattering amplitude $f(\theta)$ as in $\psi_{\mathrm{sc}} = f(\theta) \frac{e^{i (\uline{k} \uline{r} - wt)}}{r}$. 
@@ -44,11 +44,11 @@ Cross section is the probability that an incoming wave scatters along the solid 
 \dsigmadOmega &= \frac{J_{\mathrm{sc}} r^2}{J_{\mathrm{inc}}} = \sigma(\theta) 
 \end{align}
 
-In the limit of $r \to \infty$ (we would prove this relation at the end), 
+In the limit of $r \to \infty$ (we would prove this in Section.~\ref{born-appr}), 
 \eqn{ \psi &\approx e^{ikr \cos \theta} + f(\theta) \frac{e^{ikr}}{r} }
 where $f(\theta)$ is the angular modulation, and the $\frac{e^{ikr}}{r}$ is the spherical wave. 
 \eqn{ J_r &\approx \frac{|f(\theta)|^2}{r^2} \frac{\hbar k}{\mu}  & \Rightarrow r^2 \dOmega J_r &= |f(\theta)|^2 J_{in}}
-We can derive the relation for differential scattering cross section $\dsigmadOmega$ and the total scattering cross section $\sigma$, 
+Then we can get differential scattering cross section $\dsigmadOmega$ and the total scattering cross section $\sigma$ (see Section~\ref{partial-wave}), 
 \begin{align}
 \left. \begin{array}{c}
 J_{\mathrm{inc}} = \frac{\hbar k}{\mu} b^2  \\
@@ -60,12 +60,12 @@ Notes of scattering amplitude $f(\theta)$:
 \begin{enumerate}
 \item $f(\theta)$ is scattering intensity as a function of scattering angle.
 \item Generally $f(\theta)$ is anisotropic. For $l=0$ though there is no angular dependency, $f(\theta) \to $ constant. 
-\item Angular differential xs $\sigma(\theta)$ is proportional to the scattering amplitude squared. Total scattering cross section is just angular differential cross section integrated over all angles.  
+\item $\displaystyle \dsigmadOmega \propto |f(\theta)|^2 $, then total scattering cross section is just $\displaystyle \dsigmadOmega$ integrated over all angles.  
 \item To solve for $f(\theta)$, use Method of Partial Waves. The result is in Eq.~\ref{f-theta}. 
 \end{enumerate}
 
 
-\topic{Born's Approach To Get Extreme Condition}
+\topic{Born's Approach To Get Extreme Condition}\label{born-appr}
 This lecture was given by Prof. Li on 10/22/12. We assume that the proton is stationary, the neutron is a travelling wave (thus we know the energy should be $\displaystyle E = \frac{\hbar^2 k^2}{2\mu}$, thus we can simplify the SQE (where $x$ is the relative location): 
 \begin{align}
 \left[ - \frac{\hbar^2 \nabla^2}{2 \mu} + V(|x|) \right] \psi(x) &= E \psi(x) \\
@@ -117,7 +117,7 @@ In the next section we would actually solve $\psi(x)$ as an eigenstate problem u
 
 
 
-\topic{Method of Partial Waves} 
+\topic{Method of Partial Waves} \label{partial-wave}
 To find $f(\theta)$, we solve the Schrodinger Equation for wave function $\psi(\uline{r}, t) = \psi(\uline{r}) e^{-iEt/\hbar}$:
 \eqn{\left[ - \frac{\hbar^2}{2 \mu} \uline{\gradient}^2 + V(\uline{r}) \right] \psi (\uline{r}) = E \psi(\uline{r}) }
 We've already solved for this problem for the bound state condition ($E <0$), whereas now we consider the scattering case $E>0$, with the boundary condition:
