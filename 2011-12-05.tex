@@ -63,42 +63,71 @@ Region 4 is the Resonance Region; we introduce the `compound nucleus formation' 
    \caption{Energy Levels in Compound Nucleus Formation\label{compound-formation-energy}}
 \end{figure}
 
-
 $\sigma_C (T_i)$ is the cross-section for CN formation given a KE of $T_i$, $P_b$ is the probability that energy level E would decay by emission of particle. We evaluate the two terms separately (and the two processes: formation and decay decoupled too). 
-\begin{align*}
+\begin{align}
 a + X  &\to C^* \to b + Y \\
-\sigma (a,b) &= \sigma_C (T_i) P_b (E) \\ 
-\end{align*}
+\Aboxed{ \sigma (a,b) &= \sigma_C (T_i) P_b (E) }
+\end{align}
+where $E$ in $P_b(E)$ is the excitation energy, $P_b(E)$ describes the probability of the decay channel where particle $b$ is emitted characterized by interaction width $\Gamma$, and as explained by Eq.21.12 in SY5, 
+\eqn{ \sigma_c (T_i) = \pi \lambda^2 g_J \frac{\Gamma_a \Gamma}{(T_i - T_i^*)^2 + \frac{\Gamma^2}{4}}  }
+
+
 
 \begin{enumerate}
-\item Elastic Resonance Scattering: \ce{n + ^A_Z X \to \ce{^{A+1}_Z X^*} \to n + ^A_Z X}.
-\begin{figure}
-   \centering
-   \includegraphics[width=6in]{images/ni/compound-formation-scattering-energy.png}
-   \caption{Energy Levels in Resonance Scattering, Elastic and Inelastic\label{compound-formation-scattering-energy}}
-\end{figure}
+\item Elastic Resonance Scattering: \ce{n + ^A_Z X \to \ce{^{A+1}_Z X^*} \to n + ^A_Z X}. See Fig.~\ref{compound-formation-scattering-energy}. 
+  \begin{figure}
+    \centering
+    \includegraphics[width=6in]{images/ni/compound-formation-scattering-energy.png}
+    \caption{Energy Levels in Resonance Scattering, Elastic and Inelastic\label{compound-formation-scattering-energy}}
+  \end{figure}
+
 \item Inelastic Resonance Scattering: \ce{n + ^A_Z X \to \ce{^{A+1}_Z X^*} \to n+ ^A_Z X^*}.
+
 \item Radiative Capture $(n, \gamma)$: 
-\ce{n + ^A_Z X \to \ce{^{A+1}_Z X} \to \gamma + ^{A+1}_Z X}. Notice the neutron is not released.
+  \ce{n + ^A_Z X \to \ce{^{A+1}_Z X} \to \gamma + ^{A+1}_Z X}. Notice the neutron is not released.
 
-Example: \ce{ n+ ^{238} U \to ^{239} U^* \to ^{239} U + \gamma }, in which $E_n = 6.67 \fsp \eV$.
-\begin{figure}
-   \centering
-   \includegraphics[width=6in]{images/ni/compound-formation-rc-energy.png}
-   \caption{Energy Levels in Resonance Scattering, Radiative Capture\label{compound-formation-rc-energy}}
-\end{figure}
+  Example: \ce{ n+ ^{238} U \to ^{239} U^* \to ^{239} U + \gamma }, in which $E_n = 6.67 \fsp \eV$.
+  \begin{figure}
+    \centering
+    \includegraphics[width=6in]{images/ni/compound-formation-rc-energy.png}
+    \caption{Energy Levels in Resonance Scattering, Radiative Capture\label{compound-formation-rc-energy}}
+  \end{figure}
 
-\textbf{Breit-Wigner Single-level Resonance Formula} is used to describe quantitatively the resonance cross-sections, where resonances (or excited state energy levels) are spaced widely apart: 
-\begin{align}
-\sigma_{n, \gamma} (T_i) &= \sigma_0 \frac{\Gamma_n \Gamma_{\gamma}}{(T_i - T_i^*)^2 + \left( \frac{\Gamma}{2} \right)^2} \\
-\Gamma &= \mbox{total line width, the energy width that an excited CN can form about $E^*$;} \\
-\Gamma_{\gamma} &= \mbox{radiative line width, characterizing the probability that the CN will decay with gamma emission;} \\
-\Gamma_n &= \mbox{neutron line width} \propto E^{1/2} \propto v \\
-\sigma_0 &= \mbox{total cross section} = \pi \lambda^2 g \\
-g &= \mbox{statistical spin factor} = \frac{2J + 1}{(2 I_a + 1) (2 I_x + 1)}
-\end{align}
+  \textbf{Breit-Wigner Single-level Resonance Formula} is used to describe quantitatively the resonance cross-sections, where resonances (or excited state energy levels) are spaced widely apart: 
+  \begin{align}
+    \sigma_{n, \gamma} (T_i) &= \sigma_0 \frac{\Gamma_n \Gamma_{\gamma}}{(T_i - T_i^*)^2 + \left( \frac{\Gamma}{2} \right)^2} \\
+    \Gamma &= \mbox{total line width, the energy width that an excited CN can form about $E^*$;} \\
+    \Gamma_{\gamma} &= \mbox{radiative line width, characterizing the probability that the CN will decay with gamma emission;} \\
+    \Gamma_n &= \mbox{neutron line width} \propto E^{1/2} \propto v \\
+    \sigma_0 &= \mbox{total cross section} = \pi \lambda^2 g \\
+    g &= \mbox{statistical spin factor} = \frac{2J + 1}{(2 I_a + 1) (2 I_x + 1)}
+  \end{align}
+\end{enumerate}
 
 
+\subtopic{Revisit with SY5}
+\begin{enumerate}
+\item Absorption cross section can be written as, 
+  \eqn{ \sigma (n,\gamma) = \pi \lambda^2 g_J \frac{\Gamma_n \Gamma_{\gamma}}{(T_i - T_i^*)^2 + \frac{\Gamma^2}{4} } }
+Absorption behaves like $1/v$ at low wnergy; it has a peak at some $T^*$ with a width. See Fig.~\ref{2167}. 
+  \begin{figure}
+    \centering
+    \includegraphics[width=3in]{images/ni/21.6.png}
+    \includegraphics[width=3in]{images/ni/21.7.png}
+    \caption{Absorption xs Is 1/v Before Resonances}  \label{2167}
+  \end{figure}
+
+\item Elastic scattering\footnote{SY5 Eq.21.15, Fig.21.8/9}:
+\eqn{ \gamma(n,n) = 4 \pi a^2 + \pi \lambda^2 g_J \frac{\Gamma_n^2}{(T_i - T_i^*)^2 + \frac{\Gamma^2}{4} } + 4 \pi \lambda g_J a \Gamma_n \frac{T_i - T_i^*}{(T_i - T_i^*)^2 + \frac{\Gamma^2}{4} } }
+ There are three terms: potential ($4\pi a^2$), resonance, and the interference between the two. The interference is responsible for the destructive behavior (decreasing in value) right before a resonance, which differs from absorption's resonances which is just $1/v$ instead of a destructive behavior. See Fig.~\ref{2189}. 
+    \begin{figure}
+    \centering
+    \includegraphics[width=4in]{images/ni/21.8.png}
+    \includegraphics[width=4in]{images/ni/21.9.png}
+    \caption{Scattering xs Is Destructive Before Resonances}  \label{2189}
+  \end{figure}
+
+\item Fission: see SY10. 
 \end{enumerate}
 
 
