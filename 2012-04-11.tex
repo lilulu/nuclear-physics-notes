@@ -10,7 +10,7 @@ For fuel assembly depletion, the reactivity of fuel changes dramatically with bu
 \topic{Actinide Chain Construction}
 Normally we would model around 400 actinides; for this class, we only discuss 22 of them, which occupies the high-end of actinides (with large N, large Z). 
 
-What happens doing actinide chain construction? 
+What happens during actinide chain construction? 
 \begin{enumerate}
 \item Fission product absorptions reduce reactivitiy of the fuel significantly, often 10-20\%;
 \item \ce{^{235}U} depletion significantly ...
@@ -18,12 +18,15 @@ What happens doing actinide chain construction?
 \item Fission cross section: isotopes have threshold energies, producing step-shape near higher energies (around 10 MeV)\footnote{Both even and odd isotopes have threshold energies, but odd isotopes have higher resonance fission cross section, hence even isotopes' threshold energy behavior is more pronoud.}. Remember Pu is very fissile material. Am242 is a funny one -- although it's an even isotope, its fission cross section is large. 
 
 \item Simple actinide nuclide transmutation model. In Figure, the red arrors designate the actinide chains we model (chains end at isotopes that decay quickly compared with the phenomena we are trying to model); blue arrors designate beta decay. 
+
+\item The higher you go up the chain (e.g., into the MA region), the worse the absorption would be. 
+
+\item Branching ratio is a function of energy. Example: \ce{^{241}Am} can produce \ce{^{242}Am} with a half-life of 16 hrs, and the meta-stable \ce{^{242m}Am} with a half-life of 141 years. \ce{^{242}Am}'s thermal branching ratio is about 10\% that of \ce{^{242m}Am}. 
 \end{enumerate}
 
 
-
 \clearpage
-\topic{Chain Solutions}
+\topic{Actinide Chain Solutions}
 Recall our nuclide balance equation. For this model, we do not have the `direct production by fission' term anymore.  No fission yield term. 
 
 Compare fission product matrix form vs. actinides matrix formin Fig.~\ref{fp-an-matrix-form} : 
@@ -59,8 +62,7 @@ There are 4 blocks for the 4 species as in Fig.~\ref{actinide-block}.
 \item We don't have above the diagonal term because we ignore the $n2n$ reaction and the $n \alpha$ reaction. The reason we ignore them is that having a sub-diagonal matrix we can invert analytically; whereas having a full matrix is a lot harder to invert. Another simplification we made is to ignore all meta-stable states and only have the ground states, hence ignoring branching. 
 \end{itemize}
 
-\clearpage
-\topic{Understanding Results}
+\textbf{Understanding the solutions we obtained}:
 \begin{enumerate}
 \item U238 barely changes; there are a lot of it, and it probably decreases by 1\%; often time the nuclear concentration is plotted with respect to initial heavy metal inventory, that is, U238 concentration. 
 \item U234, U235 does not have production, hence it decreases. 
@@ -95,27 +97,18 @@ About 40-50\% of power would be produced from Pu instead of U by the time we shu
 \clearpage
 \topic{Numerous Subtle Effects}
 \begin{enumerate}
-\item Where do reaction rates come from? 
-  \begin{itemize}
-  \item ORIGEN uses point depletion, 
-  \item Fuel pin radial shape: the outter region almost have 2 times the flux compared with the inner ones. 
-  \end{itemize}
-\item Benchmark: 
-  \begin{itemize}
-  \item data set is the single most important things in determine the accuracy of your codes.
-  \item U235 has a pretty large error, but we don't care because there is so little of it;
-  \item Accuracy tends to decrease the further up the decay chains. 
-  \item Measurements also have an intrinsic uncertainty; do not rely on single measurement campaigns; systematic errors in measurements are common. 
-  \item In performing `actinide burner' analysis, when we place the actinide at the end of one analysis into another one, the error builds up. 
-  \end{itemize}
- \item We didn't really cover the Thorium/U233 Chain. 
+ \item We didn't really cover the Thorium/U233 Chain in Kord's class. 
    \begin{itemize}
    \item The chain for Th is very complicated; there are n2n reactions at all different levels; there are multiple ways to get U232; 
    \item some of these isotopes have very rapid alpha decays; 
    \item Pa233 has 27 day half-life; 
    \item U232 has 70 year half-life; U232's daughter product Ta208 has 2.6 MeV gamma (which is the hardest gamma known). 
    \end{itemize}
+   Coverage of Th/U233 comparison from Ben's class (11/29). [FIXME]
+
+
 \item Burnable Poisons History Effect: hardern the spectrum, because it pushes some water away, BP history effect: you place BP in it at the beginning of the reactor, we take it out later hence to achieve flat power through time. The BP effect is about 250 pcm. 
+
 \item Fuel Temperature Depletion History Effects: 
 Initially, the instantenous temperature effect is almost independent of depletion; as the burnup increases, something happens. The moral of the story is, we not only need to know the burnup but also the temperature. 
 
@@ -126,10 +119,51 @@ Initially, the instantenous temperature effect is almost independent of depletio
   \item Hold-down is the difference between the reactivity at the beginning of life-cycle. 
   \item Gad resdual: there is a little bit loss of reactivity due to Gad. Gad depletes from outside to inside. 
   \end{itemize}
+
+
+\item Where do reaction rates come from? 
+  \begin{itemize}
+  \item ORIGEN uses point depletion, 
+  \item Fuel pin radial shape: the outter region almost have 2 times the flux compared with the inner ones. 
+  \end{itemize}
+
+\item Benchmark: 
+  \begin{itemize}
+  \item data set is the single most important things in determine the accuracy of your codes.
+  \item U235 has a pretty large error, but we don't care because there is so little of it;
+  \item Accuracy tends to decrease the further up the decay chains. 
+  \item Measurements also have an intrinsic uncertainty; do not rely on single measurement campaigns; systematic errors in measurements are common. 
+  \item In performing `actinide burner' analysis, when we place the actinide at the end of one analysis into another one, the error builds up. 
+  \end{itemize}
 \end{enumerate} 
 
-What we cover today will not be covered. 
 
+
+\clearpage
+\topic{Spent Fuel and Recycling}
+[FIXME] 11/29/12. 
+
+\begin{enumerate}
+
+\item Pu enrichment is higher than U enrichment for two reasons: a) only 60\% Pu is fissile \ce{^{239}Pu}, the rest of them are parisitic; b) Pu has a higher absorption rates. 
+
+\item The majority of the spent fuel is U238 which is not real waste; the U and Pu in the spent fuel is sent back to the core. The real waste is limited to MA and is vitrified in a borosilicate glass form. 
+
+\item Multi-recycling: we cannot recycle too many times. Reason: after 1st cycle the fissile content is 64.8\%, after 2nd cycle fissile is only 51.1\% and requires a higher Pu enrichment; and if Pu enrichment is pass xxx, then the void coefficient would become positive. 
+
+\item DUPIC cycle (used in CANDU): it is an entirely mechanical process during which we grind up everything, the gas comes out, and re-construct the grinds into fuel which contains about 0.8\% U235 and 0.8\% Pu239, which is about twice the excess reactivity of natural uranium and is more than enough for a CANDU.
+
+\item Fast reactor transmutation: at high energy, all MA are fissible (also high absorption cross section which is why we don't expect to get energy from MA), so we can transmutate MA.  
+
+
+\item Th cycle advantages: 
+\begin{enumerate}
+\item Abundancy is 4x that of U. 
+\item Less waste:  we start further bottom left from the chain, and Th cycle would generate less MA waste. 
+
+\end{enumerate}
+Companies that considers Th cycle: Thorium Power Inc which is a subsidiary of Lightbridge Corp. 
+\end{enumerate}
 
 
 \end{document}
