@@ -141,8 +141,7 @@ Initially, the instantenous temperature effect is almost independent of depletio
 
 \clearpage
 \topic{Spent Fuel and Recycling}
-FIXME: 11/29/12. 
-
+This lecture was given by Prof. Forget on 11/29/12. 
 \begin{enumerate}
 
 \item Pu enrichment is higher than U enrichment for two reasons: a) only 60\% Pu is fissile \ce{^{239}Pu}, the rest of them are parisitic; b) Pu has a higher absorption rates. 
@@ -164,6 +163,104 @@ FIXME: 11/29/12.
 \end{enumerate}
 Companies that considers Th cycle: Thorium Power Inc which is a subsidiary of Lightbridge Corp. 
 \end{enumerate}
+
+\clearpage
+\topic{Relate Neutronics and TH}
+This lecture was given by Prof. Forget on 12/04/12. 
+\begin{enumerate}
+\item FP deposit energy locally, and fuel expands due to temperature changes. Because the temperature increase on the inside is larger than the outside, pellets are fabricated with a slightly shorter height on the inside as in Fig.~\ref{fuel_pellets}
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=4in]{images/dfs/fuel_pellets.png}
+  \caption{Fuel Pellets Shapes} \label{fuel_pellets}
+\end{figure}
+
+
+\item \ce{UO_2} is used in LWRs regardless of its low heat transfer property because it does not interact with water violently. \ce{UO_2} has a relatively low thermal expand, so the gap between the fuel and the clad can be relatively small. 
+
+\item Fast reactors use metallic fuel because a) better heat transfer, b) coolant is not water so no worry for chemical reaction, c) metallic fuel thermal expansion is large, which replaces Doppler effect(recall Doppler is due to U238 -- ). Also because metallic fuel expands more, we build fuel pellets with more porosity to limit the amount of volume expansion. 
+
+\item Grid straps: egg crates to place pins in them. Pin starts vibrating and may cause fuel failure. 
+
+\item To flattern power peaking: 
+  \begin{enumerate}
+  \item Core loading. 
+  \item Poisons: WABA, IFBA \ce{Zr B_2}, Gd and other Lanthanum. 
+  \item Control rod sequence. 
+  \item Reflector. 
+  \item Core enrichment. 
+  \item Flow orificing: change flow pattern at different assemblies. It is not done in LWRs that often, more common in SFRs to control temperature and flux spectrum. 
+  \end{enumerate}
+
+\item Thermal transients in fuel: 
+  \eqn{ M_F C_{p,f} \frac{\dT_f}{\dt} = P(t) - \frac{1}{R_f} (T_f(t) - T_c(t)) }
+  where $R_f$ captures all the thermal resistance. Assume steady state, then 
+  \eqn{ P(t) =  \frac{1}{R_f} (T_f(t) - T_c(t)) }
+  If we assume a fast transient with no cooling ($R_f \to \infty$), then we get adiabatic heat rate:
+  \eqn{ M_f C_{p,f} \frac{\dT_f}{\dt} = P(t) }
+
+
+\item Thermal transients in coolant: 
+  \eqn{ M_C C_{p_C} \frac{\dT_c}{\dt} = \frac{1}{R_f} (T_f(t) - T_c(t)) - 2 \dot{m}_c C_{p_c} (T_c(t) - T_i) }
+  where $\dot{m}$= mass flow of coolant, and the factor of $2$ is there because the $T_c(t)$ in the equation is assumed to be the average. 
+  \begin{itemize}
+    \item Steady state: $\displaystyle 2 \dot{m} C_{P_c} (T_c - T_i) = \frac{1}{R_f} (T_f - T_c) = P$. That is, reactor power is determined from flow and temperature measurements. 
+  \end{itemize}
+
+
+\item We can relate the above two equations with the PKE using $P(t)$. That is, how do we relate temperature change to reactivity change. 
+  \begin{enumerate}
+    \item Set-up: consider $\displaystyle \rho = \frac{k-1}{k}, \drho = \frac{\dk}{k^2}$. If we assume $k \approx 1$, then $\displaystyle \drho =  \frac{\dk}{k} = \derivative(\ln k)$. There is benefit in writing $k$ in log form as now we can separate multiplication into additions. 
+
+  \item Consider $\keff = \kinf P_{NL}$, where $P_{NL} = \frac{1}{L^2 B_g^2}$, we can write, 
+    \eqn{ \derivative (\ln k) = \derivative(\ln \kinf) + \derivative(\ln P_{NL}) = \frac{\dk_{\infty}}{\kinf} + \frac{\dP_{NL}}{P_{NL}} }
+    We can do: 
+    \eqn{\frac{\dP_{NL}}{P_{NL}} = - \frac{L^2 B_g^2}{1 +L^2 B_g^2} \left( \frac{\derivative L^2}{L^2} + \frac{\derivative B_g^2}{B_g^2} \right) }
+
+  \item Recall 
+    \eqn{ \kinf = 
+\overbrace{\left( 1 + \frac{\nu \Sigma_{f1}}{\nu \Sigma_{f2}}  \frac{\Sigma_{a2} + D_2 B_g^2}{\Sigma_{12}} \right)}^{\epsilon} 
+\overbrace{\frac{\Sigma_{s12}}{\Sigma_{R1}}  }^{\rho} 
+\overbrace{\frac{\nu \Sigma_{f2}^F}{\Sigma_{a2}^F} }^{\eta} 
+\overbrace{\frac{\Sigma_{a2}^F}{\Sigma_{a2}}}^{f} }
+
+    \item If we characterize the temperature effect as $\kinf = f(T_m, T_f, T_m)$. For PWR $T_m = T_c$, 
+      \eqn{ \drho = \frac{\dk_{\infty}}{\kinf} = \frac{1}{\kinf} \frac{\derivative \kinf}{\dT_f} + \frac{1}{\kinf} \frac{\derivative \kinf}{\dT_c} }
+      If we define reactor coefficient, 
+      \eqn{ \alpha_x = \frac{1}{\kinf} \frac{\dk_{\infty}}{\dT_x} = \frac{1}{\epsilon} \frac{\derivative \epsilon}{\dT_x} + \frac{1}{\rho} \frac{\drho}{\dT_x} +  \frac{1}{f} \frac{\derivative f}{\dT_x} +  \frac{1}{\eta} \frac{\derivative \eta}{\dT_x} }
+
+
+    \item Fuel temperature feedback: Doppler (Doppler broadening of resonances capture of \ce{^{238}U}, 
+      \begin{itemize}
+      \item Impact $\rho$ (resonance escape probability): 
+      \eqn{ \rho &= \frac{\Sigma_{s12}}{\Sigma_{R1}} & T_f &\up, \Sigma_{R1} \up, \rho \down} 
+    \item Impact $\epsilon$ is negliable above resonance region. 
+    \item Impact $\eta = \frac{\nu \Sigma_f^F}{\Sigma_{a2}^F}$ is very small because fission and absorption cross section scales with temperature approximately the same. 
+    \item Impact on $f= \frac{\Sigma_{a2}^F}{\Sigma_{a2}}$ is very small because absorption cross section scales with temperature approximately the same in fuel and outside the fuel.
+    \item PWR has a $\alpha_f = -0.01$ to $-0.03$ mk/degreeC. SFR is about the same. 
+      \end{itemize}
+      
+    \item Moderator temperature. Consider $T_m = T_c$ for PWR, 
+      \eqn{ \alpha_m = \frac{1}{\kinf} \frac{\dk_m}{\dT_m}  \approx \frac{1}{\kinf} \frac{\dk_{\infty}}{\dN_m} \frac{\dN_m}{\dT_m} }
+      There is no resonance effect; temperature effect is felt through density change. 
+      \begin{itemize}
+      \item We define expansion coefficient (volume changes at constant pressure) 
+        \eqn{ \beta_m &= - \frac{1}{N_m} \frac{\dN_m}{dT_m} & \alpha_m = - \beta_m N_m \frac{1}{\kinf} \frac{\dk_{\infty}}{\dN_m}  }
+
+      \item The expansion coefficient of sodium and salt is very large; it will change density, cross section, and push some coolant outside thus changing the moderator-to-fuel ratio. 
+
+      \item For our case, two terms depend on the fuel and do not change much: $\epsilon, \eta$. Most of the effect is felt by resonance escape probability $p$ and thermalization factor $f$. 
+
+      \item In $p$, $\Sigma_{s12} = N_m \sigma_{H, s12}$ changes as water density changes. The cross sections are considered flat. 
+
+      \item In $f$, $\displaystyle f = \frac{\Sigma_{a2,F}}{\Sigma_{a2}} = \frac{\Sigma_{a2, F}}{\Sigma_{a2,F} + \Sigma_{a2, M} + \Sigma_{a2, CC} + \Sigma_{a_2, SB}} $, where $\Sigma_{a2,M}$ does not change much because moderator's absorption cross section is relative small compare with control rods and soluble boron's absorption cross sections. As $T_c \up$, water density decreases, $N_{SB} \down, f \up$. The effect of control rod is more subtle -- as $T_c \up$, water density decreases, water moderates less, spectrum hardens, then the dominating cross section becomes smaller (recall 1/v behavior in absorption cross section in thermal energy range). \textcolor{blue}{This is a good way to consider spetral effect: think about how the flux peak shifts, and think what the cross section is like at that peak.}
+        
+      \item Summary: as $T_c \up, p \down, f \up$. 
+      \end{itemize}
+
+  \end{enumerate}
+\end{enumerate}
+
 
 
 \end{document}
