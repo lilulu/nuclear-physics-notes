@@ -141,7 +141,7 @@ Initially, the instantenous temperature effect is almost independent of depletio
 
 \clearpage
 \topic{Spent Fuel and Recycling}
-This lecture was given by Prof. Forget on 11/29/12. 
+This section was covered by Prof. Forget on 11/29/12. 
 \begin{enumerate}
 
 \item Pu enrichment is higher than U enrichment for two reasons: a) only 60\% Pu is fissile \ce{^{239}Pu}, the rest of them are parisitic; b) Pu has a higher absorption rates. 
@@ -166,7 +166,7 @@ Companies that considers Th cycle: Thorium Power Inc which is a subsidiary of Li
 
 \clearpage
 \topic{Relate Neutronics and TH}
-This lecture was given by Prof. Forget on 12/04/12. 
+This section was given by Prof. Forget on 12/04/12 and 12/06/12. 
 \begin{enumerate}
 \item FP deposit energy locally, and fuel expands due to temperature changes. Because the temperature increase on the inside is larger than the outside, pellets are fabricated with a slightly shorter height on the inside as in Fig.~\ref{fuel_pellets}
 \begin{figure}[ht]
@@ -228,9 +228,9 @@ This lecture was given by Prof. Forget on 12/04/12.
       \eqn{ \drho = \frac{\dk_{\infty}}{\kinf} = \frac{1}{\kinf} \frac{\derivative \kinf}{\dT_f} + \frac{1}{\kinf} \frac{\derivative \kinf}{\dT_c} }
       If we define reactor coefficient, 
       \eqn{ \alpha_x = \frac{1}{\kinf} \frac{\dk_{\infty}}{\dT_x} = \frac{1}{\epsilon} \frac{\derivative \epsilon}{\dT_x} + \frac{1}{\rho} \frac{\drho}{\dT_x} +  \frac{1}{f} \frac{\derivative f}{\dT_x} +  \frac{1}{\eta} \frac{\derivative \eta}{\dT_x} }
+  \end{enumerate}
 
-
-    \item Fuel temperature feedback: Doppler (Doppler broadening of resonances capture of \ce{^{238}U}, 
+\item Fuel temperature feedback: Doppler (Doppler broadening of resonances capture of \ce{^{238}U}, 
       \begin{itemize}
       \item Impact $\rho$ (resonance escape probability): 
       \eqn{ \rho &= \frac{\Sigma_{s12}}{\Sigma_{R1}} & T_f &\up, \Sigma_{R1} \up, \rho \down} 
@@ -249,16 +249,55 @@ This lecture was given by Prof. Forget on 12/04/12.
 
       \item The expansion coefficient of sodium and salt is very large; it will change density, cross section, and push some coolant outside thus changing the moderator-to-fuel ratio. 
 
-      \item For our case, two terms depend on the fuel and do not change much: $\epsilon, \eta$. Most of the effect is felt by resonance escape probability $p$ and thermalization factor $f$. 
+      \item For our case, two terms depend on the fuel and do not change much: $\epsilon, \eta$. $\epsilon$ would go up a little bit, as $\Sigma_{s12} = N_m \sigma_{s12} \up$ as $N_m \up$. Most of the effect is felt by resonance escape probability $p$ and thermalization factor $f$. 
 
-      \item In $p$, $\Sigma_{s12} = N_m \sigma_{H, s12}$ changes as water density changes. The cross sections are considered flat. 
+      \item In the resonance escape probability $p$, $\displaystyle p = \frac{\Sigma_{s12}}{\Sigma_{R1}} = \frac{N_m \sigma_{H, s12}}{\Sigma_{R1}} \down$ as $N_m \down$. The cross sections are considered flat, and in the $\Sigma_{R1} = \Sigma_a + \Sigma_{s12}$ in which $\Sigma_a$ dominates. The real formulation should be,
+\eqn{ p = \frac{N_m \sigma_{s12,m} + \overbrace{N_F \sigma_{s12,F}}^{\to 0}}{\overbrace{\Sigma_{R,m}}^{\to \Sigma_{s12}} + \Sigma_{R1, F}} } 
+\hi{This is the largest effect that density change would produce.} 
 
-      \item In $f$, $\displaystyle f = \frac{\Sigma_{a2,F}}{\Sigma_{a2}} = \frac{\Sigma_{a2, F}}{\Sigma_{a2,F} + \Sigma_{a2, M} + \Sigma_{a2, CC} + \Sigma_{a_2, SB}} $, where $\Sigma_{a2,M}$ does not change much because moderator's absorption cross section is relative small compare with control rods and soluble boron's absorption cross sections. As $T_c \up$, water density decreases, $N_{SB} \down, f \up$. The effect of control rod is more subtle -- as $T_c \up$, water density decreases, water moderates less, spectrum hardens, then the dominating cross section becomes smaller (recall 1/v behavior in absorption cross section in thermal energy range). \textcolor{blue}{This is a good way to consider spetral effect: think about how the flux peak shifts, and think what the cross section is like at that peak.}
+      \item In the thermalization factor $f$, $\displaystyle f = \frac{\Sigma_{a2,F}}{\Sigma_{a2}} = \frac{\Sigma_{a2, F}}{\Sigma_{a2,F} + \Sigma_{a2, M} + \Sigma_{a2, CC} + \Sigma_{a_2, SB}} $: 
+        \begin{itemize}
+        \item $\Sigma_{a2,M}$ does not change much because moderator's absorption cross section is relative small compare with control rods and soluble boron's absorption cross sections. 
+        \item As $T_c \up$, water density decreases, $N_{SB} \down, f \up$. 
+        \item The effect of control rod is more subtle -- as $T_c \up$, water density decreases, water moderates less, spectrum hardens, then the dominating cross section becomes smaller (recall 1/v behavior in absorption cross section in thermal energy range), or say . \textcolor{blue}{This is a good way to consider spetral effect: think about how the flux peak shifts, and think what the cross section is like at that peak.}
+        \end{itemize}
         
-      \item Summary: as $T_c \up, p \down, f \up$. 
+      \item Summary: as $T_c \up, p \down, f \up$. When we design a reactor, we have to balance $p$ with $f$ because an optimal moderation exists. We want to stay under-moderated. 
       \end{itemize}
 
-  \end{enumerate}
+\item Fast reactor considerations: we pack fuels more tightly, $\alpha_m > 0, \alpha_f < 0$, we use leakage to control reactivity: 
+\eqn{ \frac{\derivative P_{NL}}{P_{NL}} = - \frac{L^2 B_g^2}{ 1 + L^2 B_g^2} \left( \frac{\dL^2}{L^2} + \frac{\derivative B_g^2}{B_g^2} \right) }
+\begin{itemize}
+\item Core flowering: fuel expands at different rate, and it would expand more on the top, creating a negative coefficient. 
+
+\item As temperature $\up$, number of neutrons generated per fission event $\up$ producing a positive feedback $\eta \up$. This is another positive temperature coefficient that LWRs do not have to worry about. 
+\end{itemize}
+
+
+\item Power coefficient: at the end of the day, we really care about the power coefficient that combines fuel temperature effect and moderator temperature coefficient. We want the power coefficient to be negative. 
+  \eqn{ \alpha_P = \frac{\drho}{\dP} = \frac{1}{k} \frac{\pk}{\drho} = \frac{1}{k} \frac{\dk}{\dT_f} \frac{\dT_f}{\dP} + \frac{1}{k} \frac{\dk}{\dT_c} \frac{\dT_c}{\dP} }
+The one reactor built that has a positive power coefficient unexpected (designed to be -0.12mk/MW, measured at 0.28 mk/MW had to be shutdown) is the MAPLEs medical reactor built around 2000. 
+Fuel expands by less than 1mm but because it is a small reactor it pushes the power coefficient to be positive. 
+
+Key points:
+\begin{enumerate}
+\item Temperature defect: when we start up the reactor from CZP to HZP, we experience a negative reactivity due to resonances absorption increase: 
+  \eqn{ D_T = \int_{T_{\mathrm{room}}}^{T_i} (\alpha_m + \alpha_f) \dT } 
+
+\item Power defect: when we go from HZP to HFP, 
+  \eqn{ D_P = \int_{T_i}^{T_f} \alpha_f \dT_f + \int_{T_i}^{T_c} \alpha_c \dT_c }
+  where $T_c - T_i$ is fairly small ($\sim 20\degreeC$), whereas the power defect is dominated by the fuel materials. 
+
+\item One way we can use power defect: if for some reason we need to stretch out the cycle length for some, we can do coast-down by lowering the power, and by power defect, the reactivity would increase, thus we can operator for a longer period of time before reaching subcritical. 
+
+\item Excess rectivity: value of $\rho$ if all movable rods and poisons are removed from the core. We need excess reactivity to compensate for the temperature defect, power detect and shutdown margin. 
+\end{enumerate}
+
+\item Reactor transients: if we assume initially critical core, $\alpha_m, \alpha_f < 0$. With a reactority insection $\rho(t)$, we can write 
+\eqn{ \rho(t) = \rho_i(t) - |\alpha_f| (T_f(t) - T_f(0)) - |\alpha_m| (T_c(t) - T_c(0) ) }
+
+
+
 \end{enumerate}
 
 
