@@ -1,5 +1,5 @@
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
-\LoadClass{school-base}
+\LoadClassWithOptions{school-base}
 \ProvidesClass{school-22.312}
 
 \usepackage{school-style-class}

@@ -1,5 +1,5 @@
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
-\LoadClass{school-research}
+\LoadClassWithOptions{school-research}
 \ProvidesClass{school-research-notes}
 
 \usepackage{school-style-researchnotes}
