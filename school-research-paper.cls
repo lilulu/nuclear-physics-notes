@@ -1,6 +1,3 @@
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
-\LoadClass{school-research}
+\LoadClass[twocolumn]{school-research}
 \ProvidesClass{school-research-paper}
-
-\usepackage{school-style-researchpaper}
-

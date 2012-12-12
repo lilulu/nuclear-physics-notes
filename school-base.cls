@@ -3,7 +3,7 @@
 % such it probably shouldn't be modified particularly often.
 %
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
-\LoadClass[twoside]{article}
+\LoadClassWithOptions{article}
 \ProvidesClass{school-base}
 \usepackage{school-style-packages}
 
