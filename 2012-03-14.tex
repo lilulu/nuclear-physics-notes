@@ -141,12 +141,11 @@ The only reason we brought up the transport theory is that we need to set the bo
 \clearpage
 \topic{P1 Approximation, Net Current Equation}
 Start from the continuity equation, we can expand the scalar flux using Legendre polynomials: 
-\eqn{ \psi(\vecr, E, \vecOmega) = \Sum_{l=0}^L \frac{2l+1}{4 \pi} \phi_l (\vecr, E) P_l (\vecOmega) }
-where $\displaystyle \phi_0 = \mbox{scalar flux} = \int \dOmega \phi(\vecr, E, \vecOmega), \phi_2 = J(\vecr, E) = \int \dOmega \phi(\vecr, E, \vecOmega)$. 
-
+\eqn{ \psi(\vecr, E, \vecOmega) = \Sum_{l=0}^L \frac{2l+1}{4 \pi} \psi_l (\vecr, E) P_l (\vecOmega) }
+where $\displaystyle \psi_{l=0} = \mbox{scalar flux } \phi = \int \dOmega \phi(\vecr, E, \vecOmega), \psi_{l=1} = J(\vecr, E) = \int \dOmega \vecOmega \phi(\vecr, E, \vecOmega)$. 
 
 The $P_1$ angular expansion would be, 
-\eqn{ \psi(\vecr, E, \vecOmega) \approx \frac{1}{4 \pi} \left[ \phi(\vecr, E) + 3 \vecOmega \cdot J(\vecr, E) \right] }
+\eqn{ \psi(\vecr, E, \vecOmega) \approx \frac{1}{4 \pi} \left[ \phi(\vecr, E) + 3 \vecOmega \cdot \vecJ(\vecr, E) \right] }
 
 \begin{enumerate}
 \item We start from transport equation again, multiple by $\Omega$ and integrate over all angles: 
@@ -178,7 +177,7 @@ We can simplify the angular integral terms:
 
 
 
-\item We obtain the net current equation:
+\item We obtain the net current equation (source includes fission):
 \eqn{\boxed{ \frac{1}{3} \gradient \phi(\vecr, E) + \Sigma_t (\vecr, E) \vecJ(\vecr, E) = \Sum_i \int_{E'} \dE' \Sigma_{s1}^i (\vecr, E'\to E) \vecJ(\vecr, E') + \vec{S}_1(\vecr, E) } }
 \end{enumerate}
 
