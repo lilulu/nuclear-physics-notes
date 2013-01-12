@@ -15,20 +15,42 @@
 \item In an elastic scattering
   \eqn{ \alpha = \frac{E_{\mathrm{min}}}{E_0} = \left( \frac{A-1}{A+1} \right)^2 < 1 }
 
-\item Mean log energy decrement:
+\item Mean log energy decrement. Know maximum $\xi$ is $1$ for hydrogen. $A \up, \xi \down$. 
   \eqn{ \xi = 1 + \frac{\alpha \ln \alpha}{1-\alpha} }
-  The maximum $\xi$ is $1$ for hydrogen. $A \up, \xi \down$. 
 
-\item Number of collisions to slow neutrons from $E_i \to E_f$: 
-  \eqn{ n = \frac{ \ln (E_i/E_f)}{\xi} }
+\item Number of collisions to slow neutrons from $E_i \to E_f$: $\displaystyle n = \frac{ \ln (E_i/E_f)}{\xi}$. 
 
-\item Moderating power = $\xi \sigma_s$, a measurement of the slowing down ability. 
+\item Moderating power = $\frac{\xi \sigma_s}{\sigma_a}$, a measurement of the slowing down ability. 
+
+\item Flux disadvantage factor (HW4) $\displaystyle = \frac{\phi^M}{\phi^F}$, and thermal group has $>1$, fast group has $<1$. 
+
+\item Spectrum summary:
+  \begin{enumerate}
+  \item $E < 1$ eV (thermal range): a hardened Maxwellian distribution (hardened because the temperature equilibrium has not been perfectly achieved) plus a 1/E correction at higher energies, $\phi(E) = \phi_M (E, T_n) + \frac{ \lambda \Delta (E/kT_n) }{E}$. 
+
+  \item $1 \eV < E < 50$ keV (slowing-down domain): $\phi(E) \sim \frac{1}{\xi(E) \Sigma_t(E) E}$. 
+
+  \item $E > 0.5$ MeV: $\phi(E) = \frac{\chi(E)}{\Sigma_t(E)}$.
+  \end{enumerate}
+
+\item Spectrum peaks:   
+  \begin{enumerate}
+  \item A hump in high energy. Reason: fission spectrum, degraded due to scattering; 
+  \item A slight decrease in the epithermal region. Reason: resonant capture losses, esp. U238; 
+  \item A hump in low energy. Reason: Maxwell distribution of the thermal agitation but a little harder because the temperature equilibrium has not been perfectly achieved. 
+  \end{enumerate}
 \end{enumerate}
 
 
 \clearpage
 \topic{Elastic Scattering Cross Section} 
 \begin{enumerate}
+\item Elastic Scattering
+  \begin{enumerate}
+  \item Asymptotic elastic scattering for high energy (above 4eV): assume isotropic scattering in COM. Generate $1/E$ spectrum; asymptotic flux value is $\Phi_{as} (u) = \frac{S}{\xi \Sigma_s (u)}$ according to Reuss (7.2.3). 
+  \item Thermal elastic scattering (below 4eV): use elastic scattering for monatomic (Maxwellian) free gas; may up-scatter. 
+  \end{enumerate}
+
 \item Lab system: $\theta$ is uniformly distributed, front favored. 
   \eqn{ \frac{E_f}{E_i} = \frac{1}{2} \left[ 1 + \alpha + (1-\alpha) \cos \theta \right] } 
 
@@ -113,7 +135,7 @@ Answer: $1/v$ shape, thermal motion/vibration.
 \end{enumerate}
 
 \clearpage
-\topic{Resonances} 
+\topic{Resonances and Doppler} 
 \begin{enumerate}
 \item SLBW Model for cross sections: the SLBW scattering cross section is, 
   \eqn{ \sigma_s (x) &= \frac{2}{\Gamma} (r \psi(x) + q \chi(x)) + \sigma_p}
@@ -139,29 +161,28 @@ Answer: $1/v$ shape, thermal motion/vibration.
 
 \textbf{Spring 2012 Exam 1 \#16:} What is the value of the 300K infinite dilute RI for absorbium integrated from 0 to 20 keV? (we calculated in the previous problem the RI for 0K.)
 
-Answer: the infinite dilute RI is independent of temperature because in Doppler broadening the area under the resonance is constant. 
+Answer: \hi{the infinite dilute RI is independent of temperature because in Doppler broadening the area under the resonance is constant.}
   \end{enumerate}
 \end{enumerate}
 
 \clearpage
-\topic{Homogeneous resonance self-sheilding}
+\topic{Homogeneous Resonance Self-sheilding}
   \begin{enumerate}
     \item Infinite media: In infinite medium, the flux shape near resonance depends only on the ratio of the number density of the moderator to the resonance absorber and the moderator cross section. The absolute numbers are not needed until we move into a finite medium and start to worry about leakage. 
 
     \item Know how to calculate group cross sections. \textbf{2012 Spring Exam 1, \#14}: what is the value of the Absorbium infinite dilute microscopic absorption cross section (in barns) integrated from 100 eV to 20 keV? Answer: 
-      \eqn{ \expect{\sigma} &= \frac{\int_{E_1}^{E_2} \sigma(E) \phi(E) \dE}{\int_{E_1}^{E_2} \phi(E) \dE} = \frac{\int_{E_1}^{E_2} \sigma(E) \frac{1}{E} \dE}{\int_{E_1}^{E_2} \frac{1}{E}  \dE} = \frac{RI}{\ln\left(\frac{E_2}{E_1} \right)} }
+      \eqn{ \Aboxed{ \expect{\sigma} &= \frac{\int_{E_1}^{E_2} \sigma(E) \phi(E) \dE}{\int_{E_1}^{E_2} \phi(E) \dE} = \frac{\int_{E_1}^{E_2} \sigma(E) \frac{1}{E} \dE}{\int_{E_1}^{E_2} \frac{1}{E}  \dE} = \frac{RI}{\ln\left(\frac{E_2}{E_1} \right)} } }
       Infinite dilute implies that here is no neutrons being absorbed by the resonances. Recall that in HW2 when our U/H is small, the flux is not perturbed by U238 resonances at all, suggesting that the resonance escape probability is one.
 
-    \item Dilution factors/dilution cross section/background cross section,with $r$ being a scatter,
-      \eqn{ \sigma_d = \frac{N_m \sigma_m}{N_r} }
+    \item Dilution factors/dilution cross section/background cross section, where $r$ is resonance material, $m$ is moderator, $ \displaystyle \boxed{\sigma_d = \frac{N_m \sigma_m}{N_r} }$. 
 
     \item Resonance Integral
       \begin{enumerate}
-      \item Calculation, \textbf{2012 Spring Exam 1, \#13,\#15}
-        \eqn{ \RIeff = - \int_{u1}^{u2} \sigma(u) \du = \int_{E_1}^{E_2} \sigma(E) \frac{1}{E} \dE = \sigma \ln \left( \frac{E_2}{E_1} \right) }
-        where $\sigma$ is the resonance xs, not including potential xs. If there are multiple resonances, add them up. 
+      \item Calculation, \textbf{2012 Spring Exam 1, \#13,\#15}, notice $\sigma$ is given independent of E for simplicity,
+        \eqn{ \boxed{ \RIeff = - \int_{u1}^{u2} \sigma(u) \du = \int_{E_1}^{E_2} \sigma(E) \frac{1}{E} \dE = \sigma \ln \left( \frac{E_2}{E_1} \right) } }
+        where $\sigma$ is the resonance xs, not including potential xs. If there are multiple resonances, sum them up with flux-weighting. 
 
-      %\item RI represents the average absorption xs characterizing the resonance, averaged over the flux within the resonance. It is sort of like the averaged reaction rate, or collision density. 
+      \item RI represents the average absorption xs characterizing the resonance, averaged over the flux within the resonance. It conserves the reaction rate/collision density. 
         
       \item Relating to $\sigma_g, \sigma_d$: 
         \eqn{ \RIeff &= \sigma_g \ln \left(\frac{E_2}{E_1} \right)  & \RIeff^{u1\to u2} &= \int_{u1}^{u2} \sigma_a^R (u) \frac{\sigma_d}{\sigma_a^R(u) + \sigma_d} \du  }
@@ -181,20 +202,18 @@ Answer: the infinite dilute RI is independent of temperature because in Doppler 
     \item Homogeneous/heterogeneous equivalence: 
       \begin{align*}
         \mbox{Homogeneous mixture energy shape of flux } \phi(u) &= \frac{\sigma_{pot, f} + \sigma_d}{\sigma_{r,f} (u) + \sigma_{pot, f} + \sigma_d}   & \sigma_d &= \frac{N_m \sigma_m}{N_r}  \\
-        \mbox{Heterogeneous energy shape of flux in the fuel } \phi_f(u) &= \frac{\sigma_{pot, f} + \sigma_e}{\sigma_{r,f} (u) + \sigma_{pot, f} + \sigma_e}   & \sigma_e &= \frac{S_f}{4 V_f N_r} 
+       \Aboxed{ \mbox{Heterogeneous energy shape of flux in the fuel } \phi_f(u) &= \frac{\sigma_{pot, f} + \sigma_e}{\sigma_{r,f} (u) + \sigma_{pot, f} + \sigma_e}}   & \Aboxed{ \sigma_e &= \frac{S_f}{4 V_f N_r}  }
       \end{align*}
 
     \item Escape probabilities $p$: only depends on effective RI and dilution xs: 
       \eqn{ p \approx \exp \left( - \frac{\RI_{\eff}}{\zeta \sigma_d} \right) = \exp \left( - \frac{N_r \RI_{\eff}}{\zeta \Sigma_m} \right)  }
-      Escape cross section $\sigma_e$: 
-      \eqn{ \sigma_e = \frac{1}{l N_f} = \frac{S}{4V N_f} }
-      \textbf{Spring 2012 Exam 1 \#17:} what is the resonance escape probability for infinitely dilute material 1 in 1 gm/cc material 2? 
-      \begin{itemize}
-        \item Material 1 is infinitely dilute, so we assume the flux is shaped entirely by material 2 and hence is not affected by the resonances. $p = 1$. 
-      \end{itemize}
+      Escape cross section $\sigma_e$:      $ \sigma_e = \frac{1}{l N_f} = \frac{S}{4V N_f}$. 
 
-    \item 2-region reciprocity relation:
-      \eqn{ P_{1\to 2} \Sigma_1 V_1 = P_{2\to 1} \Sigma_2 V_2 }
+      \textbf{Spring 2012 Exam 1 \#17:} what is the resonance escape probability for infinitely dilute material 1 in 1 gm/cc material 2? 
+ 
+      Answer: Material 1 is infinitely dilute, so we assume the flux is shaped entirely by material 2 and hence is not affected by the resonances. $p = 1$. 
+ 
+    \item 2-region reciprocity relation: $\displaystyle \boxed{ P_{1\to 2} \Sigma_1 V_1 = P_{2\to 1} \Sigma_2 V_2}$. 
 
     \item Collision probability: the most basic form is, 
       \eqn{ P_{ff} = \frac{\sigma_{t,f}(u)}{\sigma_e + \sigma_{t,f}(u)} }
@@ -205,7 +224,12 @@ Answer: the infinite dilute RI is independent of temperature because in Doppler 
       \eqn{ P_{f\to f}  = \frac{\sigma_{t,f} (u)}{\frac{(1-C)b}{(1-C) + Cb} \sigma_e + \sigma_{t,f} (u)}  } 
       where escape cross section is calculated for a cylinder to be $\Sigma_e = \frac{1}{2r}$.  Upon getting $P_{ff}$, we find $P_{fm} = 1 - P_{ff}$, then use reciprocity to find $P_{mf}$. See \textbf{Spring 2012 Exam 1: \#20}. 
 
-    \item Dancoff factors: If the moderator is opaque, the Dancoff factor becomes zero; if transparent, the Danoff factor trends to 1.0. See Fig.~\ref{dancoff} for plot. 
+    \item Dancoff factors: ratio of probability of next collision happens in a different rod over probability of next collision in any rod. See Fig.~\ref{dancoff} for plot. 
+      \begin{itemize}
+      \item If the moderator is opaque, the Dancoff factor becomes zero; if transparent, the Danoff factor trends to 1.0. 
+      \item $r \up, C \down$. 
+      \item $P/D \up C \down$. 
+      \end{itemize}
 
     \item Solving for spatially averaged energy shape of flux in the fuel\footnote{not on the official review sheet} from the first collision rate balance equation.  We construct a first collision rate balance equation (next collision for neutrons in fuel from slowing down source and uncollided flux): 
       \eqn{ N_f \sigma_{t,f} \phi_f V_f = Q_f V_f P_{ff} + Q_m V_m P_{mf} }
@@ -223,27 +247,7 @@ Answer: the infinite dilute RI is independent of temperature because in Doppler 
 \clearpage
 \topic{Other Concepts}
 \begin{enumerate}
-\item Four pieces of nuclear physics: 
-  \begin{enumerate}
-    \item Fission Spectra    
-      \begin{enumerate}
-      \item A hump in high energy. Reason: fission spectrum, degraded due to scattering; 
-      \item A slight decrease in the epithermal region. Reason: resonant capture losses, esp. U238; 
-      \item A hump in low energy. Reason: Maxwell distribution of the thermal agitation but a little harder because the temperature equilibrium has not been perfectly achieved. 
-      \end{enumerate}
 
-    \item Elastic Scattering
-      \begin{enumerate}
-      \item Asymptotic elastic scattering for high energy (above 4eV): assume isotropic scattering in COM. Generate $1/E$ spectrum; asymptotic flux value is $\Phi_{as} (u) = \frac{S}{\xi \Sigma_s (u)}$ according to Reuss (7.2.3). 
-      \item Thermal elastic scattering (below 4eV): use elastic scattering for monatomic (Maxwellian) free gas; may up-scatter. 
-      \item  \textbf{Spring 2012 Exam 1 \#11, \#12:} for a neutron asymptotically elastic scattering off hydrogen, the probability density function is flat: 
-        \eqn{ p(E'\to E) = \frac{1}{E'} }
-        Then the probability of the next collision happening within $[E_1,E_2]$ is, 
-        \eqn{ \int_{E_1}^{E_2} \frac{1}{E'} \dE }
-      \end{enumerate}
-      \item SLBWR. see above. 
-      \item Scattering kernel. 
-  \end{enumerate}
 
 
 
@@ -255,23 +259,19 @@ Answer: the infinite dilute RI is independent of temperature because in Doppler 
     \item Simple statistics:  need enough to provide resolution, but not too many that each bin does not get enough particles.
   \end{enumerate}
   
-\item Heterogeneous Self-shielding: see Section~\ref{heterogeneous-geo}.
-
-
 \item Pin-cell code: 
   \begin{enumerate}
-    \item Flux disadvantage factors
-    \item Fine structure effects
-    \item Coefficients: 
+    \item Flux disadvantage factors: $\frac{\psi^M}{\psi^F}$. 
+    \item Fine structure effects. 
+    \item Scattering kernel: for larger than 4eV, asymptotic down scattering. For less than 4eV, thermal scattering, approximaetd by elastic scattering for Monatomic/Maxwellian free gas. 
+    \item Data: 
       \begin{itemize}
         \item Source from fission spectrum: chi, Maxwell spectrum.
         \item $\sigma_s^H$: read in.
         \item $\sigma_a^H$: $1/v$ absorber.
-        \item $\sigma_s^U$: resonance scattering cross section using $\psi, \chi$>
-        \item Scattering kernel: for larger than 4eV, asymptotic down scattering. FOr less than 4eV, thermal scattering, approximaetd by elastic scattering for Monatomic/Maxwellian free gas. 
+        \item $\sigma_s^U$: resonance scattering cross section using $\psi, \chi$. 
       \end{itemize}
   \end{enumerate}
-
 
 \item $1/v$ absorption cross section: 
   \begin{itemize}
@@ -299,10 +299,10 @@ Answer: the infinite dilute RI is independent of temperature because in Doppler 
   \item It arises basically from the kinematics of the scattering interaction (asymptotic elastic scattering, more specifically). However it gets distorted by the energy behavior of the scattering cross sections and by neutron-absorption processes (Henry, p. 90). 
   \item Stacy (p.103) derives from slowing-down equation that, with Hydorgen as the only moderator, and very heavy nuclei with $\alpha_j = \left(\frac{A-1}{A+1} \right)^2$:
     \begin{align}
-      \Sigma_t(E) \Phi(E) &= \int_E^{\infty} \Sigma_s^H \Phi(E')\frac{\dE'}{E} + \Sum_{j\neq H} \int_E^{E/\alpha_j} \frac{\Sigma_s^j (E') \Phi(E')}{E'(1-\alpha_j)} \dE' \\
-      &=  \int_E^{\infty} \Sigma_s^H \Phi(E')\frac{\dE'}{E} + \Sum_{j\neq H} \frac{1}{\alpha_j} \Sigma_s^j (E) \Phi(E) \\
+      \Sigma_t(E) \Phi(E) &= \int_E^{\infty} \Sigma_s^H \Phi(E')\frac{\dE'}{E'} + \Sum_{j\neq H} \int_E^{E/\alpha_j} \frac{\Sigma_s^j (E') \Phi(E')}{E'(1-\alpha_j)} \dE' \\
+      &=  \int_E^{\infty} \Sigma_s^H \Phi(E')\frac{\dE'}{E'} + \Sum_{j\neq H} \frac{1}{\alpha_j} \Sigma_s^j (E) \Phi(E) \\
       \left[ \Sigma_a (E) + \Sigma_s^H \right] \Phi(E) &= \int_E^{\infty} \Sigma_s^H \frac{\Phi(E')}{E'} \dE' \\
-      \phi(E) &= \frac{(\Sigma_a (E_1) + \Sigma_s^H) E_1 \Phi (E_1) }{(\Sigma_a(E) + \Sigma_s^H) E} \exp{ - \int_E^{E_1} \frac{\Sigma_a (E') \dE'}{(\Sigma_a(E') + \Sigma_s^H) E'} }
+      \phi(E) &= \frac{(\Sigma_a (E_1) + \Sigma_s^H) E_1 \Phi (E_1) }{(\Sigma_a(E) + \Sigma_s^H) E} \exp \left[ - \int_E^{E_1} \frac{\Sigma_a (E') \dE'}{(\Sigma_a(E') + \Sigma_s^H) E'} \right]
     \end{align} 
     suggesting that the neutron energy distribution varies with energy as $\Phi(E) \sim \frac{1}{(\Sigma_a(E) + \Sigma_s^H) E}$. 
   \end{itemize}
@@ -324,12 +324,7 @@ Answer: the infinite dilute RI is independent of temperature because in Doppler 
   Assume $\phi \sim \frac{1}{E}$,
   \eqn{ \sigma_g = \frac{\RI_{\eff}}{\ln(E_2/E_1)} = \frac{\Sum_{i \in g} RI_i }{\ln{\frac{E_{g-1}}{E_g} }}   }
  
-\item More spectrum: 
-  \begin{enumerate}
-  \item $E > 0.5$ MeV: $\phi(E) = \frac{\chi(E)}{\Sigma_t(E)}$.
-  \item $1 \eV < E < 50$ keV (slowing-down domain): $\phi(E) \sim \frac{1}{\xi(E) \Sigma_t(E) E}$. 
-  \item $E < 1$ eV (thermal range): a hardened Maxwellian distribution (hardened because the temperature equilibrium has not been perfectly achieved) plus a 1/E correction at higher energies, $\phi(E) = \phi_M (E, T_n) + \frac{ \lambda \Delta (E/kT_n) }{E}$. 
-  \end{enumerate}
+
 \end{enumerate}
 
 \begin{table}
