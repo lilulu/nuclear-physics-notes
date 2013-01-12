@@ -9,46 +9,49 @@
 \begin{enumerate}
 \item $\kinf$ depends on integrated cross section only (cross sections that treat pin-cells as homogenized preserve exactly the MC fuel reactivity for infinite repeating lattices):
   \begin{enumerate}
-  \item One group:  
-  \eqn{ \kinf &= \frac{\nu \bar{\Sigma}_f }{\bar{\Sigma}_a} }
-  \item Two group:
-    \eqn{ \kinf &= \frac{\nu \bar{\Sigma}_{f1} + \nu \bar{\Sigma}_{f2} \frac{\hat{\Sigma}_{s12} }{\bar{\Sigma}_{a2}}}{\bar{\Sigma}_{a1} + \hat{\Sigma}_{s12} }   }
-  \item Material buckling: the most general expression, 
-    \eqn{ B_m^2 = \frac{\frac{\nu \Sigma_f}{\keff} - \Sigma_a}{D} = \frac{\frac{1}{\keff} \frac{\nu \Sigma_f}{\Sigma_a} - 1}{D/\Sigma_a} = \frac{\frac{\kinf}{\keff} - 1}{M^2}  }
-    where $M^2$ is a measurement of the distance traveled before absorption.     If $\keff = 1$, the material buckling is uniquely determined by the cross sections, which gives us the \textit{infinite medium critical buckling}. 
+  \item One group:  $\displaystyle \kinf = \frac{\nu \bar{\Sigma}_f }{\bar{\Sigma}_a}$. 
+  \item Two group: $\displaystyle \kinf =\frac{\nu \bar{\Sigma}_{f1} + \nu \bar{\Sigma}_{f2} \frac{ \phi_2 }{\phi_1}}{\bar{\Sigma}_{a1} + \hat{\Sigma}_{s12} } = \frac{\nu \bar{\Sigma}_{f1} + \nu \bar{\Sigma}_{f2} \frac{\hat{\Sigma}_{s12} }{\bar{\Sigma}_{a2}}}{\bar{\Sigma}_{a1} + \hat{\Sigma}_{s12} } $. 
   \end{enumerate}
 
 \item $\keff$: take into account leakage, notice $\keff$ does not depend on volume or flux. 
   \begin{enumerate}
   \item One group and two group, 
-  \eqn{ \keff &= \frac{\nu \Sigma_f}{DB^2 + \Sigma_a}, &\kinf &= \frac{\nu \bar{\Sigma}_{f1} + \nu \bar{\Sigma}_{f2} \frac{\hat{\Sigma}_{s12} }{D_2 B^2 + \bar{\Sigma}_{a2}}}{D_1 B^2 + \bar{\Sigma}_{a1} + \hat{\Sigma}_{s12} }  } 
-  \item Critical buckling: means $B^2$ is the same for all energy groups. This is a common given condition in two-group diffusion problem.
+  \eqn{ \keff &= \frac{\nu \Sigma_f}{DB^2 + \Sigma_a}, &\kinf &= \frac{\nu \bar{\Sigma}_{f1} + \nu \bar{\Sigma}_{f2} \frac{\phi_2}{\phi_1} }{D_1 B^2 + \bar{\Sigma}_{a1} + \hat{\Sigma}_{s12} }
+= \frac{\nu \bar{\Sigma}_{f1} + \nu \bar{\Sigma}_{f2} \frac{\hat{\Sigma}_{s12} }{D_2 B^2 + \bar{\Sigma}_{a2}}}{D_1 B^2 + \bar{\Sigma}_{a1} + \hat{\Sigma}_{s12} }  } 
   \item Spectral hardening: see Section~\ref{spectral-hardening-section}. As U/H increases, the higher energy ranges become more important, and the peak of the thermal spectrum shifts to the right. Distribution of group-wise absorption shifts towards the higher energy. $1/v$ absorption of U238 becomes more significant. Self-shielding reduces the large resonance absorption fractions.
   \end{enumerate}
 
-\item Transport equation
+\item Buckling: 
   \begin{enumerate}
-    \item Neutron balance: derived from transport equations (this expression is exact, because we haven't approximate $\vecJ$ yet. ),
-      \eqn{ \divergence \vecJ (\vecr, E) + \Sigma_t (\vecr, E) \phi(\vecr, E) = \Sum_i \int_{E'} \dE' \Sigma_s^i (\vecr, E'\to E) \phi(\vecr, E') + S_0 (\vecr, E) }
+  \item Material buckling: the most general expression, $\displaystyle \boxed{  B_m^2 = \frac{\frac{\nu \Sigma_f}{\keff} - \Sigma_a}{D} = \frac{\frac{1}{\keff} \frac{\nu \Sigma_f}{\Sigma_a} - 1}{D/\Sigma_a} = \frac{\frac{\kinf}{\keff} - 1}{M^2} } $, where $M^2$ is a measurement of the distance traveled before absorption.     If $\keff = 1$, the material buckling is uniquely determined by the cross sections, which gives us the \textit{infinite medium critical buckling}. 
+
+  \item \hi{Critical buckling means $B^2$ is the same for all energy groups.} This is a common given condition in two-group diffusion problem.
+  \end{enumerate}
+
+
+\item Transport equation to diffusion equation: 
+  \begin{enumerate}
+  \item Real transport equation (not discussed in this class?) where every $\psi$ is $\psi(\vecr, E, \Omegahat)$, 
+    \eqn{ \Omegahat \cdot \gradient \psi + \Sigma_t \psi = \int \dE' \int \dOmega' \Sigma_s (\vecr, E' \to E, \Omegahat' \to \Omegahat) \psi(\vecr, E', \psi') + \frac{\chi(E)}{4\pi} \int \dE' \nu \Sigma_f (E') \phi(\vecr, E') + S \notag }
+
+    \item Assume isotropic scattering, we get neutron balance/continuity equation, which is is exact because we haven't approximate $\vecJ$ yet, 
+      \eqn{ \divergence \vecJ (\vecr, E) + \Sigma_t (\vecr, E) \phi(\vecr, E) = \Sum_i \int_{E'} \dE' \Sigma_s^i (\vecr, E'\to E) \phi(\vecr, E') + S_0 (\vecr, E) \notag}
 
     \item Gauss theorem/Divergence theorem: $\int_V (\divergence \vec{\phi} ) \dV = \int_S (\vec{\phi} \cdot \vecn) \dS$. In deriving the diffusion theorem from transport theorem, we use the divergence theorem to turn the surface integral into the volume integral,
   \eqn{ \int \vecJ \cdot \vec{n} \dS = \int \divergence \vecJ \dV }
   From there we use the Fick's law, $\vecJ = - D \gradient \phi$ to get the leakage term $-D \laplacian \phi$. 
-
-    \item Anisotropic scattering: we assumed isotropic scattering in lab system to approximate the transport coefficient: 
-      \eqn{ \Sigma_{tr}^i (E) = \Sigma_t^i (E) - \frac{2}{3A^i} \Sigma_s^i (E) }
   \end{enumerate}
 
 
-\item Diffusion equation
+\item Diffusion equation implementation: 
   \begin{enumerate}
   \item Coefficient: 
     \begin{itemize}
     \item Transport cross section and diffusion coefficients: from the net current equation, assume the scattering is isotropic in the COM system, and use transport correction $P_0$ approximation, 
-      \eqn{ D &= \frac{1}{3 \Sigma_{tr} }, & \Sigma_{tr} &= \Sigma_t - \Sigma_{s1} = \Sigma_t - \frac{2}{3A} \Sigma_s }
-    \item Effective down-scattering cross section: 
+      \eqn{ D &= \frac{1}{3 \Sigma_{tr} }, & \Aboxed{ \Sigma_{tr} &= \Sigma_t - \Sigma_{s1} = \Sigma_t - \frac{2}{3A} \Sigma_s } }
+    \item Effective down-scattering cross section (if assume up-scattering is zero, effective down-scattering is real down-scattering): 
       \eqn{ \hat{\Sigma}_{s12} = \bar{\Sigma}_{s12} - \bar{\Sigma}_{s21} \frac{\phi_2}{\phi_1} }
-      Typically we can assume the up-scattering is zero: $\Sigma_{s21}  = 0$.
+
     \item Removal cross section
       \eqn{ \Sigma_{rg} = \Sigma_{tg} - \Sigma_{sgg} = \Sigma_{ag} + \Sum_{g'=1, g'\neq g}^G \Sigma_{sgg'}  }
     \end{itemize}
@@ -91,7 +94,7 @@
 
   \item Laplacian: see Table~\ref{diffusion-table}.
 
-  \item Geometrical buckling: the allowable values that satisfy the boundary conditions are uniquely determined reactor geometry. See Table~\ref{diffusion-table}
+  \item Geometrical buckling: the allowable values that satisfy the boundary conditions are uniquely determined by reactor geometry. See Table~\ref{diffusion-table}
 
   \item Reflector savings: See Section~\ref{critical-reflected-slab}
 
@@ -154,7 +157,7 @@
 
 \item Numerical solution of 1D diffusion equations\footnote{The most important topic in solving diffusion equations, especially the iterative methods}: See Appendix A \ref{appendixA}.
 \begin{enumerate}
-\item Finite-difference equation: 
+\item Linear Finite Difference equation: 
   \begin{align*}
     - \hat{D}_1^{n-1,n} \phi_1^{n-1} - \hat{D}_1^{n,n+1} \phi_1^{n+1} + [ \Sigma_{r1}^n \Delta^n + \hat{D}_1^{n-1, n} + \hat{D}_1^{n,n+1} ] \phi_1^n 
     &= \nu \Sigma_{f1}^n \phi_1^n \Delta^n + \nu \Sigma_{f2}^n \phi_2^n \Delta^n + S_1^n \Delta^n \\
@@ -165,11 +168,12 @@
 \item Balance equation: 
 
 \item Interface flux: 
-  \eqn{J_n^+ &= - \hat{D}^{n,n+1} (\phi^{n+1} - \phi^n)  & J_n^- &= - \hat{D}^{n-1, n} (\phi^n - \phi^{n-1} ), & \hat{D}^{n,n+1} &= \frac{2 D^n D^{n+1}}{\Delta (D^n + D^{n+1})}   }
+  \eqn{J_{n^+} &= - \hat{D}^{n,n+1} (\phi^{n+1} - \phi^n)  & J_{n^-} &= - \hat{D}^{n-1, n} (\phi^n - \phi^{n-1} ), & \hat{D}^{n,n+1} &= \frac{2 D^n D^{n+1}}{\Delta (D^n + D^{n+1})}   }
 \item BC: 
   \begin{align}
     &\mbox{Zero Flux BC:} & J_g^N &= -D_g^N \frac{ -\phi_g^N - \phi_g^N}{\Delta^N}  = \frac{2 D_g^N}{\Delta^N} \phi_g^N \\
-    &\mbox{Zero Incoming Flux BC:} & J_g^N &= \frac{2D_g^N}{\Delta^N} \left[ \frac{1}{1 + \frac{4 D_g^N}{\Delta^N}} \right] \phi_g^N 
+    &\mbox{Zero Incoming Flux BC:} & J_g^N &= \frac{2D_g^N}{\Delta^N} \left[ \frac{1}{1 + \frac{4 D_g^N}{\Delta^N}} \right] \phi_g^N = \frac{2D_g^N \phi_g^N}{\Delta^N + 4 D_g^N}  \\
+    &\mbox{Zero Current BC:} & J_g^N &= 0 
   \end{align}
 
 
@@ -211,7 +215,7 @@ Given an eigenvalue problem, if we specify the solved eigenvalues to be:
 \eqn{ |\lambda_1| > |\lambda_2| \ge |\lambda_3| \ge \cdots }
 then $|\lambda_1|$ is the spectral radius of the iteration matrix, and every mode has a dominance ratio,
 \eqn{ \dr_n = \frac{\lambda_n}{\lambda_1} }
-and power iteration kills of the lowest dominance ratio modes. The last remaining mode is the fundamental mode $dr = \frac{\lambda_2}{\lambda_1}$. If $|\lambda_1| \ge 1$, the ietration scheme is unstable and it would not converge. Convergence of the power method is slow when $d$ is close to unity; in fact in most numerical methods, convergence rate = 1 - dominance ratio.
+and power iteration kills the lowest dominance ratio modes. The last remaining mode is the fundamental mode $dr = \frac{\lambda_2}{\lambda_1}$. If $|\lambda_1| \ge 1$, the ietration scheme is unstable and it would not converge. Convergence of the power method is slow when $d$ is close to unity; in fact in most numerical methods, convergence rate = 1 - dominance ratio.
 
 Dominance ratio measures the spatial decoupling, and it depends on: symmetric mode, core size (size $\up$, $\dr \up$, takes longer), decoupling of the radial zones, and of the axial zones. 
 
@@ -239,10 +243,10 @@ Dominance ratio measures the spatial decoupling, and it depends on: symmetric mo
     \end{align}
     Using the particular solution that $N_0 = N(t=0)$, then 
     \eqn{ N_0 = A^{-1} Y + C \Rightarrow C = N_0 - A^{-1} Y } 
-    \eqn{ e^{At} N(t) = A^{-1} [e^{At} Y - Y ] + N_0 }
-    \eqn{ \boxed{ N(t) = e^{-At} N_0 + e^{-At} A^{-1} [e^{At} Y - Y ] } }
+    \eqn{ e^{At} N(t) = A^{-1} [e^{At} Y - Y_0 ] + N_0 }
+    \eqn{ \boxed{ N(t) = e^{-At} N_0 + e^{-At} A^{-1} [e^{At} Y - Y_0 ] } }
     We can also write the above differential equation into the matrix form as in Figure~\ref{depletion-matrix}. Notice we asume fission yields, cross sections, and fluxes are constant over the time interval $t_{n-1}, t_n$,
-    \eqn{ [N(t_n)] = e^{-[A] \Delta t_n} [N(t_{n-1})] + e^{-[A]\Delta t_n} [A]^{-1} [e^{[A] \Delta t_n} Y - Y ] }
+    \eqn{ [N(t_n)] = e^{-[A] \Delta t_n} [N(t_{n-1})] + e^{-[A]\Delta t_n} [A]^{-1} [e^{[A] \Delta t_n} Y - Y_0 ] }
     \begin{figure}[ht]
       \centering
       \includegraphics[width=5in]{images/dfs/fp-an-matrix-form.png} 
