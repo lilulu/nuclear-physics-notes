@@ -155,72 +155,7 @@
 
 
 
-\item Numerical solution of 1D diffusion equations\footnote{The most important topic in solving diffusion equations, especially the iterative methods}: See Appendix A \ref{appendixA}.
-\begin{enumerate}
-\item Linear Finite Difference equation: 
-  \begin{align*}
-    - \hat{D}_1^{n-1,n} \phi_1^{n-1} - \hat{D}_1^{n,n+1} \phi_1^{n+1} + [ \Sigma_{r1}^n \Delta^n + \hat{D}_1^{n-1, n} + \hat{D}_1^{n,n+1} ] \phi_1^n 
-    &= \nu \Sigma_{f1}^n \phi_1^n \Delta^n + \nu \Sigma_{f2}^n \phi_2^n \Delta^n + S_1^n \Delta^n \\
-    - \hat{D}_2^{n-1,n} \phi_2^{n-1} - \hat{D}_2^{n,n+1} \phi_2^{n+1} + [\Sigma_{a2}^n \Delta^n + \hat{D}_2^{n-1.n} + \hat{D}_2^{n,n+1} ] \phi_2^n 
-    &= \Sigma_{s12}^n \phi_1^n \Delta^n + S_2^n \Delta^n 
-  \end{align*}
 
-\item Balance equation: 
-
-\item Interface flux: 
-  \eqn{J_{n^+} &= - \hat{D}^{n,n+1} (\phi^{n+1} - \phi^n)  & J_{n^-} &= - \hat{D}^{n-1, n} (\phi^n - \phi^{n-1} ), & \hat{D}^{n,n+1} &= \frac{2 D^n D^{n+1}}{\Delta (D^n + D^{n+1})}   }
-\item BC: 
-  \begin{align}
-    &\mbox{Zero Flux BC:} & J_g^N &= -D_g^N \frac{ -\phi_g^N - \phi_g^N}{\Delta^N}  = \frac{2 D_g^N}{\Delta^N} \phi_g^N \\
-    &\mbox{Zero Incoming Flux BC:} & J_g^N &= \frac{2D_g^N}{\Delta^N} \left[ \frac{1}{1 + \frac{4 D_g^N}{\Delta^N}} \right] \phi_g^N = \frac{2D_g^N \phi_g^N}{\Delta^N + 4 D_g^N}  \\
-    &\mbox{Zero Current BC:} & J_g^N &= 0 
-  \end{align}
-
-
-\item Matrix form: 
-  \begin{align}
-    \left[ \begin{array}{cc} 
-        [L_1 + D_1 + U_1] & [0] \\
-        -[T_2] & [L_2 + D_2 + U_2] \\
-      \end{array} \right] 
-    \left[ \begin{array}{c}
-        \phi_1 \\ \phi_2 \\ \end{array} \right] 
-    = \left[ {\begin{array}{cc} \left[M_1\right] & \left[M_2\right] \\ \left[0\right] & \left[0\right] \end{array}} \right] 
-    \left[ \begin{array}{c}
-        \phi_1 \\ \phi_2 \\ \end{array} \right] 
-    + 
-    \left[ \begin{array}{c} 
-        S_1 \\ S_2 \\ \end{array} \right] 
-  \end{align}
-  Whose compressed form is, 
-  \eqn{ [A] [\phi] = [M] [\phi] + [S] \label{diffusion-matrix-form} }
-
-\item Direct inversion: take Eq.~\ref{diffusion-matrix-form} and manipulate:
-  \eqn{  [A-M] [\phi] &= [S] &[\phi] &= [A-M]^{-1} [S] }
-  
-\item Fission source iterations: the equation we are trying to solve is,
-\eqn{ [A] [\phi]^{n+1} &= [M] [\phi]^n }
-An initial guess of the flux $\phi_i^{(0)}$ at each point and of the eigenvalue $\lambda^{(0)}$ is made and an initial fission source at each point is constructed $S_i^{(0)} = M \phi_i^{(0)}$. The Gaussian elimination is performed to determine $\phi_i^{(1)} = A^{-1} S_i^{(0)}$. Then we update the source term as well based on the flux. A new estimate of the eigenvalue is made from: 
-\eqn{ \keff = \frac{S_i^{(1)}}{S_i^{(0)}} }
-The process is continued until the eigenvalues obtained on two successive iterates differ by less than a threshold level. The rate our fission source converges depends on material, geometry etc.
-
-\item Gauss-Jacobi flux inner iterations: see screenshot below.
-\begin{figure}[ht]
-  \centering
-  \includegraphics[width=5in]{images/dfs/power-iteration-Gauss-Jacobi.png}
-\end{figure}
-
-\item Dominance ratio estimation: 
-Given an eigenvalue problem, if we specify the solved eigenvalues to be:
-\eqn{ |\lambda_1| > |\lambda_2| \ge |\lambda_3| \ge \cdots }
-then $|\lambda_1|$ is the spectral radius of the iteration matrix, and every mode has a dominance ratio,
-\eqn{ \dr_n = \frac{\lambda_n}{\lambda_1} }
-and power iteration kills the lowest dominance ratio modes. The last remaining mode is the fundamental mode $dr = \frac{\lambda_2}{\lambda_1}$. If $|\lambda_1| \ge 1$, the ietration scheme is unstable and it would not converge. Convergence of the power method is slow when $d$ is close to unity; in fact in most numerical methods, convergence rate = 1 - dominance ratio.
-
-Dominance ratio measures the spatial decoupling, and it depends on: symmetric mode, core size (size $\up$, $\dr \up$, takes longer), decoupling of the radial zones, and of the axial zones. 
-
-\item Order of operations (not included in official list): Matrix inversion is of $N^3$, finding all eigenvalues is at least $N^2$, iterative inversion must be order $N$ to be practical, multi-level iteration is a necessity. 
-\end{enumerate}
 \end{enumerate}
 
 
@@ -228,14 +163,25 @@ Dominance ratio measures the spatial decoupling, and it depends on: symmetric mo
 \clearpage
 \topic{Fission Product and Fuel Depletion}
 \begin{enumerate}
-\item Fission yields. General properties of fission products: most are highly unstable and rapidly decay; certain fission products are important to thermal spectrum ($\up$ thermal absorption xs, top three are: \ce{^{135} Xe}, \ce{^{103} Rh}, \ce{^{143} Nd}), but have little contribution to the fast spectrum. 
+\item FP properties: 
+  \begin{itemize}
+  \item Most are highly unstable and rapidly decay; 
+  \item Certain FPs are important to thermal spectrum b/c high thermal absorption xs and large concentration. Top 6 that made up 50\% of total FP absorption are: \ce{^{135} Xe}, \ce{^{103} Rh}, \ce{^{143} Nd}, \ce{^{131}Xe}, \ce{^{133}Cs}, \ce{^{149}Sm}). 
+  \item FPs have little contribution to the fast spectrum. FRs are generally not very sensitive to FPs. 
+  \end{itemize}
+
+\item Fission yields. 
 \begin{figure}[ht]
   \centering
   \includegraphics[width=5in]{images/dfs/fission-product-yield.png}
 \end{figure}
 
-\item FP absorption (thermal spectrum): know top six which make up around 50\% of total absorption: Xe-135, Rh-103, Nd-143, Xe-131, Cs-133, Sm-149. 
+\item Independent fission yield vs. cumulative fission yield (\textbf{12 Exam 2 \#4}): independent yield is the yield of a specific isotope directly from fission and nothing else. Cumulative yield includes the independent yield PLUS all the precursor isotopes that decay into a specific isotope. 
 
+\item \textbf{12 Exam 2 \#3}: approximate values of \ce{^{135}Xe} and \ce{^{149}Sm} capture cross sections at 0.10 eV and 300K? 
+
+Answer: \ce{^{135}Xe}: $2 \times 10^6$b,  \ce{^{149}Sm}: $1.15 \times 10^5$b. Both are huge! 
+  
 \clearpage
 \item FP balance equation: 
  \eqn{ \boxed{ \frac{\derivative N_i}{\dt} = \overbrace{\gamma_i \Sigma_f \phi}^{\mbox{fission gain}} - \overbrace{\lambda_i N_i}^{\mbox{decay}} - \overbrace{\sigma_i N_i \phi}^{\mbox{n capture}}  + \overbrace{ \lambda_j N_j}^{\mbox{decay of j}} + \overbrace{\sigma_k N_k \phi}^{\mbox{n capture of k}} } }
@@ -252,9 +198,9 @@ Dominance ratio measures the spatial decoupling, and it depends on: symmetric mo
     \end{align}
     Using the particular solution that $N_0 = N(t=0)$, then 
     \eqn{ N_0 = A^{-1} Y + C \Rightarrow C = N_0 - A^{-1} Y } 
-    \eqn{ e^{At} N(t) = A^{-1} [e^{At} Y - Y_0 ] + N_0 }
-    \eqn{ \boxed{ N(t) = e^{-At} N_0 + e^{-At} A^{-1} [e^{At} Y - Y_0 ] } }
-    We can also write the above differential equation into the matrix form as in Figure~\ref{depletion-matrix}. Notice we asume fission yields, cross sections, and fluxes are constant over the time interval $t_{n-1}, t_n$,
+    \eqn{ e^{At} N(t) = A^{-1} [e^{At} Y - Y] + N_0 }
+    \eqn{ \boxed{ N(t) = e^{-At} N_0 + e^{-At} A^{-1} [e^{At} Y - Y] = N_0 e^{-At} + A^{-1} Y [1 - e^{-At} ] } }
+    See Figure~\ref{depletion-matrix} for how to construct matrix form, assuming that fission yields, cross sections, and fluxes are constant over the time interval $t_{n-1}, t_n$,
     \eqn{ [N(t_n)] = e^{-[A] \Delta t_n} [N(t_{n-1})] + e^{-[A]\Delta t_n} [A]^{-1} [e^{[A] \Delta t_n} Y - Y_0 ] }
     \begin{figure}[ht]
       \centering
@@ -269,9 +215,7 @@ Dominance ratio measures the spatial decoupling, and it depends on: symmetric mo
   \end{enumerate}
 
 
-\clearpage
-\item Xe-I, Pm-Sm decay chain: know Xe do not decay away. 
-
+\item Xe-I, Pm-Sm decay chain: know Xe almost do not decay away (b/c relatively long half-life) and we can ignore Sm decay and Sm fission generation too. 
   \begin{figure}[ht]
     \includegraphics[width=0.58\textwidth]{images/dfs/I-Xe.png}     
     \includegraphics[width=0.41\textwidth]{images/dfs/Pm-Sm.png}     
@@ -292,8 +236,17 @@ Dominance ratio measures the spatial decoupling, and it depends on: symmetric mo
 \item Major source of Xe: Iodine decay; Source of Sm: Pm decay;
 \item Major sink of Xe: burnup; Sink of Sm: burnup. 
 \end{itemize}
-Xenon peaking happens because after shutdown, the major sink is removed, but the major source remains, hence Xenon peaks until the Iodine depletes. Reactors must be designed with enough fuel to offset the effect of Xenon. At the end of core life, there may not be enough reactivity to override peak Xenon; such reactors are called `xenon-precluded.' If a scram occurs, a restart may not be possible for 30-40 hours. See Stacy's Example 6.2 (p.214) for an example of xenon reactivity worth and illustrating diagrams. 
+Xenon peaking happens because after shutdown, the major sink is removed, but the major source remains, hence Xenon peaks until the Iodine depletes. 
 
+\item Xe-precluded cores: reactors must be designed with enough fuel to offset the effect of Xe; otherwise at the end of core life, there may not be enough reactivity to override peak Xe; such reactors are called `xenon-precluded.' If a scram occurs, a restart may not be possible for 30-40 hrs. See Stacy's Example 6.2 (p.214) for an example of xenon reactivity worth and illustrating diagrams. 
+
+\item Spatial Xe oscillations: if a core has a flux gradient, then regions with low flux would have a higher Xe concentration (due to less burnup of Xe), thus a even reduced flux, until the I concentration becomes low ($I_{eq} \propto \phi$), and Xe would first slowing decrease then \textit{suddently} decrease thus increasing the flux (see Fig in class notes). The point is, with a feedback due to flux changing, Xe concentration and flux can oscillate. 
+
+\item Xe chasing is not right, because Xe concentration is 9 hrs behind what is actually going on in the core. 
+
+\item Production tool: Nd is a BU marker term b/c each FP produces a fixed amount of Nd. Thus using Nd number density and the yield we can back out the BU. 
+
+\item Old rods (15 yrs) have \ce{^{156}Gd} and \ce{^{157}Gd} which would make startup hard. 
 
 \begin{table}
   \centering
@@ -303,7 +256,7 @@ Xenon peaking happens because after shutdown, the major sink is removed, but the
     \end{minipage}
     & 
     \begin{minipage}[b]{0.4\textwidth}
-      After startup: both I and Xe increases, and saturates after 30 hours. After shutdown: I decays quickly, whereas Xe peaks 9 hours after shutdown, and decays away in 60 hours. The peak happens because I coninues to decay into Xe, while Xe can no longer decrease through capture. 
+      After startup: both I and Xe increases, and saturates after \hi{30 hrs}. After shutdown: I decays quickly, whereas Xe peaks \hi{9 hrs} after shutdown, and decays away in 60 hours. The peak happens because I coninues to decay into Xe, while Xe can no longer decrease through capture. 
 There is a 2.5\% depress due to Xe; the higher the flux, the higher the peak is.
     \end{minipage}   \\ \hline
 %
@@ -312,7 +265,7 @@ There is a 2.5\% depress due to Xe; the higher the flux, the higher the peak is.
     \end{minipage}
     & 
     \begin{minipage}[b]{0.4\textwidth}    
-      A rapid startup after a scram: the concentration decreases immediately after the startup, because Xe absorption increases suddnely due to flux and the over-weight the amount from I decay. Xe would reach its equilibrium value again after about 40 hours. 
+      A rapid startup after a scram: the concentration decreases immediately after the startup, because Xe absorption increases suddenely due to flux, which over-weights the amount from I decay. Xe would reach its equilibrium value again after about 40 hrs. 
     \end{minipage}  \\ \hline
 %
     \begin{minipage}[b]{0.6\textwidth}
@@ -320,7 +273,7 @@ There is a 2.5\% depress due to Xe; the higher the flux, the higher the peak is.
     \end{minipage}
  &  
     \begin{minipage}[b]{0.4\textwidth}    
-      Equilibrium Xenon Worth: if $\phi \to \infty$, then $X_{eq}$ is independent of the flux as in the $X_{eq}$ expression; additionally, the Xenon concentration drops right after everytime power increases for the same reason as the previous case (flux increases, the destruction rate of Xe increases instantenously, but the Iodine decay rate has not increased yet). 
+      Equilibrium Xe Worth: if $\phi \to \infty$, then $X_{eq}$ is independent of $\phi$ as shown in the $X_{eq}$ expression; additionally, the Xenon concentration drops right after everytime power increases for the same reason as the previous case (flux increases, the destruction rate of Xe increases instantenously, but the Iodine decay rate has not increased yet). 
     \end{minipage} \\ \hline
 %
     \begin{minipage}[b]{0.6\textwidth}
@@ -328,11 +281,13 @@ There is a 2.5\% depress due to Xe; the higher the flux, the higher the peak is.
     \end{minipage}
  &  
     \begin{minipage}[b]{0.4\textwidth}
-      Xenon for high flux reactor: xenon peak gives rise to a control constraint. If the reactivity reserves (control rods or poisons that can be removed) are insufficient, the reactor cannot be restarted during this period of increased xenon poisoning. We have to wait till Xe drops to re-start. Alternatively, you can start before Xenon builds up, which is pretty rare. 
+      Xe for high flux reactor: Xe peak gives rise to a control constraint. If the reactivity reserves (control rods or poisons that can be removed) are insufficient, the reactor cannot be restarted during this period of increased Xe poisoning. We have to wait till Xe drops to re-start. Alternatively, you can start before Xe builds up, which is pretty rare. 
       \end{minipage} \\ \hline
   \end{tabular}
 \end{table}
 
+
+%%%%%
 \begin{table}
   \centering
   \begin{tabular}{|p{0.5\textwidth}|p{0.5\textwidth}|}\hline
@@ -342,7 +297,7 @@ There is a 2.5\% depress due to Xe; the higher the flux, the higher the peak is.
     & 
     \begin{minipage}[b]{0.5\textwidth}
       Pm behaves normally: it builds up and reaches equilibrium when in operation, and it decays away after shutdown. 
-Sm behaves similar to Xe in the sense that both peaks after reactor shutdown (Sm peaks 200 hours after shutdown, Xe peaks 9 hours after shutdown). But Sm is stable unlike Xe, and once Pm burns out, Sm would stay constant and never decay away. Sm reactivity peaks by 200-300 pcm after shutdown. 
+Sm behaves similar to Xe in the sense that both peaks after reactor shutdown (Sm peaks \hi{200 hrs} after shutdown, Xe peaks 9 hrs after shutdown). But Sm is stable unlike Xe, and once Pm burns out, Sm would stay constant and never decay away. Sm reactivity peaks by 200-300 pcm after shutdown. 
     \end{minipage}   \\ \hline
 %
     \begin{minipage}[b]{0.5\textwidth}
@@ -362,6 +317,59 @@ Sm behaves similar to Xe in the sense that both peaks after reactor shutdown (Sm
     \end{minipage} \\ \hline
   \end{tabular}
 \end{table}
+
+\clearpage
+\item Actinide chain equations: similar to FP's except there is no direction production by fission anymore (so no Y on the RHS) so the solution is just $[N(t_n)] = e^{-[A] \Delta t_n} [N(t_{n-1})]$, and the matrix is more coupled than FP's. 
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.7\textwidth]{images/dfs/actinide-model.png}
+  \includegraphics[width=4in]{images/dfs/actinide-balance.png}
+\end{figure}
+
+\clearpage
+\item Zooming in the matrix, there are four blocks for 4 matrixes, 
+  \begin{itemize}
+  \item The decay terms sit outside of the blocks; they couple the blocks.
+  \item  The capture terms are one line off the diagonal term (NP238 decays so quickly that its capture cross section is zero and is not shown throug the spy function in matlab); 
+  \item We don't have above the diagonal term because we ignore the $n2n$ reaction and the $n \alpha$ reaction. The reason we ignore them is that having a sub-diagonal matrix we can invert analytically; whereas having a full matrix is a lot harder to invert. Another simplification we made is to ignore all meta-stable states and only have the ground states, hence ignoring branching. 
+  \end{itemize}
+ \begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.8\textwidth]{images/dfs/nuclide-depletion-matrix-form.png}
+  \includegraphics[width=0.8\textwidth]{images/dfs/actinide-block.png}
+  \end{figure}
+
+
+
+  \begin{figure}[h]
+  \centering
+  \includegraphics[width=0.55\textwidth]{images/dfs/actinide-vs-BU.png}
+  \includegraphics[width=0.44\textwidth]{images/dfs/ff-vs-BU.png}
+  \end{figure}
+\item Know some solutions of the actinide chain equations. E.g., U238 barely changes; U235 decreases b/c no production; U236 increases b/c source is U235 plus n and no sink; U239 is constant b/c capture from U238 is constant, and U239 decays so quickly (23 mins) that it is at equilibrium the whole time. 
+
+\item Know the fission fraction vs. BU plot: by the EOL about 40-50\% power was produced from Pu instead of U. 
+
+\item BU is a good measurement, because number density vs. BU is independent of power level/time. BU units: 
+\begin{enumerate}
+\item FIFA = fission per initial fissile atoms;
+\item FIMA = fission per initial (heavy) metal atoms;
+\item Atom percent (A\%) = FIMA * 100;
+\item Burnup: GWd/T = MWd/kg = thermal power per weight of heavy metal. 
+  \begin{itemize}
+    \item Advantages: we know the reactor power and initial fuel loading (almost). 
+    \item Disadvantages: `energy released' is not a very clean term; we don't really care about neutrino energy, gamma energy released from capture of neutrons; energy deposited in fuel assembly B from fissions in assembly A etc. In LWR, it is a good approximation to assume that energy is depositied locally where the fission happens; in MITR it is a bad approximation, fission product energy (deposite locally), gamma heat energy (not necessarily deposited locally), etc. 
+  \end{itemize}
+\item EFPHs = Effective Full Power Hours; EFPD = Effective Full Power Days. 
+\end{enumerate}
+
+\item History effects: 
+  \begin{itemize}
+    \item Burnable poisons: harden the spectrum. Remove 20 WABA at 20 MWd/kg generates a positive 350 pcm reactivity jump. 
+    \item Fuel temperature depletion history effect: initially temperature independent of depletion; as BU $\up$, histories are approximately linear in BU. 
+    \item Gd burnable poisons: burnup rates dependent on Gd concentration; residual is proportional to w\% of Gd. 
+  \end{itemize}
 \end{enumerate}
 
 
@@ -647,8 +655,98 @@ This expression is exact, because we haven't approximate $\vecJ$ yet.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \clearpage
+\topic{Numerical Solution} 
+ See Appendix A \ref{appendixA}.
+\begin{enumerate}
+\item Linear Finite Difference equation: 
+  \begin{align*}
+    - \hat{D}_1^{n-1,n} \phi_1^{n-1} - \hat{D}_1^{n,n+1} \phi_1^{n+1} + [ \Sigma_{r1}^n \Delta^n + \hat{D}_1^{n-1, n} + \hat{D}_1^{n,n+1} ] \phi_1^n 
+    &= \nu \Sigma_{f1}^n \phi_1^n \Delta^n + \nu \Sigma_{f2}^n \phi_2^n \Delta^n + S_1^n \Delta^n \\
+    - \hat{D}_2^{n-1,n} \phi_2^{n-1} - \hat{D}_2^{n,n+1} \phi_2^{n+1} + [\Sigma_{a2}^n \Delta^n + \hat{D}_2^{n-1.n} + \hat{D}_2^{n,n+1} ] \phi_2^n 
+    &= \Sigma_{s12}^n \phi_1^n \Delta^n + S_2^n \Delta^n 
+  \end{align*}
+
+\item Balance equation: 
+
+\item Interface flux: 
+  \eqn{J_{n^+} &= - \hat{D}^{n,n+1} (\phi^{n+1} - \phi^n)  & J_{n^-} &= - \hat{D}^{n-1, n} (\phi^n - \phi^{n-1} ), & \hat{D}^{n,n+1} &= \frac{2 D^n D^{n+1}}{\Delta (D^n + D^{n+1})}   }
+\item BC: 
+  \begin{align}
+    &\mbox{Zero Flux BC:} & J_g^N &= -D_g^N \frac{ -\phi_g^N - \phi_g^N}{\Delta^N}  = \frac{2 D_g^N}{\Delta^N} \phi_g^N \\
+    &\mbox{Zero Incoming Flux BC:} & J_g^N &= \frac{2D_g^N}{\Delta^N} \left[ \frac{1}{1 + \frac{4 D_g^N}{\Delta^N}} \right] \phi_g^N = \frac{2D_g^N \phi_g^N}{\Delta^N + 4 D_g^N}  \\
+    &\mbox{Zero Current BC:} & J_g^N &= 0 
+  \end{align}
 
 
+\item Matrix form: 
+  \begin{align}
+    \left[ \begin{array}{cc} 
+        [L_1 + D_1 + U_1] & [0] \\
+        -[T_2] & [L_2 + D_2 + U_2] \\
+      \end{array} \right] 
+    \left[ \begin{array}{c}
+        \phi_1 \\ \phi_2 \\ \end{array} \right] 
+    = \left[ {\begin{array}{cc} \left[M_1\right] & \left[M_2\right] \\ \left[0\right] & \left[0\right] \end{array}} \right] 
+    \left[ \begin{array}{c}
+        \phi_1 \\ \phi_2 \\ \end{array} \right] 
+    + 
+    \left[ \begin{array}{c} 
+        S_1 \\ S_2 \\ \end{array} \right] 
+  \end{align}
+  Whose compressed form is, 
+  \eqn{ [A] [\phi] = [M] [\phi] + [S] \label{diffusion-matrix-form} }
+
+\item Direct inversion: take Eq.~\ref{diffusion-matrix-form} and manipulate:
+  \eqn{  [A-M] [\phi] &= [S] &[\phi] &= [A-M]^{-1} [S] }
+  
+\item Fission source iterations: the equation we are trying to solve is,
+\eqn{ [A] [\phi]^{n+1} &= [M] [\phi]^n }
+An initial guess of the flux $\phi_i^{(0)}$ at each point and of the eigenvalue $\lambda^{(0)}$ is made and an initial fission source at each point is constructed $S_i^{(0)} = M \phi_i^{(0)}$. The Gaussian elimination is performed to determine $\phi_i^{(1)} = A^{-1} S_i^{(0)}$. Then we update the source term as well based on the flux. A new estimate of the eigenvalue is made from: 
+\eqn{ \keff = \frac{S_i^{(1)}}{S_i^{(0)}} }
+The process is continued until the eigenvalues obtained on two successive iterates differ by less than a threshold level. The rate our fission source converges depends on material, geometry etc.
+
+\item Gauss-Jacobi flux inner iterations: see screenshot below.
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=5in]{images/dfs/power-iteration-Gauss-Jacobi.png}
+\end{figure}
+
+\item Dominance ratio estimation: given an eigenvalue problem, if we specify the solved eigenvalues to be:
+\eqn{ |\lambda_1| > |\lambda_2| \ge |\lambda_3| \ge \cdots }
+then $|\lambda_1|$ is the spectral radius of the iteration matrix, and every mode has a dominance ratio,
+\eqn{ \dr_n = \frac{\lambda_n}{\lambda_1} }
+and power iteration kills the lowest dominance ratio modes. The last remaining mode is the fundamental mode $dr = \frac{\lambda_2}{\lambda_1}$. 
+\begin{itemize}
+\item \textbf{12 Exam 2 \#5, 13 S904 \#4}: What is dominance ratio for a reactor core? Answer: DR = $\frac{k_2}{k_1} = $ the ratio of the two largest eigenvalues of the equation: 
+  \eqn{ M \Phi &= \frac{1}{k} F \Phi & M^{-1} F \Phi &= k \Phi }
+
+\item \textbf{13 S904 Exam \#5a}: physical meaning of dominance ratio of a reactor? 
+
+Answer: dominance ratio measures the spatial decoupling, and it depends on: symmetric mode, core size (size $\up$, $\dr \up$, takes longer), decoupling of the radial zones, and of the axial zones. The more decoupled the system is spatially, the larger DR is. In reactor application, we measure DR from how long it takes for the system to be stable. It is independent of mesh size and energy groups etc. 
+
+\item \textbf{12 Exam 2 \#18}: perform fission source power iteration to solve a finite difference diffusion equation using Matlab's direct inversion for A matrix. The analyst observes the following values in the normalized peak fission source: iteration \#10012: 1.98000; iteration \#10013: 1.99000; iteration \#10014: 2.00000. What is the dominance ratio of this model? 
+
+Answer: asymptotically, any norm (L1, L2, L$\infty$) can be used to compute convergence or dominance ratio. If using L$\infty$, eps1 = $\frac{1.98-1.99}{1.99} = 0.005025$, eps2 = $\frac{2.00-1.99}{1.99} = 0.005$, then the DR = $\frac{eps2}{eps1} \approx 0.995$. 
+
+\item \textbf{12 Exam 2 \#19}: continue from \#18, estimate how many more iterations will it take to converge the peak fission source to a fractional change of $10^{-6}$ between successive iterations? 
+
+Answer: the fractional change from iteration 10013 to 10014 is 0.005. We know that error reduction is proportional to DR: 
+\eqn{ 10^{-6} &= 0.005 DR^n   & DR &= \frac{\ln \left( \frac{10^{-6}}{0.005} \right) }{\ln DR} = 1708} 
+Prof. Smith noted that `do not assume linear, as all convergence is exponential at the end.' 
+
+\item \textbf{13 S904 Exam \#5b}: physical meaning of spectral radius? 
+
+Answer: spectral radius $|\lambda_1|$ is the max of all the absolute value of eigenvalues of a matrix. It is defined for a particular iterative method, and has impact on how iterative methods converge. For instance, if $|\lambda_1| \ge 1$, the iteration scheme is unstable and it would not converge. 
+
+\item Convergence of the power method is slow when $d$ is close to unity; in fact in most numerical methods, convergence rate = 1 - dominance ratio.
+\end{itemize}
+
+\item Order of operations (not included in official list): Matrix inversion is of $N^3$, finding all eigenvalues is at least $N^2$, iterative inversion must be order $N$ to be practical, multi-level iteration is a necessity. 
+\end{enumerate}
+
+
+
+%%%%%%%%%%%%%%%%%%%%% Appendix %%%%%%%%%%%%%%%%
 \clearpage
 \topic{Appendix A: Finite Difference 1D Transport Equation} \label{appendixA}
 In this chapter we are doing a fine-mesh finite difference (example: PDQ, CITATION). 

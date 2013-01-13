@@ -5,51 +5,61 @@
 \maketitle
 
 \lecture{Fuel Depletion} \label{fuel-depletion}
-For fuel assembly depletion, the reactivity of fuel changes dramatically with burnup. 
+For fuel assembly depletion, the reactivity of fuel changes dramatically with burnup as in Fig.~\ref{rho-vs-BU}. 
 
-\topic{Actinide Chain Construction}
-Normally we would model around 400 actinides; for this class, we only discuss 22 of them, which occupies the high-end of actinides (with large N, large Z). 
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.5\textwidth]{images/dfs/rho-vs-BU.png}
+  \caption{Reactivity vs. BU} \label{rho-vs-BU}
+\end{figure}
+
+\topic{Actinide Chain Balance Equation}
+Normally we would model around 400 actinides; for this class, we only discuss 22 of them that occupy the high-end of actinides (with large N, large Z). 
+
 
 What happens during actinide chain construction? 
 \begin{enumerate}
-\item Fission product absorptions reduce reactivitiy of the fuel significantly, often 10-20\%;
-\item \ce{^{235}U} depletion significantly ...
+\item FP absorbe neutrons and  reduce reactivitiy of the fuel significantly, often 10-20\%;
 
 \item Fission cross section: isotopes have threshold energies, producing step-shape near higher energies (around 10 MeV)\footnote{Both even and odd isotopes have threshold energies, but odd isotopes have higher resonance fission cross section, hence even isotopes' threshold energy behavior is more pronoud.}. Remember Pu is very fissile material. Am242 is a funny one -- although it's an even isotope, its fission cross section is large. 
 
-\item Simple actinide nuclide transmutation model. In Figure, the red arrors designate the actinide chains we model (chains end at isotopes that decay quickly compared with the phenomena we are trying to model); blue arrors designate beta decay. 
+\item Simple actinide nuclide transmutation model as in Figure~\ref{actinide-model}: red arrows designate the actinide chains we model (chains end at isotopes that decay quickly compared with the phenomena we are trying to model); blue arrows designate beta decay. 
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.7\textwidth]{images/dfs/actinide-model.png}
+  \caption{Simple Actinide Nuclide Transmutation Model} \label{actinide-model}
+\end{figure}
 
 \item The higher you go up the chain (e.g., into the MA region), the worse the absorption would be. 
 
 \item Branching ratio is a function of energy. Example: \ce{^{241}Am} can produce \ce{^{242}Am} with a half-life of 16 hrs, and the meta-stable \ce{^{242m}Am} with a half-life of 141 years. \ce{^{242}Am}'s thermal branching ratio is about 10\% that of \ce{^{242m}Am}. 
 \end{enumerate}
 
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=5in]{images/dfs/actinide-balance.png}
+  \caption{Actinide Balance Equations}
+\end{figure}
 
 \clearpage
-\topic{Actinide Chain Solutions}
-Recall our nuclide balance equation. For this model, we do not have the `direct production by fission' term anymore.  No fission yield term. 
-
-Compare fission product matrix form vs. actinides matrix formin Fig.~\ref{fp-an-matrix-form} : 
+\topic{Actinide Chain Matrix System}
+Compare fission product matrix form vs. actinides matrix formin Fig.~\ref{fp-an-matrix-form}: 
+\begin{itemize}
+\item Actinides matrix form has no fission yield term so the solution is just $[N(t_n)] = e^{-[A] \Delta t_n} [N(t_{n-1})]$ ;
+\item FP matrix is decoupled; actinide matrix is not. 
+\end{itemize}
 \begin{figure}[ht]
   \centering
   \includegraphics[width=5in]{images/dfs/fp-an-matrix-form.png}
   \caption{Nuclide Depletion Equations vs. Actinide in Matrix Form} \label{fp-an-matrix-form}
 \end{figure}
-\begin{itemize}
-\item Actinides matrix form has no fission yield term;
-\item Fission product matrix is decoupled; actinide matrix is not; 
-\end{itemize}
 
-
-More specifically, we focus on the actinides matrix, and notice: blue circles are decay coupling term; a n2n reaction with isotope 2 produces isotopes 1. 
-
+More specifically, we focus on the actinides matrix which is illustrated in both Fig.~\ref{nuclide-depletion-matrix} and Fig.~\ref{actinide-block}. 
 \begin{figure}[ht]
   \centering
   \includegraphics[width=5in]{images/dfs/nuclide-depletion-matrix-form.png}
   \caption{Nuclide Depletion Equations vs. Actinide in Matrix Form} \label{nuclide-depletion-matrix} 
     \end{figure}
-
-
 There are 4 blocks for the 4 species as in Fig.~\ref{actinide-block}. 
 \begin{figure}[ht]
   \centering
@@ -58,11 +68,31 @@ There are 4 blocks for the 4 species as in Fig.~\ref{actinide-block}.
     \end{figure}
 \begin{itemize}
 \item The decay terms sit outside of the blocks; they couple the blocks.
-\item  The capture terms are one line off the diagonal term (NP238 decays so quickly that its capture cross section is zero and is not shown throug the spy function in matlab); 
+\item  The capture terms are one line off the diagonal term (NP238 decays so quickly that its capture cross section is zero and is not shown through the spy function in Matlab); 
 \item We don't have above the diagonal term because we ignore the $n2n$ reaction and the $n \alpha$ reaction. The reason we ignore them is that having a sub-diagonal matrix we can invert analytically; whereas having a full matrix is a lot harder to invert. Another simplification we made is to ignore all meta-stable states and only have the ground states, hence ignoring branching. 
 \end{itemize}
 
-\textbf{Understanding the solutions we obtained}:
+One side-note here is that Bateman equations can be very stiff. For a system of differential equation 
+\eqn{ \left[ \begin{array}{c} N_1' \\ N_2' \\ N_3' \end{array} \right] = \left( \begin{array}{ccc} -\lambda_1 & 0 & 0 \\ \lambda_1^1 & - \lambda_2 & 0 \\ 
+\lambda_1^2 & \lambda_2 & 0 \\ \end{array} \right) \left[ \begin{array}{c} N_1 \\ N_2 \\ N_3 \end{array} \right] }
+
+whose solution is expressed as $[N] = [V] [\Lambda] [V]^{-1} [N_0]$ where 
+\eqn{ [\Lambda] &= \mathrm{Diag} [e^{-\lambda_1 t}, e^{-\lambda_2 t}, 1] & [V] &= \left( \begin{array}{ccc} 1 & 0 & 0 \\ \frac{\lambda_1^1}{\lambda_2 - \lambda_1} & 1 & 0 \\ \frac{\lambda_1^2 - \lambda_2}{\lambda_2 - \lambda_1} & - 1 & 1 \\ \end{array} \right) }
+So if $\lambda_1 = \lambda_2$ (which is possible when absorption terms are present), \hi{numerical instability} could happen depends on the flux level!
+
+\clearpage
+\topic{Actinide Chain Solution}
+\begin{figure}
+  \centering
+  \includegraphics[width=0.8\textwidth]{images/dfs/actinide-vs-BU.png}
+  \includegraphics[width=0.45\textwidth]{images/dfs/actinide-vs-BU-1.png}
+  \includegraphics[width=0.45\textwidth]{images/dfs/actinide-vs-BU-2.png}
+  \includegraphics[width=0.45\textwidth]{images/dfs/actinide-vs-BU-3.png}
+  \includegraphics[width=0.45\textwidth]{images/dfs/actinide-vs-BU-4.png}
+  \caption{Actinide Concentrations vs. BU} \label{actinide-vs-BU}
+\end{figure}
+
+Interpretation of Fig.~\ref{actinide-vs-BU}: 
 \begin{enumerate}
 \item U238 barely changes; there are a lot of it, and it probably decreases by 1\%; often time the nuclear concentration is plotted with respect to initial heavy metal inventory, that is, U238 concentration. 
 \item U234, U235 does not have production, hence it decreases. 
@@ -73,26 +103,67 @@ There are 4 blocks for the 4 species as in Fig.~\ref{actinide-block}.
 \item Production with Pu; 
 \item Am244: takes a certain burnup to come up. Even though Am is a small concentration, we still care about them. 
 \end{enumerate}
-
-About 40-50\% of power would be produced from Pu instead of U by the time we shut down the reactor. 
-
-
-
-
+\begin{figure}
+  \centering
+  \includegraphics[width=0.7\textwidth]{images/dfs/ff-vs-BU.png}
+  \caption{Fission Fractions by Nuclide vs. BU} \label{ff-vs-BU}
+\end{figure}
+Fig.~\ref{ff-vs-BU} shows that about 40-50\% of power would be produced from Pu instead of U by the time we shut down the reactor.
 
 \clearpage
-\topic{Burnup Units}
+\topic{Burnup: Why we use it and units}
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.8\textwidth]{images/dfs/nuclide-vs-power.png}  
+  \caption{Isotropic Number Density vs. BU} \label{n-vs-BU} 
+\end{figure}
+Fig.~\ref{n-vs-BU} shows that power level does not affect number density vs. BU plot. BU is a better gage of depletion effect than time. 
+
 \begin{enumerate}
 \item FIFA = fission per initial fissile atoms;
 \item FIMA = fission per initial (heavy) metal atoms;
 \item Atom percent (A\%) = FIMA * 100;
 \item Burnup: GWd/T = MWd/kg = thermal power per weight of heavy metal. 
   \begin{itemize}
-    \item Advantages: we know the reactor power and 
-    \item Disadvantages: `energy released' is not a very clean term; we don't really care about neutrino energy, gamma energy released from capture of neutrons; energy deposited in fuel assembly B from fissions in assembly A. In LWR, it is a good approximation to assume that energy is depositied where the fission is; in MITR it is a bad approximation, fission product energy (deposite locally), gamma heat energy (not necessarily deposited locally), etc. 
+    \item Advantages: we know the reactor power and initial fuel loading (almost). 
+    \item Disadvantages: `energy released' is not a very clean term; we don't really care about neutrino energy, gamma energy released from capture of neutrons; energy deposited in fuel assembly B from fissions in assembly A etc. In LWR, it is a good approximation to assume that energy is depositied locally where the fission happens; in MITR it is a bad approximation, fission product energy (deposite locally), gamma heat energy (not necessarily deposited locally), etc. 
   \end{itemize}
 \item EFPHs = Effective Full Power Hours; EFPD = Effective Full Power Days. 
 \end{enumerate}
+
+\clearpage
+\topic{History Effects}
+\begin{enumerate}
+\item Burnable Poisons History Effect (Fig.~\ref{BP-history-effect}): hardern the spectrum, because it pushes some water away. It is a history effect: you place BP at BOL and take it out later to achieve flat power through time. \hi{The BP effect is about 250 pcm}. 
+  \begin{figure}
+    \centering
+    \includegraphics[width=5in]{images/dfs/BP-history-effect.png}
+    \caption{Removable Burnable Poisons: History Effects}  \label{BP-history-effect}
+  \end{figure}
+
+
+\item Fuel Temperature Depletion History Effects (Fig.~\ref{dhe}): initially, the instantenous temperature effect is almost independent of depletion; as the burnup increases, something happens. The moral of the story is, we not only need to know the burnup but also the temperature. 
+  \begin{figure}
+    \centering
+    \includegraphics[width=5in]{images/dfs/depletion-history-effect.png}
+    \caption{Fuel Temperature: Depletion History Effects}  \label{dhe}
+  \end{figure}
+
+\item Gadolinium burnable absorber (Fig.~\ref{Gd-BP}): 
+  \begin{itemize}
+  \item Gadolinium has a huge thermal absorption cross section. It's almost as high as Zn, but we cannot use Zinon because it would ecay; 
+  \item What we do with Gadolinium is to replace part of the fuel with Gad and reactivity would be flatter with respect to time. 
+  \item Hold-down is the difference between the reactivity at the beginning of life-cycle. 
+  \item Gad resdual: there is a little bit loss of reactivity due to Gad. Gad depletes from outside to inside. 
+  \end{itemize}
+  \begin{figure}
+    \centering
+    \includegraphics[width=5in]{images/dfs/Gd-BP.png}
+    \caption{Gd Burnable Poisons}  \label{Gd-BP}
+  \end{figure}
+\end{enumerate}
+
+
 
 \clearpage
 \topic{Numerous Subtle Effects}
@@ -104,21 +175,14 @@ About 40-50\% of power would be produced from Pu instead of U by the time we shu
    \item Pa233 has 27 day half-life; 
    \item U232 has 70 year half-life; U232's daughter product Ta208 has 2.6 MeV gamma (which is the hardest gamma known). 
    \end{itemize}
-   Coverage of Th/U233 comparison from Ben's class (11/29). [FIXME]
+   \begin{figure}[h]
+     \centering
+     \includegraphics[width=4in]{images/dfs/Th-U-chains.png}
+     \caption{U233/Th Chains} 
+   \end{figure}
 
 
-\item Burnable Poisons History Effect: hardern the spectrum, because it pushes some water away, BP history effect: you place BP in it at the beginning of the reactor, we take it out later hence to achieve flat power through time. The BP effect is about 250 pcm. 
-
-\item Fuel Temperature Depletion History Effects: 
-Initially, the instantenous temperature effect is almost independent of depletion; as the burnup increases, something happens. The moral of the story is, we not only need to know the burnup but also the temperature. 
-
-\item Gadolinium burnable absorber: 
-  \begin{itemize}
-  \item Gadolinium has a huge thermal absorption cross section. It's almost as high as Zn, but we cannot use Zinon because it would ecay; 
-  \item What we do with Gadolinium is to replace part of the fuel with Gad and reactivity would be flatter with respect to time. 
-  \item Hold-down is the difference between the reactivity at the beginning of life-cycle. 
-  \item Gad resdual: there is a little bit loss of reactivity due to Gad. Gad depletes from outside to inside. 
-  \end{itemize}
+\item Coverage of Th/U233 comparison from Ben's class (11/29). [FIXME]
 
 
 \item Where do reaction rates come from? 

@@ -15,10 +15,12 @@
 The fission products have the following properties: 
 \begin{enumerate}
 \item Number: almost all fissions produce precisely two fission produces per fission;
-\item Unstability: most fission products are highly unstable and radidly decay to other nuclides;
+\item Unstability: most fission products are highly unstable and radially decay to other nuclides;
 \item Thermal spectrum: some fission produces have large thermal absorption cross sections, which are important for thermal spectrum reactors as in Figure~\ref{major-capture};
 \item Fast spectrum: fast reactors are much less sensitive to fission products, because thermal spectrum does not matter. 
 \item Distribution: contributing factors are: which species are fissioned (U235, Pu239, etc), the incident fission neutron energy, random statistical fluctuations nuclide breakup.
+\item Independent fission yield is a different concept from the cumulative fission yield: the former only accounts for fission yield, whereas the latter accounts for generation of the isotope from independent yield as well as all the precursor isotopes that decay into a specific isotope. 
+\item Meda-stable state: an isotope may not directly decay into a stable state; it may branch into a meda-stable state. For our purpose, we are going to take the simplified approach.
 \end{enumerate}
 \begin{figure}
   \centering
@@ -26,15 +28,12 @@ The fission products have the following properties:
   \caption{I135/Xe135 Chain} \label{Xe135} 
 \end{figure}
 
-
-As an example, we look at the Xenon-135 Chain in Figure~\ref{Xe135}. Notice the independent fission yield is a different concept from the cumulative fission yield. Typically very rapid transitions are not followed in details when modeling reactor behavior. For instance, because Te's half-life is 19s, we can assume that \ce{^{135}I} is producted instantenously. Most of the chains are similar and are dominated by beta decays until they are stable. 
-
-Meda-stable state: an isotope may not directly decay into a stable state; it may branch into a meda-stable state. For our purpose, we are going to take the simplified approach.
+As an example, we look at the Xenon-135 Chain in Figure~\ref{Xe135}. Typically very rapid transitions are not followed in details when modeling reactor behavior. For instance, because Te's half-life is 19s, we can assume that \ce{^{135}I} is producted instantenously. Most of the chains are similar and are dominated by beta decays until they are stable. 
 
 \begin{figure}
   \centering
-  \includegraphics[width=3.5in]{images/dfs/fission-product-capture-xs.png}
-  \includegraphics[width=3.5in]{images/dfs/fission-product-absorption.png}
+  \includegraphics[width=0.59\textwidth]{images/dfs/fission-product-capture-xs.png}
+  \includegraphics[width=0.59\textwidth]{images/dfs/fission-product-absorption.png}
   \caption{Major Fission Products Absorption} \label{major-capture} 
 \end{figure}
 
@@ -82,6 +81,7 @@ Xe-135 has a thermal absorption cross section of $2.6\times 10^6$ barns.
 Xenon peaking happens because after shutdown, the major sink is removed, but the major source remains, hence Xenon peaks until the Iodine depletes. Reactors must be designed with enough fuel to offset the effect of Xenon. At the end of core life, there may not be enough reactivity to override peak Xenon; such reactors are called `xenon-precluded.' If a scram occurs, a restart may not be possible for 30-40 hours. See Stacy's Example 6.2 (p.214) for an example of xenon reactivity worth and illustrating diagrams. 
 
 
+
 \begin{table}
   \centering
   \begin{tabular}{|p{0.6\textwidth}|p{0.4\textwidth}|}\hline
@@ -90,7 +90,7 @@ Xenon peaking happens because after shutdown, the major sink is removed, but the
     \end{minipage}
     & 
     \begin{minipage}[b]{0.4\textwidth}
-      After startup: both I and Xe increases, and saturates after 30 hours. After shutdown: I decays quickly, whereas Xe peaks 9 hours after shutdown, and decays away in 60 hours. The peak happens because I coninues to decay into Xe, while Xe can no longer decrease through capture. 
+      After startup: both I and Xe increases, and saturates after \hi{30 hrs}. After shutdown: I decays quickly, whereas Xe peaks \hi{9 hrs} after shutdown, and decays away in 60 hours. The peak happens because I coninues to decay into Xe, while Xe can no longer decrease through capture. 
 There is a 2.5\% depress due to Xe; the higher the flux, the higher the peak is.
     \end{minipage}   \\ \hline
 %
@@ -99,7 +99,7 @@ There is a 2.5\% depress due to Xe; the higher the flux, the higher the peak is.
     \end{minipage}
     & 
     \begin{minipage}[b]{0.4\textwidth}    
-      A rapid startup after a scram: the concentration decreases immediately after the startup, because Xe absorption increases suddnely due to flux and the over-weight the amount from I decay. Xe would reach its equilibrium value again after about 40 hours. 
+      A rapid startup after a scram: the concentration decreases immediately after the startup, because Xe absorption increases suddenely due to flux, which over-weights the amount from I decay. Xe would reach its equilibrium value again after about 40 hrs. 
     \end{minipage}  \\ \hline
 %
     \begin{minipage}[b]{0.6\textwidth}
@@ -107,7 +107,7 @@ There is a 2.5\% depress due to Xe; the higher the flux, the higher the peak is.
     \end{minipage}
  &  
     \begin{minipage}[b]{0.4\textwidth}    
-      Equilibrium Xenon Worth: if $\phi \to \infty$, $X_{eq}$ saturates and is independent of the flux. The Xenon concentration drops right after everytime power increases for the same reason as the previous case (flux increases, the destruction rate of Xe increases instantenously, but the Iodine decay rate has not increased yet). 
+      Equilibrium Xe Worth: if $\phi \to \infty$, then $X_{eq}$ is independent of $\phi$ as shown in the $X_{eq}$ expression; additionally, the Xenon concentration drops right after everytime power increases for the same reason as the previous case (flux increases, the destruction rate of Xe increases instantenously, but the Iodine decay rate has not increased yet). 
     \end{minipage} \\ \hline
 %
     \begin{minipage}[b]{0.6\textwidth}
@@ -115,7 +115,7 @@ There is a 2.5\% depress due to Xe; the higher the flux, the higher the peak is.
     \end{minipage}
  &  
     \begin{minipage}[b]{0.4\textwidth}
-      Xenon for high flux reactor: xenon peak gives rise to a control constraint. If the reactivity reserves (control rods or poisons that can be removed) are insufficient, the reactor cannot be restarted during this period of increased xenon poisoning. We have to wait till Xe drops to re-start. Alternatively, you can start before Xenon builds up, which is pretty rare. 
+      Xe for high flux reactor: Xe peak gives rise to a control constraint. If the reactivity reserves (control rods or poisons that can be removed) are insufficient, the reactor cannot be restarted during this period of increased Xe poisoning. We have to wait till Xe drops to re-start. Alternatively, you can start before Xe builds up, which is pretty rare. 
       \end{minipage} \\ \hline
   \end{tabular}
 \end{table}
@@ -134,7 +134,7 @@ Samarium is another fission poisoner. It has one source: decay of Promethium; it
     & 
     \begin{minipage}[b]{0.4\textwidth}
       Promethium behaves normally: it builds up and reaches equilibrium when in operation, and it decays away after shutdown. 
-Sm behaves similar to Xe in the sense that both peaks after reactor shutdown (Sm peaks 200 hours after shutdown, Xe peaks 9 hours after shutdown). But Sm is stable unlike Xe, and once Pm burns out, Sm would stay constant and never decay away. Sm reactivity peaks by 200-300 pcm after shutdown. 
+Sm behaves similar to Xe in the sense that both peaks after reactor shutdown (Sm peaks \hi{200 hrs} after shutdown, Xe peaks 9 hrs after shutdown). But Sm is stable unlike Xe, and once Pm burns out, Sm would stay constant and never decay away. Sm reactivity peaks by 200-300 pcm after shutdown. 
     \end{minipage}   \\ \hline
 %
     \begin{minipage}[b]{0.6\textwidth}
@@ -168,20 +168,20 @@ Chasing Xenon, meaning placing the control rods where there are high concentrati
 \clearpage
 \topic{Production Codes' Fission Product Modeling}
 \begin{enumerate}
-\item Point Fuel Models: ORIGEN;
+\item Point Fuel Models: ORIGEN: complete isotropic model. 
 \item Lattice Physics: 
-  \begin{enumerate}
+  \begin{itemize}
     \item Traditional models: 30 FPs, 2 lumped FPs (these fission products do not saturate; they increase as burnups).
     \item Latest codes: 250 FPs. 
-  \end{enumerate}
+  \end{itemize}
 \item Core Models: 
-  \begin{enumerate}
+  \begin{itemize}
     \item Traditionally: explicit I/Xe, Pm/Sm, all other FPs are resiual macros (depend on burnups);
-    \item Latest codes: 
-  \end{enumerate}
+    \item Latest codes: about 30 FPs, all other FPs count as residual macros vs. BU. 
+  \end{itemize}
 \end{enumerate}
 
-Benchmark: Nd is a burnup marker term: each fission produces a fixed amount of Nd (Pu and U produces slightly different amount of Nd). Use Nd number density, from the yield, you can back out the burnups. 
+Benchmark: Nd is a burnup marker term b/c of its low absorption cross section.   Each fission produces a fixed amount of Nd (Pu and U produces slightly different amount of Nd). Use Nd number density and the yield, you can back out the burnups. 
 
 Gd156 and Gd157 are important for startups when using old rods (15 years old). Once operating, we don't really care about Gd that much. 
 
