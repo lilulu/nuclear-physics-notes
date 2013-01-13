@@ -27,15 +27,36 @@
   \item Energy aspect of delayed neutron spectra: average prompt neutron emission energy: 2 MeV for prompt neutrons, 0.4 MeV for delayed neutrons. Both spectrum are Maxwellian, except delayed neutrons are more thermal, which makes them more likely to fission. 
   \item Energy group aspect: Delayed neutron spectra vary very slightly for different fissioning nuclides, but very significantly on energy groups. 
   \end{itemize}
+\end{enumerate}
+
+\begin{table}[ht]
+  \centering
+  \begin{tabular}{|c|c|c|} \hline
+    Unit & Definition & Example \\ \hline
+    $\Delta k$ & actual units of PKEs & 0.01 \\
+    \% $\Delta k$ & & 1\% \\
+    pcm & $10^5 \Delta k $ & 1000 pcm \\ \hline
+    Dollars & $\frac{\Delta k}{\beta}$ & \$1.5 \\
+    Cents & 100 Dollars & 150 cents \\ 
+    Milli-beta & 1000 Dollars & 1500 milli-beta \\ \hline
+  \end{tabular}
+\end{table}
 
 
-\item Point kinetics equations: PKEs assume average properties, assume flux spatial shape is constant. 
-  \begin{enumerate}
-  \item Derivations: start with the time-dependent diffusion equation; assume flux is separable $\phi(\vecr, E, t) = S(\vecr, E) T(t)$ ($S$ is the shape function, $T$ is the amplitude function); integrate over all space and energy, normalize; define terms to simplify. Final form: 
+\clearpage
+\topic{PKE Without Feedback}
+\begin{enumerate}
+\item PKE assumptions: 
+  \begin{itemize}
+  \item Flux is separable $\phi(\vecr, E, t) = S(\vecr, E) T(t)$ ($S$ is the shape function, $T$ is the amplitude function); 
+  \item Flux spatial shape is constant (classical PKE). 
+  \item Average properties, by integrate over all space and energy and normalize. 
+\end{itemize}
+
+\item PKE expression: 
     \eqn{ \Aboxed{ \ddt T(t) &= \frac{\rho(t) - \Sum_i \beta_i (t) }{\Lambda (t)} T(t) + \Sum_i \lambda_i C_i (t) + Q(t) } }
     \eqn{ \Aboxed{ \ddt C_i (t) &= \frac{\beta_i (t)}{\Lambda (t)} T(t) - \lambda_i C_i (t) }  }
-
-    \item Physical terms: 
+    Physical terms: 
       \begin{enumerate}
       \item Reactivity $\rho$, where the top is the diffusion equation, and the bottom is fission rate if all the neutrons show up instatenously. 
         \scriptsize
@@ -51,62 +72,42 @@
           \beta_i (t) &= \frac{\int \bsp \dE \int \bsp \dr \left[ \Sum_j \chi_d^j (E) \beta^j \int_0^{\infty} \nu \Sigma_f^j (\vecr, E', t) S(\vecr, E') \dE' \right] }{\int \bsp \dE \int \bsp \dr \Sum_j \left( \chi_p^j (E) (1-\beta^j) + \Sum_i \chi_d^i (E) \beta_i^j \right) \int \bsp \nu \Sigma_f^j S \dE'} 
         \end{align}
 
-      \item Prompt neutron lifetime, which is $\sim 1/v$ of shape divided by almost-instantenous-fission-rate. 
+      \item Prompt neutron lifetime, which is $\sim 1/v$ of shape divided by almost-instantenous-fission-rate. Know $\Lambda \sim 10^{-5}$ for LWRs; smaller for SFR, and larger for CANDU. 
 
         \begin{align}
           \Lambda (t) &= \frac{\int \bsp \dE \int \bsp  \dr \left[ \frac{1}{v} S(\vecr, E) \right] }{\int \bsp \dE \int \bsp \dr \Sum_j \left( \chi_p^j (E) (1-\beta^j) + \Sum_i \chi_d^i (E) \beta_i^j \right) \int \bsp \nu \Sigma_f^j S \dE'} 
         \end{align}
         \eqn{ \Aboxed{ \Lambda(t) &\approx \frac{1}{v \nu \Sigma_f} \xrightarrow{\mathrm{criticality}} \frac{1}{v \Sigma_a} } }
 
-      \item The $i$-th precursor, 
-        \eqn{ C_i (t) = \int \dE \int \dr C_i (\vecr, t) }
-      \item The total external source, 
-        \eqn{ Q(t) = \int \dE \int \dr Q (\vecr, t) }
+      \item The $i$-th precursor, $C_i (t) = \int \dE \int \dr C_i (\vecr, t)$. 
+
+      \item The total external source, $Q(t) = \int \dE \int \dr Q (\vecr, t)$. 
       \end{enumerate}
 
-
-    \item Data
-    \item Delayed neutron precursors
-    \item Spectra
-  \end{enumerate}
-
-\item Point kinetics equations: 
-  \begin{enumerate}
-    \item Prompt-jump approximation: 
+    \item \textbf{Prompt-jump approximation}: assume $C_i^+ = C_i^-$, $\left. \dTdt \right|_{t = 0^-} = 0, \left. \dTdt \right|_{t = 0^+} = 0$, 
       \begin{align}
         \ddt T(t) &\approx 0 = \frac{\rho - \beta}{\Lambda} T(t) + \lambda C(t) \\
         T(0^+) &= \frac{\Lambda \lambda}{\beta - \rho} C(0^+) = \frac{\Lambda \lambda}{\beta - \rho} \left[ \frac{\beta}{\Lambda \lambda} T_0 \right] \\
         \Aboxed{ \frac{T(0^+)}{T_0} &= \frac{\beta}{\beta - \rho} }
       \end{align}
-    \item In-hour equation: basically assume solutions take the form of, $T(t) \approx C_i (t) \approx e^{\omega t}$, plug into PKE, and get
+
+    \item \textbf{In-hour equation}: basically assume solutions take the form of, $T(t) \approx C_i (t) \approx e^{\omega t}$, plug into PKE, and get
       \eqn{ \Aboxed{ \rho &= \omega \Lambda + \Sum_i \frac{\beta_i \omega}{\omega + \lambda_i}} }
+      \textbf{Asymptotic periods}: we can only use Inhour equation for asymptotic period, that is, a stable condition indicated by a constant period. Thus to use Inhour equation, we have to make the reactor stable first. For any time dependent problem, we have to use the more general IK. 
 
-    \item Asymptotic periods: we can only use Inhour equation for asymptotic period, that is, a stable condition indicated by a constant period. Thus to use Inhour equation, we have to make the reactor stable first. For any time dependent problem, we have to use the more general IK. 
-  \end{enumerate}
-
-\item Reactivity units: 
-
-\begin{table}[ht]
-  \centering
-  \begin{tabular}{|c|c|c|} \hline
-    Unit & Definition & Example \\ \hline
-    $\Delta k$ & actual units of PKEs & 0.01 \\
-    \% $\Delta k$ & & 1\% \\
-    pcm & $10^5 \Delta k $ & 1000 pcm \\ \hline
-    Dollars & $\frac{\Delta k}{\beta}$ & \$1.5 \\
-    Cents & 100 Dollars & 150 cents \\ 
-    Milli-beta & 1000 Dollars & 1500 milli-beta \\ \hline
-  \end{tabular}
-\end{table}
-
-\item Inverse kinetics equations: 1st order ODE again. First given $T(t)$ we solve for the precursor concentration,
+\item \textbf{IKE}: 1st order ODE again. First given $T(t)$ we solve for the precursor concentration,
 \eqn{ \Aboxed{ [C(t)] &= [e^{-At}][C_0] + [e^{-At}] [A]^{-1} \left( [e^{At}][Y(t)] - [Y_0] \right) } }
 where $[A] = \mathrm{diag}[\lambda_i], [Y(t)] = \frac{\mathrm{diag}[\beta_i]}{\Lambda} T(t)$. Then manipulating PKEs, we can get $\rho(t)$ in terms of $T(t), C(t)$, 
 \begin{align}
 \Aboxed{\rho(t) &= \frac{\Lambda}{T(t)} \ddt T(t) + \beta - \frac{\Lambda}{T(t)} \Sum_i \lambda_i C_i(t) - \frac{\Lambda}{T(t)} Q(t) } \\
 \Aboxed{ \rho_n &= \frac{\Lambda}{T_n} \frac{T_n - T_{n-1}}{t_n - t_{n-1}} + \beta - \frac{\Lambda}{T_n} \Sum_i \lambda_i C_{i,n} - \frac{\Lambda}{T_n} Q_n } 
 \end{align}
+\end{enumerate}
 
+
+\clearpage
+\topic{PKE with Feedback}
+\begin{enumerate}
 \item Fuchs-Nordheim model for RIAs: nice for intuition
   \begin{enumerate}
     \item Deposited energy: general expression, 
@@ -134,9 +135,12 @@ where $[A] = \mathrm{diag}[\lambda_i], [Y(t)] = \frac{\mathrm{diag}[\beta_i]}{\L
   \item Time constants: recall the asymptotic power decay time constant is just that of the longest precursor. 
   \item Power level changes: power overshoot is proportional to the reactivity change rate, but not the asymptotic value. 
   \end{enumerate}
+\end{enumerate}
 
 %%%%%%%%%%%%%%%%%% Nodal %%%%%%%%%%%%%%%%%%%%
-\item Nodal methods\footnote{weighted residual is not on the final}. The point of Nodal methods is that we can achieve high accuracy with large node size (compared with finite difference methods). We turn a 3D PDE into 3 1D ODE that are coupled through averaged transverse leakage terms. 
+\clearpage
+\topic{Homogenization \& Dehomogenization} 
+Nodal methods\footnote{weighted residual is not on the final}. The point of Nodal methods is that we can achieve high accuracy with large node size (compared with finite difference methods). We turn a 3D PDE into 3 1D ODE that are coupled through averaged transverse leakage terms. 
     \begin{align*}
       \boxed{ - \Sigma_{Dg}^x \frac{\derivative^2}{\dxi_x^2} \bar{\psi}_{gx} (\xi_x) + \Sigma_{rg} \bar{\psi}_{gx} (\xi_x) = \frac{1}{\keff} \chi_g \Sum_{g'=1}^G \nu \Sigma_{fg'} \bar{\psi}_{g'x} (\xi_x) + \Sum_{g'=1}^G \Sigma_{sg'g} \bar{\psi}_{g'x} (\xi_x) - L_{gy} (\xi_x) - L_{gz} (\xi_x) }    \\
    \boxed{ - \Sigma_{Dg}^y \frac{\derivative^2}{\dxi_y^2} \bar{\psi}_{gy} (\xi_y) + \Sigma_{rg} \bar{\psi}_{gy} (\xi_y) = \frac{1}{\keff} \chi_g \Sum_{g'=1}^G \nu \Sigma_{fg'} \bar{\psi}_{g'y} (\xi_y) + \Sum_{g'=1}^G \Sigma_{sg'g} \bar{\psi}_{g'y} (\xi_y) - L_{gz} (\xi_y) - L_{gx} (\xi_y) }  \\
@@ -168,6 +172,7 @@ where $[A] = \mathrm{diag}[\lambda_i], [Y(t)] = \frac{\mathrm{diag}[\beta_i]}{\L
       That is, we have exponential homogeneous and polynomial particular solutions. 
   \end{enumerate}
 
+\begin{enumerate}
 \item Transverse-integration procedure
   \begin{enumerate}
     \item 3D to coupled 1D: we pick a direction of interest, perform integration within node over the plane normal to that direction, then devide by the planar area. For instance, the transverse leakage term is, 
@@ -187,7 +192,6 @@ where $[A] = \mathrm{diag}[\lambda_i], [Y(t)] = \frac{\mathrm{diag}[\beta_i]}{\L
   \end{enumerate}
 
 
-\clearpage
 %%%%%%%%%%%%%%%%%%% Homogenenization methods %%%%%%%%%%%%%%%%%%%%%%%%%%
 \item Homogenization methods
   \begin{enumerate}
@@ -221,10 +225,12 @@ where $[A] = \mathrm{diag}[\lambda_i], [Y(t)] = \frac{\mathrm{diag}[\beta_i]}{\L
       \end{itemize}
   \end{enumerate}
   Side note: there are two entirely different problems. One is an eigenvalue problem, using homogenized cross section, and output $k$, and the flux computed would be continuous. The other is a fixed-source problem, using $\keff$ as input (hence $J$ at interface), and generate discontinuous flux. 
-
+\end{enumerate}
 
 \clearpage
+\topic{Perturbation, Adjoint}
 %%%%%%%%%%%%%%%%%%% Perturbation Theory %%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{enumerate}
 \item  First-Order Perturbation (FOP): the point is to solve for reactivity resulted from a perturbation without have to solving for the perturbed spatial flux. There are three sets of expressions, one for unperturbed forward problem, one for the unperturbed adjoint problem,
 \eqn{ A_0 \psi_0 &= \frac{1}{k_0} M_0 \psi_0 &A_0^*\psi_0^* &= \frac{1}{k_0^*} M^* \psi_0^*  }
 and a third set of perturbed forward problem, 
@@ -234,8 +240,8 @@ FOP approximate the perturbed problem using,
 Plug the above approximation into Eq.~\ref{pertb3} and simplify, we reach the FOP which is 2nd order accurate, 
    \eqn{ \boxed{\delta \rho \approx \frac{\expect{\psi_0^*, \left( \frac{1}{k_0} \delta M - \delta A \right) \psi_0 }}{\expect{\psi_0^*, M_0 \psi_0}}  } }
 
-\item Adjoint fluxes: if we put a neutron at this place this energy, what is the probability it would cause fission.
-  \begin{enumerate}
+\item Adjoint fluxes physical meaning: if we put a neutron at this place this energy, what is the probability it would cause fission.
+
   \item Balance equations:
     \begin{align}
       -\gradient D_g  \gradient \phi_g + \Sigma_{tg} \phi_g &= \chi_g \Sum_{g'=1}^G \nu \Sigma_{fg'}  \phi_{g'} + \Sum_{g'=1}^G \Sigma_{sg'\to g} \phi_{g'} \\
@@ -277,7 +283,6 @@ Plug the above approximation into Eq.~\ref{pertb3} and simplify, we reach the FO
     \item The PWR spectrum: . 
     \item For a typical two group problem, the adjoint flux should have the same shape for the two groups, except the magnitude is offset by $\frac{\phi_2^*}{\phi_1^*}$. 
     \end{itemize}
-  \end{enumerate} 
 
 \item Adjoint fluxes in kinetics parameters\footnote{In operating reactors, they measure the control rod worth; they are no better than the delayed spectra}
   \begin{enumerate}
@@ -287,7 +292,6 @@ Plug the above approximation into Eq.~\ref{pertb3} and simplify, we reach the FO
    \eqn{ \bar{I} = \frac{\expect{S_0^* (E), \chi_d (E)}}{\expect{S_0^*(E), \chi_p (E)}} }
   \end{enumerate}
 
-\item Loading pattern optimization
 \end{enumerate}
 %%%%%%%%%%%%%%%%%%%%%%%%% Final Exam End %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 

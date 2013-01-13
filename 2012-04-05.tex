@@ -221,22 +221,31 @@ Dominance ratio measures the spatial decoupling, and it depends on: symmetric mo
 
 \item Order of operations (not included in official list): Matrix inversion is of $N^3$, finding all eigenvalues is at least $N^2$, iterative inversion must be order $N$ to be practical, multi-level iteration is a necessity. 
 \end{enumerate}
+\end{enumerate}
 
 
 
+\clearpage
+\topic{Fission Product and Fuel Depletion}
+\begin{enumerate}
+\item Fission yields. General properties of fission products: most are highly unstable and rapidly decay; certain fission products are important to thermal spectrum ($\up$ thermal absorption xs, top three are: \ce{^{135} Xe}, \ce{^{103} Rh}, \ce{^{143} Nd}), but have little contribution to the fast spectrum. 
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=5in]{images/dfs/fission-product-yield.png}
+\end{figure}
 
-\item Fission product equations
-  \begin{enumerate}
-  \item Physics: see the balance equation. 
+\item FP absorption (thermal spectrum): know top six which make up around 50\% of total absorption: Xe-135, Rh-103, Nd-143, Xe-131, Cs-133, Sm-149. 
+
+\clearpage
+\item FP balance equation: 
+ \eqn{ \boxed{ \frac{\derivative N_i}{\dt} = \overbrace{\gamma_i \Sigma_f \phi}^{\mbox{fission gain}} - \overbrace{\lambda_i N_i}^{\mbox{decay}} - \overbrace{\sigma_i N_i \phi}^{\mbox{n capture}}  + \overbrace{ \lambda_j N_j}^{\mbox{decay of j}} + \overbrace{\sigma_k N_k \phi}^{\mbox{n capture of k}} } }
     \begin{figure}[ht]
       \centering
       \includegraphics[width=4in]{images/dfs/nuclide-balance-equation.png}
     \end{figure}
 
-  \item Analytic solution first order ODEs: 
+  \item Analytic solution first order ODE $\boxed{\dNdt + A(t) N(t) = Y }$, know to do $\mbox{IF} = e^{\int A(t) \dt} = e^{At}$, 
     \begin{align}
-      \dNdt + A(t) N(t) &= Y \\
-      \mbox{IF} &= e^{\int A(t) \dt} = e^{At} \\
       e^{At} \dNdt + e^{At} A(t) N(t) &= e^{At} Y \\
       \ddt[e^{At} N(t) ] &= e^{At} Y \\
       e^{At} N(t) &= A^{-1} e^{At} Y + C 
@@ -251,7 +260,6 @@ Dominance ratio measures the spatial decoupling, and it depends on: symmetric mo
       \centering
       \includegraphics[width=5in]{images/dfs/fp-an-matrix-form.png} 
     \end{figure}
-  \end{enumerate}
 
 \item Nuclide depletion equations: it is exactly the same as the FP equations. 
   \begin{enumerate}
@@ -260,29 +268,24 @@ Dominance ratio measures the spatial decoupling, and it depends on: symmetric mo
   \item Matrix construction. 
   \end{enumerate}
 
-\item Coupled first-order ODEs, matrix solution, look hard to know how to use IF to do 1st order ODE. 
-\end{enumerate}
-
-
 
 \clearpage
-\topic{Fission Product and Fuel Depletion}
-\begin{enumerate}
-\item Fission yields. General properties of fission products: most are highly unstable and rapidly decay; certain fission products are important to thermal spectrum ($\up$ thermal absorption xs, top three are: \ce{^{135} Xe}, \ce{^{103} Rh}, \ce{^{143} Nd}), but have little contribution to the fast spectrum. 
-\begin{figure}[ht]
-  \centering
-  \includegraphics[width=5in]{images/dfs/fission-product-yield.png}
-\end{figure}
+\item Xe-I, Pm-Sm decay chain: know Xe do not decay away. 
 
-\item Transient fission product equations: 
- \eqn{ \frac{\derivative N_i}{\dt} = \overbrace{\gamma_i \Sigma_f \phi}^{\mbox{fission gain}} - \overbrace{\lambda_i N_i}^{\mbox{decay}} - \overbrace{\sigma_i N_i \phi}^{\mbox{n capture}}  + \overbrace{ \lambda_j N_j}^{\mbox{decay of j}} + \overbrace{\sigma_k N_k \phi}^{\mbox{n capture of k}} }
- Solving the above equation, we find that: 
- \begin{itemize}
+  \begin{figure}[ht]
+    \includegraphics[width=0.58\textwidth]{images/dfs/I-Xe.png}     
+    \includegraphics[width=0.41\textwidth]{images/dfs/Pm-Sm.png}     
+  \end{figure}
+
+
+
+\item Equilibrium solution and interpretation: 
+ \begin{enumerate}
    \item Equilibrium I-135 concentration is proportional to flux: $I_{eq} = \frac{\gamma_I \Sigma_f \phi}{\gamma_I}$;
    \item Equilibrium Xe-135 concentration depends on flux at low flux, and it is independent at high flux level: $X_{eq} = \frac{(\gamma_I + \gamma_X) \Sigma_f \phi}{\gamma_X + \sigma_X \phi}$;
    \item Equilibrium Pm-149 concentration is proportional to flux: $P_{eq} = \frac{\gamma \Sigma_f \phi}{\gamma}$;
    \item Equilibrium Sm-149 concentration is independent of flux: $S_{eq} = \frac{\gamma \Sigma_f}{\sigma}$. 
- \end{itemize}
+ \end{enumerate}
 
 \item I/Xe, Pm/Sm reactivity effects: Xe and Sm both are fission poisoners\footnote{Xe-135 has a thermal absorption cross section of $2.6\times 10^6$ barns.}. 
 \begin{itemize}
