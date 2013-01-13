@@ -5,7 +5,7 @@
 \maketitle
 
 \lecture{Fuel Depletion} \label{fuel-depletion}
-For fuel assembly depletion, the reactivity of fuel changes dramatically with burnup as in Fig.~\ref{rho-vs-BU}. 
+For fuel assembly depletion, the reactivity of fuel changes dramatically with burnup as in Fig.~\ref{rho-vs-BU}. Typically fresh assemblies would include burnable poisons to control initial reactivity. Notice the rapid drop right after reactor start-up -- it is due to Xe buildup. 
 
 \begin{figure}[h]
   \centering
@@ -134,6 +134,13 @@ Fig.~\ref{n-vs-BU} shows that power level does not affect number density vs. BU 
 \clearpage
 \topic{History Effects}
 \begin{enumerate}
+\item Overall, we use WABA (Wet Annular Burnable Absorber), IFBA (Integral Fuel Burnable Absorber) and Gd (mixed with fuel) to control reactivity. 
+  \begin{figure}
+    \centering
+    \includegraphics[width=4in]{images/dfs/WABA-IFBA.png}
+    \caption{Composition of WABA and IFBA} 
+  \end{figure}
+
 \item Burnable Poisons History Effect (Fig.~\ref{BP-history-effect}): hardern the spectrum, because it pushes some water away. It is a history effect: you place BP at BOL and take it out later to achieve flat power through time. \hi{The BP effect is about 250 pcm}. 
   \begin{figure}
     \centering
@@ -151,10 +158,11 @@ Fig.~\ref{n-vs-BU} shows that power level does not affect number density vs. BU 
 
 \item Gadolinium burnable absorber (Fig.~\ref{Gd-BP}): 
   \begin{itemize}
-  \item Gadolinium has a huge thermal absorption cross section. It's almost as high as Zn, but we cannot use Zinon because it would ecay; 
-  \item What we do with Gadolinium is to replace part of the fuel with Gad and reactivity would be flatter with respect to time. 
-  \item Hold-down is the difference between the reactivity at the beginning of life-cycle. 
-  \item Gad resdual: there is a little bit loss of reactivity due to Gad. Gad depletes from outside to inside. 
+  \item Gadolinium has a huge thermal absorption cross section. It is almost as high as Zn, but we cannot use Zinon because it would decay; 
+  \item What we do with Gadolinium is to replace part of the fuel with Gd and reactivity would be flatter with respect to time. 
+  \item Gad depletes/burns in layers around the fuel pin from outside to inside. ]
+  \item Hold-down is the difference between the reactivity at the BOL with and without the reactivity control mechanism. 
+  \item Gad resdual: there is a little bit loss of reactivity due to Gad. 
   \end{itemize}
   \begin{figure}
     \centering
@@ -182,8 +190,40 @@ Fig.~\ref{n-vs-BU} shows that power level does not affect number density vs. BU 
    \end{figure}
 
 
-\item Coverage of Th/U233 comparison from Ben's class (11/29). [FIXME]
+\item Coverage of Th/U233 comparison from Ben's class (11/29). 
 
+  \begin{tabular}{ccc}
+    \begin{minipage}[b]{0.3\linewidth}
+      \includegraphics[width=\textwidth]{images/dfs/U-vs-Th.png}
+    \end{minipage}
+    &
+    \begin{minipage}[b]{0.3\linewidth}
+      \includegraphics[width=\textwidth]{images/dfs/U-vs-Th-2.png}
+    \end{minipage}
+    &
+    \begin{minipage}[b]{0.38\linewidth}
+      \begin{itemize}
+      \item Neutron yield increases with incoming neutron energy, and Pu239 produces almost 0.5 more neutron per fission. 
+      \item But fission probability once captures in larger in U233 except at high energy. 
+      \item Combining the two graphs yields: $\eta = \frac{\nu \sigma_f}{\sigma_f + \sigma_c}$. Thus Th cycle is preferable for breeding in thermal systems. 
+      \end{itemize}
+    \end{minipage}
+  \end{tabular}
+      
+\item Th cycle advantages: 
+\begin{enumerate}
+\item Abundancy is 4x that of U. 
+\item Less waste:  we start further bottom left from the chain, and Th cycle would generate less MA waste. 
+\item U-233 critical mass is smaller than U-235 and not diluted by U-238. 
+\item U-232 emits high energy gamma. 
+\item Difficult reprocessing. 
+\end{enumerate}
+Companies that considers Th cycle: Thorium Power Inc which is a subsidiary of Lightbridge Corp. 
+\begin{table}
+  \centering
+  \includegraphics[width=5in]{images/dfs/fuel-type.png}
+  \caption{Nuclear Fuel Characteristics} 
+\end{table}
 
 \item Where do reaction rates come from? 
   \begin{itemize}
@@ -207,25 +247,49 @@ Fig.~\ref{n-vs-BU} shows that power level does not affect number density vs. BU 
 \topic{Spent Fuel and Recycling}
 This section was covered by Prof. Forget on 11/29/12. 
 \begin{enumerate}
-
-\item Pu enrichment is higher than U enrichment for two reasons: a) only 60\% Pu is fissile \ce{^{239}Pu}, the rest of them are parisitic; b) Pu has a higher absorption rates. 
+\item Spent fuel: 15\% of U-235 transmuted to U-236 and Np-237. 3.5\% of U-238 transmuted to Pu-239. That is, \hi{60\% fissioned} and the rest remains Pu-239 and higher actinides. 
 
 \item The majority of the spent fuel is U238 which is not real waste; the U and Pu in the spent fuel is sent back to the core. The real waste is limited to MA and is vitrified in a borosilicate glass form. 
 
+\item MOX recycling: spent fuel contains enough fissile Pu to be recycled in a LWR. \ce{Pu O_2} is mixed with depleted U (enrichment varies between 5 to 8\% Pu). Pu recycling reduces amount of waste by 30 \% (reduce total TRU by 20\%), but has minimal impact on radiotoxicity. MOX core loading is currently being done in France, Germany, Belgium, Switzerland and Japan. Current PWR are limited to 30\% loading of MOX assemblies b/c: 
+  \begin{itemize}
+    \item Pu reduces the delayed neutron fraction. 
+    \item MOX fuel has a harder spectrum thus reducing the efficiency of the control rods and soluble boron. 
+    \item Create pin peaking at the edge of MOX and UOX assemblies. 
+  \end{itemize}
+  Newly designed PWRs would be able to accommodate full core MOX assemblies by: 
+  \begin{itemize}
+    \item $\up$ number of control rods. 
+    \item $\up$ boron enrichment. 
+    \item $\up$ moderator to fuel ratio. 
+  \end{itemize}
+
+\item A higher Pu enrichment is typically required compare to U for two reasons: a) only 60\% Pu is fissile \ce{^{239}Pu}, the rest of them are parisitic; b) Pu has a higher absorption rates. 
+  \begin{figure}[h]
+    \centering
+    \includegraphics[width=4in]{images/dfs/Pu-fuel.png}
+  \end{figure}
+
+
 \item Multi-recycling: we cannot recycle too many times. Reason: after 1st cycle the fissile content is 64.8\%, after 2nd cycle fissile is only 51.1\% and requires a higher Pu enrichment; and if Pu enrichment is pass xxx, then the void coefficient would become positive. 
+  \begin{figure}[h]
+    \centering
+    \includegraphics[width=4in]{images/dfs/multirecycling.png}
+  \end{figure}
 
 \item DUPIC cycle (used in CANDU): it is an entirely mechanical process during which we grind up everything, the gas comes out, and re-construct the grinds into fuel which contains about 0.8\% U235 and 0.8\% Pu239, which is about twice the excess reactivity of natural uranium and is more than enough for a CANDU.
 
 \item Fast reactor transmutation: at high energy, all MA are fissible (also high absorption cross section which is why we don't expect to get energy from MA), so we can transmutate MA.  
 
-
-\item Th cycle advantages: 
-\begin{enumerate}
-\item Abundancy is 4x that of U. 
-\item Less waste:  we start further bottom left from the chain, and Th cycle would generate less MA waste. 
-
-\end{enumerate}
-Companies that considers Th cycle: Thorium Power Inc which is a subsidiary of Lightbridge Corp. 
+\item Safety concerns: See Fig.~\ref{safety-concern}. 
+ 
+  \begin{figure}[h]
+    \centering
+    \includegraphics[width=0.45\textwidth]{images/dfs/safety-Doppler.png}
+    \includegraphics[width=0.45\textwidth]{images/dfs/safety-void.png}
+    \includegraphics[width=3.2in]{images/dfs/safety-delayed-neutrons.png}
+    \caption{Safety Concerns} \label{safety-concern}
+  \end{figure}
 \end{enumerate}
 
 \clearpage
@@ -326,7 +390,13 @@ This section was given by Prof. Forget on 12/04/12 and 12/06/12.
         \item The effect of control rod is more subtle -- as $T_c \up$, water density decreases, water moderates less, spectrum hardens, then the dominating cross section becomes smaller (recall 1/v behavior in absorption cross section in thermal energy range), or say . \textcolor{blue}{This is a good way to consider spetral effect: think about how the flux peak shifts, and think what the cross section is like at that peak.}
         \end{itemize}
         
-      \item Summary: as $T_c \up, p \down, f \up$. When we design a reactor, we have to balance $p$ with $f$ because an optimal moderation exists. We want to stay under-moderated. 
+      \item Summary: as $T_c \up, p \down, f \up$. When we design a reactor, we have to balance $p$ with $f$ because an optimal moderation exists. We want to stay under-moderated as in Fig.~\ref{um}.
+        \begin{figure}
+          \centering
+          \includegraphics[width=4in]{images/dfs/under-moderation.png}
+          \caption{Under Moderation Requirement} \label{um}
+        \end{figure}
+
       \end{itemize}
 
 \item Fast reactor considerations: we pack fuels more tightly, $\alpha_m > 0, \alpha_f < 0$, we use leakage to control reactivity: 
@@ -340,8 +410,7 @@ This section was given by Prof. Forget on 12/04/12 and 12/06/12.
 
 \item Power coefficient: at the end of the day, we really care about the power coefficient that combines fuel temperature effect and moderator temperature coefficient. We want the power coefficient to be negative. 
   \eqn{ \alpha_P = \frac{\drho}{\dP} = \frac{1}{k} \frac{\pk}{\drho} = \frac{1}{k} \frac{\dk}{\dT_f} \frac{\dT_f}{\dP} + \frac{1}{k} \frac{\dk}{\dT_c} \frac{\dT_c}{\dP} }
-The one reactor built that has a positive power coefficient unexpected (designed to be -0.12mk/MW, measured at 0.28 mk/MW had to be shutdown) is the MAPLEs medical reactor built around 2000. 
-Fuel expands by less than 1mm but because it is a small reactor it pushes the power coefficient to be positive. 
+The one reactor built that has a positive power coefficient unexpected (designed to be -0.12mk/MW, measured at 0.28 mk/MW had to be shutdown) is the MAPLEs medical reactor built around 2000. Fuel expands by less than 1mm but because it is a small reactor it pushes the power coefficient to be positive. 
 
 Key points:
 \begin{enumerate}
