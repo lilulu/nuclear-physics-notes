@@ -5,11 +5,9 @@
 \maketitle
 
 
-%%%%%%%%%%% Break here %%%%%%%%%%%%
-
-
-
+%%%%%%%%%%% Part 3: Structure (shell, spin-parity), decay, neutron interaction %%%%%%%%%%%%
 \clearpage
+\topic{Nuclear Structure}
 \uline{Shell Model}
 \begin{enumerate}
 \item Nuclear Magic Number(Z or N): 2 (He), 8 (Oxygen), 20, 28, 50 (Zr), 82, 126. 
@@ -147,29 +145,38 @@ S_n &= B(\ce{^A_Z X_N}) -B(\ce{^{A-1}_Z X_{N-1}}) = \left[ m(A-1, Z) - m(A,Z) + 
 S_p &= B(\ce{^A_Z X_N}) -B(\ce{^{A-1}_{Z-1} X_{N}}) = \left[ m(A-1, Z-1) - m(A,Z) + m_{H} \right] c^2
 \end{align}
 \item Semi-empirical binding energy formula:
-    \eqn{B = \underbrace{15.5 A - 16.8 A^{2/3} - 0.72 \frac{Z(Z-1)}{A^{1/3}}}_{\mbox{`liquid-drop model,' collective behavior.}} \underbrace{- 23 \frac{(A-2Z)^2}{A} \pm 34 A^{-3/4}}_{\mbox{`shell model,' individual nucleon behavior.}}   }
+    \eqn{ \Aboxed{ B &= \underbrace{15.5 A - 16.8 A^{2/3} - 0.72 \frac{Z(Z-1)}{A^{1/3}}}_{\mbox{`liquid-drop model,' collective behavior.}} \underbrace{- 23 \frac{(A-2Z)^2}{A} \pm 34 A^{-3/4}}_{\mbox{`shell model,' individual nucleon behavior.}}   } }
     Parity Contribution: this term arises from the tendency of the like nucleons (neutron \& neutrons, protons \& protons) to couple pairwise to more stable configurations.
-    \begin{enumerate}
-    \item Odd N, odd Z: weakly bound, lose binding energy, $\sim -a_p A^{-3/4}$;
+    \begin{itemize}
+    \item Odd-odd: weakly bound, lose binding energy, both V and E move up, $\sim -a_p A^{-3/4}$;
     \item Odd A: no effect;
-    \item Even N, even Z: tightly bound, gain binding energy, $\sim a_p A^{-3/4}$.
-    \end{enumerate}
-\item Binding energy per nucleon graph: initial rise in B/A is due to decreasing importance of the surface term as A increases. The peak at A=60 is due to Coulomb repulsion increases as A increases.     
+    \item Even-even: tightly bound, gain binding energy, both V and E move down, $\sim a_p A^{-3/4}$.
+    \end{itemize}
+    \textbf{09 Qual \#2a}: write $B(A,Z)$ with unspecified coefficients, state the physics reason for the A and Z dependency in each term and indicate the sign.  
+
+\item B/A vs. A graph: 
+  \begin{itemize}
+  \item Initial rise in B/A is due to decreasing importance of the surface term as A increases. 
+  \item The peak at A=60 is due to Coulomb repulsion increases as A increases. 
+  \item \textbf{09 Qual \#2b,c}: draw B/A vs. A curve. Explain why heavy nuclides fission to produce energy and very light nuclide fuse to produce energy.   
+ \end{itemize}
+
 \item SEMF: combine the two formulas we have about binding energy. 
 \begin{align}
 B(A,Z) &= \left[ Z m_H + N m_n - m(A,Z) \right] c^2  \label{BAZ}\\
 m(A,Z) c^2 &= \left[ Z m_H + N m_n \right] c^2 - B(A,Z) = Z^2 (\cdots) + Z(\cdots) + C \label{SEMF-m}
 \end{align}
-\item Mass parabola is derived from Eq.~\ref{SEMF-m}. $\frac{\dM}{\dZ} = 0$ to find $Z_{\mathrm{min}}$. At small A, $Z_{\mathrm{min}} \sim \frac{A}{2}$. At large A, $Z_{\mathrm{min}} < \frac{A}{2} \sim 0.41 A$. 
-\eqn{ Z_{\mathrm{min}} \approx \frac{A/2}{1 + \frac{1}{4} \frac{a_c}{a_{\mathrm{sym}}} A^{3/4}} }
+
+\item Mass parabola is derived from Eq.~\ref{SEMF-m}. $\frac{\dM}{\dZ} = 0$ to find $\displaystyle Z_{\mathrm{min}} \approx \frac{A/2}{1 + \frac{1}{4} \frac{a_c}{a_{\mathrm{sym}}} A^{3/4}} $. At small A, $Z_{\mathrm{min}} \sim \frac{A}{2}$. At large A, $Z_{\mathrm{min}} < \frac{A}{2} \sim 0.41 A$. 
+
 \item Mass parabola is used for: 
     \begin{enumerate}
     \item To determine whether a decay process will happen or not, it has to be \textcolor{blue}{energetically allowed, $M_{\mathrm{final}} < M_{\mathrm{initial}}$, that is, goes down on the M vs. Z curve.}
     \item Remember for odd A there is only 1 parabola; for even A there are two (o-o is above e-e)
     \end{enumerate}
+\textbf{09 Qual \#2d}: what is the shape of the mass curve? given a mass parabola curve, mark the sequence of decay to a stable isotope(s). Are there additional decays that are not in these sequences? Answer: parabolic. $\beta$- decay to increase proton (moving to the right on the curve), and $\beta$+ to move to the left. We can not tell whether a $\beta$+ or an electron capture would happen. 
 \end{enumerate}
 
-\clearpage
 \uline{Decays}
 
 \begin{enumerate}
@@ -222,10 +229,12 @@ m(A,Z) c^2 &= \left[ Z m_H + N m_n \right] c^2 - B(A,Z) = Z^2 (\cdots) + Z(\cdot
 \end{enumerate}
 
 \clearpage
-\uline{Alpha decay}
+\uline{Alpha decay} (tested every year!)
 \begin{enumerate}
 \item Conceptional stuffs:
 \begin{enumerate} 
+\item Most radioactive substances are $\alpha$-emitters. Most nuclides with $A>150$ are unstable against $\alpha$ decay. 
+
 \item Why does the parent nuclei (typically heavy) want to spit out $\alpha$ particles? 
 
 Answer: Coulomb Repulsion Effect. Coulomb force increases super-linearly with respect to binding energy\footnote{Nuclear binding energy $\propto a_V A,$ Coulomb repulsion $\propto -a_C \frac{Z^2}{A^{1/3}}$, Coulomb term increases faster than nuclear binding term for heavy nuclei.}. There is a need to get rid of some protons.  
@@ -251,11 +260,13 @@ Answer: $\alpha$ particle is favored over lighter nuclei because it is doubly ma
 Answer: spontaneous fission means $Z_1 \sim Z_2$, which makes the product large, $E_G$ large, $2G$ large, $P_T$ small. 
 \end{enumerate}
 %
-\item Conservation of Energy:The decay will occur spontaneously only if $Q >0$. In general, $Q>0$ for $A > 150$ (but $\alpha$ decay observed for $A \ge 190$). 
+
+\item Conservation of Energy: decay will occur spontaneously only if $Q >0$. In general, $Q>0$ for $A > 150$ (but $\alpha$ decay observed for $A \ge 190$). 
 \begin{align}
 m_X c^2 &= m_{\Xp} c^2 + T_{\Xp} + m_{\alpha} c^2 + T_{\alpha} \\
 (m_X - m_{\Xp} - m_{\alpha} ) c^2 &= B(\Xp) + B(\alpha) - B(X) =  T_{\Xp} + T_{\alpha} = Q \label{Q-alpha}
 \end{align}
+
 \item Conservation of Linear Momentum:
 \begin{align}
 0 &= P_{\Xp} - P_{\alpha}  & P_{\Xp}^2 &= P_{\alpha}^2 \\
@@ -273,7 +284,20 @@ Q &= T_{\alpha} + T_{\alpha} \frac{m_{\alpha}}{m_{\Xp}}  & T_{\alpha} &= \frac{Q
     \end{align}
 \item Implications of Gamow's model:
 \begin{enumerate}
-\item Strong dependency on $Q$ because $E_G$ is so large (recall 125799 MeV for U238). Recall the graph we had that doubling $Q$ results in a $10^{20}$ change in $t_{1/2}$. 
+\item Explain meaning of $f, P_T$, sketch $\alpha$ energy vs $r$ with wavefunctions on it (\textbf{10 Qual \#3a, 09 Qual \#1a}). Answer: $f = \frac{v_{\alpha}}{a}$ describes how often alpha particles bounce off the potential. $P_T$ is tunneling probability. 
+
+\item \textbf{09 Qual \#1b}: given $P_T = \exp (- 2 \int_a^b \dr k_2(r)), G = \int_a^b \dr k_2 (r)$, write an expression for $k_2(r)$ from the sketch of $\alpha$ potential vs. $r$. Answer: we know this $k$ is the same as from the QM formulation thus $\displaystyle k_2 (r) = \sqrt{ \frac{2 \mu (V(r) 0 Q)}{\hbar^2}}$. 
+
+\item \textbf{10 Qual \#3b}: similarities and differences between thermal neutron fission model and alpha decay model. Answer: similarities: potential barrier shape, assume pre-formed particles. Difference: alpha particles tunnel, fission requires activation energy. 
+
+\item \textbf{10 Qual \#3c}: assume same Q for $\alpha$ decay and spontaneous fission of U238, compare $P_T$ of alpha decay and $P_T$ of spontaneous fission into two equal daughter nuclides. 
+
+Answer: $P_T$ of alpha has to be a lot larger than spontaneous fission's. $E_G$ depends on $Z_1, Z_2, \mu$ and SF has a $E_G$ about 1500 times larger than alpha decay. 
+
+\item  \textbf{09 Qual \#1c}: why strong dependency on $Q$? Is a positive and large $Q$ sufficient condition for categorizing a nuclide as an alpha-emitter? 
+
+Answer: $E_G$ is so large (recall 125799 MeV for U238). Recall the graph we had that doubling $Q$ results in a $10^{20}$ change in $t_{1/2}$. An $\alpha$-emitter requires: energetically allowed (a large positive $Q$), decay constant cannot be too small (or say half-life cannot be too large), and $\beta$ decay $\lambda$ cannot be too much higher than $\alpha$'s. 
+
 \item The calculated $E_G$ is larger than the measured values. Potential reason: we keep the nuclear radius $a$ fixed in $x = \frac{a}{b}$ term; though for A$>$230, nuclei have strongly deformed shapes, and calculated $t_{1/2}$ is very sensitive to $x$\footnote{in fact, typically we would measure $t_{1/2}$ to reverse engineer the nuclei radius.}. 
 \item Why alpha-decay not \ce{^{12} C} decay? 
 
@@ -287,7 +311,14 @@ Answer: If we consider $E_G \sim (Z_{\alpha} Z_D)^2 \mu c^2$, then $\frac{P_T^{\
     \end{tabular}
 \end{table}
 \end{enumerate}
+
+\item \textbf{11 Qual \#3}: A net angular momentum received by the daughter nucleus during alpha decay would modify the decay constant. Write and sketch the modified tunnel barrier. What is the maximum relative change in the height of the barrier? How does this modify the decay constant? 
+
+Answer: the coulomb potential barrier shifts up by `centrifugal potential' $\Delta V = \frac{\hbar^2 l(l+1)}{2\mu r^2}$.  $V = \frac{Z_1 Z_2 e^2}{r}$, and maximum potential change happens at $r = r_0$. Potential change in $\alpha$ decay increases effective thicknes of barrier and thus $\up$ half-life of decay. See Meyerhof p.145, Krane p.258. 
 \end{enumerate}
+
+
+
 
 \clearpage
 \uline{Beta decay}
@@ -307,19 +338,27 @@ Answer: If we consider $E_G \sim (Z_{\alpha} Z_D)^2 \mu c^2$, then $\frac{P_T^{\
     \item $T_{\alpha}$ is a fixed value; $T_{\beta}$ is a distribution\footnote{notice we use the term $\beta$ in a weird way: $Q_{\beta} = T_{\beta} + T_{\bar{\nu}}$.}. 
     \item Parity does not conserve in beta decay.
     \end{enumerate}
-\item Electrostatic results: 
+\item Electrostatic results on momentum distribution (\textbf{11 Qual \#2c}): 
     \begin{enumerate}
-    \item $\beta^+$: nucleus repels $\beta^+$, KE $\up$.
-    \item $\beta^-$: nucleus attracts $\beta^-$, KE $\down$. 
+    \item $\beta^+$: nucleus repels $\beta^+$, KE $\up$, curve shifts to the right.
+    \item $\beta^-$: nucleus attracts $\beta^-$, KE $\down$, curve shifts to the left. 
     \end{enumerate}
 \item The energetics associated with these updated beta decays are (notice $m_n$ is nucleus mass, m is atomic mass; keep in mind $Q>0$ is the criterion for a decay to happen):
 \begin{align}
-Q_{\beta^-} &= \left[ m_n (\ce{^A_Z X_N}) - m_n (\ce{^A_{Z+1} X_{N+1}}) - m_e \right] c^2 = \left[ m (\ce{^A_Z X_N}) - m (\ce{^A_{Z+1} X_{N}}) \right] c^2 \\
-Q_{\beta^+} &= \left[ m (\ce{^A_Z X_N}) - m (\ce{^A_{Z-1} X_{N}}) - 2m_e \right] c^2 \\
+\Aboxed{ Q_{\beta^-} &= \left[ m_n (\ce{^A_Z X_N}) - m_n (\ce{^A_{Z+1} X_{N+1}}) - m_e \right] c^2 = \left[ m (\ce{^A_Z X_N}) - m (\ce{^A_{Z+1} X_{N}}) \right] c^2 } \\
+\Aboxed{ Q_{\beta^+} &= \left[ m (\ce{^A_Z X_N}) - m (\ce{^A_{Z-1} X_{N}}) - 2m_e \right] c^2 } \\
 Q_{\epsilon} &= \left[ m (\ce{^A_Z X_N}) - m (\ce{^A_{Z+1} X_{N+1}}) \right] c^2 - B_n 
 \end{align}
+\textbf{11 Qual \#2a}: know given atomic masses of two isotopes, find decay reaction, and calculate the maximum KE of the emitted charged particle. 
+
+Answer: know larger mass beta decay into the small mess. Odd-odd curve is above even-even mass curve. Remember to distinguish between nuclear mass (what is easier to see from the reaction) and atomic mass (what we are typically given). 
+
 \item Fermi's Golden Rule:
 \eqn{ \lambda_{if} = \frac{2\pi}{\hbar} |M_{if}|^2 \rho_f } 
+\textbf{11 Qual \#2b}: explain physical meaning of $|M_{if}|$ and $\rho(E_f)$; what is allowed approximation? 
+
+Answer: $|M_{if}|$ is matrix element for the interaction between initial and final states. $\rho(E_f)$ is the density of final states available for finding $\frac{\dn}{\dE_f}$ state, aka the number of ways the transition can happen. `Allowed state'' means we keep only $l_{\beta}=0$ (the magnitude of the matrix element sqaured decreases from one order to the next by at least a factor of 10); consequence: $M$ has no effect on the shape of the spectrum; results do not depend on $p_e, p_{\nu}$. 
+
 \item The corrected formula for the distribution of electron momentum (which is proportional to $\lambda(p_e)$) is:
 \eqn{N(p_e) = N^o (p_e) \times F(Z^{\prime},p_e) \times S(p_e,p_{\nu}) = C \underbrace{p_e^2 (Q-T_e)^2}_{\textcircled{1}} \underbrace{F(Z^{\prime}, p)}_{\textcircled{2}} \underbrace{|M_{fi}|^2}_{\textcircled{3}} \underbrace{S(p_e, p_{\nu})}_{\textcircled{4}}  }
 $\textcircled{1}=$ A statistical factor derived from the density of final states available to the emitted particles; \\
@@ -327,6 +366,9 @@ $\textcircled{2}=$ Fermi function to account for the nuclear Coulomb interaction
 $\textcircled{3}=$ Matrix element for `allowed' ($l_{\beta} = 0$) transition; strength of the interaction between initial and final states; \\
 $\textcircled{4}=$ Shape factor to correct $|M_{if}|^2$ for the various `forbidden' decay paths.    
 \end{enumerate}
+
+
+
 
 \clearpage
 \uline{Gamma decay}
@@ -355,15 +397,10 @@ m_{fi} (\sigma L) &= \mbox{multipole transition operation} = \int_V \psi_f^* m(\
 \clearpage
 %%%%%%%%%%%%%%%%%%%%%%%%% Topic 4 Neutron Interaction %%%%%%%%%%%%%%%%%%%%%%%%%%
 \topic{Neutron Interaction}
-\begin{enumerate}
-\item Neutron energy range:
-    \begin{figure}[ht]
-        \centering
-        \includegraphics[width=5in]{images/ni/neutron-energy.png}
-    \end{figure}
-%    
-\item Important neutron interactions:
-    \begin{enumerate}
+Neutron energy range: thermal $\in [0, 0.025 \eV]$, epithermal $\in [10^{-3}, 1]$ eV, resonance $\in [1, 10^4]$ eV, fast is the rest. 
+
+Important neutron interactions:
+    \begin{itemize}
     \item $(n,n)$ Elastic Scattering: 
         \begin{itemize}
         \item* Potential Scattering (billard-ball like collision);
@@ -373,8 +410,9 @@ m_{fi} (\sigma L) &= \mbox{multipole transition operation} = \int_V \psi_f^* m(\
     \item $(n, \gamma)$ Radiative Capture (get hit by a neutron, release $\gamma$ ray);
     \item $(n, p), (n,\alpha), \cdots$ Charged Particle Emission;
     \item $(n, f)$ fission.     
-    \end{enumerate}
-%
+    \end{itemize}
+
+\begin{enumerate}
 \item Lab CS: 
 \begin{enumerate}
     \item General energetics derivation: 
@@ -431,11 +469,13 @@ When $E_n \approx k_B T$, neutron energy is around the same level as the thermal
 
 \item Isotropic scattering in CMCS: this assumption is valid when $E \ll 10 $keV, $l=0$, S-wave. 
 
-However, if $E > 10$ keV, higher angular momentum (p-wave and above) would be significant, 
+However, if $E > 10$ keV, higher angular momentum (p-wave and above) would be significant. 
+\eqn{ \frac{\derivative\sigma_s}{\dtheta} &= |f(\theta)|^2 = \Sum_l f_l P_l(\cos \theta)  = \underbrace{f_0}_{\mathrm{S-wave}} + \underbrace{f_1 \cos \theta}_{\mathrm{P-wave}} + \cdots } 
+\textbf{11 Qual \#1}: given an anisotropic angular differential scattering cross section in CMCS $\sigma_s (\theta_C) = \frac{\sigma (E)}{4 \pi} ( 1 + a \cos \theta_C)$, find $P(E \to E')$. 
 \begin{align}
-\frac{\derivative\sigma_s}{\dtheta} &= |f(\theta)|^2 = \Sum_l f_l P_l(\cos \theta)  = \underbrace{f_0}_{\mathrm{S-wave}} + \underbrace{f_1 \cos \theta}_{\mathrm{P-wave}} + \cdots \\
-\sigma_s (\theta_C) &= \frac{\sigma (E)}{4 \pi} ( 1 + a \cos \theta_C) \\
-P(\Omega_C) &= \frac{1 + a \cos \theta_C}{4 \pi}, \fsp \fsp P(\theta_C) = \int P(\Omega_C) \dphi \\
+\sigma_s(\theta_C) &= \sigma(E) P(\Omega_C) \fsp \fsp \fsp \Rightarrow P(\Omega_C) = \frac{1 + a \cos \theta_C}{4 \pi} \\
+ P(\theta_C) &= \int P(\Omega_C) \dphi =  \frac{1 + a \cos \theta_C}{2} \\
+\Aboxed{ P(E') \dE' = P(\theta_C) \dtheta_C } \\
 P(E^{\prime}) &= \frac{1}{2} (1 + a \cos \theta_C) \sin \theta_C \frac{\dtheta_C}{\dE^{\prime}} = (1 + a \cos \theta_C) \frac{1}{E(1-\alpha)} \\
 &= \frac{a}{\mbox{constant}} + \frac{2 a E^{\prime}}{(1-\alpha)^2 E^2}
 \end{align}

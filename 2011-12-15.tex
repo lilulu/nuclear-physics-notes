@@ -4,6 +4,9 @@
 \begin{document}
 \maketitle
 
+
+%% Part 2: Angular Momentum, Deuteron, 
+
 \clearpage
 \topic{Angular Momentum} 
   \begin{enumerate}
@@ -89,23 +92,26 @@ Beyond this, we need the Clebsch-Gordan coefficients table to find the coefficie
 
 \textbf{Deuteron Example:} 
     \begin{enumerate}
-    \item $l=0$ is the only bound state because: $V_{\mathrm{eff}} = V + \frac{\hbar^2 l(l+1)}{2 \mu r_0^2}$. 
+    \item Show that a bound state exist for the deuteron using a square well potential, given $V_{nuc} = 35$ MeV, range $R_0 = 2$f, $m_p c^2 = 938$ MeV, $m_n c^2$ = 939 MeV (\textbf{09 Qual \#3a}). Answer: square well, so 1D with $x$ axis. We can write $ \dpsidxn2 + k \psi = 0, psi(x) = A \sin(kx),   k = \sqrt{ \frac{2\mu(E-V)}{\hbar^2}} =\sqrt{ \frac{2\mu c^2 (E-V)}{\hbar^2 c^2}} = \sqrt{\frac{(2)(46.9) KE}{200}}$. We also know for this wave to be bounded, $\displaystyle \frac{1}{4} \lambda < 2F \Rightarrow k_{min} = \frac{\pi}{4}$. Thus we can get that $KE = 22.3$ MeV, minimum well depth is 23 MeV. A 35 MeV deep well is sufficient. 
+
+      
+    \item $l=0$ is the only bound state (\textbf{09 Qual \#3b}). Answer: $V_{\mathrm{eff}} = V + \frac{\hbar^2 l(l+1)}{2 \mu r_0^2}$. 
     \eqn{ \Delta V = \frac{\hbar^2 l(l+1)}{2 \mu r_0^2} = \frac{(\hbar c)^2 l(l+1)}{2 (\mu c^2) r^2} = \frac{(200)^2 l(l+1)}{2 (500)(2.1)^2} = 10 l(l+1) \fsp \MeV   }
-    For $l=1, \Delta V = 20 \fsp \MeV > E_B = 2.2 \fsp \MeV$.
-    \item Spin-spin coupling is necessary, because 
+    For $l=1, \Delta V = 20 \fsp \MeV$. We know $V_0 = -35 \fsp \MeV, KE = 23 \fsp \MeV$, so $E = 12 \fsp \MeV$. After bumping it up by 20 MeV new $E$ is going to be larger than 1 which is unbound. Alternatively if we know $E_B = 2.2 \fsp \MeV$, then the previous analysis is conservative, bumping $-2.2$ MeV up by 20 MeV is even more above 0. 
+
+    \item Spin-spin coupling/spin dependent nuclear force (\textbf{09 Qual \#3a}) Answer:
     \eqn{ V_{\mathrm{eff}} = V_0 + V_1 \frac{\expect{\hat{s}_p \cdot \hat{s}_n}}{\hbar^2} = V_0 + \frac{V_1}{2} \left[ s(s+1) - \frac{3}{2} \right] = \left\{ \begin{array}{cc} V_0 - \frac{3}{4} V_1 & S=0 \mbox{ Singlet} \\ V_0 + \frac{1}{4} V_1 & S = 1 \mbox{ Triplet}  \end{array} \right.   }
     We are given $V_T = 35$ MeV, use the `barely bound state' to find $V_S$: 
     \eqn{ \frac{\lambda}{4} = r_0 \Rightarrow k = \frac{2\pi}{\lambda} = \frac{\pi}{2 r_0}, V_S \sim E+ V_S = \frac{\hbar^2 k^2}{2m} = \frac{\hbar^2}{2m} k^2 = \frac{\hbar^2}{2m} \frac{\pi^2}{4 r_0^2} \sim 22 \fsp \MeV.}
     We plug in $V_T = 35 \fsp \MeV, V_S = 22 \fsp \MeV$ to find that $V_0 = 32 \fsp \MeV, V_1 = 13 \fsp \MeV$. 
+
     \item $l>0$ can only exist for $s=1$, singlet well is less deep than triplet.     
     \end{enumerate}
 
 
 \clearpage
 %%%%%%%%%%%%%%%%%%%%%%%%% Topic 2 Nuclear Structure %%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\topic{Nuclear Structure}
-
-\uline{Scattering}
+\topic{Scattering}
 \begin{enumerate}
 \item 
     \begin{align}
