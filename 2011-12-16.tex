@@ -572,13 +572,12 @@ However, if $E > 10$ keV, higher angular momentum (p-wave and above) would be si
 \eqn{ \frac{\derivative\sigma_s}{\dtheta} &= |f(\theta)|^2 = \Sum_l f_l P_l(\cos \theta)  = \underbrace{f_0}_{\mathrm{S-wave}} + \underbrace{f_1 \cos \theta}_{\mathrm{P-wave}} + \cdots } 
 \textbf{11 Qual \#1}: given an anisotropic angular differential scattering cross section in CMCS $\sigma_s (\theta_C) = \frac{\sigma (E)}{4 \pi} ( 1 + a \cos \theta_C)$, find $P(E \to E')$. Double check whether $\dOmega = - 2 \pi \sin \theta \dtheta$, then we can start doing things in $\Omega$ space. 
 \begin{align}
-\sigma_s(\theta_C) &= \sigma(E) P(\Omega_C) \fsp \fsp \fsp \Rightarrow P(\Omega_C) = \frac{1 + a \cos \theta_C}{4 \pi} \\
- P(\theta_C) &= \int P(\Omega_C) \dphi =  \frac{1 + a \cos \theta_C}{2} \\
-\Aboxed{ P(E') \dE' &= P(\theta_C) \dtheta_C  = P(\cos \theta_C) \derivative (\cos \theta_C)} \\
-P(E^{\prime}) &= \frac{1 + a \cos \theta_C}{2} \sin \theta_C \frac{\dtheta_C}{\dE^{\prime}} = \frac{1 + a \cos \theta_C}{2}  \frac{1}{E(1-\alpha)} \\
-&= \frac{a}{\mbox{constant}} + \frac{2 a E^{\prime}}{(1-\alpha)^2 E^2}
+\sigma_s(\theta_C) &= \sigma(E) P(\Omega_C) \fsp \fsp \fsp \Rightarrow P(\Omega_C) = \frac{1 + a \cos \theta_C}{4 \pi} \notag \\
+ P(\theta_C) &= \int_0^{2\pi} P(\Omega_C) \sin \theta_c \dphi =  \frac{1 + a \cos \theta_C}{2} \sin \theta_C \notag \\
+\Aboxed{ P(E') \dE' &= P(\theta_C) \dtheta_C} \notag \\
+P(E^{\prime}) &= \frac{1 + a \cos \theta_C}{2} \sin \theta_C \frac{\dtheta_C}{\dE^{\prime}} = \frac{1 + a \cos \theta_C}{2}  \frac{1}{E(1-\alpha)} = \frac{a}{\mbox{constant}} + \frac{2 a E^{\prime}}{(1-\alpha)^2 E^2} \notag
 \end{align}
-Know that $a>0$ corresponds to forward scattering, $a<0$ corresponds to backwards scattering. 
+$a>0$ corresponds to forward scattering, $a<0$ corresponds to backwards scattering. 
 
 \begin{figure}
     \centering
