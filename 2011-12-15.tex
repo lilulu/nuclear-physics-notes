@@ -111,30 +111,55 @@ Beyond this, we need the Clebsch-Gordan coefficients table to find the coefficie
 
 \clearpage
 %%%%%%%%%%%%%%%%%%%%%%%%% Topic 2 Nuclear Structure %%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\topic{Scattering}
+\topic{Nucleon-nucleon Scattering}
 \begin{enumerate}
-\item 
-    \begin{align}
-        \psi (r) &= \overbrace{e^{i  (k z - wt)}}^{\mathrm{incoming}} + \overbrace{ f(\theta) \frac{e^{i (k r - wt)}}{r} }^{\mathrm{outgoing}} 
-        &  \dsigmadOmega &= |f(\theta)|^2 = (\mathrm{scattering \fsp amplitude})^2 \\
-        \psi(r,\theta) &= \Sum_{l=0}^{\infty} R_l (r) P_l (\cos \theta) 
-        &  u_l (r) &= \frac{a_l}{k} \sin \left( kr - \frac{l \pi}{2} + \delta_l \right) 
+\item \textbf{10 quiz 2 \#1a}: write and sketch incoming and scattered wave; what is the BC of $\psi(r)$ as $r \to \infty$? What is the primary impact of scattering on the scattered wave as $r \to \infty$? 
+
+Answer: $\psi_{inc} = e^{ikz}, \psi_{sc} = f(\theta) \frac{e^{ikr}}{r}$. Far away from the nucleus, assume $\psi_{inc}$ is not modified, then $\psi(r)$ is just adding the incoming and scattered together: 
+\eqn{  \Aboxed{ \psi (r) &= e^{i  (k z - wt)} +  f(\theta) \frac{e^{i (k r - wt)}}{r} }  } 
+The primary impact of scattering on $\psi_{sc}$ for $r \to \infty$ is the creation of a \uline{phase shift}. $f(\theta)$ is related to $\delta$ as in Eq.~\ref{ftheta}. 
+
+\item Derivation: $\dsigmadOmega = $differential xs, $f(\theta)$ = scattering amplitude. 
+\begin{align} 
+  \dsigmadOmega &= |f(\theta)|^2  
+  & \psi(r,\theta) &= \Sum_{l=0}^{\infty} R_l (r) P_l (\cos \theta) 
+  &  u_l (r) &= \frac{a_l}{k} \sin \left( kr - \frac{l \pi}{2} + \delta_l \right) 
     \end{align}
-%    
-\item We plug $u_l(r)$ back into partial wave $\psi(r,\theta)$, in which Legende Polynomial $P_0 = 1, P_1 = \cos \theta$:
+ Plug $u_l(r)$ back into partial wave $\psi(r,\theta)$, in which Legende Polynomial $P_0 = 1, P_1 = \cos \theta$:
 \eqn{ \psi(r,\theta) = \Sum_{l=0}^{\infty} \frac{a_l}{kr} \sin \left( kr - \frac{l \pi}{2} + \delta_l \right) P_l (\cos \theta)  }
-%
-\item We equate the coefficients of the same term: 
+Equate the coefficients of the same term: 
 \begin{align}
-f(\theta) &= \frac{1}{k} \Sum_{l=0}^{\infty} (2l+1) e^{i \delta_l} \sin \delta_l P_l (\cos \theta) \\
+\Aboxed{ f(\theta) &= \frac{1}{k} \Sum_{l=0}^{\infty} (2l+1) e^{i \delta_l} \sin \delta_l P_l (\cos \theta) } \label{ftheta} \\
 \sigma (\theta) &= |f(\theta)|^2 =  \frac{1}{k^2} \Sum_{l=0}^{\infty} (2l+1) e^{i \delta_l} \sin^2 \delta_l 
 \end{align}
 %
-\item Low Energy Scattering (S-Wave Approximation): assume $E$ is small, then $k,r$ is small; we can derive $l < kr_0 \ll 1$, hence $l=0$ for low energy S-wave approximation
-\eqn{ \boxed{ u_0 (r) = \frac{a_0}{k} \sin (kr + \delta_0), \fsp \sigma(\theta) = \frac{1}{k^2} \sin^2 \delta_0, \fsp \sigma = 4 \pi \sigma(\theta) } }
+\item Low energy scattering (S-wave approximation): assume $E$ is small, then $k,r$ is small; 
+  \begin{itemize}
+  \item \textbf{10 Quiz 2 \#1b}: show s-wave (l=0) is valid for low energy $kr \ll 1$. 
+
+Answer: $L = \hbar \sqrt{l(l+1)} = bp < \hbar k r_0 \Rightarrow \sqrt{l(l+1)} < kr_0 \ll 1$, hence $l=0$. 
+
+  \item \textbf{10 Quiz 2 \#1c}: given $f(\theta) = \frac{1}{k} \left( e^{ika} \sin(ka) + 3 i e^{2ika} \cos \theta \right)$, what is the s-wave differential xs? 
+
+Answer: the given form contains the first two modes; s-wave means only $l=0$, so $f(\theta) \approx \frac{1}{k} e^{ika} \sin (ka), \dsigmadOmega = |f(\theta)|^2 = \frac{1}{k^2} \sin^2 (ka)$. 
+
+  \item S-wave results: 
+    \eqn{ \boxed{ u_0 (r) = \frac{a_0}{k} \sin (kr + \delta_0), \fsp \fsp  \sigma(\theta) = \frac{1}{k^2} \sin^2 \delta_0, \fsp \fsp \sigma = 4 \pi \sigma(\theta) } }
 Notice $f(\theta), \sigma (\theta), \theta$ do not depend on $\theta$. Keep in mind that $\psi = \frac{u}{r}$, hence for S-wave, $\psi \sim \frac{\sin (kr + \delta)}{kr}$.
+  \end{itemize}
 %
-\item To use S-wave approximation, given a potential well of $-V_0$, inside of the well assume $u(r) = B \sin (kr)$, outside assume $u(r) = A \sin(kr + \delta_0)$. Then solve for $\delta_0$.
+\item Calculate $\delta$. Given a potential well of $-V_0$, inside well $u_1 (r) = B \sin (kr)$, outside $u_2(r) = A \sin(kr + \delta_0)$, then solve for $\delta_0$ using BCs. Remember $\delta$ is outside the well! 
+  \begin{itemize}
+    \item \textbf{10 Qual \#2a}: what is the sign of $\delta$ and why? Answer: $V_0>0,  \delta < 0$. 
+    \item \textbf{10 Qual \#2b}: derive a relation b/w $\delta, r_0, V_0, E$ (given $V_0 > E > 0$ for s-wave scattering. 
+
+    \item \textbf{10 Qual \#2c}: in the low energy limit, $k_2 r_0 \ll 1, \delta \ll 1$. Simplify $\delta$ expression for two extremes: $k_1 r_0 \to 0, k_1 r_0 \to \infty$. 
+
+      Answer: 
+
+    \item \textcolor{red}{\textbf{10 Qual \#2d}}: for neutron-proton scattering, $V_0 = 35 \fsp \MeV, r_0 = 2\times 10^{-13}\fsp \cm$. Estimate $\sigma$ from \#2b. Compare this result to the experimental value of $\sigma$ for $10 \fsp \eV < E < 10^4 \fsp \eV$. If there is a discrepancy b/w your result and the experimental value, what is the main reason? How would you improve it? 
+  \end{itemize}
+
 %
 \item Scattering length $a$: it behaves like an intercept. Bound state $a>0$, unbound state $a<0$.  
 \begin{align}
