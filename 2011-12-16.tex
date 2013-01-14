@@ -29,8 +29,10 @@
     \label{fig:111}
   \end{subfigure}
 \end{figure}
-\item Neutron separation energy $S_n$ is low for nuclei with one more neutron than a magic number. Reason: it is easier to separate one neutron when number of neutrons is magic plus 1; that is, magic neutron numbers are more tightly bound \footnote{Also see Krane Figure 5.2}. 
-\item The first excited states of even-even nuclei have higher than usual energies at magic numbers because, again, these nuclei are tightly bound. If tightly bound, then excite energy increases. 
+
+\item Neutron separation energy $S_n$ is \uline{low} for nuclei with one more neutron than a magic number. Reason: it is easier to separate one neutron when number of neutrons is magic plus 1; that is, magic neutron numbers are more tightly bound \footnote{Also see Krane Figure 5.2}.
+ 
+\item The first excited states of even-even nuclei have \hi{higher} than usual energies at magic \# because, again, these nuclei are tightly bound. If tightly bound, then excite energy increases. 
 \begin{figure}[ht]
   \centering
   \begin{subfigure}[b]{0.45\textwidth}
@@ -47,7 +49,7 @@
   \end{subfigure}
 \end{figure}
 
-\item Neutron capture cross sections are low for these numbers: they are stable already, do not want to absorb neutron. Zr has Z=40 and has about 50,51,52 neutrons, hence it is `neutron transparent.'
+\item Neutron capture cross sections are \uline{low} for magic \#: they are stable already, do not want to absorb neutron. Zr has Z=40 and has about 50,51,52 neutrons, hence it is `neutron transparent.'
 \item Nuclear charge radius decreases and then suddenly jumps at magic numbers. 
 \begin{figure}[ht]
     \centering
@@ -56,15 +58,11 @@
 \end{enumerate}
 \end{enumerate}
 
-\uline{Potential 1: Infinite Wall} 
+\uline{Potential 1: Infinite Wall}: does not work because 1) it requires infinite amount of energy to separate a neutron or a proton; 2) V should go to $0$ at $r=a$; 3) model has sharp edge, whereas nuclear charge and matter distribution fall smoothly to zero beyond the mean radius. 
 
-It does not work because it requires infinite amount of energy to separate a neutron or a proton; model has sharp edge, whereas nuclear charge and matter distribution fall smoothly to zero beyond the mean radius. 
+\uline{Potential 2: Harmonic Oscillator}: does not work because 1) the separation energy goes to infinity, 2) the potential near edge is not sharp enough (compare with experimental results);
 
-\uline{Potential 2: Harmonic Oscillator}
-
-It does not work because the energy goes to infinity, and the potential inside of the well is not sharp enough (compare with experimental results);
-\begin{enumerate}
-\item Unmodified Harmonic Oscillator: $V_{\mathrm{eff}}$ takes the general form of $V_{\mathrm{eff}} = \frac{1}{2} m \omega^2 r^2 - V_0^{\prime},$ 
+Original Harmonic Oscillator: $V_{\mathrm{eff}}$ takes the general form of $V_{\mathrm{eff}} = \frac{1}{2} m \omega^2 r^2 - V_0^{\prime},$ 
   \begin{align}
     \omega^2 =
     \begin{dcases*}
@@ -97,7 +95,11 @@ Answer: $n=0, l=0, j = 1/2 \Rightarrow 1s_{1/2}, D = (n+1)(n+2) = 2$. $n=1, l = 
 \item Two problems with this model: total \# of allowed energies are correct for $n=0,1,2$ but off for the rest; Separation energy $\Delta E$ predicted is larger than reality.        
   \end{itemize}
 
-\item Modified Harmonic Oscillator: know spin-orbit coupling: $V_{\mathrm{nuc}} = V_0 + V_{\mathrm{so}} \frac{\hat{l} \cdot \hat{s} }{\hbar^2}$. 
+\uline{Potential 3: Intermediate Form}: we like it because it is a good sharpness. Expression: 
+\eqn{ V_{nuc} (r) = \frac{-V_0}{1 + e^{\frac{r-R_0}{a}} } }
+where mean radius $R_0 \sim 1.25 A^{1/3},$ mean skin thickness $a \sim 0.524$ F, $V_0 \sim 50$ MeV.  
+
+\uline{Modified For Spin-orbit Coupling}: $V_{\mathrm{nuc}} = V_0 + V_{\mathrm{so}} \frac{\hat{l} \cdot \hat{s} }{\hbar^2}$. 
   \begin{align}
     \expect{\lhat \cdot \shat} &= \frac{\hbar^2}{2} \left[ j(j+1) - l(l+1) - \frac{3}{4} \right] 
     =
@@ -126,55 +128,64 @@ Answer: $n=0, l=0, j = 1/2 \Rightarrow 1s_{1/2}, D = (n+1)(n+2) = 2$. $n=1, l = 
 
   \item \textbf{10 Qual \#4b,c}: how does spin-orbit dependency allow splitting of two new energy levels from one? derive $\Delta E(l)$. Consider $n=2$ in harmonic oscillator potential and draw the energy level with spin-orbit splitting. 
   \end{itemize}
-\end{enumerate}
+
 
 
 %%%%
 \clearpage
 \uline{Spin-Parity Assignment}
+Overall: parity $\pi = (-1)^l$, spin $I = j$. 
 \begin{enumerate}
-\item Odd A: only care about last unpaired n or p. Use that particle's j as I, use that $l$ to calculate $\pi = (-1)^l$. 
-\item even-even: $I^{\pi} = 0^+$;
-\item odd-odd: 
+\item odd A: only care about last unpaired n or p. Use that particle's j as I, use that $l$ to calculate $\pi = (-1)^l$. 
+\item even-even: $I^{\pi} = 0^+$. This is minimized energy by setting the pair's angular momentum to zero, and hundreds of stable or radioactive nuclides fall into this category (which is a strong evidence for pairing force). 
+\item odd-odd (only 4 stable ones: \ce{_1H_1}, \ce{_3Li_3}, \ce{_5B_5}, \ce{_7N_7}; more unstable ones): find the last proton and the last neutron. 
     \begin{enumerate}
     \item parity opposite: $I = |I_p - I_n|$;
     \item parity same: $I = I_p + I_n$;
     \item $\pi = (-1)^{L_p} (-1)^{L_n}$. 
     \end{enumerate}
 \end{enumerate}
+Two Exceptions: 
+\begin{enumerate}
+\item Pairing effect of larger $l$: $\delta \propto l$. At a higher A, the $\Delta E$ between two states can be small, and if there is one empty space in a higher state, the pairing effect between this state the one below (which is fully filled) is large enough, then the last neutron from the lower state would fill the higher state to reduce the total energy. 
+\item Potential may swap two states. 
+\end{enumerate}
+
 
 \textbf{10 Quiz 2 \#3a}: Odd A: \ce{^{45}_{21} Sc} is $\frac{7}{2}^-$, \ce{^{61}_{28}Ni} is $\frac{5}{2}^-$. Odd-odd: \ce{^{108}_{49}In}: find $1g_{9/2}, 2d_{5/2}$, both spin up, so $\pi = (-1)^{2+4}$, and $l = l_1 + l_2 = 7$, thus $I^{\pi} = 7^+$. 
 
-\textbf{10 Quiz 2 \#3b}: The measured assignment for \ce{^{61}_{28}Ni} is $\frac{3}{2}^-$. Explain why this differs from predicted in 3a. 
+\textbf{10 Quiz 2 \#3b}: The measured assignment for \ce{^{61}_{28}Ni} is $\frac{3}{2}^-$. Explain why this differs from 3a. 
 
 Answer: the 4th n in $2p_{3/2}$ moves up to $1f_{5/2}$ (energy difference is small), making the last unpaired neutron one in the $2p_{3/2}$ state now. $1f_{5/2}$ is found because the pairing effect favors large $l$. 
 
 
-\clearpage
-%%%%%%%%%%%%%%%%%%%%%%%%% Topic 3 Radioactive Decay %%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\topic{Radioactive Decay}
 
-\uline{Binding energy, stability, mass parabola.}
+\vspace{1cm}
+\uline{Binding Energy, Stability, Mass Parabola}
 \begin{enumerate}
 \item Stability's governing factor: nuclear mass. Typically, a higher B/A means more stable.
-\item Binding energy of a nucleus with A,Z:
+\item Binding energy (positive):
 \begin{align} 
 B(A,Z) &= \left[ Z m_p + N m_n - (m(A,Z) - Z m_e) \right] c^2 \\
 &= \left[ Z m_{\ce{^1 H}} + N m_n - m(A,Z) \right] c^2
 \end{align}
-\item Binding energy for the outmost neutron (`valence' nucleon) $=$ neutron separation energy $=$ the energy required to separate one neutron from a nucleus; similarly for proton separation energy: 
+
+\item Separation energy (positive) = binding energy for the outmost neutron (`valence' nucleon), which is the energy required to separate one neutron from a nucleus; similarly for proton separation energy: 
 \begin{align}
-S_n &= B(\ce{^A_Z X_N}) -B(\ce{^{A-1}_Z X_{N-1}}) = \left[ m(A-1, Z) - m(A,Z) + m_n \right] c^2 \\
+\Aboxed{ S_n &= B(\ce{^A_Z X_N}) -B(\ce{^{A-1}_Z X_{N-1}}) = \left[ m(A-1, Z) - m(A,Z) + m_n \right] c^2 } \\
 S_p &= B(\ce{^A_Z X_N}) -B(\ce{^{A-1}_{Z-1} X_{N}}) = \left[ m(A-1, Z-1) - m(A,Z) + m_{H} \right] c^2
 \end{align}
 
-\item Semi-empirical binding energy formula:
+\item SEBE:
     \eqn{ \Aboxed{ B &= \underbrace{15.5 A - 16.8 A^{2/3} - 0.72 \frac{Z(Z-1)}{A^{1/3}}}_{\mbox{`liquid-drop model,' collective behavior.}} \underbrace{- 23 \frac{(A-2Z)^2}{A} \pm 34 A^{-3/4}}_{\mbox{`shell model,' individual nucleon behavior.}}   } }
-    Parity Contribution: this term arises from the tendency of the like nucleons (neutron \& neutrons, protons \& protons) to couple pairwise to more stable configurations.
     \begin{itemize}
-    \item Odd-odd: weakly bound, lose binding energy, both V and E move up, $\sim -a_p A^{-3/4}$;
-    \item Odd A: no effect;
-    \item Even-even: tightly bound, gain binding energy, both V and E move down, $\sim a_p A^{-3/4}$.
+    \item Explain symmetry term: [FIXME]. 
+    \item Parity Contribution: this term arises from the tendency of the like nucleons (neutron \& neutrons, protons \& protons) to couple pairwise to more stable configurations.
+      \begin{itemize}
+      \item Odd-odd: weakly bound, lose binding energy, both V and E move up, $\sim -a_p A^{-3/4}$;
+      \item Odd A: no effect;
+      \item Even-even: tightly bound, gain binding energy, both V and E move down, $\sim a_p A^{-3/4}$.
+      \end{itemize}
     \end{itemize}
     \textbf{09 Qual \#2a}: write $B(A,Z)$ with unspecified coefficients, state the physics reason for the A and Z dependency in each term and indicate the sign.
     
@@ -194,8 +205,10 @@ S_p &= B(\ce{^A_Z X_N}) -B(\ce{^{A-1}_{Z-1} X_{N}}) = \left[ m(A-1, Z-1) - m(A,Z
 
 \item B/A vs. A graph: 
   \begin{itemize}
+  \item Know how to draw the graph. 
   \item Initial rise in B/A is due to decreasing importance of the surface term as A increases. 
-  \item The peak at A=60 is due to Coulomb repulsion increases as A increases. 
+  \item The peak at A=56 is due to Coulomb repulsion increases as A increases. Peak is 8 MeV. 
+  \item Know that $B = (Zm_H + N m_n - m(A,Z))c^2 > 0, \Delta = (m(A,Z) - (Zm_H + N m_n)) c^2  = - B < 0$. So $\Delta$ vs. A curve is concave up (and the $A>56$ portion increases linearly in $\Delta$ vs. A, which agrees with $B/A$ stays about constant). Prof. Yip draws the region of stability on the $\Delta$ vs. A curve. 
   \item \textbf{09 Qual \#2b,c}: draw B/A vs. A curve. Explain why heavy nuclides fission to produce energy and very light nuclide fuse to produce energy.   
  \end{itemize}
 
@@ -221,21 +234,29 @@ Mass parabola is used for:
 
 
 
-
-\uline{Decays}
-
+\clearpage
+%%%%%%%%%%%%%%%%%%%%%%%%% Topic 3 Radioactive Decay %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\topic{Radioactive Decay}
 \begin{enumerate}
 \item Common decay types:
     \begin{figure}[h!]
         \centering
         \includegraphics[width=3in]{images/rd/Z-N-grid.png}
     \end{figure}
-\item Decay mechanisms: $\lambda = -\frac{\dNdt}{N(t)} =$ decay constant, describe probability of decay per unit time. It is a constant for each decay. 
+
+\item Decay constant $\lambda = -\frac{\dNdt}{N(t)}$, which is the probability of decay per time. Assume $\lambda$ constant for each decay type. 
+
+\item Simpliest case: no source, just decay. 
     \begin{align}
     \dNdt (t) &= - \lambda N(t) &  N(t) &= N_0 e^{-\lambda  t} \\
     N(t_{1/2}) &= \frac{1}{2} N(0) & t_{1/2} &= \frac{\ln 2}{\lambda} = \frac{0.693}{\lambda} \\
     \tau &= \frac{\int_0^{\infty} t \left| \dNdt \right| \dt }{\int_0^{\infty}  \left| \dNdt \right| \dt} = \frac{1}{\lambda} & \mbox{mean lifetime} &= \frac{1}{\lambda}
     \end{align}
+
+\item Assume constant source, one mode decay: $\displaystyle \dNdt = S - \lambda N.$ Solution is $N(t) = N(0) e^{-\lambda t} + S(1 - e^{-\lambda t})$ (the same form as angular flux from MOC). 
+
+\item Know secular equilibrium and transient equilibrium. 
+
 \item Three decay modes and their formulas. 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%% Decay Summary %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{table}[ht]
@@ -318,8 +339,16 @@ m_X c^2 &= m_{\Xp} c^2 + T_{\Xp} + m_{\alpha} c^2 + T_{\alpha} \\
 T_{\Xp} m_{\Xp} &= T_{\alpha} m_{\alpha}  & T_{\Xp} &= T_{\alpha} \frac{m_{\alpha}}{m_{\Xp}} \\
 Q &= T_{\alpha} + T_{\alpha} \frac{m_{\alpha}}{m_{\Xp}}  & T_{\alpha} &= \frac{Q}{1 + \frac{m_{\alpha}}{m_{\Xp}}}  \approx \boxed{ Q \left( 1 - \frac{4}{A} \right) } \approx 98\% Q
 \end{align}
-\item Geiger-Nuttel Rule (experimentally observed): suggesting doubling Q can result in $10^{-24}$ change in $t_{1/2}$.
+\item Geiger-Nuttel Rule (experimentally observed): suggesting doubling Q can result in $10^{-24}$ change in $t_{1/2}$. $Q$ is the total energy generated from the reaction, which is splited between $\alpha$ and the residual particle. 
 \eqn{ \log t_{1/2} \propto \frac{1}{\sqrt{Q_{\alpha}}}   }
+One way to plit the $Q$ is, in the lab system, 
+\eqn{ E_{\alpha} &= \frac{m_D Q}{m_{\alpha} + m_D} & E_D &= \frac{m_{\alpha} Q}{m_{\alpha} + m_D} }
+Derivation: 
+\begin{align}
+Q &= T_1 + T_2 & T_1 m_1 &= T_2 m_2 \\
+T_1 &= \frac{m_1}{m_2} (Q - T_1) & T_1 &= \frac{m_2 Q}{m_1 + m_2} 
+\end{align}
+
 \item Gamow's Theory:
     \begin{align}
     E_G &= \left(\frac{2 \pi e^2 Z_{\alpha} Z_D}{\hbar c}\right)^2 \frac{\mu c^2}{2} = \left( \frac{2 \pi \cdot Z_{\alpha} Z_D}{137} \right)^2 \frac{m_{\alpha} m_D}{m_{\alpha} + m_D} \frac{938}{2} \\
@@ -358,7 +387,7 @@ Answer: $E_G$ is so large (recall 125799 MeV for U238). Recall the graph we had 
 \item The calculated $E_G$ is larger than the measured values. Potential reason: we keep the nuclear radius $a$ fixed in $x = \frac{a}{b}$ term; though for A$>$230, nuclei have strongly deformed shapes, and calculated $t_{1/2}$ is very sensitive to $x$\footnote{in fact, typically we would measure $t_{1/2}$ to reverse engineer the nuclei radius.}. 
 \item Why alpha-decay not \ce{^{12} C} decay? 
 
-Answer: If we consider $E_G \sim (Z_{\alpha} Z_D)^2 \mu c^2$, then $\frac{P_T^{\alpha}}{P_T^C} \sim \frac{\exp(-\sqrt{16})}{\exp(-\sqrt{432})} \sim \exp(16)$. `Why not spontaneous fission' can be explained similarly using Gamow's model.     
+Answer: If we consider $E_G \sim (Z_{\alpha} Z_D)^2 \mu c^2$, both $Z_1 Z_2$ and $\mu$ goes up, thus $\frac{P_T^{\alpha}}{P_T^C} \sim \frac{\exp(-\sqrt{16})}{\exp(-\sqrt{432})} \sim \exp(16)$. `Why not spontaneous fission' can be explained similarly using Gamow's model.     
 \begin{table}[ht]
     \centering
     \begin{tabular}{|c|c|c|c|} \hline
@@ -382,17 +411,14 @@ Assume $b^{mod} \approx b$ in this formulation, we get
 \eqn{ P_T^{mod} &\approx P_T^{1 + \frac{\Delta V}{V}} }
 \end{enumerate}
 
-
-
-
-\clearpage
+%\clearpage
 \uline{Beta decay}
 \begin{enumerate}
-\item Spin parity: 
+\item Spin parity: $L = L_{\beta + \gamma}, S = S_{\beta + \gamma}$, 
     \begin{enumerate}
     \item $\pi_P = \pi_D (-1)^L$ to find whether $L$ is even or odd;
     \item $I_P = I_D + L + S$, choose lowest possible $L$ while $S = 0,1$. $L$ tells us whether the state is allowed or nth forbidden.
-    \item For the lowest $L$ we find, what value can S be? $S=0$ is Fermi, $S=1$ is Gamow-Teller. 
+    \item For the lowest $L$ we find, what value can S be? $S=0$ is Fermi, $S=1$ is Gamow-Teller, if both are possible we get 'mixed.' 
     \end{enumerate}
 \item The lowest $L$ value corresponds to the most likely state. Reason: as in $\psi_{\beta} (r) = 1 + \frac{i p_e r}{\hbar} + \frac{1}{2} \left( \frac{i p_e r}{\hbar} \right)^2 + \cdots$, the higher $L$ is, the higher order the expansion is, the less likely the term is, the smaller $\lambda$ is. Hence $\lambda_{\mathrm{allowed}} \gg \lambda_{\mathrm{forbidden}}, t_{1/2,\mathrm{allowed}} \ll t_{1/2,\mathrm{forbidden}}$. 
 \item Why does beta decay's $t_{1/2}$ range from milliseconds to $10^{16}$ years? Reason: it is easy to undergo decay when $l=0$, and it is difficult to do so when $l>0$.     
@@ -405,24 +431,31 @@ Assume $b^{mod} \approx b$ in this formulation, we get
     \end{enumerate}
 \item Electrostatic results on momentum distribution (\textbf{11 Qual \#2c}): 
     \begin{enumerate}
-    \item $\beta^+$: nucleus repels $\beta^+$, KE $\up$, curve shifts to the right.
-    \item $\beta^-$: nucleus attracts $\beta^-$, KE $\down$, curve shifts to the left. 
+    \item $\beta^+$: nucleus repels $\beta^+$, KE $\up$, curve shifts to the right: both N(p) vs. p and N(T) vs. T start from (positive, 0). 
+    \item $\beta^-$: nucleus attracts $\beta^-$, KE $\down$, curve shifts to the left: N(p) vs. p starts from (0,0), and N(T) vs. T starts from (0, 4.5 MeV). 
     \end{enumerate}
-\item The energetics associated with these updated beta decays are (notice $m_n$ is nucleus mass, m is atomic mass; keep in mind $Q>0$ is the criterion for a decay to happen):
+\item The energetics associated with these updated beta decays are:
 \begin{align}
 \Aboxed{ Q_{\beta^-} &= \left[ m_n (\ce{^A_Z X_N}) - m_n (\ce{^A_{Z+1} X_{N+1}}) - m_e \right] c^2 = \left[ m (\ce{^A_Z X_N}) - m (\ce{^A_{Z+1} X_{N}}) \right] c^2 } \\
 \Aboxed{ Q_{\beta^+} &= \left[ m (\ce{^A_Z X_N}) - m (\ce{^A_{Z-1} X_{N}}) - 2m_e \right] c^2 } \\
-Q_{\epsilon} &= \left[ m (\ce{^A_Z X_N}) - m (\ce{^A_{Z+1} X_{N+1}}) \right] c^2 - B_n 
+\Aboxed{Q_{\epsilon} &= \left[ m (\ce{^A_Z X_N}) - m (\ce{^A_{Z+1} X_{N+1}}) \right] c^2 - B_e}
 \end{align}
+\begin{itemize}
+\item Notice $m_n$ is nucleus mass, m is atomic mass. 
+\item $Q>0$ is the criterion for a decay to happen; that is, for $\beta^-$ to happen we need $m_P > m_D$; for $\beta^+$ to happen we need $m_P - m_D > 2 m_e$; for electron capture we requires activation energy to be larger than binding energy of the electron.  
+\end{itemize}
+
 \textbf{11 Qual \#2a}: know given atomic masses of two isotopes, find decay reaction, and calculate the maximum KE of the emitted charged particle. 
 
 Answer: know larger mass beta decay into the small mess. Odd-odd curve is above even-even mass curve. Remember to distinguish between nuclear mass (what is easier to see from the reaction) and atomic mass (what we are typically given). 
 
 \item Fermi's Golden Rule:
-\eqn{ \lambda_{if} = \frac{2\pi}{\hbar} |M_{if}|^2 \rho_f } 
+\eqn{ \lambda_{if} = \frac{2\pi}{\hbar} |M_{if}|^2 \rho (E_f) } 
 \textbf{11 Qual \#2b}: explain physical meaning of $|M_{if}|$ and $\rho(E_f)$; what is allowed approximation? 
 
-Answer: $|M_{if}|$ is matrix element for the interaction between initial and final states. $\rho(E_f)$ is the density of final states available for finding $\frac{\dn}{\dE_f}$ state, aka the number of ways the transition can happen. `Allowed state'' means we keep only $l_{\beta}=0$ (the magnitude of the matrix element sqaured decreases from one order to the next by at least a factor of 10); consequence: $M$ has no effect on the shape of the spectrum; results do not depend on $p_e, p_{\nu}$. 
+Answer: $|M_{if}|$ is matrix element for the interaction between initial and final states, and can be further expand as: 
+\eqn{ M_{if}  =  \bra{f} V \ket{i}  = \bra{\psi_f} V \ket{\psi_i} = \int \psi_f^* V \psi_i \dr^3 = \int \psi_{\bar{\nu}}^* \psi_{\beta}^* \psi_{\gamma}^* \psi_{Y} V \psi_X \dr^3 }
+$\rho(E_f)$ is the density of final states available for finding $\frac{\dn}{\dE_f}$ state, aka the number of ways the transition can happen. `Allowed state'' means we keep only $l_{\beta}=0$ (the magnitude of the matrix element sqaured decreases from one order to the next by at least a factor of 10); consequence: $M$ has no effect on the shape of the spectrum; results do not depend on $p_e, p_{\nu}$; $\ket{i} = e^{ikr} \approx 1, \ket{f} = e^{i k' r} \approx 1$. 
 
 \item The corrected formula for the distribution of electron momentum (which is proportional to $\lambda(p_e)$) is:
 \eqn{N(p_e) = N^o (p_e) \times F(Z^{\prime},p_e) \times S(p_e,p_{\nu}) = C \underbrace{p_e^2 (Q-T_e)^2}_{\textcircled{1}} \underbrace{F(Z^{\prime}, p)}_{\textcircled{2}} \underbrace{|M_{fi}|^2}_{\textcircled{3}} \underbrace{S(p_e, p_{\nu})}_{\textcircled{4}}  }
@@ -445,6 +478,9 @@ $\textcircled{4}=$ Shape factor to correct $|M_{if}|^2$ for the various `forbidd
     \item Most probable decay mode is lowest $L$ ($L=0$ is forbidden). 
     \end{enumerate}
     In general, magnetic multiple is weaker than electric; but as far as we are concerned, the $L$ mode dominate. 
+
+Alternatively, do $I_P = I_D + L_{\gamma}$ where $L_{\gamma} = 1,2,3, \cdots$.  Electric means $\pi_P = \pi_D (-1)^{L_{\gamma}}$, magnetic means $\pi_P = \pi_D (-1)^{L_{\gamma} + 1}$. Interested in the lowest $L$ that satisfies angular momentum. 
+
 \item Energetics (R: recoil):
 \begin{align}
 M^* c^2 &= Mc^2 + T_R + E_{\gamma}  & Q_{\gamma} &=  (M^* - M)c^2  = T_R + E_{\gamma} \\
