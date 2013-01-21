@@ -107,7 +107,9 @@ Hence $\phi_f(u)$ can be written as,
 \mbox{Heterogeneous energy shape of flux in the fuel } \phi_f(u) &= \frac{\sigma_{pot, f} + \sigma_e}{\sigma_{r,f} (u) + \sigma_{pot, f} + \sigma_e}   & \sigma_e &= \frac{S_f}{4 V_f N_r} 
 \end{align}
 
-\textbf{Example: calculate corresponding cross sections.} Given a PWR with a 0.41 cm radius pellet, \ce{^{238}U} number density of $4.0 \times 10^{22} \cm^{-3}$, enriched to 3\%, and fuel density is 10 g/cc. 
+\textbf{Examples}: 
+\begin{enumerate}
+\item \textbf{Calculate corresponding cross sections.} Given a PWR with a 0.41 cm radius pellet, \ce{^{238}U} number density of $4.0 \times 10^{22} \cm^{-3}$, enriched to 3\%, and fuel density is 10 g/cc. 
 \begin{itemize}
 \item If the system is homogeneous uranium and hydrogen, then the dilution cross section looks like:
 \eqn{ \sigma_d &=  \frac{N_m \sigma_m}{N_r}  = \frac{1}{0.2} 20 \fsp \barn = 100 \fsp \barn/\mbox{resonance atom} }
@@ -119,6 +121,13 @@ If the system is 2 region, and we homogeneous the fuel region, then
 \sigma_s^F &= \sigma_{pot}^R + \sigma_b^{hom} = \sigma_{pot}^{238} + 0.05 \sigma_{pot}^{235} + 2 \sigma_{pot}^O = 11.4 + 0.05 (11.3) + 2 (4.0) = 20 \fsp \barn 
 \end{align} 
 \end{itemize}
+
+
+\item \textbf{(12 Qual \#4) Calculate escape probability.} Given a cylinder of radius $r=0.5\cm$, infinite height, and $\Sigma = 10 \cm^{-1}$. Assume uniform source inside, calculate the probability of neutrons making first collision outside the cylinder. 
+
+\textbf{Answer}: we calculate chord length $l = \frac{4V}{S} = \frac{4 \pi r^2 H}{2 \pi r H} = 2r$, so $\displaystyle P_{FF} = \frac{\Sigma^F}{\Sigma^F + \frac{1}{l}} = \frac{10}{10+1} = 91$\%, then the probability of it making it out should be 9\%. 
+\end{enumerate}
+
 
 \clearpage
 \subtopic{Bell-Wigner Approximation}
