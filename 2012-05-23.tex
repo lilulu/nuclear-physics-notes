@@ -5,10 +5,10 @@
 \maketitle
 
 %%%%%%%%%%%%%%%%%%%%%%%%% Qualify Exam Start %%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\lecture{Facts For Qualify Exam}
+\lecture{Qualify Exam Recap}
 Kord mentioned 09/10/12 that Prompt jump approximation is a classical qual problem.
 
-\topic{Basics}
+\topic{Basics (with questions)}
 \begin{enumerate}
 \item Common units, see Table~\ref{units}. Angular flux is scalar quantity and the term with angular dependency is $n$ not $v$. 
 \begin{table}[ht]
@@ -41,6 +41,28 @@ Kord mentioned 09/10/12 that Prompt jump approximation is a classical qual probl
     Milli-beta & 1000 Dollars & 1500 milli-beta \\ \hline
   \end{tabular}
 \end{table}
+\end{enumerate}
+
+
+\textbf{General Knowledge Practice Questions}
+\begin{enumerate}
+\item (Qual 2012). 
+\begin{enumerate}
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=6in]{images/qual/general_knowledge.png}
+\end{figure}
+\item We approximate 1 GWd/MT (that is 1 MWd/kg) as 30 days of operation. 
+
+\item Fission cross section at 0.1eV and 300K for \ce{U^{235}} is 250b, for \ce{Pu^{239}} is about 475b. 
+
+\item The pdf is a flat distribution, so it is equally likely to get anywhere below 1.0 MeV, then the change of below 100 keV is 100 keV/1 MeV = 10\%. 
+
+\item We treat this as a fuel to moderator two-region problem. Then we can calculate fuel to fuel probability. First we calculate chord length $l = \frac{4V}{S} = \frac{4 \pi r^2 H}{2 \pi r H} = 2r = 1\fsp \cm.$
+\eqn{ P_{FF} = \frac{\Sigma_t^F (u)}{\Sigma_t^F (u) + \Sigma_e}  = \frac{10}{10 + 1} = 0.909 } 
+Thus the probability of escaping the cylinder is just 9.09\%. 
+
+\end{enumerate}
 \end{enumerate}
 
 
@@ -85,9 +107,15 @@ Kord mentioned 09/10/12 that Prompt jump approximation is a classical qual probl
 
 
 \clearpage
+\topic{Steady State} 
+
+
+
+
+\clearpage
 \topic{Kinetics}
 \begin{enumerate}
-\item A PWR typically have a Doppler coefficient of -3 pcm/K (Lec10 p. 17). 
+\item A PWR typically have a Doppler coefficient of -3 pcm/K. 
 
 \item One Group $\kinf$: in one group $k_{\infty}$ only depends on cross sections $k_{\infty} = \frac{\nu \Sigma_f}{\Sigma_a}$ and has no flux dependency. The flux is buried in the calculation of cross section.
 
@@ -129,128 +157,8 @@ Kord mentioned 09/10/12 that Prompt jump approximation is a classical qual probl
 \end{enumerate}
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\clearpage
-\topic{2012 Qualify Exam Problems}
-\begin{enumerate}
-\item General knowlege.
-\begin{enumerate}
-\begin{figure}[ht]
-  \centering
-  \includegraphics[width=6in]{images/qual/general_knowledge.png}
-\end{figure}
-\item 
-
-\item Fission cross section at 0.1eV and 300K for \ce{U^{235}} is 250b, for \ce{Pu^{239}} is about 475b. 
-
-\item The pdf is a flat distribution, so it is equally likely to get anywhere below 1.0 MeV, then the change of below 100 keV is 100 keV/1 MeV = 10\%. 
-
-\item 
 
 
-\end{enumerate}
-
-\clearpage
-\item Steady-state problems. 
-\begin{enumerate}
-\begin{figure}[ht]
-  \centering
-  \includegraphics[width=6in]{images/qual/quiz-0.png}
-\end{figure}
-
-\item From the two group equations, 
-  \begin{align}
-    \left\{ \begin{array}{c}
-      (\Sigma_{a1} + \Sigma_{s12} ) \phi_1 = \frac{1}{\kinf} ( \nu \Sigma_{f1} \phi_1 + \nu \Sigma_{f2} \phi_2 )   \\
-      \Sigma_{a2} \phi_2 = \Sigma_{s12} \phi_1
-    \end{array} \right. 
-  \end{align}
-Then we can solve for the $\kinf$,
-\eqn{ \kinf = \frac{\nu \Sigma_{f1} + \nu \Sigma_{f2} \frac{\Sigma_{s12}}{\Sigma_{a2}}}{\Sigma_{a1} + \Sigma_{s12}} }
-
-\item $\frac{\phi_2}{\phi_1} = \frac{\Sigma_{s12}}{\Sigma_{a2}}$. 
-
-\item To preserve reaction rates, $ \Sigma = \frac{\Sum \Sigma \phi}{\Sum \phi}$
-  To preserve leakage rates, $D = \frac{\Sum D \phi}{\Sum \phi}$.
- 
-\item Us the $\nu \bar{\Sigma}_f, \bar{\Sigma}_a$, we can calculate
-  \eqn{ \kinf = \frac{\nu \bar{\Sigma}_f}{\bar{\Sigma}_a} }
-  The $\kinf$ calculated from effective one-group cross sections is the same as the one calculated from two-group cross sections, because the one-group data is calculated preserving reaction rates. 
-
-\clearpage
-\begin{figure}[ht]
-  \includegraphics[width=6in]{images/qual/quiz-1.png} 
-  \\
-  \includegraphics[width=6in]{images/qual/quiz-2.png}
-\end{figure}
-\item The critical buckling is, 
-  \eqn{ B^2 = \frac{\nu \Sigma_f - \Sigma_a}{D} }
-
-\item `unreflected' means that there are leakages now, `energy-independent' means that $B^2$ is the same for group 1 and 2,
-  \begin{align}
-    \left\{ \begin{array}{c}
-      (D_1 B^2 + \Sigma_{a1} + \Sigma_{s12} ) \phi_1 = \frac{1}{\keff} ( \nu \Sigma_{f1} \phi_1 + \nu \Sigma_{f2} \phi_2 )  \\
-      (D_2 B^2 +  \Sigma_{a2}) \phi_2 = \Sigma_{s12} \phi_1 
-    \end{array} \right. 
-  \end{align}
-Then we can solve for $B^2$ given $\keff = 1$. 
-
-\item From the above equations taking into account leakage, 
-  \eqn{ \frac{\phi_1}{\phi_2} = \frac{D_2 B^2 + \Sigma_{a2}}{\Sigma_{s12}} }
-  It is different from part b because the finite unreflected geometry has leakage terms. 
-
-\item The $\kinf$ using one-group cross sections collapsed with the critically-buckled spectrum from part g ($\frac{\phi_1}{\phi_2}$), 
-  \eqn{ \kinf = \frac{\nu \Sigma_{f1} \frac{\phi_1}{\phi_2} + \nu \Sigma_{f2} }{\Sigma_{a1} \frac{\phi_1}{\phi_2} + \Sigma_{a2} } }
-  This $\kinf$ is smaller then the one in part d because most fission comes from thermal spectrum, and a lot of it leaks out. Notice is is good to double check to make sure that the calculated $\kinf$ result is no larger than $\nu$. 
-
-\clearpage
-\begin{figure}[ht]
-  \centering
-  \includegraphics[width=6in]{images/qual/quiz-3.png}
-\end{figure}
-\item Though this appears to be a multi-region problem. But since the reflector is made of absorbium whose absorption cross section is infinite for both energy groups, the problem is effectively a one-group problem, including the core with length $L$ and the approximated extropolated distance of $2D$ on each side. Hence we solve for, 
-  \eqn{ B^2 &= \left( \frac{\pi}{L'} \right)^2, & L &= L' - 4D }
-
-\item There are two approaches. Approach 1: 
-  \eqn{ \keff = 1 = \frac{\nu \Sigma_f^F}{DB^2 + N_F \sigma_a^F + N_P \sigma_a^P} }
-  Approach 2: we solve for the unknown $\Sigma_a$ that would make $B_m^2 = B_g^2$; then solve for the concentration. 
-
-\clearpage
-\begin{figure}[ht]
-  \centering
-  \includegraphics[width=6in]{images/qual/quiz-4.png}  
-\end{figure}
-\item For the flux shape, 
-  \begin{itemize}
-    \item Fast energy: flux in the fuel region is cos shape, and suddenly drop to 0 at the interface because the Reflectonium has an infinite large absorption cross section in fast energy. 
-    \item Thermal energy: Reflectonium is a perfect reflector for the thermal region, hence the flux's slope should approach zero at the interface. 
-  \end{itemize}
-\end{enumerate}
-
-
-\clearpage
-\item Transient Reactor Analysis.
-\begin{enumerate}
-\begin{figure}[ht]
-  \centering
-  \includegraphics[width=6in]{images/qual/transient.png}
-\end{figure}
-\item $\displaystyle \rho = \frac{\keff - 1}{\keff}, \Lambda = \frac{1}{v \nu \Sigma_f}.
-$
-\item $\Lambda$ is prompt neutron lifetime, $\lambda$ is decay constant. 
-\item We use the inhour equation, and can ignore the $\omega \Lambda$ term can go away because $\Lambda$ is so small, 
-  \eqn{ \rho &= \omega \Lambda + \Sum_i \frac{\beta_i \omega}{\omega + \lambda_i} \approx \Sum_i \frac{\beta_i \omega}{\omega + \lambda_i} }
-  Because we only have one group cross section, 
-  \eqn{ \rho = 0.1 \beta = \frac{\beta \omega}{\omega + \lambda}}
-  where $\lambda = \frac{\ln 2}{\tau}$. Thus $\omega = 7.7 \times 10^{-3}, T = \frac{1}{\omega} = 130$s. 
-\item We use prompt jump approximation, 
-  \eqn{ \frac{T(0^+)}{T_0} = \frac{\beta}{\beta - \rho} = \frac{\beta}{\beta - 0.1 \beta} = 1.111}
-
-\end{enumerate}
-
-
-\end{enumerate}
-%%%%%%%%%%%%%%%%%%%%%%%%% Qualify Exam End %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 

@@ -58,14 +58,13 @@
     \eqn{ \Aboxed{ \ddt C_i (t) &= \frac{\beta_i (t)}{\Lambda (t)} T(t) - \lambda_i C_i (t) }  }
     Physical terms: 
       \begin{enumerate}
-      \item Reactivity $\rho$, where the top is the diffusion equation, and the bottom is fission rate if all the neutrons show up instatenously. 
+      \item Reactivity $\rho$, where the top is the diffusion equation, and the bottom is fission rate if all the neutrons show up instatenously. $\displaystyle  \rho(t) = \frac{\keff - 1.0}{\keff}$. 
         \scriptsize
         \begin{align}
           \rho (t) &= \frac{\int \bsp \dE \! \int \bsp \dr \Bigg\{ \!\divergence \! D  \gradient S  - \! \Sigma_t S  + \! \int \bsp \Sigma_s (\vecr \!, E' \bsp \to \bsp E, t) S \! \dE'   
             + \! \Sum_j \left( \! \chi_p^j (E) (1 \! - \! \beta^j) +  \! \Sum_i \chi_d^i (E) \beta_i^j \! \right) \! \int \bsp \nu \Sigma_f^j  S \dE'  }{\int \bsp \dE \int \bsp \dr \Sum_j \left( \chi_p^j (E) (1-\beta^j) + \Sum_i \chi_d^i (E) \beta_i^j \right) \int \bsp \nu \Sigma_f^j S \dE'} 
         \end{align}
         \normalsize
-        \eqn{  \rho(t) &= \frac{\keff - 1.0}{\keff}  } 
 
       \item The delayed neutron fraction, 
         \begin{align}
@@ -73,29 +72,25 @@
         \end{align}
 
       \item Prompt neutron lifetime, which is $\sim 1/v$ of shape divided by almost-instantenous-fission-rate. Know $\Lambda \sim 10^{-5}$ for LWRs; smaller for SFR, and larger for CANDU. 
-
-        \begin{align}
-          \Lambda (t) &= \frac{\int \bsp \dE \int \bsp  \dr \left[ \frac{1}{v} S(\vecr, E) \right] }{\int \bsp \dE \int \bsp \dr \Sum_j \left( \chi_p^j (E) (1-\beta^j) + \Sum_i \chi_d^i (E) \beta_i^j \right) \int \bsp \nu \Sigma_f^j S \dE'} 
-        \end{align}
-        \eqn{ \Aboxed{ \Lambda(t) &\approx \frac{1}{v \nu \Sigma_f} \xrightarrow{\mathrm{criticality}} \frac{1}{v \Sigma_a} } }
+\eqn{ \Lambda (t) = \frac{\int \bsp \dE \int \bsp  \dr \left[ \frac{1}{v} S(\vecr, E) \right] }{\int \bsp \dE \int \bsp \dr \Sum_j \left( \chi_p^j (E) (1-\beta^j) + \Sum_i \chi_d^i (E) \beta_i^j \right) \int \bsp \nu \Sigma_f^j S \dE'}  
+\boxed{ \approx \frac{1}{v \nu \Sigma_f} \xrightarrow{\mathrm{criticality}} \frac{1}{v \Sigma_a} }   \notag }
 
       \item The $i$-th precursor, $C_i (t) = \int \dE \int \dr C_i (\vecr, t)$. 
 
       \item The total external source, $Q(t) = \int \dE \int \dr Q (\vecr, t)$. 
       \end{enumerate}
 
-    \item \textbf{Prompt-jump approximation}: assume $C_i^+ = C_i^-$, $\left. \dTdt \right|_{t = 0^-} = 0, \left. \dTdt \right|_{t = 0^+} = 0$, 
+    \item Prompt-jump approximation: assume $C_i^+ = C_i^-$, $\left. \dTdt \right|_{t = 0^-} = 0, \left. \dTdt \right|_{t = 0^+} = 0$, 
       \begin{align}
-        \ddt T(t) &\approx 0 = \frac{\rho - \beta}{\Lambda} T(t) + \lambda C(t) \\
-        T(0^+) &= \frac{\Lambda \lambda}{\beta - \rho} C(0^+) = \frac{\Lambda \lambda}{\beta - \rho} \left[ \frac{\beta}{\Lambda \lambda} T_0 \right] \\
+        \ddt T(t) &\approx 0 = \frac{\rho - \beta}{\Lambda} T(t) + \lambda C(t) = \frac{\rho- \beta}{\Lambda} T(0^+) + \frac{\beta}{\Lambda} T_0 \\
         \Aboxed{ \frac{T(0^+)}{T_0} &= \frac{\beta}{\beta - \rho} }
       \end{align}
 
-    \item \textbf{In-hour equation}: basically assume solutions take the form of, $T(t) \approx C_i (t) \approx e^{\omega t}$, plug into PKE, and get
+    \item In-hour equation: basically assume solutions take the form of, $T(t) \approx C_i (t) \approx e^{\omega t}$, plug into PKE, and get
       \eqn{ \Aboxed{ \rho &= \omega \Lambda + \Sum_i \frac{\beta_i \omega}{\omega + \lambda_i}} }
       \textbf{Asymptotic periods}: we can only use Inhour equation for asymptotic period, that is, a stable condition indicated by a constant period. Thus to use Inhour equation, we have to make the reactor stable first. For any time dependent problem, we have to use the more general IK. 
 
-\item \textbf{IKE}: 1st order ODE again. First given $T(t)$ we solve for the precursor concentration,
+\item Inverse Kinetics Equation: 1st order ODE again. First given $T(t)$ we solve for the precursor concentration,
 \eqn{ \Aboxed{ [C(t)] &= [e^{-At}][C_0] + [e^{-At}] [A]^{-1} \left( [e^{At}][Y(t)] - [Y_0] \right) } }
 where $[A] = \mathrm{diag}[\lambda_i], [Y(t)] = \frac{\mathrm{diag}[\beta_i]}{\Lambda} T(t)$. Then manipulating PKEs, we can get $\rho(t)$ in terms of $T(t), C(t)$, 
 \begin{align}
@@ -292,6 +287,29 @@ Plug the above approximation into Eq.~\ref{pertb3} and simplify, we reach the FO
    \eqn{ \bar{I} = \frac{\expect{S_0^* (E), \chi_d (E)}}{\expect{S_0^*(E), \chi_p (E)}} }
   \end{enumerate}
 
+\end{enumerate}
+
+\clearpage
+\topic{Past Problems}
+\begin{enumerate}
+  \item Qual 2012 \#3. 
+  \begin{enumerate}
+    \begin{figure}[ht]
+      \centering
+      \includegraphics[width=6in]{images/qual/transient.png}
+    \end{figure}
+  \item $\displaystyle \rho = \frac{\keff - 1}{\keff}, \Lambda = \frac{1}{v \nu \Sigma_f}.
+    $
+  \item $\Lambda$ is prompt neutron lifetime, $\lambda$ is decay constant. 
+  \item We use the inhour equation, and can ignore the $\omega \Lambda$ term can go away because $\Lambda$ is so small, 
+    \eqn{ \rho &= \omega \Lambda + \Sum_i \frac{\beta_i \omega}{\omega + \lambda_i} \approx \Sum_i \frac{\beta_i \omega}{\omega + \lambda_i} }
+    Because we only have one group cross section, 
+    \eqn{ \rho = 0.1 \beta = \frac{\beta \omega}{\omega + \lambda}}
+    where $\lambda = \frac{\ln 2}{\tau}$. Thus $\omega = 7.7 \times 10^{-3}, T = \frac{1}{\omega} = 130$s. 
+  \item We use prompt jump approximation, 
+    \eqn{ \frac{T(0^+)}{T_0} = \frac{\beta}{\beta - \rho} = \frac{\beta}{\beta - 0.1 \beta} = 1.111}
+
+  \end{enumerate}
 \end{enumerate}
 %%%%%%%%%%%%%%%%%%%%%%%%% Final Exam End %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 

@@ -894,4 +894,85 @@ The above expression is true all the time; with different BC, the coupling coeff
 \end{enumerate}
 
 
+%%%%%%%%%%%%%%%%% 
+\clearpage
+\topic{Past Problems}
+\begin{enumerate}
+\item Qual 2012 \#2. 
+  \begin{enumerate}
+    \begin{figure}[ht]
+      \centering
+      \includegraphics[width=6in]{images/qual/quiz-0.png}
+    \end{figure}
+
+  \item From the two group equations, 
+    \begin{align}
+      \left\{ \begin{array}{c}
+        (\Sigma_{a1} + \Sigma_{s12} ) \phi_1 = \frac{1}{\kinf} ( \nu \Sigma_{f1} \phi_1 + \nu \Sigma_{f2} \phi_2 )   \\
+        \Sigma_{a2} \phi_2 = \Sigma_{s12} \phi_1
+      \end{array} \right. 
+    \end{align}
+    Then we can solve for the $\kinf$,
+    \eqn{ \kinf = \frac{\nu \Sigma_{f1} + \nu \Sigma_{f2} \frac{\Sigma_{s12}}{\Sigma_{a2}}}{\Sigma_{a1} + \Sigma_{s12}} }
+
+  \item $\frac{\phi_2}{\phi_1} = \frac{\Sigma_{s12}}{\Sigma_{a2}}$. 
+
+  \item To preserve reaction rates, $ \Sigma = \frac{\Sum \Sigma \phi}{\Sum \phi}$
+    To preserve leakage rates, $D = \frac{\Sum D \phi}{\Sum \phi}$.
+    
+  \item Us the $\nu \bar{\Sigma}_f, \bar{\Sigma}_a$, we can calculate
+    \eqn{ \kinf = \frac{\nu \bar{\Sigma}_f}{\bar{\Sigma}_a} }
+    The $\kinf$ calculated from effective one-group cross sections is the same as the one calculated from two-group cross sections, because the one-group data is calculated preserving reaction rates. 
+
+    \clearpage
+    \begin{figure}[ht]
+      \includegraphics[width=6in]{images/qual/quiz-1.png} 
+      \\
+      \includegraphics[width=6in]{images/qual/quiz-2.png}
+    \end{figure}
+  \item The critical buckling is, 
+    \eqn{ B^2 = \frac{\nu \Sigma_f - \Sigma_a}{D} }
+
+  \item `unreflected' means that there are leakages now, `energy-independent' means that $B^2$ is the same for group 1 and 2,
+    \begin{align}
+      \left\{ \begin{array}{c}
+        (D_1 B^2 + \Sigma_{a1} + \Sigma_{s12} ) \phi_1 = \frac{1}{\keff} ( \nu \Sigma_{f1} \phi_1 + \nu \Sigma_{f2} \phi_2 )  \\
+        (D_2 B^2 +  \Sigma_{a2}) \phi_2 = \Sigma_{s12} \phi_1 
+      \end{array} \right. 
+    \end{align}
+    Then we can solve for $B^2$ given $\keff = 1$. 
+
+  \item From the above equations taking into account leakage, 
+    \eqn{ \frac{\phi_1}{\phi_2} = \frac{D_2 B^2 + \Sigma_{a2}}{\Sigma_{s12}} }
+    It is different from part b because the finite unreflected geometry has leakage terms. 
+
+  \item The $\kinf$ using one-group cross sections collapsed with the critically-buckled spectrum from part g ($\frac{\phi_1}{\phi_2}$), 
+    \eqn{ \kinf = \frac{\nu \Sigma_{f1} \frac{\phi_1}{\phi_2} + \nu \Sigma_{f2} }{\Sigma_{a1} \frac{\phi_1}{\phi_2} + \Sigma_{a2} } }
+    This $\kinf$ is smaller then the one in part d because most fission comes from thermal spectrum, and a lot of it leaks out. Notice is is good to double check to make sure that the calculated $\kinf$ result is no larger than $\nu$. 
+
+    \clearpage
+    \begin{figure}[ht]
+      \centering
+      \includegraphics[width=6in]{images/qual/quiz-3.png}
+    \end{figure}
+  \item Though this appears to be a multi-region problem. But since the reflector is made of absorbium whose absorption cross section is infinite for both energy groups, the problem is effectively a one-group problem, including the core with length $L$ and the approximated extropolated distance of $2D$ on each side. Hence we solve for, 
+    \eqn{ B^2 &= \left( \frac{\pi}{L'} \right)^2, & L &= L' - 4D }
+
+  \item There are two approaches. Approach 1: 
+    \eqn{ \keff = 1 = \frac{\nu \Sigma_f^F}{DB^2 + N_F \sigma_a^F + N_P \sigma_a^P} }
+    Approach 2: we solve for the unknown $\Sigma_a$ that would make $B_m^2 = B_g^2$; then solve for the concentration. 
+
+    \clearpage
+    \begin{figure}[ht]
+      \centering
+      \includegraphics[width=6in]{images/qual/quiz-4.png}  
+    \end{figure}
+  \item For the flux shape, 
+    \begin{itemize}
+    \item Fast energy: flux in the fuel region is cos shape, and suddenly drop to 0 at the interface because the Reflectonium has an infinite large absorption cross section in fast energy. 
+    \item Thermal energy: Reflectonium is a perfect reflector for the thermal region, hence the flux's slope should approach zero at the interface. 
+    \end{itemize}
+  \end{enumerate}
+\end{enumerate}
+
 \end{document}
