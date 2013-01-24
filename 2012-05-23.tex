@@ -43,7 +43,7 @@
 \end{table}
 \end{enumerate}
 
-
+\clearpage
 \textbf{General Knowledge Practice Questions}
 \begin{enumerate}
 \item (Qual 2012). 
@@ -61,8 +61,79 @@
 \item We treat this as a fuel to moderator two-region problem. Then we can calculate fuel to fuel probability. First we calculate chord length $l = \frac{4V}{S} = \frac{4 \pi r^2 H}{2 \pi r H} = 2r = 1\fsp \cm.$
 \eqn{ P_{FF} = \frac{\Sigma_t^F (u)}{\Sigma_t^F (u) + \Sigma_e}  = \frac{10}{10 + 1} = 0.909 } 
 Thus the probability of escaping the cylinder is just 9.09\%. 
-
 \end{enumerate}
+
+\item (12 Final \#1-20) 
+  \begin{enumerate}
+  \item What are the average energies at which prompt and delayed fission neutrons are emitted? \\
+    \textbf{Answer:} 2 MeV for prompt neutrons, 0.4 MeV for delayed neutrons. 
+
+  \item What are the units of real and adjoint flux?\\
+    \textbf{Answer:} Real flux has a unit of neutrons per cm$^2$ per second. Adjoint flux is typically unitless. 
+
+  \item What is the difference between true and `effective' downscatter in two-group cross sections? \\
+    \textbf{Answer:} True down-scattering cross section $\Sigma_{s,1\to 2}$ measures the probability of scattering from group 1 to group 2. Effective down-scattering cross section $\displaystyle \hat{\Sigma}_{s,1\to 2} = \Sigma_{s,1\to 2} - \Sigma_{s, 2 \to 1} \frac{\phi_2}{\phi_1}$ is like combining flux-weighted up-scattering and down-scattering into one down-scattering term. 
+
+  \item What phenomenon is responsible for the $1/v$ tail of thermal scattering cross sections for isotopes with constant elastic cross sections at higher energies?\\
+    \textbf{Answer:} Thermal motion/thermal vibration of the interaction material. 
+
+  \item What is the mean number of isotropic elastic scattering collisions with Livermorium, \ce{Lv_{116}^{293}}, required to slow neutrons from 1 MeV to 1.0 eV? \\
+    \textbf{Answer:} $\displaystyle A = 293, \alpha = \left( \frac{A-1}{A+1} \right)^2 = 0.986, \xi = 1 + \frac{\alpha \ln \alpha}{1 - \alpha} = 6.8 \times 10^{-3}, n = \frac{\ln (E_2 / E_1)}{\xi} = 2028.6.$ Hence it requires 2029 collisions. 
+
+  \item What is the average spacing (in eV) of \ce{U^{238}} resolved capture resonances? \\
+    \textbf{Answer:} 25 eV. 
+
+  \item For Einsteinium \ce{Es^{253}} in the energe range from 11.102 eV to 99.653 eV, what is the ratio of group absorption cross section to resonance integral? \\
+    \textbf{Answer:} Recall that $\RIeff$ and $\sigma_g$ are related through: $\displaystyle \RIeff = \sigma_g \ln \left(\frac{E_2}{E_1} \right)$, hence the ratio is, $\displaystyle \frac{\sigma_g}{\RIeff} = \frac{1}{\ln  \left(\frac{E_2}{E_1} \right) } = 0.456$. 
+
+  \item What is the definition and units of `dilution cross section' for resonance absorbers? \\
+    \textbf{Answer:} Dilusion cross section is defined as, 
+    \eqn{ \sigma_d = \frac{N_m r_m}{N_r} }
+    where $N_m, r_m$ are the number density and cross section of the moderating material, and $N_r$ is the number density of the resonant material. $\sigma_d$ has the unit of $\cm^2$. 
+
+  \item What is the approximate flux disadvantage factor at 0.5 eV for a 17x17 PWR lattice? \\
+    \textbf{Answer:} Notice flux disadvantage factor seem to be defined two ways: 
+    \begin{itemize}
+    \item The moderator flux over the fuel flux (as in Reuss' book, e.g. Fig. 9.4) in which case the flux disadvantage factor would be about 1.05 for standard fuel, 1.1 for MOX fuel. 
+    \item The fuel flux over the moderator flux as in Kord's lectures, in which case the flux disadvantage factor would be around 0.9
+    \end{itemize}
+    Hence results within 0.9 to 1.1 receive credits for this problem. 
+
+  \item What is the approximate Doppler temperature coefficient in pcm/K in an LWR? \\
+    \textbf{Answer:} -3 pcm/K (it is important that the Doppler coefficient is negative), see slide 17, Lecture 10. 
+
+  \item What are the two primary sources for the production of \ce{Xe^{135}}? \\
+    \textbf{Answer:} Iodine decay (major source), fission/burnup (minor source). 
+
+  \item What is resonance escape probability for a material with a resonance integral of 100 barns, a dilution cross section of 2000 barns, and a mean logarithmic energy decrement of 0.333? \\
+    \textbf{Answer:} Recall the expression for resonance escape probability: 
+    \eqn{ p \approx \exp \left( - \frac{\RIeff}{\xi \sigma_d} \right) = \exp \left( - \frac{100 b}{0.333 \times 2000 b} \right) = 0.861 }
+
+  \item What is Dancoff factor for unclad PWR fuel rods with radius 0.5cm in a voided uniform infinite lattice with a pitch of 1.99 cm? \\
+    \textbf{Answer:} When the moderator is void, that is the opacity is zero, hence Dancoff factor is 1.0. 
+
+  \item What is the difference between delayed neutron fraction and delayed neutron yield? \\
+    \textbf{Answer:} Absolute delayed neutron yield is the number of delayed neutrons per fission. Relative delayed neutron yield is the number of delayed neutrons per fission for an isotope divided by number of delayed neutrons per fission for all isotopes. Delayed neutron fraction is the absolute yield divided by $\bar{\nu}$. 
+
+  \item What are the approximate delayed neutron fractions for \ce{U^{235}}, \ce{U^{238}}, and \ce{Pu^{239}}? \\ 
+    \textbf{Answer:} \ce{U^{235}}: 0.00665. \ce{U^{238}}: 0.01650. \ce{Pu^{239}}: 0.00225. 
+
+  \item What is an approximate expression for the extrapolation distance in diffusion theory for one-group bare homogeneous reactor? \\
+    \textbf{Answer:} $\displaystyle \frac{2}{3 \Sigma_{tr}} = \frac{2}{3} \lambda_{tr} = 2D$. 
+
+  \item What is an expression for the mean cosine of the scattering angle in the lab system for an isotope with atomic mass $A$, if scattering is isotropic in the CM system? \\
+    \textbf{Answer:} In 3D it would be $\overline{\cos \theta} = 0, \overline{\cos \phi} = \frac{2}{3A}$. 
+
+  \item For dense matrices of size $N$, what is the order of numerical operations required to find the full matrix inverse, as $N$ becomes large? \\
+    \textbf{Answer:} $N^3$. 
+
+  \item  If an infinite-repeating lattice calculation that is used to produce flux form functions and discontinuity factors has assembly-averaged flux of $0.9 \times 10^{13}$ and an surface-averaged flux of $1.1 \times 10^{13}$, what is the assembly discontinuity factor (ADF)? \\
+    \textbf{Answer:} Recall that $\displaystyle \mathrm{ADF} = \frac{\mbox{surface-averaged flux}}{\mbox{asembly-averaged flux}} = \frac{1.1 \times 10^{13}}{0.9 \times 10^{13}} = 1.22$. 
+
+  \item If two neighboring nodes have ADFs of 1.30 and 1.25 in the thermal group, what is the percentage discontinuity in homogeneous thermal flux at the shared interface when the nodal diffusion equations are solved using the NEM method? \\
+    \textbf{Answer:} Recall $\displaystyle f_n \phi_n^{HOM} = \phi_n^{HET} = \phi_{n+1}^{HET} = f_{n+1} \phi_{n+1}^{HOM}$, then $\displaystyle \frac{\phi_{n+1}^{HOM}}{\phi_n^{HOM}} = \frac{f_n}{f_{n+1}}$. Thus the percentage difference in the homogeneous thermal flux is, $\displaystyle \frac{1.30 - 1.25}{(1.30 + 1.25)/2} = 3.9\%$. 
+
+  \end{enumerate}
 \end{enumerate}
 
 

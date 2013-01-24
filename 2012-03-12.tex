@@ -339,6 +339,29 @@ Answer: \hi{the infinite dilute RI is independent of temperature because in Dopp
   \end{tabular}
   \caption{Physics and Their Corresponding Spectra in MC code} \label{plot-MC}
 \end{table}
+
+
+\clearpage
+\topic{Past Problems}
+\begin{enumerate}
+\item (12 Final \#21) If paraffin (\ce{C_{25} H_{52}}) is used as the moderator and coolant for a new district-heating reactor, what is the macroscopic elastic scattering cross section of paraffine at 10.0 eV and a density of 0.8 gm/cc? \\
+\textbf{Answer:} First we calculate the molecular number density, 
+\eqn{ N_{\mathrm{molecule}} = \frac{\rho N_A}{M} = \frac{0.8 \times 0.6022}{352} = 0.00137 \times 10^{24} 1/\cm^3 }
+Then we know the number density for Carbon atoms are $N_C = 25 N_{\mathrm{molecule}}, N_H = 52 N_{\mathrm{molecule}}$. Recall those elastic scattering cross section plots we had in the beginning of the semester (or consulting \href{http://atom.kaeri.re.kr/}{KAERI's table of nuclides}), $\sigma_C = 4.7 \fsp b, \sigma_H = 20 \fsp b$, then
+\eqn{ \Sigma = \sigma_C N_C + \sigma_H N_H = 25 \times  0.00137 \times 4.7 + 52 \times 0.00137 \times 20 = \boxed{1.584 \fsp \cm^{-1} }   }
+If you use 5 barns for $\sigma_C$, the final answer should be $\sim 1.59 \cm^{-1}$. 
+
+\item (12 Final \#22) Using Bell's approximation, estimate the ratio of escape cross section of an isolated 0.5 cm radius rod to the fuel escape cross section in a uniform hexagonal lattice with a Dancoff factor of 0.6? \\
+\textbf{Answer:} Essentially we are asked to approximate $\displaystyle \frac{(1-C)b}{(1-C) + Cb}$. We are already given the Dancoff factor $C = 0.6$. Recall the plot of Bell's factor for various geometries, we approximate $b$ as 1.1 (as in the examples in lectures), then 
+\eqn{ \frac{\sigma_e}{  \frac{(1-C)b}{(1-C) + Cb} \sigma_e} = \frac{(1-C) + Cb}{(1-C)b} = \frac{0.4 + 0.6 b}{0.4 b} = \boxed{2.4} }
+
+
+
+\end{enumerate}
+
+
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%% Exam 1 Review End %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 

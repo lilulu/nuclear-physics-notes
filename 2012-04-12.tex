@@ -973,6 +973,96 @@ The above expression is true all the time; with different BC, the coupling coeff
     \item Thermal energy: Reflectonium is a perfect reflector for the thermal region, hence the flux's slope should approach zero at the interface. 
     \end{itemize}
   \end{enumerate}
+%%%%%%%%%% End of Qual %%%%%%%%
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=3.5in]{images/qual/final.png}
+  \caption{Cross Sections for 12 Final}
+\end{figure}
+
+\item (12 Final \#23) Compute the finite-medium energy-independent critical buckling and fast-to-thermal flux ratio for Fuel 1. \\
+\textbf{Answer:} This is essentially \#10 in Exam 2. We start by writing the 2-group diffusion equations with $B^2$ being the same for the two groups, 
+\begin{align}
+D_1 B^2 \phi_1 + (\Sigma_{a1} + \Sigma_{s,1\to 2}) \phi_1 &= \nu \Sigma_{f1} \phi_1 + \nu \Sigma_{f2} \phi_2  \label{eq1} \\
+D_2 B^2 \phi_2 + \Sigma_{a2} \phi_2 &= \Sigma_{s,1\to 2} \phi_1  \label{eq2} 
+\end{align}
+From Eq.~\ref{eq2}, we can write, 
+\eqn{ \frac{\phi_1}{\phi_2} = \frac{D_2 B^2 + \Sigma_{a2}}{\Sigma_{s,1\to 2}} \label{eq3} }
+Plug into Eq.~\ref{eq1} and divide every term by $\phi_2$ we get, 
+\eqn{ ( D_1 B^2 + \Sigma_{a1} + \Sigma_{s,1\to 2} - \nu \Sigma_{f1} )\frac{D_2 B^2 + \Sigma_{a2}}{\Sigma_{s,1\to 2}}  &= \nu \Sigma_{f2}   }
+Solving this quadratic equation, we get $\boxed{B^2 = 0.008876}$. Then plug into Eq.~\ref{eq3}, we get, 
+\eqn{ \boxed{  \frac{\phi_1}{\phi_2} = \frac{D_2 B^2 + \Sigma_{a2}}{\Sigma_{s,1\to 2}} = 4.31  }}
+
+\item (12 Final \#24) Using the infinite medium spectrum from \#23, compute the effective one-group cros sections for Fuel 1 by preserving reaction and leakage rates. \\
+\textbf{Answer:} Recall collapsing cross sections is essentially $\bar{\Sigma} = \frac{\Sum \Sigma \phi}{\Sum \phi}$. 
+Thus we do, 
+\begin{align}
+\overline{\nu \Sigma_f} &= \frac{\nu_1 \Sigma_{f1} \frac{\phi_1}{\phi_2} + \nu_2 \Sigma_{f2}}{\frac{\phi_1}{\phi_2} + 1} = 0.03515  \\
+\overline{\Sigma_a} &= \frac{\Sigma_{a1} \frac{\phi_1}{\phi_2} + \Sigma_{a2}}{\frac{\phi_1}{\phi_2} + 1} = 0.02384 \\
+\overline{D} &= \frac{D_1 \frac{\phi_1}{\phi_1} + D_2}{\frac{\phi_1}{\phi_2} + 1} = 1.27387
+\end{align}
+
+
+\item (12 Final \#25) Using one-group cross sections from \#24, what is the one-group, critical radius of a bare square cylinder (i.e., height = diameter) using diffusion theory extrapolation distances for all surfaces? \\
+\textbf{Answer:} There are two slightly different ways to do it. 
+\begin{itemize}
+\item Using collapsed one-group cross sections, we can write the material buckling as, 
+\eqn{ B_{\mathrm{material}}^2 = \frac{\overline{ \nu \Sigma_f} - \overline{\Sigma_a}}{\overline{D}} = 0.008876}
+The geometrical buckling with extrapolated distance $2\bar{D}$ is, 
+\eqn{ B_{\mathrm{geometrical}}^2 = \left( \frac{2.405}{R + 2\bar{D}} \right)^2 + \left( \frac{\pi}{2R+4\bar{D}} \right)^2 }
+Setting the two bucklings to be equal, we can solve for the critical radius to be $\boxed{ R = 27.94 \cm}$. 
+
+\item Alternatively, we can recognize that we have already solved for $B^2$ in \#23 and get 0.008876 (which agrees with the previous method using collapsed one-group cross sections, because we are preserving leakage by collapsing $\bar{D}$). 
+
+Taking advantage of the square cylinder geometry and the assumption of one-group, if we define $R' = R + 2 \bar{D}$ where $R$ is the critical radius we are actually solving for, $R'$ is the distance including the extrapolated distance, we can easily solving for $R'$ through 
+  \eqn{ B^2 = \left( \frac{2.405}{R'} \right)^2 + \left( \frac{\pi}{2 R'} \right)^2 }
+  and get $R' = 30.49\cm, R = R' - 2\bar{D} = \boxed{ 27.94 \cm}$. 
+\end{itemize}
+
+
+\item (12 Final \#26) What is the two-group, critical radius of a bare square cylinder of Fuel 1 using diffusion theory extrapolation distances for each energy group and all surfaces? \\
+\textbf{Answer:} We absolutely cannot use the 2nd method in \#25 anymore because the extrapolation distance $\approx 2D$ which is different for the two energy groups. Instead, we have to define a bunch of transver buckling terms (similar to \#12 in Exam 2). This problem can be break into the following steps: 
+\begin{enumerate}
+\item Defining transverse buckling terms: there are two transverse leakage directions, the radial direction and the z-direction, 
+\eqn{ B_{g,R}^2 &= \left( \frac{2.405}{R + 2D_g} \right)^2 & B_{g,H}^2 &= \left( \frac{\pi}{2(R + 2D_g)} \right)^2 }
+where the subscript $g$ means energy group (thus 1 or 2), and subscript $R, H$ designate Radial direction or Height direction. 
+
+\item Then we can write our two-group diffusion equations: 
+\begin{align}
+(D_1 B_{1,R}^2 + D_1 B_{1,H}^2 + \Sigma_{a1} + \Sigma_{s12} ) \phi_1 &= \nu \Sigma_{f1} \phi_1 + \nu \Sigma_{f2} \phi_2  \label{26-1}\\
+(D_2 B_{2,R}^2 + D_2 B_{2,H}^2 + \Sigma_{a2} ) \phi_2 &= \Sigma_{s12} \phi_1  \label{26-2}
+\end{align}
+
+\item Solving the above system. We do the typical thing: write $\frac{\phi_1}{\phi_2}$ from Eq.~\ref{26-2}, 
+\eqn{ \frac{\phi_1}{\phi_2} = \frac{D_2 B_{2,R}^2 + D_2 B_{2,H}^2 + \Sigma_{a2}}{\Sigma_{s12}} }
+plug into Eq.~\ref{26-1} and divide both side by $\phi_2$, 
+\eqn{ D_1 B_{1,R}^2 + D_1 B_{1,H}^2 + \Sigma_{a1} + \Sigma_{s12} =    \nu \Sigma_{f1}  + \frac{\nu \Sigma_{f2} \Sigma_{s12}}{D_2 B_{2,R}^2 + D_2 B_{2,H}^2 + \Sigma_{a2}} }
+We obtained a one equation one unknown ($R$), thus can solve for the critical radius $\boxed{ R = 27.668 \cm}$. 
+\end{enumerate}
+
+\item (12 Final \#27) Los Alamos scientists have created a system to monitor sub-criticality of spent fuel pools by comparing detector responses from two identical point sources, one source/detector pair placed in the pool and another source/detector pair placed in the fuel, as depicted in the following figure. What is the required distance, $L$, between the water pool source and detector such that the signal will be exactly equal to the fuel source and detector signal as the $\kinf$ of the fuel reaches the regulatory limit of $0.95$? \\
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=4in]{images/qual/27.png}
+\end{figure}
+
+\textbf{Answer:} Recall in lecture we solved the point source in an infinite non-multiplying medium problem to have $\displaystyle \phi(r) = \frac{S_0}{4 \pi D} \frac{e^{-r/L}}{r}$. This problem is essentially the same set-up, thus we can write, 
+\eqn{ \phi(r) = \frac{S_0}{4 \pi D} \frac{e^{-|B|r}}{r}, \mbox{   where } |B| =  \left\{  \begin{array}{cc} \sqrt{ \frac{\Sigma_a^F - \nu \Sigma_f^F}{D^F}} = 0.0707 & \mbox{Fuel region} \\
+\sqrt{\frac{\Sigma_a^P}{D^P}} = 0.1414 & \mbox{Pool region} \end{array} \right. \label{27}  }
+where $\nu \Sigma_f^F = \kinf \Sigma_a^F$. A quick review of how we obtained the above flux expression, 
+\begin{itemize}
+  \item Start by writing the diffusion equation using spherical coordinate systems, 
+    \eqn{ \dphidrn2 + \frac{2}{r} \dphidr - |B|^2 \phi &= - \frac{S_0}{D} \delta (\vecr) }
+  \item The solution is in the form of, 
+    \eqn{ \phi(r) = A \frac{e^{-|B|r}}{r} + B \frac{e^{|B|r}}{r} }
+  \item BC1: $\displaystyle \lim_{r\to \infty} = 0$, thus $B = 0$. 
+  \item BC2: $\displaystyle \lim_{r\to 0} 4 \pi r^2 J(r) = S_0$, thus 
+    \eqn{ \phi(r) = \frac{S_0}{4\pi D} \frac{e^{-|B|r}}{r} }
+\end{itemize}
+Coming back to Eq.~\ref{27}, the question is basically asking for, 
+\eqn{ \frac{S_0}{4 \pi D} \frac{e^{-0.1414 r}}{r} = \frac{S_0}{4 \pi D} \frac{e^{-0.0707 \times 200}}{200} }
+Thus $\boxed{ r = 104.58 \cm}$. 
 \end{enumerate}
 
 \end{document}
