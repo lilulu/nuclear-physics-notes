@@ -184,33 +184,59 @@ Then manipulating PKEs, we can get $\rho(t)$ in terms of $T(t), C(t)$,
 \clearpage
 \topic{PKE with Feedback}
 \begin{enumerate}
+\item Why model feedbacks? 
+  \begin{itemize}
+  \item Magnitude of flux/power very sensitive (can grow very quickly): without feedback power shoots up with an asymptotic period; with Doppler feedback, both the reactivity and power decreases before the rod is even fully inserted.   
+  \item Safety analysis: fuel enthalpy at failure depends on BU so we need to model rod worth accurately for safety analysis. 
+  \end{itemize}
+
 \item Fuchs-Nordheim model for RIAs: nice for intuition
   \begin{enumerate}
-    \item Deposited energy: general expression, 
+    \item 3 assumptions: 
+      \begin{itemize}
+      \item $\rho \gg \beta$, ignore the delayed neutrons thus drop all $C_i(t)$; 
+      \item rapid transient thus no heat transfer from the fuel: $T_{\mathrm{fuel}} = T_{\mathrm{fuel}}^0 + \frac{1}{C_p} \int P(t) \dt$; 
+      \item Doppler coefficient independent of temperature: $\rho(t) = \rho_{\mathrm{rod}} - \alpha (T_{\mathrm{fuel}} - T_{\mathrm{fuel}}^0)$. 
+      \end{itemize}
+    \item First method to derive $P(t)$: $\frac{\dP}{\dT_{fuel}} = \frac{\dPdt}{\dTdt}$, integrate over temperature and get
       \eqn{ P(t) &= P_0 + \frac{1}{\Lambda} \left[ C_p (\rho_{rod} - \beta) T_{fuel} (t)  - \frac{\alpha C_p}{2} T^2_{fuel} (t) \right]  }
       At peak power, we set $\frac{\dP}{\dT_{fuel}} = 0$, 
       \begin{align}
-        \Aboxed{ T_{fuel}^{peak} &= \frac{\rho_{rod} - \beta}{\alpha} } \\
-        \Aboxed{ P^{peak} &= P_0 + \frac{C_p (\rho_{rod} - \beta)^2}{2 \Lambda \alpha} }
+        \Aboxed{ T_{fuel}^{peak} &= \frac{\rho_{rod} - \beta}{\alpha} }  &  \Aboxed{ P^{peak} &= P_0 + \frac{C_p (\rho_{rod} - \beta)^2}{2 \Lambda \alpha} }
       \end{align}
 
-    \item Temperature behavior, Doppler coefficients. We can find the temperature when $P(t)$ returns to $P_0$ to be,     
+    \item Second method to derive $P(t)$: $\frac{\dP}{\drho} = \frac{\dPdt}{\drhodt}$, integrate over $\rho$, 
+      \eqn{ P(t) = P_0 + \frac{C_p}{2\alpha} \left[ - (\rho(t) - \beta)^2 + (\rho_{\mathrm{rod}} - \beta)^2 \right]  }
+      Assume the transient terminates when $P(t)$ returns to $P_0$, then $\rho_{end} = 2 \beta - \rho_{rod}$, 
       \eqn{ \Aboxed{ T_{fuel}^{end} &= \frac{2 (\rho_{rod} - \beta)}{\alpha} + T_{fuel}^0 } }
 
     \item Take-away messages:
       \begin{itemize}
-      \item $\Delta T_{fuel}^{end} = 2 \Delta T_{fuel}^{peak}$. 
+      \item Peak fuel temperature is independent of neutron lifetime $\Lambda$ and heat capacity $C_p$. Peak temperatures are proportionally larger than core average. 
+      \item Peak power $\propto \frac{C_p}{\Lambda}$; consequence: FRs with smaller $\Lambda$ would generate tons of heat rapidly. 
+      \item $\Delta T_{fuel}^{end} = 2 \Delta T_{fuel}^{peak}$. Reason: power is symmetric around peak; temperature is integrated results. 
+      \item Asymptotic fuel temperature is independent of: reactivity insertion rate, neutron lifetime, heat capacity. 
       \item F-N model is a good estimation because temperature is basically integrated power, hence the speed of reactivity insertion does not matter, it is the amount of reactivity inserted over time that matters. 
       \item Using PKEs with feedback, we demonstrate that reactivity change rate $\down$, the smaller the overshoot is. Though teh asymptotic results are independent of the reactivity change rate (as also seen in the F-N model). 
-      \item Fuel temperature is independent of: reactivity insertion rate, neutron lifetime, heat capacity. 
+      \item A second peak in power is characteristic of slow insertion. 
       \end{itemize}
   \end{enumerate}
+
+\item PKEs with simple feedback: 
+  \begin{align}
+    \ddt T_{\mathrm{fuel}} (t) &= a P(t) - b [T_{\mathrm{fuel}}(t) - T_{\mathrm{coolant}}(t)] \\
+    \ddt T_{\mathrm{coolant}} (t) &= c [T_{\mathrm{fuel}}(t) - T_{\mathrm{coolant}} (t) ] - d [T_{\mathrm{coolant}} (t) - T_{\mathrm{inlet}} (t) ] 
+  \end{align}
 
 \item Transient feedback effects
   \begin{enumerate}
   \item Time constants: recall the asymptotic power decay time constant is just that of the longest precursor. 
-  \item Power level changes: power overshoot is proportional to the reactivity change rate, but not the asymptotic value. 
+  \item $< \beta$ insertion/withdrawal: power overshoot/undershoot is proportional to the reactivity change rate (rate $\down$, overshoot/undershoot $\down$), and the asymptotic value is independent of the reactivity change rate. 
+  \item $> \beta$ insertion/withdrawal: power and temperature would turn around due to Doppler feedback. 
+  \item Asymptotic temperature only depends on the reactivity change, not the change rate. 
   \end{enumerate}
+
+  \item Problem with our neutronics model: not accurate for large spatial flux changes. Problem with our TH model: very huge diffusive property, would not predict any thermal shock behavior. 
 \end{enumerate}
 
 %%%%%%%%%%%%%%%%%% Nodal %%%%%%%%%%%%%%%%%%%%
