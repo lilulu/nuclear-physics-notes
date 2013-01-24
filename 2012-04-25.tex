@@ -5,6 +5,10 @@
 \maketitle
 
 \lecture{Point Kinetics Without Feedback} \label{PKE-without-feedback}
+In this chapter, I use `generalized PKE' to refer to the formulation using integrated cross sections terms, and `classical PKE' specifically cast integrated cross sections into $\rho, \beta, \Lambda$. 
+
+
+\topic{Physics of Delayed Neutrons}
 In this section, we would discuss: 
 \begin{enumerate}
 \item The importance of neutron precursor data ($\beta$) and emission spectram ($\chi$) and how they are being treated in diffusion equation. 
@@ -15,7 +19,7 @@ In this section, we would discuss:
 \end{enumerate}
 
 
-\topic{Physics of Delayed Neutrons}
+\vspace{0.5cm}
 \textbf{Prompt neutrons}: more than 99\% of all neutrons are emitted in $<10^{-10}$s after the fission (prompt neutron lifetime in a PWR is about $2 \times 10^{-5}$ sec). 
 
 \vspace{0.5cm}
@@ -47,11 +51,13 @@ This reactor would be virtually impossible to control! Fortunately, delayed netr
   \item Delayed neutron precursors are embedded in fission species delayed yields. 
     \end{itemize}
 
-\item  \textcolor{blue}{Delayed yields ($\beta$) depend on fissioning species and neutron energy.}
+\item  \textcolor{blue}{Delayed yields $\nu_d$ depend on fissioning species and neutron energy.}
   \begin{itemize}
   \item Absolute yield: number of delayed neutrons per fission; unit: 1/fission. 
   \item Relative yield: absolute yield of an isotope divided by total absolute yield by all isotopes. 
-  \item \hi{Delayed neutron fraction $\beta$: absolute yield (\# of delayed neutrons per fission) divided by $\bar{\nu}$ (total fission neutrons) = percentage of neutrons that are delayed.}
+  \item Delayed neutron fraction $\beta$: absolute yield (\# of delayed neutrons per fission) divided by $\bar{\nu}$ (total fission neutrons) = percentage of neutrons that are delayed.
+  \item We talk about $\beta_{\mathrm{effective}}$ once it is averaged over all isotopes and flux. 
+  \item $\beta$ changes as a function of time through breeding of Pu-239 in U-239 cycle, though the variations in BU are on a much larger time scale than usual range of application of PKEs so typically we ignore the change in $\beta$ for short transients. 
   \item 6 group yields and decay constants depend on fissioning species, as in Table~\ref{yield-depend-on-species}.
     \begin{table}[ht]
       \centering
@@ -101,11 +107,10 @@ This reactor would be virtually impossible to control! Fortunately, delayed netr
 
 \clearpage
 \topic{Generalized PKE from Diffusion Equation}
-\begin{enumerate}
-\item We start from the diffusion equation: \hi{The steady-state diffusion equation}\footnote{Know this for the final}: 
+This lecture was given by Prof. Smith for 22.S904. Recall the \uline{steady-state diffusion equation}: 
 \small
 \begin{align}
-& - \divergence D(\vecr, E) \gradient \phi(\vecr, E) + \Sigma_t (\vecr, E) \phi(\vecr, E) = \int_0^{\infty} \Sigma_s (\vecr, E'\to E) \phi(\vecr, E') \dE' \\
+& - \divergence D(\vecr, E) \gradient \phi(\vecr, E) + \Sigma_t (\vecr, E) \phi(\vecr, E) = \int_0^{\infty} \Sigma_s (\vecr, E'\to E) \phi(\vecr, E') \dE' \notag \\
 &+ \Sum_j \chi_T^j (E) \int_0^{\infty} \nu \Sigma_p^j (\vecr, E') \phi(\vecr, E') \dE' + Q(\vecr, E) 
 \end{align}
 \normalsize
@@ -115,17 +120,17 @@ This reactor would be virtually impossible to control! Fortunately, delayed netr
 \item A chicken-and-egg problem: we need fission rates to compute $\chi(E)$, and we need $\chi(E)$ to get fission rates, so the real way to solve the balance equation is to iterate, though this is not how it is done normally.
 \end{itemize}
 
-
-\item \hi{The time-dependent neutron diffusion equation}: in transient diffusion equations, the delayed neutrons must be treated explicitly. $\beta^j = \Sum_i \beta_i^j$ is the delayed fission fraction (0.66\% for instance), 
+Next we will start from the time-dependent neutron diffusion equation and go through various steps to arrive at the generalized PKE. 
+\begin{enumerate}
+\item The \uline{time-dependent neutron diffusion equation}: now delayed neutrons must be treated explicitly. $\beta^j = \Sum_i \beta_i^j$ is the delayed fission fraction (0.66\% for instance); we use $i$ is for isotropes, $j$ is for energy groups.
   \begin{align}
     \ppt \left[ \frac{1}{v} \phi(\vecr, E, t) \right] &= \divergence D(\vecr, E, t) \gradient \phi(\vecr, E, t) - \Sigma_t (\vecr, E, t) \phi(\vecr, E, t) 
 \notag \\
     & + \int_0^{\infty} \Sigma_s (\vecr, E'\to E, t) \phi(\vecr, E', t) \dE'\notag \\
     &+ \Sum_j \chi_p^j (E) (1-\beta^j) \int_0^{\infty} \nu \Sigma_f^j (\vecr, E', t) \phi(\vecr, E', t) \dE'\notag \\
     &+ \Sum_i \chi_d^i (E) \lambda_i C_i (\vecr, t) + Q(\vecr, E, t)\\
-    \ppt C_i (\vecr, t) &= \Sum_j \beta_i^j \int_0^{\infty} \nu \Sigma_p^j (\vecr, E', t) \phi(\vecr, E', t) \dE'  - \lambda_i C_i (\vecr, t) 
+    \ppt C_i (\vecr, t) &= \Sum_j \beta_i^j \int_0^{\infty} \nu \Sigma_f^j (\vecr, E', t) \phi(\vecr, E', t) \dE'  - \lambda_i C_i (\vecr, t) 
   \end{align}
-  where $i$ is for isotropes, $j$ is for energy groups. 
 
 \item Assume that flux can be separated into a space/energy term and a time-dependent term: 
   \eqn{ \phi(\vecr, E, t) = S(\vecr, E) T(t) }
@@ -137,7 +142,7 @@ where $S(\vecr, E)$ is the Shape function,  $T(t)$ is the amplitude function (re
     &+ \Sum_j \left( \chi_p^j (E) (1-\beta^j) + \Sum_i \chi_d^i (E) \beta_i^j \right) \int_0^{\infty} \nu \Sigma_f^j (\vecr, E', t) S(\vecr, E') \dE'   \notag \\
     &- \Sum_j \chi_p^j (E) \beta^j \int_0^{\infty} \nu \Sigma_f^j (\vecr, E', t) S(\vecr, E') \dE' \Bigg\} T(t)  \notag \\
     &+ \Sum_i \chi_d^i (E) \lambda_i C_i (\vecr, t) + Q(\vecr, E, t)   \\
-    \ppt C_i (\vecr, t) &= \left\{ \Sum_j \beta_i^j \int_0^{\infty} \nu \Sigma_p^j (\vecr, E', t) S(\vecr, E') \dE' \right\} T(t) - \lambda_i C_i (\vecr, t) 
+    \ppt C_i (\vecr, t) &= \left\{ \Sum_j \beta_i^j \int_0^{\infty} \nu \Sigma_f^j (\vecr, E', t) S(\vecr, E') \dE' \right\} T(t) - \lambda_i C_i (\vecr, t) 
   \end{align}
 
 
@@ -151,12 +156,12 @@ where $S(\vecr, E)$ is the Shape function,  $T(t)$ is the amplitude function (re
     &+ \int \dE \int \dr \left[ \Sum_i \chi_d^i (E) \lambda_i C_i (\vecr, t) + Q(\vecr, E, t)\right]   \label{PKE-1}
   \end{align}
   \begin{align}
-    \ddt \left[ \int \dE \int \dr C_i (\vecr, t) \right] &= \int \dE \int \dr \left\{ \Sum_j \beta_i^j \int_0^{\infty} \nu \Sigma_p^j (\vecr, E', t) S(\vecr, E') \dE' \right\} T(t) \notag \\
+    \ddt \left[ \int \dE \int \dr C_i (\vecr, t) \right] &= \int \dE \int \dr \left\{ \Sum_j \beta_i^j \int_0^{\infty} \nu \Sigma_f^j (\vecr, E', t) S(\vecr, E') \dE' \right\} T(t) \notag \\
     &- \lambda_i \int \dE \int \dr C_i (\vecr, t)  \label{PKE-2}
   \end{align}
 
 
-\item Simplify energy dependency. In Eq.~\ref{PKE-1}, notice in the term $\Sum_j \chi_p^j (E) \beta^j \int_0^{\infty} \nu \Sigma_f^j (\vecr, E', t) S(\vecr, E') \dE'$, only $\chi_p^j(E)$ depends on energy, we can use $\int \chi_p^j (E) \dE = 1$ to get rid of the energy integral in Eq.~\ref{PKE-1}, 
+\item Simplify energy dependency. In Eq.~\ref{PKE-1}, notice in the term $\Sum_j \chi_p^j (E) \beta^j \int_0^{\infty} \nu \Sigma_f^j (\vecr, E', t) S(\vecr, E') \dE'$, only $\chi_p^j(E)$ depends on energy, we can use $\int \chi_p^j (E) \dE = 1$ to get rid of the energy integral, 
   \begin{align}
     \ddt \left[ T(t) \right] &= 
     \int \dE \int \dr \Bigg\{ \divergence D(\vecr, E, t) \gradient S(\vecr, E) - \Sigma_t (\vecr, E, t) S(\vecr, E)   \notag \\
@@ -167,7 +172,7 @@ where $S(\vecr, E)$ is the Shape function,  $T(t)$ is the amplitude function (re
   \end{align}
   In a similar fashion, notice Eq.~\ref{PKE-2} no term has a $E$ dependency, so we can cross out the $\int \dE$ in every term to get, 
     \begin{align}
-    \ddt \left[ \int \dr C_i (\vecr, t) \right] &= \int \dr \left\{ \Sum_j \beta_i^j \int_0^{\infty} \nu \Sigma_p^j (\vecr, E', t) S(\vecr, E') \dE' \right\} T(t) \notag \\
+    \ddt \left[ \int \dr C_i (\vecr, t) \right] &= \int \dr \left\{ \Sum_j \beta_i^j \int_0^{\infty} \nu \Sigma_f^j (\vecr, E', t) S(\vecr, E') \dE' \right\} T(t) \notag \\
     &- \lambda_i \int \dr C_i (\vecr, t)  \label{PKE-4}
   \end{align}
 
@@ -175,7 +180,7 @@ where $S(\vecr, E)$ is the Shape function,  $T(t)$ is the amplitude function (re
 \item Assume no net current (leakage) out of the reactor model\footnote{Recall we used Gauss theory to make the volume integral into surface integral, thus creating zero leakage for certain BCs.}, thus $\divergence D(\vecr, E, t) \gradient S(\vecr, E) \to 0$. Assume no external source of prompt or delayed neutrons, thus $Q(\vecr, E, t) \to 0$. 
 
 
-\item Assume \hi{prompt fission spectrum $\chi_d^j$ is independent of fissioning species $j$}, that is, we drop the $j$ dependency on prompt terms $\chi_p^j, \beta^j$, 
+\item Assume \hi{prompt fission spectrum $\chi_p^j$ is independent of fissioning species $j$}, that is, we drop the $j$ dependency on prompt terms $\chi_p^j, \beta^j$, 
 \eqn{ \Sum_j \chi_p^j (1 - \beta^j) = \chi_p (1 - \beta) }
 
 \item Assume \hi{delayed fission yield $\beta^j$ is independent of fissioning species $j$}, that is, we drop the $j$ dependency on delayed terms, 
@@ -222,19 +227,26 @@ Thus Eq.~\ref{PKE-5} becomes,
 
 
 
-\topic{Multi-Group PKEs}
-Based on Eq.~\ref{PKE-6} and Eq.~\ref{PKE-8}, 
+\topic{Multi-Group Generalized PKEs}
+Based on Eq.~\ref{PKE-6} and Eq.~\ref{PKE-8}, we can further define multi-group PKEs. 
 \begin{enumerate}
 \item \hi{Multi-group PKEs}: normalize $\Sum_g \expect{ \int \dr \phi_g^* (\vecr) \frac{1}{v_g(\vecr, t)} S_g (\vecr) } = 1.0$, we basically add a $_g$ subscript to every term applicable, and convert any $\int \dE A(E)$ to $\Sum_{g} A_{g}$, 
   \begin{align}
- \ddt \left[ T(t) \right] &=  
+ \ddt \left[ T_g(t) \right] &=  
     \int \dr  \phi_g^* (\vecr)  \left\{  - \Sigma_{t,g} (\vecr, t) S_g(\vecr) T_g(t)   + \Sum_{g'} \Sigma_{s, g' \to g} (\vecr, t) S_{g'}(\vecr) T_{g'} (t)  \right.  \notag \\
     &+  \left. \chi_{p,g} (E) (1-\beta (\vecr)) \Sum_{g'} \nu \Sigma_{f,g'} (\vecr, t) S_{g'} (\vecr) T_{g'}(t) \right\}  + \int \dr \phi^*(\vecr) \chi_{d,g}  \Sum_i \lambda_i C_i (\vecr, t)    \label{PKE-9}  \\
      \ddt \left[ \int \dr C_i (\vecr, t) \right] &=   \int \dr \beta_i (\vecr) \Sum_g \nu \Sigma_{f,g} (\vecr, t) S_g (\vecr) T_g(t)   - \lambda_i \int \dr C_i (\vecr, t)  \label{PKE-10}
   \end{align}
 
 
-\item \hi{2-group PKEs}\footnote{Very Important! Know this for the exam!!!}:
+\item \hi{2-group PKEs}: assumptions:
+  \begin{enumerate}
+    \item No leakage out of the core. 
+    \item All fission neutrons born in the fast group. 
+    \item All delayed neutron born in the fast group. 
+    \item Downscattering is replaced by effective downscattering. No upscattering. 
+  \end{enumerate}
+
   \begin{align}
   \ddt \left[ T_1(t) \right] &=   \int \dr  \phi_1^* (\vecr)  \left\{  - \Sigma_{r,1} (\vecr,t) S_1(\vecr) T_1(t)  + [1-\beta (\vecr)][\nu \Sigma_{f,1} (\vecr, t) S_{1} (\vecr) T_{1}(t) + \nu \Sigma_{f,2} (\vecr, t) S_2 (\vecr) T_2 (t)] \right\} \notag \\
     &+ \int \dr \phi^*(\vecr)   \Sum_i \lambda_i C_i (\vecr, t)     \label{PKE-11} \\
@@ -243,14 +255,28 @@ Based on Eq.~\ref{PKE-6} and Eq.~\ref{PKE-8},
   \end{align}
   \begin{align}
    \ddt \left[ \int \dr C_i (\vecr, t) \right] &=   \int \dr \beta_i (\vecr) \left[ \nu \Sigma_{f,1} (\vecr, t) S_1 (\vecr) T_1(t) + \nu \Sigma_{f,2} (\vecr, t) S_2 (\vecr) T_2 (t) \right]   - \lambda_i \int \dr C_i (\vecr, t)  \label{PKE-13}
-  \end{align}
-  The assumptions made include, 
+  \end{align} 
+
+  Interpretaion: 
   \begin{enumerate}
-    \item No leakage out of the core. 
-    \item All fission neutrons born in the fast group. 
-    \item All delayed neutron born in the fast group. 
-    \item Downscattering is replaced by effective downscattering. No upscattering. 
+  \item Notice we include the adjoint flux as weighting factors. Technically the parameters in the previous sections should include corresponding weighting factors as well. 
+  \item $\beta$ has no $T(t)$ temporal dependency. $\beta$ only depends on $\phi_1^*$ but not $\phi_2^*$, because all delayed neutrons are born in group 1, hence we do not care about the neutron importance in group 2.  
+  \item$\Lambda$ is the prompt neutron life time, thus only the importance of group 1 neutrons matters.
+  \item Keep in mind that the classical PKE expression that we would show in the next subsection looks simple; it is how these parameters are defined that is involved. 
   \end{enumerate}
+
+
+
+  If we drop the $\vecr, t$ dependency, we get a cleaner look of the 2-group PKE: 
+    \small
+  \begin{align}
+  \ddt \left[ T_1\right] &=   \int \dr  \phi_1^*  \left\{  - \Sigma_{r,1}  S_1 T_1  + (1-\beta) (\nu \Sigma_{f,1} S_{1}  T_{1} + \nu \Sigma_{f,2} S_2 T_2 ) \right\} + \int \dr \phi^*  \Sum_i \lambda_i C_i     \\
+   \ddt \left[ T_2 \right] &=  
+    \int \dr  \phi_2^*  \left[ - \Sigma_{a,2}  S_2 T_2 + \Sigma_{s12}  S_1 T_1  \right]   \\
+   \ddt \left[ \int \dr C_i \right] &=   \int \dr \beta_i\left[ \nu \Sigma_{f,1} S_1 T_1 + \nu \Sigma_{f,2}  S_2  T_2 \right]   - \lambda_i \int \dr C_i 
+  \end{align}
+  \normalsize
+
 
 \item We can further write the 2-group PKEs in matrix form as in Table~\ref{matrix-2-group-PKEs}. 
   \begin{table}[ht]
@@ -267,25 +293,47 @@ Based on Eq.~\ref{PKE-6} and Eq.~\ref{PKE-8},
 
 
 \clearpage
-\topic{PKE Parameters}
-First we consider one energy group only. We define a set of terms to simplify the expression. For simplicity concern, we omit the dependency on the following terms. $D(\vecr, E, t), \Sigma_t (\vecr, E, t), \Sigma_f(\vecr, E, t),  S(\vecr, E), \chi(E)$. 
+\topic{Classical PKE}
+For the classical PKE approach, we lump the integrals of cross sections and shape functions into simple parameters like $\rho, \beta$ and $\Lambda$. To start, for simplicity concern we omit the dependency on the following terms: $D(\vecr, E, t), \Sigma_t (\vecr, E, t), \Sigma_f(\vecr, E, t),  S(\vecr, E), \chi(E)$. 
+
+\subtopic{Classical PKE Parameters}
 \begin{enumerate}
 \item Reactivity $\rho(t)$, where the top is the diffusion equation, and the bottom is fission rate if all the neutrons show up instatenously. 
-\eqn{ \rho = \frac{\mbox{net production}}{\mbox{perturbation denomenator (sum of all fission in the system)}} }
+\eqn{ \rho = \frac{\mbox{net production}}{\mbox{perturbation denomenator (if all neutrons show up instantaneously)}} }
 \scriptsize
 \begin{align}
 \rho (t) &= \frac{\int \bsp \dE \! \int \bsp \dr \Bigg\{ \!\divergence \! D  \gradient S  - \! \Sigma_t S  + \! \int \bsp \Sigma_s (\vecr \!, E' \bsp \to \bsp E, t) S \! \dE'   
     + \! \Sum_j \left( \! \chi_p^j (E) (1 \! - \! \beta^j) +  \! \Sum_i \chi_d^i (E) \beta_i^j \! \right) \! \int \bsp \nu \Sigma_f^j  S \dE'  }{\int \bsp \dE \int \bsp \dr \Sum_j \left( \chi_p^j (E) (1-\beta^j) + \Sum_i \chi_d^i (E) \beta_i^j \right) \int \bsp \nu \Sigma_f^j S \dE'} 
 \end{align}
 \normalsize
-\eqn{ \Aboxed{ \rho(t) &= \frac{\keff - 1.0}{\keff}  } }
 
+A special word about reactivity: \textbf{$\rho(t)$ does not describe how much neutrons there are at a specific time; it describes how much neutrons there would be eventually.} 
+\begin{itemize}
+  \item Static $\rho$ comes from steady-state transport equation, and it indicates excess (or lack) of reactivity present in the system. 
+    \eqn{ \rho(t) &= \frac{\keff - 1.0}{\keff}  } 
+  \item Dynamic $\rho$ changes as a function of time and indicates changes from an initially stable system. 
+    \eqn{ \rho(t) &= \frac{\rho_f - \rho_i}{\rho_f} }
+\end{itemize}
 
-\item The delayed neutron fraction (notice although this is called delayed neutron fraction, there is $\chi_p^j(E)$ term in it), 
+The unit of $\rho$ can be confusing. See Table~\ref{common-rho-units}. 
+\begin{table}[h]
+  \centering
+  \begin{tabular}{|c|c|c|} \hline
+    Unit & Definition & Example \\ \hline
+    $\Delta k$ & actual units of PKEs & 0.01 \\
+    \% $\Delta k$ & & 1\% \\
+    pcm & $10^5 \Delta k $ & 1000 pcm \\ \hline
+    Dollars & $\frac{\Delta k}{\beta}$ & \$1.5 \\
+    Cents & 100 Dollars & 150 cents \\ 
+    Milli-beta & 1000 Dollars & 1500 milli-beta \\ \hline
+  \end{tabular}
+  \caption{Common Reactivity Units}\label{common-rho-units}
+\end{table}
+
+\item The delayed neutron fraction (notice although this is called delayed neutron fraction, there is $\chi_p^j(E)$ term in it). If we ignore fissioning spectrum, $\beta \approx \Sum_i \beta_i$. 
 \begin{align}
 \beta_i (t) &= \frac{\int \bsp \dE \int \bsp \dr \left[ \Sum_j \chi_d^j (E) \beta^j \int_0^{\infty} \nu \Sigma_f^j (\vecr, E', t) S(\vecr, E') \dE' \right] }{\int \bsp \dE \int \bsp \dr \Sum_j \left( \chi_p^j (E) (1-\beta^j) + \Sum_i \chi_d^i (E) \beta_i^j \right) \int \bsp \nu \Sigma_f^j S \dE'} 
 \end{align}
-If we don't worry about the fissioning spectra, we would have $\beta \approx \beta_i$. 
 
 
 \item Prompt neutron lifetime, 
@@ -293,38 +341,33 @@ If we don't worry about the fissioning spectra, we would have $\beta \approx \be
 \Lambda (t) &= \frac{\int \bsp \dE \int \bsp  \dr \left[ \frac{1}{v} S(\vecr, E) \right] }{\int \bsp \dE \int \bsp \dr \Sum_j \left( \chi_p^j (E) (1-\beta^j) + \Sum_i \chi_d^i (E) \beta_i^j \right) \int \bsp \nu \Sigma_f^j S \dE'} 
 \end{align}
 \eqn{ \Aboxed{ \Lambda(t) &\approx \frac{1}{v \nu \Sigma_f} \xrightarrow{\mathrm{criticality}} \frac{1}{v \Sigma_a} } }
-The prompt neutron life $\Gamma \sim 1/v$ of shape divided by almost-instantenous-fission-rate. 
+The prompt neutron life $\Gamma \sim 1/v$ of shape divided by almost-instantenous-fission-rate.
+
 \item The $i$-th precursor, 
   \eqn{ C_i (t) = \int \dE \int \dr C_i (\vecr, t) }
 \item The total eternal source, 
   \eqn{ Q(t) = \int \dE \int \dr Q (\vecr, t) }
 \end{enumerate}
 
+Prof. Forget summarizes the PKE parameters using a weight function $w$:
+\eqn{ \rho(t) &= \frac{\expect{w, (F-M) \phi_0}}{\expect{w, F\phi_0}} & \Lambda &= \frac{\expect{w, v^{-1} \phi_0}}{\expect{w, F\phi_0}} & \beta_{\mathrm{eff}} &= \frac{\expect{w, F_d \phi_0}}{\expect{w, F \phi_0}}}
 
-Next we consider \textbf{2-group PKE parameters.}
-\small
-\begin{align}
-\rho(t) &= \bigg\{  \int \dr  \phi_1^* (\vecr)  \left\{  - \Sigma_{r,1} (\vecr,t) S_1(\vecr) T_1(t)  + [\nu \Sigma_{f,1} (\vecr, t) S_{1} (\vecr) T_{1}(t) + \nu \Sigma_{f,2} (\vecr, t) S_2 (\vecr) T_2 (t)] \right\}   \notag \\ 
-&+  \int \dr  \phi_2^* (\vecr)  \left[ - \Sigma_{a,2} (\vecr,t) S_2(\vecr) T_2(t) + \Sigma_{s12} (\vecr, t) S_1 (\vecr) T_1 (t)  \right]  \bigg\} \notag \\
-& \bigg/
-\bigg\{\int \dr \phi_1^* (\vecr)  [\nu \Sigma_{f,1} (\vecr, t) S_{1} (\vecr) T_{1}(t) + \nu \Sigma_{f,2} (\vecr, t) S_2 (\vecr) T_2 (t)] \bigg\} 
-\end{align}
-
-\normalsize
-\eqn{ \beta_i (t) = \frac{\int \dr \phi_1^* (\vecr) \beta_i (\vecr, t)  [\nu \Sigma_{f,1} (\vecr, t) S_{1} (\vecr)  + \nu \Sigma_{f,2} (\vecr, t) S_2 (\vecr) ] }{\int \dr \phi_1^* (\vecr, t)   [\nu \Sigma_{f,1} (\vecr, t) S_{1} (\vecr) + \nu \Sigma_{f,2} (\vecr, t) S_2 (\vecr) ] } }
-\eqn{ \Lambda(t) = \frac{1}{\int \dr \phi_1^* (\vecr, t) [\nu \Sigma_{f,1} (\vecr, t) S_{1} (\vecr) + \nu \Sigma_{f,2} (\vecr, t) S_2 (\vecr) ]} }
-\eqn{ C_i (t) = \int \dr C_i (\vecr, t) }
-
-Observations:
-\begin{itemize}
-\item \textbf{$\rho(t)$ does not describe how much neutrons there are at a specific time; it describes how much neutrons there would be eventually.} 
-\item $\beta$ has no $T(t)$ temporal dependency. 
-\item $\beta$ only depends on $\phi_1^*$ but not $\phi_2^*$, because all delayed neutrons are born in group 1, hence we do not care about the neutron importance in group 2. 
-\item Similarly $\Lambda$ is the prompt neutron life time, thus only the importance of group 1 neutrons matters. 
-\end{itemize}
+\begin{table}[h]
+  \centering
+  \begin{tabular}{|c|c|c|c|} \hline
+    & LWR & CANDU & Fast Reactors \\ \hline
+    $\Lambda$ & $5\times 10^{-5}$ & $1 \times 10^{-3}$ & $1 \times 10^{-6}$ \\ \hline
+    $\beta$ & 0.0075 & 0.06 & 0.0035 \\ \hline
+    $\lambda$ & 0.1 & 0.1 & 0.1 \\ \hline
+  \end{tabular}
+  \caption{Typical Values for PKE Parameters} 
+\end{table}
 
 
-\topic{Using PKE Parameters to Define PKE}
+
+\clearpage
+\subtopic{Classical PKE using Parameters}
+Now we are ready to use PKE parameters to define the classical PKE: 
 \begin{enumerate}
 \item Using the defined PKE parameters, we get the classic \hi{point kinetics equations (PKE)},
 \eqn{ \Aboxed{ \ddt T(t) &= \frac{\rho(t) - \Sum_i \beta_i (t) }{\Lambda (t)} T(t) + \Sum_i \lambda_i C_i (t) + Q(t) } }
@@ -356,7 +399,34 @@ N &= \left[ \begin{array}{c} T \\ C_1 \\ C_2 \\ C_3 \end{array} \right]
 \end{enumerate}
 
 \clearpage
-\topic{Application of PKEs}
+\topic{Analytical Solution with One Precursor Group}
+This lecture was presented by Prof. Forget on Sept. 20, 2013. We are interested in solving the classical PKEs with one effective delayed neutron precursor group. 
+
+Problem statement: we hold steady state before $t=0$ such that: $\rho(0) = 0, P(0) = P_0, C(0) = \frac{\beta}{\lambda \Lambda} P_0$. Then we perturbe the reactivity at $t=0$ to be $\rho_0$. 
+
+Assume $P(t) = P e^{\omega t}, C(t) = C e^{\omega t}$. Substitute into PKEs, we get 
+\eqn{ \omega P &= \frac{\rho_0 - \beta}{\Lambda} P + \lambda C & \omega C &= \frac{\beta}{\Lambda} P - \lambda C} 
+
+This is a homogeneous linear system that can be written in the matrix form: 
+\eqn{ \left[ \begin{array}{cc} \omega - \frac{\rho_0 - \beta}{\Lambda} & - \lambda \\ - \frac{\beta}{\Lambda} & \omega + \lambda \end{array} \right] \left[ \begin{array}{c} P \\ C \end{array} \right] &= \left[ \begin{array}{c} 0 \\ 0 \end{array} \right] }
+
+Non-trival solution exists if and only if the determinant of the matrix is 0, that is, 
+\eqn{ \Lambda \omega^2 + (\lambda \Lambda + \beta - \rho_0) \omega - \rho_0 \Lambda &= 0 }
+whose solution is, 
+\eqn{ \omega = \frac{1}{2\Lambda} \left[ - (\beta - \rho_0 + \lambda \Lambda) \pm \sqrt{ (\beta - \rho_0 + \lambda \Lambda)^2 + 4 \lambda \Lambda \rho_0 } \right] }
+That is, we arrive at $P(t) = P_1 e^{\omega_1 t} + P_2 e^{\omega_2 t}, C(t) = C_1 e^{\omega_1 t} + C_2 e^{\omega_2 t}$. Assume $\lambda \Lambda \ll \beta, |\rho_0| \ll \beta$, we can approximate 
+\eqn{ \omega_1 &\approx \frac{\lambda \rho_0}{\beta - \rho_0}, & \omega_2 &\approx - \frac{\beta - \rho_0}{\Lambda} }
+ Then 
+\eqn{ P(t) \approx P_0 \left[ \frac{\beta}{\beta - \rho_0} e^{\frac{\lambda \rho_0}{\beta - \rho_0} t} - \frac{\rho_0}{\beta - \rho_0} e^{ \frac{\rho_0 - \beta}{\Lambda} t} \right] }
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=6in]{images/pke/PKE-ana-sol.png}
+  \caption{Plot of Analytical Solution of PKE} \label{PKE-ana-sol}
+\end{figure}
+
+\clearpage
+\topic{Numerical Solutions of Various Senarios}
 \begin{enumerate}
 \item Instantaneous reactor scram from criticality($\rho = - 8 \beta$). Power goes almost instantly to about 10\%, then it ultimately decays with time constant of longest lived precursor (Br87 with a half-life of 55s). 
   \begin{figure}[ht]
@@ -424,9 +494,12 @@ Fig.~\ref{4b} shows that, if we wait long enough, the power becomes an asymptoti
 
 
 
+
+
+
 \clearpage
 \topic{Prompt-Jump Approximations}
-Prompt-jump approximation is used to estimate prompt-jump (of course). 
+Prompt-jump approximation is used to estimate prompt-jump (of course). Stacy states that `if we are not interested in the details of the prompt neutron kinetics during the prompt jump, we can simplify the equations by assuming that the prompt jump takes place instantaneously in response to any reactivity change, and afterward, the neutron population changes instantaneously in response to changes in the delayed neutron source.'
 \begin{enumerate}
 \item In a subcritical transient, assume precursors dominant, and prompt neutron changes are negligible, 
 \begin{align}
@@ -446,7 +519,7 @@ P(t) &= \frac{\Lambda}{\beta -\rho} S(t) + \frac{\Gamma}{\beta -\rho} \Sum_1^K \
 T(0^+) &= \frac{\Lambda \lambda}{\beta - \rho} C(0^+) = \frac{\Lambda \lambda}{\beta - \rho} \left[ \frac{\beta}{\Lambda \lambda} T_0 \right] \\
 \Aboxed{ \frac{T(0^+)}{T_0} &= \frac{\beta}{\beta - \rho} }
 \end{align}
-
+More general, if initial reactivity is not exactly zero (but small), $\displaystyle \frac{T_1}{T_0} = \frac{\beta - \rho_0}{\beta - \rho_1}$. 
 
 \item Assume one precursor group, a constant source and a constant $\rho$, 
 \begin{align}
@@ -477,7 +550,27 @@ P(t) &= \left\{
 
 
 
-\topic{Inhour Equations}
+
+\topic{Inhour Equation / Nordheim Equation}
+Prof. Forget defines reactor period as `the power level divided by the rate of change of power': 
+\eqn{ \tau(t) &= \frac{ \frac{p(t)}{\derivative p(t)}   }{\dt} }
+Implications: 
+\begin{enumerate}
+\item $\tau = \infty$ means steady-state. 
+\item Small positive $\tau$ means a rapid increase in power. Small negative $\tau$ means a rapid decrease in power. 
+\item If period is constant, power varies exponentially: 
+  \eqn{ P(t) = P_0 e^{t/\tau}} 
+\item For one delayed precursor gropu, the reactor period can be separated into two parts (prompt period and stable period) which are the two exponential of the solution with different coefficient. Recall Fig.~\ref{PKE-ana-sol}. 
+\item After the initial transient, there is a fixed relation between the stable period and reactivity: 
+\eqn{ \tau_{\mathrm{stable}} = \left\{ \begin{array}{cc} 
+\frac{\beta - \rho}{\lambda \rho}  & \rho < \beta \\
+\frac{\Lambda}{\rho - \beta} & \rho > \beta 
+\end{array} \right. }
+\item Typical values: when $\rho < $1 mk, the period is larger than 1 min; when $\rho \approx \beta = $ 6 mk, $\tau \sim 1 \fsp \s$. 
+\end{enumerate}
+
+
+\clearpage
 \subtopic{Inhour Equation: The Simpliest Inverse Kinetics Application}
 From the PKEs as in Eq.~\ref{in-hour}, we can derive the In-hour Equation. We assume the solution is in the form of,
 \eqn{ T(t) &\approx C_i (t) \approx e^{\omega t}  }
@@ -494,47 +587,34 @@ Recall that $\beta = \Sum_i \beta_i$, we can write the reactivity as,
 \eqn{ \rho = \omega \Lambda + \Sum_i \left( \beta_i - \frac{\lambda_i \beta_i}{\omega + \lambda_i} \right) }
 That is, 
 \eqn{ \Aboxed{ \rho &= \omega \Lambda + \Sum_i \frac{\beta_i \omega}{\omega + \lambda_i}} }
-Interpretation: we can compute $\rho$ using inhour equation if we know $\beta_i, \omega, \lambda_i$. 
-A typically assumption is to set $\omega \Lambda \to 0$ because the prompt neutron lifetime is so small (with the exception of super prompt in which case $\omega$ is huge). Another way to put it is that the frequency of the reactor is going to be small. 
 
-
-\subtopic{Reactivity Units}
-\begin{table}[ht]
-  \centering
-  \begin{tabular}{|c|c|c|} \hline
-    Unit & Definition & Example \\ \hline
-    $\Delta k$ & actual units of PKEs & 0.01 \\
-    \% $\Delta k$ & & 1\% \\
-    pcm & $10^5 \Delta k $ & 1000 pcm \\ \hline
-    Dollars & $\frac{\Delta k}{\beta}$ & \$1.5 \\
-    Cents & 100 Dollars & 150 cents \\ 
-    Milli-beta & 1000 Dollars & 1500 milli-beta \\ \hline
-  \end{tabular}
-  \caption{Common Reactivity Units}
-\end{table}
-
+Implications:
+\begin{itemize}
+\item \textbf{Asymptotic periods $\tau_0 = \frac{1}{\omega}$}: we can only use Inhour equation for asymptotic period, that is, a stable condition indicated by a constant period. Thus to use Inhour equation, we have to make the reactor stable first. For any time dependent problem, we have to use the more general IK. 
+\item We can compute $\rho$ using inhour equation if we know $\beta_i, \omega, \lambda_i$.
+\item A typically assumption is to set $\omega \Lambda \to 0$ because the prompt neutron lifetime is so small (with the exception of super prompt in which case $\omega$ is huge). Another way to put it is that the frequency of the reactor is going to be small. 
+\end{itemize}
 
 
 \subtopic{Application 1: Computing Reactivity of Core}
 Steps of computing $\rho$ for a reactor, 
 \begin{enumerate}
-\item Withdraw reactor control rod.
-\item Measure reactivity period $T$ (make sure $T$ is constant before we measure it).
-\item Use inhour equation to compute reactivity: $\omega = \frac{1}{T}$, plug $\omega$ into inhour equation. 
+\item Make a perturbation (e.g., withdraw control rod) on a critical reactor.
+\item Measure asymptotic reactivity period $T_0$: make sure $T$ is constant before we measure it!
+\item Infer the asymptotic frequency $\omega = \frac{1}{T_0}$. 
+\item Use inhour equation to compute reactivity: plug $\omega$ into inhour equation. 
 \end{enumerate}
-This is how control rods are calibrated, and how small sample worths are measured. We would drive a sample in, and then out, etc. Just make sure that the reactor period is constant before you take a measurement of the reactor period (though this put a requirement on the reactivity, as if the reactivity is too large or too small then we might go over the range in side of which we can ignore feedback). 
-
-
-There are a couple of potential issues, [FIXME].
+There are a couple of potential issues,
 \begin{enumerate}
+\item The requirement of waiting for asymptotic period puts a restriction on the reactivity: if the reactivity is too large or too small then we might go over the range in side of which we can ignore feedback. 
 \item In-hour assumes constant $\beta_i$, where in reality Bete-effective can be changed by rod worth by 3\%. For instance, when we drive the control rod in the center of a core, we drive the flux towards the outter edge of the core and thus change beta. 
 
-\item To perform an accurate measurement, we really need to perform calculation. 
+\item To perform an accurate measurement, we really need to perform calculation.
 \end{enumerate}
 
 
 \subtopic{Applications 2: HZP Rod Worth Measurement}
-Inhour equation can be used to measure HZP rod worth due to Boron dilution. The steps are: 
+Inhour equation can be used to calibrate control rods and to measure small sample worths are measured. For instance, to measure HZP rod worth due to Boron dilution, the steps are: 
 \begin{enumerate}
 \item Make reactor stable (this is important, because without asymptotic period we cannot use the Inhour equation). 
 \item Start Boron dilution. 
@@ -572,7 +652,6 @@ If we define matrix $[A] = \mathrm{diag}[\lambda_i], [B] = \frac{\mathrm{diag}[\
 \item Integrating both side from $0$ to $t$, define $C_0 = C(t=0), Y_0 = Y(t=0)$,  
 \eqn{ [e^{At}][C(t)] - [C_0] &=  [A]^{-1} \left( [e^{At}] [Y(t)] - [Y_0] \right)  }
 \eqn{ \Aboxed{ [C(t)] &= [e^{-At}][C_0] + [e^{-At}] [A]^{-1} \left( [e^{At}][Y(t)] - [Y_0] \right) } }
-where $[A] = \mathrm{diag}[\lambda_i], [Y(t)] = \frac{\mathrm{diag}[\beta_i]}{\Lambda} T(t)$.
 That is, we can solve for the time-varying concentrations of precursors for any desired reactor power shape in time by applying this equation successively for discrete steps. 
 
 \item From the PKEs, we can solve for the reactivity in terms of $C(t), T(t)$ by making finite-difference approximation for derivative term: 
@@ -586,14 +665,16 @@ That is, we can solve for the time-varying concentrations of precursors for any 
 
 \clearpage
 \topic{Applications of IK}
-IK is what is being used in production now. 
+IK is what is used in production tools. We will discuss three examples. 
 \subtopic{PWR Boration/Dilution}
+The red lines in Fig.~\ref{ik-ex1} point out the location of the excore detectors. These ex-core detectors are used to monitor core flux/power level and axial power shape. 
 \begin{figure}[ht]
   \centering
   \includegraphics[width=4in]{images/pke/ik-ex1.png}
   \caption{IK Example 1, PWR Ex-core Detectors} \label{ik-ex1}
 \end{figure}
-The red lines in Fig.~\ref{ik-ex1} point out the location of the excore detectors. Prompt neutron life time is so short, so that even spatial distribution flux changes a lot, we can assume that it stabalizes already at each rod drop. 
+
+Prompt neutron life time is so short that spatial distribution of flux changes rapidly, thus we can assume that it stabalizes already at each rod drop. 
 \begin{itemize}
 \item Disadvantages: time concern; boration dilution increases cost with waste disposal.  
 \item Alternatives: we use General Inverse Kinetics to get around about it. 
@@ -613,9 +694,17 @@ The red lines in Fig.~\ref{ik-ex1} point out the location of the excore detector
     \end{subfigure}
     \caption{IK Example 2, Rod Drop for SCRAM Reactivity} \label{ik-ex2}
   \end{figure}
-This example produces a scram, then measure power change and infer $T(t)$, thus estimate reactivity. The rough method use Prompt Jumpt Approximation. More accurately, we need to model all the neutron sources, including ($\alpha,n$) reactions etc. In reality, there are noisy signals in measured power and reactivity data; we need to smooth them out with a fitted function before we can apply IK with external neutron sources. The point is that we can use IK instead of prompt jump approximation to gain precision. 
 
-This technique is not used in the US that much because it is harsh on your system and it requires work to bring the system back to critical. But it is one of the best ways to demonstrate to the licensing committee that a reactor is capable to scram.  
+In this example, we would scram the core, then measure power change and infer $T(t)$, thus estimating the reactivity. 
+\begin{itemize}
+\item The rough method uses Prompt Jumpt Approximation. 
+\item More accurately, we need to model all the neutron sources, including ($\alpha,n$) reactions etc. 
+\item In reality, there are noisy signals in measured power and reactivity data; we need to smooth them out with a fitted function before we can apply IK with external neutron sources. 
+\item The point is that we can use IK instead of prompt jump approximation to gain precision. 
+\end{itemize}
+
+This technique is not used in the US that much because it is harsh on your system and it requires work to bring the system back to critical. But it is one of the best ways to demonstrate to the licensing committee that a reactor is capable of scraming.  
+
 
 \subtopic{Dynamic Rod Worth} \label{dynamic-rod-worth}
 This technique is widely used by Westinghouse to estimate their rod worth: starting with a critical reactor, and drive a control rod in and out and repeat with a different rod. 

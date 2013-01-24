@@ -18,17 +18,51 @@
 
 \item Delayed neutrons concepts: 
   \begin{itemize}
-  \item Burst measurement: prompt neutrons; saturated: total neutrons. 
-  \item Dominant FP that emits delayed neutrons: Br-37. 
-  \item Delayed yields depend on: fissioning species, neutron energy.  
-  \item Absolute yield: number of delayed neutrons per fission; unit: neutrons/fission. Eg: U238 = 4\%, U235=1.6\%. \textbf{13 S904 Exam \#1}: What is the mean number of delayed neutrons emitted per U235 thermal fission? Answer: 0.016. 
-  \item Relative yield: absolute yield of an isotope divided by total absolute yield by all isotopes; unit: percentage. 
-  \item Delayed neutron fraction: absolute yield divided by $\bar{\nu}$. Number of delayed neutrons devided by number of total fission neutrons. 
-  \item Energy aspect of delayed neutron spectra: average prompt neutron emission energy: \textbf{2 MeV} for prompt neutrons, \textbf{0.4 MeV} for delayed neutrons. Both spectrum are Maxwellian, except delayed neutrons are more thermal, which makes them more likely to fission. \textbf{13 S904 Exam \#2, \#3} asks for the mean emission energy of prompt and delayed neutrons from U235 thermal fission. 
-  \item Energy group aspect: Delayed neutron spectra vary very slightly for different fissioning nuclides, but very significantly on energy groups. 
+  \item Dominant FP that emits delayed neutrons is Br-87: we use Br-87 with a 55.6s half-life to represent group 1 in 8-group model. 
+  \item Burst vs. saturated measurement. Burst means prompt neutrons; saturated means total neutrons. 
+  \item Delayed yields $\nu_d$ depend on: fissioning species, neutron energy ($E \up, \nu \up$). 
+    \begin{itemize}
+    \item Absolute yield: \# delayed neutrons per fission; unit: neutrons/fission. Know: \hi{U238 = 0.04, U235= 0.016.} \textbf{13 S904 Exam \#1}: What is the mean number of delayed neutrons emitted per U235 thermal fission? Answer: 0.016.  
+    \item Relative yield: absolute yield of an isotope divided by total absolute yield by all isotopes; unit: percentage. 
+    \end{itemize}
+
+  \item Delayed neutron fraction $\beta = \frac{\nu_d}{\nu}$: \# delayed neutrons divided by total \# fission neutrons. Know: 
+    \begin{itemize}
+    \item U-235 thermal: $\beta = 0.0067$; Pu-239: thermal $\beta = 0.0022$ fast $\beta = 0.0020$\footnote{less delayed neutrons, could make control harder}; U-238: fast $\beta = 0.0164$. 
+    \item We talk about $\beta_{\mathrm{effective}}$ that is weighted by flux. 
+    \item $\beta$ can vary with BU, though the variations in BU are on a much larger time scale than usual range of application of PKEs. 
+    \end{itemize}
+    \begin{table}[h]
+      \centering
+      \begin{tabular}{|c|c|c|} \hline
+        & $\nu_d$ (thermal/fast) & $\beta$ (thermal/fast) \\ \hline
+        U-235 & 0.01668/0.01673 & 0.0067/0.0064 \\ \hline
+        U-238 & -/0.046 & -/0.0164 \\ \hline
+        Pu-239 & 0.0157/0.0152 & 0.0022/0.0020 \\ \hline
+      \end{tabular}
+    \end{table}
+
+
+  \item Neutron emission spectra $\chi$: 
+    \begin{itemize}
+    \item Average neutron emission energy: \textbf{2 MeV} for prompt neutrons, \textbf{0.4 MeV} for delayed neutrons. Both spectrum are Maxwellian, except delayed neutrons are more thermal, which makes them more likely to fission. \textbf{13 S904 Exam \#2, \#3} asks for the mean emission energy of prompt and delayed neutrons from U235 thermal fission. 
+    \item Strong energy dependency week isotope dependency: delayed neutron spectra vary very slightly for different fissioning nuclides, but very significantly on energy groups.
+    \item Know U238 is extremely important for delayed neutrons. 
+    \end{itemize}
   \end{itemize}
+
+\item Know 8-group models: basically we don't have good theories to treat each isotope separately, thus we homogenize similar isotopes with one fixed decay constant (typically of the largest half-life in this group). 
 \end{enumerate}
 
+\clearpage
+\topic{PKE Without Feedback}
+\begin{enumerate}
+\item Reactivity definitions: 
+\begin{itemize}
+  \item Static $\rho$ comes from steady-state transport equation, and it indicates excess (or lack) of reactivity present in the system. 
+  \item Dynamic $\rho$ changes as a function of time and indicates changes from an initially stable system. 
+    \eqn{ \rho(t) &= \frac{\keff - 1.0}{\keff} & \rho(t) &= \frac{\rho_f - \rho_i}{\rho_f} }
+\end{itemize}
 \begin{table}[ht]
   \centering
   \begin{tabular}{|c|c|c|} \hline
@@ -42,23 +76,38 @@
   \end{tabular}
 \end{table}
 
-
-\clearpage
-\topic{PKE Without Feedback}
-\begin{enumerate}
 \item PKE assumptions: 
   \begin{itemize}
-  \item Flux is separable $\phi(\vecr, E, t) = S(\vecr, E) T(t)$ ($S$ is the shape function, $T$ is the amplitude function); 
-  \item Flux spatial shape is constant (classical PKE). 
+  \item Flux is separable $\phi(\vecr, E, t) = S(\vecr, E) T(t)$ ($S$ is the shape function, $T$ is the amplitude function). Classical PKE further assumes $S(\vecr, E)$ to remain constant with respect to $t$. 
+  \item Assume no leakage, no external source of neutrons, no feedback. 
   \item Average properties, by integrate over all space and energy and normalize. 
+  \item Classical PKE further assumes constant $\beta_i, \lambda_i$. 
+  \item Minor: $\chi_p^j \to \chi_p, \beta^j \to \Sum_j \beta^j = \beta$ independent of fissioning species $j$; $\chi_d^i \to \chi_d$ independent of delayed neutron energy group $i$; $\beta (\vecr) \to \beta$ aka no spatial dependency. 
 \end{itemize}
 
-\item PKE expression: 
-    \eqn{ \Aboxed{ \ddt T(t) &= \frac{\rho(t) - \Sum_i \beta_i (t) }{\Lambda (t)} T(t) + \Sum_i \lambda_i C_i (t) + Q(t) } }
-    \eqn{ \Aboxed{ \ddt C_i (t) &= \frac{\beta_i (t)}{\Lambda (t)} T(t) - \lambda_i C_i (t) }  }
-    Physical terms: 
+\item 2-group general PKE (dropped $\vecr$ for every term, and $t$ for $\Sigma, T, C$:
+  \small
+  \begin{align}
+  \ddt \left[ T_1\right] &=   \int \dr  \phi_1^*  \left\{  - \Sigma_{r,1}  S_1 T_1  + (1-\beta) (\nu \Sigma_{f,1} S_{1}  T_{1} + \nu \Sigma_{f,2} S_2 T_2 ) \right\} + \int \dr \phi^*  \Sum_i \lambda_i C_i     \\
+   \ddt \left[ T_2 \right] &=  
+    \int \dr  \phi_2^*  \left[ - \Sigma_{a,2}  S_2 T_2 + \Sigma_{s12}  S_1 T_1  \right]   \\
+   \ddt \left[ \int \dr C_i \right] &=   \int \dr \beta_i\left[ \nu \Sigma_{f,1} S_1 T_1 + \nu \Sigma_{f,2}  S_2  T_2 \right]   - \lambda_i \int \dr C_i 
+  \end{align}
+  \normalsize
+  Implications:
+  \begin{itemize}
+  \item \textbf{$\rho(t)$ does not describe how much neutrons there are at a specific time; it describes how much neutrons there would be eventually.} 
+  \item $\beta$ has no $T(t)$ temporal dependency. 
+  \item $\beta$ only depends on $\phi_1^*$ but not $\phi_2^*$, because all delayed neutrons are born in group 1, hence we do not care about the neutron importance in group 2. 
+  \item Similarly $\Lambda$ is the prompt neutron life time, thus only the importance of group 1 neutrons matters. 
+  \end{itemize}
+
+\item Classical PKE:
+    \eqn{ \Aboxed{ \dTdt &= \frac{\rho- \Sum_i \beta_i }{\Lambda} T + \Sum_i \lambda_i C_i  + Q}  &  \Aboxed{ \ddt C_i &= \frac{\beta_i }{\Lambda} T - \lambda_i C_i }  }
+    PKE parameters: 
+    \eqn{ \rho(t) &= \frac{\expect{w, (F-M) \phi_0}}{\expect{w, F\phi_0}} & \Lambda &= \frac{\expect{w, v^{-1} \phi_0}}{\expect{w, F\phi_0}} & \beta_{\mathrm{eff}} &= \frac{\expect{w, F_d \phi_0}}{\expect{w, F \phi_0}}}
       \begin{enumerate}
-      \item Reactivity $\rho$, where the top is the diffusion equation, and the bottom is fission rate if all the neutrons show up instatenously. $\displaystyle  \rho(t) = \frac{\keff - 1.0}{\keff}$. 
+      \item Reactivity $\rho$, where the top is the diffusion equation (or say the net production), and the bottom is fission rate if all neutrons show up instantaneously. $\displaystyle  \rho(t) = \frac{\nu \Sigma_f - \Sigma_a(1 + M^2 B_g^2)}{\nu \Sigma_f} = \frac{\keff - 1.0}{\keff},$ where $\keff = \frac{\frac{\nu \Sigma_f}{\Sigma_a}}{1 + M^2 B_g^2}$. 
         \scriptsize
         \begin{align}
           \rho (t) &= \frac{\int \bsp \dE \! \int \bsp \dr \Bigg\{ \!\divergence \! D  \gradient S  - \! \Sigma_t S  + \! \int \bsp \Sigma_s (\vecr \!, E' \bsp \to \bsp E, t) S \! \dE'   
@@ -66,7 +115,7 @@
         \end{align}
         \normalsize
 
-      \item The delayed neutron fraction, 
+      \item The delayed neutron fraction (notice there is prompt neutron dependent $\chi_p^j(E)$ term in it). If ignore fissioning spectrum, $\beta \approx \Sum_i \beta_i$. 
         \begin{align}
           \beta_i (t) &= \frac{\int \bsp \dE \int \bsp \dr \left[ \Sum_j \chi_d^j (E) \beta^j \int_0^{\infty} \nu \Sigma_f^j (\vecr, E', t) S(\vecr, E') \dE' \right] }{\int \bsp \dE \int \bsp \dr \Sum_j \left( \chi_p^j (E) (1-\beta^j) + \Sum_i \chi_d^i (E) \beta_i^j \right) \int \bsp \nu \Sigma_f^j S \dE'} 
         \end{align}
@@ -75,24 +124,56 @@
 \eqn{ \Lambda (t) = \frac{\int \bsp \dE \int \bsp  \dr \left[ \frac{1}{v} S(\vecr, E) \right] }{\int \bsp \dE \int \bsp \dr \Sum_j \left( \chi_p^j (E) (1-\beta^j) + \Sum_i \chi_d^i (E) \beta_i^j \right) \int \bsp \nu \Sigma_f^j S \dE'}  
 \boxed{ \approx \frac{1}{v \nu \Sigma_f} \xrightarrow{\mathrm{criticality}} \frac{1}{v \Sigma_a} }   \notag }
 
-      \item The $i$-th precursor, $C_i (t) = \int \dE \int \dr C_i (\vecr, t)$. 
-
-      \item The total external source, $Q(t) = \int \dE \int \dr Q (\vecr, t)$. 
+      \item The $i$-th precursor, $C_i (t) = \int \dE \int \dr C_i (\vecr, t)$. The total external source, $Q(t) = \int \dE \int \dr Q (\vecr, t)$. 
       \end{enumerate}
 
-    \item Prompt-jump approximation: assume $C_i^+ = C_i^-$, $\left. \dTdt \right|_{t = 0^-} = 0, \left. \dTdt \right|_{t = 0^+} = 0$, 
-      \begin{align}
-        \ddt T(t) &\approx 0 = \frac{\rho - \beta}{\Lambda} T(t) + \lambda C(t) = \frac{\rho- \beta}{\Lambda} T(0^+) + \frac{\beta}{\Lambda} T_0 \\
-        \Aboxed{ \frac{T(0^+)}{T_0} &= \frac{\beta}{\beta - \rho} }
-      \end{align}
+%%%%%% Classical %%%%%
 
-    \item In-hour equation: basically assume solutions take the form of, $T(t) \approx C_i (t) \approx e^{\omega t}$, plug into PKE, and get
-      \eqn{ \Aboxed{ \rho &= \omega \Lambda + \Sum_i \frac{\beta_i \omega}{\omega + \lambda_i}} }
-      \textbf{Asymptotic periods}: we can only use Inhour equation for asymptotic period, that is, a stable condition indicated by a constant period. Thus to use Inhour equation, we have to make the reactor stable first. For any time dependent problem, we have to use the more general IK. 
 
-\item Inverse Kinetics Equation: 1st order ODE again. First given $T(t)$ we solve for the precursor concentration,
+
+%%%%%%% %%%%%%%
+\item Steady state solution of classical PKE: 
+  \begin{align}
+    \ddt C_i (0) &= 0  &\Rightarrow  C_i (0) &= \frac{\beta_i}{\Lambda \lambda_i} T_0  &  \ddt T(0) &= 0  &\Rightarrow \rho(0) &= 0  \label{in-hour}
+  \end{align}
+
+\item The matrix form of the 1st order ODE is (assuming three precursor groups, can be easily extend for more precursor groups),  
+\begin{align}
+N &= \left[ \begin{array}{c} T \\ C_1 \\ C_2 \\ C_3 \end{array} \right]  
+& \ddt N(t) &= \left[ \begin{array}{cccc} 
+\frac{\rho(t) - \beta}{\Lambda} & \lambda_1 & \lambda_2 & \lambda_3 \\
+\frac{\beta_1}{\Lambda} & - \lambda_1 & & \\
+\frac{\beta_2}{\Lambda} & & -\lambda_2 & \\
+\frac{\beta_3}{\Lambda} & & & -\lambda_3 \end{array} \right] 
+\left[ N(t) \right] 
+\end{align}
+
+\item Numerical examples: the interesting cases: 
+  \begin{itemize}
+  \item Instantaneous $\rho = 0.1 \beta$: reactor wants to response immediately, hence the jump, though it does not have enough delayed neutron to sustain that increase, so the power would increase for the rest of the way (curve up) till time constant reaches the longest precursor group (55s). 
+  \item Insert rod for 2s, hold for 20s, re-position to original position. Power would stabilize again but not to the original value, b/c we are solving for an eigenvalue problem, and what the asymptotic power is depends on how we get there. 
+  \item Super-prompt critical: power ascension very sensitive as $\rho \approx \beta$. When $\rho > \beta$, reactivity does not have to wait for the delayed neutrons and change happens instantaneously. 
+  \end{itemize}
+
+\item \textbf{Prompt-jump approximation}: assumptions: subcritical $\rho < \beta$ (the smaller $\rho$ is, the more accurate the approximation is), precursor population does not respond instantaneously ($C_i^+ = C_i^-$), prompt neutron changes negligible ($\left. \dTdt \right|_{t = 0^-} = 0, \left. \dTdt \right|_{t = 0^+} = 0$), no source. 
+  \begin{align}
+    \ddt T(t) &\approx 0 = \frac{\rho - \beta}{\Lambda} T(t) + \lambda C(t) = \frac{\rho- \beta}{\Lambda} T(0^+) + \frac{\beta}{\Lambda} T_0 \\
+    \Aboxed{ \frac{T(0^+)}{T_0} &= \frac{\beta}{\beta - \rho} }
+  \end{align}
+  More general, if initial reactivity is not exactly zero (but small), $\displaystyle \frac{T_1}{T_0} = \frac{\beta - \rho_0}{\beta - \rho_1}$. 
+
+\item In-hour equation: assume solutions take the form of, $T(t) \approx C_i (t) \approx e^{\omega t}$, plug into PKE. Basically if we know $\beta_i, \omega, \lambda_i$ we can find $\rho$. Know $\omega$ is typically small except super prompt critical when $\omega$ is huge. 
+  \eqn{ \Aboxed{ \rho &= \omega \Lambda + \Sum_i \frac{\beta_i \omega}{\omega + \lambda_i}} }
+  Issues:
+  \begin{itemize}
+  \item A small reactivity range such that ignoring feedback is valid. 
+  \item In-hour assumes constant $\beta_i$ which is not very accurate for, e.g. we drive the control rod in the center of a core. 
+  \item \textbf{Asymptotic periods $T_0 = \frac{1}{\omega}$}: we can only use Inhour equation for asymptotic period, that is, a stable condition indicated by a constant period. Thus to use Inhour equation, we have to make the reactor stable first. For any time dependent problem, we have to use the more general IK. 
+  \end{itemize}
+
+\item Inverse Kinetics Equation: 1st order ODE again. First given $T(t)$ we solve for the precursor concentration, using $[A] = \mathrm{diag}[\lambda_i], [Y(t)] = \frac{\mathrm{diag}[\beta_i]}{\Lambda} T(t)$. 
 \eqn{ \Aboxed{ [C(t)] &= [e^{-At}][C_0] + [e^{-At}] [A]^{-1} \left( [e^{At}][Y(t)] - [Y_0] \right) } }
-where $[A] = \mathrm{diag}[\lambda_i], [Y(t)] = \frac{\mathrm{diag}[\beta_i]}{\Lambda} T(t)$. Then manipulating PKEs, we can get $\rho(t)$ in terms of $T(t), C(t)$, 
+Then manipulating PKEs, we can get $\rho(t)$ in terms of $T(t), C(t)$, 
 \begin{align}
 \Aboxed{\rho(t) &= \frac{\Lambda}{T(t)} \ddt T(t) + \beta - \frac{\Lambda}{T(t)} \Sum_i \lambda_i C_i(t) - \frac{\Lambda}{T(t)} Q(t) } \\
 \Aboxed{ \rho_n &= \frac{\Lambda}{T_n} \frac{T_n - T_{n-1}}{t_n - t_{n-1}} + \beta - \frac{\Lambda}{T_n} \Sum_i \lambda_i C_{i,n} - \frac{\Lambda}{T_n} Q_n } 
