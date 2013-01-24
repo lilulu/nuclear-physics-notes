@@ -61,20 +61,17 @@ Then we replace $P_{f\to m} = 1 - P_{f\to f}$ and get,
 Divide both sides by the number of neutrons, we get a balance equation in unit of cross section:
 \eqn{ \sigma_{t}^F (u) \phi_f (u) = \sigma_{pot}^F P_{f\to f} +  \sigma_{t}^F (1 - P_{f\to f}) }
 That is, if we know $P_{f\to f}$, we can solve for the spatially averaged energy shape of the flux in the fuel. 
-\end{enumerate}
 
-
-Alternative derivation (approached using resonance scattering operators $R_f, R_m$: 
 
 %%%%%%%%%%
-We start by writing two region balance equation: 
+\item Alternative derivation (approached using resonance scattering operators $R_f, R_m$) presented by Prof. Forget: We start by writing two region balance equation: 
 \eqn{ V_f \Sigma_{tf} (u) \Phi_f (u) &= V_f R_f \Phi_f P_{ff} + V_m R_m \Phi_m P_{mf}}
 \eqn{ V_m \Sigma_{tm} (u) \Phi_m (u) &= V_f R_f \Phi_f P_{fm} + V_m R_m \Phi_m P_{mm} }
-We facterize $\Phi_m(u) = \phi(u) \Psi(u), \Phi_f (u) = \phi(u) \Psi(u)$. \textcolor{red}{assume 1/E flux for moderator?}
+We facterize $\Phi_m(u) = \phi(u) \Psi(u), \Phi_f (u) = \phi(u) \Psi(u)$. 
 \eqn{R_m \phi_m = \int \frac{1}{1 - \alpha_m} e^{}  \Sigma_s \psi \phi   }
 because moderator has no absorption, we can write $\Sigma_{sm}$ as $\Sigma_{tm}$; in moderator there is no resonance, so $\phi = 1$, and $\Psi$ is constant, so we can pull $\Psi$ out. 
 
-% \eqn{ R_m \Phi_m (u) &= \Sigma_{tm} \Phi_m (u)  = \Sigma_{tm} \phi(u) \Psi(u) \approx \Sigma_{tm} \Psi(u) }
+%\eqn{ R_m \Phi_m (u) &= \Sigma_{tm} \Phi_m (u)  = \Sigma_{tm} \phi(u) \Psi(u) \approx \Sigma_{tm} \Psi(u) }
 %\eqn{\Rightarrow \Psi(u) &= \frac{R_m \phi_m}{\Sigma_{tm}} }
 Then fuel region balance equation becomes,
 \eqn{ V_f R_f \phi P_{ff} + V_m \Sigma_{tm} P_{mf} &= V_f \Sigma_{tf} \phi }
@@ -83,7 +80,10 @@ Write $V_m \Sigma_{tm} P_{mf} = V_f \Sigma_{tf} P_{fm} = V_f \Sigma_{tf} (1- P_{
 That is, 
 \eqn{ r_f \phi + \sigma_d &= (\sigma_{tf} + \sigma_d) \phi }
 which is the same form as the homogeneous model, except with  different definition of $\sigma_d = \frac{\sigma_{tf} (1 - P_{ff})}{P_{ff}}$. 
+\end{enumerate}
 %%%%%%%%%%%%
+
+
 
 
 

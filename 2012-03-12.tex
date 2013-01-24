@@ -11,6 +11,11 @@
 \item Know 1.0 kT correspond to 0.0253 eV. Know $\displaystyle u = \ln \frac{E_{\mathrm{ref}}}{E}$. 
 
 \item Know number density $\displaystyle N = \frac{\rho N_A}{M}$, where $N_A$ is  avogado's number, take $0.6022$, $\rho$ is density in g/cc, $M$ is atomic mass (unitless). 
+\textbf{(2012 Final \#21)} If paraffin (\ce{C_{25} H_{52}}) is used as the moderator and coolant for a new district-heating reactor, what is the macroscopic elastic scattering cross section of paraffine at 10.0 eV and a density of 0.8 gm/cc? \\
+\textbf{Answer:} First we calculate the molecular number density, 
+\eqn{ N_{\mathrm{molecule}} = \frac{\rho N_A}{M} = \frac{0.8 \times 0.6022}{352} = 0.00137 \times 10^{24} 1/\cm^3 }
+Then we know the number density for Carbon atoms are $N_C = 25 N_{\mathrm{molecule}}, N_H = 52 N_{\mathrm{molecule}}$. $\sigma_C = 4.7 \fsp b, \sigma_H = 20 \fsp b$, then
+\eqn{ \Sigma = \sigma_C N_C + \sigma_H N_H = 25 \times  0.00137 \times 4.7 + 52 \times 0.00137 \times 20 = \boxed{1.584 \fsp \cm^{-1} }   }
 
 \item In an elastic scattering
   \eqn{ \alpha = \frac{E_{\mathrm{min}}}{E_0} = \left( \frac{A-1}{A+1} \right)^2 < 1 }
@@ -209,8 +214,7 @@ Answer: \hi{the infinite dilute RI is independent of temperature because in Dopp
       \eqn{ p \approx \exp \left( - \frac{\RI_{\eff}}{\zeta \sigma_d} \right) = \exp \left( - \frac{N_r \RI_{\eff}}{\zeta \Sigma_m} \right)  }
       Escape cross section $\sigma_e$:      $ \sigma_e = \frac{1}{l N_f} = \frac{S}{4V N_f}$. 
 
-      \textbf{Spring 2012 Exam 1 \#17:} what is the resonance escape probability for infinitely dilute material 1 in 1 gm/cc material 2? 
- 
+      \textbf{Spring 2012 Exam 1 \#17:} what is the resonance escape probability for infinitely dilute material 1 in 1 gm/cc material 2? \\ 
       Answer: Material 1 is infinitely dilute, so we assume the flux is shaped entirely by material 2 and hence is not affected by the resonances. $p = 1$. 
  
     \item 2-region reciprocity relation: $\displaystyle \boxed{ P_{1\to 2} \Sigma_1 V_1 = P_{2\to 1} \Sigma_2 V_2}$. 
@@ -230,6 +234,9 @@ Answer: \hi{the infinite dilute RI is independent of temperature because in Dopp
       \item $r \up, C \down$. 
       \item $P/D \up C \down$. 
       \end{itemize}
+      \textbf{Spring 2012 Final \#22} Using Bell's approximation, estimate the ratio of escape cross section of an isolated 0.5 cm radius rod to the fuel escape cross section in a uniform hexagonal lattice with a Dancoff factor of 0.6? \\
+      Answer: Essentially we are asked to approximate $\displaystyle \frac{(1-C)b}{(1-C) + Cb}$. We are already given the Dancoff factor $C = 0.6$. Recall the plot of Bell's factor for various geometries, we approximate $b$ as 1.1 (as in the examples in lectures), then 
+\eqn{ \frac{\sigma_e}{  \frac{(1-C)b}{(1-C) + Cb} \sigma_e} = \frac{(1-C) + Cb}{(1-C)b} = \frac{0.4 + 0.6 b}{0.4 b} = \boxed{2.4} }
 
     \item Solving for spatially averaged energy shape of flux in the fuel\footnote{not on the official review sheet} from the first collision rate balance equation.  We construct a first collision rate balance equation (next collision for neutrons in fuel from slowing down source and uncollided flux): 
       \eqn{ N_f \sigma_{t,f} \phi_f V_f = Q_f V_f P_{ff} + Q_m V_m P_{mf} }
@@ -324,6 +331,8 @@ Answer: \hi{the infinite dilute RI is independent of temperature because in Dopp
   Assume $\phi \sim \frac{1}{E}$,
   \eqn{ \sigma_g = \frac{\RI_{\eff}}{\ln(E_2/E_1)} = \frac{\Sum_{i \in g} RI_i }{\ln{\frac{E_{g-1}}{E_g} }}   }
  
+ 
+
 
 \end{enumerate}
 
@@ -339,29 +348,6 @@ Answer: \hi{the infinite dilute RI is independent of temperature because in Dopp
   \end{tabular}
   \caption{Physics and Their Corresponding Spectra in MC code} \label{plot-MC}
 \end{table}
-
-
-\clearpage
-\topic{Exam Problems}
-\begin{enumerate}
-\item (12 Final \#21) If paraffin (\ce{C_{25} H_{52}}) is used as the moderator and coolant for a new district-heating reactor, what is the macroscopic elastic scattering cross section of paraffine at 10.0 eV and a density of 0.8 gm/cc? \\
-\textbf{Answer:} First we calculate the molecular number density, 
-\eqn{ N_{\mathrm{molecule}} = \frac{\rho N_A}{M} = \frac{0.8 \times 0.6022}{352} = 0.00137 \times 10^{24} 1/\cm^3 }
-Then we know the number density for Carbon atoms are $N_C = 25 N_{\mathrm{molecule}}, N_H = 52 N_{\mathrm{molecule}}$. Recall those elastic scattering cross section plots we had in the beginning of the semester (or consulting \href{http://atom.kaeri.re.kr/}{KAERI's table of nuclides}), $\sigma_C = 4.7 \fsp b, \sigma_H = 20 \fsp b$, then
-\eqn{ \Sigma = \sigma_C N_C + \sigma_H N_H = 25 \times  0.00137 \times 4.7 + 52 \times 0.00137 \times 20 = \boxed{1.584 \fsp \cm^{-1} }   }
-If you use 5 barns for $\sigma_C$, the final answer should be $\sim 1.59 \cm^{-1}$. 
-
-\item (12 Final \#22) Using Bell's approximation, estimate the ratio of escape cross section of an isolated 0.5 cm radius rod to the fuel escape cross section in a uniform hexagonal lattice with a Dancoff factor of 0.6? \\
-\textbf{Answer:} Essentially we are asked to approximate $\displaystyle \frac{(1-C)b}{(1-C) + Cb}$. We are already given the Dancoff factor $C = 0.6$. Recall the plot of Bell's factor for various geometries, we approximate $b$ as 1.1 (as in the examples in lectures), then 
-\eqn{ \frac{\sigma_e}{  \frac{(1-C)b}{(1-C) + Cb} \sigma_e} = \frac{(1-C) + Cb}{(1-C)b} = \frac{0.4 + 0.6 b}{0.4 b} = \boxed{2.4} }
-
-
-
-\end{enumerate}
-
-
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%% Exam 1 Review End %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
