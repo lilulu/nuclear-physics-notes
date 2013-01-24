@@ -329,28 +329,32 @@ Nodal methods\footnote{weighted residual is not on the final}. The point of Noda
   Side note: there are two entirely different problems. One is an eigenvalue problem, using homogenized cross section, and output $k$, and the flux computed would be continuous. The other is a fixed-source problem, using $\keff$ as input (hence $J$ at interface), and generate discontinuous flux. 
 \end{enumerate}
 
-\clearpage
-\topic{Perturbation, Adjoint}
 %%%%%%%%%%%%%%%%%%% Perturbation Theory %%%%%%%%%%%%%%%%%%%%%%%%%%
+\clearpage
+\topic{Adjoint Flux, Perturbation Theory}
 \begin{enumerate}
-\item  First-Order Perturbation (FOP): the point is to solve for reactivity resulted from a perturbation without have to solving for the perturbed spatial flux. There are three sets of expressions, one for unperturbed forward problem, one for the unperturbed adjoint problem,
-\eqn{ A_0 \psi_0 &= \frac{1}{k_0} M_0 \psi_0 &A_0^*\psi_0^* &= \frac{1}{k_0^*} M^* \psi_0^*  }
-and a third set of perturbed forward problem, 
-\eqn{ A \psi &= \frac{1}{k} M \psi \label{pertb3}}
+\item Adjoint fluxes: only defined for what reaction we are interested in; e.g., critical reactor typically neutron population; subcritical system could be detector response that we are interested in.  
+  \begin{itemize}
+  \item If we put a neutron at this phase space, adjoint flux is the probability that it would cause fission. 
+  \item Asymptotic increase in total neutron population of a critical reactor for a neutron introduced in a phase space. 
+  \item Importance function. 
+  \end{itemize}
+  
+\item  First-Order Perturbation (FOP): solve for reactivity resulted from a perturbation without have to solving for the perturbed spatial flux. There are three sets of expressions: unperturbed forward problem, unperturbed adjoint problem, perturbed forward problem, 
+\eqn{ A_0 \psi_0 &= \frac{1}{k_0} M_0 \psi_0 &A_0^*\psi_0^* &= \frac{1}{k_0^*} M^* \psi_0^*  & A \psi &= \frac{1}{k} M \psi \label{pertb3}}
 FOP approximate the perturbed problem using, 
-\eqn{ A &= A_0 + \delta A   &M &=M_0 + \delta M  &\psi &=\psi_0 + \delta \psi &k&=k_0+\delta k}
-Plug the above approximation into Eq.~\ref{pertb3} and simplify, we reach the FOP which is 2nd order accurate, 
+\eqn{ A &= A_0 + \delta A   &M &=M_0 + \delta M  &\psi &=\psi_0 + \delta \psi & \frac{1}{k} &= \frac{1}{k_0+\delta k} = \frac{1}{k_0} - \frac{\delta k}{k_0^2}}
+Plug into Eq.~\ref{pertb3} and simplify, we reach the FOP which is 2nd order accurate, 
    \eqn{ \boxed{\delta \rho \approx \frac{\expect{\psi_0^*, \left( \frac{1}{k_0} \delta M - \delta A \right) \psi_0 }}{\expect{\psi_0^*, M_0 \psi_0}}  } }
 
-\item Adjoint fluxes physical meaning: if we put a neutron at this place this energy, what is the probability it would cause fission.
 
-  \item Balance equations:
+  \item Real and adjoint diffusion equations: group diffusion and absorption operators are self-adjoint; group scattering and fission operators are not. 
     \begin{align}
       -\gradient D_g  \gradient \phi_g + \Sigma_{tg} \phi_g &= \chi_g \Sum_{g'=1}^G \nu \Sigma_{fg'}  \phi_{g'} + \Sum_{g'=1}^G \Sigma_{sg'\to g} \phi_{g'} \\
       -\gradient D_g  \gradient \phi_g^* + \Sigma_{tg}  \phi_g^* &= \nu \Sigma_{fg}  \Sum_{g'=1}^G  \chi_{g'} \phi_{g'}^*  + \Sum_{g'=1}^G \Sigma_{sg\to g'}  \phi_{g'}^*
     \end{align}
 
-  \item For two group, infinite medium case, with effective downscatter only, 
+  For two group, infinite medium case with effective downscatter only, 
     \begin{align}
       \left[ \begin{array}{cc}
           \Sigma_{a1} + \Sigma_{12} - \frac{1}{\kinf} \nu \Sigma_{f1} & - \frac{1}{\kinf} \nu \Sigma_{f2} \\
