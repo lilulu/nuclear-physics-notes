@@ -336,7 +336,8 @@ Nodal methods\footnote{weighted residual is not on the final}. The point of Noda
 \item Adjoint fluxes: only defined for what reaction we are interested in; e.g., critical reactor typically neutron population; subcritical system could be detector response that we are interested in.  
   \begin{itemize}
   \item If we put a neutron at this phase space, adjoint flux is the probability that it would cause fission. 
-  \item Asymptotic increase in total neutron population of a critical reactor for a neutron introduced in a phase space. 
+  \item Asymptotic increase in total neutron population of a critical reactor for a neutron introduced in a phase space.
+       \eqn{\frac{N(\infty) - N_0}{Q} &= \psi^* (\vecr, \Omegahat, E)  }
   \item Importance function. 
   \end{itemize}
   
@@ -376,17 +377,9 @@ Plug into Eq.~\ref{pertb3} and simplify, we reach the FOP which is 2nd order acc
  
   \item Boundary conditions: $\psi, \psi^*$ are any two functions satisfying the appropriate boundary and continuity conditions for the angular flux and adjoint flux. If $\psi(\vecr, \Omega, E) = 0$ for all $\hat{n} \cdot \Omegahat < 0$, then the adjoint satisfying $\psi^*(\vecr, \Omegahat, E) = 0$ for $\hat{n} \cdot \Omegahat > 0$. 
 
-
-  \item Meaning:
-    \begin{itemize}
-    \item Fundamental mode solution: adjoint eigenvalue is the same as the real eigenvalue: $k^* = k$. 
-    \item Adjoint flux is defined as the asymptotic increase in total neutron population of a critical reactor for a neutron introduced a phase space (position $r$, direction $\omega$, and energy $E$): 
-      \eqn{\frac{N(\infty) - N_0}{Q} &= \psi^* (\vecr, \Omegahat, E)  }
-    \end{itemize}
-
   \item Spectra: 
     \begin{itemize}
-    \item The PWR spectrum: . 
+    \item The PWR adjoint spectrum: high in fast and thermal range b/c high probability of fissioning. 
     \item For a typical two group problem, the adjoint flux should have the same shape for the two groups, except the magnitude is offset by $\frac{\phi_2^*}{\phi_1^*}$. 
     \end{itemize}
 
@@ -407,9 +400,9 @@ Plug into Eq.~\ref{pertb3} and simplify, we reach the FOP which is 2nd order acc
   \begin{enumerate}
     \begin{figure}[ht]
       \centering
-      \includegraphics[width=6in]{images/qual/transient.png}
+      \includegraphics[width=5.5in]{images/qual/transient.png}
     \end{figure}
-  \item $\displaystyle \rho = \frac{\keff - 1}{\keff}, \Lambda = \frac{1}{v \nu \Sigma_f}.
+  \item $\displaystyle \rho = \frac{\keff - 1}{\keff}, \keff = \frac{\nu \Sigma_f}{\Sigma_a + D B^2},  \Lambda = \frac{1}{v \nu \Sigma_f}.
     $
   \item $\Lambda$ is prompt neutron lifetime, $\lambda$ is decay constant. 
   \item We use the inhour equation, and can ignore the $\omega \Lambda$ term can go away because $\Lambda$ is so small, 
@@ -421,6 +414,32 @@ Plug into Eq.~\ref{pertb3} and simplify, we reach the FOP which is 2nd order acc
     \eqn{ \frac{T(0^+)}{T_0} = \frac{\beta}{\beta - \rho} = \frac{\beta}{\beta - 0.1 \beta} = 1.111}
 
   \end{enumerate}
+
+\item (12 Final \#28) When a control rod worth 37 cents is removed from a critical reactor (with beta-effective of 0.007), what is the ratio of power after and before the reactivity insertion (e.g., the prompt jump)? \\
+\textbf{Answer:} We use prompt jump approximation, $\rho = \$ 0.37  = 0.37 \beta$, 
+\eqn{ \frac{T(0^+)}{T_0} = \frac{\beta}{\beta - \rho} = \frac{\beta}{\beta - 0.37 \beta} = \boxed{ 1.59}}
+
+
+\item (12 Final \#29) If a fully-enriched, uranium-fueld, thermal-spectrum reactor has a stable period of 60 seconds after a control rod is moved following long-term stable operation at power of 100 watts, how much reactivity (in dollars) was inserted? (note: use the eight group delayed neutron data from Lecture 17, slide 21). \\
+\textbf{Answer:} Given $\beta_i, \lambda_i$ etc, we can calculate:  $\beta = 6.65 \times 10^{-3}$, $\omega = \frac{1}{T} = 1/60 \s^{-1}$; $\Lambda = \frac{1}{v \nu \Sigma_f} \approx 1.87 \times 10^{-5} \s$. Plug everything in the In-hour equation, 
+\eqn{ \rho &= \omega \Lambda + \Sum_{i=1}^8 \frac{\beta_i \omega}{\omega + \lambda_i} = 9.60 \times 10^{-4} = \boxed{\$0.1444} } 
+You can also omit the $\omega \Lambda$ part as it is very small and get $\rho= 9.59 \times 10^{-4} = \$0.1443$.
+\item (12 Final \#30) If a room temperature critical reactor undergoes a \$5.0 reactivity excursion from near zero power, what is the approximate final core-averaged fuel temperature (K)? Note, assume prompt neutron lifetime of $10^{-5}$ sec, beta-effective of 0.007, specific heat of the fuel of 1 J/gm-K, and Doppler coefficient of 3.0 pcm/C \\
+\textbf{Answer:} Be careful about the units! First we convert all the units into $\Delta k: \rho - \beta = 4 \beta = 0.028 \Delta k, \alpha = 3 \times 10^{-5} \Delta k$. Thus, 
+\eqn{ T_{fuel}^{end} = \frac{2 (\rho - \beta)}{\alpha} + T_{fuel}^0 = \frac{2 \times 0.0028 \Delta k}{3 \times 10^{-5} \Delta k} + 293 =  \boxed{2159.67  \K}  }
+
+\item (12 Final \#31) What is the fast-to-thermal adjoint flux ratio in an un-reflected critical slab reactor of Fuel 1 material? \\
+\textbf{Answer:} Keep in mind that `un-reflected' suggests there are leakage terms. We have solved earlier in \#23 that $B^2 = 0.008876$, which would remains the same for the forward problem and the adjoint problem. We write the two-group diffusion equations for the adjoint problem, 
+\begin{align}
+(D_1 B^2 + \Sigma_{a1} + \Sigma_{s12} - \nu \Sigma_{f1}) \phi_1^* &= \Sigma_{s12} \phi_2^* \label{eq31-1}\\
+\nu \Sigma_{f2}\phi_1^* &=  (D_2 B^2 + \Sigma_{a2}) \phi_2^*  \label{eq31-2}
+\end{align}
+From Eq.~\ref{eq31-1}, we can write
+\eqn{ \frac{\phi_1^*}{\phi_2^*} = \frac{\Sigma_{s12}}{D_1 B^2 + \Sigma_{a1} + \Sigma_{s12} - \nu \Sigma_{f1}} = \boxed{0.6525}}
+From Eq.~\ref{eq31-2}, we can write
+\eqn{ \frac{\phi_1^*}{\phi_2^*} = \frac{D_2 B^2 + \Sigma_{a2}}{\nu \Sigma_{f2}} = \boxed{0.6525} }
+Notice the fast-to-thermal adjoint flux ratio can be solved from either equation and they come out to be the same. 
+
 \end{enumerate}
 %%%%%%%%%%%%%%%%%%%%%%%%% Final Exam End %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
