@@ -43,8 +43,50 @@
 \end{table}
 \end{enumerate}
 
+
+
 \clearpage
-\textbf{General Knowledge Practice Questions}
+\topic{Cross Section}
+\begin{enumerate}
+\item* If the neutron cross section is independent of energy at 0K, at 1200K the cross section would have a 1/v energy shape because of thermal motion. 
+  
+\item* Resonance absorption cross section dominates resonance scattering cross section most of the time (except U238). 
+
+\item* Fission cross section: U235 fission xs at 0.1 eV and 300K is about 200 barns (200-300 barns); Pu239 fission xs is about 475 barns (380-570 barns). Hence in thermal reactors, Pu absorption should be about twice that of uranium. 
+
+\item Elastic scattering cross section as in Figure~\ref{scatter-xs}
+\begin{figure}
+  \centering
+  \includegraphics[width=6in]{images/intro/scatter-xs-moderator.png}
+  \\
+  \includegraphics[width=6in]{images/intro/scatter-xs-LWR.png}
+  \caption{Elastic Scattering Cross Sections} \label{scatter-xs}
+\end{figure}
+
+\item Capture cross section as in Figure~\ref{capture-xs}: 
+  \begin{figure}
+    \centering
+    \includegraphics[width=6in]{images/intro/capture-xs.png}
+    \\
+    \includegraphics[width=6in]{images/intro/capture-xs-2.png}
+    \caption{Capture Cross Section} \label{capture-xs}
+  \end{figure}
+  \begin{enumerate}
+  \item H has no resonance; it has the highest scattering xs in LWR, so we can ignore any other isotopic's neutron scattering.   
+  \item Na has a huge resonance in 23 keV, and more resonances at higher energies because it is a heavy isotope.
+  \item Near zero energy,
+    \eqn{ \sigma(E\to 0) \propto \sqrt{\frac{kT}{AE}}    }
+  \item Resonance at 6 to 7 eV: U238. 
+  \item U235's thermal elastic xs is larger than 238's, and they both have resonance around the same range.   
+  \item A small resonance at .3 eV: Pu239 (its signiture is a super low energy scattering xs). 
+  \end{enumerate}
+
+\item Given an unknown material type, all we care is to count the nucleus density of each material and look at it's xs. 
+\end{enumerate}
+
+
+\clearpage
+\topic{Exam Problems}
 \begin{enumerate}
 \item (Qual 2012). 
 \begin{enumerate}
@@ -132,49 +174,17 @@ Thus the probability of escaping the cylinder is just 9.09\%.
 
   \item If two neighboring nodes have ADFs of 1.30 and 1.25 in the thermal group, what is the percentage discontinuity in homogeneous thermal flux at the shared interface when the nodal diffusion equations are solved using the NEM method? \\
     \textbf{Answer:} Recall $\displaystyle f_n \phi_n^{HOM} = \phi_n^{HET} = \phi_{n+1}^{HET} = f_{n+1} \phi_{n+1}^{HOM}$, then $\displaystyle \frac{\phi_{n+1}^{HOM}}{\phi_n^{HOM}} = \frac{f_n}{f_{n+1}}$. Thus the percentage difference in the homogeneous thermal flux is, $\displaystyle \frac{1.30 - 1.25}{(1.30 + 1.25)/2} = 3.9\%$. 
-
-  \end{enumerate}
-\end{enumerate}
-
-
-\clearpage
-\topic{Cross Section}
-\begin{enumerate}
-\item* If the neutron cross section is independent of energy at 0K, at 1200K the cross section would have a 1/v energy shape because of thermal motion. 
-  
-\item* Resonance absorption cross section dominates resonance scattering cross section most of the time (except U238). 
-
-\item* Fission cross section: U235 fission xs at 0.1 eV and 300K is about 200 barns (200-300 barns); Pu239 fission xs is about 475 barns (380-570 barns). Hence in thermal reactors, Pu absorption should be about twice that of uranium. 
-
-\item Elastic scattering cross section as in Figure~\ref{scatter-xs}
-\begin{figure}
-  \centering
-  \includegraphics[width=6in]{images/intro/scatter-xs-moderator.png}
-  \\
-  \includegraphics[width=6in]{images/intro/scatter-xs-LWR.png}
-  \caption{Elastic Scattering Cross Sections} \label{scatter-xs}
-\end{figure}
-
-\item Capture cross section as in Figure~\ref{capture-xs}: 
-  \begin{figure}
-    \centering
-    \includegraphics[width=6in]{images/intro/capture-xs.png}
-    \\
-    \includegraphics[width=6in]{images/intro/capture-xs-2.png}
-    \caption{Capture Cross Section} \label{capture-xs}
-  \end{figure}
-  \begin{enumerate}
-  \item H has no resonance; it has the highest scattering xs in LWR, so we can ignore any other isotopic's neutron scattering.   
-  \item Na has a huge resonance in 23 keV, and more resonances at higher energies because it is a heavy isotope.
-  \item Near zero energy,
-    \eqn{ \sigma(E\to 0) \propto \sqrt{\frac{kT}{AE}}    }
-  \item Resonance at 6 to 7 eV: U238. 
-  \item U235's thermal elastic xs is larger than 238's, and they both have resonance around the same range.   
-  \item A small resonance at .3 eV: Pu239 (its signiture is a super low energy scattering xs). 
   \end{enumerate}
 
-\item Given an unknown material type, all we care is to count the nucleus density of each material and look at it's xs. 
+\item (12 Exam 2 \#3) What are the approximate values of Xe-135 and Sm-149 capture cross sections at 0.1 eV and temperature of 300K?  \\
+\textbf{Answer}: Xe-135: $2\times 10^6$ b. Sm-149: $1.15 \times 10^5$ b. 
+
+\item (12 Exam 2 \#4) Explain the difference between independent and cumulative fission yields for a given nuclide. \\
+\textbf{Answer}: The independent yield is the yield of a specific isotope directly from fission and nothing else. The cumulative yield includes the independent yield plus all of the precursor isotopes that decay into a specific isotope. 
+
+\item (12 Exam 2 \#5) Definition of dominance ratio for a critical reactor? 
 \end{enumerate}
+
 
 
 \clearpage
