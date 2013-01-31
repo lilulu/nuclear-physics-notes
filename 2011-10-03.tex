@@ -12,7 +12,7 @@ Plugging in the Hamiltonian $\hat{H}$, we get:
 Use separation of variables, we define, 
 \eqn{ \psi(x,t) = \phi(x) f(t) }
 Then SEQ becomes, 
-\eqn{ i \hbar \dfdt \frac{1}{f} = - \frac{-\hbar^2}{2m} \dphidxn2 \frac{1}{\phi} + V(x) -  E  }
+\eqn{ i \hbar \dfdt \frac{1}{f} = - \frac{\hbar^2}{2m} \dphidxn2 \frac{1}{\phi} + V(x) -  E  }
 The above equation has two components, the position dependent part, and the time dependent part: 
 \begin{enumerate}
 \item The eigenvalue equation for energy, which is the time independent SEQ, is, 
@@ -20,13 +20,13 @@ The above equation has two components, the position dependent part, and the time
 \item The time dependent part is, 
   \eqn{ i \hbar \dfdt = E f(t) }
   Thus $f(t) = f(0) e^{-iEt/\hbar}$ and one particular solution of the TD-SEQ is, 
-  \eqn{ \psi(x,t) = \phi(x) e^{iEt/\hbar} }
+  \eqn{ \psi(x,t) = \phi(x) e^{-iEt/\hbar} }
 \end{enumerate}
 
 
 
 
-
+\clearpage
 \topic{Time-Independence of Energy Probability}
 The idea is, we can get rid of the time dependency when we square for probability, 
 \eqn{ \expect{A} = \bra{\psi} A \ket{\psi} = \int \psi(x,t)^*  A \psi(x,t) \dx }
@@ -66,6 +66,8 @@ At any given time, our probability of finding the k-th eigenstate is:
 \eqn{ P(E_k) = |C_k (t)|^2 = |C_k (t)|^2 = |C_k (0) e^{-iw_k t}|^2 = |C_k (0)|^2 }
 This is an important point that \textcolor{blue}{the probability of finding an eigenstate does not depend on time!}
 
+
+\clearpage
 \topic{Time-Dependence of Position Probability}
 Assume a case in which only the first two states exist. 
 \begin{align}
@@ -82,11 +84,11 @@ Recall that $P(x \to x+\dx) \dx = |\psi(\uline{x}, t)|^2 \dx$. Then we can find 
 &= \frac{2}{L} \left[ |C_1|^2 \sin^2 (k_1 x) + |C_2|^2 \sin^2 (k_2 x) \right] + 2 Re \psi_1^* \psi_2 e^{-i(w_1 - w_2)t} \\
 &= \frac{2}{L} \left[ |C_1|^2 \sin^2 (k_1 x) + |C_2|^2 \sin^2 (k_2 x) \right] + 2 Re(C_1^* C_2) \cos ((w_1 - w_2)t) \sin (k_1 x) \sin(k_2 x) 
 \end{align}
-Interpretation: 
-The probability of finding a particle at position $x \to x + \dx$ is an oscillating function between the maximum $(|\psi_1| + |\psi_2|)^2$ and the minimum of $(|\psi_1| - |\psi_2|^2$, with a frequency of $w_1 - w_2$ and a period of 
+Interpretation: the probability of finding a particle at position $x \to x + \dx$ is an oscillating function between the maximum $(|\psi_1| + |\psi_2|)^2$ and the minimum of $(|\psi_1| - |\psi_2|)^2$, with a frequency of $w_1 - w_2$ and a period of 
 \eqn{  T = \frac{\hbar}{|E_1 - E_2|} } 
 This T is important because this means that we need to measure something along the magnitude of T to get a good understanding of the system. Measuring too short would result in a position probability that barely changes; measuring too long would result in oscillating/redundant behavior.
 
+\clearpage
 \topic{Time-Dependence of Any Observable }
 \subtopic{Review: Commutator Relations in QM}
 For operators $\Ahat, \Bhat$, we define the commute of the two to be:
@@ -111,7 +113,7 @@ This is very important, as we should keep in mind that $\left[ \Ahat, \Ahat^2 \r
 
 \subsubtopic{$\left[ \hat{x} ,\hat{p}^2 \right] = 2 i \hbar \hat{p}$}
 \begin{align}
-\left[ \hat{x} ,\hat{p}^2 \right] \\
+\left[ \hat{x} ,\hat{p}^2 \right] 
 &= \left[ \hat{x} ,\hat{p} \right] \hat{p} + \hat{p} \left[ \hat{x} ,\hat{p} \right] \\
 &= 2 i \hbar \hat{p}
 \end{align}
@@ -119,7 +121,7 @@ This is very important, as we should keep in mind that $\left[ \Ahat, \Ahat^2 \r
 
 \subsubtopic{$\left[ \hat{x}^2 ,\hat{p} \right] = 2 i \hbar \hat{x}$}
 \begin{align}
-\left[ \hat{x}^2,\hat{p} \right] \\
+\left[ \hat{x}^2,\hat{p} \right] 
 &= \hat{x} \left[ \hat{x} ,\hat{p} \right]  + \left[ \hat{x} ,\hat{p} \right] \hat{x} \\
 &= 2 i \hbar \hat{p}
 \end{align}
