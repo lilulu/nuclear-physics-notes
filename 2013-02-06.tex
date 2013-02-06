@@ -1,0 +1,114 @@
+\documentclass{school-22.211-notes}
+\date{February  6, 2013}
+
+\begin{document}
+\maketitle
+
+
+\clearpage
+\topic{2013 Written Qual} 
+\begin{enumerate}
+\item General Knowledge: 
+  \begin{enumerate}
+  \item If fuel in an LWR (with a rated power density of 37 W/g of heavy metal) is depleted for 600 EFPD, what is the fuel burnup in MWd/kg HM?  \\
+    \textbf{Answer:} Unit conversion: 
+    \eqn{ \frac{37 \times 10^{-3} \MW}{\kg} 600 \mathrm{day} = 22.2 \mathrm{MWd/kg}  } 
+  
+  \item What are the approximate 2200 m/s neutron-induced fission cross section for U235, U238, and Pu239 in barns? \\
+    \textbf{Answer:} U235: 500b, U238: 0 (1MeV threshold); Pu238: 700b.  
+    
+  \item Delayed neutron fraction from fission of U235, U238, and Pu239 in barns? \\
+     \textbf{Answer:} U235: 0.0067; U238: 0.015; Pu239: 0.002; 
+
+   \item In the attached plots of total cross section, which curve corresponds to each of the following isotopes? \\
+     \textbf{Answer:} 
+     \begin{itemize}
+       \item Hydrogen: C. 
+       \item Graphite: E. 
+       \item Oxygen: F, the lightest resonance material in this problem. It also have that funny dips in the fast range. 
+       \item Sodium: G, a weird peak 
+       \item Iron: D, the next light resonance material, high absorption xs so not a good cladding material. 
+       \item U235: B, resonances. 
+       \item Pu239: A, signiture peak at 0.3 eV. 
+     \end{itemize}
+     Notes on 1/v low energy range: 
+     \begin{itemize}
+     \item The heavier an isotope is, the flatter the curve is (closer to 0K situation). 
+     \item A \& B have huge 1/v tail because they are dominated by absorption. 
+     \end{itemize}
+
+   \item What are the approximate thermal U235 cumulative fission yield and half-life of I135 and the half-life of Xe135? \\
+     \textbf{Answer:} 
+  \end{enumerate}
+
+\item Modeling Neutron Scattering (20\%)
+  \begin{enumerate}
+  \item If the elastic scattering cross section for a non-absorbing moderating material has the energy dependence shown below; plot the flux spectrum (first vs. energy and second vs. lethargy) that would be observed between 10 MeV and 10 eV, when a mono-energetic source of neutrons is introduced at 20 MeV into an infinite medium of moderator with A=155 and a density of 2g/cc. \\
+    \textbf{Answer:} Insert plots. 
+
+  \item Neutrons are introduced at 200eV in an infinite medium of A=1, purely isotropic scattering, 0K, monatomic gas that has a xs of 20,000 barns and a density of 10g/cc. What is the mean number of collisions that neutrons have in scattering below 10eV? \\
+    \textbf{Answer:} Notice we are given way more information than needed. All we need is $\alpha, \xi$. 
+
+  \item If the gas of problem 2b also contains an uniformly distributed 0.1g/cc, A=100, resonance absorber that has zero xs at all energies except between 150 and 180eV, where it has an infinite absorption and 4,000 barn isotropic elastic cross sections. What is the approximate probability that source neutrons will scatter below 10eV? \\
+    \textbf{Answer:} Remember that the $P(E\to E') = $ flat. First generation, neutrons start from 200 eV, probability of falling into the black absorber is $\frac{30}{200}$; second generation, approximate the born energy to be 190 eV, the probability of falling into black absorber is $\frac{30}{190}$. 
+  \end{enumerate}
+
+\item Modeling Resonances (15\%) 
+  \begin{enumerate}
+     \item A resonance absorber of 0.01g/cc and A=100 (having a square resonance abs xs of 100,000 barns) is homogeneously mixed with 1g/cc, constant 5barn purely elastic scattering moderator with A=2. Using the narrow resonance approximation, what is the ratio of neutron flux (per unit lethargy) in the resonance to the flux (per unit lethargy) just above the resonance? \\
+    \textbf{Answer:} $\displaystyle \phi(u) = \frac{\sigma_d + \sigma_{po}}{\sigma_d + \sigma_{po} + \sigma_R}, \sigma_d = \frac{\sigma_m N_m}{N_r}$. 
+
+   \item If the effective resonance integral for the material in problem 3a is 1000 barns, what is resonance escape probability? \\
+    \textbf{Answer:} $\displaystyle p = e^{-\frac{RI}{\sigma_d \xi}}$. 
+
+  \item  An infinite 2D array of bare fuel pins containing 0.01g/cc, A=238, resonance absorber, is immersed in pure scattering moderator with a fuel-to-moderator ratio of 1:2. At 6.67 eV, $\Sigma_m = 0.5 \cm^{-1}$ and the resonance absorber has 100,000 barn scattering and 50,000 barn capture xs. If the probability that a 6.67 eV neutron born in the fuel will have its next collision in fuel is 0.95, what is the probability that a 6.67 eV neutron scattered in the moderator will have its next collision in the fuel pin? \\
+    \textbf{Answer:} Reciprocity relation. 
+  \end{enumerate}
+
+\item Diffusion Theory for Reactor Analysis (30\%): know $\kinf$ means $\kinf = \frac{\nu \Sigma_f}{\Sigma_a}$. 
+  \begin{enumerate}
+  \item Find $\kinf$ for fuel. \\
+    \textbf{Answer:} 
+
+  \item Perform a critically buckled energy-independent spectrum calculation to determine the fast-to-thermal flux ratio of fuel. \\
+    \textbf{Answer:} 
+
+  \item Using the infinite medium flux spectrum from part b, compute effective one-group cross sections and $\kinf$ for fuel by preserving reaction and leakage rates. \\
+    \textbf{Answer:} 
+
+  \item Fuel is used to construct a critical core of 1D slab reactor surrounded by a 1cm thick baffle and a 40cm reflector. Using the same infinite medium flux spectrum from part b, collapse 1G baffle and reflector xs, and then use this data to approximate critical core thickness L. \\
+    \textbf{Answer:} In 1G, the baffle's 
+
+  \item Using 2-group cross section data and the proceding critical 1D reactor geometrical model, derive the equation for the thermal flux distribution in the reflector, and compute the distance into the reflector at which the thermal flux peaks. \\
+    \textbf{Answer:} Thermal flux at the left interface of the reflector is 0, source is fast group decaying flux. In fact we don't even need the magnitude of the fast flux to get where the thermal flux peaks. 
+  \end{enumerate}
+
+\item Transient Reactor Analysis (20\%) 
+  \begin{enumerate}
+  \item Write the PKE with six delayed neutron groups. \\
+    \textbf{Answer:} 
+
+  \item Derive the in-hour equation from the PKE, explain all approximations. \\
+    \textbf{Answer:} 
+
+  \item Which isotope dominates the longest-lived delayed neutrons precursor group and approximately what is its half-life? \\
+    \textbf{Answer:} Br, 55s. 
+
+  \item  What is the mean energy at which delayed neutrons are emitted folllowing a thermal neutron induced fission of U235? \\
+    \textbf{Answer:} 
+
+  \item If $\rho = -200$ milli-beta of reactivity is introduced into a critical reactor, what is approximate magnitude of the prompt drop in core power? \\
+    \textbf{Answer:} 
+
+  \item The Fuchs-Nordheim prompt reactivity excursion model predicts that the fuel temperature at the peak of the power excursion can be expressed in terms of the Doppler feedback coefficient $T = \frac{\rho - \beta}{\alpha} + T^0$. What is the Fuchs-Nordheim expression for fuel temperature at the end of the prompt reactivity excursion? \\
+    \textbf{Answer:} 
+
+  \item If an LWR is on a positive 10s asymptotic period, what is the approximate core reactivity in dollars (using a one delayed neutron group model with a precursor half-life of 10s)? \\
+    \textbf{Answer:} 
+  \end{enumerate}
+
+\item Numerical Methods in Reactor Analysis (5\%): an engineer sets up a 2-group, finite-difference, diffusion model of a 1D reactor that has the following cross sections? \\
+    \textbf{Answer:} 
+\end{enumerate}
+
+\end{document}
