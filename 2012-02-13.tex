@@ -6,7 +6,8 @@
 
 
 %%%%%%%%%%%%%%%%%%%%%%%% Neutron Slowing Down and Thermalization %%%%%%%%%%%%%%%
-\lecture{Slowing Down \& Thermalization in Infinite Medium} \label{slowing-down-thermalization}
+\lecture{Infinite Medium Monte Carlo Neutronics Tool} \label{slowing-down-thermalization}
+This Monte Carlo Model we develope for this chapter and next chapter is for infinite medium. \\
 The goal of this and the next section (resonant approximation) is to derive group cross sections. Thus we need to approximate the spectrum. We are going to consider: 
 \begin{itemize}
 \item Ignore space and angles (assuming infinite medium) and only consider the energy space. When we discuss two region heterogeneous resonant model, we are going to add some spatial dependency back in the model. 
@@ -163,9 +164,7 @@ A good moderating material should have: high slowing down (hence light nuclei), 
 
 \clearpage
 %%%%%%%%%%%%%%%%%%%%%% start of MC %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\topic{A MC Infinite Medium Model}
-This Monte Carlo Model we develope for this chapter and next chapter is for infinite medium. 
-\subtopic{Calculating Isotopic Importance}
+\topic{Calculating Isotopic Importance}
 Given an infintie medium LWR with volume fraction listed in Table.~\ref{volume-fraction}, we can calculate isotopes' number densities: 
 
 \begin{table}[ht]
@@ -193,7 +192,7 @@ That is, in a typical LWR the relative number densities come out to be around:
 Notice \hi{hydrogen's and oxygen's number densities are about the same.} 
 
 
-\subtopic{Abtracting Cross Sections}
+\uline{Abtracting Cross Sections}
 See Figure~\ref{scatter-xs}, Figure~\ref{capture-xs} for common cross sections. Notice resonance absorption and scattering tend to line up in terms of energy. 
 
 \uline{Practice: Why can we use sodium as coolant if its capture cross section is so high?}  
@@ -203,19 +202,46 @@ See Figure~\ref{scatter-xs}, Figure~\ref{capture-xs} for common cross sections. 
 
 \clearpage
 %%%%%%%%%%%% Elastic Scattering %%%%%%%%%%%%%%%%%%%%%%
-\subtopic{High Energy: Elastic Scattering}
+\topic{High Energy Elastic Scattering Physics}
 For high energy, we assume no absorption and scattering is isotropic in COM (target at rest in Lab system). Then we arrive at some important parameters/properties: 
 \begin{enumerate}
 \item After each collision, the minimum final energy is,
 \eqn{ \boxed{ \alpha = \frac{E_{\mathrm{min}}}{E_0}  = \left( \frac{A-1}{A+1} \right)^2 } }
 
-\item Mean log energy decrement:
-\eqn{ \boxed{ \zeta = 1 + \frac{\alpha \ln(\alpha)}{1 - \alpha}  }  }
-Examples: $\zeta_{H} = 1, \zeta_D = 0.725, \zeta_C = 0.158, \zeta_U = 0.0084$. \hi{$A \up, \zeta \down$.} 
+\item From conservation equations in the COM and translating back to the energies 
 
-\item The number of collisions required to slow a particle from $E_2$ to $E_1$ is: 
+FIXME
+
+\item Differential scattering cross section: 
+  \eqn{ \sigma(E \to E') &= \sigma(E) P(E \to E') = \frac{\sigma(E)}{(1-\alpha) E}   & \alpha E &\le E' \le E }
+
+
+\item Slowing down in non-absorbing, single specie, $A=1$, isotropic elastic scattering material: 
+  \begin{enumerate}
+    \item Because we are dealing with a single specie and infinite medium, we can use $\Sigma$ instead of $\sigma$.
+    \item Write a balance equation for sources and sinks: 
+    \item Assume a delta function source: 
+    \item Define collision density:
+    \item Show that collision density is $1/E$: 
+    \item Thus flux is $1/E$ at energies below the source energy: 
+    \item By super-position, we can deduce that for a distributed energy source: 
+      \eqn{ \Aboxed{ \phi(E) &= \frac{1}{\Sigma_s(E) E} \int_{E}^{\infty} \dE' S(E') + \frac{S(E)}{\Sigma_s(E)} } }
+  \end{enumerate}
+
+
+\item Introduce lethargy: 
+
+
+\item Logarithmic energy decrement: 
+\eqn{ \boxed{ \zeta = 1 + \frac{\alpha \ln(\alpha)}{1 - \alpha}  }  }
+Examples: $\zeta_{H} = 1, \zeta_D = 0.725, \zeta_C = 0.158, \zeta_U = 0.0084$. \hi{$A \up, \zeta \down$.} \\
+ The number of collisions required to slow a particle from $E_2$ to $E_1$ is: 
 \eqn{ \boxed{ n = \frac{\ln(E_2 / E_1)}{\zeta} }  }
 Examples: for $E_2 = 2\times 10^6 \eV, E_1 = 0.1 \eV$, the number of collisions is: $n_H = 17, n_D = 23, n_C = 106, n_U = 2000$. 
+
+
+\item Slowing down in non-absorbing, arbitrary mass, isotropic scattering material: 
+
 
 \item Flux vs. energy:
 \begin{figure}[ht]
@@ -239,16 +265,27 @@ There are two ways to understand flux here.
   \caption{Flux vs. Lethargy} \label{fvl}
 \end{figure}
 
+
+
+\item Placzek transients in energy: 
+\begin{enumerate}
+\item First generation: discontinuity in flux. 
+\item Second generation: discontinuity in first derivative. 
+\item Third generation: discontinuity in second derivative. 
+\end{enumerate}
+Notice in hydrogen there is no Placzek transient
+
+
 Caution about number of bins: When we are plotting, we are really plotting the expectation value of the numbers of neutrons. 
 
-\uline{Practise: how many neutrons would there be at x energy level?}  
+\uline{Exercise: how many neutrons would there be at x energy level?}  
 
 \textbf{Answer:} zero. So the bins have to be fine enough to see the details, but not too fine that the bins got no more neutrons. 
 \end{enumerate}
 
 
 \clearpage
-\subtopic{High Energy: Add Fission Emission Spectrum $\chi$}
+\topic{Fission Emission Spectrum}
 We model the fission emission spectrum $\chi(E)$ as a Maxwell spectrum:
 \eqn{ \chi(E) \dE = \frac{2\pi}{(\pi T)^{3/2}} \sqrt{E} \exp\left( - \frac{E}{T} \right) \dE }
 Simulation: constructing a cdf for Maxwell distribution (when constructing any cdf, it is a good practice to sample immediately and double check with the pdf); for each neutron, generate a random number $\xi \in [0,1]$, and use $\xi = cdf(E)$ to reverse-lookup for $E$, and this is the fission emission energy of that neutron. 
@@ -278,9 +315,13 @@ Characteristics of spectra after adding in $\chi(E)$ (caution: Fig.~\ref{spe1} i
 
 
 
+\clearpage
+\topic{Full Range Smooth Cross Sections}
+Reserved space for 22.212. 
+
 
 \clearpage
-\subtopic{Thermal Energy ($<4$ eV): Equilibrium Thermal Scattering}
+\topic{Equilibrium Thermal Elastic Scattering}
 For the thermal energy range, we are going to start with elastic scattering from stationary, free particle. Then we would consider the effects of having the target in motion and adding chemical bound.
 \begin{enumerate}
 \item We make three assumptions for the thermal energy range, 
@@ -364,13 +405,10 @@ We will cover resonance models later, for now we just need to know that the weir
   \item 4 eV is the typicall up-scattering cutoff energy. For an incident neutron energy higher than 4 eV, use asymptotic elastic down scattering. 
   \end{itemize}
 \end{enumerate}
-%%%%%%%%%%%%%%%%%%%%%% start of MC %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-%%%%%%%%%%%%%%%%%%%%%%% start of Analytical %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \clearpage
-\topic{Analytical Derivation} \label{slowing-down-from-te}
-\subtopic{Slowing Down Kernel from TE} 
+\topic{Slowing Down Kernel from TE} 
 This lecture was given by Prof. Forget on 10/02/13. We start from the Transport Equation:
 \eqn{ \frac{1}{v} \pphipt + \Omega \gradient \phi + \Sigma_t \phi &= \int \dE \int \dOmega \Sigma_s \phi + \frac{\chi(E)}{4 \pi} \int \dE v \Sigma_f \phi + S }
 Apply assumptions:
@@ -439,7 +477,7 @@ In reactor applications, most absorptions happen in the resonances of \ce{^{238}
 \end{enumerate}
 
 \clearpage
-\subtopic{Convolution of 0K Cross Section} % 10/18/12
+\topic{Convolution of 0K Cross Section} % 10/18/12
 This lecture was given by Prof. Forget on 10/18/12 as part of the Thermalization of Neutron lecture. 
  
 So far in our slowing down derivation, we have implicitaly assumed that the target is at rest. In reactor applications, thermal agitation is always present for the temperature of interest, and it increases as temperature increases. Thus we need to account for the relative energy between the neutron and the target. 
