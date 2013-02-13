@@ -284,10 +284,11 @@ Caution about number of bins: When we are plotting, we are really plotting the e
 \end{enumerate}
 
 
+
 \clearpage
 \topic{Fission Emission Spectrum}
-We model the fission emission spectrum $\chi(E)$ as a Maxwell spectrum:
-\eqn{ \chi(E) \dE = \frac{2\pi}{(\pi T)^{3/2}} \sqrt{E} \exp\left( - \frac{E}{T} \right) \dE }
+There are a couple of different choices of the fission emission spectrum. We chose Maxwell spectrum because it is easy the invert. The Maxwell spectrum is:
+\eqn{ \chi(E) \dE &= \frac{2\pi}{(\pi T)^{3/2}} \sqrt{E} \exp\left( - \frac{E}{T} \right) \dE & T &= 1.33 \fsp \MeV \mbox{ for U235} }
 Simulation: constructing a cdf for Maxwell distribution (when constructing any cdf, it is a good practice to sample immediately and double check with the pdf); for each neutron, generate a random number $\xi \in [0,1]$, and use $\xi = cdf(E)$ to reverse-lookup for $E$, and this is the fission emission energy of that neutron. 
 
 Characteristics of spectra after adding in $\chi(E)$ (caution: Fig.~\ref{spe1} is plotted with $x$-axis being energy, but it is still in lethargy space): 
@@ -298,9 +299,15 @@ Characteristics of spectra after adding in $\chi(E)$ (caution: Fig.~\ref{spe1} i
 
 \item The effect of $\chi(E)$: smooth out the shart edge at the highest energy cutoff (Fig.~\ref{spe1} middle plot).
 
-\item Fission source peak: so far we reach a constant spectrum in lethargy. To obtain the fission source peak around 2 MeV, we have to divide the flux count by the hydrogen cross section:
+\item A little bump at fast energy due to source neutrons. FIXME. 
+\eqn{ \phi(E) = \frac{1}{\Sigma_s(E) E} \int_E^{\infty} \dE' S(E') + \frac{S(E)}{\Sigma_s(E)} }
+
+\item Adding in real Hydrogen scattering cross section. So far we reach a constant spectrum in lethargy. To obtain the fission source peak around 2 MeV, we have to divide the flux count by the hydrogen cross section:
   \eqn{\phi(E) \propto \Sum_N \Sum_g N_g^n \tau_g^n = \Sum_n \Sum_g N_g^n \frac{1}{\Sigma(E_g^n)}   }
-  Recall the hydrogen scattering cross section decreases from 0 to 1 eV, stays constant between 1 eV to 10 keV, and decreases again afterwards. In the fast energies, the decreased hydrogen absorption cross section increases the flux, causing the 1.7 MeV peak. 
+  \begin{itemize}
+  \item Recall the hydrogen scattering cross section decreases from 0 to 1 eV, stays constant between 1 eV to 10 keV, and decreases again afterwards. In the fast energies, the decreased hydrogen absorption cross section increases the flux, causing the 1.7 MeV peak. 
+  \item Notice hydrogen's scattering cross section is not exactly flat in the eV to 0.1MeV region; it is slightly decreasing, resulting in the spectrum's middle region 
+  \end{itemize}
 \end{enumerate}
 
 \begin{figure}[ht]
@@ -317,7 +324,31 @@ Characteristics of spectra after adding in $\chi(E)$ (caution: Fig.~\ref{spe1} i
 
 \clearpage
 \topic{Full Range Smooth Cross Sections}
-Reserved space for 22.212. 
+This lecture is given in 22.212 on 02/13/2013. In this session we cover cross section data sources, cross section measurement techniques, and cross section impact.
+\begin{enumerate}
+\item Point-wise cross sections: 
+  \begin{itemize}
+  \item ENDF data provides enough resolution to linearly interpolate and claims to be 0.1\% accuracy. See \href{http://www.nndc.bnl.gov/sigma/}{ENDF data website}. 
+  \item JEF is used in Europe.
+  \item JENDL is used in Japan. 
+  \item NGATLAS is mostly for activation (decay heat, captures that are not important for reactors). 
+  \end{itemize}
+\item Heavier nuclides tend to have more reactions/cross sections, and has data for angular distribution. 
+\item Resonance parameters: 
+  \begin{itemize}
+  \item For instance, \href{http://www.nndc.bnl.gov/sigma/getInterpreted.jsp?evalid=15324&mf=2&mt=151}{Interpreted ENDF file for U238 resonance parameters} is Reich-Moore data, thus we get negative resonance energies etc. 
+  \item U238 s-wave $\Gamma_{\gamma} = 23$ meV, and $\Gamma_n$ changes anywhere from 1 to 70 meV. U238's resonances are widely spaced (s-wave 21 eV spacing, p-wave 7 eV spacing) and are good for using SLBW because resonances are widly spaced. Though typically odd isotope tends to widely spaced. 
+  \item Resonance spacing is the spacing between two peaks; capture width is the width of a resonance. Capture width tends to be constant (23 meV for U238), while neutron width tends to change (Hebert thinks increasing as energy). 
+  \item Unresolved resonances: it is not that resonances become tighter together (resonance spacing is almost constant); it is that the xxxx gets too small to measure. 
+  \item Doppler broadening is the same as thermal agitation and apparently they matter even more in high energy range. 
+  \item Resonance integral is a good measurement of the data: we do not care to compare data point by point, but rather we care about the data in a range. For instance, ENDFB-VII's resonance integral over the 8 energies are about 1\% different from ENDFB-VI. This does not seem that much, but it leads to 100pcm in reactivity. 
+  \end{itemize}
+  
+\item Example: U235 and Pu239 in fast range fission cross section does not change much while the capture cross section decreases significantly, thus we are interested in operating these two isotopes in fast reactors. 
+
+\item How are cross sections measured? When cross sections become very large, neutrons cannot penetrate the foil which is only a certain thickness, so the cross sections vs. energy we get are going to have a flat top for the high cross section range. Thus it is common to do multiple measurements with different thickness. For instance, U238's 6 eV is the largest and widest resonance, so we would want many points around there. 
+\end{enumerate}
+
 
 
 \clearpage
