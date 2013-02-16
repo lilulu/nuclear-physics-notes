@@ -6,7 +6,7 @@
 
 \classcode{22.106}
 \classname{Neutron Interactions \& Applications}
-\professor{Ben Forget}
+\professor{Ben Forget, Jeremy Robert}
 \schoolname{Massachusetts Institute of Technology}
 
 % for 2012-05-15.tex
