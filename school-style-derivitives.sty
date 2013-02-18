@@ -399,6 +399,8 @@
 \newcommand{\dRdphin}[1]{\derivitivetwon{R}{\phi}{#1}}
 \newcommand{\dRdtheta}{\derivitivetwo{R}{\theta}}
 \newcommand{\dRdthetan}[1]{\derivitivetwon{R}{\theta}{#1}}
+\newcommand{\pRpr}{\partialtwo{R}{r}}
+\newcommand{\pRprn}[1]{\partialtwon{R}{r}{#1}}
 
 % s
 \newcommand{\ds}{\derivitive s}
@@ -423,6 +425,7 @@
 \newcommand{\psprn}[1]{\partialtwon{s}{r}{#1}}
 \newcommand{\pspt}{\partialtwo{s}{t}}
 \newcommand{\psptn}[1]{\partialtwon{s}{t}{#1}}
+
 % S
 \newcommand{\dS}{\derivitive S}
 \newcommand{\dSdx}{\derivitivetwo{S}{x}}
@@ -719,6 +722,8 @@
 \newcommand{\dYdxn}[1]{\derivitivetwon{Y}{x}{#1}}
 
 
+
+
 \newcommand{\dy}{\derivitive y}
 \newcommand{\dvecy}{\derivitive \vec{y}}
 \newcommand{\dydx}{\derivitivetwo{y}{x}}
@@ -745,9 +750,11 @@
 \newcommand{\pyps}{\partialtwo{y}{s}}
 \newcommand{\pypt}{\partialtwo{y}{t}}
 \newcommand{\ddddy}{\derivitiveonen{y}{3}}
+\newcommand{\pYptheta}{\partialtwo{Y}{\theta}}
+\newcommand{\pYpthetan}[1]{\partialtwon{Y}{\theta}{#1}} 
+\newcommand{\pYpphi}{\partialtwo{Y}{\phi}}
+\newcommand{\pYpphin}[1]{\partialtwon{Y}{\phi}{#1}} 
 
-%
-\newcommand{\ppxppy}{\frac{\partial^2}{\partial x \partial y} }
 %\newcommand{\partialone}[1]{\frac{\partial}{\partial #1}}
 %
 \newcommand{\dz}{\derivitive z}
@@ -1012,6 +1019,10 @@
 \newcommand{\ppsiprn}[1]{\partialtwon{\psi}{r}{#1}}
 \newcommand{\ppsipmu}{\partialtwo{\psi}{\mu}} 
 \newcommand{\ppsipmun}[1]{\partialtwon{\psi}{\mu}{#1}}
+\newcommand{\ppsiptheta}{\partialtwo{\psi}{\theta}} 
+\newcommand{\ppsipthetan}[1]{\partialtwon{\psi}{\theta}{#1}}
+\newcommand{\ppsipphi}{\partialtwo{\psi}{\phi}} 
+\newcommand{\ppsipphin}[1]{\partialtwon{\psi}{\phi}{#1}}
 
 % \theta
 \newcommand{\dtheta}{\derivitive \theta}
@@ -1050,6 +1061,7 @@
 \newcommand{\drhodP}{\derivitivetwo{\rho}{P}}
 \newcommand{\drhodT}{\derivitivetwo{\rho}{T}}
 \newcommand{\prhopt}{\partialtwo{\rho}{t}}
+\newcommand{\pprho}{\partialone{\rho}}
 
 % |Xi or \xi
 \newcommand{\dxi}{\derivitive \xi}
