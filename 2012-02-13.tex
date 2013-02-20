@@ -352,7 +352,7 @@ This lecture is given in 22.212 on 02/13/2013. In this session we cover cross se
 
 
 \clearpage
-\topic{Equilibrium Thermal Elastic Scattering}
+\topic{Free Gas/Equilibrium Thermal Elastic Scattering}
 For the thermal energy range, we are going to start with elastic scattering from stationary, free particle. Then we would consider the effects of having the target in motion and adding chemical bound.
 \begin{enumerate}
 \item We make three assumptions for the thermal energy range, 
@@ -367,10 +367,10 @@ Then the elastic scattering cross section dependent on $A$, $E$, and temperature
   \sigma(E) f_s (E \to E') = &\frac{\sigma_{s0} \eta^2}{2E} \left[ \erf{\eta \sqrt{\frac{E'}{kT}} - \rho \sqrt{\frac{E}{kT}} } \mp \erf{\eta \sqrt{\frac{E'}{kT}} + \rho \sqrt{\frac{E}{kT}} } \right. \notag \\
     & \left. + e^{\frac{E - E'}{kT}} \left( \erf{ \eta \sqrt{\frac{E}{kT}} - \rho \sqrt{\frac{E'}{kT}} }  \pm \erf{\eta \sqrt{\frac{E}{kT}} + \rho \sqrt{\frac{E'}{kT}} } \right) \right] 
 \end{align}
-where the upper signs are for $E' > E$< and the lower signs for $E' < E$, and the $\eta, \rho$ terms are:
+where the upper signs are for $E' > E$ and the lower signs for $E' < E$, and the $\eta, \rho$ terms are:
 \eqn{ \eta &= \frac{A+1}{2 \sqrt{A}} & \rho &= \frac{A-1}{2 \sqrt{A}} }
 
-\item For a proton gas (A=1), we can simplify the energy transfer function to be,
+\item For a proton gas (A=1), we can simplify the energy transfer function to be (notice the function is continuous, but not the derivative),
 \begin{align}
 \sigma_s(E) f_s(E\to E') = \frac{\sigma_{s0}}{E} \left\{ 
 \begin{array}{cc}
@@ -388,10 +388,14 @@ e^{\frac{E-E'}{kT}} \erf{\sqrt{\frac{E}{kT}}} & E' > E \\
 \end{figure}
 Observations: 
 \begin{enumerate}
-\item In Fig.~\ref{ts-C-H}: E = 1kT to 25kT provides a good cover of range, and even at 1200K, 1kT = 0.1 eV, and 25kT = 2.5eV, so 4eV is a typical upper scattering cutoff. 
+\item The reason we make the y-axis $P E (1-\alpha)$ is because the asymptotic value would be normalized to 1.0 this way. Reason: 
+\eqn{ P(E \to E') \dE &= \frac{\dE}{(1-\alpha)E} &   \Rightarrow P(E\to E') E (1 - \alpha) &= 1.0}
+
+\item $\displaystyle \frac{E}{kT}$, the ratio of the neutron energy to the medium temperature (energy), is what we care about. For instance, when we raise the neutron energy and the medium temperature both by a factor of $4$, the probability remains the same. 
+
+\item In Fig.~\ref{ts-C-H}: E = 1kT to 25kT provides a good cover of range, and even at 1200K, 1kT = 0.1 eV, and 25kT = 2.5eV, so 4eV is a typical upper scattering cutoff. Although keep in mind that there is always a very small probability to scatter to a much higher energy. 
 
 \item In Fig.~\ref{ts-C-H}: the $\frac{E'}{E}$ axis shows that there is a good probability that the neutron would gain energy from the elastic scattering(the lower the initial neutron energy, the closer it is to the target nuclei thermal agitation, the more probable is upper scattering). In fact this is the difference between this thermal energy model and the previous high-energy model.  
-
 
 \item We can add the thermal scattering into our MC model and observe a peak in the thermal range as in the left plot of Fig.~\ref{spe2}. To make the height more realistic, we add in the hydrogen absorption cross section (a $1/v$ distribution, only affect the thermal range) as in the right plot of Fig.~\ref{spe2}. The absorbing strength is picked such that the absorption-to-scattering ratio is something reasonable, like 0.2. 
 \begin{figure}[ht]
@@ -401,8 +405,8 @@ Observations:
   \caption{Spectrum, Added in Thermal Scattering and $1/v$ Hydrogen Absorption XS} \label{spe2}
 \end{figure}
 \end{enumerate}
-
-\item Adding Target in Motion (important for U238 resonances at hot fuel conditions). Thermal agitation does not matter that much for non-resonance conditions; that is, when $\dsigma/\dE$ is small, a small $\Delta v$ hence a small $\Delta E$ does not change the cross section much. This is not true anymore for U238 resonances, because when cross section changes very rapidly (especially true in the scattering cross section than the absorption cross section), target motion/thermal agitation would affect up scattering quite significantly. As shown in Figure~\ref{timr}, it could be a 10\% increase in LWR U238 Doppler.  
+\end{enumerate}
+Adding Target in Motion (important for U238 resonances at hot fuel conditions). Thermal agitation does not matter that much for non-resonance conditions; that is, when $\dsigma/\dE$ is small, a small $\Delta v$ hence a small $\Delta E$ does not change the cross section much. This is not true anymore for U238 resonances, because when cross section changes very rapidly (especially true in the scattering cross section than the absorption cross section), target motion/thermal agitation would affect up scattering quite significantly. As shown in Figure~\ref{timr}, it could be a 10\% increase in LWR U238 Doppler.  
 \begin{figure}[ht]
   \centering
   \includegraphics[width=6in]{images/sl-d/target-in-motion-resonance.png}
@@ -410,32 +414,6 @@ Observations:
 \end{figure}
 
 We will cover resonance models later, for now we just need to know that the weird dips in scattering cross section is a result of the interacting wave between the potential scattering and the compound nuclear scattering. 
-
-\item Adding chemical bound to get bound elastic scattering of H in \ce{H_2 O} molecules. So far we've only talked about free gas; in the case of tightly bound atoms at very low energy, the vibrations within a molecule due to the chemical bond come into play:
-  \eqn{\sigma_{\mathrm{bound}} = \left( 1 + \frac{1}{A_{\mathrm{atom}}} \right) \sigma_{\mathrm{free}}  }
-  For bound water molecule for instance, 
-  \eqn{ \sigma_{\mathrm{water}}^H = (1+1)^2 \sigma_H = 4 \sigma_H }
-  The dependency on $A$ suggests that \textit{the bound elastic scattering matters for light nuclei, and not so much for heavy nuclei}. In the case of hydrogen, the free gas model would still provide the right shape, but the probability can be off by a factor of 10. In the case of graphite, the free gas model does not provide the right shape. The lower energy you want to go, the more careful you need to be. 
-
-  Elastic scattering for bound molecules can be characterized by,
-  \eqn{ \frac{\derivative^2 \sigma}{\dOmega \dE'} (E\to E', \Omega\to \Omega')  = \frac{\sigma_b}{4 \pi kT} \sqrt{ \frac{E'}{E}} e^{-\frac{\beta}{2}} S(\alpha, \beta)   }
-  where $\sigma_b$ is the bound scattering cross section for the material, $kT$ is in eV, $S(\alpha, \beta)$ is the symmetric form of the thermal scattering law, since $\alpha, \beta$ depends on temperature, $S$ depends on temperature too. 
-  \eqn{ S(\alpha, \beta) = \frac{\exp{-\frac{\alpha^2 + \beta^2}{4 \alpha}} }{\sqrt{4\pi \alpha}} }
-  where $\alpha, \beta$ depends on two terms:
-  \begin{itemize}
-  \item The momentum transfer $\kappa$,
-    \eqn{ \alpha = \frac{E' + E - 2 \sqrt{E' E} \cos \theta}{A kT} = \frac{\hbar^2 \kappa^2}{2 M kT} } 
-    where $A$ is the ratio of the mass of the scattering atom to the neutron mass.
-  \item The energy transfer $\epsilon$,
-    \eqn{ \beta = \frac{E' - E}{kT} = \frac{\epsilon}{kT} }
-  \end{itemize}
-
-\item Recap: 
-  \begin{itemize}
-  \item Thermal scattering distributions: generate cdf for energies, like from 0.1kT to 8kT.  
-  \item 4 eV is the typicall up-scattering cutoff energy. For an incident neutron energy higher than 4 eV, use asymptotic elastic down scattering. 
-  \end{itemize}
-\end{enumerate}
 
 
 \clearpage
@@ -507,6 +485,19 @@ In reactor applications, most absorptions happen in the resonances of \ce{^{238}
       \end{figure}
 \end{enumerate}
 
+FIXME: assume hydrogen is purely scattering. Again in an infinite medium the spectrum is independent of the absolute number density; it only depends on the relative number density. 
+
+
+Duderstadt p.399 plots of spectrum when we add in different effects. One question is, the plots end around 0.2 eV. 
+
+p.17: left plot: constant power. right plot: average thermal flux to be 1. 
+
+Adding in absorption: fast peak is slightly decreased, flat portion is slightly decreasing as we lower energy, and thermal peak magnitude is very depressed. Observation: if we want high thermal flux, we want low absorption xs (flux trap!) 
+In the old days (e.g., Duderstadt's plots), we normalize the thermal average to 1, then we get the new flux is slightly lowered and the flat portion raises up slightly, which makes it hard to observe absorption hardening. 
+
+Perturb leakage. More likely to leak out in fast energy. 
+
+
 \clearpage
 \topic{Convolution of 0K Cross Section} % 10/18/12
 This lecture was given by Prof. Forget on 10/18/12 as part of the Thermalization of Neutron lecture. 
@@ -529,10 +520,40 @@ In the thermal range, the convolution of a constant cross section would increase
 Prof. Forget introduces SLBW here. \textcolor{blue}{The convolution integral will yield the expression in section 2.7.1 with $\psi, \chi$ definitions of 8.4.3}. 
 
 $\psi$ term shows up in both absorption and scattering cross section terms and it gives the shape of the cross section. $\chi$ term only shows up in the scattering cross section and it represents the interference effect. The sum of $\psi$ and $\chi$ results in the dip before peaking that always shows up in the scattering cross section. 
-
-
 %%%%%%%%%%%%%%%%%%%%%%% end of Analytical %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\clearpage
+\topic{Thermal Bound Scattering}
+Adding chemical bound to get bound elastic scattering of H in \ce{H_2 O} molecules. So far we've only talked about free gas; in the case of tightly bound atoms at very low energy, the vibrations within a molecule due to the chemical bond come into play:
+  \eqn{\sigma_{\mathrm{bound}} = \left( 1 + \frac{1}{A_{\mathrm{atom}}} \right) \sigma_{\mathrm{free}}  }
+  For bound water molecule for instance, 
+  \eqn{ \sigma_{\mathrm{water}}^H = (1+1)^2 \sigma_H = 4 \sigma_H }
+  The dependency on $A$ suggests that \textit{the bound elastic scattering matters for light nuclei, and not so much for heavy nuclei}. In the case of hydrogen, the free gas model would still provide the right shape, but the probability can be off by a factor of 10. In the case of graphite, the free gas model does not provide the right shape. The lower energy you want to go, the more careful you need to be. 
+
+  Elastic scattering for bound molecules can be characterized by,
+  \eqn{ \frac{\derivative^2 \sigma}{\dOmega \dE'} (E\to E', \Omega\to \Omega')  = \frac{\sigma_b}{4 \pi kT} \sqrt{ \frac{E'}{E}} e^{-\frac{\beta}{2}} S(\alpha, \beta)   }
+  where $\sigma_b$ is the bound scattering cross section for the material, $kT$ is in eV, $S(\alpha, \beta)$ is the symmetric form of the thermal scattering law, since $\alpha, \beta$ depends on temperature, $S$ depends on temperature too. 
+  \eqn{ S(\alpha, \beta) = \frac{\exp{-\frac{\alpha^2 + \beta^2}{4 \alpha}} }{\sqrt{4\pi \alpha}} }
+  where $\alpha, \beta$ depends on two terms:
+  \begin{itemize}
+  \item The momentum transfer $\kappa$,
+    \eqn{ \alpha = \frac{E' + E - 2 \sqrt{E' E} \cos \theta}{A kT} = \frac{\hbar^2 \kappa^2}{2 M kT} } 
+    where $A$ is the ratio of the mass of the scattering atom to the neutron mass.
+  \item The energy transfer $\epsilon$,
+    \eqn{ \beta = \frac{E' - E}{kT} = \frac{\epsilon}{kT} }
+  \end{itemize}
+Typically thermal bound scattering in LWRs because the change in cross section is not large, absorption cross sections are high, and water number density is low. Though bound scattering becomes important in scattering experiment, cold neutrons etc. 
+
+
+Be careful that free carbon cross section is very different from the graphite cross section because the latter has a crystal lattice structure which affects the phonon distribution tremendously. 
+
+
+
+FIXME today: p.31 U238 scattering kernel: makes sense: T is the temperature of the medium, and earlier plots E = blah kT describes the neutron energy. \\
+Free gas model: target at rest? no!!!!!
+abs \& leakage makes sense: they have the same effect. \\
+Flux trap: \\
+Why doesn't CMS uses new ENDF libraries? 
 
 \clearpage
 \topic{Summary}
