@@ -6,8 +6,7 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%% Resonance Day 2: Important Parameters %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \clearpage
-\topic{Important Parameters}
-\subtopic{Resonance Integrals}
+\topic{Resonance Integrals \& Group Cross Sections}
 We introduce \hi{(Infinite) Resonance Integrals} as flux weighted (that is, weighted with 1/E spectrum $\phi(E) \sim \frac{1}{E}$) microscopic cross section: 
 \begin{align}
 \RI &=  - \int_{u1}^{u2} \sigma(u) \du \\
@@ -24,8 +23,6 @@ Notice,
 \item RI is useful for inter-comparing libraries or cross section models. It is a classic way to evaluate new resonance data typically from 0.5 eV to 10 keV. We use RI to check our resonance data, in particularly the three big resonances at 6.67, 20.9, 36.7, 66 eV. Numerical test of the SLBW RIs shows that the RI comes out to be within 1\% of ENDF/B-VII Reich-Moore data (Lec 6, slide 17, with 0.01 eV as spacing in histogram). 
 \end{itemize}
 
-
-\subtopic{Group Cross Section}
 Group cross section is a similar but much more useful quantity. From its definition, we see $\sigma_g$ does not depend on the flux normalization: 
 \begin{align}
 \sigma_g &= \frac{\int_{E_1}^{E_2} \sigma(E) \phi(E) \dE }{\int_{E_1}^{E_2} \phi(E) \dE} 
@@ -47,7 +44,7 @@ Notice\footnote{Review here for exam}:
 \end{itemize}
 
 \clearpage
-\subtopic{Dilution Cross Section/Dilution Factor}
+\topic{Dilution Cross Section/Dilution Factor}
 In an infinite homogeneous medium with one resonance absorber and one moderator,  we write removal rates equals scattering rates (see Reuss 8.2.1 for a similar derivation), 
 \begin{align}
 \left[ N_r \sigma_r (u) + N_m \sigma_m (u) \right] \phi (u) &= \int_{-\infty}^u N_m \sigma_m (u') \phi(u') P(u' \to u) \du' \\ 
@@ -85,7 +82,7 @@ The scattering down to resonance is independent of the resonance. In other words
 
 %%%%%%%%%%%%%%%%%%%%%%%%% RESONANCE ESCAPE PROBABILITY %%%%%%%%%%%%%%%%%%%%%%%%
 \clearpage
-\subtopic{Resonance Escape Probability}
+\topic{Resonance Escape Probability}
 We define $p$ as the ratio of the therm neutron absorption rate over absorption rate at all energies; it is the fraction of neutrons absorbed thermally over all neutrons absorbed in the cell; hence it is the probability that a neutron will escape capture at energies above thermal; finally since most of the non-thermal capture in natural or slightly enriched uranium lattices is in the resonance part of the slowing down region, it is the \hi{resonance escape probability}\footnote{Henry, p. 110}. 
 \begin{align}
 p &= \exp \left( - \frac{N_R \RI_{\eff}}{\xi \Sigma_m} \right)  = \exp \left( - \frac{\RI_{\eff}}{\xi \sigma_d} \right)
@@ -102,33 +99,32 @@ Notice: (1) this expression is only an approximation; (2) \textit{p only depends
 \item Assumptions: only elastic down scatter above the resonance, $\sigma_{a,m} = 0, \sigma_{s} = $const, and only a single resonance absorber. 
 \item Start from our balance equation (scattering in = resonance absorption),
 \begin{align}
-\frac{S}{\zeta(u)} \du &= \left[ N_r \sigma_{a,r} (u) + \Sigma_m \right] \phi(u) \du = N_r \left[ \sigma_{a,r} (u) + \sigma_d \right] \phi(u) \du \\
-\Rightarrow \phi(u) &= \frac{S}{\zeta(u) N_r \left[ \sigma_{a,r} (u) + \sigma_d \right] } 
+\frac{S}{\xi(u)} \du &= \left[ N_r \sigma_{a,r} (u) + \Sigma_m \right] \phi(u) \du = N_r \left[ \sigma_{a,r} (u) + \sigma_d \right] \phi(u) \du \\
+\Rightarrow \phi(u) &= \frac{S}{\xi(u) N_r \left[ \sigma_{a,r} (u) + \sigma_d \right] } 
 \end{align}
 Define resonance escape probability as:
 \begin{align}
 p &= \frac{S - \int N_r \sigma_a(u) \phi(u) \du}{S} \\
-&= 1 - \frac{\int N_r \sigma_a(u) \frac{S}{\zeta(u) N_r \left[ \sigma_{a,r} (u) + \sigma_d \right] } \du }{S} \\
-&= 1 - \int \frac{\sigma_{a,r} (u) }{\zeta(u) \left[ \sigma_{a,r} (u) + \sigma_d \right] } \du
+&= 1 - \frac{\int N_r \sigma_a(u) \frac{S}{\xi(u) N_r \left[ \sigma_{a,r} (u) + \sigma_d \right] } \du }{S} \\
+&= 1 - \int \frac{\sigma_{a,r} (u) }{\xi(u) \left[ \sigma_{a,r} (u) + \sigma_d \right] } \du
 \end{align}
 \item Assume the mean logarithmic energy decrement is independent of lethargy, 
-\eqn{ p = 1 - \frac{1}{\zeta} \int \frac{\sigma_{a,r} (u)}{\sigma_{a,r} (u) + \sigma_d} \du }
+\eqn{ p = 1 - \frac{1}{\xi} \int \frac{\sigma_{a,r} (u)}{\sigma_{a,r} (u) + \sigma_d} \du }
 \item Use our definition of effective RI,
 \eqn{ \RI_{\eff}^{u1 \to u2} = \int_{u1}^{u2} \frac{\sigma_{a,r} (u) \sigma_d}{\sigma_{a,r} (u) + \sigma_d} \du }
 We can write $p$ in terms of $\RI$:
-\eqn{ \boxed{p^{1\to 2} = 1 - \frac{\RI_{\eff}^{u1 \to u2}}{\zeta \sigma_d} } }
+\eqn{ \boxed{p^{1\to 2} = 1 - \frac{\RI_{\eff}^{u1 \to u2}}{\xi \sigma_d} } }
 \item Since the source is incrementally reduce with each successive resonance,
-\eqn{ p^{u1 \to uN} = \left( 1 - \frac{\RI_{\eff}^{u1 \to u2}}{\zeta \sigma_d} \right) \left( 1 - \frac{\RI_{\eff}^{u2 \to u3}}{\zeta \sigma_d} \right)
-  \cdots \left( 1 - \frac{\RI_{\eff}^{uN-1 \to uN}}{\zeta \sigma_d} \right) }
+\eqn{ p^{u1 \to uN} = \left( 1 - \frac{\RI_{\eff}^{u1 \to u2}}{\xi \sigma_d} \right) \left( 1 - \frac{\RI_{\eff}^{u2 \to u3}}{\xi \sigma_d} \right)
+  \cdots \left( 1 - \frac{\RI_{\eff}^{uN-1 \to uN}}{\xi \sigma_d} \right) }
 We approximate the sequence as,
-\eqn{ p^{u1 \to uN} = \exp \left( - \frac{\Sum_{u1}^{uN-1} \RI_{\eff}^u}{\zeta \sigma_d} \right) }
+\eqn{ p^{u1 \to uN} = \exp \left( - \frac{\Sum_{u1}^{u_{N-1}} \RI_{\eff}^u}{\xi \sigma_d} \right) }
 or
-\eqn{ \boxed{ p \approx \exp \left( - \frac{\RI_{\eff}}{\zeta \sigma_d} \right) = \exp \left( - \frac{N_r \RI_{\eff}}{\zeta \Sigma_m} \right)  } }
+\eqn{ \boxed{ p \approx \exp \left( - \frac{\RI_{\eff}}{\xi \sigma_d} \right) = \exp \left( - \frac{N_r \RI_{\eff}}{\xi \Sigma_m} \right)  } }
 which for hydrogen system becomes, 
 \eqn{ p \approx \exp \left( - \frac{\RI_{\eff}}{\sigma_d} \right) }
 \end{enumerate}
-
-
+The motivation for this derivation is because back in when we had no idea what the cross sections are, as long as we can measure the flux at a high energy and at a lower energy, we can calculate the resonance escape probability, and the expression we derived to tell how it depends on dilution cross sections, and thus use the experimental data for a different set of conditions. 
 
 
 

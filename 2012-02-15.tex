@@ -107,22 +107,20 @@ In Ch.~\ref{slowing-down-thermalization}, we end up with a spectrum of a thermal
 
 
 \clearpage
-\topic{`Poor Man's' Resonance Models}
-\subtopic{Model Assumptions}
+\topic{Poor Man's Resonance Models}
 For our resonance model, we use the Single Level Breit-Wigner(SLBW) and assume:
 \begin{itemize}
-  \item the only resonance isotope is U238;
-  \item all resonances are well isolated;
-  \item only s-wave interaction (scattering \& absorption);
+  \item The only resonance isotope is U238;
+  \item All resonances are well isolated;
+  \item Only s-wave interaction (scattering \& absorption); there are p-waves in the absorption cross sections, but their widths are so small that they would not affect out RI much. 
   \item Reich-Moore parameters can be used in SLBW;
-  \item treat as resolved only the lowest 14 s-wave resonances;
-  \item generate simple `statistical model' for energies up to 10 keV, assuming an uniform spacing 25 eV\footnote{notice on a typical plot which is log-log, the spacing appears to be closer and closer as energy increases; though it is actually reasonable to assume that the spacing is uniform};
+  \item Treat as resolved only the lowest 14 s-wave resonances;
+  \item Generate simple `statistical model' for energies up to 10 keV, assuming an uniform spacing 25 eV\footnote{notice on a typical plot which is log-log, the spacing appears to be closer and closer as energy increases; though it is actually reasonable to assume that the spacing is uniform};
 \end{itemize}
-
 One place to get resonance data is from LANL's website. For instance, \href{http://t2.lanl.gov/cgi-bin/endf?2,151,/inet/WWW/data/data/ENDFB-VII-neutron/U/238}{U238 Resonance Parameters}. We can find parameters like, scattering length AP, and the potential scattering cross section is just $4 \pi A_p^2 = 11.293$ for U238. Other parameters: GN means $\Gamma_N$ with unit eV, and GG means $\Gamma_G$ in eV. Extract the energy range from 0 to 10 keV (ignore the negative resonance energies). 
 
 
-\subtopic{Model For Resolved Resonance Absorption}
+\uline{Model For Resolved Resonance Absorption}
 \begin{align}
 \sigma_{\gamma} (E,T) &= \sqrt{\frac{E_0}{E}} \frac{2}{\Gamma} A \psi(x,\xi) \\
 \sigma_{n} (E,T) &= \frac{2}{\Gamma} \left[ A \psi(x,\xi) + B \chi(x,\xi) \right] + \sigma_{\mathrm{potential}} 
@@ -134,12 +132,10 @@ To convert them into a form suitable for numerical calculation,
 \end{align}
 where
 \begin{align}
-\xi &= \Gamma \sqrt{\frac{A}{4 k T E_0}} \\
-x &= \frac{2 (E-E_0)}{\Gamma} \\
-r &= \frac{h^2}{2 \pi E_0} \frac{A+1}{A} = \frac{2603911}{E_0} \frac{A+1}{A} \\
-q &= \sqrt{ r \sigma_{\mathrm{potential}} } \\
-\Gamma &= \Gamma_n + \Gamma_{\gamma} \\
-\sigma_{\mathrm{potential}} &=  4 \pi R^2 
+\xi &= \Gamma \sqrt{\frac{A}{4 k T E_0}}  & x &= \frac{2 (E-E_0)}{\Gamma} \\
+r &= \frac{h^2}{2 \pi E_0} \frac{A+1}{A} = \frac{2603911}{E_0} \frac{A+1}{A} 
+& q &= \sqrt{ r \sigma_{\mathrm{potential}} } \\
+\Gamma &= \Gamma_n + \Gamma_{\gamma}  &\sigma_{\mathrm{potential}} &=  4 \pi R^2 
 \end{align}
 Notice there are many numerical representations of the $\psi, \chi$ functions. For now, we can use,
 \begin{align}
@@ -152,15 +148,15 @@ They are plotted in Figure~\ref{psi-chi-plot}.
   \includegraphics[width=4in]{images/r-m/psi-chi-plot.png}
   \caption{Plots of the Psi, Chi Functions} \label{psi-chi-plot} 
 \end{figure}
+Take-away:
+\begin{itemize}
+\item In principle, \hi{resonances at any energy contribute to all energies, even though their contributions can be infinitesimally}. 
+\item Because $\Psi, \chi$ functions are very temperature dependent, so when we perform a monte carlo simulation it is important to take into account that different pins are at different temperatures. However currently only MC21 supports temperature gradients (by pre-generating many many tables using NJOY). 
+\end{itemize}
 
-Results: It is important to notice that \textit{all resonances contribute to all energies, even though their contributions can be infinitesimally}. 
 
-\subtopic{Model For Unresolved Resonance Absorption}
-We assume 25 eV resonance spacing, and assume
-\begin{align}
-\Gamma_{\gamma} &= 0.023 \eV \\
-\Gamma_{n} &= 0.05 \sqrt{\frac{E}{E_{\mathrm{last}}}}  \eV
-\end{align}
+\uline{Model For Unresolved Resonance Absorption}: We assume 25 eV resonance spacing, and assume
+\eqn{ \Gamma_{\gamma} &= 0.023 \eV  & \Gamma_{n} &= 0.05 \sqrt{\frac{E}{E_{\mathrm{last}}}}  \eV }
 in which $E_{\mathrm{last}}$ means the last resonance energy used in the 14 resonance region. Notice that for the purpose of this excercise we assume this region to be unresolved, whereas in reality they are resolved. 
 
 

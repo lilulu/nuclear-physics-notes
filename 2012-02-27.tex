@@ -7,8 +7,7 @@
 
 \clearpage
 %%%%%%%%%%%%%%%%%%%%%%%%% Resonance Models Day 3: Important properties %%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\topic{Important Properties}
-\subtopic{Doppler Broadening/Temperature Effects On Cross Section}
+\topic{Doppler Broadening/Temperature Effects On Cross Section}
 Doppler effect describes the importance of thermal agigation on cross section. Thermal equilibrium means: 
 \begin{itemize}
 \item All heat source are perfectly balanced and the temperature of the medium is assumed constant. 
@@ -18,15 +17,17 @@ Doppler effect describes the importance of thermal agigation on cross section. T
 U238 has a negative Doppler feedback. Reason: as temperature increases, the resonance width increases with its depth decreases. We care less about the depth, because there is no neutrons present right at the peak anyway. 
 
 
-\hi{Doppler Broadening} means, as the temperature increases, the width of the spectrum increases, although the area under the curve stays the same\footnote{References: Reuss Section 8.4; Handbook of Nuclear Engineering Chapter 4 Section 3; Duderstadt p.337-338; Bell p.433 (points out the area under the cross section curve is constant; hence the absorption rate is proportional to the magnitude of the flux in a sense.)}. 
+\hi{Doppler Broadening means, as the temperature increases, the width of the spectrum increases, although the area under the curve stays the same}\footnote{References: Reuss Section 8.4; Handbook of Nuclear Engineering Chapter 4 Section 3; Duderstadt p.337-338; Bell p.433 (points out the area under the cross section curve is constant; hence the absorption rate is proportional to the magnitude of the flux in a sense.)}. 
 There are two possibilities: 
 \begin{enumerate}
 \item Infinite RI (infinite dilution factor, negligible absorber concentration, $\Sigma_t \sim \Sigma_s^M$) is independent of temperature becase the area under the psi chi curves are constant. The absorber concentration is too low to perturb the flux, hence no flux depression and no self-shielding.  
+
 \item Effective RI (finite concentration of \ce{^{238} U}) is dependent of temperature and the resonant material density because of the energy self-shielding effect as in Figure~\ref{Doppler}: 
   \begin{itemize}
   \item If temperature increases, $\RI_{\eff}$ would increase, because the broadened resonance increases the energy range over which abosrption occurs, which outweighs the lowering of the resonance peak. Reason: Energy self-shielding (the strong absorption of the resonance tends to shield the absorber nucleir from neutrons with energy $E\sim E_0$, hence the term `flux depression').  As temperature increases, the resonance is broadened by the Doppler effect, the neutron flux depression is decreased, whereas the area under the cross section curve is essentially constant. Hence the resonance absorption which is the energy-integrated reaction rate $\Sigma_a(E) \phi(E)$ increases with increasing temperature. 
+
   \item If U/H increases, there are two consequences: one is that the flux is more depressed hence the $\RIeff$ decreases; secondly the higher energies become more important as we would later see in Section~\ref{spectral-hardening-section}. 
-  \item \textit{The higher the concentration of U238, the larger the Doppler temperature effects become.}
+  \item \hi{The higher the concentration of U238, the larger the Doppler temperature effects become, and the \% change saturates at high temperature.} 
   \end{itemize}
 \end{enumerate}
 
@@ -68,7 +69,7 @@ occur in the fuel.
 
 \clearpage
 %%%%%%%%%%%%%%%%%%% SELF-SHIELDING %%%%%%%%%%%%%%%%%%%%%
-\subtopic{Spatial Self-Shielding}
+\topic{Self-Shielding}
 Self-shielding/flux depression is first observed through: 
 \begin{table}[ht]
   \centering
@@ -118,8 +119,7 @@ self-shielding which could lead to absorption in the moderator. Thus, there is a
 tradeoff between f and p. Both depend on the moderator-to-fuel volume ratio.
 Optimal designs have both f and p at about 0.9.}. 
 
-\subtopic{Energy Self-shielding}
-In a sentence, \textit{the strong absorption of the resonance tends to shield the absorber nuclei from neutrons with energy$\sim E_0$, hence creating the flux depression at $E_0$.}
+\uline{Energy Self-shielding}: in a sentence, \textit{the strong absorption of the resonance tends to shield the absorber nuclei from neutrons with energy$\sim E_0$, hence creating the flux depression at $E_0$.}
 
 Prof. Forget states energy self-shielding as: when pure scattering, we can assume the thermal flux to be Maxwellian. But as we increase absorption, the spectrum would harden. Example: compare spectrum of UOX and MOX. UOX is 4\% U235, 96\% U238. MOX is 8\% Pu (2/3 fissile, 1/3 parasitic absorber), 92\% U238. The reason MOX's thermal spectrum is depressed is, 
 \begin{itemize}
@@ -131,18 +131,18 @@ Prof. Forget states energy self-shielding as: when pure scattering, we can assum
 
 Prof. Smith approaches self-shielding using RI values vs. U/H ratio. As we increase the U/H ratio, the RI decreases in the three big resonance regions, and we see big dips on the spectrum plot. There are so much U238 in the fuel, that there is no flux in the fuel anymore. 
 
-As we increase the number of uranium atoms by a factor of 10, the number of absorption per atom is decreased by a factor of 3. That is, the total aborption still increases, but the absorption per atom decreases. Figure~\ref{energy-self-shielding} illustrates that RI are very dependent on the density of resonant materials.
+\hi{As we increase the number of uranium atoms by a factor of 10, the number of absorption per atom is decreased by a factor of 3.} That is, the total aborption still increases, but the absorption per atom decreases. Figure~\ref{energy-self-shielding} illustrates that RI are very dependent on the density of resonant materials.
 \begin{figure}
   \centering
   \includegraphics[width=4.5in]{images/r-m/self-shielding.png}
   \caption{Impact of Energy Self-Shielding On Effective RI} \label{energy-self-shielding}
 \end{figure}
 
-
+Recap: energy self-shileing means the decrease in absorption per atom (thus the depression of flux). Though the flux between resonances are trying to remain $1/E$. 
 
 \clearpage
 %%%%%%%%%%%%%%%%%%%%% SPECTRAL HARDENING %%%%%%%%%%%%%%%%%%
-\subtopic{Spectral Hardening Shifts Resonant Absorption Rates}\label{spectral-hardening-section}
+\topic{Spectral Hardening Shifts Resonant Absorption Rates}\label{spectral-hardening-section}
 As U/H increases, the higher energy ranges become more important, and the peak of the thermal spectrum shifts to the right. Distribution of group-wise absorption shifts towards the higher energy. $1/v$ absorption of U238 becomes more significant. Self-shielding reduces the large resonance absorption fractions. See Figure~\ref{spectral-hardening}. 
 \begin{figure}[ht]
   \centering
@@ -171,7 +171,7 @@ thousands of times the initial power, and brings the reactor power back to safe
 limits.'' 
 
 
-\subtopic{Impact On Design}
+\textbf{Impact On Design}: 
 \eqn{ \kinf = \epsilon p \eta f}
 $\epsilon$ is fast fission. 
 \eqn{ \epsilon = \frac{\int_{F+T} \Sigma_f^F (E) \phi_F \dE}{\int_T \Sigma_f^F \phi_F \dE} }
@@ -188,5 +188,10 @@ $f$ is
 
 Insert image here. Maximum $k$ gives us the optimal design (in terms of moderation). In reality we always operate at slightly under moderated. With Boron in it, we need to operate at even under moderation, and have to limit Boron concentration to 2000 ppm. Because now if we lose water, we not only lose moderation, but also lose absorption, and when Boron concentration is to high, we lose more absorption than moderation, which actually create a positive coefficient. 
 
+
+
+
+**** FIXME **** \\
+As we increase H/U, there is still a finite absorption, but the absorption per atom approaches zero. 
 
 \end{document}
