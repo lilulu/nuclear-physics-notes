@@ -1,0 +1,59 @@
+\documentclass{school-22.211-notes}
+\date{February 27, 2012}
+
+\begin{document}
+\maketitle
+
+\lecture{Infinite Medium Resonance Models}
+\topic{NJOY Overview} % Lecture 6
+Reference paper. 
+
+NJOY flow of codes:
+\begin{enumerate}
+\item RECONR: reconstructs pointwise (energy-dependent) xs from ENDF resonance parameters (Reich-Moore) and interpolation schemes. 
+\item BROADR: Doppler broadens and thins pointwise cross sections. There is no analytical way to Doppler broadening. 
+\item UNRESR: unresolved range, we have probability table that tells you the distribution of resonance spacings etc. Analytical flux depression. 
+\item HEATR: energy deficient. We do not really discuss this part. 
+\item THERMR: deals with $S(\alpha, \beta)$ to treat chemical binding, etc that we skip.
+\item GROUPR: important one. NJOY evaluates integral numerically, whereas We mimic this process using Monte Carlo because MC is easier to set up though is not as accurate. 
+\item GAMINR: not that important. 
+\end{enumerate}
+We get multigroup cross sections out of NJOY. 
+
+
+Depend on the problem you are running, the multigroup cross section may differ by a factor of 10 depends on the resolution you run. Thus we cannot just use a set of multigroup cross sections without evaluating it specifically to your problem. Unless you are using 100,000 energy groups, no matter how good your spatial representation is, your results is no better than the multigroup cross sections you start out with. 
+
+
+Assume homogeneous infinite model. 
+
+Know p.15 in your sleep! 
+
+All the main scatters have a constant scattering cross section in the range we care about. 
+
+
+\clearpage
+\topic{NJOY Flux Spectra Model and Resonance Model}
+FIXME with derivations. 
+
+
+Whenever we say RI we mean absorption/capture RI not scattering RI. 
+
+
+Lec 7 p. 19: There is a small sensitivity to scattering resonances. 
+RI is not sensitive to moderating material mass because the resonance width is so narrow. 
+
+Analysis of p.20-21 adding resonance scatter: $\sigma_{po}^{239} = 13.9 \barn, \sigma_b = 100 \times 20 = 2,000 \barn$. The reason is that the resonance scattering xs exceeds resonance capture xs at certain resonance energies, thus adding a big extra slowing down source from scattering off U238. 
+
+
+
+
+
+
+
+
+
+
+\clearpage
+
+
+\end{document}
