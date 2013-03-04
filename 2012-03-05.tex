@@ -6,9 +6,10 @@
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%% Resonance Models Day 5 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\clearpage
-\topic{Spatial Self-Shielding: Two Region Resonant Approximations} \label{heterogeneous-geo}
+\lecture{Spatial Self-Shielding: Two Region Resonant Approximations} \label{heterogeneous-geo}
 This is probably the most important topic in generating cross section in reactor physics. We want to take into account both the spatial and energy structure distributions of flux within each resonance when solving the neutron slowing down problem. 
+
+Historically we have learnt early on that we need to lump resonant materials together to get 
 
 \begin{enumerate}
 \item Assumptions for heterogeneous geometry resonant approximations:
@@ -16,7 +17,7 @@ This is probably the most important topic in generating cross section in reactor
 \item All neutron interactions in moderator are purely scattering;
 \item Moderator scattering xs is independent of energy;
 \item The previous two points together leads to that the slowing down energy source in fuel and moderator is 1/E;
-\item Slowing down source is spatially uniform within each region (a fairly accurate assumption);
+\item Slowing down source is spatially uniform within each region. This is the case for non-resonant energy; and we can make this assumption for resonant energies is because there is no much scattering in at a resonant energy. \textit{This is the only additional assumption we are making compare with the previous section}
 \item A single resonance absorber species exists only in the fuel;
 \item Fuel scattering removes neutrons from resonance energy (that is, narrow resonance model); 
 \end{itemize}
@@ -39,6 +40,8 @@ Since the two integrals are symmetric (that is, $P_{A\to B}$ and $P_{B \to A}$ a
 \eqn{ P_{1\to 2} \frac{V_1}{\Sigma_2} = P_{2\to 1} \frac{V_2}{\Sigma_1} }
 Hence we reach the reciprocity condition:
 \eqn{ \boxed{ P_{1\to 2} \Sigma_1 V_1 = P_{2\to 1} \Sigma_2 V_2 } }
+\hi{This is entirely general in geometry so far} (maybe require convex geometry?) as we are just saying that the attenuation coefficient is the same forward and backward. 
+
 
 \item Two Region Balance Equations. 
 First collision reaction rate balance, where $\sigma_{t,f}(u) = \sigma_{r,f} + \sigma_{pot, f}$ (the resonance absorption xs plus the potential scattering xs):
@@ -51,10 +54,6 @@ Next we use reciprocity relationship,
 \eqn{ P_{m\to f} N_m \sigma_m V_m = P_{f\to m} N_f \sigma_f V_f}
 and substitute into the balance equation to get,
 \eqn{ N_f \sigma_{t}^F (u) \phi_f (u) V_f = N_f \sigma_{pot}^F V_f P_{f\to f} + N_f \sigma_{t}^F V_f P_{f\to m} }
-
-
-
-
 
 Then we replace $P_{f\to m} = 1 - P_{f\to f}$ and get, 
 \eqn{ N_f \sigma_{t}^F (u) \phi_f (u) V_f = N_f \sigma_{pot}^F V_f P_{f\to f} + N_f \sigma_{t}^F V_f (1 - P_{f\to f}) }
@@ -84,28 +83,26 @@ which is the same form as the homogeneous model, except with  different definiti
 %%%%%%%%%%%%
 
 
-
-
-
-\clearpage
-\subtopic{Wigner's Approximation of $P_{f\to f}$}
+\topic{Wigner's Approximation of $P_{f\to f}$}
 In this section we compute numerically the fuel-to-fuel first flight collision probability $P_{f\to f}$, hence obtaining an expression for the heterogeneous energy shape of flux in fuel $\phi_f(u)$. 
 
 Assumption: size of the fuel is much larger than mean free path (basically Wigner works for a fat pin surrounded by an infintie sea of water). Then we approximate $P_{f\to f}$ in terms of the mean chord length $l$: 
 \eqn{ P_{f\to f} &\approx \frac{l N_f \sigma_{t,f} (u)}{1 + l N_f \sigma_{t,f} (u)} = \frac{\sigma_{t,f}(u)}{\frac{1}{l N_f} + \sigma_{t,f} (u)} }
 Recall Cauchy's Theorem for any convex body, 
 \eqn{ l = \frac{4V}{S} }
-and define \hi{escape cross section},
+and define \hi{escape cross section (with unit barns/resonance atom)},
 \eqn{ \Sigma_e &= \frac{1}{l} & \sigma_e &= \frac{\Sigma_e}{N_f} }
 $P_{f\to f}$ simplifies to, 
 \eqn{ P_{f\to f} = \frac{\sigma_{t,f} (u)}{\sigma_{t,f} (u) + \sigma_e} }
 Hence $\phi_f(u)$ can be written as, 
 \eqn{ \boxed{ \phi_f (u) = \frac{\sigma_{pot, f} + \sigma_e}{\sigma_{t,f} (u) + \sigma_e } = \frac{\sigma_{pot, f} + \sigma_e}{\sigma_{r,f} (u) + \sigma_{pot, f} + \sigma_e} } }
+\hi{This is important as it shows that the only energy dependency is from $\sigma_{r,f}(u)$.}\\
 \hi{Heterogeneous/Homogeneous Equivalence} suggests that the effects of heterogeneity are equivalent to some dilution cross section in a homogeneous mixture:
 \begin{align}
 \mbox{Homogeneous mixture energy shape of flux } \phi(u) &= \frac{\sigma_{pot, f} + \sigma_d}{\sigma_{r,f} (u) + \sigma_{pot, f} + \sigma_d}   & \sigma_d &= \frac{N_m \sigma_m}{N_r}  \\
 \mbox{Heterogeneous energy shape of flux in the fuel } \phi_f(u) &= \frac{\sigma_{pot, f} + \sigma_e}{\sigma_{r,f} (u) + \sigma_{pot, f} + \sigma_e}   & \sigma_e &= \frac{S_f}{4 V_f N_r} 
 \end{align}
+Notice in the homogeneous case, moderator (hydrogen for instance) is dominant. Whereas in the heterogeneous case, we are dependent on hydrogen at all. The reason is because if we have a pin surrounded by an infinite sea of moderator, then as soon as neutrons get out, they are not likely to go back, so it does not matter what the moderator cross section is. 
 
 \textbf{Examples}: 
 \begin{enumerate}
@@ -113,15 +110,17 @@ Hence $\phi_f(u)$ can be written as,
 \begin{itemize}
 \item If the system is homogeneous uranium and hydrogen, then the dilution cross section looks like:
 \eqn{ \sigma_d &=  \frac{N_m \sigma_m}{N_r}  = \frac{1}{0.2} 20 \fsp \barn = 100 \fsp \barn/\mbox{resonance atom} }
-If the system is 2 region, and we homogeneous the fuel region, then
+If the system is 2 region, and we homogenize the fuel region, then we can calculate the escape cross section (be careful about the unit!) 
 \begin{align}
-\sigma_e &= \frac{S_f}{4 V_f N_r} = \frac{2 \pi r h}{4 \pi r^2 h N_r} = \frac{1}{2 r N_r} = \frac{1}{(2)(0.41 \cm)(2.2 \times 10^{22} \cm^{-3})} \frac{1 \barn}{10^{-24} \cm^2} = 55 \fsp \barn/\mbox{resonance atom} \\
+\sigma_e &= \frac{S_f}{4 V_f N_r} = \frac{2 \pi r h}{4 \pi r^2 h N_r} = \frac{1}{2 r N_r} = \frac{1}{(2)(0.41 \cm)(2.2 \times 10^{22} \cm^{-3})} \frac{1 \barn}{10^{-24} \cm^2} = 55 \fsp \barn/\mbox{resonance atom}
+\end{align}
+and for the potential scattering cross section we just add up that from every isotope, 
+\begin{align}
 \sigma_b^{hom} &=  0.05 \sigma_{pot}^{235} + 2 \sigma_{pot}^O = 0.05 (11.3) + 2 (4.0) = 9 \fsp \barn \\
 \sigma_b^{het} &= \sigma_b^{hom} + \sigma_e = 64 \fsp \barn \\ 
 \sigma_s^F &= \sigma_{pot}^R + \sigma_b^{hom} = \sigma_{pot}^{238} + 0.05 \sigma_{pot}^{235} + 2 \sigma_{pot}^O = 11.4 + 0.05 (11.3) + 2 (4.0) = 20 \fsp \barn 
 \end{align} 
 \end{itemize}
-
 
 \item \textbf{(12 Qual \#4) Calculate escape probability.} Given a cylinder of radius $r=0.5\cm$, infinite height, and $\Sigma = 10 \cm^{-1}$. Assume uniform source inside, calculate the probability of neutrons making first collision outside the cylinder. 
 
@@ -130,11 +129,10 @@ If the system is 2 region, and we homogeneous the fuel region, then
 
 
 \clearpage
-\subtopic{Bell-Wigner Approximation}
-Bell's Refinements of the Wigner's Collision Probability.
-
-Bell Factor $b$ can be read off a plot given opacity (average chord times total cross section) and geometry (eg: homogeneous medium, infinite plate, sphere etc). It is then used to approximate $P_{f\to f}$ and hence $\phi_f(u)$:
+\topic{Bell-Wigner Approximation}
+Bell Factor $b$ can be read off a plot given \hi{opacity (average chord times total cross section)} and geometry (eg: homogeneous medium, infinite plate, sphere etc). It is then used to approximate $P_{f\to f}$ and hence $\phi_f(u)$:
 \eqn{ P_{f\to f} &= \frac{\sigma_{t,f} (u)}{b \sigma_e + \sigma_{t,f} (u)}  & \phi_f(u) &=\phi_f (u) = \frac{\sigma_{pot, f} + b \sigma_e}{\sigma_{t,f} (u) + b \sigma_e }  }
+Notice at the limit of infinite opacity, Wigner's approximation is accurate; whereas at the limit of a transparent moderator, Wigner's approximation alone may lead to a near 100\% error.\\
 Another way to approach this is to replace $R_f \phi_f$ by $R^R \phi_f + R^N \phi_f$ (R is resonant, N is non-resonant), and replace $\Sigma_{tf} = \Sigma_{tR} + \Sigma_{tN}$. Then 
 \eqn{ P_{RR} &= P_{ff} \frac{\Sigma_{tR}}{\Sigma_{tR} + \Sigma_{tN}}, & \sigma_d &= \frac{\sigma_{tR} (1 - P_{RR})}{P_{RR}} }
 Bell-Wigner approximation becomes, where the first term is the homogeneous term, and the second term is the heterogeneous term. 
@@ -147,8 +145,13 @@ Bell's refinement does nothing to the infinite opacity case, but could be a fact
   \caption{Bell's Factor for Various Geometris} \label{bell}
 \end{figure}
 
+[FIXME]: add materials from 2013 fall. We would typically compute a table of $P_{FF}$ as a function of opacity, and sample from it on the fly. 
+
+Collision probability only gives us the average behavior in space and in energy. For instance, in CASMO when we run a 2D case we only have 8 energy groups. 
+
+
 \clearpage
-\subtopic{Arrays of Rods, Dancoff Factor}
+\topic{Arrays of Rods, Dancoff Factor}
 Notice our model so far is an isolated pin (that is, a fuel pin surrounded by an almost infinite moderator). Now we are going to discuss arrays of rods. The major difference is that not all neutrons leaving a fuel pin would have their next interaction in the moderator. 
 
 We hence define the \hi{Dancoff Factor C}:
@@ -162,8 +165,6 @@ In Fig.~\ref{dancoff}, the $x$-axis is the radius of the rods (in units of the m
 \textbf{Notice if the moderator is opaque, the Dancoff factor becomes zero; if transparent, the Danoff factor trends to 1.0.}  LWRs typically have a C of 0.3. 
 \eqn{ P_{f\to f}  = \frac{\sigma_{t,f} (u)}{\frac{(1-C)b}{(1-C) + Cb} \sigma_e + \sigma_{t,f} (u)}  } 
 C changes the coefficient in front of the escape cross section from $\sigma_e \to \frac{(1-C)b}{1-C + Cb} \sigma_e$. For a typical PWR pin, that is reduced by 0.7 to 0.8.
-
-
 \eqn{ \sigma_d &= \frac{D}{l N_0} + \frac{\Sigma_{fN}}{N_N} }
 where $b = \frac{(1-C)b^+}{(1-C) + C b^+}$ where $b^+$ is the b factor for a single pin cell. 
 
@@ -174,10 +175,11 @@ where $b = \frac{(1-C)b^+}{(1-C) + C b^+}$ where $b^+$ is the b factor for a sin
 Then we find the parameter one, pellet radius over mfp = $\frac{0.41 \cm}{0.76 \cm}  = 0.54$, the other parameter is the lattice size over pellet radius $\frac{1.26 \cm}{0.41 \cm} = 3.07$. Using these two parameters, we can read off the plot that $C = 0.3$. For a Bell factor of about 1.1, the escape xs is reduced by,
 \eqn{ \frac{ (1-C)b}{(1-C) + Cb} = 0.774} 
 \end{itemize}
+\hi{Remember 60 barns as the approximate average cross section for PWRs}. See slide 22 of Lecture 8. 
 
 
 \clearpage
-\subtopic{Carlvik's Refinements of the Bell's Collision Probability}
+\topic{Carlvik's Refinements of the Bell's Collision Probability}
 \eqn{ P_{ff} \approx \frac{\beta \sigma_{t,f}}{\alpha_1 + \sigma_e + \sigma_{t,f}} + \frac{(1-\beta) \sigma_{t,f}}{\alpha_2 \sigma_e + \sigma_{t,f}} }
 where
 \eqn{ \alpha_1 &= \frac{5A+6 - \sqrt{A^2 + 36A + 36}}{2(A+1)}, &\alpha_2 &= \frac{5A+6 + \sqrt{A^2 + 36A + 36}}{2(A+1)} &\beta&= \frac{\frac{4A+6}{A+1} - \alpha_1}{\alpha_2 - \alpha1} &A&= \frac{1-C}{C} }
@@ -187,8 +189,13 @@ To double check,
 \begin{itemize}
 \item $C\to 1, \alpha_1 \to 0, \beta \to 1$, e.g., there is no escape from fuel.
 \item $C\to 0, \alpha_1 \to 2, \alpha_2 \to 3, \beta \to 2$, e.g., isolated rod.
-\item FOr intermediate values of $C$, each coefficient is a monotonic function.
+\item For intermediate values of $C$, each coefficient is a monotonic function.
 \end{itemize}
+The beauty of this method is that the formula stays the same, we just have pre-tabulated table of the first and second terms depend on background xs. So given a background xs, we just need to table look-up the two terms and add them up. \\
+\textbf{Recap}: moderator volume, cross section, density do matter when we come to arrys of rods through Dancoff factor.
+
+
+\clearpage
 
 
 \end{document}

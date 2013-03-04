@@ -4,11 +4,9 @@
 \begin{document}
 \maketitle
 
-
 %%%%%%%%%%%%%%%%%%%%%%%%% Resonance Models Day 6 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\clearpage
-\subtopic{Observations From Two-Region PWR Pin Cell Applications}
-(FIXME) update based on Lec10. 
+\topic{Observations From Two-Region PWR Pin Cell Applications}
+(FIXME) update based on Lec10 of Spring 2012, Spring 2013. 
 \begin{enumerate}
 \item With no oxygen or zirconium: flux dips in moderator are mild because there is only elastic scattering. 
 \item Adding in Zr: Zr has massive elastic scattering resonances, hence creating fluctuations in both spectrums most noticable in energies right above the resonance energies. THe reactivity change is small (positive 560 pcm).
@@ -18,7 +16,6 @@
 \item Doppler reactivity example (FIXME): see Lec 9. It is important to generate the Dopplar coefficient when preparing cross section data. 
 \item Boron reactivity: Boron's capture cross section is almost entirely $(n,\alpha)$ cross section which produces He. Boron worth: $-16$ pcm/ppm. 
 \end{enumerate}
-
 Looking at the flux in the moderator divided by the flux in the fuel, we see that:
 \begin{itemize}
 \item Above resonance energies: fuel flux is depressed because absorption is high compared with fission; 
@@ -29,22 +26,22 @@ Looking at the flux in the moderator divided by the flux in the fuel, we see tha
 
 
 \clearpage
-\subtopic{Collision and Variance Tallies}
-Starting from the infintie medium collision model, our two-region collision model is effectively an averaged model. For instance, $P_{ff}$ include cases like going from a fuel to moderator then back into fuel again, which is why we cannot use pathlength estimator. 
+\topic{Pool's Man Continuous Energy Monte Carlo Pin Code}
+This is a simple pin cell code that treats energy dependency from Monte Carlo slowing down, and treats spatial dependency from resolving collision probabilities. Again the results generated from this model are averaged values. 
 
-We almost always tally reaction rate or flux. Then at the end of the tallying, 
+A couple of things:
+\begin{itemize}
+\item $k_{\infty}$ is the number of absorption should equal to the total number of neutrons; in our case, we are losing a small portion of neutrons to the cutoff energy; we can cheat by pushing those neutrons back up. 
+
+\item We almost always tally reaction rate or flux. Then at the end of the tallying, 
 $\kinf$ and effective cross sections can be calculated from:
 \eqn{ \kinf = \frac{\bar{\nu} \Sum \Sigma_f \phi}{\Sum \Sigma_a \phi} }
 \eqn{ \bar{\Sigma}_{xg} = \frac{\Sum \Sigma_{xg} \phi_g}{\Sum \phi_g}}
 
+\item Flux disadvantage factor: (flux of the fuel times fuel volume) / (flux of the moderator times moderator volume). 
+\end{itemize}
 
-
-\subtopic{HW4: Monte Carlo Pin Cell}
-$k_{\infty}$: the number of absorption should equal to the total number of neutrons; in our case, we are losing a small portion of neutrons to the cutoff energy; we can cheat by pushing those neutrons back up. 
-
-Flux disadvantage factor: (flux of the fuel times fuel volume) / (flux of the moderator times moderator volume). 
-
-Our Monte Carlo tools predict LWR parameters reasonable accurately,
+\textbf{Results}: our Monte Carlo tools predict LWR parameters reasonable accurately,
 \begin{enumerate}
 \item $\kinf$ has a bias of about -700pcm relative to CASMO-5;
 \item Reactivity (differential) effects are very accurate:
@@ -63,5 +60,6 @@ Our Monte Carlo tools predict LWR parameters reasonable accurately,
     \item $P_{ff}$ from rational approximation, simple Dancoff factor. 
   \end{itemize}
 \end{enumerate}
+\clearpage
 
 \end{document}
