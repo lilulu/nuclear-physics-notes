@@ -75,5 +75,41 @@ See 3.6 of Albert.
 LWR macroscopic down scattering xs is 0.22. It is insensitive to enrichment. The advantage of micro is that you can interpolate on enrichment with accuracy. 
 
 \clearpage
+\topic{Verify Bell's Curve for Slab and Cylinder Geometries} %March 13, 2013
+This lecture was given on 03/13/2013 in 22.212. 
+
+\begin{enumerate}
+\item Method of chords. See Bell \& Glasstone for more details. Method of chords is kind of like MOC over a volume. 
+
+Method of chords takes a tube that goes through the origin, and consider where the tube contact the surface of the slab, and define the polar angle as $\theta$, the azimuthal angle as $\phi$, and the normal vector to the slab surface to be $\hat{n}$. If we assume an uniform isotropic source of $S$ neutrons/$\s\cm^2$. The probability that a neutron is generated in $\dOmega$ about $\hat{\Omega}$ in volume $\dV$ is, 
+\eqn{ \frac{\dOmega}{4 \pi} \frac{\dV}{V} }
+Further consider the tube 
+
+
+
+
+Important note: in polar angle, instead of uniformally pick $\theta$, we uniformally pick $\mu = \cos \theta$. We just sample $\Delta u /$\# polar angles. In the azimuthal angle, we sample $2\pi$/\# azimuthal angles. 
+
+
+\textbf{Results}: the more polar angles and azimuthal angles we have, the better agreement we have with the Bell factor curve. 
+
+
+\item Direct 3D volume integral. We use the finite volume approach, and basically get the same integral. 
+
+\textbf{Results}: with 100 spatial mesh, 10 polar angles, 20 azimuthal angles we get good agreement. Notice the sensitivity on the number of spatial mesh: it takes 60 spatial meshes to get a close agreement. That is, the advantage of method of chords is that by doing math we remove 
+
+
+\item Monte Carlo approach. We pick random $x, \mu, \phi$, find $\tau$, find $P_{FF} = 1 - e^{-\Sigma \tau}$. 
+\end{enumerate}
+
+
+Moving to cylindrical geometry, we now have four variables and need 4 integrals: $x,y, \phi, \theta$. Sensitivities: more sensitive to the azimuthal angle in cylindrical geometry; more 
+
+
+For each pin, loop over all isotopes, interpolate the tables for two terms, and then multiply the corresponding $\beta$ or $1-\beta$ that only depends on Dancoff Factors. The pre-computed table stores RI as a function of background cross section, isotope type, energy. 
+
+
+\clearpage
+
 
 \end{document}
