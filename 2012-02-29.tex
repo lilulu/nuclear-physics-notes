@@ -7,7 +7,7 @@
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%% Resonance Models Day 4 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\topic{Analytical Flux Models: Narrow Resonance vs. Wide Resonance}
+\topic{Narrow Resonance vs. Wide Resonance Model Overview}
 %%%% 12 fall material %%%%
 Reference: Alain Hebert's Applied Reactor Physics (p.199-202, Livolant-Jeanpierre approximation), Duderstadt's p.343-347. We only use these models for unresolved energy region nowadays. 
 
@@ -45,9 +45,7 @@ Recall the slowing down equation for the resonance region of $[1\eV, 0.1 \MeV]$ 
 
 
 
-
-
-\subtopic{Livolant-Jeanpierre Approximation}
+\topic{Livolant-Jeanpierre Approximation}
 This is the approach Prof. Forget followed in his lecture on 10/04/12. We manipulate Eq.~\ref{resonance-sl-d-eqn}:
 \begin{itemize}
 \item We facterize $\Phi(u) = \phi(u) \Psi(u)$, where $\phi(u)$ is the fine structure/self-shielding factor that models the resonances, $\Psi(u)$ is the flux outside the resonance (Hebert calls it `macroscopic flux', and it represents the asymptotic behavior of flux between resonances). 
@@ -119,7 +117,7 @@ Comments:
 
 
 \clearpage
-\subtopic{Duderstadt's Formalism} 
+\topic{Duderstadt's Formalism} 
 I find Duderstadt's (p.343-345) approach to NR \& WR as a helpful alternative without using the facterization of the flux. The rest of this section (including IR, comparison with MC, CASMO IR model) comes from Prof. Smith's 22.212 Lecture 7 on 02/27/2013. 
 \begin{enumerate}
 \item NR: assume the resonance width is small compared to the average energy loss in a collision with the resonant material (since the average energy loss $\sim \frac{(1-\alpha^R)E_0}{2}$, one can expect that NR is valid for high energy): 
@@ -163,7 +161,7 @@ Compare with MC results using real U238 and U235 xs data, the real results fall 
 
 
 \clearpage
-\subtopic{Examples Using Resonance Models}
+\topic{Examples Using Resonance Models}
 Prof. Forget described how to use resonance model in one group during lecture, and the two group problem showed up in a homework assignment. To start, recall that
 \begin{itemize}
 \item Flux facterization $\Phi(u) = \phi(u) \Psi(u)$ where $\phi$ is the fine structure function, $\Psi(u)$ is the flux outside the resonance. 
@@ -238,18 +236,28 @@ Problem with this approach: cannot take into account resonance interference from
 \item Same;
 \item Same.
 \end{enumerate}
-Still we have to be careful about the assumptions we made (constant amount of U238, so would not work well with reactors with no U238). 
+Be careful about the assumptions we made: constant amount of U238. This model does not work well with reactors with no U238. 
 
-For downstream applications that require cross section data, for each resonance group,
+For downstream applications that require cross section data, we \textit{cannot} easily evaluate the pin-wise resonance fluxes over all energy points to get multi-group xs, so instead we: 
 \begin{enumerate}
 \item For each composition, evaluate the material temperature and isotopic densities. 
-\item Evaluate Dancoff from pin diameter, lattice pitch, etc. 
-\item Compute the escape cross section for each resonance absorber.
-\item Evaluate group cross section (or RI) using Dancoff, potential and escape cross sections by interpolating cross section (or RI) tables at appropriate temperatures. 
+\item Pre-build tables of cross section or $\RIeff$ as a function of potential cross section $\sigma_{pot}^F$ and temperature using NR approximation. 
+\eqn{ \RIeff &= \int_{u1}^{u2} \sigma_r^F(\mu) \frac{\sigma_{pot}^F + \sigma_e}{\sigma_r^F(u) + \sigma_{pot}^F + \sigma_e} \dmu  & \sigma_g &= \frac{\RIeff}{\ln \lp \frac{E_2}{E_1} \rp}  }
+\item Evaluate pin-wise Dancoff factor from pin diameter, lattice pitch, etc.
+\item Compute coefficients of rational expressions, e.g., Carvik's 2 term: 
+ \eqn{ \alpha_1 &= \frac{5A+6 - \sqrt{A^2 + 36A + 36}}{2(A+1)}, &\alpha_2 &= \frac{5A+6 + \sqrt{A^2 + 36A + 36}}{2(A+1)} &\beta&= \frac{\frac{4A+6}{A+1} - \alpha_1}{\alpha_2 - \alpha_1} &A&= \frac{1-C}{C} }
+\item Compute the escape cross section for \uline{each resonance absorber} from pin diameter (be careful $\sigma_e$'s unit is b/resonant atom):
+  \eqn{ \sigma_e = \frac{\Sigma_e}{N_r} = \frac{1}{l N_r} = \frac{S_f}{4 V_f N_r} = \frac{1}{2r N_r} }
+\item Compute potential xs using Intermediate Range $\lambda$'s and isotopic number densities and non-resonant multi-group cross section. FIXME.
+\item Interpolate in RI tables and add up terms to get final $\RIeff$ and multi-group xs for \uline{each resonant nuclide}: 
+\eqn{ \RIeff = \beta \int_{u1}^{u2} \sigma_r(u) \frac{\sigma_{pot}^F + \alpha_1 \sigma_e}{\sigma_r^F(u) + \sigma_{pot}^F + \alpha_1 \sigma_e} \dmu +  (1-\beta) \int_{u1}^{u2} \sigma_r(u) \frac{\sigma_{pot}^F + \alpha_2 \sigma_e}{\sigma_r^F(u) + \sigma_{pot}^F + \alpha_2 \sigma_e} \dmu }
 \end{enumerate}
 For real application, it is rarely possible to just use someone else's cross section table; we almost certainly need to generate xs suitable for our application. 
 
-
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=4.5in]{images/sl-d/generate-mg-xs.png}
+\end{figure}
 \clearpage
 
 

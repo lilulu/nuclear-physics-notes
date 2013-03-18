@@ -5,20 +5,170 @@
 \maketitle
 
 %%%%%%%%%%%%%%%%%%%%%%%%% Resonance Models Day 6 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\topic{Pool's Man Continuous Energy Monte Carlo Pin Code}
+\lecture{Intro to 2D Transport: Three Methods for Solving Pin Cell Problems}
+This section was given 03/11/2013 and 03/13/2013 in 22.212. The purpose of this section is to generate $P_{FF}$, and from there compute energy shape of flux and/or Bell factor. Basic steps: 
+\begin{enumerate}
+\item Compute $P_{FF}$. For instance, for 1D infinite slab, $P_{FF} = 1 - P_{\mathrm{escape}}$. 
+
+\item From $P_{FF}$ compute \hi{spatially averaged energy shape}: 
+\eqn{ \Aboxed{f_F(\mu) &= P_{FF} \frac{\Sigma_{pot}^F}{\Sigma_t^F} + P_{FM}}  & 
+  \Aboxed{f_M(\mu) &= P_{MM} + P_{FM} \frac{\Sigma_{pot}^F V_F}{\Sigma^M V_M} } }
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=6in]{images/pin/design-tool.png}
+  \caption{Purpose of Reactor Design Tools} \label{design-tool}
+\end{figure}
+Sensitivity: a 0.03 average error in $P_{FF}$ would lead to 3\% over-prediction in U-238 capture; consider that U-238 capture makes up 20\% LWR capture, we are looking at an keff error of: -20000 pcm times 0.03 which is -600pcm. 
+
+\item We can also compute Bell's factor/Bell function as a function of fuel pin opacity: 
+\eqn{ P_{FF} &= \frac{O_F(\mu)}{b + O_F(\mu)} & b(O) &= O_F(\mu) \lp \frac{1}{P_{FF}^{\mathrm{true}}} - 1 \rp}
+\end{enumerate}
+Before we start, notice there are multiple conventions about defining coordinate systems as illustrated in Fig.~\ref{all-coord}. We choose to use Fig.~\ref{coord-1}. 
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=4in]{images/pin/all-coord.png}
+  \caption{Different Ways to Define Coordinate Systems} \label{all-coord}
+\end{figure}
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=4in]{images/pin/coord-1.png}
+  \caption{Our Choice of Coordinate Systems and Area of Unit Surface} \label{coord-1}
+\end{figure}
+
+
+\clearpage
+\topic{Infinite Slab Transport by Methods of Chords} %March 13, 2013
+See Bell \& Glasstone for more details. Method of chords is kind of like MOC over a volume. 
+
+\textbf{Basic Concept}: Method of chords takes a tube that goes through the origin, and consider where the tube contact the surface of the slab, and define the polar angle as $\theta$, the azimuthal angle as $\phi$, and the normal vector to the slab surface to be $\hat{n}$ as in Fig.~\ref{inf-plane-1}. 
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=4in]{images/pin/inf-plane-1.png}
+  \caption{Setup of Infinite Slab Problem using Methods of Chords} \label{inf-plane-1}
+\end{figure}
+ If we assume an uniform isotropic source of $S$ neutrons/$\s\cm^2$. The probability that a neutron is generated in $\dOmega$ about $\hat{\Omega}$ in volume $\dV$ is, 
+\eqn{ \frac{\dOmega}{4 \pi} \frac{\dV}{V} }
+Notice the orientation of the tubes determined how many of them there are to represent the geometry as illustrated in Fig.~\ref{inf-plane-2}. 
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.31\linewidth]{images/pin/inf-plane-2.png}
+  \includegraphics[width=0.31\linewidth]{images/pin/inf-plane-3.png}
+  \includegraphics[width=0.31\linewidth]{images/pin/inf-plane-4.png}
+  \caption{Tube Presentation in Methods of Chords} \label{inf-plane-2}
+\end{figure}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.45\linewidth]{images/pin/inf-plane-5.png}
+  \includegraphics[width=0.45\linewidth]{images/pin/inf-plane-6.png}
+  \caption{Tube Illustrations in Methods of Chords} \label{inf-plane-3}
+\end{figure}
+
+
+
+Important note: in polar angle, instead of uniformally pick $\theta$, we uniformally pick $\mu = \cos \theta$. We just sample $\Delta u /$\# polar angles. In the azimuthal angle, we sample $2\pi$/\# azimuthal angles. 
+
+
+\textbf{Results}: the more polar angles and azimuthal angles we have, the better agreement we have with the Bell factor curve. 
+
+
+
+
+\clearpage
+\topic{Infinite Slab Transport by Direct 3D Volume Integration}
+We use the finite volume approach, and basically get the same integral. 
+
+\textbf{Results}: with 100 spatial mesh, 10 polar angles, 20 azimuthal angles we get good agreement. Notice the sensitivity on the number of spatial mesh: it takes 60 spatial meshes to get a close agreement. That is, the advantage of method of chords is that by doing math we remove 
+
+
+\clearpage
+\topic{Infinite Slab Transport by Monte Carlo}
+We pick random $x, \mu, \phi$, find $\tau$, find $P_{FF} = 1 - e^{-\Sigma \tau}$. 
+
+
+
+\clearpage
+\topic{Infinite Cylindrical Transport by Direct Numerical Volume Integration}
+Moving to cylindrical geometry, we now have four variables and need 4 integrals: $x,y, \phi, \theta$. Sensitivities: more sensitive to the azimuthal angle in cylindrical geometry; more 
+
+
+For each pin, loop over all isotopes, interpolate the tables for two terms, and then multiply the corresponding $\beta$ or $1-\beta$ that only depends on Dancoff Factors. The pre-computed table stores RI as a function of background cross section, isotope type, energy. 
+
+
+
+\clearpage
+\topic{Infinite Cylindrical Transport by Monte Carlo}
+
+\topic{Infinite Cylinder in Squre Cell Transport by Monte Carlo}
 This is a simple pin cell code that treats energy dependency from Monte Carlo slowing down, and treats spatial dependency from resolving collision probabilities. Again the results generated from this model are averaged values. 
 
-A couple of things:
-\begin{itemize}
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=4in]{images/pin/MC-pincell.png}
+  \caption{Monte Carlo Pin Cell Algorithm}
+\end{figure}
+
+\textbf{Problem Description} (HW5 from Spring 2013 22.212):
+\begin{enumerate}
+\item Spatial treatment: an one-group flux calculation (one-group volume-averaged fluxes in fuel and coolant), that is, we fix the fuel absorption xs, fuel has no scattering, and fix coolant abs xs (adjust it for different cases). The reason is that we assume the separability of flux's dependency on energy and its dependency on space. 
+
+\item Energy fine structure and a piece of the geometry treatment: Dancoff factor. We can tabulate Dancoff factors and $P_{FF}$ as a function of coolant cross sections. 
+
+\item For this model, we do not have any IR (intermediate range) $\lambda$'s and no isotropic number densities.
+
+\item Tracklength sampling:  let $f(x)$ be the probability of starting at $0$ and collide in $\dx$ about $x$, 
+\eqn{ f(x) &= \Sigma e^{-\Sigma_t x} \dx & F(x) &= \int_0^x f(x') \dx' = 1 - e^{-\Sigma_t x} }
+Then to sample a random tracklength, 
+\eqn{ x &= - \frac{\ln \xi}{\Sigma_t}}
+Notice the limits work out too: $-\ln(0) = \infty, -\ln(1) = 0$. 
+
+\item Tracklength tally: tallies estimators can be incremented as each track is generated. Every neutron that ever crosses any region would contribute to the statistics, which makes it better than analog collision type.
+
+\item Three assumptions went into this history-based statistics: central limit theorem, law of large numbers, independency. In a fixed source problem, neutrons are independent from each other, so history-based statistics are fine. 
+
+\item \hi{History-based variance estimators cannot be incremented and squared until this history ends}:
+  \eqn{ s^2 = \left( \frac{1}{N-1} \Sum_i x_i^2 \right) - \bar{x}^2} 
+  History-based standard deviation of means:
+  \eqn{ \sigma = \sqrt{\frac{s^2}{N-1}} }
+  where sample mean is calculated from, 
+  \eqn{ \bar{x} = \frac{1}{N} \Sum_i x_i }
+\item Unit cell boundary conditions: 
+  \begin{figure}[h]
+    \centering
+    \includegraphics[width=4in]{images/pin/BC1.png}
+    \caption{Pin Cell Code Boundary Conditions} \label{BC1}
+  \end{figure}
+  \begin{enumerate}
+    \item Multiple cell typically uses natural BC as illustrated in green in Fig.~\ref{BC1}. 
+    \item Reflective: illustrated in blue in Fig.~\ref{BC1}.  
+    \item Opposite face periodic BC: illustrated in yellow in Fig.~\ref{BC1}. 
+This BC is good for repeating geometries, especially checker-board repeating geometries the ABCD pattern in the left plot of Fig.~\ref{BC2}. For more specific geometries, full core periodic BC and quarter core mirrow BC are equivalent. 
+    \item `Right-hand' rotational BC: all 1st cycle PWR are octance symmetric, then we shuffle fuels, and place the depleted fuel assemblies on the axis. 
+      \begin{itemize}
+      \item Our core is not diagonally symmetric, and 1/4 core rotational symmetry introduces lots of flexibility (e.g., allows us to balance reactivity along major axes instead of placing two fresh fuels next to each other). 
+      \item Notice 1/4 mirros is not possible any more; instead we simulate 7 cells (as surrounded by the dark red lines in Fig.~\ref{BC2}), where these 7 cells can be arbitrary. 
+      \item The advantage of keeping full nodes (instead of modeling the geometry marked by `CL'on the graph, that is, keeping 1/2 node on the axis and 1/4 on the corner) is to preserve the truncation error and thus get the same results regardless of whether we are solving quadrature, quarter or full core. 
+      \end{itemize}
+  \end{enumerate}
+  \begin{figure}[h]
+    \centering
+    \includegraphics[width=0.45\textwidth]{images/pin/BC2.png}
+    \includegraphics[width=0.45\textwidth]{images/pin/BC3.png}
+    \caption{Pin Cell Code Boundary Conditions: Opposite Face Periodic and Rotational} \label{BC2}
+  \end{figure}
+
 \item $k_{\infty}$ is the number of absorption should equal to the total number of neutrons; in our case, we are losing a small portion of neutrons to the cutoff energy; we can cheat by pushing those neutrons back up. 
 
 \item We almost always tally reaction rate or flux. Then at the end of the tallying, 
 $\kinf$ and effective cross sections can be calculated from:
-\eqn{ \kinf = \frac{\bar{\nu} \Sum \Sigma_f \phi}{\Sum \Sigma_a \phi} }
-\eqn{ \bar{\Sigma}_{xg} = \frac{\Sum \Sigma_{xg} \phi_g}{\Sum \phi_g}}
+\eqn{ \kinf &= \frac{\bar{\nu} \Sum \Sigma_f \phi}{\Sum \Sigma_a \phi} &
+\bar{\Sigma}_{xg} &= \frac{\Sum \Sigma_{xg} \phi_g}{\Sum \phi_g}}
 
 \item Flux disadvantage factor: (flux of the fuel times fuel volume) / (flux of the moderator times moderator volume). 
-\end{itemize}
+
+\item For debugging purpose, test the following limits: compute single rod $P_{FF}$ for $\Sigma^F$ large and small; computed single rod and rod array $P_{FF}$ for thick pitch limit; compute rod array Dancoff factor for thick pitch limit, $\sigma_M = 0, \infty$. 
+\end{enumerate}
 
 \textbf{Results}: our Monte Carlo tools predict LWR parameters reasonable accurately,
 \begin{enumerate}
@@ -38,101 +188,20 @@ $\kinf$ and effective cross sections can be calculated from:
     \item Simplified 2-region treatment, isotropic scattering;
     \item $P_{ff}$ from rational approximation, simple Dancoff factor. 
   \end{itemize}
-\end{enumerate}
 
-
-[FIXME] New lecture: 
-\begin{enumerate}
-\item Flux depression factor in fuel does not depend on collision rates in moderator $\Sigma_m V_m$, and it does not depend on the lattice pitch. This is from the approximation that there is an uniform source in the moderator. 
-
-\item Flux depression factor in moderator depends on collision rates in the moderator and on the pitch. 
-
-\end{enumerate}
-
-See 3.6 of Albert. 
-
-LWR macroscopic down scattering xs is 0.22. It is insensitive to enrichment. The advantage of micro is that you can interpolate on enrichment with accuracy. 
-
-\textbf{Exercise}: HW5 from Spring 2013 22.212. p.6 Lec 10. Some key points of this Monte Carlo pin cell model:  
-\begin{itemize}
-\item Spatial treatment: an one-group flux calculation (one-group volume-averaged fluxes in fuel and coolant), that is, we fix the fuel absorption xs, fuel has no scattering, and fix coolant abs xs (adjust it for different cases). The reason is that we assume the separability of flux's dependency on energy and its dependency on space. 
-\item Energy fine structure and a piece of the geometry treatment: Dancoff factor. We can tabulate Dancoff factors and $P_{FF}$ as a function of coolant cross sections. 
-\item For this model, we do not have any IR (intermediate range) $\lambda$'s and no isotropic number densities.
-\item Tracklength tally: every neutron that ever crosses any region would contribute to the statistics, which makes it better than analog collision type. 
-\item Three assumptions went into this history-based statistics: central limit theorem, law of large numbers, independency. In a fixed source problem, neutrons are independent from each other, so history-based statistics are fine. 
-\item \hi{History-based variance estimators cannot be incremented and squared until this history ends}:
-  \eqn{ s^2 = \left( \frac{1}{N-1} \Sum_i x_i^2 \right) - \bar{x}^2} 
-  History-based standard deviation of means:
-  \eqn{ \sigma = \sqrt{\frac{s^2}{N-1}} }
-  where sample mean is calculated from, 
-  \eqn{ \bar{x} = \frac{1}{N} \Sum_i x_i }
-\item Unit cell boundary conditions: 
+\item Notes on flux depression factors: 
   \begin{itemize}
-    \item Multiple cell: natural BC.
-    \item Reflective. 
-    \item Opposite face periodic BC: good for repeating geometries, especially checker-board repeating geometries. Full periodic BC and quarter core mirrow BC are equivalent. 
-    \item Rotational BC: all 1st cycle PWR are octance symmetric, then we shuffle fuels. Our core is not diagonally symmetric, but if we load the core rotational symmetric, which allows us to balance reactivity along major axes instead of placing two fresh fuels next to each other. We do the simulation in 7 cells and can have any geometry. The advantage of keeping full nodes (instead of modeling 1/2 on the axis and 1/4 on the corner) is to preserve the truncation error and thus get the same results regardless of whether we are solving quadrature, quarter or full core. 
+  \item Flux depression factor in fuel does not depend on collision rates in moderator $\Sigma_m V_m$, and it does not depend on the lattice pitch. This is from the approximation that there is an uniform source in the moderator. 
+
+  \item Flux depression factor in moderator depends on collision rates in the moderator and on the pitch. 
   \end{itemize}
-\end{itemize}
-
-
-\clearpage
-\topic{Observations From Two-Region PWR Pin Cell Applications}
-(FIXME) update based on Lec10 of Spring 2012, Lec x of Spring 2013. 
-\begin{enumerate}
-\item With no oxygen or zirconium: flux dips in moderator are mild because there is only elastic scattering. 
-\item Adding in Zr: Zr has massive elastic scattering resonances, hence creating fluctuations in both spectrums most noticable in energies right above the resonance energies. THe reactivity change is small (positive 560 pcm).
-\item Adding in O: the fast flux looks distorded in both fuel and moderator, this is because the oxygen xs has werid dips in high energy xs. the reactivity change is not large (negative 680 pcm). 
-\item Removing hydrogen absorption: the spectrum shape does not change much, but the reactivity change is huge (8808 pcm), because there are so much hydrogen in the system (hydrogen xs is 1/v down to 100 keV); this is why LWR fuel has to be enriched. 
-\item Remove U238 fission: reduce reactivity by 2\% (negative -1910 pcm). Spectrum shape does not change. 
-\item Doppler reactivity example (FIXME): see Lec 9. It is important to generate the Dopplar coefficient when preparing cross section data. 
-\item Boron reactivity: Boron's capture cross section is almost entirely $(n,\alpha)$ cross section which produces He. Boron worth: $-16$ pcm/ppm. 
 \end{enumerate}
-Looking at the flux in the moderator divided by the flux in the fuel, we see that:
-\begin{itemize}
-\item Above resonance energies: fuel flux is depressed because absorption is high compared with fission; 
-\item In resonance energies: larger than 1 because of fuel spectrums dips for the resonances; especially at the interval containing 6.7 eV;
-\item Below resonance energies: the ratio is around 1, till we hit the really low energy (less than 0.1 eV), that there is a 1/E tail that the fuel flux gets depressed. 
-\end{itemize}
+Reference: 3.6 of Albert. \hi{LWR macroscopic down scattering xs is 0.22.} It is insensitive to enrichment. The advantage of micro is that you can interpolate on enrichment with accuracy. 
 
 
 
 \clearpage
-\topic{Verify Bell's Curve for Slab and Cylinder Geometries} %March 13, 2013
-This lecture was given on 03/13/2013 in 22.212. 
-
-\begin{enumerate}
-\item Method of chords. See Bell \& Glasstone for more details. Method of chords is kind of like MOC over a volume. 
-
-Method of chords takes a tube that goes through the origin, and consider where the tube contact the surface of the slab, and define the polar angle as $\theta$, the azimuthal angle as $\phi$, and the normal vector to the slab surface to be $\hat{n}$. If we assume an uniform isotropic source of $S$ neutrons/$\s\cm^2$. The probability that a neutron is generated in $\dOmega$ about $\hat{\Omega}$ in volume $\dV$ is, 
-\eqn{ \frac{\dOmega}{4 \pi} \frac{\dV}{V} }
-Further consider the tube 
-
-
-Important note: in polar angle, instead of uniformally pick $\theta$, we uniformally pick $\mu = \cos \theta$. We just sample $\Delta u /$\# polar angles. In the azimuthal angle, we sample $2\pi$/\# azimuthal angles. 
-
-
-\textbf{Results}: the more polar angles and azimuthal angles we have, the better agreement we have with the Bell factor curve. 
-
-
-\item Direct 3D volume integral. We use the finite volume approach, and basically get the same integral. 
-
-\textbf{Results}: with 100 spatial mesh, 10 polar angles, 20 azimuthal angles we get good agreement. Notice the sensitivity on the number of spatial mesh: it takes 60 spatial meshes to get a close agreement. That is, the advantage of method of chords is that by doing math we remove 
-
-
-\item Monte Carlo approach. We pick random $x, \mu, \phi$, find $\tau$, find $P_{FF} = 1 - e^{-\Sigma \tau}$. 
-\end{enumerate}
-
-
-Moving to cylindrical geometry, we now have four variables and need 4 integrals: $x,y, \phi, \theta$. Sensitivities: more sensitive to the azimuthal angle in cylindrical geometry; more 
-
-
-For each pin, loop over all isotopes, interpolate the tables for two terms, and then multiply the corresponding $\beta$ or $1-\beta$ that only depends on Dancoff Factors. The pre-computed table stores RI as a function of background cross section, isotope type, energy. 
-
-
-
-\clearpage
-\topic{Ray Tracing using Quadratic Surfaces}
+\topic{Special Topic: Ray Tracing using Quadratic Surfaces}
 \begin{enumerate}
 \item Constructive Solid Geometry(CSG): this is a common methodology used to describe 2D and 3D geometries. 2D CSG models represent primitive surfaces: planes, circles, etc. Primitives divide the universe into half-spaces. For instance, a circle divides a universe into what is inside and what is outside. Then we use union, intersection, addition, subtraction to build complex objects. 
 
