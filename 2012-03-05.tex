@@ -9,12 +9,11 @@
 \lecture{Spatial Self-Shielding: Two Region Resonant Approximations} \label{heterogeneous-geo}
 This is probably the most important topic in generating cross section in reactor physics. We want to take into account both the spatial and energy structure distributions of flux within each resonance when solving the neutron slowing down problem. 
 
-Historically we have learnt early on that we need to lump resonant materials together to get 
-
+Historically we have learnt early on that we need to lump resonant materials together to get criticality, which leads to the understanding of spatial self-shielding. More specifically, we want to produce accurate multi-group cross sections, for which the energy group width is very broad compared to any single resonance. All details of the spatial and energy structure distribution of flux within each resonance must be treated when solving the neutron slowing down problem. 
 \begin{enumerate}
 \item Assumptions for heterogeneous geometry resonant approximations:
 \begin{itemize}
-\item All neutron interactions in moderator are purely scattering;
+\item Moderator are purely scattering;
 \item Moderator scattering xs is independent of energy;
 \item The previous two points together leads to that the slowing down energy source in fuel and moderator is 1/E;
 \item Slowing down source is spatially uniform within each region. This is the case for non-resonant energy; and we can make this assumption for resonant energies is because there is no much scattering in at a resonant energy. \textit{This is the only additional assumption we are making compare with the previous section}
@@ -83,6 +82,7 @@ which is the same form as the homogeneous model, except with  different definiti
 %%%%%%%%%%%%
 
 
+\clearpage
 \topic{Wigner's Approximation of $P_{f\to f}$}
 In this section we compute numerically the fuel-to-fuel first flight collision probability $P_{f\to f}$, hence obtaining an expression for the heterogeneous energy shape of flux in fuel $\phi_f(u)$. 
 
@@ -203,16 +203,60 @@ The beauty of this method is that the formula stays the same, we just have pre-t
 \textbf{Recap}: moderator volume, cross section, density do matter when we come to arrys of rods through Dancoff factor.
 
 
-\topic{Observations From Two-Region PWR Pin Cell Applications}
-(FIXME) update based on Lec10 of Spring 2012, Lec x of Spring 2013. 
+\clearpage
+\topic{Two-Region Pin Cell Code and Observations}
+This section was covered in Lec10 of 22.211 (Spring 2012) and Lec 7 of 22.212 (Spring 2013). 
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=4in]{images/r-m/pin-cell-code.png}
+  \caption{Algorithm for a Simple Pin Cell Code with Collision Probabilities}
+\end{figure}
 \begin{enumerate}
-\item With no oxygen or zirconium: flux dips in moderator are mild because there is only elastic scattering. 
-\item Adding in Zr: Zr has massive elastic scattering resonances, hence creating fluctuations in both spectrums most noticable in energies right above the resonance energies. THe reactivity change is small (positive 560 pcm).
-\item Adding in O: the fast flux looks distorded in both fuel and moderator, this is because the oxygen xs has werid dips in high energy xs. the reactivity change is not large (negative 680 pcm). 
-\item Removing hydrogen absorption: the spectrum shape does not change much, but the reactivity change is huge (8808 pcm), because there are so much hydrogen in the system (hydrogen xs is 1/v down to 100 keV); this is why LWR fuel has to be enriched. 
-\item Remove U238 fission: reduce reactivity by 2\% (negative -1910 pcm). Spectrum shape does not change. 
-\item Doppler reactivity example (FIXME): see Lec 9. It is important to generate the Dopplar coefficient when preparing cross section data. 
-\item Boron reactivity: Boron's capture cross section is almost entirely $(n,\alpha)$ cross section which produces He. Boron worth: $-16$ pcm/ppm. 
+\item With no oxygen or zirconium: flux dips in moderator are mild because there is only elastic scattering. See Fig.~\ref{pc-1}. 
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=4in]{images/r-m/pc-1.png}
+  \includegraphics[width=4in]{images/r-m/pc-2.png}
+  \caption{Pin Cell Code Results} \label{pc-1}
+\end{figure}
+
+
+\item Adding in Zr: Zr has massive elastic scattering resonances, hence creating fluctuations in both spectrums most noticable in energies right above the resonance energies. THe reactivity change is small (positive 560 pcm). See Fig.~\ref{pc-3}. 
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=4in]{images/r-m/pc-3.png}
+  \caption{Pin Cell Code Results} \label{pc-3}
+\end{figure}
+
+\item Adding in O: the fast flux looks distorded in both fuel and moderator, this is because the oxygen xs has werid dips in high energy xs. the reactivity change is not large (negative 680 pcm).  See Fig.~\ref{pc-4}. 
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=4in]{images/r-m/pc-4.png}
+  \caption{Pin Cell Code Results} \label{pc-4}
+\end{figure}
+
+
+\item Removing hydrogen absorption: the spectrum shape does not change much, but the reactivity change is huge (8808 pcm), because there are so much hydrogen in the system (hydrogen xs is 1/v down to 100 keV); this is why LWR fuel has to be enriched. See Fig.~\ref{pc-5}. 
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=4in]{images/r-m/pc-5.png}
+  \caption{Pin Cell Code Results} \label{pc-5}
+\end{figure}
+
+
+
+\item Remove U238 fission: reduce reactivity by 2\% (negative -1910 pcm). Spectrum shape does not change. See Fig.~\ref{pc-6}. 
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=4in]{images/r-m/pc-6.png}
+  \caption{Pin Cell Code Results} \label{pc-6}
+\end{figure}
+
+\item PWR enrichment worth \hi{4.5\% $\Delta k$ per \%}. 
+
+\item Doppler reactivity example: \hi{PWR Doppler worth = -2.7 pcm/K}. It is important to generate the Dopplar coefficient when preparing cross section data. 
+
+\item Boron reactivity: Boron's capture cross section is almost entirely $(n,\alpha)$ cross section which produces He. \hi{Boron worth: $-16$ pcm/ppm}.
 \end{enumerate}
 Looking at the flux in the moderator divided by the flux in the fuel, we see that:
 \begin{itemize}
