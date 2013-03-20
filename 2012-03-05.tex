@@ -6,7 +6,7 @@
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%% Resonance Models Day 5 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\lecture{Spatial Self-Shielding: Two Region Resonant Approximations} \label{heterogeneous-geo}
+\lecture{Finite Medium Spatial Self-Shielding: Two Region Approximations} \label{heterogeneous-geo}
 This is probably the most important topic in generating cross section in reactor physics. We want to take into account both the spatial and energy structure distributions of flux within each resonance when solving the neutron slowing down problem. 
 
 Historically we have learnt early on that we need to lump resonant materials together to get criticality, which leads to the understanding of spatial self-shielding. More specifically, we want to produce accurate multi-group cross sections, for which the energy group width is very broad compared to any single resonance. All details of the spatial and energy structure distribution of flux within each resonance must be treated when solving the neutron slowing down problem. 
@@ -220,15 +220,14 @@ This section was covered in Lec10 of 22.211 (Spring 2012) and Lec 7 of 22.212 (S
   \caption{Pin Cell Code Results} \label{pc-1}
 \end{figure}
 
-
-\item Adding in Zr: Zr has massive elastic scattering resonances, hence creating fluctuations in both spectrums most noticable in energies right above the resonance energies. THe reactivity change is small (positive 560 pcm). See Fig.~\ref{pc-3}. 
+\item Adding in Zr: Zr has massive elastic scattering resonances, hence creating fluctuations in both spectrums most noticable in energies right above the resonance energies. The reactivity change is small (positive 560 pcm). See Fig.~\ref{pc-3}. 
 \begin{figure}[h]
   \centering
   \includegraphics[width=4in]{images/r-m/pc-3.png}
   \caption{Pin Cell Code Results} \label{pc-3}
 \end{figure}
 
-\item Adding in O: the fast flux looks distorded in both fuel and moderator, this is because the oxygen xs has werid dips in high energy xs. the reactivity change is not large (negative 680 pcm).  See Fig.~\ref{pc-4}. 
+\item Adding in O: the fast flux looks distorded in both fuel and moderator, this is because the oxygen xs has weird dips in high energy xs. The reactivity change is not large (negative 680 pcm).  See Fig.~\ref{pc-4}. 
 \begin{figure}[h]
   \centering
   \includegraphics[width=4in]{images/r-m/pc-4.png}
@@ -236,7 +235,7 @@ This section was covered in Lec10 of 22.211 (Spring 2012) and Lec 7 of 22.212 (S
 \end{figure}
 
 
-\item Removing hydrogen absorption: the spectrum shape does not change much, but the reactivity change is huge (8808 pcm), because there are so much hydrogen in the system (hydrogen xs is 1/v down to 100 keV); this is why LWR fuel has to be enriched. See Fig.~\ref{pc-5}. 
+\item Removing hydrogen absorption: the spectrum shape does not change much, but the reactivity change is huge (8808 pcm), because there are so much hydrogen, and that hydrogen xs is 1/v down to 100 keV. This is why LWR fuel has to be enriched. See Fig.~\ref{pc-5}. 
 \begin{figure}[h]
   \centering
   \includegraphics[width=4in]{images/r-m/pc-5.png}

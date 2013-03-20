@@ -40,19 +40,21 @@ For resonance models, we further consider,
   \eqn{ \Sigma_t^M (E) \sim \Sigma_s^M (E) = \Sigma_{po}^M }
 \end{itemize}
 
-Recall the slowing down equation for the resonance region of $[1\eV, 0.1 \MeV]$ is, 
-\eqn{ \Sigma_t (u) \Phi(u) &= \int_{u-\epsilon}^u \frac{1}{1 - \alpha} e^{-(u-u')} \Sigma_s (u') \Phi(u') \du' \label{resonance-sl-d-eqn} } 
 
 
 
+\clearpage
 \topic{Livolant-Jeanpierre Approximation}
 This is the approach Prof. Forget followed in his lecture on 10/04/12. We manipulate Eq.~\ref{resonance-sl-d-eqn}:
-\begin{itemize}
+\begin{enumerate}
+\item Recall the slowing down equation for the resonance region of $[1\eV, 0.1 \MeV]$ is, 
+\eqn{ \Sigma_t (u) \Phi(u) &= \int_{u-\epsilon}^u \frac{1}{1 - \alpha} e^{-(u-u')} \Sigma_s (u') \Phi(u') \du' \label{resonance-sl-d-eqn} } 
+
 \item We facterize $\Phi(u) = \phi(u) \Psi(u)$, where $\phi(u)$ is the fine structure/self-shielding factor that models the resonances, $\Psi(u)$ is the flux outside the resonance (Hebert calls it `macroscopic flux', and it represents the asymptotic behavior of flux between resonances). 
 
 \item For the resonant material (R) and the moderating material (M), we define the slowing down operator using the zeroth Legendre moment of the differential scattering cross section, 
-\eqn{ R^R = \int_0^{\infty} \du' \Sigma_{s0}^R(u'\to u) \phi(\mu') }
-\eqn{ R^M = \int_0^{\infty} \du' \Sigma_{s0}^M(u'\to u) \phi(\mu') }
+\eqn{ R^R &= \int_0^{\infty} \du' \Sigma_{s0}^R(u'\to u) \phi(\mu') & 
+R^M &= \int_0^{\infty} \du' \Sigma_{s0}^M(u'\to u) \phi(\mu') }
 
 \item Then the slowing down equation becomes, 
   \eqn{ (\Sigma_{t}^R (u) + \Sigma_{t}^M (u)) \Phi(u) &= \int_{u - \epsilon^R}^u \frac{ e^{-(u-u')} \Sigma_{s}^R (u') \Phi(u')}{1 - \alpha^R} \du' + \int_{u-\epsilon^M}^u \frac{e^{-(u-u')} \Sigma_{s}^M (u') \Phi(u')}{1 - \alpha^M}  \du'  }
@@ -69,19 +71,16 @@ This is the approach Prof. Forget followed in his lecture on 10/04/12. We manipu
 
 \item If we divide by $N^R$ (the resonance nuclide number density), we get 
   \eqn{ (\sigma_d + \sigma_{t}^R) \phi &= r^R \phi + \sigma_d }
-\end{itemize}
-
-
-There are a couple of ways to approximate $r^R \phi(u)$. 
+\end{enumerate}
+\uline{Ways to approximate $r^R \phi(u)$}: 
 \begin{enumerate}
 \item Wide resonance assumes that the resonances are so large that we can assume the reaction rate (for the fine structure) is constant. 
 \eqn{ r^R \phi(u) &= \int_{u-\epsilon^R}^u \frac{1}{1-\alpha^R} e^{-(u-u')} \overbrace{ \sigma_{s}^R (u') \phi(u')}^{\mathrm{constant}} \du' = \sigma_{s}^R (u) \phi(u)  }
 Then we arrive at, 
 \eqn{ \phi_{WR} (u) &= \frac{\sigma_d}{\sigma_{t}^R (u) - \sigma_{s}^R (u) + \sigma_d} = \frac{\sigma_d}{\sigma_{a}^R (u) +  \sigma_d } \label{WR-eqn} }
 \begin{align}
-\RIeff^{\gamma} &= \int \sigma_{\gamma}^R (u) \phi_{WR} (u) \du \\
-&= \int \sigma_{\gamma}^R (u) \frac{\sigma_d}{\sigma_a^R(u) + \sigma_d} \du \\
-&= \Ln{\frac{E_2}{E_1}} \frac{ \int \sigma_{\gamma}^R (E) \frac{\sigma_d}{\sigma_{a}^R(E) + \sigma_d} \frac{1}{E} \dE}{ \int \frac{\sigma_d}{\sigma_{a}^R(E) + \sigma_d} \frac{1}{E} \dE}
+\RIeff^{\gamma} &= \int \sigma_{\gamma}^R (u) \phi_{WR} (u) \du = \int \sigma_{\gamma}^R (u) \frac{\sigma_d}{\sigma_a^R(u) + \sigma_d} \du 
+= \Ln{\frac{E_2}{E_1}} \frac{ \int \sigma_{\gamma}^R (E) \frac{\sigma_d}{\sigma_{a}^R(E) + \sigma_d} \frac{1}{E} \dE}{ \int \frac{\sigma_d}{\sigma_{a}^R(E) + \sigma_d} \frac{1}{E} \dE}
 \end{align}
 Comments:
 \begin{itemize}
@@ -118,14 +117,23 @@ Comments:
 
 \clearpage
 \topic{Duderstadt's Formalism} 
-I find Duderstadt's (p.343-345) approach to NR \& WR as a helpful alternative without using the facterization of the flux. The rest of this section (including IR, comparison with MC, CASMO IR model) comes from Prof. Smith's 22.212 Lecture 7 on 02/27/2013. 
+I find Duderstadt's (p.343-345) approach to NR \& WR as a helpful alternative without using the facterization of the flux. The rest of this section (including IR, comparison with MC, CASMO IR model) comes from Prof. Smith's 22.212 Lecture 6 on 02/27/2013. Recall Eq.~\ref{resonance-model}, we split the resonant's scattering cross section into a constant potential component and an energy dependent resonance component: 
+\eqn{ [\sigma_a^R(E) + \sigma_{res}^R(E) + \sigma_{pot}^R +  \sigma_b] \phi(E) & =\int_E^{E/\alpha_R} \frac{\sigma_s^R(E')}{(1-\alpha_R)E'} \phi(E') \dE' + \frac{\sigma_b}{E} \label{res-mod} }
+
 \begin{enumerate}
 \item NR: assume the resonance width is small compared to the average energy loss in a collision with the resonant material (since the average energy loss $\sim \frac{(1-\alpha^R)E_0}{2}$, one can expect that NR is valid for high energy): 
   \eqn{ \Gamma_p \ll \overline{\Delta E}^R = \frac{1 - \alpha^R}{2} E_0  }
   Then the resonant scattering integral can be approximated by replacing $\Phi(E)$ by its asymptotic form: 
   \eqn{ \int_E^{E/\alpha^R} \dE' \frac{\Sigma_a^R(E') \Phi(E')}{(1 - \alpha^R) E'} \approx \frac{\Sigma_p^R}{1 - \alpha^R} \int_E^{E/\alpha^R} \frac{\dE'}{E'} \frac{1}{E'} = \frac{\Sigma_p^R}{E}  }
-  Then the slowing down equation is, 
+  We plug in Eq.~\ref{res-mod}, 
   \eqn{ \Sigma_t(E) \Phi(E) &= \frac{\Sigma_s^M + \Sigma_p^R}{E} & \Phi_{NR} (E) &= \frac{\Sigma_s^M + \Sigma_p^R}{\Sigma_t(E) E} }
+  Or with Prof. Smith's notation, using microscopic cross section and background cross section, 
+\eqn{ \Aboxed{ \phi(E) &= \frac{\sigma_{pot}^R + \sigma_b}{\sigma_t^R(E) + \sigma_b} \frac{1}{E} } }
+Further we can evaluate the effective RI (absorption) using NR model: 
+\eqn{ \RI = \int_{E-}^{E+} \sigma_a^R(E) \phi(E) \dE = (\sigma_{pot}^R + \sigma_b) \int_{E-}^{E+} \frac{\sigma_a^R(E)}{\sigma_t^R(E) + \sigma_b} \frac{1}{E} \dE }
+In the limit of infinite background cross sections, 
+\eqn{ \lim_{\sigma_b \to \infty} \RI = \int_{E-}^{E+} \sigma_a^R(E) \frac{1}{E} \dE}
+
 
 \item WR: assume the resonance width is wide compared to the energy loss: 
   \eqn{ \overline{\Delta E}^R = \frac{1 - \alpha^R}{2} E_0 \ll \Gamma_p \ll  \overline{\Delta E}^M }
@@ -133,17 +141,35 @@ I find Duderstadt's (p.343-345) approach to NR \& WR as a helpful alternative wi
   \eqn{ \lim_{\alpha^R \to 1} \int_E^{E/\alpha^R} \frac{\Sigma_s^R (E') \Phi(E') \dE'}{(1-\alpha^R) E'} \to \Sigma_s^R (E) \Phi(E) \lim_{\alpha^R \to 1} \int_E^{E/\alpha^R} \frac{\dE'}{1 - \alpha^R} = \Sigma_s^R (E) \Phi(E) }
   Then slowing down equation becomes, 
   \eqn{ \Sigma_t(E) \Phi(E) &= \Sigma_s^R (E) \Phi(E) + \frac{\Sigma_s^M}{E} & \Phi_{WR} &= \frac{\Sigma_s^M}{(\Sigma_t(E) - \Sigma_s^M(E))E} }
-  WR: intuitively, you cannot get in, and cannot get out, so the two sides cancel out. Once you get in, you pretty much just get absorbed. 
+  Prof. Smith introduces WR model as Narrow Resonance Infinite Mass model, that is, we approximate the resonance material as having an infinite mass, thus $\alpha^R \to 1$, thus we can evaluate the scattering integral in Eq.~\ref{res-mod}: 
+  \eqn{ &\lim_{\alpha^R \to 1} \int_E^{E/\alpha_R} \frac{\sigma_s^R(E')}{(1-\alpha_R)E'} \phi(E') \dE' = \sigma_s^R(E) \phi(E) \frac{1}{E} \frac{1}{1 - \alpha_R} \int_E^{E/\alpha_R} \dE' \\
+    &=  \sigma_s^R(E) \phi(E) \frac{1}{E} \frac{1}{1 - \alpha_R} \lp \frac{E}{\alpha} - E \rp = \sigma_s^R(E) \phi(E) \frac{1}{E} \frac{1}{1 - \alpha_R} E \lp \frac{1-\alpha}{\alpha} - E \rp \approx \sigma_s^R(E) \phi(E)}
+Then our balance equation becomes, 
+\eqn{ [\sigma_a^R (E) + \sigma_b] \phi(E) &= \frac{\sigma_b}{E} & \phi(E) &= \frac{1}{E} \frac{\sigma_b}{\sigma_a^R(E) + \sigma_b} }
+\hi{WR: intuitively, you cannot get in, and cannot get out, so the two sides cancel out. Once you get in, you pretty much just get absorbed.}
 
 \item IR/Goldstein-Cohen Model: since isotopes are going to be somewhere between the two extremes, we consider a linear combination of $\psi_{NR}, \psi_{WR}$, 
 \eqn{ \phi_{GC} (u) = \frac{\lambda_g \sigma_{po} + \sigma_d}{\sigma_{to}(u) - (1-\lambda_g) \sigma_{so}(u) + \sigma_d } }
 where $\lambda_g$ depends on isotope and energy band. When $\lambda_g = 1$ we get the $\psi_{NR}$, $\lambda_g = 0$ we get the $\psi_{WR}$. Alternatively, we can discretize our energy group very finely, then we would not need any resonance models.
 
-\item CASMO Intermediate Resonance Model: assume fixed temperature (900 K) and something else. FIXME. 
+\item CASMO Intermediate Resonance Model: assume fixed temperature (900 K), assume fixed background cross sections (either 30b or 60b), 
+  \eqn{1 - \lambda_g(M) &= \frac{I_g(T=900K, \sigma_b = 60b) - I_g(T=900K, \sigma_b = 30b, \sigma_X  = 30b)}{I_g(T=900K, \sigma_b = 60b) - I_g(T=900K, \sigma_b = 30b)} }
+where $\lambda_g$ is the IR parameter, $X$ represents the isotope of atomic mass $M$, and $\sigma_X$ is the contribution of isotope $X$ to the background cross section. The numerator of the above equation corresponds to the effect of 30 barn of hydrogen to the resonance integral. The denominator correponds to the effect of 30 barn of isotope $X$ to the resonance integral. Therefore the above $\lambda_g$ can be interpreted as the \hi{effectiveness of isotope $X$ in terms of neutron slowing down capability relative to hydrogen}. Hence $\lambda_g$ is called \textbf{the hydrogen-equivalence parameter}. Actual IR model parameters $\lambda_g$ in CASMO: 
+\begin{itemize}
+\item Are based on 30 and 60 barn calculations with Monte Carlo. 
+\item Are tabulated for each mass of scatter ($\alpha$ dependence). 
+\item Are tabulated for each actinide. 
+\item Are tabulated for each resonance group (41 groups in CASMO). 
+\end{itemize}
+\hi{$\lambda_g$ does not depend on temperature nor background cross section.}
 \end{enumerate}
-\textbf{Compare with MC}\label{narrow-wide-compr}: As in Figure~\ref{wide-vs-narrow}, WR agrees pretty well with MC results without U238 potential scattering; NR agrees alright with the MC results with U238 potential scattering. Notice adding in scattering would change the low dilution factor results.
+\textbf{Compare with MC}\label{narrow-wide-compr}: 
+\begin{enumerate}
+\item \hi{WR over-estimate absorption, NR under-estimate absorption, IR is the best, but $\lambda$ is energy dependent.} 
 
-Compare with MC results using real U238 and U235 xs data, the real results fall between the wide and the narrow approximations for the high dilution factor; but for the low dilution factor, that is, when there are lots of resonance material (uranium), the physics gets complicated: 
+\item As in Figure~\ref{wide-vs-narrow}, WR agrees pretty well with MC results without U238 potential scattering; NR agrees alright with the MC results with U238 potential scattering. Notice adding in scattering would change the low dilution factor results.
+
+\item Compare with MC results using real U238 and U235 xs data, the real results fall between the wide and the narrow approximations for the high dilution factor; but for the low dilution factor, that is, when there are lots of resonance material (uranium), the physics gets complicated: 
 \begin{itemize}
 \item Non 1/E slowing down sources;
 \item Non constant moderator xs;
@@ -156,8 +182,8 @@ Compare with MC results using real U238 and U235 xs data, the real results fall 
   \includegraphics[width=5in]{images/r-m/narrow-vs-wide-resonance.png}
   \caption{Comparison Of Wide and Narrow Resonance Approximation} \label{wide-vs-narrow}
 \end{figure}
-\textbf{Helstrand Resonance Integral Measurements} (for isolated rod): LWR has a radius of 0.4 to 0.5cm, but a lattice of pins can be approximated with fatter isolated pins. So CASMO-5 results are about 2\% different from Helstrand RI measurements, which is equivalent to about 1\% difference in Doppler coefficients. 
-
+\item \textbf{Helstrand Resonance Integral Measurements} (for isolated rod): LWR has a radius of 0.4 to 0.5cm, but a lattice of pins can be approximated with fatter isolated pins. So CASMO-5 results are about 2\% different from Helstrand RI measurements, which is equivalent to about 1\% difference in Doppler coefficients. 
+\end{enumerate}
 
 
 \clearpage
