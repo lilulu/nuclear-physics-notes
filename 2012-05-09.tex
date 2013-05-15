@@ -7,6 +7,8 @@
 \lecture{Reconstruction/De-homogenization Methods} \label{de-homogenization}
 In this lecture we consider given a homogenized solution, how to we re-construct the heterogeneous solution. Three references: Scott Palmtag's MIT PhD thesis `Advanced Nodal Methods for MOX Fuel Analysis' for good detailed math, Ken Rempse' NSE paper `SIMULATE-3 Pin Power Reconstruction: Methology and Benchmarking,' Qunlei Jiang's NCS MS thesis for detailed plots of complex terms `Intra-nodal Study for the Mixed LEU-MOX Cores.' 
 
+
+
 \topic{Superposition Assumptions}
 Basically we assume that the detailed flux distribution can be approximated by superposition of homogeneous nodal fluxes and lattice fluxes. That is, 
 \eqn{ \phi_g^{het} (x,y) &= \phi_g^{hom}(x,y) \phi_g^{SA} (x,y) }
@@ -24,6 +26,9 @@ Consequently, most often powers are reconstructed be approximated by a superposi
 where
 \eqn{ P^{hom} (x,y) = \Sigma_{f1}^{hom} (x,y) \phi_1^{hom} (x,y) + \Sigma_{f2}^{hom} (x,y) \phi_2^{hom} (x,y) }
 For detailed pin power reconstruction, one needs 2D $(x,y)$ shapes of fluxes -- which are not directly available. Nodal methods only provide flux shape information for the 1D shape in each direction. Cross section shapes are also only 1D averages. 
+
+
+FIXME: If we want to do pin power reconstruction in our current frame-work, we need to store four form functions, two for flux and two for cross sections. Also be careful about fission rates, power and heat conducted. 
 
 
 \clearpage

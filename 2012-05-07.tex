@@ -129,6 +129,43 @@ Other applications of homogenization theory:
 \item Nonlinear acceleration of Monte Carlo. 
 \end{itemize}
 
+
+
+\clearpage
+\topic{Example}
+\begin{itemize}
+\item Fast flux peaks in fuel; thermal flux peaks in moderator. 
+\item Energy-in on every term, energ-out for the terms on the RHS. Working with $\Sigma_a$ be careful about the (n,2n) reactions. That is, 
+\eqn{ \Sigma_t &= \Sigma_s + \Sigma_a + \Sigma_{n,2n} + \Sigma_{n,3n} + \cdots  & \nu_s \Sigma_s = \Sigma_s + 2 \Sigma_{n,2n} + 3 \Sigma_{n,3n} + \cdots }
+\item Loop over all the surfaces, solve a fixed-source diffusion equation for each region (that is, given the current on the boundary, we can solve each region separately). To get an accurate solution, we need to control $D$. 
+\item If we use the heterogeneous reference solution divided by single assembly (SA) solution, we get sort of like the reference energy shape. It is almost the same as what we get out of the diffusion theory, except at the interface, which has two reasons: 1) diffusion coefficient is off in diffusion theory; 2) we assume we can separate form function and background behavior. 
+\item Full core diffusion eigenvalue solver: we need to preserve both leakage rate (DFs) as well as reaction rates (XSs). 
+\item Apply DFs to spatial discretization method: puts $f$ terms in there. Only the ratio matters. $f$'s are different for the two surfaces of the same node. 
+\item Diffusion coefficient: spatial first then energy to treat spatial void. 
+  \begin{enumerate}
+    \item Spatial: we first do calculate resolve the spatial dependency of diffusion coefficient, if there is a void, we average out the diffusion coefficient.
+    \item Energy: then we resolve the energy dependency by performing $\displaystyle \frac{\int \frac{1}{3\Sigma_{tr}} \phi}{\int \phi}$. In Monte Carlo, we cannot really perform this in fine energy space, because for materials like hydrogen we quickly run into $\Sigma_{tr} \to 0$ for hydrogens. Instead, we do a two-step process: 
+      \begin{itemize}
+        \item First flux collapse $\Sigma_{tr}$, get an approximate of $D_g$ in fine groups. 
+        \item Then flux collapse $D_g$ for few groups.
+      \end{itemize}
+  \end{enumerate}
+
+\item It is not important for preserving $\keff$ what diffusion coefficient you use. Because $\keff$ only captures the average behavior as it is integrated over all space. 
+
+\item Reconstruction: need to re-normalize the convolution flux, because the integral of the product is not the same as the product of the integrals. 
+
+\item Subtle point: net down-scattering can be more accurate for certain single assembly calculation. 
+
+\item Recap: this DF is the physical DF that preserves the leakage in assembly calculation; whereas as the $\tilde{D}$ that we talked about before is a pure mathematical concept that we come up with to do non-linear iteration to preserve physics between the high-order and low-order calculation. We need both to get it right. For instance, the $f$ terms going into computing $\hat{D}$ terms to force our low order finite difference model to match the higher order model. CMFD is effectively the physics MG. 
+
+\item On-the fly Re-homogenization: can generate the integrated form functions ahead of the time, and construct the higher-order correction terms on the fly onece we resolve the coefficients on each basis. 
+
+\item Exact homogenization parameters depend on reference solution (which we do not have), and depend on details of the nodal spatial model slightly. Homogenization for transport methods is not as simple as for diffusion methods, because now we have to have DFs for the higher moments as well. Noweverday everyone uses AXS/ADF (assembly cross section and assembly discontinuity factors) in production tools. The advantage of the ADFs are that they are almost free as they are just edits; we do need to tally them as functions of temperature, etc. 
+\end{itemize}
+
+
+
 \clearpage
 \topic{Summary of Homogenization Theories}
 Homogenization theories:
