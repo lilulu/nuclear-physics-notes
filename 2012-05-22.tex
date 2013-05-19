@@ -239,95 +239,7 @@ Then manipulating PKEs, we can get $\rho(t)$ in terms of $T(t), C(t)$,
   \item Problem with our neutronics model: not accurate for large spatial flux changes. Problem with our TH model: very huge diffusive property, would not predict any thermal shock behavior. 
 \end{enumerate}
 
-%%%%%%%%%%%%%%%%%% Nodal %%%%%%%%%%%%%%%%%%%%
-\clearpage
-\topic{Homogenization \& Dehomogenization} 
-Nodal methods\footnote{weighted residual is not on the final}. The point of Nodal methods is that we can achieve high accuracy with large node size (compared with finite difference methods). We turn a 3D PDE into 3 1D ODE that are coupled through averaged transverse leakage terms. 
-    \begin{align*}
-      \boxed{ - \Sigma_{Dg}^x \frac{\derivative^2}{\dxi_x^2} \bar{\psi}_{gx} (\xi_x) + \Sigma_{rg} \bar{\psi}_{gx} (\xi_x) = \frac{1}{\keff} \chi_g \Sum_{g'=1}^G \nu \Sigma_{fg'} \bar{\psi}_{g'x} (\xi_x) + \Sum_{g'=1}^G \Sigma_{sg'g} \bar{\psi}_{g'x} (\xi_x) - L_{gy} (\xi_x) - L_{gz} (\xi_x) }    \\
-   \boxed{ - \Sigma_{Dg}^y \frac{\derivative^2}{\dxi_y^2} \bar{\psi}_{gy} (\xi_y) + \Sigma_{rg} \bar{\psi}_{gy} (\xi_y) = \frac{1}{\keff} \chi_g \Sum_{g'=1}^G \nu \Sigma_{fg'} \bar{\psi}_{g'y} (\xi_y) + \Sum_{g'=1}^G \Sigma_{sg'g} \bar{\psi}_{g'y} (\xi_y) - L_{gz} (\xi_y) - L_{gx} (\xi_y) }  \\
-     \boxed{ - \Sigma_{Dg}^z \frac{\derivative^2}{\dxi_z^2} \bar{\psi}_{gz} (\xi_z) + \Sigma_{rg} \bar{\psi}_{gz} (\xi_z) = \frac{1}{\keff} \chi_g \Sum_{g'=1}^G \nu \Sigma_{fg'} \bar{\psi}_{g'z} (\xi_z) + \Sum_{g'=1}^G \Sigma_{sg'g} \bar{\psi}_{g'z} (\xi_z) - L_{gx} (\xi_z) - L_{gy} (\xi_z) } 
-    \end{align*}
-  \begin{enumerate}
-    \item NEM: expand $\bar{\psi}(\xi)$ by 4th order polynomial, 
-          \eqn{ \bar{\psi}(\xi) = \Sum_{i=0}^4 a_i P_i (\xi) }
 
-    \item Analytical: we solve 1D 2-group transerse-integrated diffusion equation, 
-      \begin{align}
-      -D_1 \frac{\derivative^2 \psi_1(x)}{\dx^2} + \Sigma_{r1} \psi_1(x) - \frac{1}{\keff} (\nu \Sigma_{f1} \psi_1 (x) + \nu \Sigma_{f2} \psi_2 (x) ) &= - L_1(x) \notag \\
-      -D_2 \frac{\derivative^2 \psi_2(x)}{\dx^2} + \Sigma_{r2} \psi_2(x) - \Sigma_{12} \psi_1 (x) &= - L_2 (x)  \label{ANM-1}
-    \end{align}
-      We assume the solution is in the form of, 
-      \eqn{ \psi_g (x) &= \hat{\psi}_g^H e^{iBx} + \psi_g^P(x) }
-      such that $\dpsidxn2 = - B^2$. Plug in Eq.~\ref{ANM-1}, we get a system of two equations $[A] [\hat{\psi}^H] = 0$. For non-trival solution, we set det$[A] = 0$, thus getting a quadratic equation of $B^2$ that we can find the harmonic mode to be, 
-      \eqn{ B_1^2&= b\left(-1 + \sqrt{1 - \frac{c}{b^2}} \right) = \left\{ \begin{array}{cc} > 0 & \kinf > \keff \\ < 0 & \kinf < \keff \end{array} \right. }
-      and the harmonic mode to be, 
-      \eqn{ B_2^2&=b\left(-1 - \sqrt{1 - \frac{c}{b^2}} \right) <0 }
-      We need both modes because $B_1^2$ and $B_2^2$ are different. In this case fast group uses fundamental mode, thermal group uses harmonic mode, thus the solution is, 
-      \eqn{ \left[ \begin{array}{c} \psi_1^H(x) \\ \psi_2^H (x) \end{array} \right] = \left[ \begin{array}{c} a_{11} \sin(B_1 x) + a_{12} \cos (B_1 x) \\ a_{21} \sinh(B_2 x) + a_{22} \cosh(B_2 x) \end{array} \right] =  \left[ \begin{array}{cc} r_1 & r_2 \\ 1 & 1 \end{array} \right] \left[ \begin{array}{c} a_{21} \sin(B_1 x) + a_{22} \cos (B_1 x) \\ a_{23} \sinh(B_2 x) + a_{24} \cosh(B_2 x) \end{array} \right] }
-     where the fast-to-thermal flux ratio is defined as,
-     \eqn{ r_m &= \frac{a_{11}}{a_{21}} = \frac{a_{12}}{a_{22}} = \frac{D_2 B_m^2 + \Sigma_{r2}}{\Sigma_{12}} }
-     We know the particular solution from the $L$ terms. 
-
-    \item SAMN: uses NEM for fast group, transverse integrated 1D diffusion equation for the thermal group. Approximate source with 4th order Legendre polynomial. Analytical solution of the thermal group is, 
-      \eqn{ \psi_g(x) &= A \sinh(\kappa_g x) + B \cosh(\kappa_g x) + \Sum_{i=0}^4 c_i P_i \left(\frac{2x}{h}\right), &\kappa_g&=\sqrt{\frac{\Sigma_g}{D_g}} }
-      That is, we have exponential homogeneous and polynomial particular solutions. 
-  \end{enumerate}
-
-\begin{enumerate}
-\item Transverse-integration procedure
-  \begin{enumerate}
-    \item 3D to coupled 1D: we pick a direction of interest, perform integration within node over the plane normal to that direction, then devide by the planar area. For instance, the transverse leakage term is, 
-          \eqn{ L_{gu}(\xi_x) &= \frac{1}{h_u} \left( \bar{J}_{gur}(\xi_x) - \bar{J}_{gul}(\xi_x) \right), & u &= y,z }
-          where the line-averaged surface current is, 
-          \eqn{ \bar{J}_{yr} (\xi_x) &= \int_0^1 J_y(\xi_x, 1, \xi_z) \dxi_z, &\bar{J}_{yl}(\xi_x) &= \int_0^1 J_y(\xi_x, 0, \xi_z) \dxi_z }
-          \eqn{ \bar{J}_{zr} (\xi_x) &= \int_0^1 J_z(\xi_x, \xi_y, 1) \dxi_y, &\bar{J}_{zl}(\xi_x) &= \int_0^1 J_z(\xi_x, \xi_y,  0) \dxi_y }
-          Flux distribution is not sensitive to transverse leakage shape, so we approximate transverse leakage with quadratic shape (2nd order polynomial): 
-          \eqn{ L(\xi) = \bar{L} + l_1 P_1(\xi) + l_2 P_2(\xi) }
-          and then use average TL conservation scheme to determine $l_1, l_2$. 
-          
-    \item Weighted residuals: in NEM, we have for each energy group 16 unknowns and 8 knowns, the rest 8 comes from weighted residual method: 
-    \eqn{ \int_0^1 w(\xi) \left( -\Sigma_D \frac{\derivative}{\dxi^2} \psi(\xi) + \Sigma_r \psi(\xi) \right) \dxi = \int_0^1 w(\xi) \left( \frac{1}{\keff} \chi \psi(\xi) + S(\xi) - L(\xi) \right) \dxi }
-    The closure relationship basically forces the $P_1, P_2$ integration to go to zero: 
-    \eqn{ \int_0^1 P_1(\xi) \left( - \Sigma_D \frac{\derivative}{\dxi^2} \psi(\xi) + \Sigma_r \psi(\xi) - Q(\xi) \right) \dxi &= 0, & a_3 &= \frac{5 q_1 + 3 q_3 - 5 a_1 \Sigma_r}{3(60 \Sigma_D + \Sigma_r)} }
-    \eqn{ \int_0^1 P_2(\xi) \left( - \Sigma_D \frac{\derivative}{\dxi^2} \psi(\xi) + \Sigma_r \psi(\xi) - Q(\xi) \right) \dxi &= 0, & a_4 &= \frac{-7 q_2 + 3 q_4 + 7 a_2 \Sigma_r}{420(\Sigma_D + 3\Sigma_r)} } 
-  \end{enumerate}
-
-
-%%%%%%%%%%%%%%%%%%% Homogenenization methods %%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Homogenization methods
-  \begin{enumerate}
-    \item \textbf{Discontinuity factors}: since the homogenized flux distribution in each node is affected by $D$, and the choice of the flux weighted $D$ is somewhat arbitrary, the interface fluxes can be different. We define DF: 
-      \eqn{ f_{gi,j}^{u-} &= \frac{\phi_{gi,j}^u (u_l)}{\hat{\phi}_{gi,j}^u (u_l)}, &f_{gi,j}^{u+} &= \frac{\phi_{gi,j}^u (u_{l+1})}{\hat{\phi}_{gi,j}^u (u_{l+1})} }
-      ADFs are the homogeneous analogy to the heterogeneous assembly calculation (which is calculating a single-node problem with zero net current BC). ADFs are simply ratios of the surface-averaged fluxes to the cell-averaged fluxes in the heterogeneous assembly calculation.
-
-    \item Reflector modeling: 
-      \begin{itemize}
-      \item Using empiracal albedos to replace the baffle and reflector is bad because using flux-volume weighted cross section distribute the strong absorption xs over the entire region. 
-      \item We use DFs because they are less spatially sensitive than albedos. It is advantagous in that DFs are chosen so that the nodal model wouold reproduce the net currents at the core/baffle interface and the net reaction rates in both the assembly and the homogenized baffle without explicitly representing the baffle. 
-      \item Fast neutron leakage makes up for 90\% of all leakage, so leakage is insensitive to enrichment, burnup etc. 
-      \end{itemize}
-  \end{enumerate}
-
-\item Pin power reconstruction
-  \begin{enumerate}
-    \item Form functions: we multiple homogeneous solution by the form function to get the heterogeneous solution. 
-      \eqn{ \phi_g^{het} (x,y) &= \phi_g^{hom}(x,y) \phi_g^{SA} (x,y) }
-
-    \item Corner point discontinuity factors. 
-      \begin{itemize}
-      \item Corner point fluxes are approximated by assuming that intra-nodal flux distributions are separable: 
-        \eqn{ \phi_{g,i,j}(x,y) = \frac{\phi_{g,i,j} (x) \phi_{g,i,j} (y)}{\bar{\phi}_{g,i,j}} }
-      \item Heterogeneous corner point flux has to be continuous. Thus we need corner point ratios that are analogous to DFs that can be obtained from the lattice calculations. 
-      \item In general, the corner-point fluxes are determined by averaging the four estimates of the heterogeneous corner-point flux, 
-        \eqn{ \phi_g^{het,cp} &= \frac{1}{4} \left[ \phi_{g,i,j}^{hom,cp} \phi_{g,i,j}^{fct,cp} + \phi_{g,i+1,j}^{hom,cp} \phi_{g,i+1,j}^{fct,cp} + \phi_{g,i,j+1}^{hom,cp} \phi_{g,i,j+1}^{fct,cp} + \phi_{g,i+1,j+1}^{hom,cp} \phi_{g,i+1,j+1}^{fct,cp} \right] }
-      \item In order to satisfy the continuity conditions of reconstructed fluxes, the best-estimate homogeneous corner-point fluxes for each node are computed by, 
-        \eqn{ \hat{\phi}_{g,i,j}^{hom,cp} = \frac{\phi_g^{het,cp}}{\phi_{g,i,j}^{fct,cp}} }
-      \item  The reconstructed corner point fluxes are then continuous. \textbf{CP ratio is the corner point analogue of ADF for assembly edges.}
-      \end{itemize}
-  \end{enumerate}
-  Side note: there are two entirely different problems. One is an eigenvalue problem, using homogenized cross section, and output $k$, and the flux computed would be continuous. The other is a fixed-source problem, using $\keff$ as input (hence $J$ at interface), and generate discontinuous flux. 
-\end{enumerate}
 
 %%%%%%%%%%%%%%%%%%% Perturbation Theory %%%%%%%%%%%%%%%%%%%%%%%%%%
 \clearpage
@@ -442,5 +354,6 @@ Notice the fast-to-thermal adjoint flux ratio can be solved from either equation
 
 \end{enumerate}
 %%%%%%%%%%%%%%%%%%%%%%%%% Final Exam End %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\clearpage
 
 \end{document}

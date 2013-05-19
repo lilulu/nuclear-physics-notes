@@ -5,11 +5,12 @@
 \maketitle
 
 \lecture{Nodal Diffusion Methods} \label{nodal-methods}
-The motivation is that we want a method that lives on coarse mesh. Using CMFD on a reactor application would yield somewhere between 5-10\% error. 
-
+There has not been a single LWR core that was solved using discrete transport. As we will see later, the number of core hours needed to solve a LWR using discrete transport is approximately 100,000 core hours, whereas pin-by-pin diffusion with homogenized pin cells reduce the core hours by \uline{a factor of 100,000}.
 
 \topic{3D Core Analysis Overview}
-Reference: \href{www.oecd-nea.org/dbprog/documents/MC03Smith.pdf}{`Reactor Core Methods' by Smith, MC 2003}. 
+Reference: \href{www.oecd-nea.org/dbprog/documents/MC03Smith.pdf}{`Reactor Core Methods' by Smith, MC 2003}.
+
+\subtopic{Challenges} 
 There are a couple levels of complexity for performing 3D core analysis,
 \begin{itemize}
 \item One reactor at one state point: couple core neutronics/fuel heat conduction/coolant hydraulics/structural mechanics for 60,000 fuel pins and 100 axial levels to evaluate thermal margins;
@@ -33,13 +34,17 @@ The challenges for 3D core calculation include,
   \caption{3D Core Calculation Samples} \label{3Dcore}
 \end{figure}
 
-Approaches to 3D core problems:
+\subtopic{Approaches to 3D core Problems}
 \begin{enumerate}
-\item S$_N$ Method: computational time problem. We are looking at 100 mesh per pin, 60,000 pins per core, 100 axial mesh, 100 energy groups, 1000 angles, that's about $6 \times 10^{13}$ unknowns. So even with perfect scaling, we are looking at 100,000 core hours for a full core, not to mention feedback, cross section evaluations, boron and control rod searches to critical, etc. Hence S$_N$ has never been done for a single LWR core. 
+\item  Discrete Transport: the number of meshes we need is approximately
+\eqn{ 100 \frac{\mathrm{mesh}}{\mathrm{pin}} \times 300 \frac{\mathrm{pins}}{\mathrm{assembly}} \times 200 \frac{\mathrm{assemblies}}{\mathrm{core}}\times 100 \mbox{ axial mesh}\times 100 \mbox{ energy groups}\times 1000 \mbox{ angles} = 6 \times 10^{13} }
+The best parallel transport grind time currently comes from Texas A\&M PDT code is 300 nanosecond/unknown. On top of that, assume we perform 20 fission source iterations, we are looking at \uline{100,000 core hours}. Not to mension that we have no inlcude thermal-hydraulic feedback, cross section evaluations, boron search to criticality, equilibrium xenon, and control rod search to criticality. 
 
-\item Pin-by-pin diffusion with homogenized pin cells: accuracy problem. There are only $6 \times 10^8$ unknowns, because we only have 1 mesh per pin instead of 100, and 1 angle instead of 1000. It brings the computing time down to 1 hour, but pin homogenization causes a loss of accuracy around strong absorbers. This is now a tractable problem, but not used for production.
+\item Pin-by-pin diffusion with homogenized pin cells: the number of meshes we need is approximately 
+\eqn{ 1 \frac{\mathrm{mesh}}{\mathrm{pin}}\times 300 \frac{\mathrm{pins}}{\mathrm{assembly}}\times 200 \frac{\mathrm{assemblies}}{\mathrm{core}}\times 100 \mbox{ axial mesh} 100 \times\mbox{ energy groups}\times 1 \mbox{ angles} = 6 \times 10^{8} }
+Thus we reduce the core hours from 100,000 to 1 core hour. The drawback is that pin homogenization causes a loss of accuracy around strong absorbers. This is now a tractable problem, but not used for production.
 
-\item Nodal method: this is what production codes typically use. There is a huge push towards nodal method, because nodal methods take a mesh size of 20cm to be accurate, whereas Finite Difference method requires a mesh size of about 1 cm. 
+\item Nodal method: this is what production codes typically use. There is a huge push towards nodal method, because nodal methods take a mesh size of 20cm to be accurate, whereas Finite Difference method requires a mesh size of about 1 cm. In terms of the amount of errors, using CMFD on a reactor application would yield somewhere between 5-10\% error. 
 \end{enumerate}
 
 \textbf{Multilevel Approach} for LWRs (the reason we emphasize this approach is for LWRs is because the spatial mesh should agree with mean free path which depends on energies):
@@ -59,62 +64,77 @@ Approaches to 3D core problems:
 
 \item Solve nodal diffusion (3D diffusion equation with few energy groups). 
 \end{enumerate}
-
-For fast reactors, we solve a lattice with 10,000 groups and go straight to diffusion (with 30-40 energy groups) because the mean free path is too long. 
+For fast reactors, we solve a lattice with 10,000 groups and go straight to diffusion (with 30-40 energy groups) because the mean free path is so long. 
 
 
 \clearpage
-\topic{PWR Methods}
+\subtopic{PWR Methods: A Historical Review}
 \begin{enumerate}
-\item 60s-70s:
+\item Early 60s, core analysis were done using 2D/1D finite diffusion calculation. For steady state,
   \begin{enumerate}
-  \item Pin-cell cross section generation:
-  \item Radial: generate F-xy peaking (axial plane peaking). 
-  \item Axial: generate A-O (axiao offset). 
-  \item Transient: 
+  \item Pin-cell cross section generation (e.g.: Westinghouse's Leopard), uses supercell for absorbers (absorber/fuel buffer pin-cell). 
+  \item Radial shape generatoin (e.g., PDQ/HARMONY): generate 2-group homogenized pin cell F-xy peaking (axial plane peaking) using finite difference diffusion with no feedback 
+  \item Axial: generate A-O (axial offset) and $F(z)$ axial shape using 2 group 1D axial finite difference diffusion. 
   \end{enumerate}
-  
-\item Users want direct 3D computations, thus we do 3D steady-state multigroup neutron diffusion equation. 
+  Transient analysis: 0D point kinetics with feedback, 1D axial 2 group, finite difference diffusion with feedback, then we superimpose the steady state radial peaking to get the 3D peaking: $F(z) \times$ F-xy. 
+
+\item Mid-60s: users want direct 3D computations, thus we do 3D steady-state multigroup neutron diffusion equation. 
   \begin{enumerate}
-  \item Mesh spacing: instead of $<$ 1cm mesh that finite difference solution needs, we want mesh spacing on the order of 20 cm. 
-  \item FLARE BWR Nodal model (1964): one energy group, a source in node $p$ is related to itself and its neghboring node ($q$). There is not much physics in this model, because the coefficients are derived assuming two infinite half planes. 
-  \item 70s-80s advanced nodal diffusion methods have the following goals:
-    \begin{itemize}
-    \item Directly represent baffle/reflector, instead of like previous codes that just use screw-driver to account for the albedos; 
-    \item No user-adjusted parameters, should be all physics; 
-    \item Recover individual pin powers; 
-    \item etc. 
-    \end{itemize}
-
-  \item 70s-80s MIT:     
-    \begin{itemize}
-    \item Prof. Kent Hansen was working on FEM (finite element method), which turned out to be limited because the methods are more complex compared with nodal methods. 
-    \end{itemize}
-
-  \item Modern adnvace nodal codes: there are numerous of them, and they should all be the same. 
+  \item Mesh spacing: needs $< 1\cm$ to be accurate. 
+  \item FLARE BWR Nodal model (1964): one energy group, a source in node $p$ is related to itself and its six neighboring node $q$: 
+    \eqn{ S^p = \frac{\kinf^p}{\lambda} (w_{pp} S^p + \Sum_{q=1}^6 w_{qp} S^q ) }
+    where the migration coefficients $M_p^2 = \frac{D_p}{\Sigma_p}$, $g$ is an adjustable parameter, and the coupling coefficients are $\displaystyle w_{pq} = (1-g) \frac{\sqrt{M_p^2}}{2h} + g \frac{M_p^2}{h^2}, w_pp = 1 - \Sum_{q=1^6} w_{pq}$. 
+    There is not much physics in this model, because the coefficients are derived assuming two infinite half planes. 
   \end{enumerate}
 
+  \item 70s-80s advanced nodal diffusion methods. 
+    \begin{enumerate}
+    \item Goals: 
+      \begin{itemize}
+      \item Directly represent baffle/reflector, instead of like previous codes that just use screw-driver to account for the albedos; 
+      \item No user-adjusted parameters, should be all physics; 
+      \item Full 3D thermal-hydraulic feedback by assemblies;
+      \item Recover individual pin powers; 
+      \end{itemize}
 
+    \item In Germany: KWU became Siemens who became Areva, and they have two version of the nodal diffusion method: 
+      \begin{itemize}
+        \item NEM: Wagner, Koebke, Winter et. al. 
+        \item CUBOX/QUABOX: Finnemann. 
+      \end{itemize}
+
+    \item At MIT:     
+      \begin{itemize}
+      \item Prof. Kent Hansen was working on FEM (finite element method), which turned out to be limited because the methods are more complex compared with nodal methods. 
+      \item Prof. Allan Henry's group did ANM-1D analytic, NEM variants, ANM-FLT, and QUANDRY. 
+      \end{itemize}
+
+    \item At University of Illinois, Prof. Jack Dorning's group has NGFM. 
+    \end{enumerate}
+
+  \item Modern advance nodal codes: there are numerous of them, and they should all be the same. Specific code names are listed in Lec 19 in 22.212. 
 \end{enumerate}
 
 
 \clearpage
-\topic{Derivation of Nodal Methods}
-Reference: Sutton and Aviles' `Diffusion Theory Methods for Spatial Kinetics Calculations' (1996). \hi{Nodal methods are just a way of providing the higher-order coefficients that describe the net current in terms of node-averaged fluxes}: 
+\topic{Derivation of Nodal Balance Equation}
+Reference: Sutton and Aviles' `Diffusion Theory Methods for Spatial Kinetics Calculations' (1996). 
+
+To start, \hi{nodal methods are just a way of providing the higher-order coefficients that describe the net current in terms of node-averaged fluxes}: 
 \eqn{ J = - \frac{2D^+ D^-}{D^- h^+ + D^+ h^-} (\phi^+ - \phi^-) }
 where nodal methods is no better than the $\frac{2D^+ D^-}{D^- h^+ + D^+ h^-}$. 
 
+Next we derive the nodal balance equations. 
 \begin{enumerate}
 \item We start from 3D steady-state multigroup neutron diffusion equation, 
   \eqn{\divergence \vecJ_g(\vecr, E) + \Sigma_{rg} \psi_g (\vecr, E) = \frac{1}{\keff} \chi_g \Sum_{g' = 1}^G \nu \Sigma_{fg'} \psi_{g'}(\vecr, E) + \Sum_{g'=1}^G \Sigma_{sg'g} \psi_{g'}(\vecr, E) }
   Apply Fick's Law of diffusion for current out of flux, 
   \eqn{ \vecJ_g(\vecr, E) = - D_g(\vecr, E) \gradient \psi_g(\vecr, E) }
 
-\item Assumptions: properties are constant in homogenized nodes. Then we find the volume-averaged terms for each node; that is, we integrate over the node volume and then divide by volume,
-
 \item Volume average of diffusion equation for a node: we integrate every term over the node volume then divide by volume. The volume averaged flux becomes, 
   \eqn{ \bar{\psi} = \frac{1}{h_x h_y h_z} \int_0^{h_x} \int_0^{h_y} \int_0^{h_z} \psi(x,y,z) \dx \dy \dz }
-  The leakage term becomes (after integrating the divergence term using Gauss Theorem), 
+
+\item The leakage term becomes (after integrating the divergence term using Gauss Theorem), 
   \eqn{ \int_0^{h_x} \int_0^{h_y} \int_0^{h_z} \divergence \vecJ_g \dx \dy \dz &= \int_0^{h_y} \int_0^{h_z} (J_x(h_x,y,z) - J_x(0,y,z)) \dy \dz  \\
 &+ \int_0^{h_x} \int_0^{h_z} (J_y (x,h_y, z) - J_y(x,0,z)) \dx \dz \\
 &+ \int_0^{h_x} \int_0^{h_y} (J_z(x,y,h_z) - J_z(x,y,0)) \dx \dy }
@@ -122,7 +142,8 @@ where nodal methods is no better than the $\frac{2D^+ D^-}{D^- h^+ + D^+ h^-}$.
   \eqn{ \bar{J}_{gxl} &= \frac{1}{h_y h_z} \int_0^{h_y} \int_0^{h_z} J_x(0,y,z) \dy \dz, & \bar{J}_{gxr} &= \frac{1}{h_y h_z} \int_0^{h_y} \int_0^{h_z} J_x(h_x,y,z) \dy \dz }
   Then the leakage term becomes, 
   \eqn{ \Sum_{u=x,y,z} \frac{\bar{J}_{gur} - \bar{J}_{gul}}{h_u} }
-  Together, the nodal balance equation with average terms is, 
+ 
+\item Together, the nodal balance equation with average terms is, 
   \eqn{ \Sum_{u=x,y,z} \frac{\bar{J}_{gur} - \bar{J}_{gul}}{h_u} + \Sigma_{rg} \bar{\psi}_g &= \frac{1}{\keff} \chi_g \Sum_{g'=1}^G \nu \Sigma_{fg'} \bar{\psi}_{g'} + \Sum_{g'=1}^G \Sigma_{sg'g} \bar{\psi}_{g'} \label{nodal-balance} }
   Notice, 
   \begin{itemize}
@@ -134,83 +155,110 @@ where nodal methods is no better than the $\frac{2D^+ D^-}{D^- h^+ + D^+ h^-}$.
 \end{enumerate}
 
 
+\clearpage
+\topic{Representing Interface Current in 1D}
+As we mentioned above, the nodal balance equation we arrived at Eq.~\ref{nodal-balance} is exact thus far. The next step is to represent the net current in terms of node-averaged fluxes. In 1D, for instance, we use two-node two-group finite difference scheme as an example: 
+\begin{figure}[h]
+  \hspace{-1in}
+  \includegraphics[width=1.2\textwidth]{images/methd/2node2g-finite-difference.png}
+\end{figure}
 
 
 
 \clearpage
-\topic{Transverse Integration}
-We need a set of equations for the surface average currents instead of solving 3D finite different equations directly. To do so, we pick a direction of interest (eg., x direction), and perform integration within node over 2D plane normal to that direction (eg., the grey surface in Figure~\ref{nodal-current}), then devide by the planar area. The LHS of Eq.~\ref{nodal-balance} becomes, 
-  \eqn{\Sum_{u=x,y,z} \frac{\bar{J}_{gur} - \bar{J}_{gul}}{h_u} + \Sigma_{rg} \bar{\psi}_g = \frac{1}{h_y h_z} \int_0^{h_z} \int_0^{h_y} (\divergence \vecJ_g(\vecr, E) + \Sigma_{rg} \psi_g (\vecr, E) ) \dy \dz }
+\topic{Representing Interface Current in 3D: Transverse Integration}
+We need a set of equations for the surface average currents instead of solving 3D finite different equations directly. The general idea is, 
+\begin{itemize}
+\item In approaching surface averaged current, the average of flux derivative on a surface is approximated as the derivative of average flux at the surface. 
+
+\item It is more efficient to work with the diffusion equation for average flux rather than diffusion equation for 3D point wise fluxes. 
+
+\item We use the transverse integration scheme to approach the 3D diffusion equation: We pick a direction of interest (eg., x direction), and perform integration within node over 2D plane normal to that direction (eg., the grey surface in Figure~\ref{nodal-current}), then devide by the planar area. 
 \begin{figure}[ht]
   \centering
   \includegraphics[width=0.28\textwidth]{images/methd/nodal-current.png}
   \caption{Integrate Within Node Over 2D Plane Normal to x-direction} \label{nodal-current}
 \end{figure}
- 
-The RHS becomes not interesting after a while because it is just the average flux times cross sections. 
- \begin{enumerate}
-  \item Define dimensionless independent variables,
-    \eqn{ \xi_x &= \frac{x}{h_x}, & \xi_y &= \frac{y}{h_y}, & \xi_z &= \frac{z}{h_z} }
-    and we can transform the integration and the derivative operator as well, 
-    \eqn{ \frac{\du}{h_u} &= \derivative \xi_u, & \ddu &= \frac{1}{h_u}\frac{\derivative}{\dxi_u}, & u&= x,y,z}
+\end{itemize}
 
-  \item Simplify the averaging with dimensionless variables ($l$ is left, $r$ is right): we basically say the net current on the left plane can be found by integrating the 3D net current at $x=0$ over the left plane. 
-    \eqn{ J_{xgl} &= \int_0^1 \int_0^1 J_x(0,\xi_y, \xi_z) \dxi_y \dxi_z, &J_{gxr} &= \int_0^1 \int_0^1 J_x(1,\xi_y, \xi_z) \dxi_y \dxi_z }
-    \eqn{ \bar{\psi} &= \int_0^1 \int_0^1 \int_0^1 \psi(\xi_x, \xi_y, \xi_z) \dxi_x \dxi_y \dxi_z }
+Next we discuss the details of transverse integration of the 3D diffusion equation. 
+\begin{enumerate}
+\item The LHS of Eq.~\ref{nodal-balance} becomes, 
+  \eqn{ \mathrm{LHS} = \frac{1}{h_y h_z} \int_0^{h_z} \int_0^{h_y} \lp \divergence \vec{J}_g(\vecr, E) + \Sigma_{rg} \bar{\psi}_g \rp \dydz }
 
-  \item We recall the normalized 3D diffusion equation, 
-    \eqn{ \left( - \Sum_{u=x,y,z} \frac{D_g}{h_u^2} \frac{\partial^2}{\partial \xi_u^2} + \Sigma_{rg} \right) \psi_g(\xi_x, \xi_y, \xi_z) &=  \frac{1}{\keff} \chi_g \Sum_{g'=1}^G \nu \Sigma_{fg'}\psi_g(\xi_x, \xi_y, \xi_z) + \Sum_{g'=1}^G \Sigma_{sg'g} \psi_g(\xi_x, \xi_y, \xi_z) }
+\item The RHS becomes not interesting after a while because it is just the average flux times cross sections. 
 
-  \item We look at the leakage term after the transverse integration, notice that at the end of the day terms only depend on $x$ direction becuse we integrate away the corerwponding $y$ and $z$ directions:
-    \begin{align}
-      &\int_0^1 \int_0^1 \divergence \vecJ \dxi_y \dxi_z = \int_0^1 \int_0^1 \left( \frac{1}{h_x} \frac{\partial J_x}{\partial \xi_x} + \frac{1}{h_y} \frac{\partial J_y}{\dxi_y} + \frac{1}{h_z} \frac{\partial J_z}{\dxi_z} \right) \dxi_y \dxi_z \\
-      &= \int_0^1 \int_0^1 \left( -\frac{D_g}{h_x^2} \frac{\partial^2 \psi}{\partial \xi_x^2} + \frac{1}{h_y} \frac{\partial J_y}{\dxi_y} + \frac{1}{h_z} \frac{\partial J_z}{\dxi_z} \right) \dxi_y \dxi_z \\
-      &= - \frac{D_g}{h_x^2} \frac{\partial^2 }{\partial \xi_x^2} \int_0^1 \int_0^1 \psi(\xi_x, \xi_y, \xi_z) \dxi_y \dxi_z \\
-      &+ \frac{1}{h_y} \int_0^1 (J_y(\xi_x, 1, \xi_z) - J_y(\xi_x, 0, \xi_z) )\dxi_z + \frac{1}{h_z} \int_0^1 (J_z(\xi_x, \xi_y, 1) - J_z(\xi_x, \xi_y, 0) ) \dxi_y \\
-      &= - \frac{D_g}{h_x^2} \frac{\partial \bar{\psi}_x (\xi_x)}{\partial \xi_x^2} + \frac{\bar{J}_{yr}(\xi_x) - \bar{J}_{yl} (\xi_x)}{h_y} + \frac{\bar{J}_{zr} (\xi_x) - \bar{J}_{zl} (\xi_x)}{h_z} 
-    \end{align}
-    where we defined the \textbf{plane-averaged 1D flux}, and it does not have mesh spacing on the bottom because we defined dimentionless terms:
-    \eqn{\bar{\psi}_x = \int_0^1 \int_0^1 \psi(\xi_x, \xi_y, \xi_z) \dxi_y \dxi_z }
-    and \textbf{line-averaged surface current} at an arbitrary position $\xi_x$, 
-    \eqn{ \bar{J}_{yr} (\xi_x) &= \int_0^1 J_y(\xi_x, 1, \xi_z) \dxi_z, &\bar{J}_{yl}(\xi_x) &= \int_0^1 J_y(\xi_x, 0, \xi_z) \dxi_z }
-    \eqn{ \bar{J}_{zr} (\xi_x) &= \int_0^1 J_z(\xi_x, \xi_y, 1) \dxi_y, &\bar{J}_{zl}(\xi_x) &= \int_0^1 J_z(\xi_x, \xi_y,  0) \dxi_y }
+\item Define dimensionless independent variables,
+  \eqn{ \xi_x &= \frac{x}{h_x}, & \xi_y &= \frac{y}{h_y}, & \xi_z &= \frac{z}{h_z} }
+  and we can transform the integration and the derivative operator as well, 
+  \eqn{ \frac{\du}{h_u} &= \derivative \xi_u, & \ddu &= \frac{1}{h_u}\frac{\derivative}{\dxi_u}, & u&= x,y,z}
 
-  \item Collect all the terms, we get the transverse integration of 3D diffusion equation, 
-    \eqn{ \Sum_{u=y,z} \frac{\bar{J}_{gur}(\xi_x) - \bar{J}_{gul}(\xi_x)}{h_u} - \frac{D}{h_x^2} \frac{\derivative^2}{\dxi_x^2} \bar{\psi}_{gx} (\xi_x) + \Sigma_{rg} \bar{\psi}_{gx} (\xi_x) &=  \frac{1}{\keff} \chi_g \Sum_{g'=1}^G \nu \Sigma_{fg'}\psi_g(\xi_x) + \Sum_{g'=1}^G \Sigma_{sg'g} \psi_g(\xi_x)  }
-    If we define a \textbf{transverse leakage term} (the source that comes in the plane) and move it to the RHS, 
-    \eqn{ L_{gu}(\xi_x) &= \frac{1}{h_u} \left( \bar{J}_{gur}(\xi_x) - \bar{J}_{gul}(\xi_x) \right), & u &= y,z }
-    and also define the \textbf{diffusion equivalent group constant}, 
-    \eqn{ \Sigma_{Dg}^x  = \frac{D}{h_x^2} }
-    We get the transverse integrated 1D diffusion equation, with two additional terms that describe the leakage in the other two directions. If we know the two leakage terms exactly, then we can solve the 1D diffusion equation exactly. 
-    \eqn{ \boxed{ - \Sigma_{Dg}^x \frac{\derivative^2}{\dxi_x^2} \bar{\psi}_{gx} (\xi_x) + \Sigma_{rg} \bar{\psi}_{gx} (\xi_x) = \frac{1}{\keff} \chi_g \Sum_{g'=1}^G \nu \Sigma_{fg'} \bar{\psi}_{g'x} (\xi_x) + \Sum_{g'=1}^G \Sigma_{sg'g} \bar{\psi}_{g'x} (\xi_x) - L_{gy} (\xi_x) - L_{gz} (\xi_x)  }  }
+\item Simplify the averaging with dimensionless variables ($l$ is left, $r$ is right): we basically say the net current on the left plane can be found by integrating the 3D net current at $x=0$ over the left plane. 
+  \eqn{ J_{xgl} &= \int_0^1 \int_0^1 J_x(0,\xi_y, \xi_z) \dxi_y \dxi_z, &J_{gxr} &= \int_0^1 \int_0^1 J_x(1,\xi_y, \xi_z) \dxi_y \dxi_z }
+  \eqn{ \bar{\psi} &= \int_0^1 \int_0^1 \int_0^1 \psi(\xi_x, \xi_y, \xi_z) \dxi_x \dxi_y \dxi_z }
 
-  \item Repeat for the other two directions, we get a set of 3 directional 1D diffusion equations.
-    \begin{align}
-      \boxed{ - \Sigma_{Dg}^x \frac{\derivative^2}{\dxi_x^2} \bar{\psi}_{gx} (\xi_x) + \Sigma_{rg} \bar{\psi}_{gx} (\xi_x) = \frac{1}{\keff} \chi_g \Sum_{g'=1}^G \nu \Sigma_{fg'} \bar{\psi}_{g'x} (\xi_x) + \Sum_{g'=1}^G \Sigma_{sg'g} \bar{\psi}_{g'x} (\xi_x) - L_{gy} (\xi_x) - L_{gz} (\xi_x) } \notag \\
-   \boxed{ - \Sigma_{Dg}^y \frac{\derivative^2}{\dxi_y^2} \bar{\psi}_{gy} (\xi_y) + \Sigma_{rg} \bar{\psi}_{gy} (\xi_y) = \frac{1}{\keff} \chi_g \Sum_{g'=1}^G \nu \Sigma_{fg'} \bar{\psi}_{g'y} (\xi_y) + \Sum_{g'=1}^G \Sigma_{sg'g} \bar{\psi}_{g'y} (\xi_y) - L_{gz} (\xi_y) - L_{gx} (\xi_y) }  \notag \\
-     \boxed{ - \Sigma_{Dg}^z \frac{\derivative^2}{\dxi_z^2} \bar{\psi}_{gz} (\xi_z) + \Sigma_{rg} \bar{\psi}_{gz} (\xi_z) = \frac{1}{\keff} \chi_g \Sum_{g'=1}^G \nu \Sigma_{fg'} \bar{\psi}_{g'z} (\xi_z) + \Sum_{g'=1}^G \Sigma_{sg'g} \bar{\psi}_{g'z} (\xi_z) - L_{gx} (\xi_z) - L_{gy} (\xi_z) } \notag
-    \end{align}
+\item We recall the normalized 3D diffusion equation, 
+  \eqn{ \left( - \Sum_{u=x,y,z} \frac{D_g}{h_u^2} \frac{\partial^2}{\partial \xi_u^2} + \Sigma_{rg} \right) \psi_g(\xi_x, \xi_y, \xi_z) &=  \frac{1}{\keff} \chi_g \Sum_{g'=1}^G \nu \Sigma_{fg'}\psi_g(\xi_x, \xi_y, \xi_z) + \Sum_{g'=1}^G \Sigma_{sg'g} \psi_g(\xi_x, \xi_y, \xi_z) }
 
-  \item Interpretations: 
-    \begin{itemize}
-    \item We turn a 3D partial differential equation into three 1D ordinary differential equation that are coupled through average transverse leakage term. 
-    \item It is exact if the transverse leakage shape is known. 
-    \item Why nodal methods work? As the node becomes bigger and bigger, it is less likely that a random neutron to stream right through the node (thus contributing to the $\vecJ$). That is, \hi{$\vecJ$ streaming out the node from the right side is insensitive to the transverse leakage term from the top and the bottom.} Thus the transverse leakage terms $L_y(\xi_x), L_z(\xi_x) \cdots$ can be accurately represented by 2nd order polynomials. [FIXME] insert image. 
-    \end{itemize}
-  \end{enumerate}
+\item We look at the leakage term after the transverse integration, notice that at the end of the day terms only depend on $x$ direction becuse we integrate away the corerwponding $y$ and $z$ directions:
+  \begin{align}
+    &\int_0^1 \int_0^1 \divergence \vecJ \dxi_y \dxi_z = \int_0^1 \int_0^1 \left( \frac{1}{h_x} \frac{\partial J_x}{\partial \xi_x} + \frac{1}{h_y} \frac{\partial J_y}{\dxi_y} + \frac{1}{h_z} \frac{\partial J_z}{\dxi_z} \right) \dxi_y \dxi_z \\
+    &= \int_0^1 \int_0^1 \left( -\frac{D_g}{h_x^2} \frac{\partial^2 \psi}{\partial \xi_x^2} + \frac{1}{h_y} \frac{\partial J_y}{\dxi_y} + \frac{1}{h_z} \frac{\partial J_z}{\dxi_z} \right) \dxi_y \dxi_z \\
+    &= - \frac{D_g}{h_x^2} \frac{\partial^2 }{\partial \xi_x^2} \int_0^1 \int_0^1 \psi(\xi_x, \xi_y, \xi_z) \dxi_y \dxi_z \\
+    &+ \frac{1}{h_y} \int_0^1 (J_y(\xi_x, 1, \xi_z) - J_y(\xi_x, 0, \xi_z) )\dxi_z + \frac{1}{h_z} \int_0^1 (J_z(\xi_x, \xi_y, 1) - J_z(\xi_x, \xi_y, 0) ) \dxi_y \\
+    &= - \frac{D_g}{h_x^2} \frac{\partial \bar{\psi}_x (\xi_x)}{\partial \xi_x^2} + \frac{\bar{J}_{yr}(\xi_x) - \bar{J}_{yl} (\xi_x)}{h_y} + \frac{\bar{J}_{zr} (\xi_x) - \bar{J}_{zl} (\xi_x)}{h_z} 
+  \end{align}
+  where we defined the \textbf{plane-averaged 1D flux}, and it does not have mesh spacing on the bottom because we defined dimentionless terms:
+  \eqn{\bar{\psi}_x = \int_0^1 \int_0^1 \psi(\xi_x, \xi_y, \xi_z) \dxi_y \dxi_z }
+  and \textbf{line-averaged surface current} at an arbitrary position $\xi_x$, 
+  \eqn{ \bar{J}_{yr} (\xi_x) &= \int_0^1 J_y(\xi_x, 1, \xi_z) \dxi_z, &\bar{J}_{yl}(\xi_x) &= \int_0^1 J_y(\xi_x, 0, \xi_z) \dxi_z }
+  \eqn{ \bar{J}_{zr} (\xi_x) &= \int_0^1 J_z(\xi_x, \xi_y, 1) \dxi_y, &\bar{J}_{zl}(\xi_x) &= \int_0^1 J_z(\xi_x, \xi_y,  0) \dxi_y }
 
-\textbf{Approximation On Transverse Leakage: Quadratic Approximation in Each Node} (Finnemann, KWU). 
+\item Collect all the terms, we get the transverse integration of 3D diffusion equation, 
+  \eqn{ \Sum_{u=y,z} \frac{\bar{J}_{gur}(\xi_x) - \bar{J}_{gul}(\xi_x)}{h_u} - \frac{D}{h_x^2} \frac{\derivative^2}{\dxi_x^2} \bar{\psi}_{gx} (\xi_x) + \Sigma_{rg} \bar{\psi}_{gx} (\xi_x) &=  \frac{1}{\keff} \chi_g \Sum_{g'=1}^G \nu \Sigma_{fg'}\psi_g(\xi_x) + \Sum_{g'=1}^G \Sigma_{sg'g} \psi_g(\xi_x)  }
+  If we define a \textbf{transverse leakage term} (the source that comes in the plane) and move it to the RHS, 
+  \eqn{ L_{gu}(\xi_x) &= \frac{1}{h_u} \left( \bar{J}_{gur}(\xi_x) - \bar{J}_{gul}(\xi_x) \right), & u &= y,z }
+  and also define the \textbf{diffusion equivalent group constant}, 
+  \eqn{ \Sigma_{Dg}^x  = \frac{D}{h_x^2} }
+  We get the transverse integrated 1D diffusion equation, with two additional terms that describe the leakage in the other two directions. If we know the two leakage terms exactly, then we can solve the 1D diffusion equation exactly. 
+  \eqn{ \boxed{ - \Sigma_{Dg}^x \frac{\derivative^2}{\dxi_x^2} \bar{\psi}_{gx} (\xi_x) + \Sigma_{rg} \bar{\psi}_{gx} (\xi_x) = \frac{1}{\keff} \chi_g \Sum_{g'=1}^G \nu \Sigma_{fg'} \bar{\psi}_{g'x} (\xi_x) + \Sum_{g'=1}^G \Sigma_{sg'g} \bar{\psi}_{g'x} (\xi_x) - L_{gy} (\xi_x) - L_{gz} (\xi_x)  }  }
 
+\item Repeat for the other two directions, we get a set of 3 directional 1D diffusion equations.
+  \begin{align}
+    \boxed{ - \Sigma_{Dg}^x \frac{\derivative^2}{\dxi_x^2} \bar{\psi}_{gx} (\xi_x) + \Sigma_{rg} \bar{\psi}_{gx} (\xi_x) = \frac{1}{\keff} \chi_g \Sum_{g'=1}^G \nu \Sigma_{fg'} \bar{\psi}_{g'x} (\xi_x) + \Sum_{g'=1}^G \Sigma_{sg'g} \bar{\psi}_{g'x} (\xi_x) - L_{gy} (\xi_x) - L_{gz} (\xi_x) } \notag \\
+    \boxed{ - \Sigma_{Dg}^y \frac{\derivative^2}{\dxi_y^2} \bar{\psi}_{gy} (\xi_y) + \Sigma_{rg} \bar{\psi}_{gy} (\xi_y) = \frac{1}{\keff} \chi_g \Sum_{g'=1}^G \nu \Sigma_{fg'} \bar{\psi}_{g'y} (\xi_y) + \Sum_{g'=1}^G \Sigma_{sg'g} \bar{\psi}_{g'y} (\xi_y) - L_{gz} (\xi_y) - L_{gx} (\xi_y) }  \notag \\
+    \boxed{ - \Sigma_{Dg}^z \frac{\derivative^2}{\dxi_z^2} \bar{\psi}_{gz} (\xi_z) + \Sigma_{rg} \bar{\psi}_{gz} (\xi_z) = \frac{1}{\keff} \chi_g \Sum_{g'=1}^G \nu \Sigma_{fg'} \bar{\psi}_{g'z} (\xi_z) + \Sum_{g'=1}^G \Sigma_{sg'g} \bar{\psi}_{g'z} (\xi_z) - L_{gx} (\xi_z) - L_{gy} (\xi_z) } \notag
+  \end{align}
+
+\item Interpretations: 
+  \begin{itemize}
+  \item We turn a 3D partial differential equation into three 1D ordinary differential equation that are coupled through average transverse leakage term. 
+  \item It is exact if the transverse leakage shape is known. 
+  \item Why nodal methods work? As the node becomes bigger and bigger, it is less likely that a random neutron to stream right through the node (thus contributing to the $\vecJ$). That is, \hi{$\vecJ$ streaming out the node from the right side is insensitive to the transverse leakage term from the top and the bottom.} Thus we can decouple leakage into three dimensions at large meshes. 
+  \end{itemize}
+
+\item \textbf{Approximation On Transverse Leakage: Quadratic Approximation in Each Node} (Finnemann, KWU). 
  From observation, flux is insensitive to the transverse leakage shape, so we are going to perform a quandrature polynomial with 2nd order polynomials of the leakage term, and iteratively update them. Quadratic approximation in each node, 
   \eqn{ L(\xi) = \bar{L} + l_1 P_1(\xi) + l_2 P_2(\xi) }
-  We apply average TL conservation scheme to determine $l_1, l_2$. We use three node average transver leakages (the values of each node and its two adjacent nodes), and impose constraint of conserving the averages of two adjacent nodes. About how we handle the rest of this method, we present three methods in the following section. 
+  \begin{figure}[h]
+    \centering
+    \includegraphics[width=4in]{images/methd/tl-approx.png}
+    \caption{Transverse Leakage Approximation} 
+  \end{figure}
+  We apply average TL conservation scheme to determine $l_1, l_2$. We use three node average transver leakages (the values of each node and its two adjacent nodes), and impose constraint of conserving the averages of two adjacent nodes as in Fig.~\ref{tl-constrains}. Notice the parabola defined by the quadratic polynomial is assumed to extend over three nodes, but is only used in the middle node to represent the transverse leakage shape. Alternative approach: Finnemann (1977) uses continuity on transver leakage and its first derivative to determine the quadratic coefficients. 
+    \begin{figure}[h]
+    \centering
+    \includegraphics[width=4in]{images/methd/tl-constrains.png}
+    \caption{Constraints on Transverse Leakage} \label{tl-constrains}
+  \end{figure}
+\end{enumerate}
+About how we handle the rest of this method, we present three methods in the following sections. 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%
 \clearpage
-\topic{Three Nodal Methods}
-\begin{enumerate}
-\item Nodal Expansion Method (NEM) developed by Finnemann (KWU 1975). 
+\topic{Nodal Expansion Method (NEM)}
+NEM was developed by Finnemann (KWU 1975). 
   \begin{enumerate}
   \item We approximate 1D flux by 4th order polynomial, 
     \eqn{ \bar{\psi}(\xi) = \Sum_{i=0}^4 a_i P_i (\xi) }
@@ -253,9 +301,10 @@ There has been more paper on how to find other forms of weights, but it turns ou
 
 
 \clearpage
-\item 2-Group Analytic Nodal Method (ANM) developed at MIT by Henry (1978). 
+\topic{Two Group Analytic Nodal Method (ANM)}
+2-Group Analytic Nodal Method (ANM) developed at MIT by Henry (1978). 
   \begin{enumerate}
-  \item We start from the 1D 2-Group transverse-integrated diffusion equations, and move all terms except the transverse leakage on the LHS, 
+  \item We start from the 1D 2-Group transverse-integrated diffusion equations, and move all terms except the transverse leakage terms to the LHS, 
     \begin{align}
       -D_1 \frac{\derivative^2 \psi_1(x)}{\dx^2} + \Sigma_{r1} \psi_1(x) - \frac{1}{\keff} (\nu \Sigma_{f1} \psi_1 (x) + \nu \Sigma_{f2} \psi_2 (x) ) &= - L_1(x) \\
       -D_2 \frac{\derivative^2 \psi_2(x)}{\dx^2} + \Sigma_{r2} \psi_2(x) - \Sigma_{12} \psi_1 (x) &= - L_2 (x) 
@@ -321,9 +370,8 @@ There has been more paper on how to find other forms of weights, but it turns ou
   \end{enumerate}
 
 \clearpage
-\item Semi-Analytic Nodal Method (SANM) developed at Studsvik (1985). 
-  Motivation: NEM does a good job in the fast group but not that well in the thermal group, so we use the analytical solution for the thermal group. 
-
+\topic{Semi-Analytic Nodal Method (SANM)}
+It was developed at Studsvik (1985) with the following motivation: NEM does a good job in the fast group but not that well in the thermal group, so we use the analytical solution for the thermal group. 
   \begin{enumerate}
   \item SANM uses NEM equations for the fast group, and performs transverse integrated 1D neutron diffusion equation for the thermal group, 
     \eqn{ -D_2 \frac{\derivative^2}{\dx^2} \psi_2(x) + \Sigma_{r2} \psi_2(x) &= \Sigma_{s12} \psi_1(x) - L_{y2} (x) = Q_2 (x) }
@@ -338,9 +386,8 @@ There has been more paper on how to find other forms of weights, but it turns ou
   \item We differentiate to get expression for net current at the interface: 
     \eqn{ J_g(x) &= -D_g \ddx \psi_g(x) }
     We use the continuity of net currents/flux to get analytic expression for coupling. 
-  \end{enumerate}
 
-\item Summary. SANM is advantage for two reasons: [FIXME]
+\item Summary. SANM is advantage for two reasons:
   \begin{enumerate}
     \item As in Fig.~\ref{SANM-accuracy} the NEM predicts the center flux (where the instruments would be) wrong. 
     \item Weighted residual has the advantage of capable of incorporating cross section's spatial dependence. 
@@ -351,7 +398,7 @@ There has been more paper on how to find other forms of weights, but it turns ou
       \includegraphics[width=5in]{images/methd/SANM-accuracy.png}
       \caption{Accuracy of SANM in Two-Group Application} \label{SANM-accuracy}
     \end{figure} 
-\end{enumerate}
+  \end{enumerate}
 
 
 \clearpage
