@@ -10,15 +10,19 @@ We continue our discussion on nodal methods, and would cover spatial dependency 
 
 
 
-\topic{Spatial Dependence of Cross Sections}
+\topic{Spatial Dependence of Nodal Cross Sections}
 \begin{enumerate}
-\item Spatial configuration matters because of the following three terms vary with respect to space:
+\item Spatial configuration of nodal cross sections matters because of the following three terms vary with respect to space:
 \begin{itemize}
-\item Burnup gradients: quadratic variation of cross sections with respect to exposure; we integrate bundle surface burnups;
-\item Fuel temperature gradients: fuel temperature is related to the local fission rate; and Doppler feedback is from fuel temperature variations;
-\item Non-uniform density gradients: coolant feedback is caused by density distribution.
+\item Burnup gradients: cross sections vary quadratically with respect to exposure, and we integrate bundle surface burnups;
+
+\item Fuel temperature gradients $\to$ Doppler feedback: fuel temperature is related to the local fission rate; and Doppler feedback is from fuel temperature variations;
+
+\item Non-uniform density gradients $\to$ coolant feedback: coolant feedback is caused by density distribution.
+
+\item Spectral interaction between assemblies: for instance, leakage and MOX/UO2 interface depends on cross sections.
 \end{itemize}
-For instance, if we know the fuel temperature gradient, from any library we know the cross section change with respect to temperature, then we can compue the cross section distribution.  There are spectral interaction between assemblies. It is very easy to integrate in NEM nodal method, but not so easy with ANM and SANM because of the polynomials. 
+For instance, if we know the fuel temperature gradient, from any library we know the cross section change with respect to temperature, then we can compue the cross section distribution. Space-dependent nodal xs is very easy to integrate in NEM nodal method, but not so easy with ANM and SANM because of the polynomials. 
 
 \item Space-dependent XS Changes Flux. Recall that for 1 nodal balance equation and 2 incoming current BCs, and the two additional conditions come from the weighted residual method. Now that we add in the spatial dependency of the cross sections, the weighted residual method for 1D neutron diffusion equation remains the same: 
 \eqn{ \int_0^1 w(\xi) \left( - \Sigma_D \ddxin2 \psi(\xi) + \Sigma_r (\xi) \psi(\xi) \right) \dxi   \int_0^1 \left( \frac{1}{\keff} \chi(\xi) \psi(\xi) + S(\xi) - L(\xi) \right) \dxi  }
@@ -33,24 +37,25 @@ Interpretations: flux distribution changes after we add in the spatial dependenc
 
 \clearpage
 \topic{Homogenization of Fuel Assemblies}
-Homogenization theory: homogenization can be done on either pins or assemblies. We are mostly going to talk about assembly level because they are harder. A recap of nodal methods: nodal methods are designed to achieve high accuracy with 20cm mesh (compare with 1cm mesh for finite difference). 
+Homogenization can be done on either pins or assemblies. We are mostly going to talk about assembly level because they are harder. 
 \begin{enumerate}
 \item Given a reference solution, we build a heterogeneous reactor using,
 \eqn{ \divergence \vecJ_g(\vecr) + \Sigma_{tg}(\vecr) \phi_g(\vecr) &= \Sum_{g'=1}^G \left( \frac{1}{\keff} M_{gg'} (\vecr) + \Sigma_{gg'} (\vecr) \right) \phi_{g'} (\vecr) }
 and analogous equation for the homogenized model using homogenized parameters,
 \eqn{ \divergence \hat{\vecJ}_g(\vecr) + \hat{\Sigma}_{tg}(\vecr)\hat{\phi}_g(\vecr) &= \Sum_{g'=1}^G \left( \frac{1}{\keff} \hat{M}_{gg'} (\vecr) + \hat{\Sigma}_{gg'} (\vecr) \right) \hat{\phi}_{g'} (\vecr) }
 
-\item We cannot preserve every term, but we can decide to preserve some. For instance, we preserve the scalar flux, reaction rates (for every reaction type and every energy $\alpha = t, gg'$ etc) and the leakage term; by doing so, we should preserve $\keff$. 
+\item We need to decide what terms to preserve. For instance, if we preserve the scalar flux, reaction rates (for every reaction type and every energy $\alpha = t, gg'$ etc) and the leakage term, $\keff$ will be preserved. 
 \begin{align}
 \int_{V_i} \hat{\Sigma}_{\alpha g} \hat{\phi}_g \dr &= \int_{V_i} \Sigma_{\alpha g} \phi_g \dr  & \hat{\Sigma}_{\alpha g}^i &= \frac{\int_{V_i} \Sigma_{\alpha g} \phi_g \dr}{\int_{V_i} \hat{\phi}_g \dr} \\
 \int_{S_i^k} \divergence \hat{J}_g \dS &= \int_{S_i^k} \divergence \vecJ_g \dS & \hat{J}_g &= - \hat{D}_g \gradient \hat{\phi}_g, \mbox{ where } \hat{D}_g^i = \frac{-\int_{S_i^k} \vecJ_g \dS}{\int_{S_i^k} \gradient \hat{\phi}_g \dS}
 \end{align}
-What happens is that we don't really know the true heterogeneous flux, so we further approximate heterogeneous flux using results from assembly results.
+
+\item What happens is that we don't really know the true heterogeneous flux, so we further approximate heterogeneous flux using results from assembly results.
 \begin{align}
 \int \hat{\phi}_g \dr &= \int \phi_{Ag} \dr  \\
 \hat{D}_g^i &= \frac{-\int_{S_i^k} \vecJ_g \dS}{\int_{S_i^k} \gradient \hat{\phi}_{Ag} \dS}
 \end{align}
-
+Using the assembly results give us AXS (assembly flux-weighted cross section). 
 
 \item AXS (assembly flux-weighted cross sections): in a HAFAS BWR benchmark case, notice that the error (-0.44\% for $\keff$, 5.5\% for average assembly power) is somewhat independent of the mesh size (1x1 vs. 3x3) and angular expansion (P1 vs. P3), which suggests that \hi{the error comes from homogenization of the cross sections} . 
 
@@ -95,11 +100,21 @@ which says that the heterogeneous flux is continuous across the interface and th
 
 
 \topic{Application of Homogenization Methods in 2D/1D MOC Solvers}
-FIXME
+Reference: M\&C 2013 at Sun Valley, ID. 
 \begin{enumerate}
-\item PROTEUS-MOC:
-\item Hang Joo (Seoul National University): radial: pins each with homogenized xs and coefficients coupling adjacent nodes; when solving MOC on the planar level, we now treat source as a function of $z$ plane and of polar angles. Axial SP3 nodal method (high order spatial accuracy). 300 core hours to solve one step (compare with 50,000 core hours for MC21). Measured data is from Radian reaction rates. 
-\item French version. 
+\item PROTEUS-MOC by Abel Marin-Lafleche and Michael Smith (ANL). 
+
+\item nTRACER by Prof. Hang Gyu Joo (Seoul National University): radial: pins each with homogenized xs and coefficients coupling adjacent nodes; when solving MOC on the planar level, we now treat source as a function of $z$ plane and of polar angles. Axial SP3 nodal method (high order spatial accuracy). 300 core hours to solve one step (compare with 50,000 core hours for MC21). Measured data is from Radian reaction rates. 
+  \begin{figure}[h]
+    \centering
+    \includegraphics[width=0.46\textwidth]{images/methd/nTRACER.png}
+    \includegraphics[width=0.46\textwidth]{images/methd/nTRACER-1.png}
+    \includegraphics[width=0.46\textwidth]{images/methd/nTRACER-2.png}
+    \includegraphics[width=0.46\textwidth]{images/methd/nTRACER-3.png}
+    \caption{nTRACER's 2D/1D MOC Method} \label{nTRACER} 
+  \end{figure}
+
+\item MICADO by Francois Fevotte and Bruno Lathuiliere (EDF R\&D). 
 \end{enumerate}
 
 

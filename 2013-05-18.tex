@@ -13,6 +13,16 @@
 \item NEM: good b/c multi-group, but loses accuracy for highly varying flux problems. 
 \item ANM: best accuracy, not easy for general multi-group problems. 
 \item SANM: most practical. 
+\item Homogenization theory: we want to preserve $\phi$, RR, and leakage, thus preserving $\keff$. But if conventional continuity of scalar flux and net current as imposed on all nodal surfaces, then $D_g^i$ are different on each surface, thus it is impossible to define spatially constant $D_g^i$ which preserve all quantities (both RR and leakage). We have to either relax constraints or add degrees of freedome. 
+  \begin{itemize}
+    \item Conventional (AXS): relax constraints and focus on preservation of reaction rates (though only for the infinite lattice case). Solve lattice problem with zero current BC. 
+      \eqn{ \hat{J}_{i,j}^u = \frac{2D}{h} \left[ \hat{\phi}_{i,j} - \hat{\phi}_{i+1,j}  \right] }
+    \item Advanced: DF, which alter the nodal coupling continuity conditions, because the current becomes, 
+      \eqn{ \hat{J}_{i,j}^u = \frac{2D \left[ f^{u+}_{i,j} \hat{\phi}_{i,j} - f^{u-}_{i+1,j} \hat{\phi}_{i+1,j} \right]}{h \left[ f_{i+1,j}^{u-} + f_{i,j}^{u+} \right] } }
+        AXS-ADF combination greatly reduces error. 
+  \end{itemize}
+
+
 \end{enumerate}
 
 
