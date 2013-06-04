@@ -5,7 +5,7 @@
 \usepackage{school-style-class}
 \classcode{22.101}
 \classname{Applied Nuclear Physics}
-\professor{Bilge Yildiz}
+\professor{Bilge Yildiz, Paola Cappellaro, Ju Li, Sidney Yip}
 \schoolname{Massachusetts Institute of Technology}
 
 % used in 2011-12-13.tex Final Review
