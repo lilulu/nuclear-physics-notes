@@ -28,3 +28,29 @@
 \usepackage{tikz}
 \usetikzlibrary{shapes,arrows}
 \usepackage{amsmath,bm,times}
+\usepackage{listings}
+\usepackage{booktabs,array}
+\def\Midrule{\midrule[\heavyrulewidth]}
+\newcount\rowc
+
+\makeatletter
+\def\ttabular{%
+\hbox\bgroup
+\let\\\cr
+\def\rulea{\ifnum\rowc=\@ne \hrule height 1.3pt \fi}
+\def\ruleb{
+\ifnum\rowc=1\hrule height 1.3pt \else
+\ifnum\rowc=6\hrule height \heavyrulewidth 
+   \else \hrule height \lightrulewidth\fi\fi}
+\valign\bgroup
+\global\rowc\@ne
+\rulea
+\hbox to 10em{\strut \hfill##\hfill}%
+\ruleb
+&&%
+\global\advance\rowc\@ne
+\hbox to 10em{\strut\hfill##\hfill}%
+\ruleb
+\cr}
+\def\endttabular{%
+\crcr\egroup\egroup}
