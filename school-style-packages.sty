@@ -5,31 +5,43 @@
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesClass{school-style-packages}
 
-\usepackage[version=3]{mhchem}
-\usepackage[fleqn,tbtags]{mathtools}
-\usepackage{amssymb}
-% \usepackage{amsmath}
-\usepackage{amsthm}
-% \usepackage{mathtools}
-\usepackage{graphicx}
-
-\usepackage{setspace}
-\usepackage{grffile}
-\usepackage{multirow}
+% self-defined
 \usepackage{school-style-math}
 \usepackage{school-style-units}
+
+% math related
+\usepackage[fleqn,tbtags]{mathtools}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath,bm,times}
+
+% graphics related
 \usepackage[usenames,dvipsnames]{color}
+\usepackage{graphicx}
 \usepackage{hyperref}
-\usepackage{algorithm}
-\usepackage{algorithmic}
-\usepackage{textcomp} % for \cents
-\usepackage{lscape} % for displaying table vertically.
-\usepackage{wrapfig}
+\usepackage{grffile}
 \usepackage{tikz}
 \usetikzlibrary{shapes,arrows}
-\usepackage{amsmath,bm,times}
-\usepackage{listings}
+
+% formatting
+\usepackage{setspace}
+\usepackage{multirow}
+\usepackage{lscape} % for displaying table vertically.
 \usepackage{booktabs,array}
+\usepackage{todonotes}
+
+% algorithm 
+\usepackage{listings}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+
+% symbols 
+\usepackage[version=3]{mhchem}
+\usepackage{textcomp} % for \cents
+\usepackage{wrapfig}
+
+
+% others
 \def\Midrule{\midrule[\heavyrulewidth]}
 \newcount\rowc
 
