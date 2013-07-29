@@ -1,0 +1,68 @@
+%
+% This is a single place to include the many packages we often times include
+%
+
+\NeedsTeXFormat{LaTeX2e}[1995/12/01]
+\ProvidesClass{school-style-packages}
+
+% self-defined
+\usepackage{school-style-math}
+\usepackage{school-style-units}
+
+% math related
+\usepackage[fleqn,tbtags]{mathtools}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath,bm,times}
+
+% graphics related
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{grffile}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows}
+% formatting
+\usepackage{setspace}
+\usepackage{multirow}
+\usepackage{lscape} % for displaying table vertically.
+\usepackage{booktabs,array}
+\usepackage{todonotes}
+
+% algorithm 
+\usepackage{listings}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+
+% symbols 
+\usepackage[version=3]{mhchem}
+\usepackage{textcomp} % for \cents
+\usepackage{wrapfig}
+
+
+% others
+\def\Midrule{\midrule[\heavyrulewidth]}
+\newcount\rowc
+
+\makeatletter
+\def\ttabular{%
+\hbox\bgroup
+\let\\\cr
+\def\rulea{\ifnum\rowc=\@ne \hrule height 1.3pt \fi}
+\def\ruleb{
+\ifnum\rowc=1\hrule height 1.3pt \else
+\ifnum\rowc=6\hrule height \heavyrulewidth 
+   \else \hrule height \lightrulewidth\fi\fi}
+\valign\bgroup
+\global\rowc\@ne
+\rulea
+\hbox to 10em{\strut \hfill##\hfill}%
+\ruleb
+&&%
+\global\advance\rowc\@ne
+\hbox to 10em{\strut\hfill##\hfill}%
+\ruleb
+\cr}
+\def\endttabular{%
+\crcr\egroup\egroup}
