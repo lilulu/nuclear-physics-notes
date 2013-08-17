@@ -420,7 +420,7 @@ by\par
 \unvbox\@titlesupervisor
 \par
 \vfill
-\signature{Accepted by}{\@chairmanname \\ \@chairmantitle\\ Chair, Department Committee on Gradutae Students}
+\signature{Accepted by}{\@chairmanname \\ \@chairmantitle\\ Chair, Department Committee on Graduate Students}
 \vfill
 \end{titlepage}}
 
