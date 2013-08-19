@@ -16,8 +16,8 @@
 \usepackage{amsmath,bm,times}
 
 % graphics related
-\usepackage[usenames,dvipsnames]{color}
-\usepackage{color}
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage{xcolor}
 \usepackage{graphicx}
 \usepackage{hyperref}
 \usepackage{grffile}
@@ -28,6 +28,13 @@
 \definecolor{myyellow}{RGB}{249,232,100}
 \definecolor{mygrey}{RGB}{218,215,164}
 \definecolor{myblue}{RGB}{135,146,160}
+
+% FIXME: The ``define block'' below defines ``blue'' such that it's
+% not a color any more, making it impossible to actually build blue
+% things in tikz, which is bad.  This should be fixed properly, but
+% for now I guess we can just redefine ``bluecolor'' as an actual
+% color.
+\colorlet{bluecolor}{blue}
 
 % define block
 \tikzstyle{blue} = [rectangle, draw, fill=myblue, fill opacity=.4, 
