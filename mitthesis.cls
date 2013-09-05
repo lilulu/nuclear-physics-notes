@@ -1,4 +1,7 @@
 % $Log: mitthesis.cls,v $
+% Revision 2.0  2013/08/01 lululi
+% fixes for 2013 course 22 MS requirements, adopted from course 6. 
+%
 % Revision 1.2  1999/10/21 14:51:33  boojum
 % changed references to documentstyle to documentclass in comments
 %
@@ -31,16 +34,10 @@
 %Revision 1.1  90/05/04  11:45:53  lwvanels
 %Initial revision
 
-%
-% LaTeX format for theses at MIT
-% Based on "Specifications for Thesis Preparation" 
-
 % `vi' and `upcase' options by Krishna Sethuraman - krishna@athena.mit.edu
 % Margins and heading types by Peter Nuth  - nuth@ai.mit.edu
 % Title and abstract page by Stephen Gildea - gildea@erl.mit.edu
-% Look in this directory for example file mitthesis.doc
-% Also for propcover.tex - Boilerplate for PHD proposal.
-
+%
 % To use this style - say something like:
 %  for dull, boring thesis format:
 %	\documentclass[12pt]{mitthesis}
@@ -76,7 +73,6 @@
 %
 % Pagestyle `drafthead':
 %   Puts the date and the label ``*DRAFT*'' in the footer.
-%
 %%%%%%%%%%
 %
 %%%% Parameters to initialize for boilerplate page:
@@ -129,7 +125,6 @@
 % upcase	Will put much of the cover page in uppercase, as per the
 % 		example on page 17 of the *Specifications for Thesis
 % 		Preparation*, (revised 1989)
-% Also added ``All Rights Reserved'' to default copyright notice.
 %
 %%%%%%%%%%%
 % 
@@ -156,8 +151,7 @@
 
 \def\mystretch{1.5}		% Double spacing hack
 \DeclareOption{doublespace}{}	% This is default
-				% So we do not read this style twice
-\DeclareOption{singlespace}{		% If he explicitly wants single spacing
+\DeclareOption{singlespace}{	% If one explicitly wants single spacing
     \typeout{Single spaced}
     \def\mystretch{1}}	
 
@@ -299,17 +293,7 @@
 
 
 %%%%%%%%%  End of Style parameters %%%%
-
-% Here's Gildea's Boilerplate Stuff.
-% Copyright (c) 1987 by Stephen Gildea
-% Permission to copy all or part of this work is granted, provided
-% that the copies are not made or distributed for resale, and that
-% the copyright notice and this notice are retained.
-
 %% Define all the pieces that go on the title page and the abstract.
-
-% \title and \author already exist
-
 \def\prevdegrees#1{\gdef\@prevdegrees{#1}}
 \def\@prevdegrees{}
 
