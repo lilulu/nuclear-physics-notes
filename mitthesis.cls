@@ -380,7 +380,7 @@ reserved.\par\permission}}
 \large
 {\def\baselinestretch{1.2}\Large\bf \choosecase{\@title} \par}
 by\par
-{\Large  \choosecase{\@author}}
+{\Large \@author}
 \par
 \@prevdegrees
 \par
@@ -406,12 +406,19 @@ by\par
 \vfill
 \signature{Accepted by}{\@chairmanname \\ \@chairmantitle\\ Chair, Department Committee on Graduate Students}
 \vfill
-\end{titlepage}}
+\end{titlepage}
+%% added an empty page if twoside is requested. lululi
+\if@twoside
+\clearpage
+\thispagestyle{empty}
+\mbox{}
+\fi
+}
 
 % this environment should probably be called abstract,
 % but we want people to also be able to get at the more
 % basic abstract environment
-\def\abstractpage{\newpage
+\def\abstractpage{\clearpage
 \begin{center}{\large{\bf \@title} \\
 by \\
 \@author \\[\baselineskip]}
@@ -425,11 +432,18 @@ requirements for the \@degreeword\ of \\
 \par
 \begin{abstract}}
 
-%% Changed from \unvbox to \unvcopy for use with multiple copies of abstract
-%% page.
-%% Krishna Sethuraman (1990)
+%% Added empty page after abstract page for twoside  lululi
+\if@twoside
 \def\endabstractpage{\end{abstract}\noindent
- \unvcopy\@abstractsupervisor \newpage}
+ \unvcopy\@abstractsupervisor \clearpage
+\thispagestyle{empty}
+\mbox{}
+\clearpage
+}
+\else
+\def\endabstractpage{\end{abstract}\noindent
+ \unvcopy\@abstractsupervisor \clearpage}
+\fi
 
 %% This counter is used to save the page number for the second copy of
 %% the abstract.
