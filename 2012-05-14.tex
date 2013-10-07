@@ -4,8 +4,13 @@
 \begin{document}
 \maketitle
 
-\lecture{LWR Core Design}
-This lecture combines Jeremy Robert's PWR core loading pattern lecture given for 22.211 on 05/14/2012 and Prof. Smith's LWR core design lecture given for 22.39 on 10/02/12, 10/04/12. 
+\lecture{LWR Core Design and Optimization} 
+
+This lecture combines Jeremy Robert's PWR core loading pattern lecture
+given for 22.211 on 05/14/2012 and Prof. Smith's LWR core design
+lecture given for 22.39 on 10/02/2012, 10/04/2012. The last section on
+core loading optimization also incorporates Prof. Smith's 22.251
+Lecture 10 on 10/07/2013.
 
 %%%%%%%%%%%%%% 10/02/12 22.39 Neutronics Lecture 1 %%%%%%%%%%%%
 \topic{Objectives \& Constrain}
@@ -393,31 +398,62 @@ The last step is illustrated in Fig.~\ref{BWR-startup}, as we design the startup
     \caption{BWRs Design for Startup Sequence} \label{BWR-startup} 
     \end{figure}
 
+
 \clearpage
-\topic{PWR Core Loading Pattern Optimization}
-Reference: Turinsky's `Core Isotopic Depletion and Fuel Management' in \textit{Handbook of Nuclear Engineering}, Springer (2010). 
+\topic{PWR Core Loading Pattern Optimization} 
 
-
-Objectives
+Reference: Turinsky's `Core Isotopic Depletion and Fuel Management' in
+\textit{Handbook of Nuclear Engineering}, Springer (2010). Objectives: 
 \begin{itemize}
 \item Limit on power peaking. 
-\item Increased margins to thermal limits (CHF, T$_{\mathrm{fuel}}$. 
+\item Increased margins to thermal limits (CHF, T$_{\mathrm{fuel}}$). 
 \item Maximize economics. 
 \end{itemize}
-The fundamental tradeoff is between economics (maximize energy) and minimize safety risks (minimize peaking):
+
+
+\subtopic{Fundamentals}
+
+The \textbf{fundamental trade off} is between economics (maximize energy) and
+minimize safety risks (minimize peaking):
+
 \begin{itemize}
-\item Maximize energy: maximize EOC reactivity, maximize cycle length, maximize fuel burnup. 
-\item Minimize peaking: minimize maximum enthalpy rise hot-channel factor F$_{\Delta H}$, minimize heat flux hot-channel factor. 
+\item Maximize energy: maximize EOC reactivity, maximize cycle length,
+  maximize fuel burnup.
+\item Minimize peaking: minimize maximum enthalpy rise hot-channel
+  factor F$_{\Delta H}$, minimize heat flux hot-channel factor.
+\end{itemize}
+
+\textbf{Common loading patterns}: 
+
+\begin{enumerate}
+\item Out-in: most burned fuel bundles are loaded on the
+  inside. Result: reduced peaking factor (e.g., 1.404), but bad
+  economy (for instance, when an outer ring fresh fuel bundle has a
+  kinf of 1.25, and the whole core has a keff of 1, that implies that
+  about 25\% of the neutrons leak out).
+
+\item In-out: most burned on the outside. good peaking factor, bad economics.
+
+\item Ring of fire (or low leakage pattern, in/in/out pattern):
+  checker board pattern of fresh and one cycle fuel, with a ring of
+  burned one near the out-side most. We get about 3 months additional
+  operating time compared with the traditional out-in pattern.
+\end{enumerate}
+
+A note here is that a big difference between PWRs and BWRs is that: 
+
+\begin{itemize}
+
+\item PWRs: density is almost constant; a fuel shuffle affects the
+  global problem and can produce flux tilting very easily.
+
+\item BWRs: because of the existence of void, effects tend to be local. 
+
 \end{itemize}
 
 
-Loading Pattern Problem: 
-\begin{enumerate}
-\item Out-in: most burned on the inside. good economics, bad peaking factor. 
-\item In-out: most burned on the outside. good peaking factor, bad economics.
-\item Ring of fire: from outside to inside less fresh, except a ring of burned one near the out-side most. 
-\end{enumerate}
-A LP problem is, 
+On a high level, a loading pattern problem
+
 \begin{itemize}
 \item is a nonlinear, mixed-integer problem (so no derivatives).
 \item is inherently a multi-objective problem. 
@@ -425,17 +461,76 @@ A LP problem is,
 \item has disjoint feasible regions.
 \item has an extremely large decision space. 
 \end{itemize}
-Stochastic optimization schemes are only real options, 
-\begin{enumerate}
-\item Simulated annealing.
-\item Genetic algorithms.
-\item Swarm intelligence (ant colony, particle swarm, etc). 
-\end{enumerate}
-Casting the Objectives: A common way for using multiple objectives is the \hi{augmented (weighted) objective}. Example for $k, p$: 
-\eqn{ f(k,p) = (1.5 - p) - 100 H (1.15 - k) }
-This is an easy way to to include constrains as penalties. A better approach would the Pareto optimal which is not covered in this lecture (Ask stephano for questions). 
 
-\textbf{Simulated Annealing}: The physical process of annealing means bringing metals to a high temperature and let it cool slowly; if it cools slowly enough eventually it would get to its minimum energy. 
+
+
+\clearpage
+
+\subtopic{XIMAGE: Loading Pattern Design} 
+
+\href{http://www.studsvik.com/Business-Areas/Operating-Efficiency/Nuclear-Fuel-Analysis-Software/Loading-Pattern-Design/XIMAGE/}{XIMAGE}
+is basically a graphical tool that runs CASMO and SIMULATE underneath
+and displays the results nicely for easy visualization. For this class
+we use X-IMAGE to optimize PWR loading pattern (quarter core
+shuffling). BWR loading pattern is more difficult because:
+
+\begin{itemize}
+
+\item BWRs typically do half core shuffling. There are four times as
+  many bundles as in PWRs.
+
+\item Multiple rod patterns are always possible, and rods must be
+  moved for criticality.
+
+\item Flow is a variable. It is common to drive pump speed to control
+  reactivity (review load-follow). Because a harder spectrum is
+  beneficial for extending cycle length, typically we want to run the
+  core with a low flow rate for as long as we can, then slowly
+  increasing the flow rate.
+\end{itemize}
+
+
+There are a couple of terms used in XIMAGE: 
+
+\begin{enumerate}
+
+\item \textbf{Boron search}: at each cycle exposure, a search is
+  performed to find the Boron concentration that achieves a $\keff =
+  1$.
+
+\item \textbf{F-Delta h}: $F$ is the power peaking factor, and $\Delta h$ is
+  the entropy increase. This is a good measurement because it takes
+  into account that not all energy generated from fission would be
+  deposited locally. For instance, gamma interactions in the
+  structural material generate heat which is then picked up by the
+  fluid and reflected in $\Delta h$. The analog in BWR is the MCPR
+  (Minimum Critical Power Ratio).
+
+\item \textbf{Equilibrium cycle calculation}: assume the shuffling
+  pattern (called the equilibrium cycle) stays identical from cycle to
+  cycle. The cycle length converges fairly quickly (e.g., in this case
+  5 cycles for a PWR). Though in real life, the condition never stays
+  perfectly identical from cycle to cycle, so small variation
+  exists. Typically a year before start-up, someone designs the core
+  loading pattern, and this design finalizes about 6 months before the
+  actual start-up of the plant.
+\end{enumerate}
+
+
+\clearpage
+
+\subtopic{Greedy Binary Random Swap in Quarter Core}
+
+It takes XIMAGE about 2 seconds to perform a 24-axial-node cycle
+depletion. That is about 14,400 patterns per workday. But the limiting
+factor is on the human side that we have limited decision speed,
+limited persistence, unable to recognize already searched space, and
+we tend to be greedy. That is why we move to automated optimization
+that avoids the above limitations. The simpliest method is to perform
+a greedy binary random swap in quarter-core:
+
+\todo[inline]{add in greedy binary random swap} 
+
 \begin{algorithm}
   \begin{algorithmic}
     \STATE Intialize $x, C_0, L_0$.  $k=0$. 
@@ -443,50 +538,144 @@ This is an easy way to to include constrains as penalties. A better approach wou
     \STATE do 
     \ENDWHILE
   \end{algorithmic}
-  \caption{Basic Simulated Annealing Algorithm}
+  \caption{Basic Greedy Binary Random Swap Algorithm}
 \end{algorithm}
-The key feature is 
 
+The question is, how do we make search faster? 
 
-\textbf{Genetic Algorithm}
-\begin{algorithm}
-  \begin{algorithmic}
-    \STATE Create and evaluate an initial population of $N$ chromosomes.
-    \WHILE{not converged} 
-    \STATE Select $n$ chromosomes to reproduce (crossover); 
-    \STATE Crossover and/or Mutate chromosomes;
-    \STATE Replace $n$ least fit chromosomes with $n$ offsprings;
-    \STATE Evaluate the population.
-    \ENDWHILE
-  \end{algorithmic}
-  \caption{Basic Genetic Algorithm}
-\end{algorithm}
+There are a couple of issues we need to keep in mind: 
 
 \begin{enumerate}
-\item  Selection criteria: survival of the fittest. 
-  \begin{enumerate}
-  \item Proportinal selection, Russian-Roulette. 
-  \item 
-  \end{enumerate}
 
-\item Crossover: breeding patterns. This type of problem is called ordering problems: we have finite number of something that need to be conserved in the crossover. A typically way to do it is the Heuristic Tie-Breaking crossover: 
+\item No removable BPs under control rods. 
 
-\item Mutation: add a bit of local refinement to the global scopes of GA. 
+\item Rods have to have limited burnup (say 30 MWd/kg) under control
+  rod positions). The main reason is that guide tube distorts when
+  burnup is high, and the control rods may not go in. The secondary
+  reason is that we want the reasonable rod worth underneath the
+  control rods.
 
-\item Replacement: 
-  \begin{enumerate}
-    \item Delete all (generational): replace all $N$ parents with $N$ offspring.    \item Steady state: replace some subset of $n$ parents with or without avoiding duplication.
-  \end{enumerate}
+\item We prefer quadrant/octant symmetry in the fresh fuel. Likely
+  wise we can maintain batch symmetry in the depleted fuel.
+
+\item Use heuristics to eliminate unattractive patterns: 
+  \begin{itemize}
+    \item No fresh fuel on periphery. 
+    \item Template heuristics. 
+  \end{itemize}
+
+\item Use `surrogate model' to replace expansive function
+  evaluation. In most optimization, it takes more time to decide the
+  next step than to perform the function evaluation. For our problem,
+  the function evaluation takes significantly longer than the decision
+  for next step.
+  \begin{itemize}
+  \item Early stages we can use 2D rather than 3D.
+  \item Early stages we can use neural network. 
+  \item Don't complete cycle depletion if first state point is not
+    acceptable. 
+  \end{itemize}
 \end{enumerate}
 
 
 
-\textbf{Summary}
-Comparison between SA and GA:
+
+
+\clearpage
+\subtopic{Stochastic Optimization Schemes}
+
+\textbf{Casting the objectives}: A common way for using multiple objectives is
+the \hi{augmented (weighted) objective}. Example for $k, p$: 
+
+\eqn{ f(k,p) = (1.5 - p) - 100 H (1.15 - k) }
+
+This is an easy way to include constrains as penalties. A better
+approach would the Pareto optimal which is not covered in this lecture
+(Ask stephano for questions).
+
+
+Stochastic optimization schemes are only real options, 
+
+\begin{enumerate}
+\item \textbf{Simulated Annealing}: The physical process of annealing
+  means bringing metals to a high temperature and let it cool slowly;
+  if it cools slowly enough eventually it would get to its minimum
+  energy.
+
+\begin{algorithm}
+  \begin{algorithmic}
+    \STATE Intialize $x, C_0, L_0$.  $k=0$. 
+    \WHILE{not converged} 
+    \STATE do 
+    \ENDWHILE
+  \end{algorithmic}
+  \caption{Basic Simulated Annealing Algorithm} 
+\end{algorithm}
+
+\item \textbf{Genetic Algorithm}
+  \begin{algorithm}
+    \begin{algorithmic}
+      \STATE Create and evaluate an initial population of $N$ chromosomes.
+      \WHILE{not converged} 
+      \STATE Select $n$ chromosomes to reproduce (crossover); 
+      \STATE Crossover and/or Mutate chromosomes;
+      \STATE Replace $n$ least fit chromosomes with $n$ offsprings;
+      \STATE Evaluate the population.
+      \ENDWHILE
+    \end{algorithmic}
+    \caption{Basic Genetic Algorithm}
+  \end{algorithm}
+
+  \begin{enumerate}
+  \item  Selection criteria: survival of the fittest. 
+    \begin{enumerate}
+    \item Proportional selection, Russian-Roulette. 
+    \item Find the fittest one? 
+    \end{enumerate}
+
+  \item Crossover: breeding patterns. This type of problem is called
+    ordering problems: we have finite number of something that need to
+    be conserved in the crossover. A typically way to do it is the
+    Heuristic Tie-Breaking crossover:
+
+  \item Mutation: add a bit of local refinement to the global scopes of GA. 
+
+  \item Replacement: 
+    \begin{enumerate}
+    \item Delete all (generational): replace all $N$ parents with $N$
+      offspring.  
+
+    \item Steady state: replace some subset of $n$ parents with or
+      without avoiding duplication.
+    \end{enumerate}
+  \end{enumerate}
+
+
+\item Swarm intelligence (ant colony, particle swarm, etc). 
+\item Greedy Exhaustive Dual Binary Swaps (GEDBS). 
+\end{enumerate}
+
+\textbf{Comparison between SA and GA}: 
+
 \begin{itemize}
-\item SA is simpler to understand. SA is harder to parallelize (becase at each temperature you are making up a $L$ that depends on the previous steps). 
-\item GA is natural for true `multiobjective' optimization. GA is trivial to parallelize. 
-\item Both are heuristic and need some tuning. Both can be improved with hill-climbing heuristics (eg, greedy exhaustive single binary swaps). 
+\item SA is simpler to understand. SA is harder to parallelize (because
+  at each temperature you are making up a $L$ that depends on the
+  previous steps).
+
+\item GA is natural for true `multiobjective' optimization. GA is
+  trivial to parallelize.
+
+\item Both are heuristic and need some tuning. Both can be improved
+  with hill-climbing heuristics (eg, greedy exhaustive single binary
+  swaps).
 \end{itemize}
-Once you put the most burned cores on the outside-most ring, how the inside pattern does not affect the cycle length anymore because the power on the outside is so small. But the peaking power is very sensitivie on the inner pattern. 
+
+A subtle point: once you put the most burned cores on the outside-most
+ring, how the inside pattern does not affect the cycle length anymore
+because the power on the outside is so small. But the peaking power is
+very sensitive on the inner pattern.
+
+
+
+\clearpage
 \end{document}
