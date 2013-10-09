@@ -5,17 +5,22 @@
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesClass{school-style-packages}
 
-% self-defined
+% my own styles
 \usepackage{school-style-math}
 \usepackage{school-style-units}
 
-% math related
+% math packages
 \usepackage[fleqn,tbtags]{mathtools}
 \usepackage{amssymb}
-\usepackage{amsthm}
 \usepackage{amsmath,bm,times}
 
-% graphics related
+% theorem package: theorem, definition, etc. 
+\usepackage{amsthm}
+\newtheorem{theorem}{Theorem}
+\newtheorem{definition}{Definition}
+
+
+% graphics packages
 \usepackage[usenames,dvipsnames]{color}
 \usepackage{graphicx}
 \usepackage{hyperref}
@@ -23,25 +28,25 @@
 \usepackage{tikz}
 \usetikzlibrary{shapes,arrows}
 
-% formatting
+% formatting packages
 \usepackage{setspace}
 \usepackage{multirow}
 \usepackage{lscape} % for displaying table vertically.
 \usepackage{booktabs,array}
 \usepackage{todonotes}
 
-% algorithm 
+% algorithm packages
 \usepackage{listings}
 \usepackage{algorithm}
 \usepackage{algorithmic}
 
-% symbols 
+% symbols packages
 \usepackage[version=3]{mhchem}
 \usepackage{textcomp} % for \cents
 \usepackage{wrapfig}
 
 
-% others
+% other definitions
 \def\Midrule{\midrule[\heavyrulewidth]}
 \newcount\rowc
 
