@@ -1,4 +1,4 @@
-%
+
 % The many shortcuts for derivitives, seperated from -style-math because there
 % are just so many of these
 %
@@ -519,8 +519,6 @@
 \newcommand{\ddun}[1]{\derivitivetwon{}{u}{#1}}
 \newcommand{\dudt}{\derivitivetwo{u}{t}}
 \newcommand{\pu}{\partial u}
-\newcommand{\pupt}{\partialtwo{u}{t}}
-\newcommand{\puptn}[1]{\partialtwon{u}{t}{#1}}
 \newcommand{\dudtn}[1]{\derivitivetwon{u}{t}{#1}}
 \newcommand{\dudr}{\derivitivetwo{u}{r}}
 \newcommand{\dudrn}[1]{\derivitivetwon{u}{r}{#1}}
@@ -530,6 +528,10 @@
 \newcommand{\dudyn}[1]{\derivitivetwon{u}{y}{#1}}
 \newcommand{\dudz}{\derivitivetwo{u}{z}}
 \newcommand{\dudzn}[1]{\derivitivetwon{u}{z}{#1}}
+\newcommand{\pupr}{\partialtwo{u}{r}}
+\newcommand{\puprn}[1]{\partialtwon{u}{r}{#1}}
+\newcommand{\pupt}{\partialtwo{u}{t}}
+\newcommand{\puptn}[1]{\partialtwon{u}{t}{#1}}
 \newcommand{\pupx}{\partialtwo{u}{x}}
 \newcommand{\pupxn}[1]{\partialtwon{u}{x}{#1}}
 \newcommand{\pupy}{\partialtwo{u}{y}}
@@ -721,10 +723,12 @@
 \newcommand{\dvecx}{\derivitive \vec{x}}
 \newcommand{\ddx}{\derivitiveone{x}}
 \newcommand{\ddxn}[1]{\derivitivetwon{}{x}{#1}}
-\newcommand{\dxdt}{\derivitivetwo{x}{t}}
-\newcommand{\dxdtn}[1]{\derivitivetwon{x}{t}{#1}}
+\newcommand{\drdt}{\derivitivetwo{x}{r}}
+\newcommand{\drdtn}[1]{\derivitivetwon{x}{r}{#1}}
 \newcommand{\dxds}{\derivitivetwo{x}{s}}
 \newcommand{\dxdsn}[1]{\derivitivetwon{x}{s}{#1}}
+\newcommand{\dxdt}{\derivitivetwo{x}{t}}
+\newcommand{\dxdtn}[1]{\derivitivetwon{x}{t}{#1}}
 \newcommand{\dxdz}{\derivitivetwo{x}{z}}
 \newcommand{\dxdzn}[1]{\derivitivetwon{x}{z}{#1}}
 \newcommand{\dxdu}{\derivitivetwo{x}{u}}
