@@ -1,0 +1,231 @@
+%------------------------------------------------------------------------------
+% physor2014.sty - pdflatex style file for the PHYSOR 2014 conference
+% v1.0  20130422 W.F.G. van Rooijen, University of Fukui, 2013
+%
+% In case of problems, contact the author: rooijen@u-fukui.ac.jp
+%
+% YOU __MUST__ USE PDFLATEX WITH THIS STYLE FILE
+%
+% This style file targets minimal custom programming to decrease the possibili-
+% ty of bugs. It relies, where possible, on existing style files. All required
+% style files are present in a reasonably modern TeX distribution; in particu-
+% lar, this file was tested with TeXLive 2012. If you find that your TeX dis-
+% tribution does not have one or more of the required style files, simply down-
+% load them via CTAN (http://www.ctan.org) and install the style files in the
+% same directory where this style file resides. Or, if your latex software has
+% a package management system, the required files will be downloaded automati-
+% cally for you.
+%
+% The following packages are used:
+%   ifpdf      : check for pdf(la)tex
+%   tgtermes   : the TeX Gyre version of the Times New Roman font
+%   geometry   : sets the page layout, text height and width, etc
+%   sectsty    : sets the section headings in the desired format
+%   ccaption   : sets float captions in the desired format
+%   fancyhdr   : sets the headers and footers
+%   natbib     : citations; replaces cites.sty and citesort.sty
+%   lastpage   : to allow XX/YY page numbers
+%   hyperref   : for hyperlinks and URLs
+%
+% Known issues / problems:
+% - pdflatex is required; specifically, this file does not work with "old-
+%   fashioned" latex; it also does not work with Japanese platex.
+% - the "native" latex in Ubuntu 12.04 is obsolete and will trigger non-fatal
+%   warnings.
+% - Default MikTeX installations require to download several packages.
+%------------------------------------------------------------------------------
+\NeedsTeXFormat{LaTeX2e}[2011/06/27]
+\ProvidesPackage{physor2014}[2013/04/22 v1.0 PHYSOR2014 style file]
+
+%------------------------------------------------------------------------------
+% If we are not using pdflatex, then quit
+%------------------------------------------------------------------------------
+\RequirePackage{ifpdf}[2011/01/30]
+\ifpdf
+  \PackageInfo{physor2014}{pdftex detected, OK to continue}
+\else
+  \PackageError{physor2014}{please use pdflatex!}
+    {This style file requires the use of pdflatex.\MessageBreak Type 'x' now to abort this run and re-compile with pdflatex}
+\fi
+
+%------------------------------------------------------------------------------
+% Load packages
+%------------------------------------------------------------------------------
+\RequirePackage{tgtermes}[2009/09/27]
+\RequirePackage{geometry}[2010/09/12]
+\RequirePackage{sectsty}[2002/02/25]
+\RequirePackage{ccaption}[2011/08/07]
+\RequirePackage{fancyhdr}[2005/03/22]
+\RequirePackage[numbers,sort&compress]{natbib}[2010/09/13]
+\RequirePackage{lastpage}[2013/01/28]
+\RequirePackage{setspace}[2011/12/19]
+\RequirePackage{lineno}[2005/11/02]
+\RequirePackage[]{hyperref}[2012/11/06]
+
+%------------------------------------------------------------------------------
+%
+%------------------------------------------------------------------------------
+\geometry{
+  a4paper,
+  left=22.5mm,
+  right=22.5mm,
+  top=23.3mm,
+  bottom=35mm,
+  centering,
+  twoside}
+
+\setlength{\headheight}{20pt}
+
+%------------------------------------------------------------------------------
+% Redefine some of the standard names for environments
+%------------------------------------------------------------------------------
+\renewcommand{\refname}{REFERENCES}
+\renewcommand{\abstractname}{ABSTRACT}
+
+%------------------------------------------------------------------------------
+% ccaption style: bold face and a full stop
+%------------------------------------------------------------------------------
+\captiondelim{.~}
+\captionnamefont{\bfseries}
+%\captiontitlefont{\bfseries}
+
+%------------------------------------------------------------------------------
+% Adapted from the base article class: set titlepage as a "first" page (allows
+% special treatment in fancyhdr), set the font sizes a bit different, 
+% change the spacing of all elements, and do not print the date.
+%------------------------------------------------------------------------------
+\renewcommand\maketitle{\par
+  \begingroup
+    \renewcommand\thefootnote{\@fnsymbol\c@footnote}%
+    \def\@makefnmark{\rlap{\@textsuperscript{\normalfont\@thefnmark}}}%
+    \long\def\@makefntext##1{\parindent 1em\noindent
+            \hb@xt@1.8em{%
+                \hss\@textsuperscript{\normalfont\@thefnmark}}##1}%
+    \if@twocolumn
+      \ifnum \col@number=\@ne
+        \@maketitlex
+      \else
+        \twocolumn[\@maketitlex]%
+      \fi
+    \else
+      \newpage
+      \global\@topnum\z@   % Prevents figures from going at top of page.
+      \@maketitlex
+    \fi
+    \thispagestyle{first}\@thanks
+  \endgroup
+  \setcounter{footnote}{0}%
+  \global\let\thanks\relax
+  \global\let\maketitle\relax
+  \global\let\@maketitle\relax
+  \global\let\@thanks\@empty
+  \global\let\@author\@empty
+  \global\let\@date\@empty
+  \global\let\@title\@empty
+  \global\let\title\relax
+  \global\let\author\relax
+  \global\let\date\relax
+  \global\let\and\relax
+}
+%
+\def\@maketitlex{%
+  \newpage
+  \null
+  \thispagestyle{first}
+  \begin{center}%
+    \vskip -4.0em
+    \let \footnote \thanks
+    {\normalfont \large \bfseries \@title \par}%
+    \vskip 1.0em%
+    {\normalsize
+      \lineskip .5em%
+      \begin{tabular}[t]{c}%
+        \@author
+      \end{tabular}\par}%
+  \end{center}%
+}
+
+%------------------------------------------------------------------------------
+% From sectsty.sty: set the section titles to centered; print 
+% a full stop (period, ".") after the (sub)section number
+%------------------------------------------------------------------------------
+\sectionfont{\centering \normalsize}
+\subsectionfont{\normalsize}
+\subsubsectionfont{\small \bfseries}
+
+\makeatletter
+\def\@seccntformat#1{\csname the#1\endcsname.~~}
+\makeatother
+
+%------------------------------------------------------------------------------
+% Increase the white space between paragraphs; no paragraph indentation;
+%------------------------------------------------------------------------------
+\addtolength{\parskip}{\baselineskip}
+\setlength{\parindent}{0pt}
+
+%------------------------------------------------------------------------------
+% Packages fancyhdr and lastpage; set page number as XX/YY 
+% Header and footer for normal pages
+%------------------------------------------------------------------------------
+\newcommand{\shortauthor}{Short Author Name}
+\newcommand{\shorttitle}{Short Title}
+
+\fancyhead{}
+\fancyhead[CE]{\scriptsize \shortauthor}
+\fancyhead[CO]{\scriptsize \shorttitle}
+
+\fancyfoot{}
+\fancyfoot[LE]{\thepage/\pageref{LastPage}}
+\fancyfoot[RO]{\thepage/\pageref{LastPage}}
+\fancyfoot[LO]{\scriptsize PHYSOR 2014 \--\ The Role of Reactor Physics toward
+  a Sustainable Future\\Kyoto, Japan, September 28 - October 3, 2014}
+\fancyfoot[RE]{\scriptsize PHYSOR 2014 \--\ The Role of Reactor Physics toward 
+  a Sustainable Future\\Kyoto, Japan, September 28 - October 3, 2014}
+    
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+%------------------------------------------------------------------------------
+% Header and footer for the first page
+%------------------------------------------------------------------------------
+\fancypagestyle{first}{%
+  \fancyhf{} % clear all header and footer fields
+  \fancyhead[LO]{\scriptsize \emph{PHYSOR 2014 \--\ The Role of Reactor Physics 
+  toward a Sustainable Future} \\ The Westin Miyako, Kyoto, Japan, %
+  September 28 - October 3, 2014, on CD-ROM (2014)}
+  \renewcommand{\headrulewidth}{0pt}
+  \renewcommand{\footrulewidth}{0pt}
+}
+
+%------------------------------------------------------------------------------
+% Set pagestyle for document
+%------------------------------------------------------------------------------
+\pagestyle{fancy}
+
+%------------------------------------------------------------------------------
+% Table numbering in roman symbols
+%------------------------------------------------------------------------------
+\renewcommand{\thetable}{\Roman{table}}
+
+%------------------------------------------------------------------------------
+% keywords command
+%------------------------------------------------------------------------------
+\newcommand{\keywords}[1]{
+  \vspace{-1em}
+  \begin{raggedright}
+    \begin{list}{}{\setlength{\leftmargin}{0.5in}\setlength{\rightmargin}
+      {0.5in}\small}\item[] \ignorespaces\itshape Key Words: \upshape\bfseries #1
+    \end{list}
+  \end{raggedright}
+}
+
+%------------------------------------------------------------------------------
+% Settings for hyperref; note allcolors is introduced in hyperref.sty v6.82a
+% but some linux distros have older package (pre-6.80)
+%------------------------------------------------------------------------------
+\hypersetup{
+  colorlinks=true,
+  urlcolor=blue,
+  pdfcreator={LaTeX, PHYSOR 2014, hyperref}
+}
+
