@@ -254,6 +254,7 @@
 
 \definecolor{myyellow}{RGB}{249,232,100}
 \definecolor{mygrey}{RGB}{218,215,164}
+\definecolor{darkgrey}{RGB}{148, 143, 61}
 \definecolor{myblue}{RGB}{135,146,160}
 
 % FIXME: The ``define block'' below defines ``blue'' such that it's
@@ -262,7 +263,6 @@
 % for now I guess we can just redefine ``bluecolor'' as an actual
 % color.
 \colorlet{bluecolor}{blue}
-
 
 % formatting
 \usepackage{relsize}
@@ -321,4 +321,4 @@
 \renewcommand\algorithmiccomment[1]{
   \hspace{\fill}\#\ \eqparbox{COMMENT}{#1}
 }
-
+\usetikzlibrary{calc,intersections}
