@@ -3,6 +3,9 @@
 \ProvidesClass{school-research-notes}
 
 \usepackage{school-style-researchnotes}
+\usepackage{school-style-packages}
+
+
 \usepackage{tikz}
 \usetikzlibrary{shapes,arrows,positioning}
 \usetikzlibrary{decorations.markings}
