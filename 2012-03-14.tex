@@ -202,47 +202,75 @@ In Fick's law's land, we define $\displaystyle D = - \frac{1}{3 \Sigma_{tr}}$, t
 Next we can either assume scattering to be isotropic in the Lab system, or isotropic in the Center of Mass system. 
 \begin{enumerate}
 \item Assume the scattering is isotropic in the Lab system, then the scattering kernel goes away:
-\eqn{ \frac{1}{3} \gradient \phi(\vecr, E) + \Sigma_t (\vecr, E) \vecJ(\vecr, E) = 0} 
-That is, 
-\eqn{ \Aboxed{ \vecJ(\vecr, E) &= -D(\vecr, E) \gradient \phi(\vecr, E)} 
-& D(\vecr, E) &= \frac{1}{3 \Sigma_t (\vecr, E)} }
-This is the first way to calculate diffusion coefficient, that is, $D = \frac{1}{3 \Sigma_t}$. Notice the assumption of isotropic scattering in Lab system is not very good in a typical PWR -- because hydrogen scattering dominates, and hydrogen scatters isotropically in the COM system, not in the lab system. 
+  \eqn{ \frac{1}{3} \gradient \phi(\vecr, E) + \Sigma_t (\vecr, E) \vecJ(\vecr, E) = 0} 
+  That is, 
+  \eqn{ \Aboxed{ \vecJ(\vecr, E) &= -D(\vecr, E) \gradient \phi(\vecr, E)} 
+    & D(\vecr, E) &= \frac{1}{3 \Sigma_t (\vecr, E)} }
+  This is the first way to calculate diffusion coefficient, that is, $D = \frac{1}{3 \Sigma_t}$. Notice the assumption of isotropic scattering in Lab system is not very good in a typical PWR -- because hydrogen scattering dominates, and hydrogen scatters isotropically in the COM system, not in the lab system. 
 
 
-\item Assume the scattering is isotropic in the Center of Mass system. We use the \hi{transport correction $P_0$ approximation}:
-\begin{align}
-  \Aboxed{ D(\vecr, E) &= \frac{1}{3 \Sigma_{tr} (\vecr, E) } } \\
-  \Aboxed{ \Sigma_{tr} (\vecr, E) &= \Sigma_t(\vecr, E) - \Sigma_{s1} (\vecr, E) } 
-\end{align} 
+\item We can also start from the \hi{transport correction $P_0$ approximation}:
+  \begin{align}
+    \Aboxed{ D(\vecr, E) &= \frac{1}{3 \Sigma_{tr} (\vecr, E) } } \\
+    \Aboxed{ \Sigma_{tr} (\vecr, E) &= \Sigma_t(\vecr, E) - \Sigma_{s1} (\vecr, E) } 
+  \end{align} 
+
+  The transport cross section in the transport-corrected $P_o$ approximation for isotope $i$ is, 
+  \begin{align}
+    \sigma_{s1}^i (E\to E') &= 2 \pi \int_{-1}^1 \dmu_s \sigma_s^i (E\to E', \mu_s) P_1 (\mu_s) \\
+    &= \int_{-1}^1 \dmu_s \sigma_s^i (E \to E') \delta(\mu_s - \mu_s(E,E')) \mu_s \\
+    &= \mu_s (E', E) \sigma_s^i (E \to E') \\
+    \sigma_{s1}^i (E) &= \int_{E'} \dE' \mu_s(E,E') \sigma_s^i (E\to E') \\
+    &= \bar{\mu}^i (E) \sigma_s^i (E) \\
+    \sigma_{tr}^i (E) &= \sigma_t^i (E)  - \sigma_{s1}^i (E)  \\
+    &= \sigma_t^i (E) - \bar{\mu}^i (E) \sigma_s^i (E)
+  \end{align}
+
+  Under the assumption of isotropic scattering in COM, the mean value of cosine theta over the interval $-1,1$ is zero; the mean value of the cosine psi over the interval $-1,1$ is $\frac{2}{3A}$, hence,
+  \eqn{ \boxed{ \sigma_{tr}^i (E) = \sigma_t^i (E) - \frac{2}{3 A^i} \sigma_s^i(E) } }
+
+  How do we collapse $D$? 
+  \begin{enumerate}
+  \item Assuming isotropic scattering in lab system, we can calculate the flux-weighted total cross section,
+    \eqn{ D &= \frac{1}{3 \Sigma_t},  &\Sigma_t &= \frac{\Sum \Sigma_t \phi}{\Sum \phi} }
+  \item Flux-weighted transport cross section: 
+    \eqn{ D &= \frac{1}{3 \Sigma_{tr}},& \Sigma_{tr} &= \frac{\Sum \Sigma_{tr} \phi}{\Sum \phi} }
+    The problem with this method is that flux collapse under-predict transport. 
+  \item Most accurate: flux-weighted diffusion coefficient,
+    \eqn{ D_g &=  = \frac{\Sum \frac{1}{3 \Sigma_{tr}} \phi }{\Sum \phi} }
+  \item Curent weighted: 
+    \eqn{ D_g &= \frac{\int_{E_g}^{E_{g-1}} D(E) \gradient \phi(E) \dE}{\int_{E_g}^{E_{g-1}} \gradient \phi(E) \dE } }
+  \end{enumerate}
 \end{enumerate}
 
+More advanced methods include the out-scatter and in-scatter
+transport-corrected cross sections:
 
-The transport cross section in the transport-corrected $P_o$ approximation for isotope $i$ is, 
-\begin{align}
-\sigma_{s1}^i (E\to E') &= 2 \pi \int_{-1}^1 \dmu_s \sigma_s^i (E\to E', \mu_s) P_1 (\mu_s) \\
-&= \int_{-1}^1 \dmu_s \sigma_s^i (E \to E') \delta(\mu_s - \mu_s(E,E')) \mu_s \\
-&= \mu_s (E', E) \sigma_s^i (E \to E') \\
-\sigma_{s1}^i (E) &= \int_{E'} \dE' \mu_s(E,E') \sigma_s^i (E\to E') \\
-&= \bar{\mu}^i (E) \sigma_s^i (E) \\
-\sigma_{tr}^i (E) &= \sigma_t^i (E)  - \sigma_{s1}^i (E)  \\
-&= \sigma_t^i (E) - \bar{\mu}^i (E) \sigma_s^i (E)
-\end{align}
-Under the assumption of isotropic scattering in COM, the mean value of cosine theta over the interval $-1,1$ is zero; the mean value of the cosine psi over the intervale $-1,1$ is $\frac{2}{3A}$, hence,
-\eqn{ \boxed{ \sigma_{tr}^i (E) = \sigma_t^i (E) - \frac{2}{3 A^i} \sigma_s^i(E) } }
-
-How do we collapse $D$? 
 \begin{enumerate}
-\item Assuming isotropic scattering in lab system, we can calculate the flux-weighted total cross section,
-\eqn{ D &= \frac{1}{3 \Sigma_t},  &\Sigma_t &= \frac{\Sum \Sigma_t \phi}{\Sum \phi} }
-\item Flux-weighted transport cross section: 
-\eqn{ D &= \frac{1}{3 \Sigma_{tr}},& \Sigma_{tr} &= \frac{\Sum \Sigma_{tr} \phi}{\Sum \phi} }
-The problem with this method is that flux collapse under-predict transport. 
-\item Most accurate: flux-weighted diffusion coefficient,
-\eqn{ D_g &=  = \frac{\Sum \frac{1}{3 \Sigma_{tr}} \phi }{\Sum \phi} }
-\item Curent weighted: 
-\eqn{ D_g &= \frac{\int_{E_g}^{E_{g-1}} D(E) \gradient \phi(E) \dE}{\int_{E_g}^{E_{g-1}} \gradient \phi(E) \dE } }
+\item Out-scatter transport-corrected cross section for group $g$ is
+  just total cross section minus the total P1 scattering rate from
+  group $g$ to all other group $g'$ divided by P1 flux in group $g$:
 
+  \eqn{ \sigma_{tr-out}^g = \sigma_{tot}^g - \frac{\Sum_{g'=1}^G
+      \sigma_{s1}^{g \to g'} \phi^g}{\phi^g} = \sigma_{tot}^g -
+    \Sum_{g'=1}^G \sigma_{s1}^{g \to g'}}
+
+  However this method over-predicts leakage in hydrogenous systems. 
+
+\item In-scatter transport-corrected cross section: 
+
+  \eqn{ \sigma_{tr-out}^g = \sigma_{tot}^g - \frac{\Sum_{g'=1}^G
+      \sigma_{s1}^{g' \to g} \phi^{g'}}{\phi^g}}
+
+  This method requires knowledge of an approximate P1 flux (leakage)
+  spectrum. C5 uses this method by solving the Pn equations for a
+  uniform fission spectrum source in a homogeneous slab of water of
+  infinite thickness.
 \end{enumerate}
+
+
+
+
 
 
 \clearpage
