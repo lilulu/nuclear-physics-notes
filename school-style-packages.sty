@@ -19,7 +19,6 @@
 \newtheorem{theorem}{Theorem}
 \newtheorem{definition}{Definition}
 
-
 % graphics packages
 \usepackage[usenames,dvipsnames]{color}
 \usepackage{graphicx}
@@ -29,6 +28,7 @@
 \usetikzlibrary{shapes,arrows}
 
 % formatting packages
+\usepackage{makeidx}
 \usepackage{relsize}
 \usepackage{setspace}
 \usepackage{multirow}
@@ -41,6 +41,15 @@
 \usepackage{listings}
 \usepackage{algorithm}
 \usepackage{algorithmic}
+
+% fancy cross-referencing, I am undecided! 
+% usage: \autoref{label-name}
+\renewcommand{\sectionautorefname}{$\S$}
+\renewcommand{\subsectionautorefname}{$\S$}
+\renewcommand{\subsubsectionautorefname}{$\S$}
+\renewcommand{\figureautorefname}{$\alpha$}
+\renewcommand{\tableautorefname}{$\beta$}
+\renewcommand{\pageautorefname}{$\gamma$}
 
 % symbols packages
 \usepackage[version=3]{mhchem}
