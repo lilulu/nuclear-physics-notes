@@ -259,40 +259,43 @@ Mass parabola is used for:
 
 \item Three decay modes and their formulas. 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%% Decay Summary %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{landscape}
-\begin{table}[ht]
-    \scriptsize
-    \begin{tabular}{|c|c|c|c|} \hline
-    Properties & Alpha Decay & Beta Decay & Gamma Decay \\ \hline
-    %
-    \multirow{3}{*}{Notation} & \multirow{3}{*}{\ce{^A_ZX \to \ce{^{A-4}_{Z-2}\Xp} + ^4_2He} } & b.m.($n \to p$): \ce{^A_ZX \to \ce{^A_{Z+1}\Xp} + e^- + \bar{\nu}} & \multirow{3}{*}{ \ce{X^* \to X + \gamma} } \\  
-    & & b.p.($p \to n$): \ce{^A_ZX \to \ce{^A_{Z-1}\Xp} + e^+ + \nu} & \\
-    & & e.c. \ce{^A_ZX + e^- \to \ce{^A_{Z-1}\Xp} + \nu} & \\ \hline
-    %
-    \multirow{3}{*}{Mode} & \multirow{3}{*}{blank} & $\pi_P = \pi_D (-1)^L$, L = e or o? & L=e, e E, o M; L=o, o E, e M. \\
-    & & $I_P = I_D + L + S$, $L_{\mathrm{min}} =$? while $S = 0,1$. & $I_P = I_D + L$, all possible L? \\
-    & & For $L$, $S=0$ is Fermi, 1 is Gamow-Teller. & $L_{\mathrm{min}}$ is most probable.    \\ \hline
-    %
-    \multirow{3}{*}{Energy} & $m_X c^2 = m_{\Xp}c^2 + T_{\Xp} + m_{\alpha} c^2 + T_{\alpha}$ 
-    & $m_X c^2 = m_{\Xp} c^2 + m_{\beta} c^2 + T_{\Xp} + T_{\beta}$ 
-    & $M^* c^2 = Mc^2 + T_R + E_{\gamma}$ 
-    \\ 
-    & $Q = T_{\Xp} + T_{\alpha} = (m(X) - m(\Xp) - m(\alpha) )c^2$ 
-    & $Q_{\beta^-} = (m(X) - m(\Xp))c^2$
-    & $Q_{\gamma} =  (M^* - M)c^2  = T_R + E_{\gamma}$
-    \\ 
-    & $T_{\alpha} = Q \left( 1 - \frac{4}{A} \right) \approx 0.98 Q$ 
-    & $Q_{\beta^+} = (m(X) - m(\Xp) - 2m_e) c^2$
-    & $T_R = \frac{P_R^2}{2M} = \frac{P_{\gamma}^2}{2M} = \frac{\hbar^2 k^2 c^2}{2Mc^2} = \frac{E \gamma^2}{2Mc^2}$
-    \\ \hline
-    %
-    %
-    \multirow{3}{*}{Theory} & Gamow: barrier penetration, tunneling & Fermi: weak interaction. & Multipole transition\\
-    & $\lambda = f P_T$, $E_G = \left( \frac{2 \pi e^2 Z_{\alpha} Z_D}{\hbar c} \right)^2 \frac{\mu c^2}{2}$ & $\lambda_{if} = \frac{2\pi}{\hbar} |M_{if}|^2 \rho_f$ & $\lambda = \frac{P}{\hbar \omega}$ \\
-    & $2G = \sqrt{\frac{E_G}{Q}} \left[ 1 - \frac{4}{\pi} \sqrt{\frac{a}{b} } \right], P_T = e^{-2G}$ &  $N[p] = C p_e^2 (Q - T_e)^2 F(Z^{\prime}, p) |M_{fi}|^2 S(p_e, p_{\nu})$ & $P = f[L,\omega] |m_{fi} (\sigma L)|^2$ \\ \hline 
-    \end{tabular}
-\end{table}
-\end{landscape}
+
+  \begin{landscape}
+    \begin{table}
+      \begin{tabular}{|c|c|c|c|} \hline
+         & Alpha Decay & Beta Decay & Gamma Decay \\ \hline
+        %
+        \multirow{3}{*}{Notation} & \multirow{3}{*}{\ce{^A_ZX \to \ce{^{A-4}_{Z-2}\Xp} + ^4_2He} } & b.m.($n \to p$): \ce{^A_ZX \to \ce{^A_{Z+1}\Xp} + e^- + \bar{\nu}} & \multirow{3}{*}{ \ce{X^* \to X + \gamma} } \\  
+        & & b.p.($p \to n$): \ce{^A_ZX \to \ce{^A_{Z-1}\Xp} + e^+ + \nu} & \\
+        & & e.c. \ce{^A_ZX + e^- \to \ce{^A_{Z-1}\Xp} + \nu} & \\ \hline
+        %
+        \multirow{3}{*}{Mode} & \multirow{3}{*}{blank} & $\pi_P = \pi_D (-1)^L$, L = e or o? & L = e, e E, o M; L = o, o E, e M. \\
+        & & $I_P = I_D + L + S$, $L_{\mathrm{min}} =$? while $S = 0,1$. & $I_P = I_D + L$, all possible L? \\
+        & & For $L$, $S=0$ is Fermi, 1 is Gamow-Teller. & $L_{\mathrm{min}}$ is most probable.    \\ \hline
+        %
+        \multirow{3}{*}{Energy} 
+        & $\displaystyle m_X c^2 = m_{\Xp}c^2 + T_{\Xp} + m_{\alpha} c^2 + T_{\alpha}$ 
+        & $\displaystyle m_X c^2 = m_{\Xp} c^2 + m_{\beta} c^2 + T_{\Xp} + T_{\beta}$ 
+        & $\displaystyle M^* c^2 = Mc^2 + T_R + E_{\gamma}$ 
+        \\ 
+        & $\displaystyle Q = T_{\Xp} + T_{\alpha} = (m(X) - m(\Xp) - m(\alpha) )c^2$ 
+        & $\displaystyle Q_{\beta^-} = (m(X) - m(\Xp))c^2$
+        & $\displaystyle Q_{\gamma} =  (M^* - M)c^2  = T_R + E_{\gamma}$
+        \\ 
+        & $\displaystyle T_{\alpha} = Q \left( 1 - \frac{4}{A} \right) \approx 0.98 Q$ 
+        & $\displaystyle Q_{\beta^+} = (m(X) - m(\Xp) - 2m_e) c^2$
+        & $\displaystyle T_R = \frac{P_R^2}{2M} = \frac{P_{\gamma}^2}{2M} = \frac{\hbar^2 k^2 c^2}{2Mc^2} = \frac{E \gamma^2}{2Mc^2}$
+        \\ \hline
+        %
+        %
+        \multirow{3}{*}{Theory} & Gamow: barrier penetration, tunneling & Fermi: weak interaction. & Multi-pole transition\\
+        & $\displaystyle \lambda = f P_T$, $E_G = \left( \frac{2 \pi e^2 Z_{\alpha} Z_D}{\hbar c} \right)^2 \frac{\mu c^2}{2}$ 
+        & $\displaystyle \lambda_{if} = \frac{2\pi}{\hbar} |M_{if}|^2 \rho_f$ & $\lambda = \frac{P}{\hbar \omega}$ \\
+        & $\displaystyle 2G = \sqrt{\frac{E_G}{Q}} \left[ 1 - \frac{4}{\pi} \sqrt{\frac{a}{b} } \right], P_T = e^{-2G}$ &  $N[p] = C p_e^2 (Q - T_e)^2 F(Z^{\prime}, p) |M_{fi}|^2 S(p_e, p_{\nu})$ 
+        & $\displaystyle P = f[L,\omega] |m_{fi} (\sigma L)|^2$ \\ \hline 
+      \end{tabular}
+    \end{table}
+  \end{landscape}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%% Decay Summary %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \end{enumerate}
 
@@ -672,6 +675,7 @@ P_T &\sim e^{-2G} \sim e^{- \frac{Z_a Z_X}{\sqrt{Q}}} & \sigma_{\mathrm{fusion}}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%% A Condensed Version %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\clearpage
 \topic{A Condensed Version}
 \begin{enumerate}
 \item CGS unit: $\hbar c = 200 \fsp \MeV \cdot \fm$; the fine structure constant $\frac{e^2}{\hbar c} = \frac{1}{137}, m_n c^2 = 938, a=(1.2 \fm) A^{1/3}. k = \frac{2\pi}{\lambda} = \frac{p}{\hbar} = \frac{E}{\hbar c}. \int_0^a \sin^2 (n \pi x) \dx = \frac{a}{2}. \frac{e^x - e^{-x} }{2} = \sin x, \frac{e^x + e^{-x}}{2} = \cosh x.$

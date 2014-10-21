@@ -32,8 +32,18 @@ Comments:
 
 \begin{figure}[ht]
   \centering
-  \subfloat[A=135]{\label{A135}\includegraphics[width=0.8\textwidth]{images/rd/M-Z-A135.png}}                
-  \subfloat[A=102]{\label{A102}\includegraphics[width=0.8\textwidth]{images/rd/M-Z-A102.png}}
+  \begin{subfigure}[b]{0.45\textwidth}
+    \centering
+    \includegraphics[width=0.8\textwidth]{images/rd/M-Z-A135.png}
+    \caption{A=135}\label{A135}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.45\textwidth}
+    \centering
+    \includegraphics[width=0.8\textwidth]{images/rd/M-Z-A102.png}
+    \caption{A=102}\label{A102}
+  \end{subfigure}
+  %\subfloat[A=135]{\label{A135}\includegraphics[width=0.8\textwidth]{images/rd/M-Z-A135.png}}                
+  %\subfloat[A=102]{\label{A102}\includegraphics[width=0.8\textwidth]{images/rd/M-Z-A102.png}}
   \caption{Mass Parabola, Two Examples} \label{mass-parabola}
 \end{figure}
 
