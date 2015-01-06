@@ -8,4 +8,7 @@
 \newcommand{\cmark}{\ding{51}}%
 \newcommand{\xmark}{\ding{55}}%
 
-
+\usepackage{algorithmic,eqparbox,array}
+\renewcommand\algorithmiccomment[1]{
+  \hspace{\fill}\#\ \eqparbox{COMMENT}{#1}
+}
