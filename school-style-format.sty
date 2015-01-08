@@ -4,11 +4,7 @@
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesClass{school-style-format}
 
+
 \newcommand{\verbatimfont}[1]{\renewcommand{\verbatim@font}{\ttfamily#1}}
 \newcommand{\cmark}{\ding{51}}%
 \newcommand{\xmark}{\ding{55}}%
-
-\usepackage{algorithmic,eqparbox,array}
-\renewcommand\algorithmiccomment[1]{
-  \hspace{\fill}\#\ \eqparbox{COMMENT}{#1}
-}
