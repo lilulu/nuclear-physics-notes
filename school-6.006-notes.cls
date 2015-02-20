@@ -3,3 +3,4 @@
 \ProvidesClass{school-6.006-notes}
 
 \usepackage{school-style-classnotes}
+\usepackage{algpseudocode} %% for algorithmicx package

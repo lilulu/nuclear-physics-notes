@@ -3,3 +3,4 @@
 \ProvidesClass{school-22.106-notes}
 
 \usepackage{school-style-classnotes}
+\usepackage{algorithmic} %% for algorithmic package
