@@ -448,13 +448,35 @@ where we can subsitute $P(E'\to E) = \frac{1}{(1-\alpha)E'}$ into $\Sigma_s(E' \
   \eqn{ q(E) = \int_E^{\infty} \chi(E') S_f \dE' - \int_E^{\infty} \Sigma_a(E') \phi(E') \dE' }
   From the general expression $\int_0^{\infty} \chi(E') \dE' = 1$, we can approximate $\int_{0.1}^{\infty} \chi(E') \dE' = 1$, thus only leaving the energy independent $S_f$ term:  
   \begin{align}
-    q(E) &= - \int_E^{\infty} \Sigma_a (E') \phi(E') \dE' + S_f \\
-    \Aboxed{ \frac{\derivative q(E)}{\dE} &= - \Sigma_a (E) \phi(E) } 
+    q(E) &= - \int_E^{\infty} \Sigma_a (E') \phi(E') \dE' + S_f \label{eqn:qE}
+  \end{align}
+
+  Next we apply the second fundamental theorem of calculus, or the
+  Newton-Leibniz axiom, which states that, 
+
+  \eqn{ F'(x) &= f(x)  &\Rightarrow F(b) - F(a) &= \int_a^b f(x) \dx}
+
+  Be careful about the bounds as the second theorem is not simply
+  taking the derivative of Eq.~\ref{eqn:qE}. In our case, $q = F,
+  \Sigma \phi = f$. We already have $q(E)$, substitute $E = \infty$ in
+  Eq.~\ref{eqn:qE} we get,
+
+  \eqn{ q(\infty) &= S_f \label{eqn:qE-infty}}
+
+  Then Eq.~\ref{eqn:qE-infty} minus Eq.~\ref{eqn:qE} yields, 
+
+  \eqn{ q(\infty) - q(E) = \int_E^{\infty} \Sigma_a (E') \phi(E') \dE' }
+
+  which is the second expression in the second fundamental theorem of
+  calculus. Then by the theorem,
+  
+  \begin{align}
+    \Aboxed{ \frac{\derivative q(E)}{\dE} &= \Sigma_a (E) \phi(E) } 
   \end{align}
   Comments/notes: 
   \begin{itemize}
     \item If absorption increases, less neutrons would make it to $E$, then $q(E)$ should be smaller. 
-    \item $q(E)$ decreases proportional to $\Sigma_a$, because in our approximation the source term becomes indpendent of energy. 
+    \item $q(E)$ changes proportional to $\Sigma_a$, because in our approximation the source term becomes indpendent of energy. 
     \item If $\Sigma_a = 0, q(E) = $ constant. 
   \end{itemize}
 
