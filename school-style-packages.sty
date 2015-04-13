@@ -28,6 +28,9 @@
 \usepackage{tikz}
 \usetikzlibrary{shapes,arrows}
 \usepackage{pdflscape}
+\usepackage{color,soul}
+% usage: default is \hl{text in yellow}, define \hlc[green]{text in green}
+\newcommand{\hlc}[2][yellow]{ {\sethlcolor{#1} \hl{#2}} }
 
 % formatting packages
 \usepackage{makeidx}
