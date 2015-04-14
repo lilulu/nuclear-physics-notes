@@ -37,9 +37,6 @@
 \usetikzlibrary{shapes,arrows,positioning}
 \usetikzlibrary{decorations.markings}
 \usepackage{tikz-3dplot}
-%\usepackage[active,tightpage]{preview}
-%\PreviewEnvironment{tikzpicture}
-%\setlength\PreviewBorder{2mm}
 
 \definecolor{myyellow}{RGB}{249,232,100}
 \definecolor{mygrey}{RGB}{218,215,164}
@@ -111,3 +108,30 @@
 \cr}
 \def\endttabular{%
 \crcr\egroup\egroup}
+
+
+\usepackage{times}
+\usetikzlibrary{overlay-beamer-styles}
+
+\newcounter{storetxt}
+\newcounter{showtxt}
+
+\newcommand{\tikzmark}[2]{
+\tikz[remember picture,baseline=-0.5ex] 
+\node[inner sep=0pt,outer sep=0pt] (#1) {#2};%
+\stepcounter{storetxt}
+\global\@namedef{text@\thestoretxt\expandafter}\expandafter{#2}% storing text
+}
+
+\newcommand<>{\highlighton}[1]{
+\stepcounter{showtxt}
+\tikz[overlay,remember picture]{
+\edef\txt{\@nameuse{text@\theshowtxt}}% retrieve the correct text
+\node[opacity=0.8,text opacity=1,rounded corners,
+minimum width=3cm,minimum height=1.5cm,% size of the box
+background fill=red!50,fill on=#2,% box visibility
+visible on=#2% we need this to have the filling only in some overlays,
+% otherwise the opacity would affect all overlays
+]at(#1){\txt};
+}
+}

@@ -8,3 +8,5 @@
 \professor{Chinmay Hegde, Piotr Indyk, Yuan Zhou}
 \schoolname{Massachusetts Institute of Technology}
 
+\renewcommand{\path}{\rightsquigarrow}
+
