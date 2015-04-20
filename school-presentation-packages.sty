@@ -28,11 +28,16 @@
 \usepackage{booktabs}
 
 % graphics related
-%\usepackage[usenames,dvipsnames]{xcolor}
-%\usepackage{xcolor}
 \usepackage{graphicx}
 % cannot use hyperref package because it clash with grffile and tdclock
 \usepackage{grffile}
+\usepackage{color,soul}
+% usage: default is \hl{text in yellow}, define \hlc[green]{text in green}
+\newcommand{\hlc}[2][yellow]{ {\sethlcolor{#1} \hl{#2}} }
+\newcommand\bc{%
+  \let\set@color\beamerorig@set@color
+  \let\reset@color\beamerorig@reset@color}
+
 \usepackage{tikz}
 \usetikzlibrary{shapes,arrows,positioning}
 \usetikzlibrary{decorations.markings}
