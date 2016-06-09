@@ -1,0 +1,193 @@
+\documentclass{school-22.211-notes}
+\date{February 27, 2012}
+
+\begin{document}
+\maketitle
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%% Resonance Models Day 3: Important properties %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\topic{Doppler Broadening/Temperature Effects On Cross Section}
+Doppler effect describes the importance of thermal agigation on cross section. Thermal equilibrium means: 
+\begin{itemize}
+\item All heat source are perfectly balanced and the temperature of the medium is assumed constant. 
+\item Atom energy/velocity distribution can be approximated by Maxwell-Boltzman distribution, that is, a probability distribution that expresses velocity distribution as a function of temperature and mass medium. The higher the temperature, the wider the velocity range is; the lighter the atom is, the wider the velocity range is. Know the Boltzmann constant. 
+\end{itemize}
+
+U238 has a negative Doppler feedback. Reason: as temperature increases, the resonance width increases with its depth decreases. We care less about the depth, because there is no neutrons present right at the peak anyway. 
+
+
+\hi{Doppler Broadening means, as the temperature increases, the width of the spectrum increases, although the area under the curve stays the same}\footnote{References: Reuss Section 8.4; Handbook of Nuclear Engineering Chapter 4 Section 3; Duderstadt p.337-338; Bell p.433 (points out the area under the cross section curve is constant; hence the absorption rate is proportional to the magnitude of the flux in a sense.)}. 
+There are two possibilities: 
+\begin{enumerate}
+\item Infinite RI (infinite dilution factor, negligible absorber concentration, $\Sigma_t \sim \Sigma_s^M$) is independent of temperature becase the area under the psi chi curves are constant. The absorber concentration is too low to perturb the flux, hence no flux depression and no self-shielding.  
+
+\item Effective RI (finite concentration of \ce{^{238} U}) is dependent of temperature and the resonant material density because of the energy self-shielding effect as in Figure~\ref{Doppler}: 
+  \begin{itemize}
+  \item If temperature increases, $\RI_{\eff}$ would increase, because the broadened resonance increases the energy range over which abosrption occurs, which outweighs the lowering of the resonance peak. Reason: Energy self-shielding (the strong absorption of the resonance tends to shield the absorber nucleir from neutrons with energy $E\sim E_0$, hence the term `flux depression').  As temperature increases, the resonance is broadened by the Doppler effect, the neutron flux depression is decreased, whereas the area under the cross section curve is essentially constant. Hence the resonance absorption which is the energy-integrated reaction rate $\Sigma_a(E) \phi(E)$ increases with increasing temperature. 
+
+  \item If U/H increases, there are two consequences: one is that the flux is more depressed hence the $\RIeff$ decreases; secondly the higher energies become more important as we would later see in Section~\ref{spectral-hardening-section}. 
+  \item \hi{The higher the concentration of U238, the larger the Doppler temperature effects become, and the \% change saturates at high temperature.} 
+  \end{itemize}
+\end{enumerate}
+
+
+\textbf{Why do resonance broaden?} 
+
+If a neutron's energy equals that of the resonance, it will be absorbed. If it is
+slightly above or below the resonance energy, it will scatter off the U-238 nuclei
+without absorption. As the fuel heats up, the nuclei vibrate and this changes the
+relative speed between the neutron and the nuclei. Hence, the neutron is
+effectively at a different energy. What are the consequences? Suppose a neutron
+is initially slightly below the resonance energy. If the nucleus moves toward the
+neutron, the relative speed between the two goes up. Hence, that neutron will be
+absorbed.
+
+But for every neutron that is now newly absorbed, one that was previously at the
+resonance energy is now too high and it only scatters off the nucleus. So, why is
+there a net increase in absorption? The reason is that scattered neutron loses only
+a slight amount of energy (small object bouncing off a large one) and on its next
+collision, which will likely be with the fuel again, it will be absorbed. Thus, U-
+238 resonances broaden because (1) the U-238 nuclei vibrate more rapidly on heat
+up and (2) the fuel is separate from the coolant so that successive interactions
+occur in the fuel.
+
+\begin{figure}
+  \begin{subfigure}[b]{0.45\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{images/r-m/Doppler-RI-1.png}
+    \caption{U/H = 0.001} \label{UH0.01}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.45\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{images/r-m/Doppler-RI-2.png}
+    \caption{U/H = 0.1} \label{UH0.1}
+  \end{subfigure}
+  \caption{Impact of Temperature On Effective RI, Doppler Broadening} \label{Doppler}
+\end{figure}
+
+
+\clearpage
+%%%%%%%%%%%%%%%%%%% SELF-SHIELDING %%%%%%%%%%%%%%%%%%%%%
+\topic{Self-Shielding}
+Self-shielding/flux depression is first observed through: 
+\begin{table}[ht]
+  \centering
+  \begin{tabular}{|l|p{6cm}|p{6cm}|} \hline
+    & Observation & Explaination \\ \hline
+    Spatial 
+    & if natural uranium was made into a lump surrounded by moderator, resonance absorption $\down \down$  
+    & U238 in the center of a pin is `shielded' from neutrons in the moderator \\ \hline
+    Energy
+    & if U/H $\up$, absorption rate per atom (for neutrons slowed down in a water \& U mix) $\down$   
+    & the magnitude of absorption is proportional to the width of the resonance;  \\ \hline
+  \end{tabular}
+  \caption{Observation Concerning Self-Shielding}
+  \end{table}
+
+In a sentence, lumped configuration shields the fuel region from neutrons with $E \sim E_0$, hence decreasing resonance absorption and increasing $p$. As fuel diameter increases, the RI -- and therefore the absorption -- decreases. 
+
+For a homogenized medium, the value of p for natural uranium is about 0.70.
+However, larger values exist for the heterogeneous case. This is because of a
+phenomenon called ``spatial self-shielding.'' The idea is to keep the fuel and
+moderator separate. Neutrons slow down in a stepwise manner. Some collisions
+will cause neutrons to jump over the energies that correspond to the U238
+resonances. Others will land in resonance energies. What happens to these neutrons? 
+Suppose a neutron has an energy close to that of a U-238 resonance. 
+\begin{itemize}
+\item If a neutron scatters off U238 it will lose
+only a small amount of energy. In this case, the neutron is
+left near the resonance energy.
+\item If it scatters off moderator it will lose a lot of its energy.  In this case the neutron is removed from that energy.
+\end{itemize}
+
+What then is the effect of homogeneous or heterogeneous fuel? If the fuel and
+moderator are separate and the neutron is in the moderator, chances are it will
+collide with another moderator atom and be scattered out of the resonance region.
+So, heterogeneous arrangements favor resonance escape. In contrast, if the fuel
+and moderator are infinitely mixed (homogeneous) or if the fuel rod/moderator
+volumes repeat on small scales with dimensions less than a diffusion length, the
+next collision may again be with fuel and the neutron will be absorbed.
+Heterogeneous arrays are sometimes called ``lumped'' meaning that the fuel and
+moderator are separate, widely spread entities.
+
+Notice both $f$ and $p$ depends on the moderator-to-fuel ratio and there is a trade-off
+between the two\footnote{It should be noted that if one separates the fuel and moderator (large amounts of
+moderator between fuel rods), one decreases the thermal utilization. For f to be
+large, one seeks to maximize absorption in the fuel and hence minimize spatial
+self-shielding which could lead to absorption in the moderator. Thus, there is a
+tradeoff between f and p. Both depend on the moderator-to-fuel volume ratio.
+Optimal designs have both f and p at about 0.9.}. 
+
+\uline{Energy Self-shielding}: in a sentence, \textit{the strong absorption of the resonance tends to shield the absorber nuclei from neutrons with energy$\sim E_0$, hence creating the flux depression at $E_0$.}
+
+Prof. Forget states energy self-shielding as: when pure scattering, we can assume the thermal flux to be Maxwellian. But as we increase absorption, the spectrum would harden. Example: compare spectrum of UOX and MOX. UOX is 4\% U235, 96\% U238. MOX is 8\% Pu (2/3 fissile, 1/3 parasitic absorber), 92\% U238. The reason MOX's thermal spectrum is depressed is, 
+\begin{itemize}
+\item 1/3 of Pu in MOX is parasitic absorbtion, thus decreasing the thermal spectrum. 
+\item Pu239's fission cross section is significantly larger than U235's fission cross section, thus depressing the spectrum.
+\item Pu has huge thermal resonances. 
+\end{itemize}
+Prof. Smith approaches self-shielding using RI values vs. U/H ratio. As we increase the U/H ratio, the RI decreases in the three big resonance regions, and we see big dips on the spectrum plot. There are so much U238 in the fuel, that there is no flux in the fuel anymore. 
+
+\hi{As we increase the number of uranium atoms by a factor of 10, the number of absorption per atom is decreased by a factor of 3.} That is, the total aborption still increases, but the absorption per atom decreases. Figure~\ref{energy-self-shielding} illustrates that RI are very dependent on the density of resonant materials.
+\begin{figure}
+  \centering
+  \includegraphics[width=4.5in]{images/r-m/self-shielding.png}
+  \caption{Impact of Energy Self-Shielding On Effective RI} \label{energy-self-shielding}
+\end{figure}
+
+\textbf{Recap}: energy self-shileing means the decrease in absorption per atom (thus the depression of flux). Though the flux between resonances are trying to remain $1/E$. 
+
+\clearpage
+%%%%%%%%%%%%%%%%%%%%% SPECTRAL HARDENING %%%%%%%%%%%%%%%%%%
+\topic{Spectral Hardening Shifts Resonant Absorption Rates}\label{spectral-hardening-section}
+As U/H increases, the higher energy ranges become more important, and the peak of the thermal spectrum shifts to the right. Distribution of group-wise absorption shifts towards the higher energy. $1/v$ absorption of U238 becomes more significant. Self-shielding reduces the large resonance absorption fractions. See Figure~\ref{spectral-hardening}. 
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=6in]{images/r-m/spectral-hardening.png}
+  \caption{Impact of Spectral Hardening On RI} \label{spectral-hardening}
+\end{figure}
+
+As Shultis states(p.286-297),
+
+``As the temperature of the core material increases, the thermal neutrons maintain a Maxwellian energy distribution one but shifted increasingly towards higher energies. The thermal spectrum is said to harden. If all the cross sections in the core
+had exactly a 1/v dependence, there would be no change in the thermal-neutron
+interaction rates. However, most heavy nuclides have resonances near the upper end
+of the thermal energy range and their cross sections, consequently, are not exactly
+1/v in the thermal energy region. For example 239Pu has a large resonance at about 0.3 eV, and, as the thermal neutrons shift in energy towards this resonance, more neutrons are absorbed by 239Pu and thus the fission rate increases, thus producing a positive reactivity feedback. By contrast, hardening the thermal neutron spectrum causes a very slight decrease in absorption by 235U. 
+
+This hardening of the thermal neutron spectrum with increasing temperature
+is taken to an extreme in the TRIGA class of reactors which use as fuel enriched 235U blended in zirconium hydride. As the fuel temperature increases, vibrating hydrogen atoms trapped in the zirconium-hydride crystal lattice can transfer some
+of their vibratiorial energy (about 0.13 eV) to thermal neutrons, thereby removing
+them from the thermal energy region so they are less likely to be absorbed by the
+fuel. This very rapid negative reactivity feedback effect is the reason these reactors
+can be operated in a pulse mode, in which a large positive reactivity is inserted into
+the core by rapidly removing a control rod to make the reactor very super prompt
+critical. However, the ZrH negative temperature feedback acts within a few ms to
+stop the runaway chain reaction, which has increased the reactor power by many
+thousands of times the initial power, and brings the reactor power back to safe
+limits.'' 
+
+
+\textbf{Impact On Design}: 
+\eqn{ \kinf = \epsilon p \eta f}
+$\epsilon$ is fast fission. 
+\eqn{ \epsilon = \frac{\int_{F+T} \Sigma_f^F (E) \phi_F \dE}{\int_T \Sigma_f^F \phi_F \dE} }
+
+$p$ is resonance escape probability, 
+\eqn{ p = \frac{V_F \int_T \Sigma_a^F \phi_F \dE + V_M \int_T \Sigma_a^M \phi_M \dE}{V_F \int_{T+I} \Sigma_a^F \phi_F \dE + V_M \int_{T+I} \Sigma_a^M \phi_M \dE }  \approx \exp \left[ - \frac{V_F N_F \RI}{\Sum_i (V \xi \Sigma_s)_i} \right] }
+
+$eta$ is 
+\eqn{\eta = \frac{\int_T \nu \Sigma_f^F \phi_F \dE}{\int_T \Sigma_a^F \phi_F \dE}  }
+
+$f$ is
+\eqn{ f = \frac{V_F \int_T \Sigma_a^F  \phi_f \dE}{V_F \int_T \Sigma_a^F \phi_F \dE + V_M \int_T \Sigma_a^M \phi_M \dE} }
+
+
+Insert image here. Maximum $k$ gives us the optimal design (in terms of moderation). In reality we always operate at slightly under moderated. With Boron in it, we need to operate at even under moderation, and have to limit Boron concentration to 2000 ppm. Because now if we lose water, we not only lose moderation, but also lose absorption, and when Boron concentration is to high, we lose more absorption than moderation, which actually create a positive coefficient. 
+
+**** FIXME **** \\
+As we increase H/U, there is still a finite absorption, but the absorption per atom approaches zero. 
+
+\clearpage
+
+\end{document}

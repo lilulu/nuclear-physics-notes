@@ -1,0 +1,268 @@
+\documentclass{school-22.211-notes}
+\date{April 4, 2012}
+
+\begin{document}
+\maketitle
+
+\lecture{Two-Group Finite Difference Diffusion}\label{2g-finite-difference}
+Reference: Stacy's Section 3.10. 
+
+\topic{Neutron Balance Equation}
+We start with the two-group neutron balance equations, and apply assumptions:
+\begin{itemize}
+\item Assume fission source is in the fast group. That is, $\chi_1 = 1, \chi_2 = 0$. 
+\item Assume no up-scattering. We define effective down-scattering, so up-scattering is zero $\Sigma_{21}(r) = 0$. Then our down-scattering becomes an effective down-scattering cross section by conserving reaction rates (as usual), 
+  \eqn{\hat{\Sigma_{12}} = \Sigma_{12} - \Sigma_{21} \frac{\phi_2}{\phi_1} }
+
+\item Thus two-group diffusion equations are: 
+  \begin{align}
+    \left\{ \begin{array}{c}
+      - D_1 \laplacian \phi_1 + (\Sigma_{a1} + \Sigma_{s12}) \phi_1 = \nu \Sigma_{f1} \phi_1 + \nu \Sigma_{f2} \phi_2 + S_1  \\
+      - D_2 \laplacian \phi_2 + \Sigma_{a2} \phi_2 = \Sigma_{s12} \phi_1 + S_2
+    \end{array} \right. \label{two-group-eq}
+  \end{align} 
+
+\item If we are in an infinite system that we can ignore the leakage term, then we can write out an eigenvalue problem in matrix form immediately. More specifically, \hi{without leakage, $\phi_1, \phi_2$ are flat}, and we can directly write out the ratio of the two: 
+  \eqn{ \frac{\phi_2}{\phi_1} = \frac{\Sigma_{s12}}{\Sigma_{a2}} }
+ and the eigenvalue: 
+ \eqn{ k = \frac{\nu \Sigma_{f1}}{\Sigma_{r1}} + \frac{\nu \Sigma_{f2} \Sigma_{s12}}{\Sigma_{a2} \Sigma_{r1}} }
+ Prof. Forget made a connection between the four-factor/sixe-factor formula and the 2 group theory: 
+\begin{enumerate}
+\item Four factor: $\displaystyle p = \frac{\Sigma_{s12} \phi_1}{\Sigma_{r1} \phi_1} = \frac{\Sigma_{s12}}{\Sigma_{r1}}, k_1 = \eta_1 f_1 = \frac{\nu \Sigma_{f1}}{\Sigma_{r1}}, k_2 = \eta_2 f_2 = \frac{\nu \Sigma_{f2}}{\Sigma_{a2}}, \epsilon = 1 + \frac{\nu \Sigma_{f1}}{\nu \Sigma_{f2}} \frac{\Sigma_{a2}}{\Sigma_{r1} \Sigma_{12}}, \kinf = \epsilon \eta p f$. 
+
+\item Six factor: $\displaystyle \keff = \epsilon \eta p f P_{1,NL} P_{2,NL}$ where $\displaystyle P_{1,NL} = \frac{1}{1 + L_1^2 B_g^2}, L_1^2 = \frac{D_1}{\Sigma_{r1}}, P_{2,NL} = \frac{1}{1 + L_2^2 B^2}, L_2^2 = \frac{D_2}{\Sigma_{a2}}$.  
+
+\end{enumerate}
+
+\item However to keep it general, we need to approximate the leakage term by constructing a finite spatial mesh in which cross sections are constant. Integrate Eq.~\ref{two-group-eq} over for node $n$ with width $\Delta^n$,
+\eqn{-\int \ddx D_1^n \ddx \phi_1^n \dx + \Sigma_{r1}^n  \phi_1^n \Delta^n = \nu \Sigma_{f1}^n \phi_1^n \Delta^n + \nu \Sigma_{f2}^n \phi_2^n \Delta^n + S_1 \Delta^n} 
+\eqn{-\int \ddx D_2^n \ddx \phi_2^n  \dx + \Sigma_{a2}^n \phi_2^n \Delta^n = \Sigma_{s12}^n \phi_1^n \Delta^n + S_2 \Delta^n}
+We evaluate the integral term\footnote{Lectuer says use the divergence theorem $\int \divergence \vec{F} \dV = \int_S \vec{F} \cdot \vec{n} \dS$, I think this is just manipulating integral and $\int_{x_1}^{x_2} \ddx A \dx \to \left. A \right|_{x_2} - \left. A \right|_{x_1}$}, 
+\eqn{\int \ddx D_1^n \ddx \phi_1^n \dx  = \left. D_1^n \ddx \phi_1^n \right|_{n^+} - \left. D_1^n \ddx \phi_1^n \right|_{n^-} }
+where $n^+$ is the right surface of node $n$, $n^-$ is the left surface. Then the balance equations become,
+\eqn{ - \left. D_1^n \ddx \phi_1^n \right|_{n^+} + \left. D_1^n \ddx \phi_1^n \right|_{n^-} + \Sigma_{r1}^n  \phi_1^n \Delta^n = \nu \Sigma_{f1}^n \phi_1^n \Delta^n + \nu \Sigma_{f2}^n \phi_2^n \Delta^n + S_1 \Delta^n} 
+\eqn{- \left. D_2^n \ddx \phi_2^n \right|_{n^+} + \left. D_2^n \ddx \phi_2^n \right|_{n^-} + \Sigma_{a2}^n \phi_2^n \Delta^n = \Sigma_{s12}^n \phi_1^n \Delta^n + S_2 \Delta^n}
+
+\end{itemize}
+
+
+
+\topic{Interface Flux}
+Recall that net current is $J = -D \ddx \phi$ (which shows up in the balance equation, implying that it could help to manipulate this term). Assume neighboring cells have the same width as in Figure~\ref{diagram-finite-difference}, and we make a linear flux approximation between cell centers and cell edges, then the net currents at the cell edge have two formulations, 
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=2.5in]{images/dfs/diagram-finite-difference.png}
+  \caption{Diagram Illustrating Neighboring Cells in Finite Difference Scheme} \label{diagram-finite-difference}
+\end{figure}
+
+\eqn{J_{n^+} = - \left. D_g^n \ddx \phi_g^n \right|_{n+} = -D_g^n \frac{\phi_g^S - \phi_g^n}{\Delta/2} }
+\eqn{J_{{n+1}^-} = - \left. D_g^{n+1} \ddx \phi_g^{n+1} \right|_{n-} = - D_g^{n+1} \frac{\phi_g^{n+1} - \phi_g^S}{\Delta/2} }
+By continuity of the net current, we know the net current at the surface from the left cell ($J_{n^+}$) and from the right cell ($J_{{n+1}^-}$) should be the same,
+\eqn{  -D_g^n \frac{\phi_g^S - \phi_g^n}{\Delta/2} =  - D_g^{n+1} \frac{\phi_g^{n+1} - \phi_g^S}{\Delta/2} }
+From where we can solve for the interface flux $\phi_g^S$, 
+\eqn{ \phi_g^S = \frac{D_g^{n} \phi_g^{n} + D_g^{n+1} \phi_g^{n+1}}{D_g^{n} + D_g^{n+1}}} 
+Thus we have $J_S$ in terms of mesh-averaged fluxes\footnote{Kord uses the notation $J_n^+, J_n^-$, which in this content are actually net currents not partial currents!!!}: 
+\eqn{ J_S = J_{n^+} = - \frac{2D_g^n}{\Delta} \left[ \frac{ D^{n} \phi^{n} + D^{n+1} \phi^{n+1}}{D^{n+1} + D^{n}} - \phi^n \right] = - \overbrace{\frac{2 D^n D^{n+1} }{\Delta (D^n + D^{n+1})}}^{\to \hat{D}^{n,n+1}} (\phi^{n+1} - \phi^{n}) }
+
+Now we consider three neighboring cells with the same width, and following the previous analogy, we can get the net currents in cell $n$:
+\eqn{ J_{n^+} &= - \hat{D}^{n,n+1} (\phi^{n+1} - \phi^n)  & J_{n^-} &= - \hat{D}^{n-1, n} (\phi^n - \phi^{n-1} ), & \hat{D}^{n,n+1} &= \frac{2 D^n D^{n+1}}{\Delta (D^n + D^{n+1})}  \label{net-current}} 
+
+
+\topic{Linear Finite Difference Equations}
+Plug the interface flux in Eq.~\ref{net-current} back into diffusion equations, we get, 
+\eqn{ \hat{D}_1^{n-1,n} (\phi_1^n - \phi_1^{n-1})  - \hat{D}_1^{n,n+1} (\phi_1^{n+1} - \phi_1^n) + \Sigma_{r1}^n \phi_1^n \Delta^n &= \nu \Sigma_{f1}^n \phi_1^n \Delta^n + \nu \Sigma_{f2}^n \phi_2^n \Delta^n + S_1 \Delta^n} 
+\eqn{ \hat{D}_2^{n-1,n} (\phi_2^n - \phi_2^{n-1})  - \hat{D}_2^{n,n+1} (\phi_2^{n+1} - \phi_2^n) + \Sigma_{a2}^n \phi_2^n \Delta^n &= \Sigma_{s12}^n \phi_1^n \Delta^n + S_2 \Delta^n} 
+
+Rearranging terms by fluxes, we get \textbf{the linear finite-difference diffusion equations}:
+\small
+\eqn{ \boxed{ - \hat{D}_1^{n-1,n} \phi_1^{n-1} - \hat{D}_1^{n,n+1} \phi_1^{n+1} + [ \Sigma_{r1}^n \Delta^n + \hat{D}_1^{n-1, n} + \hat{D}_1^{n,n+1} ] \phi_1^n = \nu \Sigma_{f1}^n \phi_1^n \Delta^n + \nu \Sigma_{f2}^n \phi_2^n \Delta^n + S_1 \Delta^n }} 
+\eqn{ \boxed{- \hat{D}_2^{n-1,n} \phi_2^{n-1} - \hat{D}_2^{n,n+1} \phi_2^{n+1} + [\Sigma_{a2}^n \Delta^n + \hat{D}_2^{n-1.n} + \hat{D}_2^{n,n+1} ] \phi_2^n = \Sigma_{s12}^n \phi_1^n \Delta^n  + S_2 \Delta^n} }
+\normalsize
+
+\clearpage
+\topic{BCs for Finite-Difference Equation \label{finite-app-BC} }
+Review Section.~\ref{diff-BC}. Interior BCs are implied, whereas the exterior BCs have to be specified. 
+\begin{enumerate}
+\item Zero current, reflective BC: $J_g^N = 0$. 
+
+\item Zero flux: flux at the RHS of node $N$ is zero.  We can either think of the flux as keep going to be $-\phi_g^N$ in the imaginary $N+1$ node\footnote{we have to interpolate the node center value from the node edge value because in linear difference equation the center value is the averaged value which is what we care about.}, or calculate the slope by doing $\phi_g^N / (\Delta /2)$,
+\eqn{ J_g^N = -D_g^N \frac{ -\phi_g^N - \phi_g^N}{\Delta^N}  = \frac{2 D_g^N}{\Delta^N} \phi_g^N }
+
+\item Zero incoming flux, zero incoming current, vacuum BC: there is no partial current coming in from RHS,
+\eqn{ J_N^- = \frac{1}{4} \phi - \frac{1}{2} J_N = 0 }
+which implies,
+\begin{align}
+  J_g^N &= \frac{\phi_g^s}{2} = -D_g^N \frac{\phi_g^s - \phi_g^N}{\Delta/2} = - \frac{2 D_g^N}{\Delta^N} \frac{\frac{2D_g^N}{\Delta^N} - 1}{\frac{1}{2} + \frac{2D_g^N}{\Delta}} \phi_g^N \\
+  &= \frac{2D_g^N}{\Delta^N} \left[ \frac{1}{1 + \frac{4 D_g^{N}}{\Delta^N}} \right] \phi_g^N  \label{JgN}
+\end{align}
+\end{enumerate}
+
+Inspired by Eq.~\ref{JgN}, we make up a coefficient C to unify 3 BCs: 
+\eqn{ \boxed{ J_g^N = \frac{2 D_g^N \phi_g^N}{\Delta^N + C \cdot D_g^N} } } 
+\begin{itemize}
+\item If $C \to 0$, we get zero flux BC.  
+\item If $C = 4$, we get zero incoming current BC $J_{\mathrm{in}} = 0$.
+\item If $C \to \infty$, we get zero flux BC $J_g^N = 0$. 
+\end{itemize}
+
+Alternatively, we can also take Eq.~\ref{JgN} and make the $D_g^N$ term into the diffusion coefficient of the imaginary $N+1$ node: 
+\eqn{ J_g^N  = \frac{2D_g^N}{\Delta^N} \left[ \frac{1}{1 + \frac{4 D_g^{N+1}}{\Delta^N}} \right] \phi_g^N  }
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%% Matrix Representation %%%%%%%%%%%%%%%%
+\lecture{Matrix Representation of 1D Slab Diffusion Equations} \label{matrix-representation-of-1d-slab}
+\topic{Construct Matrix}
+If we use $L$ for the $\phi^{n-1}$ term, $U$ for the $\phi^{n+1}$ term, $D$ for the $\phi^n$ term, $T$ for the transport term, we can express the finite difference equation in matrix form as a net distruction term: 
+\begin{align}
+[L_1 + D_1 + U_1] [\phi_1] &= [M_1] [\phi_1] + [M_2][\phi_2] + [S_1] \\
+[L_2 + D_2 + U_2] [\phi_2] &= [T_2] [\phi_1] + [S_2] 
+\end{align}
+We define a vector of group fluxes, 
+\begin{align}
+\left[ \begin{array}{cc} 
+[L_1 + D_1 + U_1] & [0] \\
+-[T_2] & [L_2 + D_2 + U_2] \\
+\end{array} \right] 
+\left[ \begin{array}{c}
+\phi_1 \\ \phi_2 \\ \end{array} \right] 
+= \left[ {\begin{array}{cc} \left[M_1\right] & \left[M_2\right] \\ \left[0\right] & \left[0\right] \end{array}} \right] 
+\left[ \begin{array}{c}
+\phi_1 \\ \phi_2 \\ \end{array} \right] 
++ 
+\left[ \begin{array}{c} 
+S_1 \\ S_2 \\ \end{array} \right] 
+\end{align}
+Whose compressed form is, 
+\eqn{ [A] [\phi] = [M] [\phi] + [S] }
+The two matrix are plotted in Figure~\ref{matrix-form}. Notice there are missing points in A. Explaination: Block matrix: the $L+D+U$ term should only be doing in-group stuff, and the missing points would have been throwing group 1 stuff into group 2 when it is not supposed to do it. 
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=6in]{images/dfs/matrix-form.png}
+  \caption{Destruction and Production Matrix} \label{matrix-form}
+\end{figure}
+
+\topic{Method 1: Sequential Source/Fixed-Source Problem}
+\begin{align}
+[A] [\phi] &= [M] [\phi] + [S] \\
+[A - M ] [\phi] &= [S] \\
+[\phi] &= [A - M]^{-1} [S]
+\end{align}
+In this method, we guess $\keff$, and given a source we can solve for the flux. We can either use Matlab to solve the $Ax = b$ system, or we use Gaussian elimination/forward elimination backward substitution by hand. The basic idea is to subtract $a_{i,i-1}/a_{i-1,i-1}$ times the $(i-1)$th equation from the $i$th equation to eliminate the $a_{i,i-1}$ element in the $i$th equation. The modified $i$th equation is then divided by $a_{i,i}$. This process is repeated successively for $i=1$ through $i = I-1$. 
+
+We never solve real questions this way, because the flux approaches the right shape (as $\keff \to \keff_{\mathrm{correct}}$), but once $\keff > \keff_{\mathrm{correct}}$, the flux can be entirely inverted to become negative (recall that the 1/M curve goes to 0 when we become critical, implying that $M \to \infty$. Having a negative flux is fine because the flux solved can be arbitrarily scaled). If we have a super-critical problem, then the only way to get criticality with an additional source is through negative flux. A reactor is like an amplifier; the closer it is to criticality the more amplification it is; when critical, the amplification is infinity. 
+
+
+\topic{Method 2: Direct Matlab Eigenvalue Solver}
+We can solve for $\keff$ directly from: 
+\begin{align}
+[A] [\phi] &= \frac{1}{\keff} [M] [\phi] \\
+[A]^{-1} [M] [\phi] &= \keff [\phi]
+\end{align}
+Notice that the eigenvectors are arbitrarily normalized; hence it is fine if the flux is negative. 
+
+
+\topic{Method 3: Power Iterations with Matlab's Direct Matrix Inverter}
+The equation we are trying to solve is,
+\eqn{ [A] [\phi]^{n+1} &= [M] [\phi]^n }
+An initial guess of the flux $\phi_i^{(0)}$ at each point and of the eigenvalue $\lambda^{(0)}$ is made and an initial fission source at each point is constructed $S_i^{(0)} = M \phi_i^{(0)}$. The Gaussian elimination is performed to determine $\phi_i^{(1)} = A^{-1} S_i^{(0)}$. Then we update the source term as well based on the flux. A new estimate of the eigenvalue is made from: 
+\eqn{ \keff = \frac{S_i^{(1)}}{S_i^{(0)}} }
+The process is continued until the eigenvalues obtained on two successive iterates differ by less than a threshold level. The rate our fission source converges depends on material, geometry etc. See next section for \hi{dominance ratio}. 
+\begin{figure}
+  \centering
+  \includegraphics[width=4in]{images/dfs/power-iteration-convergence.png}
+  \caption{Power Iteration Convergence Rate (left) and Dominance Ratio (right)}
+\end{figure}
+
+\topic{Method 3+: Power Iteration with Matlab's GMRES Numerical Invertion} 
+With no pre-conditioner, GMRES is actually longer than Method 3. 
+
+
+\topic{Method 4: Power Iteration with Point-Jacobi Iterative Flux Matrix Inversion}
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=6in]{images/dfs/power-iteration-Gauss-Jacobi.png}
+  \caption{Power Iteration With Gauss-Jacobi Numerical Inversion of Matrix}
+\end{figure}
+
+The outter loop is on $i$ (the fission source iteration index), 
+\begin{align}
+A \phi^{i+1} &= \frac{1}{\keff} M \phi^i \\
+\keff^{i+1} &= \frac{M \phi^{i+1}}{M \phi^i} \\
+A &= D + O \Rightarrow D \phi^{m+1} = \frac{1}{\keff} M \phi^i - O \phi^m 
+\end{align}
+
+The inner loop is on $m$ (the flux iteration index), 
+\eqn{ \phi^{m+1} = D^{-1} \left( \frac{1}{\keff} M \phi^i - O \phi^m \right) }
+
+\textcolor{blue}{In a steady-state problem, it does not matter whether we fully converge our flux iteration.} 
+
+
+\topic{Method 5: Power Iteration with Gauss-Seidal Iterative Flux Matrix Inversion} 
+The outter loop is almost the same as Point-Jacobi, 
+\begin{align}
+A &= L + D + U  \\
+(L + D ) \phi^{m+1} &= \frac{1}{\keff} M \phi^i - U \phi^m 
+\end{align}
+Then the inner loop is on $m$ (the flux iteration index), 
+\eqn{ \phi^{m+1} &= (L + D)^{-1} \left( \frac{1}{\keff} M \phi^i - U \phi^m \right) }
+\textcolor{blue}{Notice these Point-Jacobi and Gauss-Seidal only work with 2D problem that we can easily split a matrix into L, D, and U. 3D and above problems would be hard to solve using these two methods.} 
+
+
+\topic{Matrix Representation of Higher Dimensions Diffusion Equations}
+\begin{enumerate}
+\item 1D matrix can be solved without iterations; this is not the case for higher dimenisions: we have to use iterative methods for higher dimensions. 
+\item The matrix representation for higher dimensions looks the same as in 1D, except with one additional pair of off-diagonal term for each additional dimension as in Figure~\ref{matrix-shape}
+\item The size of the matrix increases as the dimensions increases. For instance, if we have 10 meshes per dimension, then 1D matrix is 10x10, 2D matrix is 100x100, 3D matrix is 1000x1000.
+\end{enumerate}
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=5in]{images/dfs/matrix_multidimension.png}
+  \caption{Destruction and Production Matrix Representation} \label{matrix-shape}
+\end{figure}
+
+\clearpage
+\topic{Dominance Ratio/Eigenvalue Separation}
+Given an eigenvalue problem, if we specify the solved eigenvalues to be:
+\eqn{ |\lambda_1| > |\lambda_2| \ge |\lambda_3| \ge \cdots }
+then $|\lambda_1|$ is the spectral radius of the iteration matrix, and every mode has a dominance ratio,
+\eqn{ \dr_n = \frac{\lambda_n}{\lambda_1} }
+and power iteration kills of the lowest dominance ratio modes. The last remaining mode is the fundamental mode $dr = \frac{\lambda_2}{\lambda_1}$. If $|\lambda_1| \ge 1$, the ietration scheme is unstable and it would not converge\footnote{See Lewis' Computational Methods of Neutron Transport Appendixe C for more details}. Convergence of the power method is slow when $\dr$ is close to unity; in fact in most numerical methods, convergence rate = 1 - dominance ratio. Knowing the dominance ratio, we can estimate the number of iterations needed for convergence. 
+
+Dominance ratio measures the spatial decoupling. It depends on: 
+\begin{enumerate}
+\item Symmetric mode. If the initial guess is symmetric, the solution is symmetric, and the method used is symmetric, then only the symmetric mode shows up in the dominance ratio, and the asymmetric mode is hidden. As shown in Figure~\ref{dominance-symmetric}, the symmetric guess may not display the highest $\dr$ convergence (0.99 in this case), instead it display a symmetric mode (0.975 in this case). Whereas a random guess would excited all modes and show all the $\dr$ convergence (though the lower modes die too fast to be observed; we can only see the last two dominance ratio, 0.97 and 0.99), and the dominant mode has an asymmetric shape.  
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=6in]{images/dfs/dominance_ratio.png}
+  \caption{Dominance Ratio With An Symmetric Guess (left) or Random Guess (right)}
+  \label{dominance-symmetric}
+\end{figure}
+
+\item Core size: As seen in Figure~\ref{dominance-size}, as core size increases, dominance ratio increases, and it takes longer to converge. 
+\begin{figure}
+  \centering
+  \includegraphics[width=7in]{images/dfs/dominance_ratio_size.png}
+  \caption{Dominance Ratio With Different Core Sizes}
+  \label{dominance-size}
+\end{figure}
+
+\item Decoupling of radial zones from inserting control rod, having asymmetric core loadings, or having xenon distributions. For instance, in BWRs if we insert control rods to make the core into two halves, then it would take a lot longer to converge. 
+
+\item Decoupling of axial zones form partially inserting control rods, axial fuel enrichment zoning, and axial burnable absorber loading. 
+\end{enumerate}
+Dominance ratio should be a physical property, so it should not depend on mesh size. 
+
+\clearpage
+\topic{Summary}
+Remember for real 3D problem,
+\begin{itemize}
+\item Matrix inversion if of order $N^3$, so in real applications no matrix inversion;
+\item Finding all eigenvalues is at least order $N^2$;
+\item Iterative inversion must be order $N$ to be practical for large problems;
+\item Multi-level iteration is a practical necessity. 
+\item Dominance ratio measures spatial decoupling-ness.
+\item Gauss-Seidal is twice as Point-Jacobi. 
+\end{itemize}
+
+
+\end{document}
