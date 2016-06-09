@@ -1,0 +1,78 @@
+%
+% Class for homework assignments, which are really anything that is short and
+% doesn't need much of a header.
+%
+\NeedsTeXFormat{LaTeX2e}[1995/12/01]
+\ProvidesClass{school-style-lab}
+
+\def\assignment#1{\gdef\@assignment{#1}}
+\def\classcode#1{\gdef\@classcode{#1}}
+
+% Sets a simple header/footer
+\lhead{\@author}
+\chead{\@classcode\ Homework \#\@assignment}
+\rhead{\@date}
+\lfoot{}
+\cfoot{\thepage}
+\rfoot{}
+
+% Sets a small title
+\renewcommand{\maketitle}{%
+  \thispagestyle{empty}
+  \begin{center}
+  \vspace{2in}
+  \HRule \\[0.4cm]
+         {\huge \bfseries \@classcode\\
+           \@classname\\
+           Lab \#\@assignment}\\[0.4cm]
+   \HRule \\[1.5cm]
+  \end{center}
+
+   \begin{minipage}{0.4\textwidth}
+     \begin{flushleft} \large
+       \emph{Author:}\\
+       \@author \\
+     \end{flushleft}
+   \end{minipage}
+   \begin{minipage}{0.4\textwidth}
+     \begin{flushright} \large
+       \emph{Professor:} \\
+       \@professor
+     \end{flushright}
+   \end{minipage}
+
+\vfill
+\begin{center}
+{\large  \@date} \\
+\end{center}
+\clearpage
+}
+
+\DeclareOption{exercise}{%
+  \def\exercise#1{\gdef\@exercise{#1}}
+  \renewcommand{\maketitle}{%
+    \thispagestyle{empty}
+    \begin{flushright}
+      \@author\\
+      \@date\\
+    \end{flushright}
+    \begin{flushleft}
+      \textit{\@classcode\ Lab \@assignment\ Exercise \@exercise:}\\
+    \end{flushleft}
+  }
+
+  \renewcommand{\section}[1]{%
+  \large%
+  \begin{flushleft}%
+    \textbf{#1}%
+  \end{flushleft}%
+  \normalsize}
+}
+
+\pagestyle{fancy}
+
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+\newcommand{\note}[1]{\textbf{#1}}
+\newcommand{\questiontext}[1]{\textbf{#1}}
+
+\ProcessOptions{\relax}

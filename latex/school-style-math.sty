@@ -1,0 +1,281 @@
+%
+% Contains shorter names for many commonly used math related items
+%
+\NeedsTeXFormat{LaTeX2e}[1995/12/01]
+\ProvidesClass{school-style-math}
+
+% We use the AMS math stuff
+\usepackage{amsmath}
+
+% Derivitives are messy, so they go in a seperate file
+\usepackage{school-style-derivitives}
+
+% These don't really have anywhere else to go
+\renewcommand{\bar}[1]{\left.\overline{#1} \right.}
+\newcommand{\bothline}[1]{\left. \overline{\underline{#1}} \right.}
+\newcommand{\fsp}{\mbox{ }}
+\newcommand{\inv}{^{_-}\!\!}
+\newcommand{\nt}{_{_{0}}}
+\newcommand{\degree}{^{\circ}}
+\newcommand{\sub}[1]{_{\mathrm{#1}}}
+\newcommand{\mtx}[1]{\tilde{#1}}
+\newcommand{\eqn}[1]{\begin{align}#1\end{align}}
+\newcommand{\bsp}{\! \!}
+\newcommand{\defeq}{\mathrel{\mathop:}=} 
+\newcommand{\eqdef}{\mathrel{\mathop=}:}
+%\newcommand{\path}{\rightsquigarrow}
+\newcommand{\GCD}{\mathrm{GCD}}
+\newcommand{\FS}{\mathrm{FS}}
+
+% Parthentecies
+\newcommand{\lp}{ \left( }
+\newcommand{\rp}{ \right) }
+\newcommand{\parens}[1]{ \lp #1 \rp }
+\newcommand{\bracket}[1]{ \left[ #1 \right] }
+
+% Relation Symbols
+\newcommand{\eq}{\stackrel{}{=}}
+\newcommand{\qeq}{\stackrel{?}{=}}
+\newcommand{\qneq}{\stackrel{?}{\neq}}
+\newcommand{\qleq}{\stackrel{?}{\leq}}
+
+% Number Sets
+\newcommand{\Real}{\mathbb{R}}
+\newcommand{\Natural}{\mathbb{N}}
+\newcommand{\Integer}{\mathbb{Z}}
+\newcommand{\Rational}{\mathbb{Q}}
+
+% Shortcuts to print some things larger
+\newcommand{\Sum}{\displaystyle\sum}
+\newcommand{\Prod}{\displaystyle\prod}
+
+\newcommand{\Int}{\displaystyle\int}
+\newcommand{\oInt}{\displaystyle\oint}
+\newcommand{\OInt}{\displaystyle\oint}
+\newcommand{\Oint}{\displaystyle\oint}
+
+\newcommand{\Frac}[2]{\displaystyle\frac{\displaystyle #1}{\displaystyle #2}}
+
+% LaTeX doesn't define this one, but I don't know why
+\newcommand\ointint{\begingroup
+\displaystyle \unitlength 1pt
+\int\mkern-7.2mu
+\begin{picture}(0,3)
+\put(0,3){\oval(10,8)}
+\end{picture}
+\mkern-7mu\int\endgroup}
+
+% Vector calculus related terms
+\newcommand{\gradient}{\nabla}
+\newcommand{\divergence}{\nabla \cdot}
+\newcommand{\curl}{\nabla \times}
+\newcommand{\laplacian}{\nabla^2}
+\newcommand{\laplace}{\laplacian}
+\newcommand{\cross}{\times}
+
+% Math
+ \newcommand{\argmin}[1]{\underset{#1}{\operatorname{arg}\,\operatorname{min}}\;}
+ \newcommand{\argmax}[1]{\underset{#1}{\operatorname{arg}\,\operatorname{max}}\;}
+ \newcommand{\cond}[1]{\mathrm{cond}\left(#1\right)}
+ \newcommand{\rank}[1]{\mathrm{rank}\left(#1\right)}
+ \newcommand{\range}[1]{\mathrm{range}\left(#1\right)}
+ \newcommand{\nullspace}[1]{\mathrm{null}\left(#1\right)}
+ \newcommand{\Laplacian}{\mathop{}\!\mathbin\bigtriangleup}
+
+% Nuclear Physics terms
+\newcommand{\eff}{\mathrm{eff}}
+\newcommand{\keff}{\left. k_{\mathrm{eff}} \right.}
+\newcommand{\kinf}{\left. k_{\infty} \right.}
+\newcommand{\RI}{\mathrm{RI}}
+\newcommand{\RIeff}{\left. \mathrm{RI}_{\mathrm{eff}} \right.}
+\newcommand{\ols}{\frac{1}{L^2}}
+
+% Physics symbols
+\newcommand{\avg}[1]{\left< #1 \right>}
+\newcommand{\ket}[1]{\left| #1 \right>}
+\newcommand{\bra}[1]{\left< #1 \right|}
+\newcommand{\expect}[1]{\left< #1 \right>}
+\newcommand{\braket}[2]{\langle #1 \mid #2 \rangle}
+\newcommand{\ketbra}[2]{\left| #1 \right> \left< #2 \right|}
+\newcommand{\up}{\uparrow}
+\newcommand{\down}{\downarrow}
+\newcommand{\braces}[1]{\left\{ #1 \right\}}
+\newcommand{\Var}[1]{\mathrm{Var}\left( #1 \right)} 
+\newcommand{\Cov}[1]{\mathrm{Cov}\left( #1 \right)} 
+
+% Fluid mechanics symbols
+\newcommand{\Reynolds}{\mathrm{Re}}
+\newcommand{\Fr}{\mathrm{Fr}}
+\newcommand{\Nu}{\mathrm{Nu}}
+\newcommand{\Pe}{\mathrm{Pe}}
+%\newcommand{\Pr}{\mathrm{Pr}}
+\newcommand{\St}{\mathrm{St}}
+
+% Short names for primes, overlines, underlines, vector, bar
+% overlines
+\newcommand{\uline}[1]{\underline{#1}}
+\newcommand{\uuline}[1]{\underline{\underline{#1}}}
+% vectors
+\newcommand{\vecj}{\left.\vec{j}\right.}
+\newcommand{\vecJ}{\left.\vec{J}\right.}
+\newcommand{\vecn}{\left.\vec{n}\right.}
+\newcommand{\vecp}{\left.\vec{p}\right.}
+\newcommand{\vecr}{\left.\vec{r}\right.}
+\newcommand{\vecs}{\left.\vec{s}\right.}
+\newcommand{\vecS}{\left.\vec{S}\right.}
+\newcommand{\vect}{\left.\vec{t}\right.}
+\newcommand{\vecu}{\left.\vec{u}\right.}
+\newcommand{\vecv}{\left.\vec{v}\right.}
+\newcommand{\vecvp}{\vec{v}^{\prime}}
+\newcommand{\vecvb}{\bar{\vec{v}}}
+\newcommand{\vecV}{\left.\vec{V}\right.}
+\newcommand{\vecw}{\left.\vec{w}\right.}
+\newcommand{\vecx}{\left.\vec{x}\right.}
+\newcommand{\vecOmega}{\left.\vec{\Omega}\right.}
+% primes
+\newcommand{\pprime}[1]{\left.{#1}^{\prime \prime}\right.}
+\newcommand{\ppprime}[1]{\left.{#1}^{\prime \prime \prime}\right.}
+\newcommand{\pppprime}[1]{\left.{#1}^{\prime \prime \prime \prime}\right.}
+\newcommand{\qp}{\left.q^{\prime}\right.}
+\newcommand{\qpp}{\left.q^{\prime \prime}\right.}
+\newcommand{\qppp}{\left.q^{\prime \prime \prime}\right.}
+\newcommand{\Qp}{\left.Q^{\prime}\right.}
+\newcommand{\Qpp}{\left.Q^{\prime \prime}\right.}
+\newcommand{\Qppp}{\left.Q^{\prime \prime \prime}\right.}
+\newcommand{\vp}{\left.v^{\prime}\right.}
+\newcommand{\vb}{\left.\bar{v}\right.}
+\newcommand{\Tprime}{\left.T^{\prime}\right.}
+% bars
+\newcommand{\Abar}{\left. \bar{A} \right.}
+\newcommand{\Abarbar}{\left. \bar{\bar{A}} \right.}
+\newcommand{\Bbar}{\left. \bar{B} \right.}
+\newcommand{\bbar}{\left. \bar{b} \right.}
+\newcommand{\Dbar}{\left. \bar{D} \right.}
+\newcommand{\epsilonbar}{\bar{\epsilon}}
+\newcommand{\Fbarbar}{\left. \bar{\bar{F}} \right.}
+\newcommand{\Ibarbar}{\left. \bar{\bar{I}} \right.}
+\newcommand{\Tbar}{\bar{T}}
+\newcommand{\kbar}{\bar{k}}
+%\newcommand{\lambdabar}{\bar{\lambda}}
+\newcommand{\lambdabar}{{\mkern0.75mu\mathchar '26\mkern -9.75mu\lambda}}
+\newcommand{\Mbarbar}{\left. \bar{\bar{M}} \right.}
+\newcommand{\nbar}{\bar{n}}
+\newcommand{\pbar}{\bar{p}}
+\newcommand{\Phibar}{\left. \bar{\Phi} \right. }
+\newcommand{\phibar}{\left. \bar{\phi} \right. }
+\newcommand{\Qbar}{\left. \bar{Q} \right.}
+\newcommand{\qbar}{\left. \bar{q} \right.}
+\newcommand{\Sigmabar}{\left. \overline{\Sigma} \right. }
+\newcommand{\nuSigmabar}{\left. \overline{\nu \Sigma} \right. }
+
+% Thermal Hydraulics terms
+\newcommand{\DeltaPacc}{\Delta P_{\mathrm{acc}}}
+\newcommand{\DeltaPfri}{\Delta P_{\mathrm{friction}}}
+\newcommand{\DeltaPgra}{\Delta P_{\mathrm{gravity}}}
+\newcommand{\DeltaPloss}{\Delta P_{\mathrm{loss}}}
+\newcommand{\DeltaPiform}{\Delta P_{\mathrm{i,form}}}
+\newcommand{\DeltaPfform}{\Delta P_{\mathrm{f,form}}}
+\newcommand{\DeltaPform}{\Delta P_{\mathrm{form}}}
+\newcommand{\DeltaPent}{\Delta P_{\mathrm{entrance}}}
+\newcommand{\DeltaPexit}{\Delta P_{\mathrm{exit}}}
+\newcommand{\DeltaPspa}{\Delta P_{\mathrm{spacer}}}
+\newcommand{\DeltaPfit}{\Delta P_{\mathrm{fitting}}}
+\newcommand{\dPdzacc}{\left( \dPdz \right)_{\mathrm{acc}}}
+\newcommand{\dPdzfri}{\left( \dPdz \right)_{\mathrm{friction}}}
+\newcommand{\dPdzgra}{\left( \dPdz \right)_{\mathrm{gravity}}}
+\newcommand{\dPdzloss}{\left( \dPdz \right)_{\mathrm{loss}}}
+\newcommand{\Xp}{\left.X^{\prime}\right.}
+\newcommand{\xp}{\left.x^{\prime}\right.}
+\newcommand{\yp}{\left.y^{\prime}\right.}
+
+% Functions that sometimes need () around them
+\newcommand{\Sin}[1]{\sin\left( #1 \right)}
+\newcommand{\Arcsin}[1]{\arcsin\left( #1 \right)}
+\newcommand{\Cos}[1]{\cos\left( #1 \right)}
+\newcommand{\Arccos}[1]{\arccos\left( #1 \right)}
+\newcommand{\Tan}[1]{\tan\left( #1 \right)}
+\newcommand{\Arctan}[1]{\arctan\left( #1 \right)}
+\newcommand{\Sinh}[1]{\sinh\left( #1 \right)}
+\newcommand{\Arcsinh}[1]{\arcsinh\left( #1 \right)}
+\newcommand{\Cosh}[1]{\cosh\left( #1 \right)}
+\newcommand{\Arccosh}[1]{\arccosh\left( #1 \right)}
+\newcommand{\Tanh}[1]{\tanh\left( #1 \right)}
+\newcommand{\Arctanh}[1]{\arctanh\left( #1 \right)}
+
+\newcommand{\Log}[1]{\log\left( #1 \right)}
+\newcommand{\Ln}[1]{\ln\left( #1 \right)}
+\newcommand{\erf}[1]{\mathrm{erf}\left( #1 \right)}
+
+% Unit Vetors
+\newcommand{\Dtilde}{\left. \tilde{D} \right.}
+\newcommand{\ftilde}{\left. \tilde{f} \right.}
+\newcommand{\stilde}{\left. \tilde{s} \right.}
+\newcommand{\xtilde}{\left. \tilde{x} \right.}
+
+\newcommand{\Ahat}{\left. \hat{A} \right.}
+\newcommand{\ahat}{\left. \hat{a} \right.}
+\newcommand{\Bhat}{\left. \hat{B} \right.}
+\newcommand{\bhat}{\left. \hat{b} \right.}
+\newcommand{\Chat}{\left. \hat{C} \right.}
+\newcommand{\chat}{\left. \hat{c} \right.}
+\newcommand{\Dhat}{\left. \hat{D} \right.}
+\newcommand{\dhat}{\left. \hat{d} \right.}
+\newcommand{\Ehat}{\left. \hat{E} \right.}
+\newcommand{\ehat}{\left. \hat{e} \right.}
+\newcommand{\Fhat}{\left. \hat{F} \right.}
+\newcommand{\fhat}{\left. \hat{f} \right.}
+\newcommand{\Ghat}{\left. \hat{G} \right.}
+\newcommand{\ghat}{\left. \hat{g} \right.}
+\newcommand{\Hhat}{\left. \hat{H} \right.}
+\newcommand{\hhat}{\left. \hat{h} \right.}
+\newcommand{\Ihat}{\left. \hat{I} \right.}
+\newcommand{\ihat}{\left. \hat{i} \right.}
+\newcommand{\Jhat}{\left. \hat{J} \right.}
+\newcommand{\jhat}{\left. \hat{j} \right.}
+\newcommand{\Khat}{\left. \hat{K} \right.}
+\newcommand{\khat}{\left. \hat{k} \right.}
+\newcommand{\Lhat}{\left. \hat{L} \right.}
+\newcommand{\lhat}{\left. \hat{l} \right.}
+\newcommand{\Mhat}{\left. \hat{M} \right.}
+\newcommand{\mhat}{\left. \hat{m} \right.}
+\newcommand{\Nhat}{\left. \hat{N} \right.}
+\newcommand{\nhat}{\left. \hat{n} \right.}
+\newcommand{\Ohat}{\left. \hat{O} \right.}
+\newcommand{\ohat}{\left. \hat{o} \right.}
+\newcommand{\Phat}{\left. \hat{P} \right.}
+\newcommand{\phat}{\left. \hat{p} \right.}
+\newcommand{\Qhat}{\left. \hat{Q} \right.}
+\newcommand{\qhat}{\left. \hat{q} \right.}
+\newcommand{\Rhat}{\left. \hat{R} \right.}
+\newcommand{\rhat}{\left. \hat{r} \right.}
+\newcommand{\Shat}{\left. \hat{S} \right.}
+\newcommand{\shat}{\left. \hat{s} \right.}
+\newcommand{\That}{\left. \hat{T} \right.}
+\newcommand{\that}{\left. \hat{t} \right.}
+\newcommand{\Uhat}{\left. \hat{U} \right.}
+\newcommand{\uhat}{\left. \hat{u} \right.}
+\newcommand{\Vhat}{\left. \hat{V} \right.}
+\newcommand{\vhat}{\left. \hat{v} \right.}
+\newcommand{\What}{\left. \hat{W} \right.}
+\newcommand{\what}{\left. \hat{w} \right.}
+\newcommand{\Xhat}{\left. \hat{X} \right.}
+\newcommand{\xhat}{\left. \hat{x} \right.}
+\newcommand{\Yhat}{\left. \hat{Y} \right.}
+\newcommand{\yhat}{\left. \hat{y} \right.}
+\newcommand{\Zhat}{\left. \hat{Z} \right.}
+\newcommand{\zhat}{\left. \hat{z} \right.}
+
+\newcommand{\Deltahat}{\left. \hat{\Delta} \right.}
+\newcommand{\deltahat}{\left. \hat{\delta} \right.}
+\newcommand{\rhohat}{\left. \hat{\rho} \right.}
+\newcommand{\phihat}{\left. \hat{\phi} \right.}
+\newcommand{\psihat}{\left. \hat{\psi} \right.}
+\newcommand{\Psihat}{\left. \hat{\Psi} \right.}
+\newcommand{\psihatbar}{\left. \bar{\hat{\psi}} \right.}
+\newcommand{\thetahat}{\left. \hat{\theta} \right.}
+\newcommand{\Omegahat}{\left. \hat{\Omega} \right.}
+\newcommand{\omegahat}{\left. \hat{\omega} \right.}
+\newcommand{\Sigmahat}{\left. \hat{\Sigma} \right.}
+
+% Other random stuff that I will need: 
+\newcommand{\ksi}{\xi}

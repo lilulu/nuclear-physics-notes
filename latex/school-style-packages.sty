@@ -1,0 +1,94 @@
+%
+% This is a single place to include the many packages we often times include
+%
+
+\NeedsTeXFormat{LaTeX2e}[1995/12/01]
+\ProvidesClass{school-style-packages}
+
+% my own styles
+\usepackage{school-style-format}
+\usepackage{school-style-math}
+\usepackage{school-style-units}
+
+% math packages
+\usepackage[fleqn,tbtags]{mathtools}
+\usepackage{amssymb}
+\usepackage{amsmath,bm,times}
+
+% theorem package: theorem, definition, etc. 
+\usepackage{amsthm}
+\newtheorem{theorem}{Theorem}
+\newtheorem{definition}{Definition}
+
+% graphics packages
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{grffile}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows}
+\usepackage{pdflscape}
+\usepackage{color,soul}
+% usage: default is \hl{text in yellow}, define \hlc[green]{text in green}
+\newcommand{\hlc}[2][yellow]{ {\sethlcolor{#1} \hl{#2}} }
+
+% formatting packages
+\usepackage{makeidx}
+\usepackage{relsize}
+\usepackage{setspace}
+\usepackage{multirow}
+\usepackage{lscape} % for displaying table vertically.
+\usepackage{booktabs,array}
+\usepackage{todonotes}
+%\usepackage{enumitem}
+\usepackage{enumerate}
+\usepackage{tablefootnote}
+\usepackage{fancyvrb}
+\usepackage{pifont} % for check marks etc
+\usepackage{geometry}
+\usepackage{arydshln} % for \hdashline
+
+% algorithm packages
+\usepackage{listings}
+\usepackage{algorithm}
+
+% fancy cross-referencing, I am undecided! 
+% usage: \autoref{label-name}
+\renewcommand{\sectionautorefname}{$\S$}
+\renewcommand{\subsectionautorefname}{$\S$}
+\renewcommand{\subsubsectionautorefname}{$\S$}
+\renewcommand{\figureautorefname}{Fig.}
+\renewcommand{\tableautorefname}{Table }
+\renewcommand{\pageautorefname}{p.}
+
+% symbols packages
+\usepackage[version=3]{mhchem}
+\usepackage{textcomp} % for \cents
+\usepackage{wrapfig}
+
+
+% other definitions
+\def\Midrule{\midrule[\heavyrulewidth]}
+\newcount\rowc
+
+\makeatletter
+\def\ttabular{%
+\hbox\bgroup
+\let\\\cr
+\def\rulea{\ifnum\rowc=\@ne \hrule height 1.3pt \fi}
+\def\ruleb{
+\ifnum\rowc=1\hrule height 1.3pt \else
+\ifnum\rowc=6\hrule height \heavyrulewidth 
+   \else \hrule height \lightrulewidth\fi\fi}
+\valign\bgroup
+\global\rowc\@ne
+\rulea
+\hbox to 10em{\strut \hfill##\hfill}%
+\ruleb
+&&%
+\global\advance\rowc\@ne
+\hbox to 10em{\strut\hfill##\hfill}%
+\ruleb
+\cr}
+\def\endttabular{%
+\crcr\egroup\egroup}

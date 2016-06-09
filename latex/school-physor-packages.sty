@@ -1,0 +1,114 @@
+%
+% This is a single place to include the many packages we often times include
+%
+
+\NeedsTeXFormat{LaTeX2e}[1995/12/01]
+\ProvidesClass{school-physor-packages}
+
+% self-defined
+\usepackage{school-style-math}
+\usepackage{school-style-units}
+
+% citation, use this package to fix line break.
+\usepackage{cite}
+
+% math related
+\usepackage[fleqn,tbtags]{mathtools}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath,bm,times}
+
+% graphics related
+%\usepackage[usenames,dvipsnames]{xcolor}
+%\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage[breaklinks=true]{hyperref}
+%\usepackage{grffile}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows,positioning}
+\usetikzlibrary{decorations.markings}
+\usepackage{tikz-3dplot}
+%\usepackage[active,tightpage]{preview}
+%\PreviewEnvironment{tikzpicture}
+%\setlength\PreviewBorder{2mm}
+
+\definecolor{myyellow}{RGB}{249,232,100}
+\definecolor{mygrey}{RGB}{218,215,164}
+\definecolor{myblue}{RGB}{135,146,160}
+
+% FIXME: The ``define block'' below defines ``blue'' such that it's
+% not a color any more, making it impossible to actually build blue
+% things in tikz, which is bad.  This should be fixed properly, but
+% for now I guess we can just redefine ``bluecolor'' as an actual
+% color.
+\colorlet{bluecolor}{blue}
+
+% define block
+\tikzstyle{bl} = [rectangle, draw, fill=myblue, fill opacity=.4, 
+  text opacity=1, text width=5em, text centered, rounded corners, 
+  minimum height=4em]
+%\tikzstyle{yl} = [rectangle, draw, color=blue!20,
+%  text opacity=1, text width=7em, text centered, rounded corners, 
+%  minimum height=4em, drop shadow]
+\tikzstyle{yl}=[draw, fill=blue!20, 
+  minimum height=4em,drop shadow, rounded corners]
+\tikzstyle{no} = [rectangle, draw, 
+  text opacity=1, text width=5em, text centered, rounded corners,
+  minimum height=4em]
+\tikzstyle{di} = [diamond, draw, text opacity=1, text width=4em, minimum height=2em]
+
+\tikzstyle{line} = [draw, very thick, color=black, -latex']
+\tikzstyle{dash} = [draw, very thick, color=black, -latex', dashed]
+
+
+\tikzstyle{bk} = [rectangle, draw, fill=myyellow, fill opacity=.6, 
+  text opacity=1, text width=15em, text centered, rounded corners, 
+  minimum height=4em]
+\tikzstyle{bkb} = [rectangle, draw, fill=myblue, fill opacity=.4,
+  text opacity=1, text width=27em, text centered, rounded corners, 
+  minimum height=4em]
+
+% formatting
+\usepackage{relsize}
+\usepackage{setspace}
+\usepackage{multirow}
+\usepackage{lscape} % for displaying table vertically.
+\usepackage{booktabs,array}
+\usepackage{todonotes}
+
+% algorithm 
+\usepackage{listings}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+
+% symbols 
+\usepackage[version=3]{mhchem}
+\usepackage{textcomp} % for \cents
+\usepackage{wrapfig}
+
+
+% others
+\def\Midrule{\midrule[\heavyrulewidth]}
+\newcount\rowc
+
+\makeatletter
+\def\ttabular{%
+\hbox\bgroup
+\let\\\cr
+\def\rulea{\ifnum\rowc=\@ne \hrule height 1.3pt \fi}
+\def\ruleb{
+\ifnum\rowc=1\hrule height 1.3pt \else
+\ifnum\rowc=6\hrule height \heavyrulewidth 
+   \else \hrule height \lightrulewidth\fi\fi}
+\valign\bgroup
+\global\rowc\@ne
+\rulea
+\hbox to 10em{\strut \hfill##\hfill}%
+\ruleb
+&&%
+\global\advance\rowc\@ne
+\hbox to 10em{\strut\hfill##\hfill}%
+\ruleb
+\cr}
+\def\endttabular{%
+\crcr\egroup\egroup}
