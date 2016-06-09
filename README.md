@@ -23,10 +23,10 @@ scattering, radioactive decay, and neutron interactions.
 
 **If you just want the pdfs**, visit www.mit.edu/~lululi
 
-Compile
+Build
 =======
 
-To compile the Latex sources in this repo, you would need to git clone
+To build the Latex sources in this repo, you would need to git clone
 and build tek (https://github.com/palmer-dabbelt/tek), which is the
 Latex Makefile generator I use. Then run
 
@@ -43,7 +43,13 @@ Then run
 make
 ```
 
-to make...
+Note: Latex package dependencies can be found in
+latex/school-style-packages.sty. The very first time you build this
+repo you are most likely going to get error messages of missing some
+packages (depending on your Latex distributions they come with a
+different set of random stuffs). You can fix so by installing linux
+distribution packages, or installing Latex distribution packages, or
+by going to CTAN to get the file.
 
 
 Contact
