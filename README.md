@@ -1,5 +1,9 @@
 This repo provides Latex source for materials related to nuclear
-physics, specifically related to three courses offered at MIT's
+physics.
+
+Content
+=======
+Materials in this repo are related to three courses offered at MIT's
 nuclear science and engineering department:
 
 - 22.101 Applied nuclear physics: basic quantum mechanics and modern
@@ -17,9 +21,33 @@ scattering, radioactive decay, and neutron interactions.
   diffusion theory (CMFD, NEM, ANM, SANM), homogenization and
   de-homogenization.
 
-If you just want the pdfs, visit www.mit.edu/~lululi
+**If you just want the pdfs**, visit www.mit.edu/~lululi
 
-If you want to compile the Latex source, you'd need the Latex styles
-included in the /latex folder.
+Compile
+=======
 
-Please feel free to create a pull request/collaborate etc. 
+To compile the Latex sources in this repo, you would need to git clone
+and build tek (https://github.com/palmer-dabbelt/tek), which is the
+Latex Makefile generator I use. Then run
+
+```
+TEXINPUTS="$(readlink -f latex)/:" tek
+```
+
+which generates a Makefile that points to the latex style files
+(latex/) used in these Latex sources.
+
+Then run
+
+```
+make
+```
+
+to make...
+
+
+Contact
+=======
+
+Please feel free to create a pull request/collaborate etc. My email
+address is lululi@mit.edu for now.
