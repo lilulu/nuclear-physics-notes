@@ -1,0 +1,742 @@
+\documentclass{school-22.101-notes}
+\date{December 16, 2011}
+
+\begin{document}
+\maketitle
+
+
+%%%%%%%%%%% Part 3: Structure (shell, spin-parity), decay, neutron interaction %%%%%%%%%%%%
+\clearpage
+\topic{Nuclear Structure}
+\uline{Shell Model}
+\begin{enumerate}
+\item Nuclear Magic Number(Z or N): 2 (He), 8 (Oxygen), 20, 28, 50 (Zr), 82, 126. 
+\item Evidence of magic \# and shell model: \textbf{10 Qual \#4-1} asks two examples.
+\begin{enumerate}
+\item Abundance of stable isotones\footnote{Isotones: same neutron number N, but different proton number Z; Isotopes: same proton number Z, but different neutron number N} is large (by 5 to 7 times) for nuclei with magic \# neutrons.
+\begin{figure}[ht]
+  \centering
+  \begin{subfigure}[b]{0.45\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{images/shell/shell-evidence-1.png}
+    \caption{Evidence 1}
+    \label{fig:111}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.45\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{images/shell/shell-evidence-2.png}
+    \caption{Evidence 2}
+    \label{fig:111}
+  \end{subfigure}
+\end{figure}
+
+\item Neutron separation energy $S_n$ is \uline{low} for nuclei with one more neutron than a magic number. Reason: it is easier to separate one neutron when number of neutrons is magic plus 1; that is, magic neutron numbers are more tightly bound \footnote{Also see Krane Figure 5.2}.
+ 
+\item The first excited states of even-even nuclei have \hi{higher} than usual energies at magic \# because, again, these nuclei are tightly bound. If tightly bound, then excite energy increases. 
+\begin{figure}[ht]
+  \centering
+  \begin{subfigure}[b]{0.45\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{images/shell/shell-evidence-3.png}
+    \caption{Evidence 3}
+    \label{fig:111}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.45\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{images/shell/shell-evidence-4.png}
+    \caption{Evidence 4}
+    \label{fig:111}
+  \end{subfigure}
+\end{figure}
+
+\item Neutron capture cross sections are \uline{low} for magic \#: they are stable already, do not want to absorb neutron. Zr has Z=40 and has about 50,51,52 neutrons, hence it is `neutron transparent.'
+\item Nuclear charge radius decreases and then suddenly jumps at magic numbers. 
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=3in]{images/shell/shell-evidence-5.png}
+\end{figure}
+\end{enumerate}
+\end{enumerate}
+
+\uline{Potential 1: Infinite Wall}: does not work because 1) it requires infinite amount of energy to separate a neutron or a proton; 2) V should go to $0$ at $r=a$; 3) model has sharp edge, whereas nuclear charge and matter distribution fall smoothly to zero beyond the mean radius. 
+
+\uline{Potential 2: Harmonic Oscillator}: does not work because 1) the separation energy goes to infinity, 2) the potential near edge is not sharp enough (compare with experimental results);
+
+Original Harmonic Oscillator: $V_{\mathrm{eff}}$ takes the general form of $V_{\mathrm{eff}} = \frac{1}{2} m \omega^2 r^2 - V_0^{\prime},$ 
+  \begin{align}
+    \omega^2 =
+    \begin{dcases*}
+      \frac{2}{m} \frac{V_0}{R_0^2}  & neutrons \\
+      \frac{2}{m} \left[ \frac{V_0}{R_0^2} - \frac{(Z-1) e^2}{2 R_0^3} \right] & protons \\
+    \end{dcases*}
+    \fsp \fsp \fsp \fsp \fsp
+    V_0^{\prime} = 
+    \begin{dcases*}
+      V_0 & neutrons \\
+      V_0 - \frac{3}{2} \frac{(Z-1) e^2}{R_0} & protons \\
+    \end{dcases*}
+  \end{align}
+\begin{itemize}
+\item Energy eigenvalues are: 
+  \eqn{ E_n = \hbar \omega \left( n + \frac{3}{2} \right) - V_0^{\prime} }
+
+\item The allowed quantum numbers are: 
+  \begin{enumerate}
+  \item $l$ has to satisfy: $\boxed{l \le n, l \mbox{ has same even-odd-ness as n.}}$
+  \item $-l \le m_l \le l$, hence $2l+1$ degeneracy, also take into account $m_s = \pm \frac{1}{2}$, then the total degeneracy is $ D_l (l) = 2l+1, \fsp D_{l,s} (l) = 2(2l+1) = 4l+2$.
+  \item Written $D_{l,s}$ as a function of $n$, the total number of degeneracy is: 
+    $ D_l (n) = \frac{1}{2} (n+1)(n+2), \fsp D_{l,s} (n) = (n+1)(n+2).$
+  \end{enumerate}
+  
+\item \textbf{10 Qual \#4a}: for the first 3 energy levels, given the states using $n, l$ and spectroscopic notation and the degeneracies for each energy leve. 
+ 
+Answer: $n=0, l=0, j = 1/2 \Rightarrow 1s_{1/2}, D = (n+1)(n+2) = 2$. $n=1, l = 1, j = 1/2, 3/2 \Rightarrow 1p_{1/2}, 1p_{3/2}, D = (n+1)(n+2) = 6$. $n=2, l=0,2, j = 1/2, 3/2, 5/2 \Rightarrow 2s_{1/2}, 2d_{3/2}, 2d_{5/2}, D = 12$. 
+
+\item Two problems with this model: total \# of allowed energies are correct for $n=0,1,2$ but off for the rest; Separation energy $\Delta E$ predicted is larger than reality.        
+  \end{itemize}
+
+\uline{Potential 3: Intermediate Form}: we like it because it is a good sharpness. Expression: 
+\eqn{ V_{nuc} (r) = \frac{-V_0}{1 + e^{\frac{r-R_0}{a}} } }
+where mean radius $R_0 \sim 1.25 A^{1/3},$ mean skin thickness $a \sim 0.524$ F, $V_0 \sim 50$ MeV.  
+
+\uline{Modified For Spin-orbit Coupling}: $V_{\mathrm{nuc}} = V_0 + V_{\mathrm{so}} \frac{\hat{l} \cdot \hat{s} }{\hbar^2}$. 
+  \begin{align}
+    \expect{\lhat \cdot \shat} &= \frac{\hbar^2}{2} \left[ j(j+1) - l(l+1) - \frac{3}{4} \right] 
+    =
+    \begin{dcases*}
+      - \frac{\hbar^2}{2} (l+1) & for $j = l-\frac{1}{2}$. \\ 
+      \frac{\hbar^2}{2} l & for $j = l + \frac{1}{2}$. \\
+    \end{dcases*} 
+    \\
+    V_{\mathrm{nuc}} (r) &= 
+    \begin{dcases*}
+      V_0 - \frac{l+1}{2} V_{\mathrm{so}} & for $j = l-\frac{1}{2}$. \\ 
+      V_0 + \frac{l}{2} V_{\mathrm{so}} & for $j = l + \frac{1}{2}$. \\
+    \end{dcases*}
+  \end{align}
+  \begin{itemize}
+  \item Remember $V_0 < 0, V_{\mathrm{so}} < 0$, so 
+    \begin{itemize}
+    \item $j = l+\frac{1}{2}$: pushes the well and the energy levels down, more tightly bound; the attractive well is more attractive; 
+    \item $j = l - \frac{1}{2}$: pushes the well and the energy levels higher, more weakly bound; well less attractive. 
+    \end{itemize}    
+  \item For a pair of states with $l>0$, the energy splitting difference increases with increasing $l$:
+    \eqn{ \Delta E = \expect{ \lhat \cdot \shat }_{j = l+\frac{1}{2} } - \expect{ \lhat \cdot \shat }_{j = l-\frac{1}{2} } = \frac{\hbar^2}{2} (2l+1) }
+    The physical interpretation of the this is that states with larger $l$ values split more; for instance, $1f$ state split more than than $2p$. In the deuteron example, $l=0$, hence we do not consider spin-orbit coupling.               
+
+  \item \textbf{10 Quiz 2 \#3c}: show how the spin-orbit coupling allows for prediction of the large magic numbers, particularly 50. For 1g level, compute $V_{SO} \frac{\hat{l} \cdot \hat{s}}{\hbar^2}$ to show the splitting into two levels/. What are the spin states associated with the two levels? Which one is more tightly bound? How many nucleons can occupy each of these two new energy levels? How does 50 result from such splitting? 
+
+  \item \textbf{10 Qual \#4b,c}: how does spin-orbit dependency allow splitting of two new energy levels from one? derive $\Delta E(l)$. Consider $n=2$ in harmonic oscillator potential and draw the energy level with spin-orbit splitting. 
+  \end{itemize}
+
+
+
+%%%%
+\clearpage
+\uline{Spin-Parity Assignment}
+Overall: parity $\pi = (-1)^l$, spin $I = j$. 
+\begin{enumerate}
+\item odd A: only care about last unpaired n or p. Use that particle's j as I, use that $l$ to calculate $\pi = (-1)^l$. 
+\item even-even: $I^{\pi} = 0^+$. This is minimized energy by setting the pair's angular momentum to zero, and hundreds of stable or radioactive nuclides fall into this category (which is a strong evidence for pairing force). 
+\item odd-odd (only 4 stable ones: \ce{_1H_1}, \ce{_3Li_3}, \ce{_5B_5}, \ce{_7N_7}; more unstable ones): find the last proton and the last neutron. 
+    \begin{enumerate}
+    \item parity opposite: $I = |I_p - I_n|$;
+    \item parity same: $I = I_p + I_n$;
+    \item $\pi = (-1)^{L_p} (-1)^{L_n}$. 
+    \end{enumerate}
+\end{enumerate}
+Two Exceptions: 
+\begin{enumerate}
+\item Pairing effect of larger $l$: $\delta \propto l$. At a higher A, the $\Delta E$ between two states can be small, and if there is one empty space in a higher state, the pairing effect between this state the one below (which is fully filled) is large enough, then the last neutron from the lower state would fill the higher state to reduce the total energy. 
+\item Potential may swap two states. 
+\end{enumerate}
+
+
+\textbf{10 Quiz 2 \#3a}: Odd A: \ce{^{45}_{21} Sc} is $\frac{7}{2}^-$, \ce{^{61}_{28}Ni} is $\frac{5}{2}^-$. Odd-odd: \ce{^{108}_{49}In}: find $1g_{9/2}, 2d_{5/2}$, both spin up, so $\pi = (-1)^{2+4}$, and $l = l_1 + l_2 = 7$, thus $I^{\pi} = 7^+$. 
+
+\textbf{10 Quiz 2 \#3b}: The measured assignment for \ce{^{61}_{28}Ni} is $\frac{3}{2}^-$. Explain why this differs from 3a. 
+
+Answer: the 4th n in $2p_{3/2}$ moves up to $1f_{5/2}$ (energy difference is small), making the last unpaired neutron one in the $2p_{3/2}$ state now. $1f_{5/2}$ is found because the pairing effect favors large $l$. 
+
+
+
+\vspace{1cm}
+\uline{Binding Energy, Stability, Mass Parabola}
+\begin{enumerate}
+\item Stability's governing factor: nuclear mass. Typically, a higher B/A means more stable.
+\item Binding energy (positive):
+\begin{align} 
+B(A,Z) &= \left[ Z m_p + N m_n - (m(A,Z) - Z m_e) \right] c^2 \\
+&= \left[ Z m_{\ce{^1 H}} + N m_n - m(A,Z) \right] c^2
+\end{align}
+
+\item Separation energy (positive) = binding energy for the outmost neutron (`valence' nucleon), which is the energy required to separate one neutron from a nucleus; similarly for proton separation energy: 
+\begin{align}
+\Aboxed{ S_n &= B(\ce{^A_Z X_N}) -B(\ce{^{A-1}_Z X_{N-1}}) = \left[ m(A-1, Z) - m(A,Z) + m_n \right] c^2 } \\
+S_p &= B(\ce{^A_Z X_N}) -B(\ce{^{A-1}_{Z-1} X_{N}}) = \left[ m(A-1, Z-1) - m(A,Z) + m_{H} \right] c^2
+\end{align}
+
+\item SEBE:
+    \eqn{ \Aboxed{ B &= \underbrace{15.5 A - 16.8 A^{2/3} - 0.72 \frac{Z(Z-1)}{A^{1/3}}}_{\mbox{`liquid-drop model,' collective behavior.}} \underbrace{- 23 \frac{(A-2Z)^2}{A} \pm 34 A^{-3/4}}_{\mbox{`shell model,' individual nucleon behavior.}}   } }
+    \begin{itemize}
+    \item Explain symmetry term: [FIXME]. 
+    \item Parity Contribution: this term arises from the tendency of the like nucleons (neutron \& neutrons, protons \& protons) to couple pairwise to more stable configurations.
+      \begin{itemize}
+      \item Odd-odd: weakly bound, lose binding energy, both V and E move up, $\sim -a_p A^{-3/4}$;
+      \item Odd A: no effect;
+      \item Even-even: tightly bound, gain binding energy, both V and E move down, $\sim a_p A^{-3/4}$.
+      \end{itemize}
+    \end{itemize}
+    \textbf{09 Qual \#2a}: write $B(A,Z)$ with unspecified coefficients, state the physics reason for the A and Z dependency in each term and indicate the sign.
+    
+    \textbf{10 Quiz 2 \#2a}: write the relationship between Z and N for a nucleus which has zero proton separation energy $S_p = 0$, using the semi empirical binding energy formula. 
+
+    Answer: $S_p = 0$, the binding energy between the parent nucleus and its daughter should be the same for a beta plus decay, 
+    \eqn{ 0 = B(A,Z) - (A-1, Z-1) &= a_v (1) - a_s (A^{2/3} - (A-1)^{2/3}) - a_c \left( \frac{Z(Z-1)}{A^{1/3}} - \frac{(Z-1)(Z-2)}{(A-1)^{1/3}} \right)\notag  \\ 
+ & - a_{sym} \left( \frac{(N-Z)^2}{A} - \frac{(N-Z)^2}{A-1} \right) + \delta_P - \delta_D } 
+
+    \textbf{10 Quiz 2 \#2b}: compare the surface and Coulomb energy for A=60 (N=30, Z=30) and A=240 (N=140, Z=100). Explain the difference. 
+
+    Answer: calculate; A=60 has larger surface term; A=240 has larger Coulomb term. The difference comes from: a) surface-to-volume $\down$ as A $\up$; b) Coulomb $\up$ as proton number $\up$. 
+
+    \textbf{10 Quiz 2 \#2c}: given $Z_{min} = \frac{A}{2} \left/ \left( 1 + \frac{1}{4} \frac{a_c}{a_{sym}} A^{2/3} \right) \right.$, which interactions govern the deviation from $N=Z=A/2$? 
+
+    Answer: Coulomb tends to decrease proton number, while asymmetric term tends to decrease this effect. It is a direct competition between the two as can be seen from $\frac{a_c}{a_{sym}} A^{2/3} = \frac{a_c / A^{1/3}}{a_{sym} / A }$. 
+
+\item B/A vs. A graph: 
+  \begin{itemize}
+  \item Know how to draw the graph. 
+  \item Initial rise in B/A is due to decreasing importance of the surface term as A increases. 
+  \item The peak at A=56 is due to Coulomb repulsion increases as A increases. Peak is 8 MeV. 
+  \item Know that $B = (Zm_H + N m_n - m(A,Z))c^2 > 0, \Delta = (m(A,Z) - (Zm_H + N m_n)) c^2  = - B < 0$. So $\Delta$ vs. A curve is concave up (and the $A>56$ portion increases linearly in $\Delta$ vs. A, which agrees with $B/A$ stays about constant). Prof. Yip draws the region of stability on the $\Delta$ vs. A curve. 
+  \item \textbf{09 Qual \#2b,c}: draw B/A vs. A curve. Explain why heavy nuclides fission to produce energy and very light nuclide fuse to produce energy.   
+ \end{itemize}
+
+\item SEMF: combine the two formulas we have about binding energy. 
+\begin{align}
+B(A,Z) &= \left[ Z m_H + N m_n - m(A,Z) \right] c^2  \label{BAZ}\\
+m(A,Z) c^2 &= \left[ Z m_H + N m_n \right] c^2 - B(A,Z) = Z^2 (\cdots) + Z(\cdots) + C \label{SEMF-m}
+\end{align}
+
+\item Mass parabola: derived from Eq.~\ref{SEMF-m}. $\frac{\dM}{\dZ} = 0$ to find $\displaystyle Z_{\mathrm{min}} \approx \frac{A/2}{1 + \frac{1}{4} \frac{a_c}{a_{\mathrm{sym}}} A^{3/4}} $. At small A, $Z_{\mathrm{min}} \sim \frac{A}{2}$. At large A, $Z_{\mathrm{min}} < \frac{A}{2} \sim 0.41 A$. 
+
+Mass parabola is used for: 
+    \begin{enumerate}
+    \item To determine whether a decay process will happen or not, it has to be \textcolor{blue}{energetically allowed, $M_{\mathrm{final}} < M_{\mathrm{initial}}$, that is, goes down on the M vs. Z curve.}
+    \item Remember for odd A there is only 1 parabola; for even A there are two (o-o is above e-e)
+    \end{enumerate}
+\textbf{09 Qual \#2d}: what is the shape of the mass curve? given a mass parabola curve, mark the sequence of decay to a stable isotope(s). Are there additional decays that are not in these sequences? Answer: parabolic. $\beta$- decay to increase proton (moving to the right on the curve), and $\beta$+ to move to the left. We can not tell whether a $\beta$+ or an electron capture would happen. 
+
+\textbf{10 Quiz 2 \#2d}: given masses, draw mass parabola, find the decay mode and calculate the max energy release. Answer: keep in mind odd-odd curve is above even-even (remember e-e is more stable thus below). Know that beta plus $Q = m(X) - m(X') - 2m(e)$. 
+
+\end{enumerate}
+
+
+
+
+\clearpage
+%%%%%%%%%%%%%%%%%%%%%%%%% Topic 3 Radioactive Decay %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\topic{Radioactive Decay}
+\begin{enumerate}
+\item Common decay types:
+    \begin{figure}[h!]
+        \centering
+        \includegraphics[width=3in]{images/rd/Z-N-grid.png}
+    \end{figure}
+
+\item Decay constant $\lambda = -\frac{\dNdt}{N(t)}$, which is the probability of decay per time. Assume $\lambda$ constant for each decay type. 
+
+\item Simpliest case: no source, just decay. 
+    \begin{align}
+    \dNdt (t) &= - \lambda N(t) &  N(t) &= N_0 e^{-\lambda  t} \\
+    N(t_{1/2}) &= \frac{1}{2} N(0) & t_{1/2} &= \frac{\ln 2}{\lambda} = \frac{0.693}{\lambda} \\
+    \tau &= \frac{\int_0^{\infty} t \left| \dNdt \right| \dt }{\int_0^{\infty}  \left| \dNdt \right| \dt} = \frac{1}{\lambda} & \mbox{mean lifetime} &= \frac{1}{\lambda}
+    \end{align}
+
+\item Assume constant source, one mode decay: $\displaystyle \dNdt = S - \lambda N.$ Solution is $N(t) = N(0) e^{-\lambda t} + S(1 - e^{-\lambda t})$ (the same form as angular flux from MOC). 
+
+\item Know secular equilibrium and transient equilibrium. 
+
+\item Three decay modes and their formulas. 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Decay Summary %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+  \begin{landscape}
+    \begin{table}
+      \begin{tabular}{|c|c|c|c|} \hline
+         & Alpha Decay & Beta Decay & Gamma Decay \\ \hline
+        %
+        \multirow{3}{*}{Notation} & \multirow{3}{*}{\ce{^A_ZX \to \ce{^{A-4}_{Z-2}\Xp} + ^4_2He} } & b.m.($n \to p$): \ce{^A_ZX \to \ce{^A_{Z+1}\Xp} + e^- + \bar{\nu}} & \multirow{3}{*}{ \ce{X^* \to X + \gamma} } \\  
+        & & b.p.($p \to n$): \ce{^A_ZX \to \ce{^A_{Z-1}\Xp} + e^+ + \nu} & \\
+        & & e.c. \ce{^A_ZX + e^- \to \ce{^A_{Z-1}\Xp} + \nu} & \\ \hline
+        %
+        \multirow{3}{*}{Mode} & \multirow{3}{*}{blank} & $\pi_P = \pi_D (-1)^L$, L = e or o? & L = e, e E, o M; L = o, o E, e M. \\
+        & & $I_P = I_D + L + S$, $L_{\mathrm{min}} =$? while $S = 0,1$. & $I_P = I_D + L$, all possible L? \\
+        & & For $L$, $S=0$ is Fermi, 1 is Gamow-Teller. & $L_{\mathrm{min}}$ is most probable.    \\ \hline
+        %
+        \multirow{3}{*}{Energy} 
+        & $\displaystyle m_X c^2 = m_{\Xp}c^2 + T_{\Xp} + m_{\alpha} c^2 + T_{\alpha}$ 
+        & $\displaystyle m_X c^2 = m_{\Xp} c^2 + m_{\beta} c^2 + T_{\Xp} + T_{\beta}$ 
+        & $\displaystyle M^* c^2 = Mc^2 + T_R + E_{\gamma}$ 
+        \\ 
+        & $\displaystyle Q = T_{\Xp} + T_{\alpha} = (m(X) - m(\Xp) - m(\alpha) )c^2$ 
+        & $\displaystyle Q_{\beta^-} = (m(X) - m(\Xp))c^2$
+        & $\displaystyle Q_{\gamma} =  (M^* - M)c^2  = T_R + E_{\gamma}$
+        \\ 
+        & $\displaystyle T_{\alpha} = Q \left( 1 - \frac{4}{A} \right) \approx 0.98 Q$ 
+        & $\displaystyle Q_{\beta^+} = (m(X) - m(\Xp) - 2m_e) c^2$
+        & $\displaystyle T_R = \frac{P_R^2}{2M} = \frac{P_{\gamma}^2}{2M} = \frac{\hbar^2 k^2 c^2}{2Mc^2} = \frac{E \gamma^2}{2Mc^2}$
+        \\ \hline
+        %
+        %
+        \multirow{3}{*}{Theory} & Gamow: barrier penetration, tunneling & Fermi: weak interaction. & Multi-pole transition\\
+        & $\displaystyle \lambda = f P_T$, $E_G = \left( \frac{2 \pi e^2 Z_{\alpha} Z_D}{\hbar c} \right)^2 \frac{\mu c^2}{2}$ 
+        & $\displaystyle \lambda_{if} = \frac{2\pi}{\hbar} |M_{if}|^2 \rho_f$ & $\lambda = \frac{P}{\hbar \omega}$ \\
+        & $\displaystyle 2G = \sqrt{\frac{E_G}{Q}} \left[ 1 - \frac{4}{\pi} \sqrt{\frac{a}{b} } \right], P_T = e^{-2G}$ &  $N[p] = C p_e^2 (Q - T_e)^2 F(Z^{\prime}, p) |M_{fi}|^2 S(p_e, p_{\nu})$ 
+        & $\displaystyle P = f[L,\omega] |m_{fi} (\sigma L)|^2$ \\ \hline 
+      \end{tabular}
+    \end{table}
+  \end{landscape}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Decay Summary %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{enumerate}
+
+\clearpage
+\uline{Alpha decay} (tested every year!)
+\begin{enumerate}
+\item Conceptional stuffs:
+\begin{enumerate} 
+\item Most radioactive substances are $\alpha$-emitters. Most nuclides with $A>150$ are unstable against $\alpha$ decay. 
+
+\item Why does the parent nuclei (typically heavy) want to spit out $\alpha$ particles? 
+
+Answer: Coulomb Repulsion Effect. Coulomb force increases super-linearly with respect to binding energy\footnote{Nuclear binding energy $\propto a_V A,$ Coulomb repulsion $\propto -a_C \frac{Z^2}{A^{1/3}}$, Coulomb term increases faster than nuclear binding term for heavy nuclei.}. There is a need to get rid of some protons.  
+\item $\alpha$-decay is the most favored form of radioactive decay among heavy nuclei. Very rare to observe other nucleon emission besides alpha particles. Why is the $\alpha$ particle chosen for spontaneously carrying away the positive charge?
+    \begin{enumerate}
+    \item \ce{^4_2 He_2} is doubly magic, very stable, tightly bound structure;
+    \item \ce{^4_2 He_2} has relatively small mass compared with the mass of its separate constituents (beats \ce{^{12} C}, \ce{^{18} O}). It is favored as an emitted particle if we hope to have the disintegration products as light as possible and thus get the largest possible release of T. 
+    \end{enumerate}
+\item To determine whether a decay mode is possible, we need to check three things:
+    \begin{enumerate}
+    \item Energetically allowed, that is, $Q > 0$. Decay through emission of lighter particles is not possible because they require energy instead of release energy.
+    \item $\lambda$ for the decay cannot be too small, $t_{1/2}$ cannot be too large (larger than $10^{16}$ years is no good). 
+    \item Its $\beta$ decay $\lambda$ cannot be too much higher than $\alpha$ decay's, or it would mask the $\alpha$ decay. Most nuclei with $A>190$ (and many with $150 < A < 190$) are energetically possible for $\alpha$ decay, but only one-half can actually meet these requirements.
+    \end{enumerate}
+\item Why is decay via emission of heavier nuclei (such as \ce{^{16}O} or \ce{^{12}C}) rarely observed? 
+
+Answer: $P_T = e^{-2G}, 2G \approx \sqrt{\frac{E_G}{Q}}, E_G \sim Z_1^2 Z_2^2$. Decaying via a heavier nuclei means $E_G$ is larger than that of $\alpha$ emission (because $Z_1, Z_2$ would be closer in value), making the probability decreases significantly. 
+\item Why is decay via emission of lighter nuclei (such as \ce{^1H}, \ce{^2H}, \ce{^3He}) rarely observed?
+
+Answer: $\alpha$ particle is favored over lighter nuclei because it is doubly magic stable, very stable, tightly bound. HW6 solution also says `this could be qualified by $Q_{\alpha}$ in $2G = \sqrt{\frac{E_G}{Q_{\alpha}}}$. 
+\item Why is spontaneous fission not very likely?
+
+Answer: spontaneous fission means $Z_1 \sim Z_2$, which makes the product large, $E_G$ large, $2G$ large, $P_T$ small. 
+\end{enumerate}
+%
+
+\item Conservation of Energy: decay will occur spontaneously only if $Q >0$. In general, $Q>0$ for $A > 150$ (but $\alpha$ decay observed for $A \ge 190$). 
+\begin{align}
+m_X c^2 &= m_{\Xp} c^2 + T_{\Xp} + m_{\alpha} c^2 + T_{\alpha} \\
+(m_X - m_{\Xp} - m_{\alpha} ) c^2 &= B(\Xp) + B(\alpha) - B(X) =  T_{\Xp} + T_{\alpha} = Q \label{Q-alpha}
+\end{align}
+
+\item Conservation of Linear Momentum:
+\begin{align}
+0 &= P_{\Xp} - P_{\alpha}  & P_{\Xp}^2 &= P_{\alpha}^2 \\
+T_{\Xp} m_{\Xp} &= T_{\alpha} m_{\alpha}  & T_{\Xp} &= T_{\alpha} \frac{m_{\alpha}}{m_{\Xp}} \\
+Q &= T_{\alpha} + T_{\alpha} \frac{m_{\alpha}}{m_{\Xp}}  & T_{\alpha} &= \frac{Q}{1 + \frac{m_{\alpha}}{m_{\Xp}}}  \approx \boxed{ Q \left( 1 - \frac{4}{A} \right) } \approx 98\% Q
+\end{align}
+\item Geiger-Nuttel Rule (experimentally observed): suggesting doubling Q can result in $10^{-24}$ change in $t_{1/2}$. $Q$ is the total energy generated from the reaction, which is splited between $\alpha$ and the residual particle. 
+\eqn{ \log t_{1/2} \propto \frac{1}{\sqrt{Q_{\alpha}}}   }
+One way to plit the $Q$ is, in the lab system, 
+\eqn{ E_{\alpha} &= \frac{m_D Q}{m_{\alpha} + m_D} & E_D &= \frac{m_{\alpha} Q}{m_{\alpha} + m_D} }
+Derivation: 
+\begin{align}
+Q &= T_1 + T_2 & T_1 m_1 &= T_2 m_2 \\
+T_1 &= \frac{m_1}{m_2} (Q - T_1) & T_1 &= \frac{m_2 Q}{m_1 + m_2} 
+\end{align}
+
+\item Gamow's Theory:
+    \begin{align}
+    E_G &= \left(\frac{2 \pi e^2 Z_{\alpha} Z_D}{\hbar c}\right)^2 \frac{\mu c^2}{2} = \left( \frac{2 \pi \cdot Z_{\alpha} Z_D}{137} \right)^2 \frac{m_{\alpha} m_D}{m_{\alpha} + m_D} \frac{938}{2} \\
+    2G &= \sqrt{\frac{E_G}{Q}} \left[ 1 - \frac{4}{\pi} \sqrt{\frac{a}{b}} \right] \\
+    P_T &= e^{-2G} \\
+    \lambda &= f P_T; \fsp t_{1/2} = \frac{0.693}{\lambda} 
+    \end{align}
+
+Implications of Gamow's model:
+\begin{enumerate}
+\item Explain meaning of $f, P_T$, sketch $\alpha$ energy vs $r$ with wavefunctions on it (\textbf{10 Qual \#3a, 10 Quiz 2 \#4a, 09 Qual \#1a}). 
+
+Answer: Assume $\alpha$ pre-formed. $f = \frac{v_{\alpha}}{a}$ describes how often alpha particles bounce off the potential. $P_T$ is tunneling probability. 
+
+\item \textbf{09 Qual \#1b}: given $P_T = \exp (- 2 \int_a^b \dr k_2(r)), G = \int_a^b \dr k_2 (r)$, write an expression for $k_2(r)$ from the sketch of $\alpha$ potential vs. $r$. 
+
+Answer: we know this $k$ is the same as from the QM formulation thus $\displaystyle k_2 (r) = \sqrt{ \frac{2 \mu (V(r) - Q)}{\hbar^2}}$. 
+
+\item \textbf{10 Quiz 2 \#4b}: derive $P_T$ as a function of the tunnel barrier form and parameters. 
+
+Answer: the wavefunction of $r \in [a,b]$ has the form $r \psi(r) \sim e^{-k_2 r}$ with $k_2 = \frac{\sqrt{2\mu (V(r) - Q)}}{\hbar}$ where $Q$ is the energy of $\alpha$. The probability to be transmitted per unit $\dr$ is (keep in mind $k_2(r)$ changes with $r$ too): 
+\eqn{ \dP_T = \left| \frac{e^{- k_2 (r+\dr)}}{e^{-k_2 r}} \right|^2 = e^{-2k_2 (r) \dr}}
+The $P_T$ from $r=a$ to $t=b$ is then just (where $b$ is given by solving for $V(b) = Q$): 
+\eqn{ P_T &= e^{-2 \int_a^b k_2(r) \dr} = e^{-2G} & G&= \int_a^b \frac{\sqrt{2 \mu (V(r) - Q)}}{\hbar} \dr }
+
+\item \textbf{10 Qual \#3c}: similarities and differences between thermal neutron fission model and alpha decay model. Answer: similarities: potential barrier shape, assume pre-formed particles. Difference: alpha particles tunnel, fission requires activation energy. 
+
+\item \textbf{10 Qual \#3d}: assume same Q for $\alpha$ decay and spontaneous fission of U238, compare $P_T$ of alpha decay and $P_T$ of spontaneous fission into two equal daughter nuclides. 
+
+Answer: $P_T$ of alpha has to be a lot larger than spontaneous fission's. $E_G$ depends on $Z_1, Z_2, \mu$ and SF has a $E_G$ about 1500 times larger than alpha decay. 
+
+\item  \textbf{09 Qual \#1c}: why strong dependency on $Q$? Is a positive and large $Q$ sufficient condition for categorizing a nuclide as an alpha-emitter? 
+
+Answer: $E_G$ is so large (recall 125799 MeV for U238). Recall the graph we had that doubling $Q$ results in a $10^{20}$ change in $t_{1/2}$. An $\alpha$-emitter requires: energetically allowed (a large positive $Q$), decay constant cannot be too small (or say half-life cannot be too large), and $\beta$ decay $\lambda$ cannot be too much higher than $\alpha$'s. 
+
+\item The calculated $E_G$ is larger than the measured values. Potential reason: we keep the nuclear radius $a$ fixed in $x = \frac{a}{b}$ term; though for A$>$230, nuclei have strongly deformed shapes, and calculated $t_{1/2}$ is very sensitive to $x$\footnote{in fact, typically we would measure $t_{1/2}$ to reverse engineer the nuclei radius.}. 
+\item Why alpha-decay not \ce{^{12} C} decay? 
+
+Answer: If we consider $E_G \sim (Z_{\alpha} Z_D)^2 \mu c^2$, both $Z_1 Z_2$ and $\mu$ goes up, thus $\frac{P_T^{\alpha}}{P_T^C} \sim \frac{\exp(-\sqrt{16})}{\exp(-\sqrt{432})} \sim \exp(16)$. `Why not spontaneous fission' can be explained similarly using Gamow's model.     
+\begin{table}[ht]
+    \centering
+    \begin{tabular}{|c|c|c|c|} \hline
+    & $(Z_{p} Z_D)^2$ & $\mu$-dependency & $P_T$ \\ \hline
+    $\alpha$ &  $(2 (Z-2))^2 \sim 4Z^2$ & 3.9 & $\exp(-\sqrt{16})$ \\ \hline
+    \ce{^{12} C} & $(6(Z-6))^2 \sim 36 Z^2$ & 11.4 & $\exp(-\sqrt{432})$ \\ \hline
+    \end{tabular}
+\end{table}
+\end{enumerate}
+
+\item $\alpha$ with momentum. \textbf{11 Qual \#3, 10 Quiz 2 \#4c}: A net angular momentum received by the daughter nucleus during alpha decay would modify the decay constant. Write and sketch the modified tunnel barrier. What is the maximum relative change in the height of the barrier? How does this modify the decay constant? 
+
+Answer: the coulomb potential barrier shifts up by `centrifugal potential.' The maximum potential change happens at $r = a$: 
+\eqn{ V^{mod}(r) &= \frac{Z_1 Z_2 e^2}{r} +  \frac{\hbar^2 l(l+1)}{2\mu r^2},  &\left. \frac{\Delta V}{V} \right|_{max} &= \frac{\hbar^2}{Z_1 Z_2 e^2} \frac{l(l+1)}{2 \mu a} }
+ Potential change in $\alpha$ decay increases effective thicknes of barrier, thus $b^{mod} > b$. The new Gamow energy can roughly be expressed as: 
+ \begin{align}
+   \sqrt{E_G^{mod}} &\approx \sqrt{E_G} \left(1 + \frac{\Delta V}{V} \right)  = \sqrt{ \frac{2 \pi^2 Z_1 Z_2 e^4}{\hbar^2 c^2}}  \left(1 + \frac{\Delta V}{V} \right) \\
+   P_T^{mod} &\approx \exp \left[ - 2 \sqrt{\frac{E_G}{Q}} \left( 1 - \frac{a}{\pi} \sqrt{\frac{a}{b^{mod}}} \right)  \left(1 + \frac{\Delta V}{V} \right)  \right] 
+ \end{align}
+Assume $b^{mod} \approx b$ in this formulation, we get 
+\eqn{ P_T^{mod} &\approx P_T^{1 + \frac{\Delta V}{V}} }
+\end{enumerate}
+
+\clearpage
+\uline{Beta decay}
+\begin{enumerate}
+\item Spin parity: $L = L_{\beta + \gamma}, S = S_{\beta + \gamma}$, 
+    \begin{enumerate}
+    \item $\pi_P = \pi_D (-1)^L$ to find whether $L$ is even or odd;
+    \item $I_P = I_D + L + S$, choose lowest possible $L$ while $S = 0,1$. $L$ tells us whether the state is allowed or nth forbidden.
+    \item For the lowest $L$ we find, what value can S be? $S=0$ is Fermi, $S=1$ is Gamow-Teller, if both are possible we get 'mixed.' 
+    \end{enumerate}
+\item The lowest $L$ value corresponds to the most likely state. Reason: as in $\psi_{\beta} (r) = 1 + \frac{i p_e r}{\hbar} + \frac{1}{2} \left( \frac{i p_e r}{\hbar} \right)^2 + \cdots$, the higher $L$ is, the higher order the expansion is, the less likely the term is, the smaller $\lambda$ is. Hence $\lambda_{\mathrm{allowed}} \gg \lambda_{\mathrm{forbidden}}, t_{1/2,\mathrm{allowed}} \ll t_{1/2,\mathrm{forbidden}}$. 
+\item Why does beta decay's $t_{1/2}$ range from milliseconds to $10^{16}$ years? Reason: it is easy to undergo decay when $l=0$, and it is difficult to do so when $l>0$.     
+\item Difference between alpha and beta decay: 
+    \begin{enumerate}
+    \item alpha decay has conserved neutrons and protons, use `preformed alpha-particle in daughter nuclei' theory; beta decay is transformation (\ce{n \to p}, \ce{p \to n}), creations \& annihilation of electrons and positrons.
+    \item alpha decay is based on strong interaction; beta decay is based on weak interaction, transition. 
+    \item $T_{\alpha}$ is a fixed value; $T_{\beta}$ is a distribution\footnote{notice we use the term $\beta$ in a weird way: $Q_{\beta} = T_{\beta} + T_{\bar{\nu}}$.}. 
+    \item Parity does not conserve in beta decay.
+    \end{enumerate}
+\item Electrostatic results on momentum distribution (\textbf{11 Qual \#2c}): 
+    \begin{enumerate}
+    \item $\beta^+$: nucleus repels $\beta^+$, KE $\up$, curve shifts to the right: both N(p) vs. p and N(T) vs. T start from (positive, 0). 
+    \item $\beta^-$: nucleus attracts $\beta^-$, KE $\down$, curve shifts to the left: N(p) vs. p starts from (0,0), and N(T) vs. T starts from (0, 4.5 MeV). 
+    \end{enumerate}
+\item The energetics associated with these updated beta decays are:
+\begin{align}
+\Aboxed{ Q_{\beta^-} &= \left[ m_n (\ce{^A_Z X_N}) - m_n (\ce{^A_{Z+1} X_{N+1}}) - m_e \right] c^2 = \left[ m (\ce{^A_Z X_N}) - m (\ce{^A_{Z+1} X_{N}}) \right] c^2 } \\
+\Aboxed{ Q_{\beta^+} &= \left[ m (\ce{^A_Z X_N}) - m (\ce{^A_{Z-1} X_{N}}) - 2m_e \right] c^2 } \\
+\Aboxed{Q_{\epsilon} &= \left[ m (\ce{^A_Z X_N}) - m (\ce{^A_{Z+1} X_{N+1}}) \right] c^2 - B_e}
+\end{align}
+\begin{itemize}
+\item Notice $m_n$ is nucleus mass, m is atomic mass. 
+\item $Q>0$ is the criterion for a decay to happen; that is, for $\beta^-$ to happen we need $m_P > m_D$; for $\beta^+$ to happen we need $m_P - m_D > 2 m_e$; for electron capture we requires activation energy to be larger than binding energy of the electron.  
+\end{itemize}
+
+\textbf{11 Qual \#2a}: know given atomic masses of two isotopes, find decay reaction, and calculate the maximum KE of the emitted charged particle. 
+
+Answer: know larger mass beta decay into the small mess. Odd-odd curve is above even-even mass curve. Remember to distinguish between nuclear mass (what is easier to see from the reaction) and atomic mass (what we are typically given). 
+
+\item Fermi's Golden Rule:
+\eqn{ \lambda_{if} = \frac{2\pi}{\hbar} |M_{if}|^2 \rho (E_f) } 
+\textbf{11 Qual \#2b}: explain physical meaning of $|M_{if}|$ and $\rho(E_f)$; what is allowed approximation? 
+
+Answer: $|M_{if}|$ is matrix element for the interaction between initial and final states, and can be further expand as: 
+\eqn{ M_{if}  =  \bra{f} V \ket{i}  = \bra{\psi_f} V \ket{\psi_i} = \int \psi_f^* V \psi_i \dr^3 = \int \psi_{\bar{\nu}}^* \psi_{\beta}^* \psi_{\gamma}^* \psi_{Y} V \psi_X \dr^3 }
+$\rho(E_f)$ is the density of final states available for finding $\frac{\dn}{\dE_f}$ state, aka the number of ways the transition can happen. `Allowed state'' means we keep only $l_{\beta}=0$ (the magnitude of the matrix element sqaured decreases from one order to the next by at least a factor of 10); consequence: $M$ has no effect on the shape of the spectrum; results do not depend on $p_e, p_{\nu}$; $\ket{i} = e^{ikr} \approx 1, \ket{f} = e^{i k' r} \approx 1$. 
+
+\item The corrected formula for the distribution of electron momentum (which is proportional to $\lambda(p_e)$) is:
+\eqn{N(p_e) = N^o (p_e) \times F(Z^{\prime},p_e) \times S(p_e,p_{\nu}) = C \underbrace{p_e^2 (Q-T_e)^2}_{\textcircled{1}} \underbrace{F(Z^{\prime}, p)}_{\textcircled{2}} \underbrace{|M_{fi}|^2}_{\textcircled{3}} \underbrace{S(p_e, p_{\nu})}_{\textcircled{4}}  }
+$\textcircled{1}=$ A statistical factor derived from the density of final states available to the emitted particles; \\
+$\textcircled{2}=$ Fermi function to account for the nuclear Coulomb interaction with the emitted particles;\\
+$\textcircled{3}=$ Matrix element for `allowed' ($l_{\beta} = 0$) transition; strength of the interaction between initial and final states; \\
+$\textcircled{4}=$ Shape factor to correct $|M_{if}|^2$ for the various `forbidden' decay paths.    
+\end{enumerate}
+
+
+
+
+\clearpage
+\uline{Gamma decay}
+\begin{enumerate}
+\item Selection rule:
+    \begin{enumerate}
+    \item  $\pi_P = \pi_D (-1)^L$ to find whether $L$ is even or odd; if $L$ is even, then even E, odd M; if $L$ is odd, then odd E, even M;
+    \item $I_P = I_D + L$, find all possible L values; write all allowed multi-poles;
+    \item Most probable decay mode is lowest $L$ ($L=0$ is forbidden). 
+    \end{enumerate}
+    In general, magnetic multiple is weaker than electric; but as far as we are concerned, the $L$ mode dominate. 
+
+Alternatively, do $I_P = I_D + L_{\gamma}$ where $L_{\gamma} = 1,2,3, \cdots$.  Electric means $\pi_P = \pi_D (-1)^{L_{\gamma}}$, magnetic means $\pi_P = \pi_D (-1)^{L_{\gamma} + 1}$. Interested in the lowest $L$ that satisfies angular momentum. 
+
+\item Energetics (R: recoil):
+\begin{align}
+M^* c^2 &= Mc^2 + T_R + E_{\gamma}  & Q_{\gamma} &=  (M^* - M)c^2  = T_R + E_{\gamma} \\
+|P_R| &= |P_{\gamma}| = \hbar k & T_R &= \frac{P_R^2}{2M} = \frac{P_{\gamma}^2}{2M} = \frac{\hbar^2 k^2 c^2}{2Mc^2} = \frac{E \gamma^2}{2Mc^2} 
+\end{align}
+A typical range of gamma energy is: $E_{\gamma} \approx 0.1 \sim 10 \fsp \MeV$. With $2Mc^2$ on the order of $2000 A$ MeV, $T_R$ is very small. Then $Q = E_{\gamma} + T_R \approx E_{\gamma}$
+\item Theory ($\sigma$ is E or M): 
+\begin{align}
+\lambda &= \mbox{Probability per unit time for photon emission } = \frac{P}{\hbar \omega} = \frac{\mbox{Power radiated}}{\mbox{photon energy}} \\
+P&= f[L,\omega] \cdot |m_{fi} (\sigma L)|^2 = \mbox{power radiated in the EM field} \cdot \mbox{multipole moment} \\
+m_{fi} (\sigma L) &= \mbox{multipole transition operation} = \int_V \psi_f^* m(\sigma L) \psi_i \dV 
+\end{align}
+\end{enumerate}
+
+\clearpage
+%%%%%%%%%%%%%%%%%%%%%%%%% Topic 4 Neutron Interaction %%%%%%%%%%%%%%%%%%%%%%%%%%
+\topic{Neutron Interaction}
+Neutron energy range: thermal $\in [0, 0.025 \eV]$, epithermal $\in [10^{-3}, 1]$ eV, resonance $\in [1, 10^4]$ eV, fast is the rest. Important neutron interactions:
+    \begin{itemize}
+    \item $(n,n)$ Elastic Scattering: 
+        \begin{itemize}
+        \item* Potential Scattering (billard-ball like collision);
+        \item Resonance Scattering (compound nucleus formation and decay);
+        \end{itemize}
+    \item* $(n,n^{\prime})$ Inelastic Scattering (excitation of nuclear levels);
+    \item $(n, \gamma)$ Radiative Capture (get hit by a neutron, release $\gamma$ ray);
+    \item $(n, p), (n,\alpha), \cdots$ Charged Particle Emission;
+    \item $(n, f)$ fission.     
+    \end{itemize}
+
+\begin{enumerate}
+\item Lab CS: 
+\begin{enumerate}
+    \item General energetics derivation: 
+    \eqn{ Q =  T_3 \left( 1 + \frac{m_3}{m_4} \right) - T_1 \left( 1 - \frac{m_3}{m_4} \right) - \frac{2}{m_4} \sqrt{m_1 T_1 m_3 T_1} \cos \theta }
+    \item Elastic Scattering $\Rightarrow Q=0$ (energy lost by neutrons is energy gained by the recoiling target nucleus):
+        \begin{align}
+        0 &= T_3 \left( 1 + \frac{1}{A} \right)  - T_1 \left( 1 - \frac{1}{A} \right) - \frac{2}{A} \sqrt{ T_1 T_3} \cos \theta \\
+        &\begin{dcases*}
+        T_3^{max} = T_1 &  $\theta = 0$,  Perfect forward scattering \\
+        T_3^{min} = \left( \frac{A-1}{A+1} \right)^2 T_1 = \alpha T_1 & $\theta = \pi$, Perfect backward scattering 
+        \end{dcases*}
+        \end{align}
+    \item Inelastic Scattering $\Rightarrow Q < 0$ (energy lost by neutrons is larger than energy gained by recoiling nucleus, neutron excites the target nucleus, target nucleus gain energy through the KE of neutron):
+\begin{align}
+M^* c^2 - M c^2 &= E^* > 0  & M^* &= M + \frac{E^*}{c^2} \label{M*} \\
+Q &= - E^* = -T_1^{min} \left( 1 - \frac{1}{A} \right) & T_1^{min} &= E^* \frac{A}{A-1} > E^* 
+\end{align}
+\textcolor{blue}{Minimum KE of neutron, $T_1^{min}$, is always greater than $E^*$!!!}
+\end{enumerate}
+%
+\item CMCS: relate $E, E^{\prime}$; relate $\cos \theta, \cos \theta_C$:
+    \begin{align}
+     T_3 &= \frac{1}{2} T_1 \left[ (\alpha+1 ) + (1-\alpha) \cos \theta_C \right], \fsp \alpha = \left( \frac{A-1}{A+1} \right)^2 \\
+    \cos \theta &= \frac{1 + A \cos \theta_C}{\sqrt{A^2 + 1 + 2A \cos \theta_C}} 
+    \end{align}
+Energy distribution of elastically scattered neutrons:
+    \begin{align}
+    P(E \to E^{\prime}) &= \frac{1}{(1-\alpha)E} \\
+    \int_{\alpha E}^E (E - E^{\prime}) P(E \to E^{\prime}) \dE^{\prime} &= \mbox{Average Energy Loss per collision}  = \frac{E}{2} (1-\alpha) 
+    \end{align}
+Angular distribution of elastically scattered neutrons:
+In CMCS the energy differential cross-section $\sigma_s(E)$ and the angular differential cross section $\sigma_s(\theta_C)$ are constant,
+    \eqn{\frac{\derivative\sigma_s}{\derivative\Omega_C} = \sigma_s (\theta_C) = \frac{\sigma_s(E)}{4 \pi} }
+This is not the case, however, in Lab CS (Lab CS is forward biased; though as A $\up$, distribution gets more uniform):
+    \begin{align}
+    \sigma_s (\theta) &= \frac{\sigma_s (E)}{4 \pi} \frac{(\gamma^2 + 2 \gamma \cos \theta_C + 1)^{3/2}}{1 + \gamma \cos \theta_C}, \fsp \gamma = \frac{1}{A}  \\
+    \overline{\cos \theta} &= \frac{\int \dOmega \cos \theta \sigma(\theta)}{\int \sigma_s (\theta) \dOmega} \approx \frac{2}{3A} > 0 
+    \end{align}
+%
+%
+\item Revisit Assumptions:
+\begin{enumerate}
+\item Elastic Scattering Assumption: this assumption is valid when $E_n$ is small that it does not provide enough energy to excite the compound nucleus, hence the scattering from ground state of $\nu$, no energy lost for excitation. 
+
+If $E_n > 0.05 \sim 0.1$ MeV for heavy nuclei, $E_n > 0.1 \sim 2$ MeV for medium nuclei, it would excite the first nuclear energy level above the ground state, and inelastic scattering becomes energetically possible. Elastic scattering cross section tend to be larger than inelastic scattering cross section: $\sigma (n,n) = 5\sim20$ barns, $\sigma(n,n^{\prime}) \sim 1$ barn.
+
+\item Target at rest: this assumption is valid when neutron energy is large compared to the KE of the target nucleus ($k_B T$): $E_n \gg k_B T$. Typically, $E_n > 0.1$ eV is enough for making this assumption. 
+
+When $E_n \approx k_B T$, neutron energy is around the same level as the thermal motion of the target, and neutron can gain energy from the vibration of the target nucleus. 
+\begin{figure}
+    \centering
+    \includegraphics[width=4in]{images/ni/lower-neutron-energy.png}
+\end{figure}
+
+\item Isotropic scattering in CMCS: this assumption is valid when $E \ll 10 $keV, $l=0$, S-wave. 
+
+However, if $E > 10$ keV, higher angular momentum (p-wave and above) would be significant. 
+\eqn{ \frac{\derivative\sigma_s}{\dtheta} &= |f(\theta)|^2 = \Sum_l f_l P_l(\cos \theta)  = \underbrace{f_0}_{\mathrm{S-wave}} + \underbrace{f_1 \cos \theta}_{\mathrm{P-wave}} + \cdots } 
+\textbf{11 Qual \#1}: given an anisotropic angular differential scattering cross section in CMCS $\sigma_s (\theta_C) = \frac{\sigma (E)}{4 \pi} ( 1 + a \cos \theta_C)$, find $P(E \to E')$. Double check whether $\dOmega = - 2 \pi \sin \theta \dtheta$, then we can start doing things in $\Omega$ space. 
+\begin{align}
+\sigma_s(\theta_C) &= \sigma(E) P(\Omega_C) \fsp \fsp \fsp \Rightarrow P(\Omega_C) = \frac{1 + a \cos \theta_C}{4 \pi} \notag \\
+ P(\theta_C) &= \int_0^{2\pi} P(\Omega_C) \sin \theta_c \dphi =  \frac{1 + a \cos \theta_C}{2} \sin \theta_C \notag \\
+\Aboxed{ P(E') \dE' &= P(\theta_C) \dtheta_C} \notag \\
+P(E^{\prime}) &= \frac{1 + a \cos \theta_C}{2} \sin \theta_C \frac{\dtheta_C}{\dE^{\prime}} = \frac{1 + a \cos \theta_C}{2}  \frac{1}{E(1-\alpha)} = \frac{a}{\mbox{constant}} + \frac{2 a E^{\prime}}{(1-\alpha)^2 E^2} \notag
+\end{align}
+$a>0$ corresponds to forward scattering, $a<0$ corresponds to backwards scattering. 
+
+\begin{figure}
+    \centering
+    \includegraphics[width=3in]{images/ni/p-wave-approx.png}
+\end{figure}
+\end{enumerate}
+
+
+\item Energy Dependence of Scattering Cross-sections:
+\begin{enumerate}
+\item Low energy range ($E \le 1$ eV): neutrons can feel the thermal motion of the target nuclei; under 0.01 eV, neutron can see molecules; above it, neutrons can see atoms.
+    \begin{align}
+    \sigma_s (v) &= 
+    \begin{dcases*}
+    \mbox{constant } \frac{\sigma_{so}}{v}& $E \ll k_B T, \beta \ll 1$ \\
+    \mbox{constant } \sigma_{so}, \mbox{E independent, isotropic} & $E \gg k_B T, \beta \gg 1$ 
+    \end{dcases*} 
+    \end{align}
+\item Oscillation in the low energy range: Bragg-cutoff corresponds to the lattice parameter, and every spikes afterwards correspond to smaller lattice spacings. 
+\item S-wave potential scattering: constant.
+\item Resonance region: Compound Nucleus Formation, describes elastic resonance scattering, inelastic scattering, radioactive capture, fission. 
+\end{enumerate}
+
+\item Fission
+\begin{enumerate}
+\item Based on $Q$ and $V^{\mathrm{peak}}$ relation:
+    \begin{enumerate}
+    \item $Q \sim V^{\mathrm{peak}}$: spontaneous fission, use Tunneling; 
+    \item $Q > V^{\mathrm{peak}}, A>300$: instantaneous spontaneous fission (rare);
+    \item $Q < V^{\mathrm{peak}}$: induced fission, activation energy provides help/energy to climb over the coulomb barrier. 
+    \end{enumerate}
+\textbf{11 Qual \#4a}: explain the fission activation energy using a potential energy vs. radial distance, and how thermal neutrons can help to overcome the fission activation barrier. 
+
+Answer: activation energy provide the boost over the barrier. Thermal neutrons may reduce the barrier by paring effect. 
+    \begin{figure}[ht]
+       \centering
+       \includegraphics[width=3in]{images/ni/fission-mechanism.png}
+    \end{figure}
+
+\item Know how to evaluate what isotopes can fission by doing: $E_{\mathrm{excitation}} = (m_P - m_D)c^2, E_{\mathrm{activation}} = $ look up table. \textbf{11 Qual \#4b}: evaluate Np-237 and Np-238. 
+
+Answer: 
+\begin{table}[ht]
+    \centering
+    \begin{tabular}{|c|c|c|} \hline
+    & U235 & U238  \\ \hline
+    $E_{\mathrm{excitation}}$ & 6.54 MeV & 4.8 MeV \\ \hline
+    $E_{\mathrm{activation}}$ & 6.2  MeV & 6.6 MeV \\ \hline
+    To overcome barrier & Thermal n suffice & MeV energy n needed \\ \hline
+    \end{tabular}
+\end{table}
+
+\item Pairing effect. The difference in the excitation energies can be understood in terms of $\delta$, the paring energy term in SEMF. \ce{^{236}U} has higher $E_{\mathrm{ex}}$ upon paring, allowing it to jump over barrier easier; whereas \ce{^{239}U} has lower $E_{\mathrm{ex}}$ upon paring, requiring higher neutron energy to fission. 
+\begin{figure}[ht]
+   \centering
+   \includegraphics[width=4in]{images/ni/KE-incoming-neutron.png}
+\end{figure}
+\textbf{11 Qual \#4c}: draw the energy level diagram and explain how the pairing force leads to the difference in the excitation energy levels of \ce{^{237}Np^*} and \ce{^{238}Np^*}. Answer: odd-odd isotopes are raised; even-even isotopes are lowered. 
+
+
+\item Why is spontaneous fission not very common? 
+
+Answer: Use \ce{^{238}_{92}U \to 2 ^{119}_{49}Pd + (n, \beta, \gamma, KE) }  as an example, the energy release can be calculated from binding energy
+\eqn{ Q = 238 \times \underbrace{(-7.6 \fsp \MeV)}_{B/A \fsp \mathrm{U}} - 2 \times 119 \times \underbrace{(-8.5 \fsp \MeV)}_{B/A \fsp \mathrm{Pd}} = -1809 + 2023 = 214 \fsp \MeV  }
+The Coulomb barrier can be estimated as:
+\eqn{ V = \frac{Z_1 Z_2 e^2}{R} \approx 250 \fsp \MeV}
+The barrier is higher than the available energy 250 MeV $>$ 214 MeV, making tunneling probability very small. 
+
+\end{enumerate}
+
+\item Fusion
+\begin{enumerate}
+\item The mutual Coulomb repulsion between light nuclei must be overcome before they can combine. Overcoming the barrier is not really an option (require very high temperature or heavy icon acceleration), so quantum tunneling is our only chance. 
+\item Basic Fusion Reactions: 
+\begin{enumerate}
+\item \ce{p + p \to \ce{^2He}} (not stable, reaction not possible); 
+\item \ce{p + p \to \ce{^2H} + e^+ + \nu} (first step in solar fusion, analogus to beta decay);
+\item \ce{^2 H + ^2 H \to \ce{^3He} + n}, Q = 3.3 MeV ($Q>0$, hence possible); 
+\item \ce{^2 H + ^2 H \to \ce{^3H} + p}, Q = 4.0 MeV (probable);
+\item \ce{^2H + ^3H \to \ce{^4He} + n}, Q = 17.6 MeV (probable, larger Q than D-D reaction, ideal choice).
+\end{enumerate}
+\item Energy release: the lighter the particle, the more released Q it carries. For instance, in D-T reaction, KE of neutron is 14.1 MeV, total Q = 17.6 MeV, neutron carries 80\% Q.
+\item Coulomb barrier: $Z_1 Z_2 \down \down, P_T \up \up$:
+\begin{align}
+V_{\mathrm{coul}} &= \frac{Z_{a} Z_{X} e^2 }{R} & G &\sim \frac{Z_a Z_x}{\sqrt{Q}} \\
+P_T &\sim e^{-2G} \sim e^{- \frac{Z_a Z_X}{\sqrt{Q}}} & \sigma_{\mathrm{fusion}} &\sim \frac{1}{v^2} P_T
+\end{align}
+\end{enumerate}
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%% A Condensed Version %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\clearpage
+\topic{A Condensed Version}
+\begin{enumerate}
+\item CGS unit: $\hbar c = 200 \fsp \MeV \cdot \fm$; the fine structure constant $\frac{e^2}{\hbar c} = \frac{1}{137}, m_n c^2 = 938, a=(1.2 \fm) A^{1/3}. k = \frac{2\pi}{\lambda} = \frac{p}{\hbar} = \frac{E}{\hbar c}. \int_0^a \sin^2 (n \pi x) \dx = \frac{a}{2}. \frac{e^x - e^{-x} }{2} = \sin x, \frac{e^x + e^{-x}}{2} = \cosh x.$
+\item $\psi(x)$ space: $\hat{p} = - i \hbar \ddx, \hat{H} = - \frac{\hbar^2}{2m} \ddxn2 = \frac{\hat{p}^2}{2m} + V.$ $\phi(k)$ space: $p = \hbar k, E_n = \frac{\hbar^2 k^2}{2m}$. 
+\item Basic Time-Independent Schroedinger Equation:
+\begin{align}
+- \frac{\hbar^2}{2m} \ddxn2 w_n &= E_n w_n & \ddxn2 w_n &= - k_n^2 w_n & w_n &= A \sin (k_n x) + B \cos (k_n x).
+\end{align}
+\item Basic Time-Dependent Schroedinger Equation: keep in mind the probability of finding an eigenstate $P_n$ does not depend on time $P_n = |C_n (t)|^2 = |C_n (0)|^2$. 
+\begin{align}
+\psi(x,t) &= \Sum C_n (t) w_n (x) & C_n (t) &= C_n (0) e^{-\frac{i E_n t}{\hbar}}  & C_n &= \int w_n^* \psi \dx  & \expect{E} &= \Sum P_n E_n 
+\end{align}
+\item Deuteron:
+    \begin{enumerate}
+    \item $l=0$ is the only bound state because: $V_{\mathrm{eff}} = V + \frac{\hbar^2 l(l+1)}{2 \mu r_0^2}$. 
+    \eqn{ \Delta V = \frac{\hbar^2 l(l+1)}{2 \mu r_0^2} = \frac{(\hbar c)^2 l(l+1)}{2 (\mu c^2) r^2} = \frac{(200)^2 l(l+1)}{2 (500)(2.1)^2} = 10 l(l+1) \fsp \MeV   }
+    For $l=1, \Delta V = 20 \fsp \MeV > E_B = 2.2 \fsp \MeV$.
+    \item Spin-spin coupling is necessary, because 
+    \eqn{ V_{\mathrm{eff}} = V_0 + V_1 \frac{\expect{\hat{s}_p \cdot \hat{s}_n}}{\hbar^2} = V_0 + \frac{V_1}{2} \left[ s(s+1) - \frac{3}{2} \right] = \left\{ \begin{array}{cc} V_0 - \frac{3}{4} V_1 & S=0 \mbox{ Singlet} \\ V_0 + \frac{1}{4} V_1 & S = 1 \mbox{ Triplet}  \end{array} \right.   }
+    We are given $V_T = 35$ MeV, use the `barely bound state' to find $V_S$: 
+    \eqn{ \frac{\lambda}{4} = r_0 \Rightarrow k = \frac{2\pi}{\lambda} = \frac{\pi}{2 r_0}, V_S \sim E+ V_S = \frac{\hbar^2 k^2}{2m} = \frac{\hbar^2}{2m} k^2 = \frac{\hbar^2}{2m} \frac{\pi^2}{4 r_0^2} \sim 22 \fsp \MeV.}
+    We plug in $V_T = 35 \fsp \MeV, V_S = 22 \fsp \MeV$ to find that $V_0 = 32 \fsp \MeV, V_1 = 13 \fsp \MeV$. 
+    \item $l>0$ can only exist for $s=1$, singlet well is less deep than triplet.     
+    \end{enumerate}
+\item SEMF (positive $\delta$ for even-even nucleon): 
+\eqn{ B[A,Z] = a_V A - a_S A^{2/3} - a_C \frac{Z(Z-1)}{A^{1/3}} - a_{\mathrm{sym}} \frac{(A-2Z)^2}{A} \pm a_p A^{-3/4} }   
+\item Alpha Decay Theory:
+    \begin{align}
+    E_G &= \left(\frac{2 \pi e^2 Z_{\alpha} Z_D}{\hbar c}\right)^2 \frac{\mu c^2}{2} = \left( \frac{2 \pi \cdot Z_{\alpha} Z_D}{137} \right)^2 \mu \frac{938}{2} &
+    2G &= \sqrt{\frac{E_G}{Q}} \left[ 1 - \frac{4}{\pi} \sqrt{\frac{a}{b}} \right] \\
+    P_T &= e^{-2G}, \fsp \lambda = f P_T & t_{1/2} &= \frac{0.693}{\lambda} 
+    \end{align}
+\item Lab CS vs. CMCS in nuclear interaction:   
+    \eqn{\mu = \frac{1+ A \mu_c}{\sqrt{ A^2 + 2A \mu_C + 1}}, \fsp \fsp \frac{E^{\prime}}{E} = \frac{A^2 + 2 A \mu_C + 1}{(A+1)^2} } 
+\item Three different couplings:
+    \begin{enumerate}
+    \item Spin-spin coupling: 
+        \begin{enumerate}
+        \item (n,p) deuteron, bound and virtual states.
+        \eqn{ V_{\mathrm{eff}} = V_0 + V_1 \frac{\expect{\hat{s}_p \cdot \hat{s}_n}}{\hbar^2} = V_0 + \frac{V_1}{2} \left[ s(s+1) - \frac{3}{2} \right] = \left\{ \begin{array}{cc} V_0 - \frac{3}{4} V_1 & S=0 \mbox{ Singlet} \\ V_0 + \frac{1}{4} V_1 & S = 1 \mbox{ Triplet}  \end{array} \right.   }
+        \item n-p scattering, spin-spin coupling fix the $\sigma_s$ magnitude problem (plug in $E_B = 2.22 \fsp \MeV, E^*  = 0.077 \fsp \MeV$):
+        \begin{align}
+        \sigma(\theta) &= \frac{3}{4} \sigma_T (\theta) + \frac{1}{4} \sigma_S (\theta) = \frac{3}{4} \frac{\sin^2 \theta_T}{k^2} + \frac{1}{4} \frac{\sin^2 \theta_S}{k^2} \\
+        \sigma &= \frac{4 \pi \hbar^2}{2 \mu} \left[ \frac{3}{4} \frac{1}{E_B} + \frac{1}{4} \frac{1}{E^*} \right] = 19 \fsp b
+        \end{align} 
+        \end{enumerate} 
+    \item Higher angular momentum:
+        \begin{enumerate}
+        \item (n,p) deuteron, $l=0$ is the only bound case because higher angular momentum create a barrier $\Delta V = \frac{\hbar^2 l(l+1)}{2 \mu r^2} = 20 \fsp \MeV > E_B = 2.22 \fsp \MeV$. 
+        \item n-p scattering, higher order terms are: $\sigma = \frac{4\pi}{k^2} \Sum (2l+1) \sin^2 \delta_l$.
+        \item Revisit the isotropic assumption in CMCS elastic scattering, if $E > 10$ keV higher angular momentum (p-wave and above) would be significant:
+        \begin{align}
+        \sigma_s (\theta) &= |f(\theta)|^2 = \Sum_l f_l P_l (\cos \theta) = f_0 + f_1 \cos \theta + \cdots \\
+        \sigma_s (\theta_C) &= \frac{\sigma(E)}{4 \pi} (1 + a \cos \theta_C)
+        \end{align}
+        \end{enumerate} 
+    \item s-l coupling: in shell model, we use s-l coupling to explain sub-shells:
+        \eqn{V_{\mathrm{nuc}} = V_0 + V_1\frac{\expect{\hat{l} \cdot \hat{s} }}{\hbar^2} = V_0 + \frac{V_1}{2} \left[ j(j+1) - l(l+1) - s(s+1) \right] = \left\{ \begin{array}{cc} V_0 - \frac{l+1}{2} V_1 & j=l-\frac{1}{2} \\ V_0 + \frac{l}{2} V_1 & j = l+ \frac{1}{2}  \end{array} \right.   }
+     Keep in mind $V_0 < 0, V_1 <0$, the s-l coupling weakens the well, and for each $l$ creates an energy difference of $\Delta E = \frac{\hbar^2}{2} (2l+1)$.   
+    \end{enumerate} 
+\end{enumerate}
+
+
+\end{document}

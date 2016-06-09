@@ -1,0 +1,191 @@
+\documentclass{school-22.101-notes}
+\date{October 3, 2011}
+
+\begin{document}
+\maketitle
+
+\lecture{Time-Dependent Schrodinger Equation}
+This is where the 4th postulate comes into play. The time dependent Schrodinger Equation in position basis is, 
+\eqn{ i\hbar \dpsidt = \hat{H} \psi (x,t) }
+Plugging in the Hamiltonian $\hat{H}$, we get: 
+\eqn{ i\hbar \dpsidt = \hat{H} \psi =  - \frac{\hbar^2}{2m} \laplacian \left[ \psi + V(x,t) \psi (x,t) \right] }
+Use separation of variables, we define, 
+\eqn{ \psi(x,t) = \phi(x) f(t) }
+Then SEQ becomes, 
+\eqn{ i \hbar \dfdt \frac{1}{f} = - \frac{\hbar^2}{2m} \dphidxn2 \frac{1}{\phi} + V(x) -  E  }
+The above equation has two components, the position dependent part, and the time dependent part: 
+\begin{enumerate}
+\item The eigenvalue equation for energy, which is the time independent SEQ, is, 
+  \eqn{ - \frac{\hbar^2}{2m} \dphidxn2 + V(x) \phi(x) = E \phi(x) }
+\item The time dependent part is, 
+  \eqn{ i \hbar \dfdt = E f(t) }
+  Thus $f(t) = f(0) e^{-iEt/\hbar}$ and one particular solution of the TD-SEQ is, 
+  \eqn{ \psi(x,t) = \phi(x) e^{-iEt/\hbar} }
+\end{enumerate}
+
+
+
+
+\clearpage
+\topic{Time-Independence of Energy Probability}
+The idea is, we can get rid of the time dependency when we square for probability, 
+\eqn{ \expect{A} = \bra{\psi} A \ket{\psi} = \int \psi(x,t)^*  A \psi(x,t) \dx }
+
+
+\subtopic{Simplified Initial State: One Single Eigenstate}
+The Simplified initial state is just a constant times the m-th order time-independent wave function:
+\eqn{ \psi(x,0) = C_m(0) \psi_m(x) }
+One valid example is, say, 5th order wave function in 1D particle in a box: $\psi(x,0) = \sqrt{\frac{2}{L}} \sin \left( \frac{5 \pi}{L} x\right).$
+\begin{align}
+\psi(x,t) &= C_m(t) \psi_m(x) \\
+i \hbar \ppsipt &= i \hbar \ppt C_m (t) \psi_m (x) = \hat{H} C_m (t) \psi_m (x) = C_m (t) E_m \psi_m (x) \\
+\ppt C_m &= \frac{E_m}{i\hbar} C_m (t) \\
+C_m (t) &= C_m(0) e^{-i w_m t} \\
+\psi(x,t) &= C_m(0) e^{-i w_m t} \psi_m (x) 
+\end{align}
+in which we call $w_m = \frac{E_m}{\hbar}$. 
+
+Interpretation: if we have one initial measured energy $E_m$, that is at time zero there is only one state possibly existing, or say $E_m$ is not time dependent (conservation of energy), then 
+\eqn{ P(E_m) = 1 = |C_m(t)|^2 = |C_m(0) e^{-iw_n t}|^2 = |C_m (0)|^2 = 1 }
+
+
+\subtopic{General Form of Solution}
+Now that our wavefunction is a super-position of multiple eigenstates:
+\eqn{ \boxed{ \psi(x,t) = \Sum_n C_n (t) \psi_n (\uline{x}) e^{-i E_n t/\hbar}  } }
+We solve the Schrodinger Equation again:
+\begin{align}
+i \hbar \ppsipt &= \Sum_n i \hbar \ppt C_n (t) \psi_n (\uline{x}) \\
+\hat{H} \psi &= \Sum_n C_n (t) \hat{H} \psi_n (x) = \Sum_n C_n (t) E_n \psi_n (x) \\
+\Sum_n i \hbar \ppt C_n \psi_n (x) &= \Sum_n C_n(t) E_n \psi_n(x) \\
+\int \dx^3 \psi_m^* \cdot \Sum_n i \hbar \ppt C_n \psi_n (x) &= \int \dx^3 \psi_m^* \cdot\Sum_n C_n(t) E_n \psi_n(x) \\
+i \hbar \ppt C_m &= E_m C_m \\
+C_m (t) &= C_m (0) e^{-iw_m t} \\
+\psi(x,t) &= \Sum_n C_n (0) e^{-i w_n t} \psi_n (x) 
+\end{align}
+At any given time, our probability of finding the k-th eigenstate is:
+\eqn{ P(E_k) = |C_k (t)|^2 = |C_k (t)|^2 = |C_k (0) e^{-iw_k t}|^2 = |C_k (0)|^2 }
+This is an important point that \textcolor{blue}{the probability of finding an eigenstate does not depend on time!}
+
+
+\clearpage
+\topic{Time-Dependence of Position Probability}
+Assume a case in which only the first two states exist. 
+\begin{align}
+\psi(\uline{x}, 0) &= \Sum_n C_n (0) \psi_n(x)  = C_1 (0) \psi_1 (x) + C_2 (0) \psi_2 (x) \\
+&= C_1 (0) \sqrt{\frac{2}{L}} \sin (k_1 x) + C_2 (0) \sqrt{\frac{2}{L}} \sin (k_2 x) \\
+k_1 &= \frac{\pi}{L}, \fsp E_1 = \frac{\hbar^2 k_1^2}{2m}, \fsp w_1 = \frac{E_1}{\hbar} \\
+k_2 &= \frac{2\pi}{L}, \fsp E_2 = \frac{\hbar^2 k_2^2}{2m} = 4 E_1, \fsp w_2 = \frac{E_2}{\hbar} \\
+P(E_1) + P(E_2) &= |C_1 (0)|^2 + |C_2(0)|^2 = 1 \\
+\expect{E}  &=  P(E_1) \cdot E_1 + P(E_2) \cdot E_2
+\end{align}
+Recall that $P(x \to x+\dx) \dx = |\psi(\uline{x}, t)|^2 \dx$. Then we can find $|\psi(\uline{x}, t)|^2$ by doing\footnote{See details on the math part in \#6.14 in Liboff}: 
+\begin{align}
+&|\psi(\uline{x}, t)|^2 = \frac{2}{L} \left( C_1^* e^{i w_1 t} \sin (k_1 x) + C_2^* e^{i w_2 t} \sin(k_2 x) \right) \left( C_1 e^{-i w_1 t} \sin (k_1 x) + C_2 e^{-i w_2 t} \sin(k_2 x) \right) \\
+&= \frac{2}{L} \left[ |C_1|^2 \sin^2 (k_1 x) + |C_2|^2 \sin^2 (k_2 x) \right] + 2 Re \psi_1^* \psi_2 e^{-i(w_1 - w_2)t} \\
+&= \frac{2}{L} \left[ |C_1|^2 \sin^2 (k_1 x) + |C_2|^2 \sin^2 (k_2 x) \right] + 2 Re(C_1^* C_2) \cos ((w_1 - w_2)t) \sin (k_1 x) \sin(k_2 x) 
+\end{align}
+Interpretation: the probability of finding a particle at position $x \to x + \dx$ is an oscillating function between the maximum $(|\psi_1| + |\psi_2|)^2$ and the minimum of $(|\psi_1| - |\psi_2|)^2$, with a frequency of $w_1 - w_2$ and a period of 
+\eqn{  T = \frac{\hbar}{|E_1 - E_2|} } 
+This T is important because this means that we need to measure something along the magnitude of T to get a good understanding of the system. Measuring too short would result in a position probability that barely changes; measuring too long would result in oscillating/redundant behavior.
+
+\clearpage
+\topic{Time-Dependence of Any Observable }
+\subtopic{Review: Commutator Relations in QM}
+For operators $\Ahat, \Bhat$, we define the commute of the two to be:
+\eqn{ \left[\Ahat, \Bhat \right] = \Ahat \Bhat - \Bhat \Ahat \overbrace{=0}^{\mbox{if commute}} }
+A few properties to keep in mind:
+\begin{itemize}
+\item $ \left[ \Ahat, a \right] = - \left[ a, \Ahat \right] = 0 $. 
+\item $ \left[ \Ahat, a \Bhat \right] = \left[ a \Ahat, \Bhat \right] = a \left[ \Ahat, \Bhat \right]$.
+\item $ \left[ \Ahat, \Ahat^2 \right] = 0 $. 
+This is very important, as we should keep in mind that $\left[ \Ahat, \Ahat^2 \right] g(x) = 0$. 
+\item $ \left[ \Ahat, f(\Ahat) \right] = 0$. 
+\end{itemize}
+
+\subtopic{Important Commuting Relations}
+\subsubtopic{$\left[ \hat{x} ,\hat{p} \right] = i \hbar$}
+\begin{align}
+\left[ \hat{x} ,\hat{p} \right] g(x) &= \left[ -x i \hbar \ppx + i \hbar \ppx x   \right] g(x) \\
+&= i \hbar \left[ -x \ppx + \ppx x \right] g(x) \\
+&= i \hbar \left[ -x \ppx g(x) + g(x) + x \ppx g(x) \right] \\
+&= i \hbar g(x)
+\end{align}
+
+\subsubtopic{$\left[ \hat{x} ,\hat{p}^2 \right] = 2 i \hbar \hat{p}$}
+\begin{align}
+\left[ \hat{x} ,\hat{p}^2 \right] 
+&= \left[ \hat{x} ,\hat{p} \right] \hat{p} + \hat{p} \left[ \hat{x} ,\hat{p} \right] \\
+&= 2 i \hbar \hat{p}
+\end{align}
+
+
+\subsubtopic{$\left[ \hat{x}^2 ,\hat{p} \right] = 2 i \hbar \hat{x}$}
+\begin{align}
+\left[ \hat{x}^2,\hat{p} \right] 
+&= \hat{x} \left[ \hat{x} ,\hat{p} \right]  + \left[ \hat{x} ,\hat{p} \right] \hat{x} \\
+&= 2 i \hbar \hat{p}
+\end{align}
+
+\subsubtopic{If $\Ahat, \Bhat$ commute, they have common eigenfunctions}
+If $\Ahat, \Bhat$ commute, then
+\begin{align}
+\Ahat \psi_a &= a \psi_a \\
+\Bhat ( \Ahat \psi_a) &= \Bhat (a \psi_a ) \\
+\Ahat (\Bhat \psi_a ) &= a (\Bhat \psi_a ) 
+\end{align}
+That is to say $\Bhat \psi_a$ is an eigenfunction of $\Ahat$ with an eigenvalue of some sort of constant b. Then we should have:
+\eqn{ \Bhat \psi_a = \frac{b}{a} \psi_a }
+That is, $\psi_a$ is a common eigenfunction of $\Ahat, \Bhat$. Note this is not saying that all eigenfunctions have to be same among $\Ahat, \Bhat$ once they commute. \textbf{If two operators commute, they have nontrivial common eigenfunctions.}
+
+Application: we know $\Phat, \Hhat$ commute, thus chances are they have the same eigenfunctions:
+\eqn{ \Phat e^{ikx} = \hbar k e^{ikx} }
+\eqn{ \Hhat e^{ikx} = \frac{\hbar^2 k^2}{2m} e^{ikx} }
+
+
+\subsubtopic{The Derivative of Expectation Value}
+Derivation by Prof. Cappellaro: 
+\eqn{ A \to \expect{A(t)} = \bra{\psi(t)} A \ket{\psi(t)} }
+\eqn{ \frac{\derivative \expect{A(t)}}{\dt} = \ppt \bra{\psi} A \ket{\psi} + \bra{\psi} \pApt \ket{\psi} + \bra{\psi A} \ppt \ket{\psi} }
+
+Derivation by Prof. Yildiz,
+\begin{align}
+\expect{A} &= \int \dx^3 \psi^* \Ahat \psi \\
+\ddt \expect{A} &= \int \dx^3 \left( \ddt \psi^* \Ahat \psi \right) = \int \dx^3 \left( \overbrace{\ddt \psi^* \Ahat \psi}^{\textcircled{3}} + \overbrace{\psi^* \Ahat \ddt \psi}^{\textcircled{2}} + \overbrace{\psi^* \ddt \hat{A} \psi}^{\textcircled{1}} \right) \\
+\textcircled{1} &= \expect{\ppt \Ahat} \\
+\textcircled{2} &= \psi^* \Ahat \Hhat \psi \frac{-i}{\hbar}  \\
+\textcircled{3} &= \left( \frac{-i}{\hbar}\Hhat \psi \right)^* \\
+\ddt \expect{A} &= \frac{i}{\hbar} \int \dx^3 \left( \psi^* \Hhat \Ahat \psi  - \psi^* \Ahat \Hhat \psi \right) + \expect{\ppt \Ahat} \\
+&= \frac{i}{\hbar} \int \dx^3 \psi^* \left[ \Hhat, \Ahat \right] \psi + \expect{\ppt \Ahat} \\
+&= \frac{i}{\hbar} \expect{ \left[ \Hhat, \Ahat \right] } + \overbrace{\expect{\ppt \Ahat}}^{=0\mbox{ for most operators}} 
+\end{align}
+
+\uline{Application:} If we plug in $\phat$ for $\Ahat$, and take into account that $\left[ \Hhat, \phat \right] = 0$ because $\Hhat = \frac{\phat^2}{2m}$, then,
+\eqn{ \ddt \expect{\phat} = \frac{i}{\hbar} \expect{\left[ \Hhat, \phat \right]} + 0 = 0 }
+That is to say, momentum is conserved in time. We can plug in $\Hhat$ and get the same thing out, suggesting the energy is conserved in time. In fact any operator that commute with $\Hhat$ would have an expectation value not dependent of time.  Notice we assume that the potential is time independent. 
+
+
+\subtopic{Case 1, $\ddt \expect{x}, \hat{H} = \frac{\hat{p}^2}{2m} + V(x) $}
+
+\begin{align}
+\ddt \expect{x} &= \frac{i}{\hbar} \expect{\left[ \hat{H}, \hat{x} \right]} \\
+&= \frac{i}{\hbar} \expect{\left[ \frac{\hat{p}^2}{2m} + V(x), \hat{x} \right]} \\
+&= \frac{i}{\hbar} \expect{\left[ \frac{\hat{p}^2}{2m} , \hat{x} \right]} \\
+&= \frac{i}{2m\hbar} \expect{\left[ \hat{p}^2 , \hat{x} \right]} \\
+&= \frac{i}{2m\hbar} (-2i\hbar \hat{p} ) \\
+&= \boxed{\frac{1}{m} \expect{p} = \expect{v}}
+\end{align}
+
+\subtopic{Case 2, $\ddt \expect{p}, \hat{H} = \frac{\hat{p}^2}{2m} + V(x) $}
+
+\begin{align}
+\ddt \expect{p} &= \frac{i}{\hbar} \expect{\left[ \hat{H}, \hat{p} \right]} \\
+&= \frac{i}{\hbar} \expect{\left[ \frac{\hat{p}^2}{2m} + V(x), \hat{p} \right]} \\
+&= \frac{i}{\hbar} \expect{\left[ V(x) , \hat{p} \right]} \\
+&= \frac{i}{\hbar} \expect{\left[ V(x), - i\hbar \ppx \right]} \\
+&= \frac{i}{\hbar} \expect{(-i\hbar) (V(x) \ppx - \ppx V(x))} \\
+&= \frac{i}{\hbar} \expect{i\hbar\pVpx} \\
+&= \boxed{- \expect{\pVpx} = \expect{\mathrm{Force}} }
+\end{align}
+This is called Ehrenfest's Principle, which is a quantum mechanical equation for average/expectation values of p(t). 
+
+\end{document}

@@ -1,0 +1,202 @@
+\documentclass{school-22.101-notes}
+\date{September 7, 2011}
+
+\begin{document}
+\maketitle
+
+
+\lecture{Overview of This Class}
+This class (first taken Fall 2011, sitting in again Fall 2012) is delivered in \uline{three parts}:
+\begin{enumerate}
+\item Quantum mechanics fundamentals. 
+\item Nuclear structure and nuclear decays.
+\item Interactions in nuclear matter and nuclear reactions.
+\end{enumerate}
+
+Prof. Yildiz summarizes the class into \uline{two major problems}:
+\begin{enumerate}
+\item Statics: properties of force that holds neutrons and protons together. Sample sections: nuclear structure, stability (scattering). 
+
+\item Dynamics: behavior of atoms of many particles. Sample sections: nuclear decay, neutron interactions, nuclear reaction. 
+\end{enumerate}
+
+
+
+The recommended texts are: 
+\begin{itemize}
+\item Introductory Nuclear Physics by Krane 1988.
+\item Introductory Quantum Mechanics by Liboff, 2003.
+\end{itemize}
+Some images were obtained from MIT OCW \url{http://www.flickr.com/photos/mitopencourseware/sets/72157621892931990/}. 
+
+\vspace{0.5cm}
+Introductory question: is an exothermic reaction always spontaneous? 
+\begin{enumerate}
+\item $Q = $ energy out $-$ energy in. 
+\item To find $Q$: it is the mass defecate. 
+\item To find mass: we solve it from the binding energy. 
+\item To model binding energy for simple model of the nucleus: we use the liquid-drop model: nucleons act like water. Thus we arrive at the Semi-Empirical Mass Formula (SEMF): volume, surface, coulomb, symmetry, pairing.  
+\item From SEMF, we derive the B/A vs. A plot, where exothermic reactions increase the binding energy per nucleon (B/A), whether it's from the left to right or the right to left.
+\end{enumerate}
+The answer is, an exothermic reaction does not always have to be spontaneous. A spontaneous reaction has to be exothermic. 
+
+
+The common questions we are going to address in this class include,
+\begin{itemize}
+\item Why some material are fissile, others fissionable, and very rarely we have spontaneous fission?
+\item Why is it so hard to obtain fusion on earth?
+\item When do we have alpha decay? Why radioactive decay is a statistical process?
+\item Where does the SEMF come from?
+\end{itemize}
+
+\lecture{Quantum Mechanics Fundamentals}
+Prof. Cappellaro thinks it is important to review linear algebra for the quantum mechanics portion of the class. 
+
+
+\topic{Nuclear Nomenclature}
+Nucleus (protons \& neutrons) are the smallest units in this course. We start with some nuclear nomenclature:
+\begin{enumerate}
+\item Protons and neutrons are around the size of 1 femmi ($10^{-13}$ cm, or $10^{-15}$ m). 
+
+\item Mass is important because it has to do with energy and stability. For now (without regarding to stability), we can consider: 
+\eqn{ A = N + Z = \mbox{Mass number}}
+because $m_e \ll m_p, m_n$. 
+
+\item Nuclear size $\approx 10^{-13}$ to $10^{-12} \cm \approx 10^{-5}$ to $10^{-4} \AA$. 
+
+Atomic size $\approx 10^{-8} \cm \approx 1 \AA$. 
+
+Example: Fe $\approx 2-3 \AA$. 
+
+\item The force that combines protons and neutrons is: strong nuclear force. Protons and neutrons are held to their first neighbors tightly together to form a roughly spherical shape. 
+
+\item Discovery of nucleus: 
+
+Prior to the discovery of nucleus around 1900, the guess is the `plumb pudding model.' Two groups of people shot alpha-particles into solid matters (Geiger \& Madsen in 1909, and Rutherford in 1911). They found that most particles went through, and only very small fraction (1/8000) got reflected back ($\theta > 90^{\degree}$). 
+
+The difference between Thomson's model and Rutherford's is that Rutherford's has positive charges densely packed in the middle, thus the small fraction of alpha particles that interact with the protons experience large Coulomb repulsion force, resulting in large scattering angle. 
+
+Example relating KE to Coulomb potential energy V: run experiment and found that the alpha particles with the largest KE targeting Uranium is about 20 MeV (equivalent to $3.204 \times 10^{-12} \J$). This is the largest KE of alpha particles getting close to uranium atoms without penetrating through them. Thus we plug in to the following: 
+\eqn{ V_{\alpha} = k_e \frac{ (2e) (92e)}{D} }
+\eqn{\Rightarrow D &= \frac{k_e 184 e^2}{V_{\alpha}} = \frac{9 \times 10^9 \times 184 \times (1.6 \times 10^{-19} )^2}{3.204 \times 10^{-12} \J} = 13 \fm \\
+&\approx R_{\mathrm{Uranium}} + R_{\alpha} = 9 \fm + 2 \fm = 11 \fm }
+Notice the $V_\alpha$ is the potential energy, which is in unit of energy. 
+
+
+\item $r_n \approx r_e \approx r = 1.2 F, Z + Z = A. V = A \frac{4\pi}{3} r^3 = \frac{4 \pi}{3} R^2 \Rightarrow R^3 = A^{1/3} r.$ Hence,
+\eqn{  \boxed{R (\mbox{in F}) = (1.2 \sim 1.4) A^{1/3}}}
+The 1.2 is from electron scattering with protons, which depends on distribution of charges. The 1.4 is from neutron scattering which depends on the extent of nuclear force, and depends on the neutrons and protons in the core, as well as the neutron skin. 
+
+The above expression suggests that the size of a nucleus is related to the atom number. 
+
+The density of nucleus is about $10^{14} \g/\cm^3$, which corresponds to about $10^{38} $ nucleons/$\cm^3$. 
+
+
+\item Classification:
+  \begin{enumerate}
+  \item Nucleon: a collective name for two particles: the neutron and the proton. 
+  \item Nucleus (plural nuclei): the very dense region consisting of protons and neutrons at the center of an atom.
+  \item Nuclide: an atomic species characterized of its nucleus, like number of protons (called isotopes), number of neutrons (isotones), mass number (isobars) etc. 
+  \end{enumerate}
+  more classification: 
+  \begin{enumerate}
+  \item Isotope: nuclides with the same proton number. 
+  \item Isotone: nuclides with the same neutron number.
+  \item Isobar: nuclides with the same mass number. 
+  \item Isomer: nuclides in excited states with measurable half-lives. 
+  \end{enumerate}
+
+
+
+\item The following would come in  handy in Pauli Exclusion Principle: 
+  \begin{enumerate}
+    \item Leptons: fundamental particles with spin 1/2. Eg: electrons, neutrinos. Protons and neutrons are not fundamental particles hence not leptons. Although quarks have spin 1/2 they are not leptons neither. 
+    \item Fermions: particles with any half-integer spin. Eg: electrons, neutrinos, protons, neutrons (all with spin 1/1). 
+    \item Bosons: particles with any integer spin. Eg: photons (spin of 1). 
+  \end{enumerate}
+\end{enumerate}
+
+
+
+\topic{Nuclear Stability}
+Concerning nuclear stability:
+\begin{enumerate}
+\item \# unstable nuclides $\gg$ \# stable nuclides.
+\item Z vs N curve: For larger atoms to be stable, they need to have more protons than neutrons. 
+\item To tell whether a nucleus is stable or not: $\Delta = M_{\mathrm{nucleus}} - \Sum_A m_{n,p} $. The range of A (or Z) that results in a negative $\Delta$ is the range of stability. The reason $\Delta$ is concave up will be discussed in the future.
+\item Classically, we know $V_{\mathrm{coul}} = \frac{q_1 q_2}{r} = \frac{Z_1 Z_2 e^2}{r}$. That is, classically there is a minimum energy E that alpha particles need to penetrate through. But in an alpha decay \ce{ U238 \to \alpha + Th234} the experimental $E_{\alpha} = 4.2$ MeV does not agree with the predicted $V_{max} = 8.6$ MeV (which is the potential of the barrier).
+
+The probability of alpha decay $P^{\alpha \to} \neq 0$. The explanation is quantum tunneling. We need a set of principles that explain the physical behavior of the very small particles, like atomic (atoms, molecules), subatomic (electron, neutron, proton, etc). 
+
+While we are measuring any observable, they will be associated with a probability -- so we are not going to measure/predict an observable with certain precision, but rather with probability. 
+
+\item Wave \& Particle behavior: de Broglie Wave.
+\eqn{ \lambda = \frac{h}{P} }
+in which P is the momentum of the particle, and h is Planck's constant. There are observables that we can solve for: position, energy, momentum, spin, etc. 
+\end{enumerate}
+
+
+\topic{A Linear Algebra Review}
+
+\begin{enumerate}
+\item Ket: A vector $\vec{v}$ can be written as $\ket{v}$ in the Diract notation. 
+
+\item Vector space is a collection of vectors $\left\{ \vec{v} \right\}$. 
+
+\item A complex Hilbert space is the space of states: $a \vec{v} = a \ket{v}$. 
+
+\item Operator: takes in a vector, and outputs another vector. The operators can be any mathematical expression, for instance,
+\eqn{ \hat{A} (x) = f(x) = \ddx  }
+The operators are mathematical expressions, so they obey math rules, like,
+\eqn{ \hat{A}^2 (x) = \ddxn2 }
+
+\item Hermilian operator: have real eigenvalues. Example: 
+  \eqn{ A \ket{\psi} &= \ket{\phi} & \frac{\derivative f(x)}{\dx} &= g(x) }
+
+\item Eigenvalues/eiganvectors: 
+  \eqn{ A \ket{n} = a_n \ket{n} \label{eigenvalue-eq}}
+  What it means is, given a vector $\ket{n}$, an operator $A$ generates a vector that lines on the same line with $\ket{n}$ but with maybe different magnitude. Another way to write Eq.~\ref{eigenvalue-eq} is, 
+  \eqn{ \left[ \begin{array}{cc} c & d \\ e & f \end{array} \right] \left[ \begin{array}{c} v_1 \\ v_2 \end{array} \right] = a \left[ \begin{array}{c} v_1 \\ v_2 \end{array} \right] }
+
+\item Dual of vector: 
+  \eqn{ \vec{\psi} \cdot \vec{\phi} = c \label{dual-of-vectors}} 
+  Recall that vectors can be written as ket. When we dot two vectors though, we would write one as a ket, the other as a bra, thus Eq.~\ref{dual-of-vectors} becomes, 
+  \eqn{ \braket{\psi}{\phi} = c}
+  To calculate $\braket{\psi}{\phi}$, in vector notation, 
+  \eqn{ \vec{\psi} \cdot \vec{\phi} = |\vec{\psi}| |\vec{\phi}| \cos \theta }
+  In Diract notation, we would integrate, 
+  \eqn{ \braket{\psi}{\phi} = \int_{-\infty}^{\infty} \phi^* (x) \psi(x) \dx }
+  A property of the braket is that, 
+  \eqn{ \braket{\psi}{\phi} = \braket{\phi}{\psi}^* }
+
+
+
+
+\item How Prof. Yildiz approaches eigenvalues/eiganvectors: \hi{observables A is associated with eigenvalues of the operator $\hat{A}$.} The eigenvalue problem of $\hat{A}$ is:
+\eqn{ \hat{A} u_n(\underline{x}) = a_n u_n(\underline{x}), n=1,2,3,\cdots }
+in which $a_n$ are the possible values of the observables A, and $u_n(\underline{x})$ are the eigenfunctions. 
+
+The properties associated with the eigenfunctions are: 
+\begin{enumerate}
+\item $u_n(\underline{x})$ is orthonormal. 
+\eqn{ \int u_m^* (\underline{x}) u_n(\underline{x}) \dV = \left\{ \begin{array}{c} 0, m\neq n \\ 1, m=n \end{array} \right.  }
+
+\item `Complete:' any function $f(\underline{x})$ can be represented as a linear superposition of the eigenfunctions $u_n(\underline{x})$:
+  \eqn{  f(\underline{x}) = \Sum_n C_n u_n(\underline{x} ) }
+  We can find $C_n$ by using the orthonormal properties of the eigenfunctions:
+  \eqn{ C_n = \int \dV f(\underline{x}) u_n^* (\underline{x}) }
+  We can prove the above expression by plugging in $f(\underline{x})$:
+  \begin{align}
+    & \int \dV f(\underline{x}) u_n^* (\underline{x}) = \int \dV  u_n^* (\underline{x}) \Sum_m C_m u_m(\underline{x}) = \Sum_m C_m \int \dV u_n^*(\underline{x}) u_m (\underline{x}) = C_n
+  \end{align}
+\end{enumerate}
+
+Example: given a matrix:
+\eqn{ \underline{\underline{M}} = \left[ \begin{array}{cc} 2 & 1 \\ 1 & 2 \end{array} \right] }
+We can solve for the eigenvalues to be 1 and 3, and the eigenfunctions are:
+\eqn{ \underline{u}_1 = \frac{1}{\sqrt{2}} \left[ \begin{array}{c} 1 \\ -1 \end{array} \right], \underline{u}_2 = \frac{1}{\sqrt{2}} \left[ \begin{array}{c} 1 \\ 1 \end{array} \right]   }
+That is to say, 1 and 3 are the possible values of your observables, and the two eigenfunctions are orthonormal, and the linear superposition of them can form any vector in this space.
+\end{enumerate}
+
+
+\end{document}

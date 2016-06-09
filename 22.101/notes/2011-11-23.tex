@@ -1,0 +1,62 @@
+\documentclass{school-22.101-notes}
+\date{November 23, 2011}
+
+\begin{document}
+\maketitle
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Gamma Decay %%%%%%%%%%%%%%%%%%%%%%%%
+\topic{Gamma Decay}
+\subtopic{Energetics}
+Gamma ray is made of photons of electromagnetic radiation. There is a mass-energy difference from the excited state and the ground state (even though they have the same number of neutrons and protons), and this energy is the available energy before gamma decay, or the energy release after the gamma decay.
+\begin{align}
+M^* c^2 &= Mc^2 + T_R + E_{\gamma} \\
+Q_{\gamma} &=  (M^* - M)c^2  = T_R + E_{\gamma} \\
+|P_R| &= |P_{\gamma}| = \hbar k \\
+T_R &= \frac{P_R^2}{2M} = \frac{P_{\gamma}^2}{2M} = \frac{\hbar^2 k^2 c^2}{2Mc^2} = \frac{E \gamma^2}{2Mc^2} 
+\end{align}
+ R stands for recoil, so $T_R, P_R$ are the KE and momentum of the recoiled mass $M$. Since gamma ray is photons, we can use $P_{\gamma} = \hbar k$. 
+ 
+A typical range of gamma energy is: $E_{\gamma} \approx 0.1 \sim 10 \fsp \MeV$. With $2Mc^2$ on the order of $2000 A$ MeV, $T_R$ is very small. Then $Q = E_{\gamma} + T_R \approx E_{\gamma}$.
+
+\subtopic{Gamma Decay Probability}
+\begin{align}
+\lambda &= \mbox{Probability per unit time for photon emission } = \frac{P}{\hbar \omega} = \frac{\mbox{Power radiated}}{\mbox{photon energy}} \\
+P&= f[L,\omega] \cdot |m_{fi} (\sigma L)|^2 = \mbox{power radiated in the EM field} \cdot \mbox{multipole moment} \\
+m_{fi} (\sigma L) &= \mbox{multipole transition operation} = \int_V \psi_f^* m(\sigma L) \psi_i \dV, \fsp \fsp \sigma = \mbox{E or M} 
+\end{align}
+
+\subtopic{Angular Momentum and Parity Selection Rule}
+\begin{align}
+I_i &= I_f + I_{\gamma}, S_{\gamma} = 1 \\
+\Pi_i &= \Pi_f (-1)^{I_{\gamma}}, I_{\gamma} = L_{\gamma} + S_{\gamma} \\
+&\begin{dcases*}
+\Pi_{\gamma} = (-1)^{I_{\gamma}} & Electric Multiple \\
+\Pi_{\gamma} = (-1)^{I_{\gamma} +1 } & Magnetic Multiple
+\end{dcases*} \label{Parity-assignment-gamma}
+\end{align}
+Example: consider $2^+ \to 0^+$. Then we have : 
+\begin{itemize}
+\item $2 = 0 + I_{\gamma}, \Rightarrow I_{\gamma} = 2$, given $S=1$, then $L_{\gamma} = 1,2$. 
+\item $+ = +(-1)^{2}$ works, hence it has to be electric multiple. 
+\end{itemize}
+\subtopic{Angular Momentum and Parity Selection Rule, Alternative Approach}
+\begin{itemize}
+\item Figuring out $L_{\gamma}$ from: $I_i = I_f + L_{\gamma} \Rightarrow L_{\gamma} = |I_i - I_f|, \cdots |I_i + I_f|$. A couple of rules about $L_{\gamma}$: $L_{\gamma} \ge 1$ (this is the reason $0^+ \to 0^+$ is forbidden); decay constant for lower mode is significantly larger than higher modes ($\lambda (M1) \gg \lambda(M2) \gg \cdots; \lambda(E1) \gg \lambda(E2) \cdots$.
+\item Figuring out which mode (E or M) based on parity: we either use Eq.\ref{Parity-assignment-gamma}, which is equivalent to:
+    \begin{itemize}
+    \item Odd parity: E for odd $L_{\gamma}$, M for even $L_{\gamma}$. 
+    \item Even parity: E for even $L_{\gamma}$, M for odd $L_{\gamma}$. 
+    \end{itemize}
+\item Example: $\frac{1}{2}^- \to \frac{1}{2}^+$. L can only be 1 (remember L cannot be 0!). Then from Eq.~\ref{Parity-assignment-gamma}, we want $-1 = (-1)^L$, which is electric. The decay mode is E1. 
+\end{itemize}
+
+
+
+
+
+
+
+
+\end{document}
